@@ -1,5 +1,5 @@
 @host = localhost:4000
-
+#@host = fhnw-sql-training-game-api.herokuapp.com/
 
 POST http://{{host}}/users/register  HTTP/1.1
 content-type: application/json
@@ -11,6 +11,7 @@ content-type: application/json
 
 ###
 
+# @name auth
 POST http://{{host}}/users/authenticate  HTTP/1.1
 content-type: application/json
 
@@ -21,3 +22,6 @@ content-type: application/json
 
 ###
 
+GET http://{{host}}/users/self  HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{auth.response.body.token}}

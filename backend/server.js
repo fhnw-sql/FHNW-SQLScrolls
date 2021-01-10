@@ -9,7 +9,7 @@ const errorHandler = require("utils/error-handler");
 const logger = require("utils/logger");
 const db = require("utils/db");
 
-// user BodyParser & Cors
+// add BodyParser & Cors
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
@@ -19,6 +19,11 @@ app.use(jwt());
 
 // api routes
 app.use("/users", require("./routes/users.routes"));
+
+// Defalt health route
+app.get("/", function (req, res) {
+  res.send("Up and running 🐛");
+});
 
 // global error handler
 app.use(errorHandler);
