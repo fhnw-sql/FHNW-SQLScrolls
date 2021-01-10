@@ -1,1 +1,1 @@
-# FHNW-SQL-Traning-Game
+# FHNW-SQL-Training-Game
