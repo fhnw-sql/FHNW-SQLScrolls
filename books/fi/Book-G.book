@@ -1,0 +1,11 @@
+METADATA {
+    id: Book-G
+    name: Tyyppien kirja
+    title: Bananas and Where to use them
+    author: Ms. ABC
+    color: light-green
+}
+
+COVER {
+    ""
+}

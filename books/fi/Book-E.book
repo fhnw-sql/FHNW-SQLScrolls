@@ -1,0 +1,123 @@
+METADATA {
+    id: Book-E
+    name:
+    title:
+    author:
+    color: magenta
+}
+
+COVER {
+    "Tekstiloitsuja on suuri määrä ja jotta osaisit analysoida mieltä, tässä kirjassa selitetään niiden toiminta juurta jaksaen, banaaneja apuna käyttäen."
+}
+
+PAGE {
+    Tekstiloitsuilla voidaan lukea mieltä.
+
+    Loitsut:\n
+    LENGTH({sarake}) - kertoo tekstin pituuden\n
+    UPPER({sarake}) - muuttaa tekstin isokirjaimiseksi\n
+    LOWER({sarake}) - muuttaa tekstin pienikirjaimiseksi
+
+    {sarake} || 'Tekstiä' - tekstin yhdistys (concatenation)\n
+    {sarake} LIKE '%pa_tte%rn' - ehto tekstin muodon tarkistamiseen\n
+    _ yksi merkki, % nolla, yksi tai useita merkkejä
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Mind
+            id|teksti
+            1|banaani
+            2|apina
+        }
+        QUERY {
+            SELECT teksti, LENGTH(teksti) as pituus FROM Mind;
+        }
+    }
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Mind
+            id|teksti
+            1|Banaani
+            2|Apina
+        }
+        QUERY {
+            SELECT UPPER(teksti) as iso FROM Mind;
+        }
+    }
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Mind
+            id|teksti
+            1|Banaani
+            2|Apina
+        }
+        QUERY {
+            SELECT LOWER(teksti) as pieni FROM Mind;
+        }
+    }
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Mind
+            id|teksti
+            1|Banaani
+            2|Apina
+        }
+        QUERY {
+            SELECT 'Super ' || teksti as yhdiste FROM Mind;
+        }
+    }
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Mind
+            id|teksti|liite
+            1|Banaani|keitto
+            2|Apina|puu
+        }
+        QUERY {
+            SELECT teksti || liite as yhdiste FROM Mind;
+        }
+    }
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Mind
+            id|teksti
+            1|banaani
+            2|apina
+            3|jolla
+        }
+        QUERY {
+            SELECT teksti FROM Mind WHERE teksti LIKE '%na%';
+        }
+    }
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Mind
+            id|teksti
+            1|banaani
+            2|apina
+        }
+        QUERY {
+            SELECT teksti FROM Mind WHERE teksti LIKE 'a___a'
+        }
+    }
+}

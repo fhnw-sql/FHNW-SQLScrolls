@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="Opettele SQL kielen salat pelaamalla hauskaa peliä." name="description">
+    <meta content="Risto Lahtela / Rsl1122" name="author">
+    <meta content="University of Helsinki" name="creator">
+    <meta content="SQL, Game, Magic, Learn, Teach, Study" name="keywords">
+    <meta content="strict-origin" name="referrer">
+    <meta content="nofollow" name="robots">
+
+    <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+    <link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+    <link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+    <link href="site.webmanifest" rel="manifest">
+    <link color="#5bbad5" href="safari-pinned-tab.svg" rel="mask-icon">
+    <meta content="#da532c" name="msapplication-TileColor">
+    <meta content="#ffffff" name="theme-color">
+
+    <title>Untitled SQL Training Game</title>
+
+    <style>
+        .hidden {
+            display: none !important;
+            opacity: 0;
+        }
+    </style>
+    <link href="vendor/bootstrap-4.5.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="bg-black">
+<section class="container-fluid" id="main">
+    <div id="alerts"></div>
+    <div class="hidden" id="fade-to-black" style="display: none"></div>
+    <div class="m-2 col-md-10 view" id="inventory-view">
+        <div class="back-button clickable-items" onclick="window.location.href = './'">
+            <p class="col-white"><i class="fa fa-arrow-left"></i> <span class="i18n-back">Takaisin</span></p>
+        </div>
+        <div class="inventory-contents clickable-items col-white" id="editors" style="flex-direction: column">
+            <div class="mb-4" onclick="showBookEditor()"><h2><i class="fa fa-book"></i> Kirjaeditori</h2></div>
+            <div class="mb-4" onclick="showTaskEditor()"><h2><i class="fa fa-scroll"></i> Tehtäväeditori</h2></div>
+            <label>Varoita jos muutokset menetetään</label>
+            <input checked id="save-warning-check" type="checkbox">
+        </div>
+    </div>
+    <div class="m-2 col-md-11 view hidden" id="book-editor-view">
+        <div class="back-button clickable-items" onclick="window.location.href = './editors.html'">
+            <p class="col-white"><i class="fa fa-arrow-left"></i> <span class="i18n-back">Takaisin</span></p>
+        </div>
+        <div class="row justify-content-md-around" style="margin-top: 3rem;">
+            <div class="col-md-6" id="book-editor">
+                <div class="form-group left">
+                    <label class="col-white" for="book-editor-textfield">Muokkaa kirjaa</label>
+                    <label class="col-white float-right" id="book-ids"></label>
+                    <textarea class="form-control" id="book-editor-textfield" oninput="updateBasedOnBookEditor()"
+                              rows="3" style="font-family: Courier, 'Courier New', sans-serif;"></textarea>
+                    <p id="book-editor-error" style="color: var(--col-light-red)"></p>
+                </div>
+                <div class="form-inline left">
+                    <button class="btn btn-primary mr-4" onclick="saveBook()"><i class="fa fa-download"></i> Tallenna
+                    </button>
+                    <select class="form-control mr-2" id="book-editor-existing">
+                        <option>Large select</option>
+                    </select>
+                    <button class="btn btn-primary mr-4" onclick="loadSelectedBook()"><i class="fa fa-edit"></i> Muokkaa
+                    </button>
+                    <button class="btn btn-primary" onclick="uploadBook()"><i class="fa fa-upload"></i> Lataa
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6 modal-lg" id="book-preview">
+                <h1 class="col-white" id="display-book-title"></h1>
+                <div class="row justify-content-md-around" id="display-book">
+                </div>
+                <div class="inventory-contents small-items" id="book-small-preview"></div>
+            </div>
+        </div>
+    </div>
+    <div class="m-2 col-md-12 view hidden" id="task-editor-view">
+        <div class="back-button clickable-items" onclick="window.location.href = './editors.html'">
+            <p class="col-white"><i class="fa fa-arrow-left"></i> <span class="i18n-back">Takaisin</span></p>
+        </div>
+        <div class="row justify-content-md-around" style="margin-top: 3rem;">
+            <div class="col-md-6" id="task-editor">
+                <div class="form-group left">
+                    <label class="col-white" for="book-editor-textfield">Muokkaa tehtävää</label>
+                    <label class="col-white float-right" id="task-ids"></label>
+                    <textarea class="form-control" id="task-editor-textfield" oninput="updateBasedOnTaskEditor()"
+                              rows="3" style="font-family: Courier, 'Courier New', sans-serif;"></textarea>
+                    <p id="task-editor-error" style="color: var(--col-light-red)"></p>
+                </div>
+                <div class="form-inline left">
+                    <button class="btn btn-primary mr-4" onclick="saveTask()"><i class="fa fa-download"></i> Tallenna
+                    </button>
+                    <select class="form-control mr-2" id="task-editor-existing">
+                        <option>Large select</option>
+                    </select>
+                    <button class="btn btn-primary mr-4" onclick="loadSelectedTask()"><i class="fa fa-edit"></i> Muokkaa
+                    </button>
+                    <button class="btn btn-primary" onclick="uploadTask()"><i class="fa fa-upload"></i> Lataa
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6 modal-lg" id="task-preview"
+                 style="max-height: 90vh; overflow-y: auto; overflow-x: hidden">
+                <h1 class="col-white mb-4" id="task-name"></h1>
+                <div id="task-completed-text"></div>
+                <div class="task-container">
+                    <div class="row justify-content-center mb-3">
+                        <div class="info-box example" tabindex="0">
+                            <div class="row justify-content-md-center">
+                                <div id="task-flame-container"></div>
+                                <p class="task-description col-md-8" id="task-description" tabindex="0"></p>
+                            </div>
+                            <hr>
+                            <h5 class="col-model-blue center i18n-example"></h5>
+                            <div class="row justify-content-center" id="query-in-table"></div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-md-center mb-3">
+                        <div class="dropdown" id="previous-answers">
+                            <button aria-expanded="false" aria-haspopup="true"
+                                    class="btn btn-rune dropdown-toggle i18n-previous-answers"
+                                    data-toggle="dropdown" id="dropdownMenuButton" type="button"></button>
+                            <div aria-labelledby="dropdownMenuButton" class="dropdown-menu"
+                                 id="previous-answers-dropdown">
+                            </div>
+                        </div>
+                        <div class="info-box col-md-6">
+                            <div class="row justify-content-between">
+                                <div class="col-md-10">
+                        <textarea aria-label="SQL" class="text-input i18n-query-placeholder"
+                                  id="query-input" tabindex="0"></textarea>
+                                    <textarea aria-label="Model answer" class="text-input mt-3 hidden" disabled
+                                              id="model-answer" tabindex="0"></textarea>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="col-yellow float-right p-0 mt-2 hidden i18n-show-model-answer"
+                                       href="javascript:void(0)" id="query-model-button"
+                                       onclick="Views.TASK.showModelAnswer()"
+                                       tabindex="0"></a>
+                                </div>
+                                <div class="info-box tests" tabindex="0">
+                                    <ul class="nav nav-tabs" id="query-out-tables-nav"></ul>
+                                    <div id="query-out-table"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modals">
+    <div aria-hidden="true" aria-labelledby="display-item-modalLabel" class="modal fade" id="display-item-modal"
+         role="dialog"
+         tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content bg-transparent">
+                <div class="center">
+                    <h1 class="col-white" id="display-item-header"></h1>
+                    <div class="rotate-2deg" id="display-item"></div>
+                    <p class="col-white center">
+                        <i id="display-item-text"></i>
+                    </p>
+                    <button class="btn btn-light-blue i18n-ok" data-dismiss="modal" type="button">Selvä!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="vendor/jquery-slim-3.5.1/jquery-3.5.1.slim.min.js"></script>
+<script src="vendor/bootstrap-4.5.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="dist/sql-wasm.js"></script>
+<script src="vendor/canvas-confetti-1.2.0/confetti.browser.min.js"></script>
+
+<script>
+    sessionStorage.setItem('currentLang', 'fi');
+</script>
+<script src="js/i18n.js"></script>
+<script src="i18n/fi.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/utilities.js"></script>
+<script src="js/mooc.js"></script>
+<script src="js/parsers.js"></script>
+<script src="js/itemTypes.js"></script>
+<script src="js/items.js"></script>
+<script src="js/tasks.js"></script>
+<script src="js/taskGroups.js"></script>
+<script src="js/inventory.js"></script>
+<script src="js/views.js"></script>
+<script src="js/main.js"></script>
+<script src="js/saveState.js"></script>
+<script src="js/editors.js"></script>
+
+<!-- Font Awesome, load & swap -->
+<link as="style" href="vendor/fontawesome-free-5.14.0-web/css/all.min.css" rel="preload"/>
+<link href="vendor/fontawesome-free-5.14.0-web/css/all.min.css" media="print" onload="this.media='all'"
+      rel="stylesheet"/>
+<!-- Google fonts Aclonica (book covers), Nunito (main text), Pangolin (written text)-->
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style"
+      href="https://fonts.googleapis.com/css2?family=Aclonica&family=Paprika&family=Nunito:wght@400;600&family=Pangolin&display=swap"
+      rel="preload"/>
+<link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Paprika&family=Nunito:wght@400;600&family=Pangolin&display=swap"
+      media="print" onload="this.media='all'" rel="stylesheet"/>
+</body>
+</html>

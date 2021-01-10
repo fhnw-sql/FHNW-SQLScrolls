@@ -1,0 +1,41 @@
+METADATA {
+    id: task-009
+    name: Tehtävä 9
+    color: blue
+}
+
+DESCRIPTION {
+    Laske, moniko kummitus on syntynyt 1700-luvulla.
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1801
+        3|Siegfried|1650
+        4|Sieglinde|1777
+        5|Kaaleppi|1833
+    }
+
+    RESULT {
+        2
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Edmond|1711
+        2|Mercedes|1722
+        3|Fernand|1733
+        4|Valentine|1744
+        5|Haydee|1755
+    }
+
+    RESULT {
+        5
+    }
+}

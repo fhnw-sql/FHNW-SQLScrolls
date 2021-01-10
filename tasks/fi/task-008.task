@@ -1,0 +1,44 @@
+METADATA {
+    id: task-008
+    name: Tehtävä 8
+    color: purple
+}
+
+DESCRIPTION {
+    Hae kaikki eri syntymävuodet.
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1833
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+    }
+
+    RESULT {
+        1650
+        1765
+        1833
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Edmond|1744
+        2|Mercedes|1744
+        3|Fernand|1790
+        4|Valentine|1744
+        5|Haydee|1744
+    }
+
+    RESULT {
+        1744
+        1790
+    }
+}

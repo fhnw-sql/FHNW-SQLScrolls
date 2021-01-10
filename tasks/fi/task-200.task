@@ -1,0 +1,38 @@
+METADATA {
+    id: task-200
+    name: Esimerkki tehtävä 1
+    color: purple
+}
+
+DESCRIPTION {
+    Tehtävänanto ja ohjeet tehtävän suorittamiseen. Tässä voi liittää tehtävän maagiseen maailmaan.
+    \n pakottaa rivinvaihdon.
+
+    Tehtävä: Tässä tarkempia ohjeita
+}
+
+STRICT
+
+TEST {
+    TABLE {
+        Parts
+        head|tail
+        🐟|🐍
+    }
+
+    RESULT {
+        🐟|🐍
+    }
+}
+
+TEST {
+    TABLE {
+        Parts
+        head|tail
+        paa|hanta
+    }
+
+    RESULT {
+        paa|hanta
+    }
+}

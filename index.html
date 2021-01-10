@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="Opettele SQL kielen salat pelaamalla hauskaa peliä." name="description">
+    <meta content="Risto Lahtela / Rsl1122" name="author">
+    <meta content="Antti Laaksonen / pllk" name="author">
+    <meta content="University of Helsinki" name="creator">
+    <meta content="SQL, Game, Magic, Learn, Teach, Study" name="keywords">
+    <meta content="strict-origin" name="referrer">
+    <meta content="nofollow" name="robots">
+
+    <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+    <link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+    <link href="favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+    <link href="site.webmanifest" rel="manifest">
+    <link color="#5bbad5" href="safari-pinned-tab.svg" rel="mask-icon">
+    <meta content="#da532c" name="msapplication-TileColor">
+    <meta content="#ffffff" name="theme-color">
+
+    <title>SQL Trainer</title>
+
+    <style>
+        .hidden {
+            display: none !important;
+            opacity: 0;
+        }
+
+        .screen-reader-only {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+    </style>
+    <link href="vendor/bootstrap-4.5.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="bg-black no-focus-outline" id="body">
+<section class="container-fluid" id="main">
+    <section id="alerts" role="alertdialog"></section>
+    <div id="fade-to-black" style="display: none"></div>
+
+    <section class="view" id="login-view">
+        <aside class="background"></aside>
+        <aside aria-hidden="true" class="left-graphic">
+            <svg enable-background="new 0 0 125 189.864" height="189.864px" id="Layer_1"
+                 style="transform: scale(2)" version="1.1"
+                 viewBox="0 0 125 189.864" width="125px" x="0px" xml:space="preserve"
+                 xmlns="http://www.w3.org/2000/svg" y="0px">
+<path class="flame-main" d="M76.553,186.09c0,0-10.178-2.976-15.325-8.226s-9.278-16.82-9.278-16.82s-0.241-6.647-4.136-18.465
+	c0,0,3.357,4.969,5.103,9.938c0,0-5.305-21.086,1.712-30.418c7.017-9.333,0.571-35.654-2.25-37.534c0,0,13.07,5.64,19.875,47.54
+	c6.806,41.899,16.831,45.301,6.088,53.985" fill="#16AAFD"/>
+                <path class="flame-main one" d="M61.693,122.257c4.117-15.4,12.097-14.487-11.589-60.872c0,0,32.016,10.223,52.601,63.123
+	c20.585,52.899-19.848,61.045-19.643,61.582c0.206,0.537-19.401-0.269-14.835-18.532S57.576,137.656,61.693,122.257z"
+                      fill="#4AB8FF"/>
+                <path class="flame-main two" d="M81.657,79.192c0,0,11.549,24.845,3.626,40.02c-7.924,15.175-21.126,41.899-0.425,64.998
+	C84.858,184.21,125.705,150.905,81.657,79.192z" fill="#1FD7F6"/>
+                <path class="flame-main three" d="M99.92,101.754c0,0-23.208,47.027-12.043,80.072c0,0,32.741-16.073,20.108-45.79
+	C95.354,106.319,99.92,114.108,99.92,101.754z" fill="#21F0F3"/>
+                <path class="flame-main four" d="M103.143,105.917c0,0,8.927,30.753-1.043,46.868c-9.969,16.115-14.799,29.041-14.799,29.041
+	S134.387,164.603,103.143,105.917z" fill="#16AAFD"/>
+                <path class="flame-main five"
+                      d="M62.049,104.171c0,0-15.645,67.588,10.529,77.655C98.753,191.894,69.033,130.761,62.049,104.171z"
+                      fill="#21F0F3"/>
+</svg>
+        </aside>
+        <img alt="scrolls" aria-hidden="true" class="right-graphic" src="img/scrolls.png">
+        <div class="row justify-content-center login-widget">
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                <div class="info-box justify-content-center">
+                    <h1 class="task-description center" style="font-size: 3.5rem; font-family: var(--book-font)">
+                        SQL Trainer
+                    </h1>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <div class="info-box justify-content-center mt-3">
+                            <h2 class="screen-reader-only i18n-login"></h2>
+                            <p class="task-description center i18n-welcome"></p>
+                            <div class="alert alert-danger hidden" id="login-error" role="alert"></div>
+                            <form onsubmit="event.preventDefault()">
+                                <div class="form-group">
+                                    <input aria-label="mooc.fi username" autocomplete="username"
+                                           class="form-control form-control-user i18n-username i18n-aria-username"
+                                           id="inputUser" placeholder="" tabindex="0" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <input aria-label="password" autocomplete="current-password"
+                                           class="form-control form-control-user i18n-password i18n-aria-password"
+                                           id="inputPassword" placeholder="" tabindex="0" type="password">
+                                </div>
+                                <button class="btn i18n-login" id="login-button" onclick="login()" tabindex="0"
+                                        type="submit">
+
+                                </button>
+                                <!-- TODO Remove 'hidden' class to reveal language selector -->
+                                <select aria-label="Select language" class="form-control hidden" id="language-selector"
+                                        tabindex="0">
+                                    <option selected="selected">FI</option>
+                                    <option>EN</option>
+                                </select>
+                            </form>
+                        </div>
+                        <p class="center mt-2">
+                            <a class="task-description i18n-forgot-password"
+                               href="https://tmc.mooc.fi/password_reset_keys/new"
+                               rel="noreferrer" tabindex="0" target="_blank"></a><br>
+                            <a class="task-description i18n-register" href="https://www.mooc.fi/fi/sign-up"
+                               rel="noreferrer" tabindex="0" target="_blank"></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="view hidden" id="loading-view" tabindex="-1">
+        <h1 class="large-loading-text">
+            <i class="fa fa-star loading-animation"></i>
+            <i class="far fa-star loading-animation offset"></i>
+            <span class="i18n-loading"></span>
+        </h1>
+    </section>
+
+    <section class="m-2 col-md-10 view hidden" id="inventory-view" tabindex="-1">
+        <button class="col-white logout-button" onclick="logout()">
+            <i class="fa fa-fw fa-door-open"></i> <span class="i18n-logout"></span>
+        </button>
+        <div>
+            <h1 class="screen-reader-only i18n-task-groups"></h1>
+            <ul class="inventory-contents clickable-items col-12" id="inventory"></ul>
+            <h2 class="screen-reader-only i18n-tasks" id="viewed-tasks-header" tabindex="-1"></h2>
+            <ul class="inventory-contents clickable-items col-12 viewed-tasks" id="viewed-tasks"></ul>
+        </div>
+    </section>
+
+    <section class="m-2 view hidden" id="task-view" tabindex="-1">
+        <div class="bg-transparent" onclick="changeView(DISPLAY_STATE.previousView)"
+             style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; margin: 0;"></div>
+        <h1 class="col-white mb-1" id="task-name"></h1>
+
+        <div aria-hidden="true" class="task-complete-notification info-box hidden" id="task-complete-notification">
+            <p>
+                <i class="fa fa-star col-yellow"></i>
+                <span class="i18n-task-complete col-yellow"></span>
+            </p>
+        </div>
+
+        <div class="task-container">
+            <div class="row justify-content-md-center mb-3">
+                <div class="col-sm-12 col-md-8 col-lg-6">
+                    <button class="back-button clickable-items" onclick="changeView(DISPLAY_STATE.previousView)">
+                        <span class="col-white"><i class="fa fa-arrow-left"></i> <span class="i18n-back"></span></span>
+                    </button>
+                    <div class="info-box mb-3">
+                        <div class="row justify-content-between pt-3">
+                            <div class="info-box example col-12 mb-3">
+                                <div aria-live="polite" id="task-completed-text" role="alert"></div>
+                                <h2 class="screen-reader-only i18n-task-description"></h2>
+                                <div class="row justify-content-start">
+                                    <div id="task-flame-container"></div>
+                                    <p class="task-description" id="task-description"></p>
+                                </div>
+                                <h3 class="col-model-blue left i18n-example" style="font-size: 1.2rem"></h3>
+                                <hr style="margin-top: 0">
+                                <div style="overflow-x: auto">
+                                    <div class="row justify-content-center" id="query-in-table"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tests-container">
+                        <div class="info-box">
+                            <div class="row justify-content-between pt-3">
+                                <h2 class="screen-reader-only i18n-task-area"></h2>
+                                <div class="col-md-10">
+                                <textarea aria-label="SQL"
+                                          class="text-input i18n-query-placeholder i18n-aria-query-input-box"
+                                          id="query-input"></textarea>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="float-right btn i18n-query-test" id="query-run-button"
+                                            onclick="runQueryTests(true)" tabindex="0"></button>
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <div class="dropdown btn btn-rune float-left mr-2" id="previous-answers">
+                                        <button aria-expanded="false" aria-haspopup="true"
+                                                class="dropdown-toggle pt-0 pb-0 i18n-previous-answers"
+                                                data-toggle="dropdown"
+                                                id="dropdownMenuButton" role="radio"></button>
+                                        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu"
+                                             id="previous-answers-dropdown">
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-rune float-left hidden i18n-show-model-answer"
+                                            id="query-model-button" onclick="Views.TASK.showModelAnswer()"></button>
+                                </div>
+                                <div class="col-md-10">
+                                <textarea aria-label="Model answer"
+                                          class="text-input mt-3 hidden i18n-aria-model-answer" disabled
+                                          id="model-answer"></textarea>
+                                </div>
+                                <div class="info-box tests" tabindex="0">
+                                    <h3 class="screen-reader-only i18n-task-tests"></h3>
+                                    <ul class="nav nav-tabs" id="query-out-tables-nav"></ul>
+                                    <div id="query-out-table"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div aria-live="polite" class="hidden" id="task-group-complete-notification" role="alert" tabindex="-1">
+        <p class="gold-shine-text i18n-level-unlocked"></p>
+        <p class="smaller gold-shine-text i18n-unlocked-more-tasks">Avasit lisää tehtäviä</p>
+    </div>
+    <div class="counters hidden" id="counter-container">
+        <h2 class="screen-reader-only i18n-counters"></h2>
+        <p class="col-white" id="star-counter" tabindex="0"></p>
+    </div>
+
+    <section class="col-md-9 view hidden" id="map-view" tabindex="-1">
+        <img alt="Map of the world" class="col-white" loading="lazy" src="img/worldmap.jpg">
+        <button class="col-white logout-button" onclick="logout()">
+            <i class="fa fa-fw fa-door-open"></i> <span class="i18n-logout"></span>
+        </button>
+        <h1 class="screen-reader-only i18n-map-view"></h1>
+        <ul id="map-tasks"></ul>
+    </section>
+
+    <section class="view col-md-8 hidden" id="evil-flame-animation" tabindex="-1">
+        <h1 class="screen-reader-only i18n-transformation-animation"></h1>
+        <div class="row">
+            <div class="col-md-4">
+                <img alt="lightning bolt" class="lightning-bolt hidden" id="lightning-bolt-right"
+                     src="img/lightning-bolt.png">
+                <img alt="lightning bolt" class="lightning-bolt hidden" id="lightning-bolt-left"
+                     src="img/lightning-bolt.png">
+                <div id="evil-flame-animation-container" style="height: 350px">
+                    <svg enable-background="new 0 0 125 189.864" height="189.864px" id="good-flame"
+                         style="transform: scale(2);  opacity: 1" version="1.1"
+                         viewBox="0 0 125 189.864" width="125px" x="0px" xml:space="preserve"
+                         xmlns="http://www.w3.org/2000/svg" y="0px">
+<path class="flame-main" d="M76.553,186.09c0,0-10.178-2.976-15.325-8.226s-9.278-16.82-9.278-16.82s-0.241-6.647-4.136-18.465
+	c0,0,3.357,4.969,5.103,9.938c0,0-5.305-21.086,1.712-30.418c7.017-9.333,0.571-35.654-2.25-37.534c0,0,13.07,5.64,19.875,47.54
+	c6.806,41.899,16.831,45.301,6.088,53.985" fill="#16AAFD"/>
+                        <path class="flame-main one" d="M61.693,122.257c4.117-15.4,12.097-14.487-11.589-60.872c0,0,32.016,10.223,52.601,63.123
+	c20.585,52.899-19.848,61.045-19.643,61.582c0.206,0.537-19.401-0.269-14.835-18.532S57.576,137.656,61.693,122.257z"
+                              fill="#4AB8FF"/>
+                        <path class="flame-main two" d="M81.657,79.192c0,0,11.549,24.845,3.626,40.02c-7.924,15.175-21.126,41.899-0.425,64.998
+	C84.858,184.21,125.705,150.905,81.657,79.192z" fill="#1FD7F6"/>
+                        <path class="flame-main three" d="M99.92,101.754c0,0-23.208,47.027-12.043,80.072c0,0,32.741-16.073,20.108-45.79
+	C95.354,106.319,99.92,114.108,99.92,101.754z" fill="#21F0F3"/>
+                        <path class="flame-main four" d="M103.143,105.917c0,0,8.927,30.753-1.043,46.868c-9.969,16.115-14.799,29.041-14.799,29.041
+	S134.387,164.603,103.143,105.917z" fill="#16AAFD"/>
+                        <path class="flame-main five"
+                              d="M62.049,104.171c0,0-15.645,67.588,10.529,77.655C98.753,191.894,69.033,130.761,62.049,104.171z"
+                              fill="#21F0F3"/>
+</svg>
+                    <svg enable-background="new 0 0 125 189.864" height="189.864px" id="evil-flame"
+                         style="filter: hue-rotate(-125deg) brightness(0.9); transform: scale(2); opacity: 0"
+                         version="1.1" viewBox="0 0 125 189.864"
+                         width="125px" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                         y="0px">
+<path class="flame-main" d="M76.553,186.09c0,0-10.178-2.976-15.325-8.226s-9.278-16.82-9.278-16.82s-0.241-6.647-4.136-18.465
+	c0,0,3.357,4.969,5.103,9.938c0,0-5.305-21.086,1.712-30.418c7.017-9.333,0.571-35.654-2.25-37.534c0,0,13.07,5.64,19.875,47.54
+	c6.806,41.899,16.831,45.301,6.088,53.985" fill="#F36E21"/>
+                        <path class="flame-main one" d="M61.693,122.257c4.117-15.4,12.097-14.487-11.589-60.872c0,0,32.016,10.223,52.601,63.123
+	c20.585,52.899-19.848,61.045-19.643,61.582c0.206,0.537-19.401-0.269-14.835-18.532S57.576,137.656,61.693,122.257z"
+                              fill="#F6891F"/>
+                        <path class="flame-main two" d="M81.657,79.192c0,0,11.549,24.845,3.626,40.02c-7.924,15.175-21.126,41.899-0.425,64.998
+	C84.858,184.21,125.705,150.905,81.657,79.192z" fill="#FFD04A"/>
+                        <path class="flame-main three" d="M99.92,101.754c0,0-23.208,47.027-12.043,80.072c0,0,32.741-16.073,20.108-45.79
+	C95.354,106.319,99.92,114.108,99.92,101.754z" fill="#FDBA16"/>
+                        <path class="flame-main four" d="M103.143,105.917c0,0,8.927,30.753-1.043,46.868c-9.969,16.115-14.799,29.041-14.799,29.041
+	S134.387,164.603,103.143,105.917z" fill="#F36E21"/>
+                        <path class="flame-main five"
+                              d="M62.049,104.171c0,0-15.645,67.588,10.529,77.655C98.753,191.894,69.033,130.761,62.049,104.171z"
+                              fill="#FDBA16"/>
+</svg>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <p class="task-description" id="task-animation-flame-speech" tabindex="0"></p>
+                <p class="col-white hidden i18n-animation-explanation-6" id="evil-flame-animation-explanation"
+                   tabindex="0"></p>
+                <button class="btn btn-light-blue i18n-skip" id="evil-flame-exit"
+                        onclick="changeView(Views.MAP)" tabindex="0" type="button"></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="view col-md-8 hidden" id="end-animation" tabindex="-1">
+        <h1 class="screen-reader-only i18n-end-animation"></h1>
+        <div class="row">
+            <div class="col-md-4">
+                <img alt="lightning bolt" class="lightning-bolt hidden" id="end-lightning-bolt-right"
+                     src="img/lightning-bolt.png">
+                <img alt="lightning bolt" class="lightning-bolt hidden" id="end-lightning-bolt-left"
+                     src="img/lightning-bolt.png">
+                <div id="end-evil-flame-container">
+                    <svg enable-background="new 0 0 125 189.864" height="189.864px" id="end-evil-flame"
+                         style="filter: hue-rotate(-125deg) brightness(0.9); transform: scale(2);"
+                         version="1.1" viewBox="0 0 125 189.864"
+                         width="125px" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                         y="0px">
+<path class="flame-main" d="M76.553,186.09c0,0-10.178-2.976-15.325-8.226s-9.278-16.82-9.278-16.82s-0.241-6.647-4.136-18.465
+	c0,0,3.357,4.969,5.103,9.938c0,0-5.305-21.086,1.712-30.418c7.017-9.333,0.571-35.654-2.25-37.534c0,0,13.07,5.64,19.875,47.54
+	c6.806,41.899,16.831,45.301,6.088,53.985" fill="#F36E21"/>
+                        <path class="flame-main one" d="M61.693,122.257c4.117-15.4,12.097-14.487-11.589-60.872c0,0,32.016,10.223,52.601,63.123
+	c20.585,52.899-19.848,61.045-19.643,61.582c0.206,0.537-19.401-0.269-14.835-18.532S57.576,137.656,61.693,122.257z"
+                              fill="#F6891F"/>
+                        <path class="flame-main two" d="M81.657,79.192c0,0,11.549,24.845,3.626,40.02c-7.924,15.175-21.126,41.899-0.425,64.998
+	C84.858,184.21,125.705,150.905,81.657,79.192z" fill="#FFD04A"/>
+                        <path class="flame-main three" d="M99.92,101.754c0,0-23.208,47.027-12.043,80.072c0,0,32.741-16.073,20.108-45.79
+	C95.354,106.319,99.92,114.108,99.92,101.754z" fill="#FDBA16"/>
+                        <path class="flame-main four" d="M103.143,105.917c0,0,8.927,30.753-1.043,46.868c-9.969,16.115-14.799,29.041-14.799,29.041
+	S134.387,164.603,103.143,105.917z" fill="#F36E21"/>
+                        <path class="flame-main five"
+                              d="M62.049,104.171c0,0-15.645,67.588,10.529,77.655C98.753,191.894,69.033,130.761,62.049,104.171z"
+                              fill="#FDBA16"/>
+</svg>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <p class="evil-task-description" id="end-flame-speech" tabindex="0"></p>
+                <button class="btn btn-light-blue i18n-skip" id="end-exit"
+                        onclick="changeView(Views.END_TEXT)" tabindex="0" type="button"></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="view hidden" id="end-view" tabindex="-1"
+             style="background: url('img/end-background.jpg') fixed no-repeat; background-size: cover; width: 100%; height: 100vh; position: absolute; top: 0; left: 0;">
+        <div>
+            <h1 class="col-white i18n-congratulations"></h1>
+            <p class="col-white center i18n-ending-text-1"></p>
+            <p class="col-white center i18n-ending-text-2"></p>
+            <button class="btn btn-light-blue i18n-return-to-game" onclick="changeView(Views.MAP)"
+                    tabindex="0" type="button"></button>
+        </div>
+        <button class="col-white logout-button" onclick="logout()">
+            <i class="fa fa-fw fa-door-open"></i> <span class="i18n-logout"></span>
+        </button>
+    </section>
+</section>
+<div class="modals">
+    <div aria-hidden="true" aria-label="display letter" class="modal fade i18n-aria-display-letter"
+         id="display-letter-modal"
+         role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content bg-transparent">
+                <div class="center">
+                    <div class="letter">
+                        <button aria-label="close modal" class="btn i18n-aria-close-modal" data-dismiss="modal"
+                                tabindex="0" type="button">
+                            &times;
+                        </button>
+                        <p tabindex="0"><i id="display-letter-text"></i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div aria-hidden="true" aria-label="display books" class="modal i18n-aria-display-books"
+         id="display-book-modal"
+         role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-transparent">
+                <div class="center">
+                    <h1 class="col-white" id="display-book-title" tabindex="0"></h1>
+                    <div class="row justify-content-md-around" id="display-book">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div aria-hidden="true" aria-label="display profile" class="modal i18n-aria-display-profile"
+         id="display-profile-modal"
+         role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content info-box">
+                <div class="info-box tests col-yellow" style="width: calc(100% - 2rem) !important;">
+                    <div class="row justify-content-between">
+                        <h1 class="i18n-profile"></h1>
+                        <button class="float-right col-yellow close-button" data-dismiss="modal"><span
+                                class="i18n-close"></span>
+                            &times;
+                        </button>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="row">
+                                <div class="col-12"><p class="float-left" id="logged-in-as"></p></div>
+                                <div class="col-12">
+                                    <button class="btn btn-rune" onclick="Views.PROFILE.downloadData()">
+                                        <i class="fa fa-download"></i> <span class="i18n-download-your-data"></span>
+                                    </button>
+                                </div>
+                                <div class="col-12 graph-loading">
+                                    <p>
+                                        <i class="fa fa-star loading-animation"></i>
+                                        <i class="far fa-star loading-animation offset"></i> <span
+                                            class="i18n-loading"></span></p>
+                                </div>
+                                <div class="col-12" id="task-completion-graph" style="height: 16rem;"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 my-4">
+                            <p class="i18n-counters float-right pl-2"></p>
+                            <table class="float-right" id="task-completion-grid"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<aside class="right-sidebar clickable-items">
+    <h1 class="screen-reader-only i18n-right-sidebar"></h1>
+    <button class="center col-white" id="profile-menu" onclick="changeSecondaryView(Views.PROFILE)">
+        <i class="center fa fa-user fa-2x"></i>
+        <p class="center i18n-profile"></p>
+    </button>
+    <button class="center col-white hidden" id="book-menu" onclick="BookMenuButton.open(event)">
+        <i class="center fa fa-book fa-3x" id="book-menu-icon"></i>
+        <p class="center i18n-books-text" id="book-menu-text"></p>
+    </button>
+    <button class="center col-white hidden" id="task-view-swap" onclick="TaskViewSwap.toInventoryView()">
+        <i class="center fa fa-scroll fa-3x" id="task-view-swap-icon"></i>
+        <p class="center i18n-tasks-text" id="task-view-swap-text"></p>
+    </button>
+</aside>
+
+<script src="vendor/jquery-slim-3.5.1/jquery-3.5.1.slim.min.js"></script>
+<script src="vendor/bootstrap-4.5.2-dist/js/popper.min.js"></script>
+<script src="vendor/bootstrap-4.5.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="dist/sql-wasm.js"></script>
+<script src="vendor/canvas-confetti-1.2.0/confetti.browser.min.js"></script>
+<script src="vendor/dygraphs-2.1.0/dygraph.min.js"></script>
+
+<script src="js/i18n.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/utilities.js"></script>
+<script src="js/mooc.js"></script>
+<script src="js/parsers.js"></script>
+<script src="js/itemTypes.js"></script>
+<script src="js/items.js"></script>
+<script src="js/tasks.js"></script>
+<script src="js/taskGroups.js"></script>
+<script src="js/inventory.js"></script>
+<script src="js/views.js"></script>
+<script src="js/main.js"></script>
+<script src="js/saveState.js"></script>
+
+<!-- Font Awesome, load & swap -->
+<link as="style" href="vendor/fontawesome-free-5.14.0-web/css/all.min.css" rel="preload"/>
+<link href="vendor/fontawesome-free-5.14.0-web/css/all.min.css" media="print" onload="this.media='all'"
+      rel="stylesheet"/>
+<!-- preload is used to connect to the gstatic server which speeds up font loading. -->
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<!-- Google fonts Aclonica var(--book-font), Nunito var(--main-font), Pangolin var(--hand-font), load & swap -->
+<link as="style"
+      href="https://fonts.googleapis.com/css2?family=Aclonica&family=Paprika&family=Nunito:wght@400;600&family=Pangolin&display=swap"
+      rel="preload"/>
+<link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Paprika&family=Nunito:wght@400;600&family=Pangolin&display=swap"
+      media="print" onload="this.media='all'"
+      rel="stylesheet"/>
+
+<link href="css/endgame.css" rel="stylesheet"/>
+<link as="style" href="vendor/dygraphs-2.1.0/dygraph.min.css"/>
+
+<div aria-hidden="true" class="preload-images" style="width: 1px; height: 1px; position: fixed; bottom: 0; right: 0">
+    <img alt="lazy-loaded-icon" src="img/letter.png">
+    <img alt="lazy-loaded-icon" src="img/scroll.png">
+    <img alt="lazy-loaded-icon" src="img/questionmark.png">
+    <img alt="lazy-loaded-icon" src="img/shelf.png">
+    <img alt="lazy-loaded-icon" src="img/magic-texture-seamless.png">
+    <img alt="lazy-loaded-icon" src="img/evil-magic-texture-seamless.png">
+    <img alt="lazy-loaded-icon" src="img/gold-shine-texture.png">
+</div>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+METADATA {
+    id: Book-A
+    name: Valintojen kirja
+    title: Book of Selection Spells
+    author: Maestro Codd
+    color: purple
+}
+
+COVER {
+    ""
+}
+
+PAGE {
+    Komento SELECT hakee halutut sarakkeet taulusta.
+    Komentoa käytetään näin:
+
+    SELECT {sarakkeet} FROM {taulu};
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id|name|weight
+            1|Wilfried|3500
+            2|Justus|7500
+            3|Tabaluca|6000
+        }
+        QUERY {
+            SELECT name, weight FROM Dragons;
+        }
+    }
+}
+
+PAGE {
+    Hakua voidaan rajoittaa WHERE-osalla:
+    
+    SELECT {sarakkeet} FROM {taulu} WHERE {ehto};
+    
+    Ehdoissa voidaan käyttää esimerkiksi vertailuja ==, <>,
+    <, >, <=, >= sekä sanoja AND ja OR.    
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id|name|weight
+            1|Wilfried|3500
+            2|Justus|7500
+            3|Tabaluca|6000
+        }
+        QUERY {
+            SELECT name FROM Dragons WHERE weight > 5000;
+        }
+    }
+}
+
+PAGE {
+    Haun tulokset voidaan järjestää ORDER BY -osalla:
+
+    SELECT {sarakkeet} FROM {taulu} ORDER BY {sarakkeet};
+    
+    Jos järjestys halutaan käänteiseksi, komennon loppuun lisätään DESC.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id|name|weight
+            1|Wilfried|3500
+            2|Justus|7500
+            3|Tabaluca|6000
+        }
+        QUERY {
+            SELECT name, weight FROM Dragons ORDER BY weight;
+        }
+    }
+}
+
+PAGE {
+    Sana DISTINCT hakee jokaisen erilaisen rivin vain kerran.
+
+    SELECT DISTINCT {haku};
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id|name|weight
+            1|Wilfried|3500
+            2|Justus|7500
+            3|Wilfried|6000
+        }
+        QUERY {
+            SELECT DISTINCT name FROM Dragons;
+        }
+    }
+}

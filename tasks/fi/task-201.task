@@ -1,0 +1,25 @@
+METADATA {
+    id: task-201
+    name: Esimerkki tehtävä 2
+    color: green
+}
+
+DESCRIPTION {
+    Tehtävänanto ja ohjeet tehtävän suorittamiseen. Tässä voi liittää tehtävän maagiseen maailmaan.
+    \n pakottaa rivinvaihdon.
+
+    Tehtävä: Tässä tarkempia ohjeita
+}
+
+DENY_SUBQUERY
+
+TEST {
+    SQL {
+        CREATE TABLE Parts (head TEXT, tail TEXT);
+        INSERT INTO Parts (head, tail) VALUES ('🐟','🐍')    
+    }
+
+    RESULT {
+        🐟|🐍
+    }
+}

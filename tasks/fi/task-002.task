@@ -1,0 +1,49 @@
+METADATA {
+    id: task-002
+    name: Tehtävä 2
+    color: purple
+}
+
+DESCRIPTION {
+    Hae jokaisen kummituksen nimi ja syntymävuosi.
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1801
+        3|Siegfried|1650
+        4|Sieglinde|1777
+        5|Kaaleppi|1833
+    }
+
+    RESULT {
+        Arthur|1765
+        Desiree|1801
+        Siegfried|1650
+        Sieglinde|1777
+        Kaaleppi|1833
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Edmond|1744
+        2|Mercedes|1801
+        3|Fernand|1790
+        4|Valentine|1885
+        5|Haydee|1604
+    }
+
+    RESULT {
+        Edmond|1744
+        Mercedes|1801
+        Fernand|1790
+        Valentine|1885
+        Haydee|1604
+    }
+}

@@ -1,0 +1,41 @@
+METADATA {
+    id: task-010
+    name: Tehtävä 10
+    color: blue
+}
+
+DESCRIPTION {
+    Hae varhaisin ja myöhäisin syntymävuosi.
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1801
+        3|Siegfried|1650
+        4|Sieglinde|1777
+        5|Kaaleppi|1833
+    }
+
+    RESULT {
+        1650|1833
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Edmond|1744
+        2|Mercedes|1801
+        3|Fernand|1790
+        4|Valentine|1885
+        5|Haydee|1604
+    }
+
+    RESULT {
+        1604|1885
+    }
+}

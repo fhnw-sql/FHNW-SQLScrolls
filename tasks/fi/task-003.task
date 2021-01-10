@@ -1,0 +1,41 @@
+METADATA {
+    id: task-003
+    name: Tehtävä 3
+    color: purple
+}
+
+DESCRIPTION {
+    Hae Sieglinden syntymävuosi.
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1801
+        3|Siegfried|1650
+        4|Sieglinde|1777
+        5|Kaaleppi|1833
+    }
+
+    RESULT {
+        1777
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1744
+        2|Sieglinde|1801
+        3|Desiree|1790
+        4|Siegfried|1885
+        5|Kaaleppi|1604
+    }
+
+    RESULT {
+        1801
+    }
+}

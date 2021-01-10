@@ -1,0 +1,65 @@
+METADATA {
+    id: task-018
+    name: Tehtävä 18
+    color: orange
+}
+
+DESCRIPTION {
+    Hae jokaisen kummituksen kummittelupaikka.
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|place_id
+        1|Arthur|1
+        2|Desiree|3
+        3|Siegfried|2
+        4|Sieglinde|2
+        5|Kaaleppi|3
+    }
+
+    TABLE {
+        Places
+        id|name
+        1|school
+        2|forest
+        3|mill
+    }
+
+    RESULT {
+        Arthur|school
+        Desiree|mill
+        Siegfried|forest
+        Sieglinde|forest
+        Kaaleppi|mill
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|place_id
+        1|Edmond|2
+        2|Mercedes|2
+        3|Fernand|3
+        4|Valentine|2
+        5|Haydee|2
+    }
+
+    TABLE {
+        Places
+        id|name
+        1|school
+        2|forest
+        3|mill
+    }
+
+    RESULT {
+        Edmond|forest
+        Mercedes|forest
+        Fernand|mill
+        Valentine|forest
+        Haydee|forest
+    }
+}

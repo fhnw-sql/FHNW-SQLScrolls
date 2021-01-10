@@ -1,0 +1,51 @@
+METADATA {
+    id: task-006
+    name: Tehtävä 6
+    color: purple
+}
+
+DESCRIPTION {
+    Hae kummitusten nimet aakkosjärjestyksessä.
+}
+
+STRICT
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1801
+        3|Siegfried|1650
+        4|Sieglinde|1777
+        5|Kaaleppi|1833
+    }
+
+    RESULT {
+        Arthur
+        Desiree
+        Kaaleppi
+        Siegfried
+        Sieglinde
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Edmond|1744
+        2|Mercedes|1801
+        3|Fernand|1790
+        4|Valentine|1885
+        5|Haydee|1604
+    }
+
+    RESULT {
+        Edmond
+        Fernand
+        Haydee
+        Mercedes
+        Valentine
+    }
+}

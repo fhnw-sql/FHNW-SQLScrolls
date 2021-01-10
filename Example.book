@@ -1,0 +1,37 @@
+METADATA {
+    id: Example
+    name: Esimerkki-kirja
+    title: Mahtava esimerkki-kirja
+    author: Matti Meikäläinen
+    color: purple
+}
+
+COVER {
+    Tähän voi kirjoittaa takakansitekstin, joka näytetään kun kirja avataan.
+    Takakansiteksti kursivoidaan automaattisesti, rivinvaihtoja ei näytetä.
+}
+
+PAGE {
+    Esimerkki ensimmäisestä sivusta. Sivulle voi kirjoittaa useita kappaleita.
+    Rivinvaihto ei lopeta kappaletta.\n pakottaa rivinvaihdon.
+
+    Tuplarivinvaihto aloittaa uuden kappaleen
+
+    <ul><li><b>Tukee html-tageja</b></li></ul>
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Examples
+            id|name|field
+            1|Esimerkki|Taulusta
+            2|Tähän|Mahtuu
+            3|Kolme|Riviä
+        }
+
+        QUERY {
+            SELECT name FROM Examples;
+        }
+    }
+}

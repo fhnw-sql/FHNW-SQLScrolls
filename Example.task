@@ -1,0 +1,54 @@
+METADATA {
+    id: Example
+    name: Esimerkki tehtävä
+    color: purple
+}
+
+DESCRIPTION {
+    Tehtävänanto ja ohjeet tehtävän suorittamiseen. Tässä voi liittää tehtävän maagiseen maailmaan.
+    \n pakottaa rivinvaihdon.
+
+    Tehtävä: Tässä tarkempia ohjeita
+}
+
+TEST {
+    TABLE {
+        Lemmikit
+        id|elain|tunne
+        1|😻|rakastunut
+        2|🦑|tyytyväinen
+        3|🦎|vihainen
+    }
+
+    TABLE {
+        Lemmikit_copy
+        id|elain|tunne
+        1|😻|rakastunut
+        2|🦑|tyytyväinen
+        3|🦎|vihainen
+    }
+
+    SQL {
+        CREATE TABLE Runes (id INTEGER PRIMARY KEY, rune TEXT, name TEXT);
+        INSERT INTO Runes (name,rune) VALUES ('Fe','ᚠ'),('Thurs','ᚦ'),('Kaun','ᚲ'),('Algiz','ᛉ'),('Berkanan','ᛒ'),('Yngvi','ᛝ');
+    }
+
+    STRICT
+    RESULT {
+        1|😻|rakastunut
+        2|🦑|tyytyväinen
+        3|🦎|vihainen
+    }
+}
+
+LEGACY {
+    TABLES
+    CREATE TABLE Parts (id INTEGER PRIMARY KEY, head TEXT, tail TEXT);
+
+    TEST
+    INSERT INTO Parts (head,tail) VALUES ('🐟','🐍');
+
+    STRICT
+    RESULT
+    🐟|🐍
+}

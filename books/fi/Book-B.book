@@ -1,0 +1,100 @@
+METADATA {
+    id: Book-B
+    name: Yhteenvedon kirja
+    title: Summa Summarum
+    author: Maestro Codd
+    color: blue
+}
+
+COVER {
+    ""
+}
+
+PAGE {
+    Yhteenvetokysely antaa yksittäisen tuloksen, joka liittyy kaikkiin valittuihin taulun riveihin.
+
+    Tavallisia yhteenvetoja ovat COUNT (rivien määrä), SUM (arvojen summa), MIN (pienin arvo) ja MAX (suurin arvo).
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id|name|weight
+            1|Wilfried|3500
+            2|Justus|7500
+            3|Tabaluca|6000
+        }
+        QUERY {
+            SELECT COUNT(*) FROM Dragons;
+        }
+    }
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id|name|weight
+            1|Wilfried|3500
+            2|Justus|7500
+            3|Tabaluca|6000
+        }
+        QUERY {
+            SELECT MAX(weight) FROM Dragons;
+        }
+    }
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id|name|weight
+            1|Wilfried|3500
+            2|Justus|7500
+            3|Tabaluca|6000
+        }
+        QUERY {
+            SELECT COUNT(*), SUM(weight) FROM Dragons;
+        }
+    }
+}
+
+PAGE {
+    Yhteenvetokyselyssä voi olla mukana ehto samaan tapaan kuin tavallisessa kyselyssä.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id|name|weight
+            1|Wilfried|3500
+            2|Justus|7500
+            3|Tabaluca|6000
+        }
+        QUERY {
+            SELECT COUNT(*) FROM Dragons WHERE weight > 5000;
+        }
+    }
+}
+
+PAGE {
+    Yhteenvetokyselyssä voi käyttää myös sanaa DISTINCT, kun halutaan ottaa huomioon jokainen erilainen arvo vain kerran.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id|name|weight
+            1|Wilfried|3500
+            2|Justus|7500
+            3|Tabaluca|3500
+        }
+        QUERY {
+            SELECT COUNT(DISTINCT weight) FROM Dragons;
+        }
+    }
+}

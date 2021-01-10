@@ -1,0 +1,36 @@
+METADATA {
+    id: task-092
+    name:
+    color: none
+}
+
+DESCRIPTION {
+    Tehtävänanto ja ohjeet tehtävän suorittamiseen. Tässä voi liittää tehtävän maagiseen maailmaan.
+    \n pakottaa rivinvaihdon.
+
+    Tehtävä: Tässä tarkempia ohjeita
+}
+
+TEST {
+    TABLE {
+        Parts
+        head|tail
+        🐟|🐍
+    }
+
+    RESULT {
+        🐟|🐍
+    }
+}
+
+TEST {
+    TABLE {
+        Parts
+        head|tail
+        paa|hanta
+    }
+
+    RESULT {
+        paa|hanta
+    }
+}

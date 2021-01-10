@@ -1,0 +1,43 @@
+METADATA {
+    id: task-015
+    name: Tehtävä 15
+    color: green
+}
+
+DESCRIPTION {
+    Laske eritaitoisten taikurien määrä joka alueella.
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|1
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|5
+        5|Rufus|Kumpula|1
+    }
+
+    RESULT {
+        Shadowland|2
+        Kumpula|1
+    }
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Shadowland|2
+        3|Bingo|Shadowland|5
+        4|Solmu|Shadowland|1
+        5|Rufus|Shadowland|5
+    }
+
+    RESULT {
+        Shadowland|3
+    }
+}
+
