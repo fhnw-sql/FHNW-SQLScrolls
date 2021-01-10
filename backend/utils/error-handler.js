@@ -1,5 +1,4 @@
-module.exports = errorHandler;
-
+// Error Handler
 function errorHandler(err, req, res, next) {
   if (typeof err === "string") {
     // custom application error
@@ -19,3 +18,6 @@ function errorHandler(err, req, res, next) {
   // default to 500 server error
   return res.status(500).json({ message: err.message });
 }
+
+// Export
+module.exports = errorHandler;
