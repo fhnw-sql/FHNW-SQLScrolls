@@ -1,4 +1,4 @@
-# FHNW SQL Traning Game
+# FHNW SQL Training Game
 SQL training game written in Javascript
 
 ## Configuration
