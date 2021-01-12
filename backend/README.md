@@ -3,15 +3,27 @@
 
 ## Endpoints
 
+Possible codes: 
+* `200: Success`
+* `400: Bad Request`
+* `401: Unauthorized`
+* `500: Internal Server Error`
+
+
 ### Users
 
 * `POST: /users/register`
-  * `username`
-  * `password`
+  * `username:string`
+  * `password:string`
 * `POST: /users/authenticate`
-  * `username`
-  * `password`
+  * `username:string`
+  * `password:string`
 * `GET: /users/self`
+* `PATCH: /users/self/answer_sql`
+  * `course:int`
+  * `task:int`
+  * `success:bool`
+  * `query:string`
 
 
 ## Configuration

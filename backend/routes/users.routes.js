@@ -33,7 +33,10 @@ router.post("/register", async function (req, res, next) {
   // Insert into Database
   users
     .insertOne(value)
-    .then(() => res.json({}))
+    .then(() => {
+      let { password, ...u } = value;
+      return res.json(u);
+    })
     .catch((err) => next(err));
 });
 
@@ -56,7 +59,6 @@ router.post("/authenticate", async function (req, res, next) {
     const token = jwt.sign({ userId: user._id }, config.jwtSecret, { expiresIn: "365d" });
     let { password, ...u } = user;
     const retVal = { user: u, token };
-    // TODO: Last Login Date
     return res.json(retVal);
   } else {
     return next("Username or password is incorrect");
@@ -70,6 +72,45 @@ router.get("/self", async function (req, res, next) {
   const user = await users.findOne({ _id: new ObjectID(req.user.userId) });
   const { password, ...retVal } = user;
   return res.json(retVal);
+});
+
+// /users/self/answer_sql
+router.patch("/self/answer_sql", async function (req, res, next) {
+  // Schema
+  const sqlAnswerSchema = Joi.object().keys({
+    course: Joi.number().integer().required(),
+    task: Joi.number().integer().required(),
+    correct: Joi.boolean().required(),
+    query: Joi.string().required(),
+  });
+
+  // Validate
+  const { error, value } = sqlAnswerSchema.validate(req.body, { abortEarly: false });
+  if (error) return next(`Validation error: ${error.details.map((x) => x.message).join(", ")}`);
+
+  // Get Users Collections
+  const users = db.get().collection("users");
+  const user = await users.findOne({ _id: new ObjectID(req.user.userId) });
+
+  // conduct payload
+  const payload = {
+    correct: value.correct,
+    date: Date.now(),
+    query: value.query,
+  };
+
+  // Update
+  users
+    .findOneAndUpdate(
+      { _id: user._id },
+      { $addToSet: { [`sqlhistory.${value.course}.${value.task}`]: payload } },
+      { returnOriginal: false }
+    )
+    .then(({ value }) => {
+      var { password, ...user } = value;
+      return res.json(user);
+    })
+    .catch((err) => next(err));
 });
 
 // export

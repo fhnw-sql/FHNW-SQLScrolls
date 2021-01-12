@@ -25,3 +25,17 @@ content-type: application/json
 GET http://{{host}}/users/self  HTTP/1.1
 content-type: application/json
 Authorization: Bearer {{auth.response.body.token}}
+
+
+###
+
+PATCH http://{{host}}/users/self/answer_sql  HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{auth.response.body.token}}
+
+{
+    "course": 1,
+    "task": 3,
+    "correct": true,
+    "query": "SELECT * FROM DE"
+}
