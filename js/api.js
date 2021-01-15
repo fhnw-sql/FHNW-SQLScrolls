@@ -37,8 +37,8 @@ const API = {
     const username = sessionStorage.getItem("fhnw-username");
     // TODO: Check token request
     if (sessionToken) {
-      this.loginStatus = LoginStatus.LOGGED_IN;
-      this.token = sessionToken;
+      API.loginStatus = LoginStatus.LOGGED_IN;
+      API.token = sessionToken;
       API.username = username;
     }
   },
