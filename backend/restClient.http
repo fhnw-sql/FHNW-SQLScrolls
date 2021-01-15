@@ -34,8 +34,7 @@ content-type: application/json
 Authorization: Bearer {{auth.response.body.token}}
 
 {
-    "course": 1,
-    "task": 3,
+    "task": "task-2",
     "correct": true,
-    "query": "SELECT * FROM DE"
+    "query": "SELECT * FROM Lorem"
 }

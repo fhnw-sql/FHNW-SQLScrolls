@@ -78,8 +78,7 @@ router.get("/self", async function (req, res, next) {
 router.patch("/self/answer_sql", async function (req, res, next) {
   // Schema
   const sqlAnswerSchema = Joi.object().keys({
-    course: Joi.number().integer().required(),
-    task: Joi.number().integer().required(),
+    task: Joi.string().required(),
     correct: Joi.boolean().required(),
     query: Joi.string().required(),
   });
@@ -103,7 +102,7 @@ router.patch("/self/answer_sql", async function (req, res, next) {
   users
     .findOneAndUpdate(
       { _id: user._id },
-      { $addToSet: { [`history.${value.course}.${value.task}`]: payload } },
+      { $addToSet: { [`history.${value.task}`]: payload } },
       { returnOriginal: false }
     )
     .then(({ value }) => {

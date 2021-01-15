@@ -20,8 +20,7 @@ Possible codes:
   * `password:string`
 * `GET: /users/self`
 * `PATCH: /users/self/answer_sql`
-  * `course:int`
-  * `task:int`
+  * `task:string`
   * `success:bool`
   * `query:string`
 
