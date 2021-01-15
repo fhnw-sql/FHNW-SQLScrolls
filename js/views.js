@@ -315,12 +315,16 @@ class TaskView extends View {
     }
   }
 
-  async showModelAnswer() {
+  async toggleAnswer() {
     const currentTask = this.currentTask;
     if (!currentTask) return;
 
     document.getElementById("model-answer").value = currentTask.answer;
-    await showElement("model-answer");
+    if (document.getElementById("model-answer").classList.contains("hidden")) {
+      await showElementImmediately("model-answer");
+    } else {
+      await hideElementImmediately("model-answer");
+    }
   }
 
   async showWithQuery(query) {
