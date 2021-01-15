@@ -232,17 +232,20 @@ async function loadCompletionFromQuizzes() {
 
 async function beginGame() {
   try {
+    await loadLanguage(currentLang);
     API.loginExisting();
     if (API.loginStatus === LoginStatus.LOGGED_IN) {
       loadCompletionFromQuizzes(); // async load of task completion, see DISPLAY_STATE.saveLoaded
       changeView(Views.LOADING); // LOADING view awaits DISPLAY_STATE.saveLoaded and DISPLAY_STATE.loaded are true.
+    } else {
+      await showElementImmediately("login-view");
+      await fadeFromBlack();
     }
     try {
       await loadGameElements(await readLines("tasks/progression.js"));
     } catch (e) {
       return showError(`Could not load tasks/progression.js: ${e}`);
     }
-    await loadLanguage(currentLang);
     await loadItems();
     await awaitUntil(() => items.loaded);
     await inventory.update();
