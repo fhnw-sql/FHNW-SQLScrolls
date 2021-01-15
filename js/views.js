@@ -308,7 +308,7 @@ class TaskView extends View {
       : `<p class="center col-yellow"><i class="far fa-star" title="${i18n.get(
           "task-incomplete"
         )}" aria-label="${i18n.get("task-incomplete")}"></i></p>`;
-    if (currentTask.completed && API.loginStatus === LoginStatus.LOGGED_IN) {
+    if (currentTask.completed && currentTask.answer && API.loginStatus === LoginStatus.LOGGED_IN) {
       await showElementImmediately("query-model-button");
     } else {
       await hideElementImmediately("query-model-button");
@@ -319,7 +319,7 @@ class TaskView extends View {
     const currentTask = this.currentTask;
     if (!currentTask) return;
 
-    document.getElementById("model-answer").value = await API.quizzesModel(currentTask);
+    document.getElementById("model-answer").value = currentTask.answer;
     await showElement("model-answer");
   }
 
@@ -358,13 +358,24 @@ class TaskView extends View {
   }
 
   async renderPreviousAnswers(task, changeQuery) {
-    const previousAnswers = await API.quizzesTaskHistory(task);
+    const profile = await API.self();
+    const previousAnswers = _.orderBy(profile.history[task.id], ["date"], ["desc"]);
     const dropdown = document.getElementById("previous-answers-dropdown");
     if (dropdown && previousAnswers.length) {
       if (changeQuery) await this.setQuery(previousAnswers[0].query); // First entry is latest answer
-
       let render = "";
-      for (let answer of previousAnswers) render += answer.render(!render);
+      for (let answer of previousAnswers) {
+        let selected = !render;
+        render += `<button class="dropdown-item${selected ? " selected" : ""}" role="option" data-query="${
+          answer.query
+        }" onclick="Views.TASK.selectPreviousAnswer(event)">
+                ${
+                  answer.correct
+                    ? `<i class="fa fa-fw fa-check col-green" aria-label="${i18n.get("correct")}"></i>`
+                    : `<i class="fa fa-fw fa-times col-red" aria-label="${i18n.get("incorrect")}"></i>`
+                } ${moment(answer.date).format("MMMM Do YYYY, H:mm:ss")}
+            </button>`;
+      }
       dropdown.innerHTML = render;
 
       this.selectedPreviousAnswer = true;
@@ -586,32 +597,24 @@ class ProfileView extends View {
   }
 
   async downloadData() {
-    const data = await API.quizzesAllPastAnswers();
-    saveFile("sqltrainer-sent-answers.json", JSON.stringify(data));
+    const data = await API.self();
+    saveFile("sqltrainer-sent-answers.json", JSON.stringify(data.history));
   }
 
   async renderGraph() {
     const loadingIcon = document.querySelector(".graph-loading");
     loadingIcon.classList.remove("hidden");
-    const answers = await API.quizzesAllPastAnswers();
+    const userProfile = await API.self();
 
-    const dates = answers
-      .map((forTask) => forTask.answers.filter((answer) => answer.correct)[0])
-      .filter((correctAnswer) => correctAnswer)
-      .map((correctAnswer) => new Date(correctAnswer.date.split(" ").join("T")))
-      .sort((a, b) => a.getTime() - b.getTime());
-
-    let data = [];
-    let completed = 0;
-    for (const date of dates) {
-      completed++;
-      data.push([new Date(date), completed]);
-    }
+    // Transform Data
+    const historyData = [].concat(...Object.entries(userProfile.history).map((m) => m[1])).filter((m) => m.correct);
+    var groups = _.groupBy(historyData, (m) => moment(m.date).startOf("day").format());
+    var chartData = Object.entries(groups).map((m) => [new Date(m[0]), m[1].length]);
 
     if (this.graph) {
-      this.graph.updateOptions({ file: data });
+      this.graph.updateOptions({ file: chartData });
     } else {
-      this.graph = new Dygraph(document.getElementById("task-completion-graph"), data, {
+      this.graph = new Dygraph(document.getElementById("task-completion-graph"), chartData, {
         labels: [i18n.get("time"), i18n.get("completed-tasks")],
         colors: ["#f2cd60"],
         customBars: false,

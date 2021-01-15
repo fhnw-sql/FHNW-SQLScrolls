@@ -8,6 +8,11 @@ DESCRIPTION {
     Hae jokaisen kummituksen nimi.
 }
 
+ANSWER {
+    SELECT * FROM Ghosts
+}
+
+
 TEST {
     TABLE {
         Ghosts
