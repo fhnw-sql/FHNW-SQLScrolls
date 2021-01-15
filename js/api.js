@@ -101,7 +101,6 @@ const API = {
   },
   quizzesSend(task, sql, result) {
     this.cachedAnswerData.loaded = false;
-    const taskID = task.getNumericID();
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
@@ -113,9 +112,10 @@ const API = {
           }
         }
       };
-      xhr.open("PATCH", `${this.ADDRESS}/users/self/patch`, true);
+      xhr.open("PATCH", `${this.ADDRESS}/users/self/answer_sql`, true);
+      xhr.setRequestHeader("Authorization", "Bearer " + this.token);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhr.send(`course=2&task=${taskID}&correct=${result ? 1 : 0}&query=${encodeURIComponent(sql)}`);
+      xhr.send(`task=${task.id}&correct=${result}&query=${encodeURIComponent(sql)}`);
     });
   },
 };
