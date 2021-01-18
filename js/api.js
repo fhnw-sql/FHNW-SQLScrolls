@@ -5,7 +5,7 @@ LoginStatus = {
 };
 
 const API = {
-  ADDRESS: "http://localhost:4000",
+  ADDRESS: "https://fhnw-stg-api-web.dev.liqix.cc",
   loginStatus: LoginStatus.LOGGED_OUT,
   token: undefined,
   username: undefined,
