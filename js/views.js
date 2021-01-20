@@ -283,6 +283,7 @@ class TaskView extends View {
   constructor() {
     super("task-view");
     this.queryInputField = document.getElementById("query-input");
+    this.parsonsInputDiv = document.getElementById("parsons-input");
     this.currentTask = null;
     this.selectedPreviousAnswer = false;
   }
@@ -313,6 +314,20 @@ class TaskView extends View {
     } else {
       await hideElementImmediately("query-model-button");
     }
+  }
+
+  initParsonsProblem() {
+    var initial = this.currentTask.parsons.join("\n");
+    var parson = new ParsonsWidget({
+      sortableId: "parsons-sortable",
+      trashId: "parsons-sortableTrash",
+      can_indent: false,
+    });
+    parson.init(initial);
+    parson.shuffleLines();
+    $("#query-run-button").click(function (event) {
+      parson.getFeedback();
+    });
   }
 
   async toggleAnswer() {
@@ -349,6 +364,15 @@ class TaskView extends View {
     this.queryInputField.value = query ? query : i18n.get("query-placeholder");
     if (API.loginStatus === LoginStatus.LOGGED_IN) {
       this.loadPreviousAnswers(task);
+    }
+    // Display the right input [query / parsons]
+    if (task.parsons) {
+      await showElementImmediately("parsons-input");
+      await hideElementImmediately("query-input");
+      this.initParsonsProblem();
+    } else {
+      await showElementImmediately("query-input");
+      await hideElementImmediately("parsons-input");
     }
     await changeView(this);
   }

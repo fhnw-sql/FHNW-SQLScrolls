@@ -234,11 +234,17 @@
                   <div class="row justify-content-between pt-3">
                     <h2 class="screen-reader-only i18n-task-area"></h2>
                     <div class="col-md-10">
+                      <!-- Query -->
                       <textarea
                         aria-label="SQL"
                         class="text-input i18n-query-placeholder i18n-aria-query-input-box"
                         id="query-input"
                       ></textarea>
+                      <!-- Parsons -->
+                      <div id="parsons-input">
+                        <div id="parsons-sortableTrash" class="sortable-code"></div>
+                        <div id="parsons-sortable" class="sortable-code"></div>
+                      </div>
                     </div>
                     <div class="col-md-2">
                       <button
@@ -669,13 +675,16 @@
       </button>
     </aside>
 
-    <script src="vendor/jquery-slim-3.5.1/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+      crossorigin="anonymous"
+    ></script>
     <script src="vendor/bootstrap-4.5.2-dist/js/popper.min.js"></script>
     <script src="vendor/bootstrap-4.5.2-dist/js/bootstrap.bundle.min.js"></script>
     <script src="dist/sql-wasm.js"></script>
     <script src="vendor/canvas-confetti-1.2.0/confetti.browser.min.js"></script>
     <script src="vendor/dygraphs-2.1.0/dygraph.min.js"></script>
-
     <!-- TODO: Move to vendors -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"
@@ -683,6 +692,19 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+      integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"
+      integrity="sha512-0bEtK0USNd96MnO4XhH8jhv3nyRF0eK87pJke6pkYf3cM0uDIhNJy9ltuzqgypoIFXw3JSuiy04tVk4AjpZdZw=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="vendor/js-parsons/lis.js"></script>
+    <script src="vendor/js-parsons/parsons.js"></script>
 
     <script src="js/i18n.js"></script>
     <script src="js/particles.js"></script>
@@ -721,7 +743,7 @@
       onload="this.media='all'"
       rel="stylesheet"
     />
-
+    <link href="vendor/js-parsons/parsons.css" rel="stylesheet" />
     <link href="css/endgame.css" rel="stylesheet" />
     <link as="style" href="vendor/dygraphs-2.1.0/dygraph.min.css" />
 
