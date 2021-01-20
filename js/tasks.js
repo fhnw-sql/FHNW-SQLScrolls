@@ -121,6 +121,7 @@ class Task extends ItemType {
    * parsed.metadata.color  Color of the book related to this task.
    * parsed.description     Instructions about how the task needs to be done.
    * parsed.answer          Model answer of the Task
+   * parsed.parsons          parsons of the Task
    * parsed.tests           Test objects parsed by TestParser, used to test if the query for the task was correct.
    *
    * @param options {parsed: {metadata: {id, name, color}, description, tests}}
@@ -132,6 +133,7 @@ class Task extends ItemType {
       ...options,
     });
     const parsed = options.parsed;
+
     if (parsed) {
       this.id = parsed.metadata.id;
       this.item = new ImageItem({
@@ -146,6 +148,7 @@ class Task extends ItemType {
           : `col-book-${parsed.metadata.color}`;
       this.description = parsed.description;
       this.answer = parsed.answer;
+      this.parsons = parsed.parsons;
       this.tests = parsed.tests;
     }
   }
@@ -307,6 +310,7 @@ class LazyTask extends Task {
       this.color = loaded.color;
       this.description = loaded.description;
       this.answer = loaded.answer;
+      this.parsons = loaded.parsons;
       this.tests = loaded.tests;
     } catch (e) {
       throw e;

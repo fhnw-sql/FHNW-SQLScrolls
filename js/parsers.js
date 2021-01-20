@@ -298,9 +298,22 @@ class AnswerParser extends Parser {
     while (true) {
       const line = lines.shift().trim();
       if (line === "}") break;
-      answerHtml += (line + " ").split("\\n").join("<br>");
+      answerHtml += line + " ";
     }
     return answerHtml;
+  }
+}
+
+// Parses PARSONs blocks
+class ParsonsParser extends Parser {
+  parse(context, lines) {
+    let parsonsTiles = [];
+    while (true) {
+      const line = lines.shift().trim();
+      if (line === "}") break;
+      parsonsTiles.push(line);
+    }
+    return parsonsTiles;
   }
 }
 
@@ -377,6 +390,7 @@ class TaskParser extends Parser {
       metadata: {},
       description: "",
       answer: "",
+      parsons: "",
       tests: [],
     };
     context.strict = false;
@@ -396,6 +410,9 @@ class TaskParser extends Parser {
       }
       if (line === "ANSWER {") {
         task.answer = PARSERS.ANSWER.parse({}, lines);
+      }
+      if (line === "PARSONS {") {
+        task.parsons = PARSERS.PARSONs.parse({}, lines);
       }
       if (line === "TEST {") {
         task.tests.push(PARSERS.TEST.parse(context, lines));
@@ -448,6 +465,7 @@ const PARSERS = {
   LEGACY: new LegacyParser(),
   TEST: new TestParser(),
   ANSWER: new AnswerParser(),
+  PARSONs: new ParsonsParser(),
   DESCRIPTION: new DescriptionParser(),
   TASK: new TaskParser(),
 };
