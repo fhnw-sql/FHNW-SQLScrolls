@@ -375,6 +375,10 @@ class TaskView extends View {
     if (API.loginStatus === LoginStatus.LOGGED_IN) {
       this.loadPreviousAnswers(task);
     }
+
+    // Remove event handler to prevent double bindings if a new question gets open
+    $("#query-run-button").off("click");
+
     // Display the right input [query / parsons]
     if (task.parsons) {
       await showElementImmediately("parsons-input");
