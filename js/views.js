@@ -286,6 +286,7 @@ class TaskView extends View {
     this.parsonsInputDiv = document.getElementById("parsons-input");
     this.currentTask = null;
     this.selectedPreviousAnswer = false;
+    this.parsons = null;
   }
 
   async open() {
@@ -318,15 +319,24 @@ class TaskView extends View {
 
   initParsonsProblem() {
     var initial = this.currentTask.parsons.join("\n");
-    var parson = new ParsonsWidget({
+    this.parsons = new ParsonsWidget({
       sortableId: "parsons-sortable",
       trashId: "parsons-sortableTrash",
       can_indent: false,
     });
-    parson.init(initial);
-    parson.shuffleLines();
-    $("#query-run-button").click(function (event) {
-      parson.getFeedback();
+    this.parsons.init(initial);
+    this.parsons.shuffleLines();
+    $("#query-run-button").click(() => {
+      this.parsons.getFeedback();
+      // Translate parsons input to query input
+      const parsonsInput = $("#parsons-sortable ul.output > li")
+        .toArray()
+        .map((m) => $(m).text())
+        .join(" ")
+        .trim();
+      if (parsonsInput) $("#query-input").val(parsonsInput);
+
+      runQueryTests(true);
     });
   }
 
@@ -373,6 +383,7 @@ class TaskView extends View {
     } else {
       await showElementImmediately("query-input");
       await hideElementImmediately("parsons-input");
+      $("#query-run-button").click(() => runQueryTests(true));
     }
     await changeView(this);
   }

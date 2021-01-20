@@ -553,15 +553,6 @@ async function runQueryTests(allowCompletionAndStore) {
       return await renderTestResults();
     }
   }
-  // Translate parsons input to query input
-  if (Views.TASK.currentTask.parsons) {
-    const parsonsInput = $("#parsons-sortable ul.output > li")
-      .toArray()
-      .map((m) => $(m).text())
-      .join(" ")
-      .trim();
-    if (parsonsInput) $("#query-input").val(parsonsInput);
-  }
 
   const query = document.getElementById("query-input").value.trim();
 
