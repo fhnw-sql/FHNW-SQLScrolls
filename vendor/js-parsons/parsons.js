@@ -1,3 +1,6 @@
+/**
+ * 20.01.2020: Modfied to support lodash instead of underscore.js @vitalragaz
+ */
 (function ($, _) {
   // wrap in anonymous function to not show some helper variables
 

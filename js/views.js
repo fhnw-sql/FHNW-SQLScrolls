@@ -372,9 +372,6 @@ class TaskView extends View {
     document.getElementById("query-out-table").innerHTML = "";
     document.getElementById("query-out-tables-nav").innerHTML = "";
     this.queryInputField.value = query ? query : i18n.get("query-placeholder");
-    if (API.loginStatus === LoginStatus.LOGGED_IN) {
-      this.loadPreviousAnswers(task);
-    }
 
     // Remove event handler to prevent double bindings if a new question gets open
     $("#query-run-button").off("click");
@@ -389,6 +386,11 @@ class TaskView extends View {
       await hideElementImmediately("parsons-input");
       $("#query-run-button").click(() => runQueryTests(true));
     }
+
+    if (API.loginStatus === LoginStatus.LOGGED_IN) {
+      this.loadPreviousAnswers(task);
+    }
+
     await changeView(this);
   }
 
@@ -462,6 +464,61 @@ class TaskView extends View {
 
   async setQuery(query) {
     this.queryInputField.value = query;
+
+    // Experimental: Load Parsons State based on given query
+    if (this.currentTask.parsons && this.parsons) {
+      // Restore Parsons trash and empty choices
+      this.parsons.shuffleLines();
+      // Parse query into array
+      var inputWords = query.toLowerCase().split(" ");
+      // Parse Parsons Brackets into array of objects {$ref: jQuery Reference, value: SQL}
+      var parsonsBrackets = $("#parsons-sortableTrash li")
+        .toArray()
+        .map((n) => {
+          return {
+            $ref: $(n),
+            value: $(n).text().toLowerCase(),
+          };
+        });
+      var matchingBrackets = []; // Holds the matching brackets
+
+      // Iterate through input words
+      while (inputWords.length > 0) {
+        let matchArray = [],
+          hasNext = true;
+        // Innerloop to detect brackets
+        while (hasNext) {
+          let filterStr = [...matchArray, inputWords[matchArray.length]].join(" ");
+          // Check if exists if not move on
+          if (parsonsBrackets.filter((b) => b.value.includes(filterStr)).length > 0) {
+            matchArray.push(inputWords[matchArray.length]);
+          } else {
+            hasNext = false;
+          }
+        }
+        // Check for matches
+        if (matchArray.length) {
+          let matchedBracket = parsonsBrackets.find((m) => m.value == matchArray.join(" "));
+          // remove all words that we found
+          inputWords = inputWords.slice(matchArray.length);
+          // Remove the element from the Parsons Brackets
+          parsonsBrackets = parsonsBrackets.filter((b) => b.$ref != matchedBracket.$ref);
+          matchingBrackets.push(matchedBracket);
+        } else {
+          // remove word, as no match was found
+          inputWords = inputWords.slice(1);
+        }
+      }
+
+      // Move Brackents between the two sortables$lists
+      matchingBrackets.forEach((m) => {
+        m.$ref.appendTo("#parsons-sortable ul");
+      });
+
+      // Validate Parsons
+      this.parsons.getFeedback();
+    }
+
     await runQueryTests(false);
   }
 }
