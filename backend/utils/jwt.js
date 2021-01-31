@@ -13,6 +13,8 @@ function jwt() {
       "/",
       "/users/authenticate",
       "/users/register",
+      "/users/reset",
+      "/users/recover",
     ],
   });
 }

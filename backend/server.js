@@ -5,9 +5,13 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const jwt = require("utils/jwt");
-const errorHandler = require("utils/error-handler");
 const logger = require("utils/logger");
 const db = require("utils/db");
+const validateEnvVars = require("./utils/envVarValidator");
+const errorHandler = require("./middlewares/errorHandler");
+
+// Check all environment variables
+validateEnvVars();
 
 // add BodyParser & Cors
 app.use(bodyParser.urlencoded({ extended: false }));

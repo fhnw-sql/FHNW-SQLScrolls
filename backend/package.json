@@ -22,6 +22,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.9.21",
+    "postmark": "^2.7.1",
     "rootpath": "^0.1.2",
     "winston": "^3.3.3"
   },

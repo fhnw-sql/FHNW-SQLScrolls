@@ -1,40 +1,32 @@
 const express = require("express");
 const router = express.Router();
-var Joi = require("joi");
-var db = require("../utils/db");
+const Joi = require("joi");
+const db = require("../utils/db");
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const config = require("config.json");
 const { ObjectID } = require("mongodb");
+const postmark = require("postmark");
+const reqValidator = require("../middlewares/reqValidator");
+const { registerPOST } = require("../models/users");
 
 // /users/register
-router.post("/register", async function (req, res, next) {
-  // Schema
-  const registerSchema = Joi.object().keys({
-    username: Joi.string()
-      .email({ tlds: { allow: false } })
-      .required(),
-    password: Joi.string().min(5).max(20).required(),
-  });
-
-  // Validate
-  const { error, value } = registerSchema.validate(req.body, { abortEarly: false });
-  if (error) return next(`Validation error: ${error.details.map((x) => x.message).join(", ")}`);
-
+router.post("/register", reqValidator(registerPOST), async function ({ body: user }, res, next) {
   // Get Users Collections
   const users = db.get().collection("users");
 
   // Check if user already exists
-  if (await users.findOne({ username: value.username })) return next("User already exists!");
+  if (await users.findOne({ username: user.username })) return next("User already exists!");
 
   // Hash password
-  value.password = await bcrypt.hashSync(value.password, 10);
+  user.password = bcrypt.hashSync(user.password, 10);
 
   // Insert into Database
   users
-    .insertOne(value)
+    .insertOne(user)
     .then(() => {
-      let { password, ...u } = value;
+      let { password, ...u } = user;
       return res.json(u);
     })
     .catch((err) => next(err));
@@ -44,7 +36,9 @@ router.post("/register", async function (req, res, next) {
 router.post("/authenticate", async function (req, res, next) {
   // Schema
   const authSchema = Joi.object().keys({
-    username: Joi.string().required(),
+    username: Joi.string()
+      .email({ tlds: { allow: false } })
+      .required(),
     password: Joi.string().required(),
   });
 
@@ -108,6 +102,98 @@ router.patch("/self/answer_sql", async function (req, res, next) {
     .then(({ value }) => {
       var { password, ...user } = value;
       return res.json(user);
+    })
+    .catch((err) => next(err));
+});
+
+// /users/recover
+// A reset link is created and an options object is created defining the from, to, subject and text and an email is sent to the user using the sendgrid package.
+router.post("/recover", async function (req, res, next) {
+  // Schema
+  const recoverSchema = Joi.object().keys({
+    username: Joi.string()
+      .email({ tlds: { allow: false } })
+      .required(),
+  });
+
+  // Validate
+  const { error, value } = recoverSchema.validate(req.body, { abortEarly: false });
+  if (error) return next(`Validation error: ${error.details.map((x) => x.message).join(", ")}`);
+
+  // Get Users Collections
+  const users = db.get().collection("users");
+  users
+    .findOneAndUpdate(
+      { username: value.username },
+      {
+        $set: {
+          resetPasswordToken: crypto.randomBytes(20).toString("hex"),
+          resetPasswordExpires: Date.now() + 3600000,
+        },
+      },
+      { returnOriginal: false }
+    )
+    .then(async ({ value: user }) => {
+      if (!user) return next("User not found");
+      // Send email
+      const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
+      const link = req.protocol + "://" + req.headers.host + "/api/user/reset/" + user.resetPasswordToken;
+      await client.sendEmail({
+        From: process.env.FROM_SENDER,
+        To: user.username,
+        Subject: "Password change request",
+        TextBody: `Hi ${user.username} \n 
+    Please click on the following link ${link} to reset your password. \n\n 
+    If you did not request this, please ignore this email and your password will remain unchanged.\n`,
+        MessageStream: "outbound",
+      });
+      return res.json({ message: "Password reset link sent!" });
+    })
+    .catch((err) => next(err));
+});
+
+// /users/reset
+// Reset the password
+router.post("/reset", async function (req, res, next) {
+  // Schema
+  const resetSchema = Joi.object().keys({
+    token: Joi.string().required(),
+    password: Joi.string().min(5).max(20).required(),
+  });
+
+  // Validate
+  const { error, value } = resetSchema.validate(req.body, { abortEarly: false });
+  if (error) return next(`Validation error: ${error.details.map((x) => x.message).join(", ")}`);
+
+  // Get Users Collections
+  const users = db.get().collection("users");
+  const password = bcrypt.hashSync(value.password, 10);
+  users
+    .findOneAndUpdate(
+      { resetPasswordToken: value.token, resetPasswordExpires: { $gt: Date.now() } },
+      {
+        $set: {
+          password: password,
+          resetPasswordToken: undefined,
+          resetPasswordExpires: undefined,
+        },
+      },
+      { returnOriginal: false }
+    )
+    .then(async ({ value: user }) => {
+      if (!user) return next("Invalid request");
+      // Send email
+      const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
+      await client.sendEmail({
+        From: process.env.FROM_SENDER,
+        To: user.username,
+        subject: "Your password has been changed",
+        TextBody: `Hi ${user.username} \n 
+          This is a confirmation that the password for your account ${user.username} has just been changed.\n`,
+        MessageStream: "outbound",
+      });
+
+      return res.json({ message: "Password reset was successfully!" });
     })
     .catch((err) => next(err));
 });

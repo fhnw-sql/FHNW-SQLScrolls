@@ -18,6 +18,11 @@ Possible codes:
 * `POST: /users/authenticate`
   * `username:string`
   * `password:string`
+* `POST: /users/recover`
+  * `username:string`
+* `POST: /users/reset`
+  * `token:string`
+  * `password:string`
 * `GET: /users/self`
 * `PATCH: /users/self/answer_sql`
   * `task:string`
@@ -30,3 +35,4 @@ Possible codes:
 * `NODE_ENV`
 * `PORT`
 * `MONGODB_URI`
+* `POSTMARK_API_KEY`

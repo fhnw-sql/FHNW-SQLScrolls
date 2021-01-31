@@ -5,7 +5,26 @@ POST http://{{host}}/users/register  HTTP/1.1
 content-type: application/json
 
 {
-    "username": "stg@github.io",
+    "username": "kai.krause@students.fhnw.ch",
+    "password": "123456"
+}
+
+###
+
+POST http://{{host}}/users/recover  HTTP/1.1
+content-type: application/json
+
+{
+    "username": "kai.krause@students.fhnw.ch"
+}
+
+###
+
+POST http://{{host}}/users/reset  HTTP/1.1
+content-type: application/json
+
+{
+    "token": "7ba4e781dac1f00254b04b0e3f9a92cd790a276e",
     "password": "123456"
 }
 
@@ -16,7 +35,7 @@ POST http://{{host}}/users/authenticate  HTTP/1.1
 content-type: application/json
 
 {
-    "username": "stg@github.io",
+    "username": "kai.krause@students.fhnw.ch",
     "password": "123456"
 }
 
