@@ -4,6 +4,8 @@ const request = supertest(app);
 const db = require("./utils/db");
 
 describe("The Server", () => {
+  const USERNAME = "test@jest.io";
+
   beforeAll(async (done) => {
     await db.connect();
     done();
@@ -17,7 +19,7 @@ describe("The Server", () => {
 
   it("should register a new user", async (done) => {
     const res = await request.post("/users/register").send({
-      username: "test@jest.io",
+      username: USERNAME,
       password: "abc123456",
     });
     expect(res.status).toBe(200);
@@ -27,7 +29,7 @@ describe("The Server", () => {
 
   it("should prevent the registration of an existing user", async (done) => {
     const res = await request.post("/users/register").send({
-      username: "test@jest.io",
+      username: USERNAME,
       password: "abc123456",
     });
     expect(res.status).toBe(400);
@@ -37,7 +39,7 @@ describe("The Server", () => {
 
   it("should fail the authentication when entering wrong credentials", async (done) => {
     const res = await request.post("/users/authenticate").send({
-      username: "test@jest.io",
+      username: USERNAME,
       password: "abc1234",
     });
     expect(res.status).toBe(400);
@@ -51,10 +53,19 @@ describe("The Server", () => {
     done();
   });
 
+  it("should respond to wrong parameters", async (done) => {
+    const res = await request.post("/users/authenticate").send({
+      username: USERNAME,
+    });
+    expect(res.status).toBe(400);
+    expect(res.body).toHaveProperty("message");
+    done();
+  });
+
   var authToken = "";
   it("should authenticate a user", async (done) => {
     const res = await request.post("/users/authenticate").send({
-      username: "test@jest.io",
+      username: USERNAME,
       password: "abc123456",
     });
     expect(res.status).toBe(200);
@@ -84,8 +95,39 @@ describe("The Server", () => {
     done();
   });
 
+  var resetPasswordToken = "";
+  it("should recover the password", async (done) => {
+    const res = await request.post("/users/recover").send({
+      username: USERNAME,
+    });
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("message");
+    const user = await db.get().collection("users").findOne({ username: USERNAME });
+    expect(user).toHaveProperty("resetPasswordToken");
+    expect(user).toHaveProperty("resetPasswordExpires");
+    resetPasswordToken = user.resetPasswordToken;
+    done();
+  });
+
+  it("should reset the password", async (done) => {
+    const NEW_PASSWORD = "1234567";
+    var res = await request.post("/users/reset").send({
+      token: resetPasswordToken,
+      password: NEW_PASSWORD,
+    });
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("message");
+    res = await request.post("/users/authenticate").send({
+      username: USERNAME,
+      password: NEW_PASSWORD,
+    });
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("token");
+    done();
+  });
+
   afterAll(async (done) => {
-    await db.get().collection("users").remove({ username: "test@jest.io" });
+    await db.get().collection("users").remove({ username: USERNAME });
     await db.close();
     done();
   });

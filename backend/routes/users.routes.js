@@ -93,7 +93,7 @@ router.post("/recover", reqBodyValidator(recoverPOST), async function (req, res,
   const users = db.get().collection("users");
   users
     .findOneAndUpdate(
-      { username: value.username },
+      { username: req.body.username },
       {
         $set: {
           resetPasswordToken: crypto.randomBytes(20).toString("hex"),
@@ -107,15 +107,17 @@ router.post("/recover", reqBodyValidator(recoverPOST), async function (req, res,
       // Send email
       const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
       const link = req.protocol + "://" + req.headers.host + "/api/user/reset/" + user.resetPasswordToken;
-      await client.sendEmail({
-        From: process.env.FROM_SENDER,
-        To: user.username,
-        Subject: "Password change request",
-        TextBody: `Hi ${user.username} \n 
+      if (!process.env.JEST_WORKER_ID) {
+        await client.sendEmail({
+          From: process.env.FROM_SENDER,
+          To: user.username,
+          Subject: "Password change request",
+          TextBody: `Hi ${user.username} \n 
     Please click on the following link ${link} to reset your password. \n\n 
     If you did not request this, please ignore this email and your password will remain unchanged.\n`,
-        MessageStream: "outbound",
-      });
+          MessageStream: "outbound",
+        });
+      }
       return res.json({ message: "Password reset link sent!" });
     })
     .catch((err) => next(err));
@@ -123,7 +125,7 @@ router.post("/recover", reqBodyValidator(recoverPOST), async function (req, res,
 
 // /users/reset
 // Reset the password
-router.post("/reset", reqBodyValidator(resetPOST), async function (req, res, next) {
+router.post("/reset", reqBodyValidator(resetPOST), async function ({ body: value }, res, next) {
   // Get Users Collections
   const users = db.get().collection("users");
   const password = bcrypt.hashSync(value.password, 10);
@@ -143,14 +145,16 @@ router.post("/reset", reqBodyValidator(resetPOST), async function (req, res, nex
       if (!user) return next("Invalid request");
       // Send email
       const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
-      await client.sendEmail({
-        From: process.env.FROM_SENDER,
-        To: user.username,
-        subject: "Your password has been changed",
-        TextBody: `Hi ${user.username} \n 
+      if (!process.env.JEST_WORKER_ID) {
+        await client.sendEmail({
+          From: process.env.FROM_SENDER,
+          To: user.username,
+          subject: "Your password has been changed",
+          TextBody: `Hi ${user.username} \n 
           This is a confirmation that the password for your account ${user.username} has just been changed.\n`,
-        MessageStream: "outbound",
-      });
+          MessageStream: "outbound",
+        });
+      }
 
       return res.json({ message: "Password reset was successfully!" });
     })
