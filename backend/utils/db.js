@@ -1,21 +1,27 @@
 const mongoClient = require("mongodb").MongoClient;
 const logger = require("./logger");
 
-let mongodb;
-function connect(callback) {
-  mongoClient.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
-    if (err) return logger.error(err);
+let mongodb, client;
+
+async function connect() {
+  try {
+    client = await mongoClient.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     logger.info("Database Connected");
     mongodb = client.db();
-    callback();
-  });
+  } catch (err) {
+    logger.error(err);
+  }
 }
+
 function get() {
   return mongodb;
 }
 
-function close() {
-  mongodb.close();
+async function close() {
+  await client.close();
 }
 
 module.exports = {

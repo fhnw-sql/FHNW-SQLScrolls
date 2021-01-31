@@ -1,12 +1,10 @@
 const expressJwt = require("express-jwt");
-const config = require("config.json");
 var db = require("../utils/db");
-const logger = require("./logger");
 const { ObjectID } = require("mongodb");
 
 // JWT
 function jwt() {
-  const secret = config.jwtSecret;
+  const secret = process.env.JWT_SECRET;
   return expressJwt({ secret, algorithms: ["HS256"], isRevoked }).unless({
     path: [
       // public routes that don't require authentication

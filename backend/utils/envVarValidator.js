@@ -1,6 +1,6 @@
 const logger = require("./logger");
 
-const environmentVariables = ["MONGODB_URI", "POSTMARK_API_KEY", "FROM_SENDER"];
+const environmentVariables = ["MONGODB_URI", "POSTMARK_API_KEY", "FROM_SENDER", "JWT_SECRET"];
 
 function validateEnvVars() {
   let err = environmentVariables.filter((m) => !process.env[m]);

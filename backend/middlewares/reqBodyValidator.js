@@ -1,11 +1,11 @@
 const logger = require("../utils/logger");
 
 /**
- * ReqValidator
+ * reqBodyValidator
  * @param {*} schema
  * @param {*} property
  */
-const reqValidator = (schema, property) => {
+const reqBodyValidator = (schema, property) => {
   return (req, res, next) => {
     const { error } = schema.validate(req.body, { abortEarly: false });
     const valid = error == null;
@@ -20,4 +20,4 @@ const reqValidator = (schema, property) => {
     }
   };
 };
-module.exports = reqValidator;
+module.exports = reqBodyValidator;

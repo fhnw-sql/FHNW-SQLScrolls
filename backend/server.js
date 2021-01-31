@@ -4,9 +4,9 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const jwt = require("utils/jwt");
-const logger = require("utils/logger");
-const db = require("utils/db");
+const jwt = require("./middlewares/jwt");
+const logger = require("./utils/logger");
+const db = require("./utils/db");
 const validateEnvVars = require("./utils/envVarValidator");
 const errorHandler = require("./middlewares/errorHandler");
 
@@ -34,8 +34,12 @@ app.use(errorHandler);
 
 // start server
 const port = process.env.NODE_ENV === "production" ? process.env.PORT || 80 : process.env.PORT || 4000;
-db.connect(() => {
-  app.listen(port, function () {
-    logger.info("Server listening on port " + port);
+if (!process.env.JEST_WORKER_ID) {
+  db.connect().then((m) => {
+    app.listen(port, function () {
+      logger.info("Server listening on port " + port);
+    });
   });
-});
+}
+
+module.exports = app;
