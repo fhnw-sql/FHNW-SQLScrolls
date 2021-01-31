@@ -104,10 +104,10 @@ router.post("/recover", reqBodyValidator(recoverPOST), async function (req, res,
     )
     .then(async ({ value: user }) => {
       if (!user) return next("User not found");
-      // Send email
-      const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
-      const link = req.protocol + "://" + req.headers.host + "/api/user/reset/" + user.resetPasswordToken;
+      // Send Mail if its not invoked by JEST
       if (!process.env.JEST_WORKER_ID) {
+        const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
+        const link = req.protocol + "://" + req.headers.host + "/api/user/reset/" + user.resetPasswordToken;
         await client.sendEmail({
           From: process.env.FROM_SENDER,
           To: user.username,
@@ -143,9 +143,9 @@ router.post("/reset", reqBodyValidator(resetPOST), async function ({ body: value
     )
     .then(async ({ value: user }) => {
       if (!user) return next("Invalid request");
-      // Send email
-      const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
+      // Send Mail if its not invoked by JEST
       if (!process.env.JEST_WORKER_ID) {
+        const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
         await client.sendEmail({
           From: process.env.FROM_SENDER,
           To: user.username,

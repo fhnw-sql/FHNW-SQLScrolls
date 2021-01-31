@@ -127,7 +127,7 @@ describe("The Server", () => {
   });
 
   afterAll(async (done) => {
-    await db.get().collection("users").remove({ username: USERNAME });
+    await db.get().collection("users").deleteOne({ username: USERNAME });
     await db.close();
     done();
   });

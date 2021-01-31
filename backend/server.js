@@ -32,8 +32,10 @@ app.get("/", function (req, res) {
 // global error handler
 app.use(errorHandler);
 
-// start server
+// Set Port
 const port = process.env.NODE_ENV === "production" ? process.env.PORT || 80 : process.env.PORT || 4000;
+
+// start server
 if (!process.env.JEST_WORKER_ID) {
   db.connect().then((m) => {
     app.listen(port, function () {

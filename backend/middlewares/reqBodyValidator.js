@@ -15,7 +15,7 @@ const reqBodyValidator = (schema, property) => {
     } else {
       const { details } = error;
       const message = details.map((i) => i.message).join(",");
-      logger.error(message);
+      logger.debug("Body validation error", message);
       return next(message);
     }
   };
