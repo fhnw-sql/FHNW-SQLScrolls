@@ -5,8 +5,21 @@ METADATA {
 }
 
 DESCRIPTION {
-    Hae jokaisen kummituksen nimi ja syntymävuosi.
+    Get the name and Year of Birth of each ghost.
 }
+
+PARSONS {
+  SELECT name, year
+  FROM Ghosts
+  SELECT name and yearOfBirth #distractor
+  SELECT * #distractor
+  SELECT name #distractor
+}
+
+ANSWER {
+    SELECT Name, Year FROM GHOSTS
+}
+
 
 TEST {
     TABLE {

@@ -1,6 +1,6 @@
 METADATA {
     id: Book-B
-    name: Yhteenvedon kirja
+    name: Summary book
     title: Summa Summarum
     author: Maestro Codd
     color: blue
@@ -11,22 +11,22 @@ COVER {
 }
 
 PAGE {
-    Yhteenvetokysely antaa yksittäisen tuloksen, joka liittyy kaikkiin valittuihin taulun riveihin.
+    The summary query returns a single result that is associated with all selected rows in the table.
 
-    Tavallisia yhteenvetoja ovat COUNT (rivien määrä), SUM (arvojen summa), MIN (pienin arvo) ja MAX (suurin arvo).
+    Common summaries are COUNT (number of rows), SUM (sum of values), MIN (lowest value), and MAX (maximum value).
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
             Dragons
-            id|name|weight
-            1|Wilfried|3500
-            2|Justus|7500
-            3|Tabaluca|6000
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT COUNT(*) FROM Dragons;
+            SELECT COUNT (*) FROM Dragons;
         }
     }
 }
@@ -35,13 +35,13 @@ PAGE {
     EXAMPLE {
         TABLE {
             Dragons
-            id|name|weight
-            1|Wilfried|3500
-            2|Justus|7500
-            3|Tabaluca|6000
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT MAX(weight) FROM Dragons;
+            SELECT MAX (weight) FROM Dragons;
         }
     }
 }
@@ -50,51 +50,51 @@ PAGE {
     EXAMPLE {
         TABLE {
             Dragons
-            id|name|weight
-            1|Wilfried|3500
-            2|Justus|7500
-            3|Tabaluca|6000
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT COUNT(*), SUM(weight) FROM Dragons;
+            SELECT COUNT (*), SUM (weight) FROM Dragons;
         }
     }
 }
 
 PAGE {
-    Yhteenvetokyselyssä voi olla mukana ehto samaan tapaan kuin tavallisessa kyselyssä.
+    A summary survey can include a condition in the same way as a regular survey.
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
             Dragons
-            id|name|weight
-            1|Wilfried|3500
-            2|Justus|7500
-            3|Tabaluca|6000
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT COUNT(*) FROM Dragons WHERE weight > 5000;
+            SELECT COUNT (*) FROM Dragons WHERE weight> 5000;
         }
     }
 }
 
 PAGE {
-    Yhteenvetokyselyssä voi käyttää myös sanaa DISTINCT, kun halutaan ottaa huomioon jokainen erilainen arvo vain kerran.
+    You can also use the word DISTINCT in a summary query to consider each different value only once.
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
             Dragons
-            id|name|weight
-            1|Wilfried|3500
-            2|Justus|7500
-            3|Tabaluca|3500
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 3500
         }
         QUERY {
-            SELECT COUNT(DISTINCT weight) FROM Dragons;
+            SELECT COUNT (DISTINCT weight) FROM Dragons;
         }
     }
 }

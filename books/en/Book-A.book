@@ -1,6 +1,6 @@
 METADATA {
     id: Book-A
-    name: Valintojen kirja
+    name: Book of Choices
     title: Book of Selection Spells
     author: Maestro Codd
     color: purple
@@ -11,20 +11,20 @@ COVER {
 }
 
 PAGE {
-    Komento SELECT hakee halutut sarakkeet taulusta.
-    Komentoa käytetään näin:
+    The SELECT command retrieves the desired columns from the table.
+    The command is used as follows:
 
-    SELECT {sarakkeet} FROM {taulu};
+    SELECT {columns} FROM {table};
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
             Dragons
-            id|name|weight
-            1|Wilfried|3500
-            2|Justus|7500
-            3|Tabaluca|6000
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
         }
         QUERY {
             SELECT name, weight FROM Dragons;
@@ -33,45 +33,45 @@ PAGE {
 }
 
 PAGE {
-    Hakua voidaan rajoittaa WHERE-osalla:
+    The search can be restricted by the WHERE section:
     
-    SELECT {sarakkeet} FROM {taulu} WHERE {ehto};
+    SELECT {columns} FROM {table} WHERE {condition};
     
-    Ehdoissa voidaan käyttää esimerkiksi vertailuja ==, <>,
-    <, >, <=, >= sekä sanoja AND ja OR.    
+    For example, comparisons ==, <>,
+    <,>, <=,> = and AND and OR.
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
             Dragons
-            id|name|weight
-            1|Wilfried|3500
-            2|Justus|7500
-            3|Tabaluca|6000
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT name FROM Dragons WHERE weight > 5000;
+            SELECT name FROM Dragons WHERE weight> 5000;
         }
     }
 }
 
 PAGE {
-    Haun tulokset voidaan järjestää ORDER BY -osalla:
+    Search results can be sorted by ORDER BY section:
 
-    SELECT {sarakkeet} FROM {taulu} ORDER BY {sarakkeet};
+    SELECT {columns} FROM {table} ORDER BY {columns};
     
-    Jos järjestys halutaan käänteiseksi, komennon loppuun lisätään DESC.
+    If the order is reversed, DESC is added to the end of the command.
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
             Dragons
-            id|name|weight
-            1|Wilfried|3500
-            2|Justus|7500
-            3|Tabaluca|6000
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
         }
         QUERY {
             SELECT name, weight FROM Dragons ORDER BY weight;
@@ -80,19 +80,19 @@ PAGE {
 }
 
 PAGE {
-    Sana DISTINCT hakee jokaisen erilaisen rivin vain kerran.
+    The word DISTINCT retrieves each different line only once.
 
-    SELECT DISTINCT {haku};
+    SELECT DISTINCT {search};
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
             Dragons
-            id|name|weight
-            1|Wilfried|3500
-            2|Justus|7500
-            3|Wilfried|6000
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Wilfried | 6000
         }
         QUERY {
             SELECT DISTINCT name FROM Dragons;

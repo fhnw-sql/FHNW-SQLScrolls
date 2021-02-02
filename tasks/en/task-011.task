@@ -1,11 +1,11 @@
 METADATA {
-    id: task-009
-    name: Tehtävä 9
+    id: task-011
+    name: Tehtävä 11
     color: blue
 }
 
 DESCRIPTION {
-    Calculate how many ghosts were born in the 18th century.
+    Find the first name in alphabetical order.
 }
 
 TEST {
@@ -20,7 +20,7 @@ TEST {
     }
 
     RESULT {
-        2
+        Arthur
     }
 }
 
@@ -28,14 +28,14 @@ TEST {
     TABLE {
         Ghosts
         id|name|year
-        1|Edmond|1711
-        2|Mercedes|1722
-        3|Fernand|1733
-        4|Valentine|1744
-        5|Haydee|1755
+        1|Mercedes|1801
+        2|Fernand|1790
+        3|Edmond|1744
+        4|Valentine|1885
+        5|Haydee|1604
     }
 
     RESULT {
-        5
+        Edmond
     }
 }

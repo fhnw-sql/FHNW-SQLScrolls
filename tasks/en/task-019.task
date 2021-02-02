@@ -1,0 +1,57 @@
+METADATA {
+    id: task-019
+    name: Tehtävä 19
+    color: orange
+}
+
+DESCRIPTION {
+    Find a place where Arthur haunts.
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|place_id
+        1|Arthur|1
+        2|Desiree|3
+        3|Siegfried|2
+        4|Sieglinde|2
+        5|Kaaleppi|3
+    }
+
+    TABLE {
+        Places
+        id|name
+        1|school
+        2|forest
+        3|mill
+    }
+
+    RESULT {
+        school
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|place_id
+        1|Edmond|2
+        2|Mercedes|2
+        3|Fernand|3
+        4|Valentine|2
+        5|Arthur|2
+    }
+
+    TABLE {
+        Places
+        id|name
+        1|school
+        2|mill
+        3|forest
+    }
+
+    RESULT {
+        mill
+    }
+}

@@ -1,0 +1,43 @@
+METADATA {
+    id: task-013
+    name: Tehtävä 13
+    color: green
+}
+
+DESCRIPTION {
+    Count the number of magicians in each area.
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Kumpula|1
+    }
+
+    RESULT {
+        Shadowland|3
+        Kumpula|2
+    }
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Shadowland|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Shadowland|1
+    }
+
+    RESULT {
+        Shadowland|5
+    }
+}
+

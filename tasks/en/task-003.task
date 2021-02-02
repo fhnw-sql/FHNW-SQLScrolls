@@ -5,7 +5,11 @@ METADATA {
 }
 
 DESCRIPTION {
-    Hae Sieglinden syntymävuosi.
+    Search Sieglinden Year of birth.
+}
+
+ANSWER {
+    SELECT year FROM Ghosts WHERE name = "Sieglinde"
 }
 
 TEST {

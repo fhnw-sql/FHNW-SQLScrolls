@@ -5,16 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Hae kaikki 1700-luvulla syntyneet kummitukset.
-}
-
-PARSONS {
-  SELECT name 
-  FROM Test 
-  WHERE YEAR > 2000
-  WHERE YEAR > 1500 #distractor
-  SELECT * #distractor
-  WHERE YEAR > 1500 #distractor
+    Get all the ghosts born in the 18th century.
 }
 
 TEST {

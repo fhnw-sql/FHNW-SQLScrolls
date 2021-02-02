@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Hae kaikki eri syntymävuodet.
+    Search for all different birth years.
 }
 
 TEST {

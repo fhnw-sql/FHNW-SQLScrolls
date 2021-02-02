@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Hae kummitusten nimet nuorimmasta vanhimpaan.
+    Get the names of the ghosts from the youngest to the oldest.
 }
 
 STRICT

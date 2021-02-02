@@ -5,13 +5,20 @@ METADATA {
 }
 
 DESCRIPTION {
-    Hae jokaisen kummituksen nimi.
+    Get the name of each ghost.
 }
+
+PARSONS {
+  SELECT name
+  FROM Ghosts
+  SELECT name of each ghosts #distractor
+  SELECT * #distractor
+}
+
 
 ANSWER {
-    SELECT * FROM Ghosts
+    SELECT Name FROM GHOSTS
 }
-
 
 TEST {
     TABLE {

@@ -1,11 +1,11 @@
 METADATA {
-    id: task-009
-    name: Tehtävä 9
+    id: task-012
+    name: Tehtävä 12
     color: blue
 }
 
 DESCRIPTION {
-    Calculate how many ghosts were born in the 18th century.
+    Calculate how many different years of birth there are.
 }
 
 TEST {
@@ -13,14 +13,14 @@ TEST {
         Ghosts
         id|name|year
         1|Arthur|1765
-        2|Desiree|1801
+        2|Desiree|1833
         3|Siegfried|1650
-        4|Sieglinde|1777
+        4|Sieglinde|1765
         5|Kaaleppi|1833
     }
 
     RESULT {
-        2
+        3
     }
 }
 
@@ -28,14 +28,14 @@ TEST {
     TABLE {
         Ghosts
         id|name|year
-        1|Edmond|1711
-        2|Mercedes|1722
-        3|Fernand|1733
+        1|Edmond|1744
+        2|Mercedes|1744
+        3|Fernand|1790
         4|Valentine|1744
-        5|Haydee|1755
+        5|Haydee|1744
     }
 
     RESULT {
-        5
+        2
     }
 }

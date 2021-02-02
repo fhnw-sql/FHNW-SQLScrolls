@@ -1,0 +1,42 @@
+METADATA {
+    id: task-017
+    name: Tehtävä 17
+    color: green
+}
+
+DESCRIPTION {
+    Find areas with exactly one magician.
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Shadowland|1
+    }
+
+    RESULT {
+        Kumpula
+    }
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Shadowland|3
+        3|Bingo|Kumpula|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Fabuland|1
+    }
+
+    RESULT {
+        Kumpula
+        Fabuland
+    }
+}

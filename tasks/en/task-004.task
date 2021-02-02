@@ -5,23 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Hae kaikki vuoden 1800 jälkeen syntyneet kummitukset.
-}
-
-PARSONS {
-  SELECT name 
-  FROM Ghosts 
-  WHERE YEAR > 1800
-  WHERE YEAR > 1500 #distractor
-  SELECT * #distractor
-  WHERE YEAR > 1500 #distractor
-  SELECT * #distractor
-  WHERE YEAR > 1500 #distractor
-  SELECT * #distractor
-}
-
-ANSWER {
-    SELECT name FROM Ghosts WHERE YEAR > 1800
+    Get all the ghosts born after 1800.
 }
 
 TEST {

@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Hae kummitusten nimet aakkosjärjestyksessä.
+    Search for ghost names in alphabetical order.
 }
 
 STRICT
