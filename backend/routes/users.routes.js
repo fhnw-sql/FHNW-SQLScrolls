@@ -41,8 +41,7 @@ router.post("/authenticate", reqBodyValidator(authenticatePOST), async function 
 
   // Sign Token
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "365d" });
-  let { password, ...u } = user;
-  const retVal = { user: u, token };
+  const retVal = { token };
   return res.json(retVal);
 });
 
