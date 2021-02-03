@@ -1,6 +1,6 @@
 METADATA {
     id: task-001
-    name: Tehtävä 1
+    name: Task 1
     color: purple
 }
 
@@ -14,7 +14,6 @@ PARSONS {
   SELECT name of each ghosts #distractor
   SELECT * #distractor
 }
-
 
 ANSWER {
     SELECT Name FROM GHOSTS

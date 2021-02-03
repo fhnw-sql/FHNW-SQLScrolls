@@ -11,6 +11,10 @@ COVER {
 }
 
 PAGE {
+    A weclome
+}
+
+PAGE {
     The SELECT command retrieves the desired columns from the table.
     The command is used as follows:
 
