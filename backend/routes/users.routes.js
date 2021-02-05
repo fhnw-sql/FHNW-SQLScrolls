@@ -66,7 +66,7 @@ router.patch("/self/answer_sql", reqBodyValidator(answerSqlPATCH), async functio
 
   // conduct payload
   const payload = {
-    correct: JSON.parse(value.correct.toLowerCase()),
+    correct: JSON.parse(value.correct),
     date: Date.now(),
     query: value.query,
   };
