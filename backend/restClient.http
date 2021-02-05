@@ -1,11 +1,11 @@
-@host = localhost:4000
+@host = localhost:5000
 #@host = fhnw-sql-training-game-api.herokuapp.com/
-
+@username = "kai.kkrause@students.fhnw.ch"
 POST http://{{host}}/users/register  HTTP/1.1
 content-type: application/json
 
 {
-    "username": "kai.krause@students.fhnw.ch",
+    "username": {{username}},
     "password": "123456"
 }
 
@@ -15,7 +15,7 @@ POST http://{{host}}/users/recover  HTTP/1.1
 content-type: application/json
 
 {
-    "username": "kai.krause@students.fhnw.ch"
+    "username": {{username}}
 }
 
 ###
@@ -35,7 +35,7 @@ POST http://{{host}}/users/authenticate  HTTP/1.1
 content-type: application/json
 
 {
-    "username": "kai.krause@students.fhnw.ch",
+    "username": {{username}},
     "password": "123456"
 }
 
