@@ -111,7 +111,7 @@ router.post("/recover", reqBodyValidator(recoverPOST), async function (req, res,
           From: process.env.FROM_SENDER,
           To: user.username,
           Subject: "Password change request",
-          TextBody: `Hi ${user.username} \n 
+          HtmlBody: `Hi ${user.username} \n 
     Please click on the following link <a href="${link}">${link}</a> to reset your password. \n\n 
     If you did not request this, please ignore this email and your password will remain unchanged.\n`,
           MessageStream: "outbound",
@@ -149,7 +149,7 @@ router.post("/reset", reqBodyValidator(resetPOST), async function ({ body: value
           From: process.env.FROM_SENDER,
           To: user.username,
           subject: "Your password has been changed",
-          TextBody: `Hi ${user.username} \n 
+          HtmlBody: `Hi ${user.username} \n 
           This is a confirmation that the password for your account ${user.username} has just been changed.\n`,
           MessageStream: "outbound",
         });
