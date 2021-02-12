@@ -194,6 +194,13 @@ async function loadGameElements(linesOfProgressionJs) {
   initializeGameDictionaries(requiredByMatrix);
 }
 
+async function register() {
+  const username = document.getElementById("inputUser").value;
+  if (!username) return await Views.LOGIN.showLoginError(i18n.get("login-error-no-user"));
+  const password = document.getElementById("inputPassword").value;
+  if (!password) return await Views.LOGIN.showLoginError(i18n.get("login-error-no-password"));
+}
+
 async function login() {
   await Views.LOGIN.clearLoginError();
   const username = document.getElementById("inputUser").value;
@@ -207,6 +214,10 @@ async function login() {
     if (API.loginStatus === LoginStatus.ERRORED) {
       await Views.LOGIN.showLoginError(i18n.get("login-error-failed-unknown"));
     } else if (API.loginStatus === LoginStatus.LOGGED_IN) {
+      await fadeToBlack();
+      await showElementImmediately("loading-view");
+      await showElementImmediately("counter-container");
+      await fadeFromBlack();
       loadCompletionFromQuizzes();
       changeView(Views.LOADING);
     }

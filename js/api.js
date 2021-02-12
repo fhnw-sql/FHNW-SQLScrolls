@@ -8,7 +8,6 @@ const API = {
   ADDRESS: "https://fhnw-stg-api-web.dev.liqix.cc",
   loginStatus: LoginStatus.LOGGED_OUT,
   token: undefined,
-  username: undefined,
   cachedAnswerData: {
     loading: false,
     loaded: false,
@@ -34,12 +33,10 @@ const API = {
   },
   loginExisting() {
     const sessionToken = sessionStorage.getItem("fhnw-token");
-    const username = sessionStorage.getItem("fhnw-username");
     // TODO: Check token request
     if (sessionToken) {
       API.loginStatus = LoginStatus.LOGGED_IN;
       API.token = sessionToken;
-      API.username = username;
     }
   },
   login(username, password) {
@@ -49,12 +46,9 @@ const API = {
         if (this.readyState === 4) {
           if (xhr.status === 200) {
             const responseJson = JSON.parse(this.response);
-            const username = responseJson.user.username;
             const token = responseJson.token;
             API.loginStatus = LoginStatus.LOGGED_IN;
-            sessionStorage.setItem("fhnw-username", username);
             sessionStorage.setItem("fhnw-token", token);
-            API.username = username;
             API.token = token;
             resolve();
           } else if (xhr.status === 400) {
@@ -74,9 +68,7 @@ const API = {
   logout() {
     this.loginStatus = LoginStatus.LOGGED_OUT;
     this.token = "";
-    this.username = "";
     sessionStorage.removeItem("fhnw-token");
-    sessionStorage.removeItem("fhnw-username");
   },
   async fetchCompletedTaskIDs() {
     const profile = await this.self();

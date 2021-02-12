@@ -46,6 +46,7 @@
       <section id="alerts" role="alertdialog"></section>
       <!-- fade-to-black -->
       <div id="fade-to-black" style="opacity: 1;"></div>
+
       <!-- login-view -->
       <section class="view hidden" id="login-view">
         <aside class="background"></aside>
@@ -145,23 +146,28 @@
                       tabindex="0"
                       type="submit"
                     ></button>
-                    <select aria-label="Select language" class="form-control" id="language-selector" tabindex="0">
+                    <select
+                      aria-label="Select language"
+                      class="form-control hidden"
+                      id="language-selector"
+                      tabindex="0"
+                    >
                       <option selected>EN</option>
                     </select>
                   </form>
                 </div>
                 <p class="center mt-2">
                   <a
-                    class="task-description i18n-forgot-password"
-                    href="https://tmc.mooc.fi/password_reset_keys/new"
+                    class="task-description i18n-register"
+                    onclick="changeView(Views.REGISTER)"
                     rel="noreferrer"
                     tabindex="0"
                     target="_blank"
                   ></a
                   ><br />
                   <a
-                    class="task-description i18n-register"
-                    href="https://www.mooc.fi/fi/sign-up"
+                    class="task-description i18n-forgot-password"
+                    onclick="alert('not implemented yet')"
                     rel="noreferrer"
                     tabindex="0"
                     target="_blank"
@@ -237,58 +243,28 @@
               </h1>
             </div>
             <div class="row justify-content-center">
-              <div class="col-md-12">
+              <!-- Register Form-->
+              <div id="register-form" class="col-md-12">
                 <div class="info-box justify-content-center mt-3">
-                  <h2 class="screen-reader-only i18n-login"></h2>
-                  <p class="task-description center i18n-welcome"></p>
-                  <div class="alert alert-danger hidden" id="login-error" role="alert"></div>
+                  <h2 class="screen-reader-only i18n-register"></h2>
+                  <p class="task-description center i18n-register"></p>
+                  <div class="alert alert-danger hidden" id="register-error" role="alert"></div>
                   <form onsubmit="event.preventDefault()">
                     <div class="form-group">
-                      <input
-                        aria-label="username"
-                        autocomplete="username"
-                        class="form-control form-control-user i18n-username i18n-aria-username"
-                        id="inputUser"
-                        placeholder=""
-                        tabindex="0"
-                        type="text"
-                      />
-                    </div>
-                    <div class="form-group">
-                      <input
-                        aria-label="password"
-                        autocomplete="current-password"
-                        class="form-control form-control-user i18n-password i18n-aria-password"
-                        id="inputPassword"
-                        placeholder=""
-                        tabindex="0"
-                        type="password"
-                      />
-                    </div>
+                     
                     <button
-                      class="btn i18n-login"
-                      id="login-button"
-                      onclick="login()"
+                      class="btn i18n-register"
+                      id="register-button"
+                      onclick="register()"
                       tabindex="0"
                       type="submit"
                     ></button>
-                    <select aria-label="Select language" class="form-control" id="language-selector" tabindex="0">
-                      <option selected>EN</option>
-                    </select>
                   </form>
                 </div>
                 <p class="center mt-2">
                   <a
-                    class="task-description i18n-forgot-password"
-                    href="https://tmc.mooc.fi/password_reset_keys/new"
-                    rel="noreferrer"
-                    tabindex="0"
-                    target="_blank"
-                  ></a
-                  ><br />
-                  <a
-                    class="task-description i18n-register"
-                    href="https://www.mooc.fi/fi/sign-up"
+                    class="task-description i18n-login"
+                    onclick="showLoginForm()"
                     rel="noreferrer"
                     tabindex="0"
                     target="_blank"

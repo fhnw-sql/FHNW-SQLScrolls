@@ -48,6 +48,10 @@ body {
   outline-style: none !important;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 /* Add no-animation class to body to disable animation */
 .no-animation *,
 .no-animation *:before,

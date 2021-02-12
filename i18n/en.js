@@ -9,7 +9,7 @@ for (let entry of Object.entries({
   "login-error-failed-unknown": "Login failed.",
   logout: "Logout",
   "incorrect-login": "Incorrect username or password",
-  register: "Register",
+  register: "Registration",
   "forgot-password": "Forgot Password",
   "empty-table": "The table is empty",
   ok: "Alright!",

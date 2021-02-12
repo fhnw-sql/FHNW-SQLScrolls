@@ -614,9 +614,8 @@ class ProfileView extends View {
   }
 
   async open() {
-    document.getElementById("logged-in-as").innerHTML = i18n.getWith("logged-in-as", [
-      API.username ? API.username : API.token,
-    ]);
+    const userProfile = await API.self();
+    document.getElementById("logged-in-as").innerHTML = i18n.getWith("logged-in-as", [userProfile.username]);
     document.getElementById("task-completion-grid").innerHTML = this.renderTaskCompletionGrid();
 
     const trigger = document.activeElement;
@@ -686,12 +685,7 @@ class LoginView extends View {
   }
 
   async close() {
-    await fadeToBlack();
     await hideElementImmediately(this.id);
-    await showElementImmediately("loading-view");
-    await showElementImmediately("counter-container");
-    await fadeFromBlack();
-
     // Clear user information from dom
     document.getElementById("inputUser").value = "";
     document.getElementById("inputPassword").value = "";
@@ -727,6 +721,61 @@ class LoginView extends View {
 }
 
 /**
+ * View where people register
+ *
+ * a Main view, use changeView-function with this view.
+ */
+class RegisterView extends View {
+  constructor() {
+    super("register-view");
+  }
+
+  async open() {
+    await showElementImmediately(this.id);
+  }
+
+  async close() {
+    await fadeToBlack();
+    await hideElementImmediately(this.id);
+    await showElementImmediately("loading-view");
+    await showElementImmediately("counter-container");
+    await fadeFromBlack();
+
+    // Clear user information from dom
+    document.getElementById("inputUser").value = "";
+    document.getElementById("inputPassword").value = "";
+  }
+
+  startLogin() {
+    const registerButton = document.getElementById("register-button");
+    registerButton.innerHTML =
+      `<span id="loading-animation">
+            <i class="fa fa-star loading-animation"></i>
+            <i class="far fa-star loading-animation offset"></i>
+        </span>` + registerButton.innerHTML;
+    registerButton.setAttribute("disabled", "true");
+    registerButton.setAttribute("aria-disabled", "true");
+  }
+
+  endLogin() {
+    const loginButton = document.getElementById("register-button");
+    document.getElementById("loading-animation").remove();
+    loginButton.removeAttribute("disabled");
+    loginButton.setAttribute("aria-disabled", "false");
+  }
+
+  async clearRegisterError() {
+    await this.showRegisterError();
+  }
+
+  async showRegisterError(error) {
+    if (!error) return await hideElement("register-error");
+    document.getElementById("register-error").innerText = error;
+    await showElement("register-error");
+  }
+}
+
+/**
  * Transition view from login to the game while the necessary files are loaded.
  *
  * Automatically transitions to MAP or INVENTORY view afterwards.
@@ -747,6 +796,7 @@ class LoadingView extends View {
   }
 
   async close() {
+    await fadeFromBlack();
     await hideElement(this.id);
   }
 }
@@ -855,6 +905,7 @@ Views = {
   SHOW_ITEM: new ShowItemView(),
   READ_BOOK: new ReadBookView(),
   LOGIN: new LoginView(),
+  REGISTER: new RegisterView(),
   PROFILE: new ProfileView(),
   LOADING: new LoadingView(),
   FLAME_ANIMATION: new FlameAnimationView(),
