@@ -195,17 +195,17 @@ async function loadGameElements(linesOfProgressionJs) {
 }
 
 async function register() {
-  const username = document.getElementById("inputUser").value;
+  const username = document.getElementById("inputUserLogin").value;
   if (!username) return await Views.LOGIN.showLoginError(i18n.get("login-error-no-user"));
-  const password = document.getElementById("inputPassword").value;
+  const password = document.getElementById("inputPasswordLogin").value;
   if (!password) return await Views.LOGIN.showLoginError(i18n.get("login-error-no-password"));
 }
 
 async function login() {
   await Views.LOGIN.clearLoginError();
-  const username = document.getElementById("inputUser").value;
+  const username = document.getElementById("inputUserLogin").value;
   if (!username) return await Views.LOGIN.showLoginError(i18n.get("login-error-no-user"));
-  const password = document.getElementById("inputPassword").value;
+  const password = document.getElementById("inputPasswordLogin").value;
   if (!password) return await Views.LOGIN.showLoginError(i18n.get("login-error-no-password"));
 
   Views.LOGIN.startLogin();

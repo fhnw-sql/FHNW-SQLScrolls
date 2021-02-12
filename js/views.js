@@ -691,8 +691,8 @@ class LoginView extends View {
   async close() {
     await hideElement(this.id);
     // Clear user information from dom
-    document.getElementById("inputUser").value = "";
-    document.getElementById("inputPassword").value = "";
+    document.getElementById("inputUserLogin").value = "";
+    document.getElementById("inputPasswordLogin").value = "";
   }
 
   startLogin() {
