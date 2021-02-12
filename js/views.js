@@ -935,12 +935,34 @@ class ResetPasswordView extends View {
 
   async open() {
     await showElement(this.id);
+    document.getElementById("inputResetPassword").value = "";
+    document.getElementById("inputResetPasswordVerify").value = "";
   }
 
   async close() {
     await hideElement(this.id);
     await this.clearResetPasswordAlerts();
     window.location.search = "";
+  }
+
+  async resetPassword() {
+    await this.clearResetPasswordAlerts();
+
+    // Validate Password
+    const password = document.getElementById("inputResetPassword").value;
+    if (!password) return await this.showResetPasswordError(i18n.get("error-no-password"));
+    const passwordVerify = document.getElementById("inputResetPasswordVerify").value;
+    if (!passwordVerify || passwordVerify !== password)
+      return await this.showResetPasswordError(i18n.get("error-password-missmatch"));
+
+    const token = document.getElementById("inputResetPasswordToken").value;
+
+    try {
+      await API.resetPassword(password, token);
+      this.showResetPasswordSuccess(i18n.get("reset-password-success"));
+    } catch (err) {
+      await this.showResetPasswordError(err.message);
+    }
   }
 
   async clearResetPasswordAlerts() {
