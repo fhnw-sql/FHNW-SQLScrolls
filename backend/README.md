@@ -1,7 +1,7 @@
 # 🔍 Introduction
  This repository is the backend API for the FHNW-SQL-Training-Game which is used to determine the effectiveness and acceptance of a learning game as an alternative learning method within the Bachelor of Business Information Technology at the FHNW, with regard to practising the structured query language (SQL) which is taught as part of the Database Technology course.
 
-**📚 Technologies:**
+**Technologies:**
 - Node.JS
 - MongoDB
 
@@ -44,7 +44,7 @@ Possible codes:
   * `query:string`
 
 
-## Configuration
+## ⚙️ Configuration
 ### Environment Variables
 * `NODE_ENV` -> Development / Production
 * `PORT` -> The port on which the API should run
@@ -52,7 +52,7 @@ Possible codes:
 * `POSTMARK_API_KEY` -> Postmark API Key for sending the mails.
 
 
-## Packages
+## 📦 Packages
 The used third party packages for the API are described in the following subchapters. For further information about a single package visit npmjs.com.
 
 ### bcryptjs
