@@ -215,7 +215,7 @@ async function register() {
     await API.register(username, password);
     Views.REGISTER.showRegisterSuccess(i18n.get("register-success"));
     Views.REGISTER.endRegister();
-    await delay(800);
+    await delay(1500);
     changeView(Views.LOGIN);
   } catch (err) {
     await Views.REGISTER.showRegisterError(err.message);

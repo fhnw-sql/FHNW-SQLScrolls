@@ -691,6 +691,7 @@ class LoginView extends View {
 
   async close() {
     await hideElement(this.id);
+    await this.clearLoginError();
     // Clear user information from dom
     document.getElementById("inputLoginUser").value = "";
     document.getElementById("inputLoginPassword").value = "";
@@ -741,6 +742,11 @@ class RegisterView extends View {
 
   async close() {
     await hideElement(this.id);
+    await this.clearRegisterAlerts();
+    // Clear user information from dom
+    document.getElementById("inputRegisterUser").value = "";
+    document.getElementById("inputRegisterPassword").value = "";
+    document.getElementById("inputRegisterPasswordVerify").value = "";
   }
 
   startRegister() {
@@ -791,10 +797,14 @@ class ForgotPasswordView extends View {
 
   async open() {
     await showElement(this.id);
+    await showElementImmediately("inputForgotPasswordUser");
+    await showElementImmediately("forgot-password-button");
   }
 
   async close() {
     await hideElement(this.id);
+    await this.clearForgotPasswordAlerts();
+    document.getElementById("inputForgotPasswordUser").value = "";
   }
 
   startForgotPassword() {
@@ -823,6 +833,8 @@ class ForgotPasswordView extends View {
   async showForgotPasswordSuccess(msg) {
     if (!msg) return await hideElement("forgot-password-success");
     document.getElementById("forgot-password-success").innerText = msg;
+    await hideElementImmediately("inputForgotPasswordUser");
+    await hideElementImmediately("forgot-password-button");
     await showElement("forgot-password-success");
   }
 
