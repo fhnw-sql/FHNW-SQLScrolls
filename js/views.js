@@ -490,6 +490,7 @@ class ShowItemView extends View {
   async close() {
     this.shownItem = null;
     $("#" + this.id).modal("hide");
+    Views.INVENTORY.showTaskGroup("A");
   }
 
   setupModal() {
@@ -691,8 +692,8 @@ class LoginView extends View {
   async close() {
     await hideElement(this.id);
     // Clear user information from dom
-    document.getElementById("inputUserLogin").value = "";
-    document.getElementById("inputPasswordLogin").value = "";
+    document.getElementById("inputLoginUser").value = "";
+    document.getElementById("inputLoginPassword").value = "";
   }
 
   startLogin() {
@@ -742,7 +743,7 @@ class RegisterView extends View {
     await hideElement(this.id);
   }
 
-  startLogin() {
+  startRegister() {
     const registerButton = document.getElementById("register-button");
     registerButton.innerHTML =
       `<span id="loading-animation">
@@ -753,15 +754,21 @@ class RegisterView extends View {
     registerButton.setAttribute("aria-disabled", "true");
   }
 
-  endLogin() {
-    const loginButton = document.getElementById("register-button");
+  endRegister() {
+    const registerButton = document.getElementById("register-button");
     document.getElementById("loading-animation").remove();
-    loginButton.removeAttribute("disabled");
-    loginButton.setAttribute("aria-disabled", "false");
+    registerButton.removeAttribute("disabled");
+    registerButton.setAttribute("aria-disabled", "false");
   }
 
-  async clearRegisterError() {
+  async clearRegisterAlerts() {
     await this.showRegisterError();
+  }
+
+  async showRegisterSuccess(msg) {
+    if (!msg) return await hideElement("register-success");
+    document.getElementById("register-success").innerText = msg;
+    await showElement("register-success");
   }
 
   async showRegisterError(error) {

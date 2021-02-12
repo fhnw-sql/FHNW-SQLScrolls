@@ -123,10 +123,10 @@
                         aria-label="username"
                         autocomplete="username"
                         class="form-control form-control-user i18n-username i18n-aria-username"
-                        id="inputUserLogin"
+                        id="inputLoginUser"
                         placeholder=""
                         tabindex="0"
-                        type="email"
+                        type="text"
                       />
                     </div>
                     <div class="form-group">
@@ -134,7 +134,7 @@
                         aria-label="password"
                         autocomplete="current-password"
                         class="form-control form-control-user i18n-password i18n-aria-password"
-                        id="inputPasswordLogin"
+                        id="inputLoginPassword"
                         placeholder=""
                         tabindex="0"
                         type="password"
@@ -197,24 +197,33 @@
                   <h2 class="screen-reader-only i18n-register"></h2>
                   <p class="task-description center i18n-register"></p>
                   <div class="alert alert-danger hidden" id="register-error" role="alert"></div>
+                  <div class="alert alert-success hidden" id="register-success" role="alert"></div>
                   <form onsubmit="event.preventDefault()">
                     <div class="form-group">
                       <input
                         aria-label="username"
-                        autocomplete="username"
                         class="form-control form-control-user i18n-username i18n-aria-username"
-                        id=""
+                        id="inputRegisterUser"
                         placeholder=""
                         tabindex="0"
-                        type="email"
+                        type="text"
                       />
                     </div>
                     <div class="form-group">
                       <input
                         aria-label="password"
-                        autocomplete="current-password"
                         class="form-control form-control-user i18n-password i18n-aria-password"
-                        id=""
+                        id="inputRegisterPassword"
+                        placeholder=""
+                        tabindex="0"
+                        type="password"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        aria-label="password"
+                        class="form-control form-control-user i18n-password-verify i18n-aria-password-verify"
+                        id="inputRegisterPasswordVerify"
                         placeholder=""
                         tabindex="0"
                         type="password"

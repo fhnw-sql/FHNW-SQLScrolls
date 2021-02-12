@@ -584,6 +584,13 @@ th {
   padding: 0.7rem 1.1rem;
 }
 
+#login-view .alert,
+#register-view .alert,
+#forgot-password-view .alert {
+  margin-left: 2.2rem;
+  margin-right: 2.2rem;
+}
+
 .info-box .row,
 .info-box .collapse {
   margin: 1rem;

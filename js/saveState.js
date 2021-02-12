@@ -44,13 +44,14 @@ async function load(completedTaskIDs) {
   async function loadInventory(unlockedTaskGroups) {
     if (!unlockedTaskGroups.includes("A")) {
       await inventory.addItems(["item-00", "task-group-A"]);
+      Views.SHOW_ITEM.show("item-00");
     }
     await inventory.addItems(taskGroups.asList().map((taskGroup) => taskGroup.item.id));
     await inventory.removeItem("task-group-X");
     if (unlockedTaskGroups.includes("X")) {
       await inventory.unlock("item-999");
     }
-    await inventory.addItem("item-999");
+    //  await inventory.addItem("item-999"); -> Endgame isn't necessary for the study
   }
 
   function loadGameState(unlockedTaskGroups) {

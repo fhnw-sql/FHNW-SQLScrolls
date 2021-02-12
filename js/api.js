@@ -93,7 +93,7 @@ const API = {
     const profile = await this.self();
     const completedTaskIDs = [];
     for (let task of tasks.asList()) {
-      if (profile.history[task.id]?.map((m) => m.correct).includes(true)) {
+      if (profile.history && profile.history[task.id]?.map((m) => m.correct).includes(true)) {
         completedTaskIDs.push(task.id);
       }
     }

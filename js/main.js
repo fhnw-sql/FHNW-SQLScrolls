@@ -195,18 +195,45 @@ async function loadGameElements(linesOfProgressionJs) {
 }
 
 async function register() {
-  const username = document.getElementById("inputUserLogin").value;
-  if (!username) return await Views.LOGIN.showLoginError(i18n.get("login-error-no-user"));
-  const password = document.getElementById("inputPasswordLogin").value;
-  if (!password) return await Views.LOGIN.showLoginError(i18n.get("login-error-no-password"));
+  await Views.REGISTER.clearRegisterAlerts();
+
+  // Validate User
+  const username = document.getElementById("inputRegisterUser").value;
+  if (!username) return await Views.REGISTER.showRegisterError(i18n.get("error-no-user"));
+  if (!username.includes("@")) return await Views.REGISTER.showRegisterError(i18n.get("error-invalid-user"));
+
+  // Validate Password
+  const password = document.getElementById("inputRegisterPassword").value;
+  if (!password) return await Views.REGISTER.showRegisterError(i18n.get("error-no-password"));
+  const passwordVerify = document.getElementById("inputRegisterPasswordVerify").value;
+  if (!passwordVerify || passwordVerify !== password)
+    return await Views.REGISTER.showRegisterError(i18n.get("error-password-missmatch"));
+
+  Views.REGISTER.startRegister();
+
+  try {
+    await API.register(username, password);
+    Views.REGISTER.showRegisterSuccess(i18n.get("register-success"));
+    Views.REGISTER.endRegister();
+    await delay(800);
+    changeView(Views.LOGIN);
+  } catch (err) {
+    await Views.REGISTER.showRegisterError(err.message);
+    Views.REGISTER.endRegister();
+  }
 }
 
 async function login() {
   await Views.LOGIN.clearLoginError();
-  const username = document.getElementById("inputUserLogin").value;
-  if (!username) return await Views.LOGIN.showLoginError(i18n.get("login-error-no-user"));
-  const password = document.getElementById("inputPasswordLogin").value;
-  if (!password) return await Views.LOGIN.showLoginError(i18n.get("login-error-no-password"));
+
+  // Validate username
+  const username = document.getElementById("inputLoginUser").value;
+  if (!username) return await Views.LOGIN.showLoginError(i18n.get("error-no-user"));
+  if (!username.includes("@")) return await Views.LOGIN.showLoginError(i18n.get("error-invalid-user"));
+
+  // Validate password
+  const password = document.getElementById("inputLoginPassword").value;
+  if (!password) return await Views.LOGIN.showLoginError(i18n.get("error-no-password"));
 
   Views.LOGIN.startLogin();
   try {
