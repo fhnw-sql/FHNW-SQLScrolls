@@ -65,6 +65,25 @@ const API = {
       xhr.send(`username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
     });
   },
+  register(username, password) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          if (xhr.status === 200) {
+            resolve();
+          } else if (xhr.status === 400) {
+            reject(this.response);
+          } else {
+            reject(`Bad response code '${xhr.status}' for login`);
+          }
+        }
+      };
+      xhr.open("POST", `${this.ADDRESS}/users/register`, true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send(`username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
+    });
+  },
   logout() {
     this.loginStatus = LoginStatus.LOGGED_OUT;
     this.token = "";

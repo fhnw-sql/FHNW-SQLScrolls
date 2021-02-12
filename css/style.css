@@ -578,7 +578,9 @@ th {
   margin: 1rem 1rem;
 }
 
-#login-view .info-box > * {
+#login-view .info-box > *,
+#register-view .info-box > *,
+#forgot-password-view .info-box > * {
   padding: 0.7rem 1.1rem;
 }
 

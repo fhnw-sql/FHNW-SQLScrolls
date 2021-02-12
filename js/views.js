@@ -689,7 +689,7 @@ class LoginView extends View {
   }
 
   async close() {
-    await hideElementImmediately(this.id);
+    await hideElement(this.id);
     // Clear user information from dom
     document.getElementById("inputUser").value = "";
     document.getElementById("inputPassword").value = "";
@@ -735,11 +735,11 @@ class RegisterView extends View {
   }
 
   async open() {
-    await showElementImmediately(this.id);
+    await showElement(this.id);
   }
 
   async close() {
-    await hideElementImmediately(this.id);
+    await hideElement(this.id);
   }
 
   startLogin() {
