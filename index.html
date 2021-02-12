@@ -42,9 +42,11 @@
   </head>
   <body class="bg-black no-focus-outline" id="body">
     <section class="container-fluid" id="main">
+      <!-- alerts -->
       <section id="alerts" role="alertdialog"></section>
+      <!-- fade-to-black -->
       <div id="fade-to-black" style="opacity: 1;"></div>
-
+      <!-- login-view -->
       <section class="view hidden" id="login-view">
         <aside class="background"></aside>
         <aside aria-hidden="true" class="left-graphic">
@@ -171,6 +173,134 @@
         </div>
       </section>
 
+      <!-- register-view -->
+      <section class="view hidden" id="register-view">
+        <aside class="background"></aside>
+        <aside aria-hidden="true" class="left-graphic">
+          <svg
+            enable-background="new 0 0 125 189.864"
+            height="189.864px"
+            id="Layer_1"
+            style="transform: scale(2);"
+            version="1.1"
+            viewBox="0 0 125 189.864"
+            width="125px"
+            x="0px"
+            xml:space="preserve"
+            xmlns="http://www.w3.org/2000/svg"
+            y="0px"
+          >
+            <path
+              class="flame-main"
+              d="M76.553,186.09c0,0-10.178-2.976-15.325-8.226s-9.278-16.82-9.278-16.82s-0.241-6.647-4.136-18.465
+	c0,0,3.357,4.969,5.103,9.938c0,0-5.305-21.086,1.712-30.418c7.017-9.333,0.571-35.654-2.25-37.534c0,0,13.07,5.64,19.875,47.54
+	c6.806,41.899,16.831,45.301,6.088,53.985"
+              fill="#16AAFD"
+            />
+            <path
+              class="flame-main one"
+              d="M61.693,122.257c4.117-15.4,12.097-14.487-11.589-60.872c0,0,32.016,10.223,52.601,63.123
+	c20.585,52.899-19.848,61.045-19.643,61.582c0.206,0.537-19.401-0.269-14.835-18.532S57.576,137.656,61.693,122.257z"
+              fill="#4AB8FF"
+            />
+            <path
+              class="flame-main two"
+              d="M81.657,79.192c0,0,11.549,24.845,3.626,40.02c-7.924,15.175-21.126,41.899-0.425,64.998
+	C84.858,184.21,125.705,150.905,81.657,79.192z"
+              fill="#1FD7F6"
+            />
+            <path
+              class="flame-main three"
+              d="M99.92,101.754c0,0-23.208,47.027-12.043,80.072c0,0,32.741-16.073,20.108-45.79
+	C95.354,106.319,99.92,114.108,99.92,101.754z"
+              fill="#21F0F3"
+            />
+            <path
+              class="flame-main four"
+              d="M103.143,105.917c0,0,8.927,30.753-1.043,46.868c-9.969,16.115-14.799,29.041-14.799,29.041
+	S134.387,164.603,103.143,105.917z"
+              fill="#16AAFD"
+            />
+            <path
+              class="flame-main five"
+              d="M62.049,104.171c0,0-15.645,67.588,10.529,77.655C98.753,191.894,69.033,130.761,62.049,104.171z"
+              fill="#21F0F3"
+            />
+          </svg>
+        </aside>
+        <img alt="scrolls" aria-hidden="true" class="right-graphic" src="img/scrolls.png" />
+        <div class="row justify-content-center login-widget">
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="info-box justify-content-center">
+              <h1 class="task-description center" style="font-size: 3.5rem; font-family: var(--book-font);">
+                SQL Trainer
+              </h1>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-md-12">
+                <div class="info-box justify-content-center mt-3">
+                  <h2 class="screen-reader-only i18n-login"></h2>
+                  <p class="task-description center i18n-welcome"></p>
+                  <div class="alert alert-danger hidden" id="login-error" role="alert"></div>
+                  <form onsubmit="event.preventDefault()">
+                    <div class="form-group">
+                      <input
+                        aria-label="username"
+                        autocomplete="username"
+                        class="form-control form-control-user i18n-username i18n-aria-username"
+                        id="inputUser"
+                        placeholder=""
+                        tabindex="0"
+                        type="text"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        aria-label="password"
+                        autocomplete="current-password"
+                        class="form-control form-control-user i18n-password i18n-aria-password"
+                        id="inputPassword"
+                        placeholder=""
+                        tabindex="0"
+                        type="password"
+                      />
+                    </div>
+                    <button
+                      class="btn i18n-login"
+                      id="login-button"
+                      onclick="login()"
+                      tabindex="0"
+                      type="submit"
+                    ></button>
+                    <select aria-label="Select language" class="form-control" id="language-selector" tabindex="0">
+                      <option selected>EN</option>
+                    </select>
+                  </form>
+                </div>
+                <p class="center mt-2">
+                  <a
+                    class="task-description i18n-forgot-password"
+                    href="https://tmc.mooc.fi/password_reset_keys/new"
+                    rel="noreferrer"
+                    tabindex="0"
+                    target="_blank"
+                  ></a
+                  ><br />
+                  <a
+                    class="task-description i18n-register"
+                    href="https://www.mooc.fi/fi/sign-up"
+                    rel="noreferrer"
+                    tabindex="0"
+                    target="_blank"
+                  ></a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- loading-view -->
       <section class="view hidden" id="loading-view" tabindex="-1">
         <h1 class="large-loading-text">
           <i class="fa fa-star loading-animation"></i>
@@ -179,6 +309,7 @@
         </h1>
       </section>
 
+      <!-- inventory-view -->
       <section class="m-2 col-md-10 view hidden" id="inventory-view" tabindex="-1">
         <button class="col-white logout-button" onclick="logout()">
           <i class="fa fa-fw fa-door-open"></i> <span class="i18n-logout"></span>
@@ -191,6 +322,7 @@
         </div>
       </section>
 
+      <!-- task-view -->
       <section class="m-2 view hidden" id="task-view" tabindex="-1">
         <div
           class="bg-transparent"
@@ -293,15 +425,19 @@
         </div>
       </section>
 
+      <!-- task-group-complete-notification -->
       <div aria-live="polite" class="hidden" id="task-group-complete-notification" role="alert" tabindex="-1">
         <p class="gold-shine-text i18n-level-unlocked"></p>
-        <p class="smaller gold-shine-text i18n-unlocked-more-tasks">Avasit lisää tehtäviä</p>
+        <p class="smaller gold-shine-text i18n-unlocked-more-tasks">You opened more tasks.</p>
       </div>
+
+      <!-- counter-container -->
       <div class="counters hidden" id="counter-container">
         <h2 class="screen-reader-only i18n-counters"></h2>
         <p class="col-white" id="star-counter" tabindex="0"></p>
       </div>
 
+      <!-- map-view -->
       <section class="col-md-9 view hidden" id="map-view" tabindex="-1">
         <img alt="Map of the world" class="col-white" loading="lazy" src="img/worldmap.jpg" />
         <button class="col-white logout-button" onclick="logout()">
@@ -311,6 +447,7 @@
         <ul id="map-tasks"></ul>
       </section>
 
+      <!-- evil-flame-animation -->
       <section class="view col-md-8 hidden" id="evil-flame-animation" tabindex="-1">
         <h1 class="screen-reader-only i18n-transformation-animation"></h1>
         <div class="row">
@@ -448,6 +585,7 @@
         </div>
       </section>
 
+      <!-- end-animation -->
       <section class="view col-md-8 hidden" id="end-animation" tabindex="-1">
         <h1 class="screen-reader-only i18n-end-animation"></h1>
         <div class="row">
@@ -530,6 +668,7 @@
         </div>
       </section>
 
+      <!-- end-view -->
       <section
         class="view hidden"
         id="end-view"
@@ -560,7 +699,10 @@
         </button>
       </section>
     </section>
+
+    <!-- Modals -->
     <div class="modals">
+      <!-- letter-modal -->
       <div
         aria-hidden="true"
         aria-label="display letter"
@@ -589,6 +731,7 @@
         </div>
       </div>
 
+      <!-- book-modal -->
       <div
         aria-hidden="true"
         aria-label="display books"
@@ -607,6 +750,7 @@
         </div>
       </div>
 
+      <!-- profile-modal -->
       <div
         aria-hidden="true"
         aria-label="display profile"
@@ -671,6 +815,7 @@
       </button>
     </aside>
 
+    <!-- scripts -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
       integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
