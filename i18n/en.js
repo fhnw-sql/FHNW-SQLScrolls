@@ -1,4 +1,5 @@
 for (let entry of Object.entries({
+  "game-name": "SQL Training Game",
   error: "Error",
   username: "Email",
   password: "Password",
