@@ -763,6 +763,7 @@ class RegisterView extends View {
 
   async clearRegisterAlerts() {
     await this.showRegisterError();
+    await this.showRegisterSuccess();
   }
 
   async showRegisterSuccess(msg) {
@@ -775,6 +776,60 @@ class RegisterView extends View {
     if (!error) return await hideElement("register-error");
     document.getElementById("register-error").innerText = error;
     await showElement("register-error");
+  }
+}
+
+/**
+ * View where people recover their password
+ *
+ * a Main view, use changeView-function with this view.
+ */
+class ForgotPasswordView extends View {
+  constructor() {
+    super("forgot-password-view");
+  }
+
+  async open() {
+    await showElement(this.id);
+  }
+
+  async close() {
+    await hideElement(this.id);
+  }
+
+  startForgotPassword() {
+    const forgotPasswordButton = document.getElementById("forgot-password-button");
+    forgotPasswordButton.innerHTML =
+      `<span id="loading-animation">
+            <i class="fa fa-star loading-animation"></i>
+            <i class="far fa-star loading-animation offset"></i>
+        </span>` + forgotPasswordButton.innerHTML;
+    forgotPasswordButton.setAttribute("disabled", "true");
+    forgotPasswordButton.setAttribute("aria-disabled", "true");
+  }
+
+  endForgotPassword() {
+    const forgotPasswordButton = document.getElementById("forgot-password-button");
+    document.getElementById("loading-animation").remove();
+    forgotPasswordButton.removeAttribute("disabled");
+    forgotPasswordButton.setAttribute("aria-disabled", "false");
+  }
+
+  async clearForgotPasswordAlerts() {
+    await this.showForgotPasswordError();
+    await this.showForgotPasswordSuccess();
+  }
+
+  async showForgotPasswordSuccess(msg) {
+    if (!msg) return await hideElement("forgot-password-success");
+    document.getElementById("forgot-password-success").innerText = msg;
+    await showElement("forgot-password-success");
+  }
+
+  async showForgotPasswordError(error) {
+    if (!error) return await hideElement("forgot-password-error");
+    document.getElementById("forgot-password-error").innerText = error;
+    await showElement("forgot-password-error");
   }
 }
 
@@ -909,6 +964,7 @@ Views = {
   READ_BOOK: new ReadBookView(),
   LOGIN: new LoginView(),
   REGISTER: new RegisterView(),
+  FORGOT_PASSWORD: new ForgotPasswordView(),
   PROFILE: new ProfileView(),
   LOADING: new LoadingView(),
   FLAME_ANIMATION: new FlameAnimationView(),

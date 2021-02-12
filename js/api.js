@@ -85,6 +85,26 @@ const API = {
       xhr.send(`username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
     });
   },
+  recoverPassword(username) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          if (xhr.status === 200) {
+            resolve();
+          } else if (xhr.status === 400) {
+            const responseJson = JSON.parse(this.response);
+            reject(responseJson);
+          } else {
+            reject(`Bad response code '${xhr.status}' for recover password`);
+          }
+        }
+      };
+      xhr.open("POST", `${this.ADDRESS}/users/recover`, true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send(`username=${encodeURIComponent(username)}`);
+    });
+  },
   logout() {
     this.loginStatus = LoginStatus.LOGGED_OUT;
     this.token = "";

@@ -168,7 +168,7 @@
                   ><br />
                   <a
                     class="task-description i18n-forgot-password"
-                    onclick="alert('not implemented yet')"
+                    onclick="changeView(Views.FORGOT_PASSWORD)"
                     rel="noreferrer"
                     tabindex="0"
                     target="_blank"
@@ -191,8 +191,7 @@
               ></h1>
             </div>
             <div class="row justify-content-center">
-              <!-- Register Form-->
-              <div id="register-form" class="col-md-12">
+              <div class="col-md-12">
                 <div class="info-box justify-content-center mt-3">
                   <h2 class="screen-reader-only i18n-register"></h2>
                   <p class="task-description center i18n-register"></p>
@@ -233,6 +232,58 @@
                       class="btn i18n-register"
                       id="register-button"
                       onclick="register()"
+                      tabindex="0"
+                      type="submit"
+                    ></button>
+                  </form>
+                </div>
+                <p class="center mt-2">
+                  <a
+                    class="task-description i18n-login"
+                    onclick="changeView(Views.LOGIN)"
+                    rel="noreferrer"
+                    tabindex="0"
+                    target="_blank"
+                  ></a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- forgot-password-view -->
+      <section class="view hidden" id="forgot-password-view">
+        <div class="row justify-content-center login-widget">
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="info-box justify-content-center">
+              <h1
+                class="task-description center i18n-game-name"
+                style="font-size: 3.5rem; font-family: var(--book-font);"
+              ></h1>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-md-12">
+                <div class="info-box justify-content-center mt-3">
+                  <h2 class="screen-reader-only i18n-forgot-password"></h2>
+                  <p class="task-description center i18n-forgot-password"></p>
+                  <div class="alert alert-danger hidden" id="forgot-password-error" role="alert"></div>
+                  <div class="alert alert-success hidden" id="forgot-password-success" role="alert"></div>
+                  <form onsubmit="event.preventDefault()">
+                    <div class="form-group">
+                      <input
+                        aria-label="username"
+                        class="form-control form-control-user i18n-username i18n-aria-username"
+                        id="inputForgotPasswordUser"
+                        placeholder=""
+                        tabindex="0"
+                        type="text"
+                      />
+                    </div>
+                    <button
+                      class="btn i18n-forgot-password"
+                      id="forgot-password-button"
+                      onclick="forgotPassword()"
                       tabindex="0"
                       type="submit"
                     ></button>

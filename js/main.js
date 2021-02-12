@@ -223,6 +223,26 @@ async function register() {
   }
 }
 
+async function forgotPassword() {
+  await Views.FORGOT_PASSWORD.clearForgotPasswordAlerts();
+
+  // Validate User
+  const username = document.getElementById("inputForgotPasswordUser").value;
+  if (!username) return await Views.FORGOT_PASSWORD.showForgotPasswordError(i18n.get("error-no-user"));
+  if (!username.includes("@"))
+    return await Views.FORGOT_PASSWORD.showForgotPasswordError(i18n.get("error-invalid-user"));
+
+  Views.FORGOT_PASSWORD.startForgotPassword();
+  try {
+    await API.recoverPassword(username);
+    Views.FORGOT_PASSWORD.showForgotPasswordSuccess(i18n.get("forgot-password-success"));
+    Views.FORGOT_PASSWORD.endForgotPassword();
+  } catch (err) {
+    await Views.FORGOT_PASSWORD.showForgotPasswordError(err.message);
+    Views.FORGOT_PASSWORD.endForgotPassword();
+  }
+}
+
 async function login() {
   await Views.LOGIN.clearLoginError();
 

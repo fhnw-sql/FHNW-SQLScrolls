@@ -16,6 +16,7 @@ for (let entry of Object.entries({
   "register-success": "Your account was created. Redirect to login...",
   "error-password-missmatch": "Password doesn't match.",
   "forgot-password": "Forgot Password",
+  "forgot-password-success": "Sent an email to your mail for the recover process! Check your Spam!",
   "empty-table": "The table is empty",
   ok: "Alright!",
   close: "Close",
