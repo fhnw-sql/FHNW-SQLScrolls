@@ -10,6 +10,7 @@ for (let entry of Object.entries({
   logout: "Logout",
   "incorrect-login": "Incorrect username or password",
   register: "Register",
+  "forgot-password": "Forgot Password",
   "empty-table": "The table is empty",
   ok: "Alright!",
   close: "Close",
