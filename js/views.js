@@ -937,12 +937,33 @@ class ResetPasswordView extends View {
     await showElement(this.id);
     document.getElementById("inputResetPassword").value = "";
     document.getElementById("inputResetPasswordVerify").value = "";
+    await showElementImmediately("inputResetPassword");
+    await showElementImmediately("inputResetPasswordVerify");
+    await showElementImmediately("reset-password-button");
   }
 
   async close() {
     await hideElement(this.id);
     await this.clearResetPasswordAlerts();
     window.location.search = "";
+  }
+
+  startResetPassword() {
+    const resetPasswordButton = document.getElementById("reset-password-button");
+    resetPasswordButton.innerHTML =
+      `<span id="loading-animation">
+            <i class="fa fa-star loading-animation"></i>
+            <i class="far fa-star loading-animation offset"></i>
+        </span>` + resetPasswordButton.innerHTML;
+    resetPasswordButton.setAttribute("disabled", "true");
+    resetPasswordButton.setAttribute("aria-disabled", "true");
+  }
+
+  endResetPassword() {
+    const resetPasswordButton = document.getElementById("reset-password-button");
+    document.getElementById("loading-animation").remove();
+    resetPasswordButton.removeAttribute("disabled");
+    resetPasswordButton.setAttribute("aria-disabled", "false");
   }
 
   async resetPassword() {
@@ -956,13 +977,14 @@ class ResetPasswordView extends View {
       return await this.showResetPasswordError(i18n.get("error-password-missmatch"));
 
     const token = document.getElementById("inputResetPasswordToken").value;
-
+    this.startResetPassword();
     try {
       await API.resetPassword(password, token);
       this.showResetPasswordSuccess(i18n.get("reset-password-success"));
     } catch (err) {
       await this.showResetPasswordError(err.message);
     }
+    this.endResetPassword();
   }
 
   async clearResetPasswordAlerts() {
@@ -973,6 +995,9 @@ class ResetPasswordView extends View {
   async showResetPasswordSuccess(msg) {
     if (!msg) return await hideElement("reset-password-success");
     document.getElementById("reset-password-success").innerText = msg;
+    await hideElementImmediately("inputResetPassword");
+    await hideElementImmediately("inputResetPasswordVerify");
+    await hideElementImmediately("reset-password-button");
     await showElement("reset-password-success");
   }
 
