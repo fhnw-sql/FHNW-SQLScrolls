@@ -580,13 +580,15 @@ th {
 
 #login-view .info-box > *,
 #register-view .info-box > *,
-#forgot-password-view .info-box > * {
+#forgot-password-view .info-box > *,
+#reset-password-view .info-box > * {
   padding: 0.7rem 1.1rem;
 }
 
 #login-view .alert,
 #register-view .alert,
-#forgot-password-view .alert {
+#forgot-password-view .alert,
+#reset-password-view .alert {
   margin-left: 2.2rem;
   margin-right: 2.2rem;
 }

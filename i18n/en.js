@@ -17,6 +17,8 @@ for (let entry of Object.entries({
   "error-password-missmatch": "Password doesn't match.",
   "forgot-password": "Forgot Password",
   "forgot-password-success": "Sent a link to your mail to start the recovery process! Check your Spam!",
+  "reset-password": "Reset Password",
+  "reset-password-success": "You can now login with your new password!",
   "empty-table": "The table is empty",
   ok: "Alright!",
   close: "Close",

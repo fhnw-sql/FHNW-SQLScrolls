@@ -143,7 +143,7 @@
                     <button
                       class="btn i18n-login"
                       id="login-button"
-                      onclick="login()"
+                      onclick="Views.LOGIN.login()"
                       tabindex="0"
                       type="submit"
                     ></button>
@@ -231,7 +231,7 @@
                     <button
                       class="btn i18n-register"
                       id="register-button"
-                      onclick="register()"
+                      onclick="Views.REGISTER.register()"
                       tabindex="0"
                       type="submit"
                     ></button>
@@ -283,7 +283,79 @@
                     <button
                       class="btn i18n-forgot-password"
                       id="forgot-password-button"
-                      onclick="forgotPassword()"
+                      onclick="Views.FORGOT_PASSWORD.forgotPassword()"
+                      tabindex="0"
+                      type="submit"
+                    ></button>
+                  </form>
+                </div>
+                <p class="center mt-2">
+                  <a
+                    class="task-description i18n-login"
+                    onclick="changeView(Views.LOGIN)"
+                    rel="noreferrer"
+                    tabindex="0"
+                    target="_blank"
+                  ></a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- reset-password-view -->
+      <section class="view hidden" id="reset-password-view">
+        <div class="row justify-content-center login-widget">
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="info-box justify-content-center">
+              <h1
+                class="task-description center i18n-game-name"
+                style="font-size: 3.5rem; font-family: var(--book-font);"
+              ></h1>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-md-12">
+                <div class="info-box justify-content-center mt-3">
+                  <h2 class="screen-reader-only i18n-reset-password"></h2>
+                  <p class="task-description center i18n-reset-password"></p>
+                  <div class="alert alert-danger hidden" id="reset-password-error" role="alert"></div>
+                  <div class="alert alert-success hidden" id="reset-password-success" role="alert"></div>
+                  <form onsubmit="event.preventDefault()">
+                    <div class="form-group">
+                      <input
+                        aria-label="password"
+                        class="form-control form-control-user i18n-password i18n-aria-password"
+                        id="inputResetPassword"
+                        placeholder=""
+                        tabindex="0"
+                        type="password"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        aria-label="password"
+                        class="form-control form-control-user i18n-password-verify i18n-aria-password-verify"
+                        id="inputResetPasswordVerify"
+                        placeholder=""
+                        tabindex="0"
+                        type="password"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        aria-label="username"
+                        class="form-control hidden"
+                        id="inputResetPasswordToken"
+                        placeholder=""
+                        tabindex="0"
+                        type="text"
+                      />
+                    </div>
+                    <button
+                      class="btn i18n-reset-password"
+                      id="reset-password-button"
+                      onclick="resetPassword()"
                       tabindex="0"
                       type="submit"
                     ></button>
@@ -863,6 +935,7 @@
     <script src="js/taskGroups.js"></script>
     <script src="js/inventory.js"></script>
     <script src="js/views.js"></script>
+    <script src="js/middlewares.js"></script>
     <script src="js/main.js"></script>
     <script src="js/saveState.js"></script>
 

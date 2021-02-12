@@ -194,85 +194,6 @@ async function loadGameElements(linesOfProgressionJs) {
   initializeGameDictionaries(requiredByMatrix);
 }
 
-async function register() {
-  await Views.REGISTER.clearRegisterAlerts();
-
-  // Validate User
-  const username = document.getElementById("inputRegisterUser").value;
-  if (!username) return await Views.REGISTER.showRegisterError(i18n.get("error-no-user"));
-  if (!username.includes("@")) return await Views.REGISTER.showRegisterError(i18n.get("error-invalid-user"));
-
-  // Validate Password
-  const password = document.getElementById("inputRegisterPassword").value;
-  if (!password) return await Views.REGISTER.showRegisterError(i18n.get("error-no-password"));
-  const passwordVerify = document.getElementById("inputRegisterPasswordVerify").value;
-  if (!passwordVerify || passwordVerify !== password)
-    return await Views.REGISTER.showRegisterError(i18n.get("error-password-missmatch"));
-
-  Views.REGISTER.startRegister();
-
-  try {
-    await API.register(username, password);
-    Views.REGISTER.showRegisterSuccess(i18n.get("register-success"));
-    Views.REGISTER.endRegister();
-    await delay(1500);
-    changeView(Views.LOGIN);
-  } catch (err) {
-    await Views.REGISTER.showRegisterError(err.message);
-    Views.REGISTER.endRegister();
-  }
-}
-
-async function forgotPassword() {
-  await Views.FORGOT_PASSWORD.clearForgotPasswordAlerts();
-
-  // Validate User
-  const username = document.getElementById("inputForgotPasswordUser").value;
-  if (!username) return await Views.FORGOT_PASSWORD.showForgotPasswordError(i18n.get("error-no-user"));
-  if (!username.includes("@"))
-    return await Views.FORGOT_PASSWORD.showForgotPasswordError(i18n.get("error-invalid-user"));
-
-  Views.FORGOT_PASSWORD.startForgotPassword();
-  try {
-    await API.recoverPassword(username);
-    Views.FORGOT_PASSWORD.showForgotPasswordSuccess(i18n.get("forgot-password-success"));
-    Views.FORGOT_PASSWORD.endForgotPassword();
-  } catch (err) {
-    await Views.FORGOT_PASSWORD.showForgotPasswordError(err.message);
-    Views.FORGOT_PASSWORD.endForgotPassword();
-  }
-}
-
-async function login() {
-  await Views.LOGIN.clearLoginError();
-
-  // Validate username
-  const username = document.getElementById("inputLoginUser").value;
-  if (!username) return await Views.LOGIN.showLoginError(i18n.get("error-no-user"));
-  if (!username.includes("@")) return await Views.LOGIN.showLoginError(i18n.get("error-invalid-user"));
-
-  // Validate password
-  const password = document.getElementById("inputLoginPassword").value;
-  if (!password) return await Views.LOGIN.showLoginError(i18n.get("error-no-password"));
-
-  Views.LOGIN.startLogin();
-  try {
-    await API.login(username, password);
-    if (API.loginStatus === LoginStatus.ERRORED) {
-      await Views.LOGIN.showLoginError(i18n.get("login-error-failed-unknown"));
-    } else if (API.loginStatus === LoginStatus.LOGGED_IN) {
-      changeView(Views.LOADING);
-      await showElementImmediately("loading-view");
-      await showElementImmediately("counter-container");
-      await showElementImmediately("right-sidebar");
-      loadCompletionFromQuizzes();
-    }
-  } catch (e) {
-    await Views.LOGIN.showLoginError(e);
-  }
-  Views.LOGIN.endLogin();
-}
-
 async function logout() {
   API.logout();
   await changeView(Views.LOGIN);
@@ -290,16 +211,30 @@ async function loadCompletionFromQuizzes() {
 async function beginGame() {
   try {
     await loadLanguage(currentLang);
-    API.loginExisting();
-    if (API.loginStatus === LoginStatus.LOGGED_IN) {
-      loadCompletionFromQuizzes(); // async load of task completion, see DISPLAY_STATE.saveLoaded
-      changeView(Views.LOADING); // LOADING view awaits DISPLAY_STATE.saveLoaded and DISPLAY_STATE.loaded are true.
-      await showElementImmediately("counter-container");
-      await showElementImmediately("right-sidebar");
-    } else {
-      await showElementImmediately("login-view");
-      await fadeFromBlack();
-    }
+
+    // Custom router if we ask to reset password
+    await routeActionMiddleware("resetPassword", async (urlParams) => {
+      const token = urlParams.get("token");
+      document.getElementById("inputResetPasswordToken").value = token;
+      API.logout();
+      await changeView(Views.RESET_PASSWORD);
+    });
+
+    // Default Middleware routing
+    await routeActionMiddleware("", async (urlParams) => {
+      API.loginExisting();
+      if (API.loginStatus === LoginStatus.LOGGED_IN) {
+        loadCompletionFromQuizzes(); // async load of task completion, see DISPLAY_STATE.saveLoaded
+        changeView(Views.LOADING); // LOADING view awaits DISPLAY_STATE.saveLoaded and DISPLAY_STATE.loaded are true.
+        await showElementImmediately("counter-container");
+        await showElementImmediately("right-sidebar");
+      } else {
+        await showElementImmediately("login-view");
+      }
+    });
+
+    await fadeFromBlack();
+
     try {
       await loadGameElements(await readLines("tasks/progression.js"));
     } catch (e) {

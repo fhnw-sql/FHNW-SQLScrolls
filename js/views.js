@@ -715,6 +715,36 @@ class LoginView extends View {
     loginButton.setAttribute("aria-disabled", "false");
   }
 
+  async login() {
+    await this.clearLoginError();
+
+    // Validate username
+    const username = document.getElementById("inputLoginUser").value;
+    if (!username) return await this.showLoginError(i18n.get("error-no-user"));
+    if (!username.includes("@")) return await this.showLoginError(i18n.get("error-invalid-user"));
+
+    // Validate password
+    const password = document.getElementById("inputLoginPassword").value;
+    if (!password) return await this.showLoginError(i18n.get("error-no-password"));
+
+    this.startLogin();
+    try {
+      await API.login(username, password);
+      if (API.loginStatus === LoginStatus.ERRORED) {
+        await this.showLoginError(i18n.get("login-error-failed-unknown"));
+      } else if (API.loginStatus === LoginStatus.LOGGED_IN) {
+        changeView(Views.LOADING);
+        await showElementImmediately("loading-view");
+        await showElementImmediately("counter-container");
+        await showElementImmediately("right-sidebar");
+        loadCompletionFromQuizzes();
+      }
+    } catch (e) {
+      await this.showLoginError(e);
+    }
+    this.endLogin();
+  }
+
   async clearLoginError() {
     await this.showLoginError();
   }
@@ -747,6 +777,35 @@ class RegisterView extends View {
     document.getElementById("inputRegisterUser").value = "";
     document.getElementById("inputRegisterPassword").value = "";
     document.getElementById("inputRegisterPasswordVerify").value = "";
+  }
+
+  async register() {
+    await this.clearRegisterAlerts();
+
+    // Validate User
+    const username = document.getElementById("inputRegisterUser").value;
+    if (!username) return await this.showRegisterError(i18n.get("error-no-user"));
+    if (!username.includes("@")) return await this.showRegisterError(i18n.get("error-invalid-user"));
+
+    // Validate Password
+    const password = document.getElementById("inputRegisterPassword").value;
+    if (!password) return await this.showRegisterError(i18n.get("error-no-password"));
+    const passwordVerify = document.getElementById("inputRegisterPasswordVerify").value;
+    if (!passwordVerify || passwordVerify !== password)
+      return await this.showRegisterError(i18n.get("error-password-missmatch"));
+
+    this.startRegister();
+
+    try {
+      await API.register(username, password);
+      this.showRegisterSuccess(i18n.get("register-success"));
+      this.endRegister();
+      await delay(1500);
+      changeView(Views.LOGIN);
+    } catch (err) {
+      await this.showRegisterError(err.message);
+      this.endRegister();
+    }
   }
 
   startRegister() {
@@ -786,7 +845,7 @@ class RegisterView extends View {
 }
 
 /**
- * View where people recover their password
+ * View where people sent ask for a recovery link of their password
  *
  * a Main view, use changeView-function with this view.
  */
@@ -805,6 +864,25 @@ class ForgotPasswordView extends View {
     await hideElement(this.id);
     await this.clearForgotPasswordAlerts();
     document.getElementById("inputForgotPasswordUser").value = "";
+  }
+
+  async forgotPassword() {
+    await this.clearForgotPasswordAlerts();
+
+    // Validate User
+    const username = document.getElementById("inputForgotPasswordUser").value;
+    if (!username) return await this.showForgotPasswordError(i18n.get("error-no-user"));
+    if (!username.includes("@")) return await this.showForgotPasswordError(i18n.get("error-invalid-user"));
+
+    this.startForgotPassword();
+    try {
+      await API.recoverPassword(username);
+      this.showForgotPasswordSuccess(i18n.get("forgot-password-success"));
+      this.endForgotPassword();
+    } catch (err) {
+      await this.showForgotPasswordError(err.message);
+      this.endForgotPassword();
+    }
   }
 
   startForgotPassword() {
@@ -842,6 +920,44 @@ class ForgotPasswordView extends View {
     if (!error) return await hideElement("forgot-password-error");
     document.getElementById("forgot-password-error").innerText = error;
     await showElement("forgot-password-error");
+  }
+}
+
+/**
+ * View where people reset their password with a given token
+ *
+ * a Main view, use changeView-function with this view.
+ */
+class ResetPasswordView extends View {
+  constructor() {
+    super("reset-password-view");
+  }
+
+  async open() {
+    await showElement(this.id);
+  }
+
+  async close() {
+    await hideElement(this.id);
+    await this.clearResetPasswordAlerts();
+    window.location.search = "";
+  }
+
+  async clearResetPasswordAlerts() {
+    await this.showResetPasswordError();
+    await this.showResetPasswordSuccess();
+  }
+
+  async showResetPasswordSuccess(msg) {
+    if (!msg) return await hideElement("reset-password-success");
+    document.getElementById("reset-password-success").innerText = msg;
+    await showElement("reset-password-success");
+  }
+
+  async showResetPasswordError(error) {
+    if (!error) return await hideElement("reset-password-error");
+    document.getElementById("reset-password-error").innerText = error;
+    await showElement("reset-password-error");
   }
 }
 
@@ -977,6 +1093,7 @@ Views = {
   LOGIN: new LoginView(),
   REGISTER: new RegisterView(),
   FORGOT_PASSWORD: new ForgotPasswordView(),
+  RESET_PASSWORD: new ResetPasswordView(),
   PROFILE: new ProfileView(),
   LOADING: new LoadingView(),
   FLAME_ANIMATION: new FlameAnimationView(),
