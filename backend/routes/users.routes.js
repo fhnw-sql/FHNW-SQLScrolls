@@ -106,13 +106,13 @@ router.post("/recover", reqBodyValidator(recoverPOST), async function (req, res,
       // Send Mail if its not invoked by JEST
       if (!process.env.JEST_WORKER_ID) {
         const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
-        const link = req.protocol + "://" + req.headers.host + "/api/user/reset/" + user.resetPasswordToken;
+        const link = "https://fhnw-sql-training-game.github.io/?action=resetPassword&token=" + user.resetPasswordToken;
         await client.sendEmail({
           From: process.env.FROM_SENDER,
           To: user.username,
           Subject: "Password change request",
           TextBody: `Hi ${user.username} \n 
-    Please click on the following link ${link} to reset your password. \n\n 
+    Please click on the following link <a href="${link}">${link}</a> to reset your password. \n\n 
     If you did not request this, please ignore this email and your password will remain unchanged.\n`,
           MessageStream: "outbound",
         });
