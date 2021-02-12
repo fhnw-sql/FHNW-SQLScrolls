@@ -141,7 +141,7 @@ router.post("/reset", reqBodyValidator(resetPOST), async function ({ body: value
       { returnOriginal: false }
     )
     .then(async ({ value: user }) => {
-      if (!user) return next("Invalid request");
+      if (!user) return next("Token invalid or expired! Request a new one!");
       // Send Mail if its not invoked by JEST
       if (!process.env.JEST_WORKER_ID) {
         const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
