@@ -73,9 +73,10 @@ const API = {
           if (xhr.status === 200) {
             resolve();
           } else if (xhr.status === 400) {
-            reject(this.response);
+            const responseJson = JSON.parse(this.response);
+            reject(responseJson);
           } else {
-            reject(`Bad response code '${xhr.status}' for login`);
+            reject(`Bad response code '${xhr.status}' for registration`);
           }
         }
       };
