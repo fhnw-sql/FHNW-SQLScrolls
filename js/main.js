@@ -214,12 +214,11 @@ async function login() {
     if (API.loginStatus === LoginStatus.ERRORED) {
       await Views.LOGIN.showLoginError(i18n.get("login-error-failed-unknown"));
     } else if (API.loginStatus === LoginStatus.LOGGED_IN) {
-      await fadeToBlack();
+      changeView(Views.LOADING);
       await showElementImmediately("loading-view");
       await showElementImmediately("counter-container");
-      await fadeFromBlack();
+      await showElementImmediately("right-sidebar");
       loadCompletionFromQuizzes();
-      changeView(Views.LOADING);
     }
   } catch (e) {
     await Views.LOGIN.showLoginError(e);
@@ -229,7 +228,7 @@ async function login() {
 
 async function logout() {
   API.logout();
-  await changeView(Views.NONE);
+  await changeView(Views.LOGIN);
   window.location.href = "./"; // Reloads the page
 }
 
@@ -248,6 +247,8 @@ async function beginGame() {
     if (API.loginStatus === LoginStatus.LOGGED_IN) {
       loadCompletionFromQuizzes(); // async load of task completion, see DISPLAY_STATE.saveLoaded
       changeView(Views.LOADING); // LOADING view awaits DISPLAY_STATE.saveLoaded and DISPLAY_STATE.loaded are true.
+      await showElementImmediately("counter-container");
+      await showElementImmediately("right-sidebar");
     } else {
       await showElementImmediately("login-view");
       await fadeFromBlack();

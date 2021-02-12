@@ -684,6 +684,10 @@ class LoginView extends View {
     super("login-view");
   }
 
+  async open() {
+    await showElement(this.id);
+  }
+
   async close() {
     await hideElementImmediately(this.id);
     // Clear user information from dom
@@ -735,15 +739,7 @@ class RegisterView extends View {
   }
 
   async close() {
-    await fadeToBlack();
     await hideElementImmediately(this.id);
-    await showElementImmediately("loading-view");
-    await showElementImmediately("counter-container");
-    await fadeFromBlack();
-
-    // Clear user information from dom
-    document.getElementById("inputUser").value = "";
-    document.getElementById("inputPassword").value = "";
   }
 
   startLogin() {
