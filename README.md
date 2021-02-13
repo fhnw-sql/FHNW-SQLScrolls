@@ -148,8 +148,48 @@ ANSWER {
 }
 ```
 
-### Test
+### TEST
+The section `TEST` is used to validate the task. A teacher can specifiy multiple `TEST` if needed in order to validate the answer.
+Consider the pre implementated tasks for further and more complex examples.
 
+```
+TEST {
+    TABLE {
+        Ghosts
+        id|name
+        1|Arthur
+        2|Desiree
+        3|Siegfried
+        4|Sieglinde
+        5|Kaaleppi
+    }
+
+    TABLE {
+        Places
+        id|name
+        1|school
+        2|forest
+        3|mill
+    }
+
+    TABLE {
+        Hauntings
+        ghost_id|place_id
+        1|1
+        2|2
+        2|3
+        3|2
+        4|2
+    }
+
+    RESULT {
+        Desiree
+        Siegfried
+        Sieglinde
+    }
+}
+
+```
 
 ### Example
 ```
@@ -209,6 +249,9 @@ TEST {
     }
 }
 ```
+
+## 🔨 Editor (Experimental)
+As mentioned within the introduction tasks and books can be edited over and online editor located `/editors.html`. However for the purpose of the study the editor remains in experimental mode and is for advanced users only who know what they do an can troubleshoot the `js` expection that might be thrown.
 
 ## 🗣️ Acknowledgements
 - [sql.js](https://github.com/sql-js/sql.js) SQLite compiled to wasm
