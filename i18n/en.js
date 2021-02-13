@@ -20,6 +20,7 @@ for (let entry of Object.entries({
   "reset-password": "Reset Password",
   "reset-password-success": "You can now login with your new password!",
   "empty-table": "The table is empty",
+  "privacy-information": "Information Data-Collection",
   ok: "Alright!",
   close: "Close",
   skip: "Skip",
