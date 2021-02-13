@@ -1,5 +1,5 @@
 # 🔍 Introduction
- This repository is the backend API for the FHNW-SQL-Training-Game which is used to determine the effectiveness and acceptance of a learning game as an alternative learning method within the Bachelor of Business Information Technology at the FHNW, with regard to practising the structured query language (SQL) which is taught as part of the Database Technology course.
+This repository is the backend API for the FHNW-SQL-Training-Game which is used to determine the effectiveness and acceptance of a learning game as an alternative learning method within the Bachelor of Business Information Technology at the FHNW, concerning practising the structured query language (SQL) which is taught as part of the Database Technology course.
 
 **Technologies:**
 - Node.JS
@@ -13,7 +13,7 @@
 * `POSTMARK_API_KEY` -> Postmark API Key for sending the mails.
 
 ## 💾 Getting Started
-For running the project a working Node.JS and MongoDB environment is required. Afterwards the project dependencies can be installed with `npm i` as usuall.
+For running the project, a working Node.JS and MongoDB environment is required. Afterwards, one can install the project dependencies with `npm i` as usual.
 The following `npm run` commands are available:
 - `start` -> starts the api
 - `start:dev` -> start the api over nodemon with livereload support
@@ -22,7 +22,7 @@ The following `npm run` commands are available:
 - `test:watch` -> runs jest test with livereload support
 
 ### 🔮 Deployment
-To deploy the API one can use every kind of deployment processes that is common for a Node.JS application. The recommanded way is using docker. There are no specials steps that needs to be considered. However, one can use the oneclick deployment to heroku by using the button bellow (don't forget to configure the environment variables).
+To deploy the API one can use every kind of deployment process common for a Node.JS application. The recommended way is using docker. There are no specials steps that need to be considered. However, one can use the one-click deployment to Heroku by using the button below (don't forget to configure the environment variables).
 
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game-API)
