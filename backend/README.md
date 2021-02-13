@@ -22,7 +22,7 @@ The following `npm run` commands are available:
 - `test:watch` -> runs jest test with livereload support
 
 ### 🔮 Deployment
-To deploy the API one can use every kind of deployment processes that is common for a Node.JS application. The recommanded way is using docker. There are no specials steps that needs to be considered. However, one can use the oneclick deployment to heroku by using the button bellow.
+To deploy the API one can use every kind of deployment processes that is common for a Node.JS application. The recommanded way is using docker. There are no specials steps that needs to be considered. However, one can use the oneclick deployment to heroku by using the button bellow (don't forget to configure the environment variables).
 
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game-API)
