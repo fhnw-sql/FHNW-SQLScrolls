@@ -15,7 +15,6 @@ bookEditorField.onkeydown = (event) => {
 bookEditorField.onclick = onBookEditorPageSwap;
 bookEditorField.onfocus = onBookEditorPageSwap;
 taskEditorField.onkeydown = onEditorKeydown;
-document.getElementById("query-input").oninput = runQueryTests;
 document.getElementById("save-warning-check").oninput = (event) => {
   EDITOR_STATE.confirmOnUnsaved = event.target.checked;
 };
