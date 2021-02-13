@@ -5,15 +5,25 @@
 - Node.JS
 - MongoDB
 
+## ⚙️ Configuration
+### Environment Variables
+* `NODE_ENV` -> Development / Production
+* `PORT` -> The port on which the API should run
+* `MONGODB_URI` -> MongoDB Connection String
+* `POSTMARK_API_KEY` -> Postmark API Key for sending the mails.
+
 ## 💾 Getting Started
-For running the project a working Node.JS environment ist required. Afterwards the project dependencies can be installed with `npm i` as usuall.
+For running the project a working Node.JS and MongoDB environment is required. Afterwards the project dependencies can be installed with `npm i` as usuall.
 The following `npm run` commands are available:
 - `start` -> starts the api
 - `start:dev` -> start the api over nodemon with livereload support
 - `test` -> runs the jest tests
 - `test:coverage` -> produces a report for jest tests coverage
 - `test:watch` -> runs jest test with livereload support
-``
+
+### 🔮 Deployment
+To deploy the API one can use every kind of deployment processes that is common for a Node.JS application. There are no specials steps that needs to be considered. However, one can use the oneclick deployment to heroku by using the button bellow.
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game-API)
 
 ## ⚡ API
 
@@ -43,13 +53,6 @@ Possible codes:
   * `correct:bool`
   * `query:string`
 
-
-## ⚙️ Configuration
-### Environment Variables
-* `NODE_ENV` -> Development / Production
-* `PORT` -> The port on which the API should run
-* `MONGODB_URI` -> MongoDB Connection String
-* `POSTMARK_API_KEY` -> Postmark API Key for sending the mails.
 
 
 ## 📦 Packages
