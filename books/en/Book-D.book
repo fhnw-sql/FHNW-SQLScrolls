@@ -6,9 +6,6 @@ METADATA {
     color: orange
 }
 
-COVER {
-    ""
-}
 
 PAGE {
     An SQL query can target multiple tables, so the results are based on all row combinations from the retrieved tables.

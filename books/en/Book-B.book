@@ -6,9 +6,6 @@ METADATA {
     color: blue
 }
 
-COVER {
-    ""
-}
 
 PAGE {
     The summary query returns a single result that is associated with all selected rows in the table.

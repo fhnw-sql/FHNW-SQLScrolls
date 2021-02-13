@@ -6,9 +6,6 @@ METADATA {
     color: green
 }
 
-COVER {
-    ""
-}
 
 PAGE {
     The GROUP BY section groups the retrieved rows by a specific column or columns.

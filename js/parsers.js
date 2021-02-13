@@ -35,20 +35,6 @@ class MetaDataParser extends Parser {
   }
 }
 
-// Parses COVER blocks
-class CoverParser extends Parser {
-  parse(context, lines) {
-    let coverText = "";
-    while (true) {
-      const line = lines.shift().trim();
-      if (line === "}") break;
-      coverText += " " + line;
-    }
-    // Removes preceding space
-    return coverText.substr(1);
-  }
-}
-
 // Parses TABLE blocks
 class TableParser extends Parser {
   parse(context, lines) {
@@ -441,9 +427,6 @@ class BookParser extends Parser {
       if (line === "METADATA {") {
         book.metadata = await PARSERS.METADATA.parse({}, lines);
       }
-      if (line === "COVER {") {
-        book.cover = await PARSERS.COVER.parse({}, lines);
-      }
       if (line === "PAGE {") {
         book.pages.push(await PARSERS.PAGE.parse({}, lines));
       }
@@ -455,7 +438,6 @@ class BookParser extends Parser {
 const PARSERS = {
   BOOK: new BookParser(),
   METADATA: new MetaDataParser(),
-  COVER: new CoverParser(),
   PAGE: new PageParser(),
   EXAMPLE: new ExampleParser(),
   TABLE: new TableParser(),

@@ -1,23 +1,216 @@
-# FHNW SQL Training Game
-SQL training game written in Javascript
+# 🕹️ FHNW SQL Training Game
+SQL training game is written in Javascript
 
-## Configuration
+## ⚙️ Configuration
 
-- Tasks and books can be configured via `.task` and `.book` files.
+- Tasks and books can be configured via `.task` and `.book` files located in `/tasks` or `/books`. More information to the syntax can be found below.
 - For translating into more languages, add a `/i18n/<lang>.js`, `/books/<lang>/Book-<>.book` files and `/tasks/<lang>/Task-<>.task` files, as well as an option to `language-selector` element in `index.html`
 - Progression can be configured in `/tasks/progression.js`
 
-Extra information:
-- [async-await-101.md](async-await-101.md) (Finnish)
-- [Access editors by going to /editors.html](https://rsl1122.github.io/SQL-Training-game/editors.html)
+## ⚡ Deployment
 
-## Deployment
-
+- Deploy backend API [FHNW-SQL-Training-Game-API](https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game-API)
 - Place all files to a webserver so that `index.html` is loaded from some address.
 - Prevent access to `editors.html` if you don't want students who find it to read tasks and books ahead of time.
 
-## Acknowledgements
 
+## 📚 Books syntax
+In the following chapter, the outline of a book is explained and according to syntax. In the end, a full example is shown. 
+
+### METADATA
+Within the `METADATA` one can specify:
+- `id` of the book which should follow the naming convention `book-[id]`
+- `name` of the book
+- `title` of the book -> shown on  the cover
+- `author` of the book
+- `color` of the book a.e green, purple, red
+
+```
+METADATA {
+     id: Book-A
+     name: Example book
+     title: Awesome Example Book
+     author: Author of the Book
+     color: purple
+}
+```
+
+### PAGE
+Representation of a page within the book. Within one can use plain text or HTML syntax to describe the content of the page. A page further supports the `EXAMPLE` tag, which can be used to display a theoretical example. Consider the snippet below for the usage:
+
+```
+PAGE {
+    Sample of a page. You can write several paragraphs on the page.
+    EXAMPLE {
+        TABLE {
+            Examples
+            id | name | field
+            1 | Example | From the table
+            2 | Here | Fits
+            3 | Three | Rows
+        }
+
+        QUERY {
+            SELECT name FROM Examples;
+        }
+    }
+}
+```
+
+### Example
+
+```
+METADATA {
+     id: Example
+     name: Example book
+     title: Awesome Example Book
+     author: Author of the Book
+     color: purple
+}
+
+PAGE {
+     Example of the first page. You can write several songs on the page.
+     A newline does not end the paragraph. \ N Forces a newline.
+
+     The double line break starts a new song.
+
+     <ul><li> <b> Supports html tags </b> </li> </ul>
+}
+
+PAGE {
+     EXAMPLE {
+         TABLE {
+             Examples
+             id | name | field
+             1 | Example | From the table
+             2 | Here | Fits
+             3 | Three | Rows
+         }
+
+         QUERY {
+             SELECT name FROM Examples;
+         }
+     }
+}
+```
+
+##  📝 Tasks syntax
+In the following chapter, the outline of a task is explained and the according to syntax. In the end, a full example is shown. 
+
+### METADATA
+Within the `METADATA` one can specify:
+- `id` of the task which should follow the naming convention `task-001`
+- `name` of the task
+- `title` of the task
+- `author` of the book
+- `color` of the book a.e green, purple, red
+
+```
+METADATA {
+     id: Book-A
+     name: Example book
+     title: Awesome Example Book
+     author: Author of the Book
+     color: purple
+}
+```
+
+### DESCRIPTION
+The description is used to assign instruction to the task. The content should consist of plain text.
+```
+DESCRIPTION {
+    Assignment and instructions for completing the task. Here you can connect the task to the magical world.
+    \ n force line breaks.
+
+    Assignment: Here are more detailed instructions
+}
+```
+
+### PARSONS (optional)
+The `PARSONS` Section is optional and specifies whether a task needs to be solved by using the  [Parsons Programming Puzzle](https://github.com/js-parsons/js-parsons) (if set). The outline needs to follow the model solution. This means that a concatenation of all entries from index 0-n and filtering out the `#discractor` needs to result in the model solution.
+
+```
+PARSONS {   
+  SELECT name, year 
+  FROM Ghosts   
+  SELECT name and yearOfBirth #distractor   
+  SELECT * #distractor  
+  SELECT name #distractor   
+}   
+```
+
+### ANSWER (optional)
+The `ANSWER` section can be set if the teacher wants to allow the display of a model answer after the task is completed successfully by the student.
+
+```
+ANSWER {
+    SELECT * FROM Test;
+}
+```
+
+### Test
+
+
+### Example
+```
+METADATA {
+    id: task-001
+    name: Example task
+    color: purple
+}
+
+DESCRIPTION {
+    Assignment and instructions for completing the task. Here you can connect the task to the magical world.
+    \ n force line breaks.
+
+    Assignment: Here are more detailed instructions
+}
+
+PARSONS {   
+  SELECT name, year 
+  FROM Ghosts   
+  SELECT name and yearOfBirth #distractor   
+  SELECT * #distractor  
+  SELECT name #distractor   
+}   
+
+
+ANSWER {
+    SELECT * FROM Test;
+}
+
+TEST {
+    TABLE {
+        Pets
+        id | animal | feeling
+        1 | 😻 | in love
+        2 | 🦑 | satisfied
+        3 | 🦎 | angry
+    }
+
+    TABLE {
+        Pets_copy
+        id | animal | feeling
+        1 | 😻 | in love
+        2 | 🦑 | satisfied
+        3 | 🦎 | angry
+    }
+
+    SQL {
+        CREATE TABLE Runes (id INTEGER PRIMARY KEY, rune TEXT, name TEXT);
+        INSERT INTO Runes (name, rune) VALUES ('Fe', 'ᚠ'), ('Thurs', 'ᚦ'), ('Kaun', 'ᚲ'), ('Algiz', 'ᛉ'), ( 'Berkanan', 'ᛒ'), ('Yngvi', 'ᛝ');
+    }
+
+    STRICT
+    RESULT {
+        1 | 😻 | in love
+        2 | 🦑 | satisfied
+        3 | 🦎 | angry
+    }
+}
+```
+
+## 🗣️ Acknowledgements
 - [sql.js](https://github.com/sql-js/sql.js) SQLite compiled to wasm
 - [canvas confetti](https://github.com/catdad/canvas-confetti) JS Confetti cannon
 - [Bootstrap 4](https://getbootstrap.com/) HTML, CSS & JS toolkit 
@@ -26,7 +219,8 @@ Extra information:
 - [Dygraphs](http://dygraphs.com/) Line graphing library
 - Public domain or CC0 asset creators
 - [pllk/sqltrainer](https://github.com/pllk/sqltrainer)
+- [js-parsons](https://github.com/js-parsons/js-parsons)
 
-## Credits
-The code base is based on the work of Risto Lahtela from Helsinki
+## 🙏 Credits
+The codebase is based on the work of Risto Lahtela from Helsinki
 - [Rsl1122/SQL-Training-Game](https://github.com/Rsl1122/SQL-Training-game)

@@ -6,11 +6,6 @@ METADATA {
      color: purple
 }
 
-COVER {
-     Here you can write the back cover text that will be displayed when the book is opened.
-     The back cover text is automatically italicized, no line breaks are displayed.
-}
-
 PAGE {
      Example of the first page. You can write several songs on the page.
      A newline does not end the paragraph. \ N Forces a newline.
