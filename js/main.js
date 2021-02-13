@@ -212,6 +212,16 @@ async function beginGame() {
   try {
     await loadLanguage(currentLang);
 
+    try {
+      await loadGameElements(await readLines("tasks/progression.js"));
+    } catch (e) {
+      return showError(`Could not load tasks/progression.js: ${e}`);
+    }
+    await loadItems();
+    await awaitUntil(() => items.loaded);
+    await inventory.update();
+    if ($("#star-counter").length) await StarCounter.update();
+
     // Custom router if we ask to reset password
     await routeActionMiddleware("resetPassword", async (urlParams) => {
       const token = urlParams.get("token");
@@ -235,15 +245,6 @@ async function beginGame() {
 
     await fadeFromBlack();
 
-    try {
-      await loadGameElements(await readLines("tasks/progression.js"));
-    } catch (e) {
-      return showError(`Could not load tasks/progression.js: ${e}`);
-    }
-    await loadItems();
-    await awaitUntil(() => items.loaded);
-    await inventory.update();
-    if ($("#star-counter").length) await StarCounter.update();
     DISPLAY_STATE.loaded = true;
   } catch (error) {
     console.error(error);
