@@ -1,37 +1,37 @@
 METADATA {
-    id: Example
-    name: Esimerkki-kirja
-    title: Mahtava esimerkki-kirja
-    author: Matti Meikäläinen
-    color: purple
+     id: Example
+     name: Example book
+     title: Awesome Example Book
+     author: Author of the Book
+     color: purple
 }
 
 COVER {
-    Tähän voi kirjoittaa takakansitekstin, joka näytetään kun kirja avataan.
-    Takakansiteksti kursivoidaan automaattisesti, rivinvaihtoja ei näytetä.
+     Here you can write the back cover text that will be displayed when the book is opened.
+     The back cover text is automatically italicized, no line breaks are displayed.
 }
 
 PAGE {
-    Esimerkki ensimmäisestä sivusta. Sivulle voi kirjoittaa useita kappaleita.
-    Rivinvaihto ei lopeta kappaletta.\n pakottaa rivinvaihdon.
+     Example of the first page. You can write several songs on the page.
+     A newline does not end the paragraph. \ N Forces a newline.
 
-    Tuplarivinvaihto aloittaa uuden kappaleen
+     The double line break starts a new song
 
-    <ul><li><b>Tukee html-tageja</b></li></ul>
+     <ul><li> <b> Supports html tags </b> </li> </ul>
 }
 
 PAGE {
-    EXAMPLE {
-        TABLE {
-            Examples
-            id|name|field
-            1|Esimerkki|Taulusta
-            2|Tähän|Mahtuu
-            3|Kolme|Riviä
-        }
+     EXAMPLE {
+         TABLE {
+             Examples
+             id | name | field
+             1 | Example | From the table
+             2 | Here | Fits
+             3 | Three | Rows
+         }
 
-        QUERY {
-            SELECT name FROM Examples;
-        }
-    }
+         QUERY {
+             SELECT name FROM Examples;
+         }
+     }
 }

@@ -229,7 +229,7 @@ async function beginGame() {
         await showElementImmediately("counter-container");
         await showElementImmediately("right-sidebar");
       } else {
-        await showElementImmediately("login-view");
+        if (location.pathname !== "/editors.html") await showElementImmediately("login-view");
       }
     });
 
@@ -243,7 +243,7 @@ async function beginGame() {
     await loadItems();
     await awaitUntil(() => items.loaded);
     await inventory.update();
-    await StarCounter.update();
+    if ($("#star-counter").length) await StarCounter.update();
     DISPLAY_STATE.loaded = true;
   } catch (error) {
     console.error(error);
