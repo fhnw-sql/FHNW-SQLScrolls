@@ -573,7 +573,9 @@ th {
   -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
 }
-
+[onclick]:hover {
+  cursor: pointer;
+}
 .info-box > * {
   margin: 1rem 1rem;
 }
@@ -736,7 +738,8 @@ th {
   );
   background: -webkit-gradient(
     linear,
-    left top, left bottom,
+    left top,
+    left bottom,
     from(transparent),
     color-stop(25%, transparent),
     color-stop(25.1%, rgba(255, 255, 255, 0.25)),
