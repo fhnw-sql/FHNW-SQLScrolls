@@ -11,10 +11,6 @@ COVER {
 }
 
 PAGE {
-    A weclome
-}
-
-PAGE {
     The SELECT command retrieves the desired columns from the table.
     The command is used as follows:
 
@@ -65,7 +61,7 @@ PAGE {
 
     SELECT {columns} FROM {table} ORDER BY {columns};
     
-    If the order is reversed, DESC is added to the end of the command.
+    If you want the order to be reversed, DESC is added to the end of the command.
 }
 
 PAGE {

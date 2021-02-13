@@ -1,0 +1,103 @@
+METADATA {
+    id: Book-C
+    name: Grouping book
+    title: The Art of Grouping
+    author: Maestro Codd
+    color: green
+}
+
+COVER {
+    ""
+}
+
+PAGE {
+    The GROUP BY section groups the retrieved rows by a specific column or columns.
+    
+    After grouping, a summary of each group can be retrieved.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Animals
+            id | name | species | weight
+            1 | Wilfried | dragon | 3500
+            2 | Fred | sheep | 500
+            3 | Justus | dragon | 7500
+            4 | Tabaluca | dragon | 6000
+            5 | Ake | sheep | 800
+        }
+        QUERY {
+            SELECT species, COUNT (*) FROM Animals GROUP BY species;
+        }
+    }
+}
+
+PAGE {
+    The COUNT, SUM, MAX, and MIN functions can be used in the summary in the same way as before.
+    
+    The only difference is that the function is used to calculate a summary of each group separately.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Animals
+            id | name | species | weight
+            1 | Wilfried | dragon | 3500
+            2 | Fred | sheep | 500
+            3 | Justus | dragon | 7500
+            4 | Tabaluca | dragon | 6000
+            5 | Ake | sheep | 800
+        }
+        QUERY {
+            SELECT species, SUM (weight) FROM Animals GROUP BY species;
+        }
+    }
+}
+
+PAGE {
+    You can use conditions with grouping in the same way as you would with queries.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Animals
+            id | name | species | weight
+            1 | Wilfried | dragon | 3500
+            2 | Fred | sheep | 500
+            3 | Justus | dragon | 7500
+            4 | Tabaluca | dragon | 6000
+            5 | Ake | sheep | 800
+        }
+        QUERY {
+            SELECT species, COUNT (*) FROM Animals WHERE weight <5000 GROUP BY species;
+        }
+    }
+}
+
+PAGE {
+    The word HAVING can be used to specify a condition that is checked only after grouping.
+    
+    In this case, the condition can also refer to summary functions.
+    
+    For example, the following query only shows groups with more than 2 results.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Animals
+            id | name | species | weight
+            1 | Wilfried | dragon | 3500
+            2 | Fred | sheep | 500
+            3 | Justus | dragon | 7500
+            4 | Tabaluca | dragon | 6000
+            5 | Ake | sheep | 800
+        }
+        QUERY {
+            SELECT species, COUNT (*) FROM Animals GROUP BY species HAVING COUNT (*)> 2;
+        }
+    }
+}

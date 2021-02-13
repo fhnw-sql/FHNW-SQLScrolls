@@ -1,15 +1,11 @@
 METADATA {
     id: task-003
-    name: Tehtävä 3
+    name: Task 3
     color: purple
 }
 
 DESCRIPTION {
     Search Sieglinden Year of birth.
-}
-
-ANSWER {
-    SELECT year FROM Ghosts WHERE name = "Sieglinde"
 }
 
 TEST {
