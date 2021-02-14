@@ -20,9 +20,10 @@
     <meta content="#ffffff" name="theme-color" />
 
     <title>Editor SQL Training Game</title>
+    <script src="js/configuration.js"></script>
     <script>
       // Temporary protection to editor for the experiment.
-      if (prompt("Enter password") !== "fhnw") window.location.href = "/";
+      if (prompt("Enter password") !== Config.EDITOR_PASSWORD) window.location.href = "/";
     </script>
     <style>
       .hidden {

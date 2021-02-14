@@ -572,7 +572,7 @@ async function runQueryTests(allowCompletionAndStore) {
   // Display Query Model Button
   if (API.loginStatus === LoginStatus.LOGGED_IN && Views.TASK.currentTask.answer) {
     const profile = await API.self();
-    const needsHelp = profile.history[Views.TASK.currentTask.id]?.length >= 5;
+    const needsHelp = profile.history[Views.TASK.currentTask.id]?.length >= Config.FALSE_ANSWER_UNTIL_MODEL_ANSWER;
     allCorrect || needsHelp
       ? await showElementImmediately("query-model-button")
       : await hideElementImmediately("query-model-button");

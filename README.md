@@ -6,6 +6,7 @@ SQL training game is written in Javascript
 - Tasks and books can be configured via `.task` and `.book` files located in `/tasks` or `/books`. More information to the syntax can be found below.
 - For translating into more languages, add a `/i18n/<lang>.js`, `/books/<lang>/Book-<>.book` files and `/tasks/<lang>/Task-<>.task` files, as well as an option to `language-selector` element in `index.html`
 - Progression can be configured in `/tasks/progression.js`
+- General configurations can be found in `/js/configuration.js`
 
 ## ⚡ Deployment
 
