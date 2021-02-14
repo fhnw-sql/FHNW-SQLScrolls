@@ -33,7 +33,6 @@ const API = {
   },
   loginExisting() {
     const sessionToken = sessionStorage.getItem("fhnw-token");
-    // TODO: Check token request
     if (sessionToken) {
       API.loginStatus = LoginStatus.LOGGED_IN;
       API.token = sessionToken;
