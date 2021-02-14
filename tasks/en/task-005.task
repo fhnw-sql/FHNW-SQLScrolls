@@ -5,7 +5,11 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get all the ghosts born in the 18th century.
+    Get all name of ghosts born in the 18th century.
+}
+
+ANSWER {
+   SELECT name from ghosts where year > 1700 and year < 1800
 }
 
 TEST {

@@ -8,6 +8,11 @@ DESCRIPTION {
     Get everyone in the woods haunted.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Ghosts

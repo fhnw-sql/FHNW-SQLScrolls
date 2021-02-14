@@ -8,6 +8,11 @@ DESCRIPTION {
     Get information about ghosts.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Ghosts

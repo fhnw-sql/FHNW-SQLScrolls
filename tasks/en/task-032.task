@@ -8,6 +8,11 @@ DESCRIPTION {
     Look for areas where the magician's highest skill level is 5.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Wizards

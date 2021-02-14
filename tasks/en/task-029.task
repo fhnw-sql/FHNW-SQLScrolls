@@ -8,6 +8,11 @@ DESCRIPTION {
     Count the number of magicians in each area.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Wizards

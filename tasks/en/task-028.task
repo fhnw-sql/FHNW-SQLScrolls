@@ -7,6 +7,7 @@ METADATA {
 DESCRIPTION {
    Get the name of the wizard which skill level is lower than 4 ordered by the lowest skill level
 }
+
 ANSWER {
    SELECT NAME FROM WIZARDS GROUP BY  NAME  HAVING SKILL <4 ORDER BY SKILL ASC
 }

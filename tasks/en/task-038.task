@@ -8,6 +8,11 @@ DESCRIPTION {
     Get places where Desiree is haunted.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Ghosts

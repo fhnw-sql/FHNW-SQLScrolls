@@ -8,6 +8,11 @@ DESCRIPTION {
     Calculate the number of skilled magicians in each area.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Wizards

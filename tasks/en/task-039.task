@@ -8,6 +8,11 @@ DESCRIPTION {
     Search for ghosts in the forest.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Ghosts

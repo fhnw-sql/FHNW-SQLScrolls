@@ -12,6 +12,8 @@ ANSWER {
    SELECT * FROM Ghosts ORDER BY YEAR ASC, NAME ASC
 }
 
+STRICT 
+
 TEST {
     TABLE {
         Ghosts

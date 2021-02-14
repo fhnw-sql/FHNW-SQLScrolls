@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    Hello world
+   Select name, year from ghosts
 }
 
 TEST {

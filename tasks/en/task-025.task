@@ -8,6 +8,11 @@ DESCRIPTION {
     Calculate how many different years of birth there are.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Ghosts

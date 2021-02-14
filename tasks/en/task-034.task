@@ -8,6 +8,11 @@ DESCRIPTION {
     Get a ghost spot for each ghost.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Ghosts

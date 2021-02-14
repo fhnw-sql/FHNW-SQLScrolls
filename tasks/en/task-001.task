@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
- Lorem Ipsum
+    SELECT name from ghosts
 }
 
 TEST {

@@ -8,6 +8,11 @@ DESCRIPTION {
     Find a place where Arthur haunts.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Ghosts

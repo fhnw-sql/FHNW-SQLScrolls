@@ -8,6 +8,11 @@ DESCRIPTION {
     Calculate how many ghosts were born in the 18th century.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Ghosts

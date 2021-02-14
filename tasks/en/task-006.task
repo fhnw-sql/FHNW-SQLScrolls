@@ -8,6 +8,10 @@ DESCRIPTION {
     Search for ghost names in alphabetical order.
 }
 
+ANSWER {
+   SELECT name from ghosts order by name ASC
+}
+
 STRICT
 
 TEST {

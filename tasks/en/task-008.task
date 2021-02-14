@@ -8,6 +8,11 @@ DESCRIPTION {
     Search for all different birth years.
 }
 
+ANSWER {
+   SELECT DISTINCT year from ghosts
+}
+
+
 TEST {
     TABLE {
         Ghosts

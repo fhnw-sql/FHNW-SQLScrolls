@@ -8,6 +8,10 @@ DESCRIPTION {
     Get the names of the ghosts from the youngest to the oldest.
 }
 
+ANSWER {
+   SELECT name from ghosts order by year desc
+}
+
 STRICT
 
 TEST {

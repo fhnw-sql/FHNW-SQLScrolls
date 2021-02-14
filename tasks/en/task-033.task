@@ -8,6 +8,11 @@ DESCRIPTION {
     Find areas with exactly one magician.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Wizards

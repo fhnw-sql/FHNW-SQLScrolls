@@ -7,6 +7,7 @@ METADATA {
 DESCRIPTION {
    Get the wizards with a minimum skill level of 3 of each area
 }
+
 ANSWER {
    SELECT AREA, MIN(SKILL) FROM WIZARDS GROUP BY AREA  
 }

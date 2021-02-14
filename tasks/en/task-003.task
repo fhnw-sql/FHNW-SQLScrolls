@@ -5,8 +5,13 @@ METADATA {
 }
 
 DESCRIPTION {
-    Search Sieglinden Year of birth.
+    Search Sieglinde Year of birth.
 }
+
+ANSWER {
+   SELECT year from ghosts where name ="Sieglinde"
+}
+
 
 TEST {
     TABLE {

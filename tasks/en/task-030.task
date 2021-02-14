@@ -8,6 +8,11 @@ DESCRIPTION {
     Find out the highest skill level of the magician in each area.
 }
 
+ANSWER {
+   
+}
+
+
 TEST {
     TABLE {
         Wizards

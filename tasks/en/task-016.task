@@ -1,12 +1,13 @@
 METADATA {
     id: task-016
     name: Task 16
-    color: green
+    color: purple
 }
 
 DESCRIPTION {
    Get the name of the wizard which skill level is lower than 4 ordered by the lowest skill level
 }
+
 ANSWER {
   SELECT Name FROM wizards where skill < 4 order by skill ASC
 }

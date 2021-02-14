@@ -7,6 +7,7 @@ METADATA {
 DESCRIPTION {
    Get the area and the sum of skill level of each area
 }
+
 ANSWER {
    SELECT SUM(SKILL) FROM WIZARDS GROUP BY AREA 
 }

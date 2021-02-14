@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT NAME FROM Ghosts WHERE YEAR > '1700' AND NAME = 'Veronika'
+   SELECT * FROM Ghosts WHERE YEAR > '1700' AND NAME = 'Veronika'
 }
 
 TEST {

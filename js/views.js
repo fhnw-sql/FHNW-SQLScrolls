@@ -350,6 +350,7 @@ class TaskView extends View {
 
   async showWithQuery(query) {
     await hideElementImmediately("model-answer");
+    await hideElementImmediately("query-model-button");
     const task = this.currentTask;
     if (task instanceof LazyTask && !task.loaded) await task.loadTask();
 
