@@ -569,6 +569,15 @@ async function runQueryTests(allowCompletionAndStore) {
     await Views.TASK.updatePreviousAnswers(Views.TASK.currentTask);
   }
 
+  // Display Query Model Button
+  if (API.loginStatus === LoginStatus.LOGGED_IN && Views.TASK.currentTask.answer) {
+    const profile = await API.self();
+    const needsHelp = profile.history[Views.TASK.currentTask.id]?.length >= 5;
+    allCorrect || needsHelp
+      ? await showElementImmediately("query-model-button")
+      : await hideElementImmediately("query-model-button");
+  }
+
   await animateQueryResultsOpen(rendered.nav, rendered.content);
 
   if (allCorrect && allowCompletionAndStore && Views.TASK.currentTask) {

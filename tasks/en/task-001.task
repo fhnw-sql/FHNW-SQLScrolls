@@ -8,6 +8,10 @@ DESCRIPTION {
     Get the name of each ghost.
 }
 
+ANSWER {
+ Lorem Ipsum
+}
+
 TEST {
     TABLE {
         Ghosts

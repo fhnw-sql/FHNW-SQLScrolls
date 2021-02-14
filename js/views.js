@@ -302,6 +302,7 @@ class TaskView extends View {
 
   async updateTaskCompleteMarker() {
     const currentTask = this.currentTask;
+
     if (!currentTask) return;
     document.getElementById("task-completed-text").innerHTML = currentTask.completed
       ? `<p class="center col-yellow"><i class="fa fa-star" title="${i18n.get("task-complete")}" aria-label="${i18n.get(
@@ -310,11 +311,6 @@ class TaskView extends View {
       : `<p class="center col-yellow"><i class="far fa-star" title="${i18n.get(
           "task-incomplete"
         )}" aria-label="${i18n.get("task-incomplete")}"></i></p>`;
-    if (currentTask.completed && currentTask.answer && API.loginStatus === LoginStatus.LOGGED_IN) {
-      await showElementImmediately("query-model-button");
-    } else {
-      await hideElementImmediately("query-model-button");
-    }
   }
 
   initParsonsProblem() {

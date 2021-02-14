@@ -8,6 +8,10 @@ DESCRIPTION {
     Get the name and Year of Birth of each ghost.
 }
 
+ANSWER {
+    Hello world
+}
+
 TEST {
     TABLE {
         Ghosts
