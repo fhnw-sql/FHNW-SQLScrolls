@@ -281,7 +281,7 @@ TEST {
 ```
 
 ## 🔨 Editor (Experimental)
-As mentioned within the introduction tasks and books can be edited over a handy realtime online editor located `/editors.html`. For the purpose of the study the editor remains as experimental and needs further work for the use of an ordinary user. However an advanced users that knows what todo  if a `js` expection is thrown can make use of this gem. To edit a book or a task over the editor one needs to select the task/book from the dropdown or load an existing task from the local environment over the upload button. As the editing is finished the task/book needs to be saved over the save button and copied over manually into the according directory.
+As mentioned within the introduction tasks and books can be edited over a handy realtime online editor located `/editors.html`. For the purpose of the study the editor remains as experimental and needs further work for the use of an ordinary user. However an advanced users that knows what todo  if a `js` expection is thrown can make use of this gem. Recommended browser is chrome. To edit a book or a task over the editor one needs to select the task/book from the dropdown or load an existing task from the local environment over the upload button. As the editing is finished the task/book needs to be saved over the save button and copied over manually into the according directory.
 
 
 ## 🔐 Usage of Data
