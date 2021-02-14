@@ -1,8 +1,19 @@
 # 🕹️ FHNW SQL Training Game
-SQL training game is written in Javascript
+This repository is the frontend for the FHNW-SQL-Training-Game which is used to determine the effectiveness and acceptance of a learning game as an alternative learning method within the Bachelor of Business Information Technology at the FHNW, concerning practising the structured query language (SQL) which is taught as part of the Database Technology course.
+
+**Technologies:**
+- Javascript
+- HTML
+- CSS
+
+**Supported browsers:**
+The game is designed to support the latest web browsers. It supports the current versions of:
+- Chrome 
+- Firefox
+- Safari
+- Microsoft Edge
 
 ## ⚙️ Configuration
-
 - Tasks and books can be configured via `.task` and `.book` files located in `/tasks` or `/books`. More information to the syntax can be found below.
 - For translating into more languages, add a `/i18n/<lang>.js`, `/books/<lang>/Book-<>.book` files and `/tasks/<lang>/Task-<>.task` files, as well as an option to `language-selector` element in `index.html`
 - Progression can be configured in `/tasks/progression.js`
