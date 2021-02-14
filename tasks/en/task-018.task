@@ -1,65 +1,35 @@
 METADATA {
     id: task-018
     name: Task 18
-    color: orange
+    color: purple
 }
 
 DESCRIPTION {
-    Get a ghost spot for each ghost.
+    Find the earliest year of Birth in the 18th century 
+}
+
+ANSWER {
+   SELECT MIN (YEAR) FROM GHOSTS WHERE YEAR BETWEEN '1700' AND '1800'
 }
 
 TEST {
     TABLE {
         Ghosts
-        id|name|place_id
-        1|Arthur|1
-        2|Desiree|3
-        3|Siegfried|2
-        4|Sieglinde|2
-        5|Kaaleppi|3
-    }
-
-    TABLE {
-        Places
-        id|name
-        1|school
-        2|forest
-        3|mill
-    }
-
-    RESULT {
-        Arthur|school
-        Desiree|mill
-        Siegfried|forest
-        Sieglinde|forest
-        Kaaleppi|mill
-    }
-}
-
-TEST {
-    TABLE {
-        Ghosts
-        id|name|place_id
-        1|Edmond|2
-        2|Mercedes|2
-        3|Fernand|3
-        4|Valentine|2
-        5|Haydee|2
-    }
-
-    TABLE {
-        Places
-        id|name
-        1|school
-        2|forest
-        3|mill
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1777
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+        5|Khaled|1777
+        6|Hermine|1650
+        7|Siegfried|1687
+        8|Veronika|1777
+        9|Veronika|1602
+	10|Veronika|1623
     }
 
     RESULT {
-        Edmond|forest
-        Mercedes|forest
-        Fernand|mill
-        Valentine|forest
-        Haydee|forest
+       1765
     }
 }

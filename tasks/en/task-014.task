@@ -1,43 +1,36 @@
 METADATA {
     id: task-014
     name: Task 14
-    color: green
+    color: purple
 }
 
 DESCRIPTION {
-    Find out the highest skill level of the magician in each area.
+    Search for the names of all different ghosts born in 1777 in alphabetical order
+}
+
+ANSWER {
+   SELECT DISTINCT NAME FROM Ghosts WHERE YEAR = '1777' ORDER BY NAME ASC
 }
 
 TEST {
     TABLE {
-        Wizards
-        id|name|area|skill
-        1|Anna|Shadowland|5
-        2|Orz Orz|Kumpula|3
-        3|Bingo|Shadowland|2
-        4|Solmu|Shadowland|4
-        5|Rufus|Kumpula|1
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1777
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+        5|Khaled|1777
+        6|Hermine|1650
+        7|Siegfried|1687
+        8|Veronika|1777
+        9|Veronika|1777
     }
 
     RESULT {
-        Shadowland|5
-        Kumpula|3
+       Desiree
+       Khaled
+       Veronika
     }
 }
-
-TEST {
-    TABLE {
-        Wizards
-        id|name|area|skill
-        1|Anna|Shadowland|5
-        2|Orz Orz|Shadowland|3
-        3|Bingo|Shadowland|2
-        4|Solmu|Shadowland|4
-        5|Rufus|Shadowland|1
-    }
-
-    RESULT {
-        Shadowland|5
-    }
-}
-

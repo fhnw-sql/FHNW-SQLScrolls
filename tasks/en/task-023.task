@@ -1,81 +1,41 @@
 METADATA {
     id: task-023
     name: Task 23
-    color: orange
+    color: blue
 }
 
 DESCRIPTION {
-    Search for ghosts in the forest.
+    Apply for the Earliest and Late Year of Birth.
 }
 
 TEST {
     TABLE {
         Ghosts
-        id|name
-        1|Arthur
-        2|Desiree
-        3|Siegfried
-        4|Sieglinde
-        5|Kaaleppi
-    }
-
-    TABLE {
-        Places
-        id|name
-        1|school
-        2|forest
-        3|mill
-    }
-
-    TABLE {
-        Hauntings
-        ghost_id|place_id
-        1|1
-        2|2
-        2|3
-        3|2
-        4|2
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1801
+        3|Siegfried|1650
+        4|Sieglinde|1777
+        5|Kaaleppi|1833
     }
 
     RESULT {
-        Desiree
-        Siegfried
-        Sieglinde
+        1650|1833
     }
 }
 
 TEST {
     TABLE {
         Ghosts
-        id|name
-        1|Edmond
-        2|Desiree
-        3|Fernand
-        4|Valentine
-        5|Haydee
-    }
-
-    TABLE {
-        Places
-        id|name
-        1|school
-        2|forest
-        3|mill
-    }
-
-    TABLE {
-        Hauntings
-        ghost_id|place_id
-        1|1
-        1|2
-        1|3
-        2|1
-        2|2
-        2|3
+        id|name|year
+        1|Edmond|1744
+        2|Mercedes|1801
+        3|Fernand|1790
+        4|Valentine|1885
+        5|Haydee|1604
     }
 
     RESULT {
-        Edmond
-        Desiree
+        1604|1885
     }
 }

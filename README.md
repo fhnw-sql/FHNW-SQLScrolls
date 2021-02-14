@@ -163,6 +163,17 @@ ANSWER {
 }
 ```
 
+### STRICT (optional)
+The `STRICT` can be used to enable strict validation of the test result (order).
+
+```
+STRICT
+
+TEST {
+    ...    
+}
+```
+
 ### TEST
 The section `TEST` is used to validate the task. A teacher can specifiy multiple `TEST` if needed in order to validate the answer. For this there are two possible approaches on the one hand by defining a DB scheme by using the `TABLE` section recommened for SELECT operations and on the other hand by using `SQL` section mostly suited for queries containing statements like CREATE and INSERT. Consider the pre implementated tasks for further and more complex examples.
 

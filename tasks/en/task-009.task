@@ -1,11 +1,15 @@
 METADATA {
     id: task-009
     name: Task 9
-    color: blue
+    color: purple
 }
 
 DESCRIPTION {
-    Calculate how many ghosts were born in the 18th century.
+    Get all ghosts from the oldest to the youngest in alphabetical order
+}
+
+ANSWER {
+   SELECT * FROM Ghosts ORDER BY YEAR ASC, NAME ASC
 }
 
 TEST {
@@ -13,29 +17,17 @@ TEST {
         Ghosts
         id|name|year
         1|Arthur|1765
-        2|Desiree|1801
+        2|Desiree|1833
         3|Siegfried|1650
-        4|Sieglinde|1777
+        4|Sieglinde|1765
         5|Kaaleppi|1833
     }
 
     RESULT {
-        2
-    }
-}
-
-TEST {
-    TABLE {
-        Ghosts
-        id|name|year
-        1|Edmond|1711
-        2|Mercedes|1722
-        3|Fernand|1733
-        4|Valentine|1744
-        5|Haydee|1755
-    }
-
-    RESULT {
-        5
+       3|Siegfried|1650
+       1|Arthur|1765
+       4|Sieglinde|1765
+       2|Desiree|1833
+       5|Kaaleppi|1833
     }
 }

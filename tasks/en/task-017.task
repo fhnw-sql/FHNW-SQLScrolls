@@ -1,42 +1,35 @@
 METADATA {
     id: task-017
     name: Task 17
-    color: green
+    color: purple
 }
 
 DESCRIPTION {
-    Find areas with exactly one magician.
+    Calculate how many different ghots were born in the 17th century
+}
+
+ANSWER {
+   SELECT COUNT (DISTINCT NAME) FROM Ghosts WHERE YEAR BETWEEN '1600' AND '1700'
 }
 
 TEST {
     TABLE {
-        Wizards
-        id|name|area|skill
-        1|Anna|Shadowland|5
-        2|Orz Orz|Kumpula|3
-        3|Bingo|Shadowland|2
-        4|Solmu|Shadowland|4
-        5|Rufus|Shadowland|1
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1777
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+        5|Khaled|1777
+        6|Hermine|1650
+        7|Siegfried|1687
+        8|Veronika|1777
+        9|Veronika|1602
+	10|Veronika|1623
     }
 
     RESULT {
-        Kumpula
-    }
-}
-
-TEST {
-    TABLE {
-        Wizards
-        id|name|area|skill
-        1|Anna|Shadowland|5
-        2|Orz Orz|Shadowland|3
-        3|Bingo|Kumpula|2
-        4|Solmu|Shadowland|4
-        5|Rufus|Fabuland|1
-    }
-
-    RESULT {
-        Kumpula
-        Fabuland
+       3
     }
 }

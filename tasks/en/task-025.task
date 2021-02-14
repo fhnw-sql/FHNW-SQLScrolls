@@ -1,63 +1,41 @@
 METADATA {
     id: task-025
     name: Task 25
-    color: orange
+    color: blue
 }
 
 DESCRIPTION {
-    Get everyone who has taught Bingo.
+    Calculate how many different years of birth there are.
 }
 
 TEST {
     TABLE {
-        Wizards
-        id|name|area|skill
-        1|Anna|Shadowland|5
-        2|Orz Orz|Kumpula|3
-        3|Bingo|Shadowland|2
-        4|Solmu|Shadowland|4
-        5|Rufus|Shadowland|1
-    }
-
-    TABLE {
-        Lessons
-        teacher_id|pupil_id
-        1|3
-        1|4
-        2|1
-        5|3
-        4|5
-        5|1
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1833
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
     }
 
     RESULT {
-        Anna
-        Rufus
+        3
     }
 }
 
 TEST {
     TABLE {
-        Wizards
-        id|name|area|skill
-        1|Bingo|Kumpula|2
-        2|Orz Orz|Shadowland|3
-        3|Anna|Shadowland|5
-        4|Solmu|Shadowland|4
-        5|Rufus|Fabuland|1
-    }
-
-    TABLE {
-        Lessons
-        teacher_id|pupil_id
-        1|2
-        2|3
-        3|1
-        3|4
-        5|4
+        Ghosts
+        id|name|year
+        1|Edmond|1744
+        2|Mercedes|1744
+        3|Fernand|1790
+        4|Valentine|1744
+        5|Haydee|1744
     }
 
     RESULT {
-        Anna
+        2
     }
 }

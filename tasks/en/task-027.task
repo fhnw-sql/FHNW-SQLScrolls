@@ -1,17 +1,15 @@
 METADATA {
-    id: task-016
-    name: Task 16
+    id: task-027
+    name: Task 27
     color: green
 }
 
 DESCRIPTION {
-   Get the name of the wizard which skill level is lower than 4 ordered by the lowest skill level
+   Get the area and the sum of skill level of each area
 }
 ANSWER {
-  SELECT Name FROM wizards where skill < 4 order by skill ASC
+   SELECT SUM(SKILL) FROM WIZARDS GROUP BY AREA 
 }
-
-STRICT 
 
 TEST {
     TABLE {
@@ -25,8 +23,7 @@ TEST {
     }
 
     RESULT {
-        Rufus
-        Bingo
-        Orz Orz
+        Kumpula|4
+        Shadowland|11
     }
 }

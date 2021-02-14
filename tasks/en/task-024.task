@@ -1,65 +1,41 @@
 METADATA {
     id: task-024
     name: Task 24
-    color: orange
+    color: blue
 }
 
 DESCRIPTION {
-    Get all of Anna's students.
+    Find the first name in alphabetical order.
 }
 
 TEST {
     TABLE {
-        Wizards
-        id|name|area|skill
-        1|Anna|Shadowland|5
-        2|Orz Orz|Kumpula|3
-        3|Bingo|Shadowland|2
-        4|Solmu|Shadowland|4
-        5|Rufus|Shadowland|1
-    }
-
-    TABLE {
-        Lessons
-        teacher_id|pupil_id
-        1|2
-        1|3
-        1|5
-        4|1
-        3|2
-        3|4
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1801
+        3|Siegfried|1650
+        4|Sieglinde|1777
+        5|Kaaleppi|1833
     }
 
     RESULT {
-        Orz Orz
-        Bingo
-        Rufus
+        Arthur
     }
 }
 
 TEST {
     TABLE {
-        Wizards
-        id|name|area|skill
-        1|Bingo|Kumpula|2
-        2|Orz Orz|Shadowland|3
-        3|Anna|Shadowland|5
-        4|Solmu|Shadowland|4
-        5|Rufus|Fabuland|1
-    }
-
-    TABLE {
-        Lessons
-        teacher_id|pupil_id
-        1|2
-        2|3
-        3|1
-        3|4
-        5|4
+        Ghosts
+        id|name|year
+        1|Mercedes|1801
+        2|Fernand|1790
+        3|Edmond|1744
+        4|Valentine|1885
+        5|Haydee|1604
     }
 
     RESULT {
-        Bingo
-        Solmu
+        Edmond
     }
 }

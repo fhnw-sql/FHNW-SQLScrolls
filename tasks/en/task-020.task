@@ -1,58 +1,34 @@
 METADATA {
     id: task-020
     name: Task 20
-    color: orange
+    color: purple
 }
 
 DESCRIPTION {
-    Get everyone in the woods haunted.
+    Find the latest year of Birth in the 17th century  
+}
+
+ANSWER {
+   SELECT MAX (YEAR) FROM GHOSTS WHERE YEAR BETWEEN '1600' AND '1700'  
 }
 
 TEST {
     TABLE {
         Ghosts
-        id|name|place_id
-        1|Arthur|1
-        2|Desiree|3
-        3|Siegfried|2
-        4|Sieglinde|2
-        5|Kaaleppi|3
-    }
-
-    TABLE {
-        Places
-        id|name
-        1|school
-        2|forest
-        3|mill
+        id|name|year|murdered
+        1|Arthur|1765|0
+        2|Desiree|1777|1
+        3|Siegfried|1650|2
+        4|Sieglinde|1765|3
+        5|Kaaleppi|1833|2
+        5|Khaled|1777|0
+        6|Hermine|1650|4
+        7|Siegfried|1687|2
+        8|Veronika|1777|1
+        9|Veronika|1602|2
     }
 
     RESULT {
-        Siegfried
-        Sieglinde
-    }
-}
-
-TEST {
-    TABLE {
-        Ghosts
-        id|name|place_id
-        1|Edmond|2
-        2|Mercedes|2
-        3|Fernand|3
-        4|Valentine|2
-        5|Haydee|2
-    }
-
-    TABLE {
-        Places
-        id|name
-        1|school
-        2|mill
-        3|forest
-    }
-
-    RESULT {
-        Fernand
+       1687
     }
 }
