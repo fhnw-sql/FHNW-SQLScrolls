@@ -98,7 +98,6 @@ function showModal(id, changeToViewAfter, trigger) {
 }
 
 async function shakeElement(id) {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   async function rotateRight(element) {
     element.style.transform = "rotate(5deg)";
     await delay(100);
@@ -119,7 +118,6 @@ async function shakeElement(id) {
 }
 
 async function shookElement(id) {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   async function moveRight(element) {
     element.style.transform = "translate(7px)";
     await delay(100);
@@ -141,7 +139,7 @@ async function shookElement(id) {
 
 function shootConfetti(durationMs, particles) {
   const end = Date.now() + durationMs;
-  const disableForReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const disableForReducedMotion = false;
   (function frame() {
     confetti({
       particleCount: particles ? particles : 5,
@@ -224,7 +222,7 @@ async function evilFlameAnimation() {
   const goodFlame = document.getElementById("good-flame");
   const evilFlame = document.getElementById("evil-flame");
   const speech = document.getElementById("task-animation-flame-speech");
-  const disableForReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const disableForReducedMotion = false;
 
   let translation = 15;
   let starCount = taskGroups.getCompletedTaskCount();
@@ -469,7 +467,7 @@ async function endAnimation() {
 }
 
 function endScreenAnimation() {
-  const disableForReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const disableForReducedMotion = false;
 
   let previous;
   let frameCount = 0;

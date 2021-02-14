@@ -31,10 +31,10 @@ PAGE {
 PAGE {
     The search can be restricted by the WHERE section:
     
-    SELECT {columns} FROM {table} WHERE {condition};
+    SELECT {columns} FROM table WHERE {condition};
     
     For example, comparisons ==, <>,
-    <,>, <=,> = and AND and OR.
+    <,>, <=,> = and AND and OR and LIKE.
 }
 
 PAGE {
@@ -47,7 +47,7 @@ PAGE {
             3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT name FROM Dragons WHERE weight> 5000;
+            SELECT name FROM Dragons WHERE weight > 5000;
         }
     }
 }
