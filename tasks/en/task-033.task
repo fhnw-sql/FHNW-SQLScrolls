@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   
+   SELECT area from wizards group by area having count(*) = 1
 }
 
 

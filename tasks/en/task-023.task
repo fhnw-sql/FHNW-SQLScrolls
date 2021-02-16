@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   
+   SELECT MIN(year), MAX(year) from ghosts
 }
 
 

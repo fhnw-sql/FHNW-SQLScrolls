@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   
+    SELECT Area, MAX(skill) FROM WIZARDS GROUP BY AREA  
 }
 
 

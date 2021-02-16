@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   
+   SELECT g.name, p.name from ghosts g, places p WHERE g.place_id == p.id
 }
 
 

@@ -5,11 +5,11 @@ METADATA {
 }
 
 DESCRIPTION {
-   Get the wizards with a minimum skill level of 3 of each area
+   Get the area's count of wizards.
 }
 
 ANSWER {
-   SELECT AREA, MIN(SKILL) FROM WIZARDS GROUP BY AREA  
+      SELECT Area, COUNT(*) FROM WIZARDS GROUP BY AREA  
 }
 
 TEST {
@@ -24,7 +24,7 @@ TEST {
     }
 
     RESULT {
-        2|Orz Orz|Kumpula|3
-        1|Anna|Shadowland|5
+        Kumpula|2
+        Shadowland|3
     }
 }

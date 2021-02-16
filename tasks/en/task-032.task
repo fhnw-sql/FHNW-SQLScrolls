@@ -5,11 +5,11 @@ METADATA {
 }
 
 DESCRIPTION {
-    Look for areas where the magician's highest skill level is 5.
+    Look for areas with the magician's level lower 3.
 }
 
 ANSWER {
-   
+   SELECT Area FROM WIZARDS WHERE SKILL < 3 GROUP BY AREA
 }
 
 
@@ -21,11 +21,13 @@ TEST {
         2|Orz Orz|Kumpula|3
         3|Bingo|Shadowland|2
         4|Solmu|Shadowland|4
-        5|Rufus|Kumpula|1
+        5|Rufus|Kumpula|4
+        6|Fred|Mumba|2
     }
 
     RESULT {
         Shadowland
+        Mumba
     }
 }
 
@@ -42,7 +44,6 @@ TEST {
 
     RESULT {
         Shadowland
-        Kumpula
     }
 }
 

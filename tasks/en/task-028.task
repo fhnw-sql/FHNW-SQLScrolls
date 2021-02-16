@@ -1,7 +1,7 @@
 METADATA {
     id: task-028
     name: Task 28
-    color: green
+    color: purple
 }
 
 DESCRIPTION {
@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT NAME FROM WIZARDS GROUP BY  NAME  HAVING SKILL <4 ORDER BY SKILL ASC
+    SELECT NAME FROM WIZARDS WHERE SKILL <4 ORDER BY SKILL ASC
 }
 
 TEST {

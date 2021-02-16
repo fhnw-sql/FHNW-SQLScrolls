@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   
+    SELECT Area, COUNT(*) FROM WIZARDS GROUP BY AREA  
 }
 
 
