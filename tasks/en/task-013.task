@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get all ghosts born in the 17th century from the youngest to the oldest
+    Get all ghosts born in the 17th century from the youngest to the oldest in alphabetical order.
 }
 
 ANSWER {
