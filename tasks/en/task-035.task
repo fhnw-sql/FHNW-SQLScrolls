@@ -8,8 +8,20 @@ DESCRIPTION {
     Find a place where Arthur haunts.
 }
 
+PARSONS {
+   SELECT p.name 
+   FROM 
+   GHOSTS g,
+   PLACES p
+   WHERE 
+   p.id = g.place_id 
+   AND g.name = "Arthur"
+   AND p.name = "Arthur" #distractor
+   p.ghost_id = g.id #distractor
+}
+
 ANSWER {
-   SELECT p.name FROM GHOSTS  g, PLACES p WHERE p.id = g.place_id AND g.name = "Arthur"
+   SELECT p.name FROM GHOSTS g, PLACES p WHERE p.id = g.place_id AND g.name = "Arthur"
 }
 
 

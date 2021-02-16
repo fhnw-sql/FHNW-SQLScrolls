@@ -8,6 +8,17 @@ DESCRIPTION {
    Get the area's count of wizards.
 }
 
+PARSONS {
+     SELECT 
+     AREA, 
+     COUNT(*)
+     FROM WIZARDS
+     GROUP BY
+     AREA
+     COUNT OF WIZARDS #distractor
+     SUM (*) #distractor
+}
+
 ANSWER {
       SELECT Area, COUNT(*) FROM WIZARDS GROUP BY AREA  
 }

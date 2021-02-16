@@ -8,6 +8,17 @@ DESCRIPTION {
     Search for all different birth years.
 }
 
+PARSONS {
+    SELECT 
+    DISTINCT
+    year
+    FROM
+    ghosts
+    UNIQUE #distractor
+    ONLY #distractor
+    birth_year #distractor
+}
+
 ANSWER {
    SELECT DISTINCT year from ghosts
 }

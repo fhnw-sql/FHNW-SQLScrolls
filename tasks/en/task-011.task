@@ -8,6 +8,7 @@ DESCRIPTION {
     Search for all ghosts born in 1650
 }
 
+
 ANSWER {
    SELECT * FROM Ghosts WHERE YEAR='1650'
 }

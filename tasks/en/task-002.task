@@ -8,6 +8,14 @@ DESCRIPTION {
     Get the name and Year of Birth of each ghost.
 }
 
+PARSONS {
+    SELECT 
+    name, year 
+    from ghosts
+    name and year #distractor
+    name & year #distractor
+}
+
 ANSWER {
    Select name, year from ghosts
 }

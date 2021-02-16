@@ -8,6 +8,15 @@ DESCRIPTION {
     Get the name of each ghost.
 }
 
+PARSONS {
+    SELECT name 
+    from ghosts
+    SELECT * #distractor
+    GET NAME OF GHOST #distractor
+    FROM ghost #distractor
+    EACH GHOST #distractor
+}
+
 ANSWER {
     SELECT name from ghosts
 }

@@ -2079,10 +2079,3 @@ body {
 #parsons-input p {
   color: var(--col-gold-70) !important;
 }
-
-/* zoom out on mobile: quick responsive fix */
-@media (max-height: 900px) {
-  html {
-    zoom: 80%;
-  }
-}

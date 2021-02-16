@@ -8,6 +8,17 @@ DESCRIPTION {
     Look for areas with the magician's level lower 3.
 }
 
+PARSONS {
+    SELECT 
+    AREA 
+    FROM WIZARDS
+    WHERE 
+    SKILL < 3 
+    GROUP BY 
+    AREA
+    SKILL LOWER 3 #distractor
+}
+
 ANSWER {
    SELECT Area FROM WIZARDS WHERE SKILL < 3 GROUP BY AREA
 }

@@ -8,6 +8,23 @@ DESCRIPTION {
     Find the earliest year of Birth in the 18th century 
 }
 
+PARSONS {
+    SELECT 
+    MIN 
+    (YEAR)
+    FROM GHOSTS
+    WHERE 
+    YEAR 
+    BETWEEN
+    '1700' 
+    AND
+    '1800'
+    OR #distractor
+    LOW #distractor
+    AND #distractor
+    = #distractor
+}
+
 ANSWER {
    SELECT MIN (YEAR) FROM GHOSTS WHERE YEAR BETWEEN '1700' AND '1800'
 }

@@ -7,7 +7,17 @@ METADATA {
 DESCRIPTION {
     Get a ghost spot for each ghost.
 }
-
+PARSONS {
+    SELECT 
+    g.name, p.name
+    FROM
+    ghosts g, places p 
+    WHERE 
+    g.place_id == p.id
+    g.id == p.id #distractor
+    ghosts p, places g #distractor
+    ghost_name, place_name #distractor
+}
 ANSWER {
    SELECT g.name, p.name from ghosts g, places p WHERE g.place_id == p.id
 }

@@ -8,6 +8,16 @@ DESCRIPTION {
     Search Sieglinde Year of birth.
 }
 
+PARSONS {
+    SELECT year
+    FROM GHOSTS
+    WHERE 
+    name = "Sieglinde"
+    name IS "Sieglinde" #distractor
+    FILTER #distractor
+    SEARCH #distractor
+}
+
 ANSWER {
    SELECT year from ghosts where name ="Sieglinde"
 }

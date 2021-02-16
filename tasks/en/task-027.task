@@ -8,6 +8,15 @@ DESCRIPTION {
    Get the area and the sum of skill level of each area
 }
 
+PARSONS {
+    SELECT 
+    AREA,
+    SUM(SKILL) 
+    FROM WIZARDS 
+    GROUP BY
+    AREA 
+}
+
 ANSWER {
     SELECT AREA, SUM(SKILL) FROM WIZARDS GROUP BY AREA 
 }

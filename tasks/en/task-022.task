@@ -8,8 +8,22 @@ DESCRIPTION {
     Calculate how many ghosts were born in the 18th century.
 }
 
+
+PARSONS {
+   SELECT 
+   COUNT (*)
+   FROM GHOSTS 
+   WHERE YEAR 
+   BETWEEN 
+   1700 
+   AND 
+   1800
+   SUM (*) #distractor
+   AND #distractor
+}
+
 ANSWER {
-   SELECT COUNT (*) FROM GHOSTS WHERE YEAR > 1700 AND YEAR < 1800
+   SELECT COUNT (*) FROM GHOSTS WHERE YEAR BETWEEN 1700 AND 1800
 }
 
 

@@ -8,6 +8,19 @@ DESCRIPTION {
     Get the name of all different ghosts born in 1650 in reverse alphabetical order
 }
 
+PARSONS {
+    SELECT 
+    DISTINCT 
+    NAME 
+    FROM Ghosts 
+    WHERE YEAR='1650'
+    ORDER BY NAME 
+    DESC
+    ASC #distractor
+    ORDER BY YEAR #distractor
+    ALPHABETICAL #distractor
+}
+
 ANSWER {
    SELECT DISTINCT NAME FROM Ghosts WHERE YEAR='1650' ORDER BY NAME DESC
 }

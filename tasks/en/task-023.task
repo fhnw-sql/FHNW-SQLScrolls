@@ -8,10 +8,10 @@ DESCRIPTION {
     Apply for the Earliest and Late Year of Birth.
 }
 
+
 ANSWER {
    SELECT MIN(year), MAX(year) from ghosts
 }
-
 
 TEST {
     TABLE {
