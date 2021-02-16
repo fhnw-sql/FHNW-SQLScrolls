@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   
+   SELECT p.name FROM GHOSTS  g, PLACES p WHERE p.id = g.place_id AND g.name = "Arthur"
 }
 
 

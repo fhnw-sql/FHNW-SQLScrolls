@@ -1,7 +1,7 @@
 METADATA {
     id: task-041
     name: Task 41
-    color: orange
+    color: red
 }
 
 DESCRIPTION {
@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   
+    SELECT w.name FROM Wizards w, Lessons l  WHERE l.pupil_id = (SELECT w.id FROM Wizards w WHERE w.name = "Bingo") and  l.teacher_id = w.id
 }
 
 

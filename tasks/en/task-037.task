@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   
+   SELECT g.name, p.name FROM Hauntings  h, PLACES p, Ghosts g WHERE g.id = h.ghost_id AND p.id = h.place_id
 }
 
 
