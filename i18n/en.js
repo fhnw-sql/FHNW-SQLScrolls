@@ -58,7 +58,7 @@ for (let entry of Object.entries({
     "\n" +
     "Great regards,\n" +
     "Principal Queryx \n\n" +
-    "<small>PS: After five wrong answers, the model answer can be shown.</small>",
+    "<small>PS: After five wrong answers, a button called 'Display model answer' appears.</small>",
   "item-999-name": "???",
   "write-query-first": "Write a query.",
   "multi-query-not-allowed": "Result has to be reached with a single query. Do not write multiple queries.",
