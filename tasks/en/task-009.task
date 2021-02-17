@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get all ghosts from the oldest to the youngest in alphabetical order
+    Get all ghosts from the oldest to the youngest and in alphabetical order
 }
 
 ANSWER {

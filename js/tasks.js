@@ -596,10 +596,14 @@ async function runQueryTests(allowCompletionAndStore) {
 
   if (API.loginStatus === LoginStatus.LOGGED_IN && allCorrect) {
     const nextTaskId = getNextTaskId(Views.TASK.currentTask.id);
-    $("#task-next-button").click(() => Views.TASK.show(nextTaskId));
+    $("#task-next-button").click(() => {
+      Views.TASK.currentTask = null;
+      removePreservedTaskBoxHeight();
+      Views.TASK.show(nextTaskId);
+    });
     await showElementImmediately("task-next-button");
   } else {
-    await showElementImmediately("task-next-button");
+    await hideElementImmediately("task-next-button");
   }
 
   await animateQueryResultsOpen(rendered.nav, rendered.content);
