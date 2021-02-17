@@ -210,6 +210,14 @@ async function loadCompletionFromQuizzes() {
 
 async function beginGame() {
   try {
+    // Notification if user tries to leave the page, as it is a vanilla js app without a SPA router like in react
+    // we need to notify the user as the back button would result leaving the page
+    window.addEventListener("beforeunload", function (e) {
+      var confirmationMessage = i18n.get("leave-page-alert");
+      (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+      return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+    });
+
     await loadLanguage(currentLang);
 
     try {

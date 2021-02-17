@@ -28,6 +28,7 @@ for (let entry of Object.entries({
   task: "Task {}",
   example: "Example",
   loading: "Loading..",
+  "leave-page-alert": "Are you sure you want to close the game?",
   "show-model-answer": "Display model answer",
   "previous-answers": "Query history",
   "table-result": "Result",
