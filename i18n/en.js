@@ -54,10 +54,11 @@ for (let entry of Object.entries({
   "item-00-hint":
     "Welcome. You have been given some study material and tasks. Hopefully you find it pleasant to study here.\n" +
     "\n" +
-    "May the books assist ye and your tasks be solvable!\n" +
+    "The books in the next screen assists you to help you solving the tasks!\n" +
     "\n" +
     "Great regards,\n" +
-    "Principal Queryx",
+    "Principal Queryx \n\n" +
+    "<small>PS: After five wrong answers, the model answer can be shown.</small>",
   "item-999-name": "???",
   "write-query-first": "Write a query.",
   "multi-query-not-allowed": "Result has to be reached with a single query. Do not write multiple queries.",
