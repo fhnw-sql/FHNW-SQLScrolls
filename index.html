@@ -41,7 +41,6 @@
     <link href="css/style.css" rel="stylesheet" />
 
     <script>
-      /* Sample function that returns boolean in case the browser is Internet Explorer*/
       function isIE() {
         ua = navigator.userAgent;
         /* MSIE used to detect old browsers and Trident used to newer ones*/
@@ -49,12 +48,11 @@
 
         return is_ie;
       }
-      /* Create an alert to show that the browser isn't supported */
-      if (isIE()) {
+      // Create an alert to show that the browser isn't supported
+      if (isIE())
         alert(
           "Your browser isn't supported by the game. Please consider using a latest version of chrome, firefox, safari or edge."
         );
-      }
     </script>
   </head>
   <body class="bg-black no-focus-outline" id="body">
