@@ -236,6 +236,15 @@
                         type="password"
                       />
                     </div>
+                    <p style="color: white; font-style: italic;">
+                      Through the registration you agree to use of your data for the study as described in the
+                      <a
+                        href="https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game.github.io/blob/main/privacy.md"
+                        target="_blank"
+                        style="color: var(--col-good-blue-100);"
+                        >data collection</a
+                      >.
+                    </p>
                     <button
                       class="btn i18n-register"
                       id="register-button"
@@ -463,6 +472,12 @@
                       </div>
                     </div>
                     <div class="col-md-2">
+                      <!-- Event handler gets bound within: Tasks.runQueryTests -->
+                      <button
+                        class="float-right btn i18n-task-next mb-3 hidden"
+                        id="task-next-button"
+                        tabindex="0"
+                      ></button>
                       <!-- Event handler gets bound within: Views.Tasks.showWithQuery -->
                       <button class="float-right btn i18n-query-test" id="query-run-button" tabindex="0"></button>
                     </div>

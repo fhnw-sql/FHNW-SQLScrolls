@@ -463,6 +463,22 @@ class Table {
   }
 }
 
+// Returns the next higher taskId based on a given taskId
+function getNextTaskId(currentTaskId) {
+  function padWithZeroes(number, length = 3) {
+    var my_string = "" + number;
+    while (my_string.length < length) {
+      my_string = "0" + my_string;
+    }
+    return my_string;
+  }
+  var getPart = currentTaskId.replace(/[^\d.]/g, ""); // returns 0023
+  var num = parseInt(getPart); // returns 23
+  var newVal = padWithZeroes(num + 1); // returns 24
+  var reg = new RegExp(getPart); // create dynamic regexp
+  return currentTaskId.replace(reg, newVal); // returns Task-0024
+}
+
 async function queryAllContentsOfTables(context, tableNames) {
   const queries = tableNames.map((table) => `SELECT * FROM ${table};`).join("");
   const resultSets = await runSQL(context, queries);
@@ -576,6 +592,14 @@ async function runQueryTests(allowCompletionAndStore) {
     allCorrect || needsHelp
       ? await showElementImmediately("query-model-button")
       : await hideElementImmediately("query-model-button");
+  }
+
+  if (API.loginStatus === LoginStatus.LOGGED_IN && allCorrect) {
+    const nextTaskId = getNextTaskId(Views.TASK.currentTask.id);
+    $("#task-next-button").click(() => Views.TASK.show(nextTaskId));
+    await showElementImmediately("task-next-button");
+  } else {
+    await showElementImmediately("task-next-button");
   }
 
   await animateQueryResultsOpen(rendered.nav, rendered.content);

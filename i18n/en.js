@@ -68,6 +68,7 @@ for (let entry of Object.entries({
   correct: "Correct",
   incorrect: "Incorrect",
   "task-complete": "Completed",
+  "task-next": "Next Task",
   "task-incomplete": "Not completed",
   "group-K-name": "Scrolls of normalization",
   "group-L-name": "Scrolls of union",
