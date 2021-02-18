@@ -322,19 +322,21 @@ class TaskView extends View {
     });
     this.parsons.init(initial);
     this.parsons.shuffleLines();
-    $("#query-run-button").click(function (e) {
-      e.preventDefault();
-      Views.TASK.parsons.getFeedback();
-      // Translate parsons input to query input
-      const parsonsInput = $("#parsons-sortable ul.output > li")
-        .toArray()
-        .map((m) => $(m).text())
-        .join(" ")
-        .trim();
-      if (parsonsInput) $("#query-input").val(parsonsInput);
+    $("#query-run-button")
+      .off()
+      .on("click", function (e) {
+        e.preventDefault();
+        Views.TASK.parsons.getFeedback();
+        // Translate parsons input to query input
+        const parsonsInput = $("#parsons-sortable ul.output > li")
+          .toArray()
+          .map((m) => $(m).text())
+          .join(" ")
+          .trim();
+        if (parsonsInput) $("#query-input").val(parsonsInput);
 
-      runQueryTests(true);
-    });
+        runQueryTests(true);
+      });
   }
 
   async toggleAnswer() {
@@ -372,9 +374,6 @@ class TaskView extends View {
     document.getElementById("query-out-tables-nav").innerHTML = "";
     this.queryInputField.value = query ? query : i18n.get("query-placeholder");
 
-    // Remove event handler to prevent double bindings if a new question gets open
-    $("#query-run-button").off("click");
-
     // Display the right input [query / parsons]
     if (task.parsons) {
       await showElementImmediately("parsons-input");
@@ -383,10 +382,12 @@ class TaskView extends View {
     } else {
       await showElementImmediately("query-input");
       await hideElementImmediately("parsons-input");
-      $("#query-run-button").click(function (e) {
-        e.preventDefault();
-        runQueryTests(true);
-      });
+      $("#query-run-button")
+        .off()
+        .on("click", function (e) {
+          e.preventDefault();
+          runQueryTests(true);
+        });
     }
 
     if (API.loginStatus === LoginStatus.LOGGED_IN) {
