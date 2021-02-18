@@ -596,13 +596,13 @@ async function runQueryTests(allowCompletionAndStore) {
 
   if (API.loginStatus === LoginStatus.LOGGED_IN && allCorrect) {
     const nextTaskId = getNextTaskId(Views.TASK.currentTask.id);
-    /* $("#task-next-button").click(() => {
+    $("#task-next-button").click(function (e) {
+      e.preventDefault();
       Views.TASK.currentTask = null;
       removePreservedTaskBoxHeight();
       Views.TASK.show(nextTaskId);
     });
     await showElementImmediately("task-next-button");
-    */
   } else {
     await hideElementImmediately("task-next-button");
   }

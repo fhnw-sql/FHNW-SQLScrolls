@@ -322,8 +322,9 @@ class TaskView extends View {
     });
     this.parsons.init(initial);
     this.parsons.shuffleLines();
-    $("#query-run-button").click(() => {
-      this.parsons.getFeedback();
+    $("#query-run-button").click(function (e) {
+      e.preventDefault();
+      Views.TASK.parsons.getFeedback();
       // Translate parsons input to query input
       const parsonsInput = $("#parsons-sortable ul.output > li")
         .toArray()
@@ -382,7 +383,10 @@ class TaskView extends View {
     } else {
       await showElementImmediately("query-input");
       await hideElementImmediately("parsons-input");
-      $("#query-run-button").click(() => runQueryTests(true));
+      $("#query-run-button").click(function (e) {
+        e.preventDefault();
+        runQueryTests(true);
+      });
     }
 
     if (API.loginStatus === LoginStatus.LOGGED_IN) {
