@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Calculate how many different ghots were born in the 17th century
+    Count how many ghosts with different names were born in the 17th century
 }
 
 ANSWER {
