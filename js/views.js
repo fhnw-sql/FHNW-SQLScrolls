@@ -1122,6 +1122,8 @@ class EndTextView extends View {
     clearParticles();
     await showElementImmediately(this.id);
     document.getElementById(this.id).focus();
+    await BookMenuButton.hide();
+    await ProfileButton.hide();
     await fadeFromBlack();
     endScreenAnimation();
   }
@@ -1129,7 +1131,7 @@ class EndTextView extends View {
   async close() {
     await hideElement(this.id);
     await BookMenuButton.show();
-    await TaskViewSwap.show();
+    //await TaskViewSwap.show();
     await ProfileButton.show();
   }
 }

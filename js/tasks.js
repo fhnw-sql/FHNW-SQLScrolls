@@ -595,16 +595,22 @@ async function runQueryTests(allowCompletionAndStore) {
   }
 
   if (API.loginStatus === LoginStatus.LOGGED_IN && allCorrect) {
-    const nextTaskId = getNextTaskId(Views.TASK.currentTask.id);
-    $("#task-next-button")
-      .off()
-      .on("click", function (e) {
-        e.preventDefault();
-        Views.TASK.currentTask = null;
-        removePreservedTaskBoxHeight();
-        Views.TASK.show(nextTaskId);
-      });
-    await showElementImmediately("task-next-button");
+    // Display Endgame dialog on last question submission & hide next button
+    if (Views.TASK.currentTask.getNumericID() === tasks.asList().length) {
+      if (allowCompletionAndStore) await changeView(Views.END_TEXT);
+      await hideElementImmediately("task-next-button");
+    } else {
+      const nextTaskId = getNextTaskId(Views.TASK.currentTask.id);
+      $("#task-next-button")
+        .off()
+        .on("click", function (e) {
+          e.preventDefault();
+          Views.TASK.currentTask = null;
+          removePreservedTaskBoxHeight();
+          Views.TASK.show(nextTaskId);
+        });
+      await showElementImmediately("task-next-button");
+    }
   } else {
     await hideElementImmediately("task-next-button");
   }
