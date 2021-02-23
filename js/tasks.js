@@ -597,7 +597,10 @@ async function runQueryTests(allowCompletionAndStore) {
   if (API.loginStatus === LoginStatus.LOGGED_IN && allCorrect) {
     // Display Endgame dialog on last question submission & hide next button
     if (Views.TASK.currentTask.getNumericID() === tasks.asList().length) {
-      if (allowCompletionAndStore) await changeView(Views.END_TEXT);
+      if (allowCompletionAndStore) {
+        await Views.TASK.currentTask.completeTask();
+        await changeView(Views.END_TEXT);
+      }
       await hideElementImmediately("task-next-button");
     } else {
       const nextTaskId = getNextTaskId(Views.TASK.currentTask.id);

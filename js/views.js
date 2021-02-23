@@ -1119,6 +1119,7 @@ class EndTextView extends View {
   }
 
   async open() {
+    eventQueue.clear();
     clearParticles();
     await showElementImmediately(this.id);
     document.getElementById(this.id).focus();
@@ -1130,6 +1131,7 @@ class EndTextView extends View {
 
   async close() {
     await hideElement(this.id);
+
     await BookMenuButton.show();
     //await TaskViewSwap.show();
     await ProfileButton.show();
