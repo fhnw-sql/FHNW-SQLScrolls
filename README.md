@@ -309,5 +309,5 @@ The collected data and their according usage are explained within [privacy.md](p
 - [js-parsons](https://github.com/js-parsons/js-parsons)
 
 ## 🙏 Credits
-The codebase is based on the work of Risto Lahtela from Helsinki
+The codebase is based on the work of Risto Lahtela from Helsinki. One can diff the changes between the original code base and the one of FHNW-SQL-Training-Game through the created tag called `Rsl1122/SQL-Training-Game-e755cc5` representing the state of the commit `e755cc5`.  [Compare the changes](https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game.github.io/compare/Rsl1122/SQL-Training-Game-e755cc5...main).
 - [Rsl1122/SQL-Training-Game](https://github.com/Rsl1122/SQL-Training-game)
