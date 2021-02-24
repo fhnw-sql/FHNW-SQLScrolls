@@ -37,3 +37,20 @@ TEST {
         Shadowland|11
     }
 }
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Soulness|5
+        2|Orz Orz|Leckrr|3
+        3|Bingo|Soulness|1
+        4|Solmu|Soulness|8
+        5|Rufus|Leckrr|6
+    }
+
+    RESULT {
+        Leckrr|9
+        Soulness|14
+    }
+}

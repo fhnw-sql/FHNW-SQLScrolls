@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-   Get the name of the wizard which skill level is lower than 4 ordered by the lowest skill level
+   Get the names of the wizards which skill level is lower than 4 ordered by the lowest skill level
 }
 
 ANSWER {
@@ -29,5 +29,25 @@ TEST {
         Rufus
         Bingo
         Orz Orz
+    }
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Kumpula|1
+        6|Zaptus|Kumpula|3
+    }
+
+    RESULT {
+        Rufus
+        Bingo
+        Orz Orz
+        Zaptus
     }
 }

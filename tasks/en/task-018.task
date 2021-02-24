@@ -50,3 +50,25 @@ TEST {
        1765
     }
 }
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1777
+        3|Siegfried|1650
+        4|Sieglinde|1712
+        5|Kaaleppi|1833
+        5|Khaled|1777
+        6|Hermine|1650
+        7|Siegfried|1687
+        8|Veronika|1777
+        9|Veronika|1602
+	10|Veronika|1623
+    }
+
+    RESULT {
+       1712
+    }
+}

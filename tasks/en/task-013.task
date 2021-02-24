@@ -35,3 +35,26 @@ TEST {
        8|Veronika|1602
     }
 }
+
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1833
+        3|Solomun|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+        6|Herold|1650
+        7|Solomun|1687
+        8|Zaptus|1602
+    }
+
+    RESULT {
+       7|Solomun|1687
+       6|Herold|1650
+       3|Solomun|1650
+       8|Zaptus|1602
+    }
+}

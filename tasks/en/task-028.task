@@ -29,3 +29,23 @@ TEST {
         Orz Orz
     }
 }
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Solomun|Kumpula|3
+        3|Fred|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Klex|Kumpula|2
+        6|Zaptus|Kumpula|1
+    }
+
+    RESULT {
+        Zaptus
+        Fred
+        Klex
+        Solomun
+    }
+}

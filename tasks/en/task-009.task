@@ -33,3 +33,25 @@ TEST {
        5|Kaaleppi|1833
     }
 }
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1833
+        3|Zeptus|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+        6|Artus|1650
+    }
+
+    RESULT {
+       6|Artus|1650
+       3|Zeptus|1650
+       1|Arthur|1765
+       4|Sieglinde|1765
+       2|Desiree|1833
+       5|Kaaleppi|1833
+    }
+}

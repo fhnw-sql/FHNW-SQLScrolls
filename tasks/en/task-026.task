@@ -39,3 +39,22 @@ TEST {
         Shadowland|3
     }
 }
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Dirtland|5
+        2|Orz Orz|Flempla|3
+        3|Bingo|Dirtland|2
+        4|Solmu|Dirtland|4
+        5|Rufus|Flempla|1
+        6|Zaptus|Flempla|7
+        7|Hermine|Flempla|1
+    }
+
+    RESULT {
+        Flempla|4
+        Dirtland|3
+    }
+}

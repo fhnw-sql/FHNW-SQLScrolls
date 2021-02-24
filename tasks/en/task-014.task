@@ -36,3 +36,26 @@ TEST {
        Veronika
     }
 }
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Bilbo|1777
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+        5|Klex|1777
+        6|Hermine|1650
+        7|Siegfried|1687
+        8|Zaptus|1777
+        9|Zaptus|1777
+    }
+
+    RESULT {
+       Bilbo
+       Klex
+       Zaptus
+    }
+}

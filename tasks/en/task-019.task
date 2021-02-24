@@ -32,3 +32,25 @@ TEST {
        4
     }
 }
+
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year|murdered
+        1|Arthur|1765|0
+        2|Desiree|1777|1
+        3|Siegfried|1650|8
+        4|Sieglinde|1765|3
+        5|Kaaleppi|1833|2
+        5|Khaled|1777|0
+        6|Hermine|1650|4
+        7|Siegfried|1687|2
+        8|Veronika|1777|1
+        9|Veronika|1602|2
+    }
+
+    RESULT {
+       10
+    }
+}

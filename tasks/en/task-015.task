@@ -9,7 +9,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT * FROM Ghosts WHERE YEAR > '1700' AND NAME = 'Veronika'
+   SELECT * FROM Ghosts WHERE YEAR BETWEEN 1700 AND 1800 AND NAME = 'Veronika'
 }
 
 TEST {
@@ -26,7 +26,32 @@ TEST {
         7|Siegfried|1687
         8|Veronika|1777
         9|Veronika|1602
-	10|Veronika|1723
+	    10|Veronika|1723
+    }
+
+    RESULT {
+       8|Veronika|1777
+       10|Veronika|1723
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1777
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+        5|Khaled|1777
+        6|Hermine|1650
+        7|Siegfried|1687
+        8|Veronika|1777
+        9|Veronika|1602
+	    10|Veronika|1723
+        11|Veronika|1912
+        12|Veronika|1404
     }
 
     RESULT {
