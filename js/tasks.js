@@ -608,9 +608,13 @@ async function runQueryTests(allowCompletionAndStore) {
         .off()
         .on("click", function (e) {
           e.preventDefault();
-          Views.TASK.currentTask = null;
-          removePreservedTaskBoxHeight();
-          Views.TASK.show(nextTaskId);
+          if ((eventQueue["inventory-view"]?.length ?? 0) > 0) {
+            changeView(Views.INVENTORY);
+          } else {
+            Views.TASK.currentTask = null;
+            removePreservedTaskBoxHeight();
+            Views.TASK.show(nextTaskId);
+          }
         });
       await showElementImmediately("task-next-button");
     }
