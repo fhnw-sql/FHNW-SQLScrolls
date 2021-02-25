@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-   Get the name of the wizard which skill level is lower than 4 ordered by the lowest skill level
+   Get the names of the wizards with skill level lower than 4 by skill level increasing
 }
 
 ANSWER {
