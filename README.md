@@ -26,14 +26,12 @@ The game is designed to support the latest web browsers. It supports the current
 ## 🔮 Deployment
 To deploy the Frontend one can consider one of the mentioned ways below: Docker, BareboneNodeJS, We recommend to use GitHub Pages or Docker Compose for enterprise grade. The illustration below shows a quick overview of the recommended solution.
 
-**However, if you want to deploy the whole project (Frontend, Backend, DB) on your own docker host consider the Docker Compose section.**
-
 ![Architecture-Overview](stg-architecture.png)
 
-### ⚡ Docker Compose (whole solution)
-`In progress`
 
-### 🐋 Docker - Frontend
+### 🖼️ Frontend Deployment
+
+#### 🐋 Docker - Frontend
 The following steps assume that a basic understanding of docker already exists. If this is not the case, the following book is recommended [Docker: Up & Running: Shipping Reliable Containers in Production](https://www.oreilly.com/library/view/docker-up/9781492036722/).
 
 To spin-up the container run the following commands, don't forget to replace the environments variables with your actual configuration:
@@ -43,9 +41,12 @@ To spin-up the container run the following commands, don't forget to replace the
 
 The API is now exposed on the PORT 80 on the docker host.
 
-### 🐱 GitHub Pages
+#### 🐱 GitHub Pages
 To deploy the project on github pages. Simply fork the repository and name it `{your-gh-username}.github.io` and do the according configruation within `configuration.js`.
 More information concerning GH Pages can be found [GitHub Pages](https://pages.github.com/)
+
+### ⚡ Solution Deployment (Docker Compose)
+`In progress`
 
 ## 📚 Books syntax
 In the following chapter, the outline of a book is explained and according to syntax. In the end, a full example is shown. 
