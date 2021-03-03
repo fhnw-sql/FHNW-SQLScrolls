@@ -22,12 +22,26 @@ The game is designed to support the latest web browsers. It supports the current
   - `FALSE_ANSWER_UNTIL_MODEL_ANSWER`
   - `EDITOR_PASSWORD`
 
-## ⚡ Deployment
+## 🔮 Deployment
+To deploy the Frontend one can consider one of the mentioned ways below: Docker, BareboneNodeJS, We recommend to use GitHub Pages or Docker Compose for enterprise grade.
+**However, if you want to deploy the whole solution (Frontend, Backend, DB) consider the Docker Compose section.**
 
-- Deploy backend API [FHNW-SQL-Training-Game-API](https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game-API)
-- Place all files to a webserver so that `index.html` is loaded from some address.
-- Prevent access to `editors.html` if you don't want students who find it to read tasks and books ahead of time.
+### ⚡ Docker Compose (whole solution)
+`In progress`
 
+### 🐋 Docker - Frontend
+The following steps assume that a basic understanding of docker already exists. If this is not the case, the following book is recommended [Docker: Up & Running: Shipping Reliable Containers in Production](https://www.oreilly.com/library/view/docker-up/9781492036722/).
+
+To spin-up the container run the following commands, don't forget to replace the environments variables with your actual configuration:
+
+1. Run `docker build -t FHNW-SQL-Training-Game:1.0 .`
+2. Run `docker run -dp 80:80 FHNW-SQL-Training-Game:1.0 -e API_URL='{API_URL}''
+
+The API is now exposed on the PORT 80 on the docker host.
+
+### 🐱 GitHub Pages
+To deploy the project on github pages. Simply fork the repository and name it `{your-gh-username}.github.io` and do the according configruation within `configuration.js`.
+More information concerning GH Pages can be found [GitHub Pages](https://pages.github.com/)
 
 ## 📚 Books syntax
 In the following chapter, the outline of a book is explained and according to syntax. In the end, a full example is shown. 
