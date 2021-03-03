@@ -1,3 +1,5 @@
+**The following readme only discusses the aspects of the API. If you are looking for more information about the whole project and possible deployment models, see: [FHNW-SQL-Training-Game.github.io](https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game.github.io/)**
+
 # 🔍 Introduction
 This repository is the backend API for the FHNW-SQL-Training-Game which is used to determine the effectiveness and acceptance of a learning game as an alternative learning method within the Bachelor of Business Information Technology at the FHNW, concerning practising the structured query language (SQL) which is taught as part of the Database Technology course.
 
