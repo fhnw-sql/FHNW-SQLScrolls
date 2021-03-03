@@ -26,7 +26,7 @@ To deploy the API one can consider one of the mentioned ways below: Docker, Bare
 **However, if you want to deploy the whole solution (Frontend, Backend, DB) consider the Docker Compose section on the Frontend project.**
 
 #### 🐋 Docker
-The following steps assume that a basic understanding of docker already exists. If this is not the case, the following book is recommended (https://www.oreilly.com/library/view/docker-up/9781492036722/)[Kane, S. P., & Matthias, K. (2018). Docker: Up & Running: Shipping Reliable Containers in Production (2nd ed.). O’Reilly Media.].
+The following steps assume that a basic understanding of docker already exists. If this is not the case, the following book is recommended [Docker: Up & Running: Shipping Reliable Containers in Production](https://www.oreilly.com/library/view/docker-up/9781492036722/).
 
 To spin-up the container run the following commands, don't forget to replace the environments variables with your actual configuration:
 
@@ -36,7 +36,7 @@ To spin-up the container run the following commands, don't forget to replace the
 The API is now exposed on the PORT 3000 on the docker host.
 
 #### 👣 Barebone Node
-The barebone workflow for NodeJS requires Node 14.x and npm installed on the host as also a basic knowledge of Node. If this is not the case, the following book is recommended (https://www.oreilly.com/library/view/learning-node-2nd/9781491943113/)[Powers, S. (2016). Learning Node: Moving to the Server-Side (2. Aufl.). O’Reilly Media.]. Don't forget to configure the environment variables.
+The barebone workflow for NodeJS requires Node 14.x and npm installed on the host as also a basic knowledge of Node. If this is not the case, the following book is recommended [Powers, S. (2016). Learning Node: Moving to the Server-Side](https://www.oreilly.com/library/view/learning-node-2nd/9781491943113/). Don't forget to configure the environment variables.
 
 
 ```js
