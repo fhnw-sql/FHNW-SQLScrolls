@@ -13,6 +13,7 @@ The game is designed to support the latest web browsers. It supports the current
 - Safari
 - Microsoft Edge
 
+
 ## ⚙️ Configuration
 - Tasks and books can be configured via `.task` and `.book` files located in `/tasks` or `/books`. More information to the syntax can be found below.
 - For translating into more languages, add a `/i18n/<lang>.js`, `/books/<lang>/Book-<>.book` files and `/tasks/<lang>/Task-<>.task` files, as well as an option to `language-selector` element in `index.html`
@@ -23,8 +24,11 @@ The game is designed to support the latest web browsers. It supports the current
   - `EDITOR_PASSWORD`
 
 ## 🔮 Deployment
-To deploy the Frontend one can consider one of the mentioned ways below: Docker, BareboneNodeJS, We recommend to use GitHub Pages or Docker Compose for enterprise grade.
-**However, if you want to deploy the whole solution (Frontend, Backend, DB) consider the Docker Compose section.**
+To deploy the Frontend one can consider one of the mentioned ways below: Docker, BareboneNodeJS, We recommend to use GitHub Pages or Docker Compose for enterprise grade. The illustration below shows a quick overview of the recommended solution.
+
+**However, if you want to deploy the whole project (Frontend, Backend, DB) on your own docker host consider the Docker Compose section.**
+
+![Architecture-Overview](stg-architecture.png)
 
 ### ⚡ Docker Compose (whole solution)
 `In progress`
