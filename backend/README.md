@@ -38,12 +38,11 @@ The API is now exposed on the PORT 3000 on the docker host.
 #### 👣 Barebone Node
 The barebone workflow for NodeJS requires Node 14.x and npm installed on the host as also a basic knowledge of Node. If this is not the case, the following book is recommended [Powers, S. (2016). Learning Node: Moving to the Server-Side](https://www.oreilly.com/library/view/learning-node-2nd/9781491943113/). Don't forget to configure the environment variables.
 
-
 ```js
 # Install the app
-npm install
+npm ci --only=production
 # Run the app
-npm run start
+node server.js
 ```
 
 #### ☁️ Heroku
