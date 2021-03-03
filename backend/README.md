@@ -31,7 +31,7 @@ The following steps assume that a basic understanding of docker already exists. 
 To spin-up the container run the following commands, don't forget to replace the environments variables with your actual configuration:
 
 1. Run `docker build -t FHNW-SQL-Training-Game-API:1.0 .`
-2. Run `docker run -dp 3000:3000 FHNW-SQL-Training-Game-API:1.0 -e NODE_ENV='Production' -e MONGODB_URI='{MONGODB_URI}' -e POSTMARK_API_KEY='POSTMARK_API_KEY}'`
+2. Run `docker run -dp 3000:3000 FHNW-SQL-Training-Game-API:1.0 -e NODE_ENV='Production' -e MONGODB_URI='{MONGODB_URI}' -e POSTMARK_API_KEY='{POSTMARK_API_KEY}'`
 
 The API is now exposed on the PORT 3000 on the docker host.
 
