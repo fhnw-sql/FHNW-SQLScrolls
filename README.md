@@ -35,7 +35,7 @@ The following steps assume that a basic understanding of docker already exists. 
 To spin-up the container run the following commands, don't forget to replace the environments variables with your actual configuration:
 
 1. Run `docker build -t FHNW-SQL-Training-Game:1.0 .`
-2. Run `docker run -dp 80:80 FHNW-SQL-Training-Game:1.0 -e API_URL='{API_URL}''
+2. Run `docker run -dp 80:80 FHNW-SQL-Training-Game:1.0 -e API_URL='{API_URL}'`
 
 The API is now exposed on the PORT 80 on the docker host.
 
