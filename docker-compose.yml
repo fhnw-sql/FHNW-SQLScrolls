@@ -1,0 +1,40 @@
+# Variables
+# API_URL -> http://localhost:3000
+# POSTMARK_API_KEY -> POSTMARK_API_KEY
+# FROM_SENDER -> POSTMARK_API_KEY
+
+
+version: "3"
+services:
+  db:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+  api:
+    container_name: stg-api
+    depends_on:
+      - 'db'
+    restart: always
+    build: https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game-API.git#main
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/stg-api
+      - JWT_SECRET=FHNW_2021
+      - FROM_SENDER=${FROM_SENDER}
+      - POSTMARK_API_KEY=${POSTMARK_API_KEY}
+      - PORT=3000
+    ports:
+      - "3000:3000"
+  frontend:
+    container_name: stg-frontend
+    depends_on:
+      - 'api'
+    restart: always
+    build:
+      context: .
+      args:
+        API_URL: ${API_URL}
+    ports:
+      - "80:80"

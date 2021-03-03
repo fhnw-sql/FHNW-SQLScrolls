@@ -64,7 +64,22 @@ found [GitHub Pages](https://pages.github.com/)
 
 ### ⚡ Solution Deployment (Docker Compose)
 
-`In progress`
+The following steps assume that a basic understanding of docker already exists. If this is not the case, the following
+book is
+recommended [Docker: Up & Running: Shipping Reliable Containers in Production](https://www.oreilly.com/library/view/docker-up/9781492036722/)
+.
+
+To spin-up the whole solution on docker. The repository provides a docker-compose file. It includes the setup for the
+API, Frontend and the MongoDB container. To use it consider the example below.
+
+```
+ API_URL=http://localhost:3000 
+ POSTMARK_API_KEY={API_KEY} 
+ FROM_SENDER=stg@github.io 
+ docker-compose up 
+```
+
+For further configurations consider the docker-compose file directly.
 
 ## 📚 Books syntax
 
