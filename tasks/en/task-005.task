@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get all name of ghosts born in the 18th century.
+    Show all names of ghosts born in the 18th century.
 }
 
 ANSWER {

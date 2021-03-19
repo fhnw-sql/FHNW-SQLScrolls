@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Count the number of magicians in each area.
+    List all areas and the number of magicians in each area.
 }
 
 ANSWER {

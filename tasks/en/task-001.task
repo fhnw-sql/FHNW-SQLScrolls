@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get the name of each ghost.
+    List the ghost names.
 }
 
 PARSONS {

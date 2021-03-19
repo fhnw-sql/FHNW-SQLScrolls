@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Calculate the number of skilled(5) magicians in each area.
+   List all areas and the number of fully skilled magicians in each area, i.e. with skill level 5.
 }
 
 ANSWER {

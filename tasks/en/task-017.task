@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Count how many ghosts with different names were born in the 17th century
+    How many different ghost names belong to ghosts born in the 17th century?
 }
 
 ANSWER {

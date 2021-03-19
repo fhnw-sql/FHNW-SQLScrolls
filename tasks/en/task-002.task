@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get the name and Year of Birth of each ghost.
+   List the ghost names and Years of Birth.
 }
 
 PARSONS {

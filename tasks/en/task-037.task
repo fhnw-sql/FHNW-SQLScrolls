@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get information about ghosts.
+    Show all information you can get about ghosts.
 }
 
 ANSWER {

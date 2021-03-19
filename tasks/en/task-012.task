@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get the name of all different ghosts born in 1650 in reverse alphabetical order
+  List the names of all different ghosts born in 1650 in reverse alphabetical order
 }
 
 PARSONS {

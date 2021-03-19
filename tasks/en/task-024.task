@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Find the first name in alphabetical order.
+    Which of the ghost names comes first in alphabetical order?
 }
 
 ANSWER {

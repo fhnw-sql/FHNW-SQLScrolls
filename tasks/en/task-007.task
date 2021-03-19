@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get the names of the ghosts from the youngest to the oldest.
+    List the ghost names from the youngest to the oldest.
 }
 
 ANSWER {

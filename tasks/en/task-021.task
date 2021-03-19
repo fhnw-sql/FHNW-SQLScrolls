@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Calculate how many ghost have murdered at least 2 people   
+    How many ghosts have murdered at least 2 people?   
 }
 
 ANSWER {

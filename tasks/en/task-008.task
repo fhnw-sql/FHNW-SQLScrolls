@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Search for all different birth years.
+    List all different (unique) years of birth.
 }
 
 PARSONS {

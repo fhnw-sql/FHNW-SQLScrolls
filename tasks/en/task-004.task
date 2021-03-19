@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get all name of ghosts born after 1800.
+    List all names of ghosts born after 1800.
 }
 
 ANSWER {
