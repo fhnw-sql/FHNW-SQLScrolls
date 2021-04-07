@@ -7,10 +7,10 @@ METADATA {
 }
 
 PAGE {
-    I'm a book. You find me in every chapter and I contain the necessary theory if you need help to solve the given tasks. \n
-    Try the first tasks to get in touch with the mechanics :).
+    I'm a book. You find me in every chapter and I contain the necessary theory if you need help to solve the given tasks. \n\n
+    Try the first tasks to get in touch with the mechanics.
 }
 
 PAGE {
-   <b>Hint:</b> After five wrong answers Principal Queryx will assist you by providing the model answer in case you stuck.
+   <small><b>Hint:</b> <i>After five wrong answers Principal Queryx will assist you by providing the model answer in case you stuck.</i></small>
 }
