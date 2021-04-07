@@ -12,5 +12,7 @@ PAGE {
 }
 
 PAGE {
-   <small><b>Hint:</b> <i>After five wrong answers Principal Queryx will assist you by providing the model answer in case you stuck.</i></small>
+
+ <small><b>Hint 1:</b> <i>The colour of the individual tasks corresponds to the colour of the corresponding books.</i></small> <br/ > <br />
+   <small><b>Hint 2:</b> <i>After five wrong answers Maestro Codd will assist you by providing the model answer in case you stuck.</i></small>
 }
