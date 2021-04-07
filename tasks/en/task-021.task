@@ -1,11 +1,11 @@
 METADATA {
     id: task-021
     name: Task 21
-    color: purple
+    color: blue
 }
 
 DESCRIPTION {
-    Calculate how many ghost have murdered at least 2 people   
+    How many ghosts have murdered at least 2 people?   
 }
 
 ANSWER {

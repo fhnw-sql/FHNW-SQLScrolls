@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-   Get the area and the sum of skill level of each area
+   List the areas where wizards live and the sum of wizard skill levels in each area.
 }
 
 PARSONS {

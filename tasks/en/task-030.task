@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Find out the highest skill level of the magician in each area.
+    List all areas and show the highest skill level of magicians in each area.
 }
 
 ANSWER {

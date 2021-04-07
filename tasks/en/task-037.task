@@ -5,8 +5,19 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get information about ghosts.
+    Show all information you can get about ghosts.
 }
+
+PARSONS {
+  SELECT g.name, p.name 
+  FROM Hauntings  h, 
+  PLACES p, Ghosts g 
+  WHERE g.id = h.ghost_id 
+  AND p.id = h.place_id
+  AND g.id = p.place_id #distractor
+  WHERE h.id = g.id #distractor
+}
+
 
 ANSWER {
    SELECT g.name, p.name FROM Hauntings  h, PLACES p, Ghosts g WHERE g.id = h.ghost_id AND p.id = h.place_id

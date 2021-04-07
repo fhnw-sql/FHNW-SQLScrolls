@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get the name of all different ghosts born in 1833
+    Show all different ghost names for ghosts born in 1833
 }
 
 ANSWER {

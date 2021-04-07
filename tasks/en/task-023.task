@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Apply for the earliest and latest Year of Birth.
+    Show the year of birth for the oldest and for the youngest ghost.
 }
 
 

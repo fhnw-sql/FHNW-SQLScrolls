@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Look for areas with the magician's level lower 3.
+    List areas with poorly skilled magicians, i.e. skill level lower than 3.
 }
 
 PARSONS {

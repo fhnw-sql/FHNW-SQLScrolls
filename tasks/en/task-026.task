@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-   Get the area's count of wizards.
+   For each area that the wizards inhabit, show the number of wizards who live there.
 }
 
 PARSONS {

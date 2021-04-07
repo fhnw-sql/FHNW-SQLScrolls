@@ -1,11 +1,11 @@
 METADATA {
     id: task-019
     name: Task 19
-    color: purple
+    color: blue
 }
 
 DESCRIPTION {
-    Find the total of murdered people by the ghosts named Siegfried  
+   How many people were murdered by ghosts called Siegfried?  
 }
 
 ANSWER {

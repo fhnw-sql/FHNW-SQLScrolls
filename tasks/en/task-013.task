@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get all ghosts born in the 17th century from the youngest to the oldest in alphabetical order.
+  Show all ghosts born in the 17th century from the youngest to the oldest and if they were born in the same year, then in alphabetical order within each year.
 }
 
 ANSWER {

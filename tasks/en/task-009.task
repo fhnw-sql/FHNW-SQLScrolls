@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get all ghosts from the oldest to the youngest and in alphabetical order
+    Show all ghosts ordered from the oldest to the youngest and where they are of the same age, then in alphabetical order.
 }
 
 ANSWER {

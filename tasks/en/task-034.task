@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Get a ghost spot for each ghost.
+    Which place does each ghost haunt?
 }
 PARSONS {
     SELECT 

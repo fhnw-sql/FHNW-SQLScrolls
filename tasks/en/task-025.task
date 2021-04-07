@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Calculate how many different years of birth there are.
+    How many different years of birth do we have in the ghost table?
 }
 
 ANSWER {
