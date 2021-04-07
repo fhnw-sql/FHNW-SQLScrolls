@@ -1,31 +1,16 @@
 METADATA {
     id: Book-B
-    name: Summary book
-    title: Summa Summarum
+    name: Book of Choices
+    title: Book of Selection Spells
     author: Maestro Codd
-    color: blue
-}
-
-
-PAGE {
-    The summary query returns a single result that is associated with all selected rows in the table.
-
-    Common summaries are COUNT (number of rows), SUM (sum of values), MIN (lowest value), and MAX (maximum value).
+    color: purple
 }
 
 PAGE {
-    EXAMPLE {
-        TABLE {
-            Dragons
-            id | name | weight
-            1 | Wilfried | 3500
-            2 | Justus | 7500
-            3 | Tabaluca | 6000
-        }
-        QUERY {
-            SELECT COUNT (*) FROM Dragons;
-        }
-    }
+    The SELECT command retrieves the desired columns from the table.
+    The command is used as follows:
+
+    SELECT {columns} FROM {table};
 }
 
 PAGE {
@@ -38,9 +23,18 @@ PAGE {
             3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT MAX (weight) FROM Dragons;
+            SELECT name, weight FROM Dragons;
         }
     }
+}
+
+PAGE {
+    The search can be restricted by the WHERE section:
+
+    SELECT {columns} FROM table WHERE {condition};
+
+    For example, comparisons ==, <>,
+    <,>, <=,> = and AND and OR and LIKE.
 }
 
 PAGE {
@@ -53,13 +47,17 @@ PAGE {
             3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT COUNT (*), SUM (weight) FROM Dragons;
+            SELECT name FROM Dragons WHERE weight > 5000;
         }
     }
 }
 
 PAGE {
-    A summary survey can include a condition in the same way as a regular survey.
+    Search results can be sorted by ORDER BY section:
+
+    SELECT {columns} FROM {table} ORDER BY {columns};
+
+    If you want the order to be reversed, DESC is added to the end of the command.
 }
 
 PAGE {
@@ -72,13 +70,15 @@ PAGE {
             3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT COUNT (*) FROM Dragons WHERE weight> 5000;
+            SELECT name, weight FROM Dragons ORDER BY weight;
         }
     }
 }
 
 PAGE {
-    You can also use the word DISTINCT in a summary query to consider each different value only once.
+    The word DISTINCT retrieves each different line only once.
+
+    SELECT DISTINCT {search};
 }
 
 PAGE {
@@ -88,10 +88,10 @@ PAGE {
             id | name | weight
             1 | Wilfried | 3500
             2 | Justus | 7500
-            3 | Tabaluca | 3500
+            3 | Wilfried | 6000
         }
         QUERY {
-            SELECT COUNT (DISTINCT weight) FROM Dragons;
+            SELECT DISTINCT name FROM Dragons;
         }
     }
 }

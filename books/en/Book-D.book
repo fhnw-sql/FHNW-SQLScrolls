@@ -1,92 +1,100 @@
 METADATA {
     id: Book-D
-    name: Connection book
-    title: Cartesian Products
+    name: Grouping book
+    title: The Art of Grouping
     author: Maestro Codd
-    color: orange
+    color: green
 }
 
 
 PAGE {
-    An SQL query can target multiple tables, so the results are based on all row combinations from the retrieved tables.
-    
-    To make the results meaningful, the rows in the different tables are joined together using a suitable condition.
+    The GROUP BY section groups the retrieved rows by a specific column or columns.
+
+    After grouping, a summary of each group can be retrieved.
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
-            Dragons
-            id|name|owner_id
-            1|Wilfried|1
-            2|Justus|2
-            3|Tabaluca|1
-        }
-        TABLE {
-            Owners
-            id|name
-            1|Anna
-            2|Bingo
-            3|Coco
+            Animals
+            id | name | species | weight
+            1 | Wilfried | dragon | 3500
+            2 | Fred | sheep | 500
+            3 | Justus | dragon | 7500
+            4 | Tabaluca | dragon | 6000
+            5 | Ake | sheep | 800
         }
         QUERY {
-            SELECT D.name, O.name FROM Dragons D, Owners O WHERE D.owner_id=O.id;
+            SELECT species, COUNT (*) FROM Animals GROUP BY species;
         }
     }
 }
 
-
 PAGE {
-    In a multi-table query, the WHERE section may contain both join-related conditions and other conditions that limit the results.
+    The COUNT, SUM, MAX, and MIN functions can be used in the summary in the same way as before.
+
+    The only difference is that the function is used to calculate a summary of each group separately.
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
-            Dragons
-            id|name|owner_id
-            1|Wilfried|1
-            2|Justus|2
-            3|Tabaluca|1
-        }
-        TABLE {
-            Owners
-            id|name
-            1|Anna
-            2|Bingo
-            3|Coco
+            Animals
+            id | name | species | weight
+            1 | Wilfried | dragon | 3500
+            2 | Fred | sheep | 500
+            3 | Justus | dragon | 7500
+            4 | Tabaluca | dragon | 6000
+            5 | Ake | sheep | 800
         }
         QUERY {
-            SELECT D.name, O.name FROM Dragons D, Owners O WHERE D.owner_id=O.id AND O.name='Bingo';
+            SELECT species, SUM (weight) FROM Animals GROUP BY species;
         }
     }
 }
 
-
 PAGE {
-    The same table can appear multiple times in a query if the rows in the table have multiple different roles.
-    
-    In the following example, the board Friends tells you which dragons are friends with each other.
+    You can use conditions with grouping in the same way as you would with queries.
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
-            Dragons
-            id|name
-            1|Wilfried
-            2|Justus
-            3|Tabaluca
-        }
-        TABLE {
-            Friends
-            dragon_id|friend_id
-            1|2
-            1|3
-            2|1
+            Animals
+            id | name | species | weight
+            1 | Wilfried | dragon | 3500
+            2 | Fred | sheep | 500
+            3 | Justus | dragon | 7500
+            4 | Tabaluca | dragon | 6000
+            5 | Ake | sheep | 800
         }
         QUERY {
-            SELECT A.name, B.name FROM Dragons A, Dragons B, Friends F WHERE A.id=F.dragon_id AND B.id=F.friend_id;
+            SELECT species, COUNT (*) FROM Animals WHERE weight <5000 GROUP BY species;
+        }
+    }
+}
+
+PAGE {
+    The word HAVING can be used to specify a condition that is checked only after grouping.
+
+    In this case, the condition can also refer to summary functions.
+
+    For example, the following query only shows groups with more than 2 results.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Animals
+            id | name | species | weight
+            1 | Wilfried | dragon | 3500
+            2 | Fred | sheep | 500
+            3 | Justus | dragon | 7500
+            4 | Tabaluca | dragon | 6000
+            5 | Ake | sheep | 800
+        }
+        QUERY {
+            SELECT species, COUNT (*) FROM Animals GROUP BY species HAVING COUNT (*)> 2;
         }
     }
 }

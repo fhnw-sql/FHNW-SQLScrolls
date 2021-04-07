@@ -1,97 +1,16 @@
 METADATA {
     id: Book-A
-    name: Book of Choices
-    title: Book of Selection Spells
+    name: Book of Explanation
+    title: Book of Explanation
     author: Maestro Codd
-    color: purple
+    color: grey
 }
 
 PAGE {
-    The SELECT command retrieves the desired columns from the table.
-    The command is used as follows:
-
-    SELECT {columns} FROM {table};
+    I'm a book. You find me in every chapter and I contain the necessary theory if you need help to solve the given tasks. \n
+    Try the first tasks to get in touch with the mechanics :).
 }
 
 PAGE {
-    EXAMPLE {
-        TABLE {
-            Dragons
-            id | name | weight
-            1 | Wilfried | 3500
-            2 | Justus | 7500
-            3 | Tabaluca | 6000
-        }
-        QUERY {
-            SELECT name, weight FROM Dragons;
-        }
-    }
-}
-
-PAGE {
-    The search can be restricted by the WHERE section:
-    
-    SELECT {columns} FROM table WHERE {condition};
-    
-    For example, comparisons ==, <>,
-    <,>, <=,> = and AND and OR and LIKE.
-}
-
-PAGE {
-    EXAMPLE {
-        TABLE {
-            Dragons
-            id | name | weight
-            1 | Wilfried | 3500
-            2 | Justus | 7500
-            3 | Tabaluca | 6000
-        }
-        QUERY {
-            SELECT name FROM Dragons WHERE weight > 5000;
-        }
-    }
-}
-
-PAGE {
-    Search results can be sorted by ORDER BY section:
-
-    SELECT {columns} FROM {table} ORDER BY {columns};
-    
-    If you want the order to be reversed, DESC is added to the end of the command.
-}
-
-PAGE {
-    EXAMPLE {
-        TABLE {
-            Dragons
-            id | name | weight
-            1 | Wilfried | 3500
-            2 | Justus | 7500
-            3 | Tabaluca | 6000
-        }
-        QUERY {
-            SELECT name, weight FROM Dragons ORDER BY weight;
-        }
-    }
-}
-
-PAGE {
-    The word DISTINCT retrieves each different line only once.
-
-    SELECT DISTINCT {search};
-}
-
-PAGE {
-    EXAMPLE {
-        TABLE {
-            Dragons
-            id | name | weight
-            1 | Wilfried | 3500
-            2 | Justus | 7500
-            3 | Wilfried | 6000
-        }
-        QUERY {
-            SELECT DISTINCT name FROM Dragons;
-        }
-    }
+   <b>Hint:</b> After five wrong answers Principal Queryx will assist you by providing the model answer in case you stuck.
 }

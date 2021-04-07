@@ -1,100 +1,97 @@
 METADATA {
     id: Book-C
-    name: Grouping book
-    title: The Art of Grouping
+    name: Summary book
+    title: Summa Summarum
     author: Maestro Codd
-    color: green
+    color: blue
 }
 
 
 PAGE {
-    The GROUP BY section groups the retrieved rows by a specific column or columns.
-    
-    After grouping, a summary of each group can be retrieved.
+    The summary query returns a single result that is associated with all selected rows in the table.
+
+    Common summaries are COUNT (number of rows), SUM (sum of values), MIN (lowest value), and MAX (maximum value).
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
-            Animals
-            id | name | species | weight
-            1 | Wilfried | dragon | 3500
-            2 | Fred | sheep | 500
-            3 | Justus | dragon | 7500
-            4 | Tabaluca | dragon | 6000
-            5 | Ake | sheep | 800
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT species, COUNT (*) FROM Animals GROUP BY species;
+            SELECT COUNT (*) FROM Dragons;
         }
     }
 }
 
 PAGE {
-    The COUNT, SUM, MAX, and MIN functions can be used in the summary in the same way as before.
-    
-    The only difference is that the function is used to calculate a summary of each group separately.
-}
-
-PAGE {
     EXAMPLE {
         TABLE {
-            Animals
-            id | name | species | weight
-            1 | Wilfried | dragon | 3500
-            2 | Fred | sheep | 500
-            3 | Justus | dragon | 7500
-            4 | Tabaluca | dragon | 6000
-            5 | Ake | sheep | 800
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT species, SUM (weight) FROM Animals GROUP BY species;
+            SELECT MAX (weight) FROM Dragons;
         }
     }
 }
 
 PAGE {
-    You can use conditions with grouping in the same way as you would with queries.
-}
-
-PAGE {
     EXAMPLE {
         TABLE {
-            Animals
-            id | name | species | weight
-            1 | Wilfried | dragon | 3500
-            2 | Fred | sheep | 500
-            3 | Justus | dragon | 7500
-            4 | Tabaluca | dragon | 6000
-            5 | Ake | sheep | 800
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT species, COUNT (*) FROM Animals WHERE weight <5000 GROUP BY species;
+            SELECT COUNT (*), SUM (weight) FROM Dragons;
         }
     }
 }
 
 PAGE {
-    The word HAVING can be used to specify a condition that is checked only after grouping.
-    
-    In this case, the condition can also refer to summary functions.
-    
-    For example, the following query only shows groups with more than 2 results.
+    A summary survey can include a condition in the same way as a regular survey.
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
-            Animals
-            id | name | species | weight
-            1 | Wilfried | dragon | 3500
-            2 | Fred | sheep | 500
-            3 | Justus | dragon | 7500
-            4 | Tabaluca | dragon | 6000
-            5 | Ake | sheep | 800
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT species, COUNT (*) FROM Animals GROUP BY species HAVING COUNT (*)> 2;
+            SELECT COUNT (*) FROM Dragons WHERE weight> 5000;
+        }
+    }
+}
+
+PAGE {
+    You can also use the word DISTINCT in a summary query to consider each different value only once.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 3500
+        }
+        QUERY {
+            SELECT COUNT (DISTINCT weight) FROM Dragons;
         }
     }
 }
