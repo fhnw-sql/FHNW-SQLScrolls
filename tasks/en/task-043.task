@@ -25,7 +25,7 @@ ANSWER {
 TEST {
     TABLE {
         Songs
-        id|name|year
+        song_id|title|seconds|language|rating|interpret_fk|album_fk
         1|'All I Want for Christmas Is you'|241|'en'|4|4|13
         2|'Silent Night'|219|'en'|1|4|13
         3|'O Holy Night'|267|'en'|3|4|13
