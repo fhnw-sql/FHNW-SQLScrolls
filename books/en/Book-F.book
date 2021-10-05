@@ -20,12 +20,21 @@ PAGE {
             interpret_id|name|f_year|country
             1|'Darlene Love'|0|'US'
             2|'The Flippers'|1964|'D'
+            3|'The Crystals'|1961|'US'
+            4|'Mariah Carey'|0|'US'
+            5|'Wham!'|1981|'UK'
         }
+    }
+}
+
+PAGE {
+    EXAMPLE {
         TABLE {
             Album
             album_id|title|year
-            11|'A Christmas Gift For You From Ph
-            12|'Original German Christmas With D
+            11|'A Christmas Gift For You From Phil Spector'|1963
+            12|'Original German Christmas With Die Flippers'|1987
+            13|'Merry Christmas'|1994
         }
         TABLE {
             Song
