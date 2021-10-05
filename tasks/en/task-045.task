@@ -39,10 +39,10 @@ TEST {
         song_id|title|seconds|language|rating|interpret_fk|album_fk
 		1|All I Want for Christmas Is you|241|en|4|4|13
 		2|O Holy Night|267|en|3|4|13
-		3|Christmas Baby Please Come Home)|153|en|7|4|13
+		3|Christmas (Baby Please Come Home)|153|en|7|4|13
 		4|Parade Of The Wooden Soldiers|175|en|2|3|11
 		5|Aber Heidschi Bum Beidschi|267|de|8|2|12
-		6|Vom Himmel hoch da komm ich her|180|de|7|2|12
+		6|Christmas Baby (Please Come Home)|166|en|3|1|11
 		7|Alle Jahre wieder|118|de|4|2|NULL
     }
 
