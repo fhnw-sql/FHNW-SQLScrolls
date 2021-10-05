@@ -1512,9 +1512,9 @@ body {
 }
 
 .book.xmas-book::after {
-  background: -o-radial-gradient(closest-corner, #820202 0%, #580101 60%, #240000 99%, #110000 100%);
-  background: radial-gradient(closest-corner, #820202 0%, #580101 60%, #240000 99%, #110000 100%);
-  border-color: #11000f;
+  border-color: #110000;
+  background: url("/img/stars-xmas-background.png");
+  background-size: cover;
 }
 
 .book-open.xmas-book {
