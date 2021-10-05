@@ -1,0 +1,37 @@
+METADATA {
+    id: Book-F
+    name: Christmas book
+    title: Christmas Sogns & Spells
+    author: Maestro Codd
+    color: red
+}
+
+
+PAGE {
+    Collection of SQL tasks in a musical Christmas ambiance.
+
+    You can see in the next page the relational model used for this tasks
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Interpret
+            interpret_id|name|f_year|country
+            1|'Darlene Love'|0|'US'
+            2|'The Flippers'|1964|'D'
+        }
+        TABLE {
+            Album
+            album_id|title|year
+            11|'A Christmas Gift For You From Ph
+            12|'Original German Christmas With D
+        }
+        TABLE {
+            Song
+            song_id|title|seconds|language|rating|interpret_fk|album_fk
+                10|'Parade Of The Wooden Soldiers'|175|'en'|2|3|11
+                11|'Aber Heidschi Bum Beidschi'|267|'de'|8|2|12
+        }
+    }
+}
