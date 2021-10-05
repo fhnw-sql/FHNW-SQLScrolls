@@ -36,11 +36,21 @@ PAGE {
             12|'Original German Christmas With Die Flippers'|1987
             13|'Merry Christmas'|1994
         }
+    }
+}
+
+PAGE {
+    EXAMPLE {
         TABLE {
             Song
             song_id|title|seconds|language|rating|interpret_fk|album_fk
-                10|'Parade Of The Wooden Soldiers'|175|'en'|2|3|11
-                11|'Aber Heidschi Bum Beidschi'|267|'de'|8|2|12
+            1|'All I Want for Christmas Is you'|241|'en'|4|4|13
+            2|'Silent Night'|219|'en'|1|4|13
+            3|'O Holy Night'|267|'en'|3|4|13
+            4|'Christmas Baby Please Come Home)'|153|'en'|7|4|13
+            5|'Santa Claus Is Comin'' to Town'|204|'en'|8|4|13
+            6|'Christmas Baby Please Come Home)'|166|'en'|3|1|11
+            7|'Santa Claus Is Coming to Town'|204|'en'|7|3|11
         }
     }
 }
