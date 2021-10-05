@@ -1508,12 +1508,12 @@ body {
 }
 
 .book.xmas-book {
-  border-color: #11000f;
+  border-color: #110000;
 }
 
 .book.xmas-book::after {
-  background: -o-radial-gradient(closest-corner, #820202 0%, #580148 60%, #24001e 99%, #11000f 100%);
-  background: radial-gradient(closest-corner, #820202 0%, #580148 60%, #24001e 99%, #11000f 100%);
+  background: -o-radial-gradient(closest-corner, #820202 0%, #580101 60%, #240000 99%, #110000 100%);
+  background: radial-gradient(closest-corner, #820202 0%, #580101 60%, #240000 99%, #110000 100%);
   border-color: #11000f;
 }
 
