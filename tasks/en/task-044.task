@@ -1,0 +1,57 @@
+METADATA {
+    id: task-044
+    name: Task 44
+    color: xmas
+}
+
+DESCRIPTION {
+    How are the German songs called and who sings them?
+}
+
+PARSONS {
+
+    SELECT title, name 
+	FROM song, interpret
+	FROM song #distractor
+	WHERE language = 'de'
+	WHERE language is 'D' #distractor
+	AND interpret_id = interpret_fk
+	AND song_id = interpret_fk #distractor
+
+}
+
+ANSWER { 
+    SELECT title, name FROM song, interpret WHERE language = 'de' AND interpret_id = interpret_fk
+}
+
+TEST {
+
+	TABLE {
+		Interpret
+		interpret_id|name|f_year|country
+		1|Darlene Love|0|US
+		2|The Flippers|1964|D
+		3|The Crystals|1961|US
+		4|Mariah Carey|0|US
+		5|Wham!|1981|UK
+	}
+	
+    TABLE {
+        Song
+        song_id|title|seconds|language|rating|interpret_fk|album_fk
+		1|All I Want for Christmas Is you|241|en|4|4|13
+		2|O Holy Night|267|en|3|4|13
+		3|Christmas Baby Please Come Home)|153|en|7|4|13
+		4|Parade Of The Wooden Soldiers|175|en|2|3|11
+		5|Aber Heidschi Bum Beidschi|267|de|8|2|12
+		6|Vom Himmel hoch da komm ich her|180|de|7|2|12
+		7|Alle Jahre wieder|118|de|4|2|NULL
+    }
+
+    RESULT {
+		Aber Heidschi Bum Beidschi|The Flippers        
+		Vom Himmel hoch da komm ich her|The Flippers        
+		Alle Jahre wieder|The Flippers        
+    }
+}
+
