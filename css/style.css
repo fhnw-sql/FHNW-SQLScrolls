@@ -13,6 +13,7 @@ body {
   --col-light-green: #1ccb1c;
   --col-red: darkred;
   --col-light-red: #d74848;
+  --col-xmas-red: #aa0000;
 
   --col-rune-grey: #343434;
 
@@ -454,6 +455,10 @@ button.col-yellow:focus {
 
 .col-book-magenta {
   color: #820263 !important;
+}
+
+.col-book-xmas {
+  color:var(--col-xmas-red) !important;
 }
 
 .col-book-light-blue {
@@ -1500,6 +1505,20 @@ body {
 
 .book-open.magenta-book {
   border-color: #580148;
+}
+
+.book.xmas-book {
+  border-color: #11000f;
+}
+
+.book.xmas-book::after {
+  background: -o-radial-gradient(closest-corner, #820202 0%, #580148 60%, #24001e 99%, #11000f 100%);
+  background: radial-gradient(closest-corner, #820202 0%, #580148 60%, #24001e 99%, #11000f 100%);
+  border-color: #11000f;
+}
+
+.book-open.xmas-book {
+  border-color: #550000;
 }
 
 .book.light-blue-book {
