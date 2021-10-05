@@ -11,12 +11,12 @@ DESCRIPTION {
 PARSONS {
 
 	SELECT a.title, s.rating, s.title 
+ 	SELECT title, rating, name  #distractor
+   FROM song s, album a 
     FROM song, album  #distractor
     WHERE s.rating = 3
     WHERE s.rating EQUAL 3 #distractor
 	AND a.album_id = s.album_fk	
-	SELECT title, rating, name  #distractor
-    FROM song s, album a 
 	AND s.album_id = a.album_fk #distractor
 }
 
