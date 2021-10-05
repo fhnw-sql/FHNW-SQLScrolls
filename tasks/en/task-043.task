@@ -1,0 +1,44 @@
+METADATA {
+    id: task-043
+    name: Task 45
+    color: red
+}
+
+DESCRIPTION {
+    Which songs have the word "Christmas""in the title?
+}
+
+PARSONS {
+    SELECT song_id, title
+    SELECT year #distractor
+    FROM song
+    FROM songs #distractor
+    WHERE title LIKE '%Christmas %'
+    WHERE title LIKE '%Christmas%' #distractor
+    WHERE title IS 'Christmas' #distractor
+}
+
+ANSWER { 
+    SELECT song_id, title FROM song WHERE title LIKE '%Christmas %'
+}
+
+TEST {
+    TABLE {
+        Songs
+        id|name|year
+        1|'All I Want for Christmas Is you'|241|'en'|4|4|13
+        2|'Silent Night'|219|'en'|1|4|13
+        3|'O Holy Night'|267|'en'|3|4|13
+        4|'Christmas Baby Please Come Home)'|153|'en'|7|4|13
+        5|'Santa Claus Is Comin'' to Town'|204|'en'|8|4|13
+        6|'Christmas Baby Please Come Home)'|166|'en'|3|1|11
+        7|'Christmasland'|144|'en'|9|NULL|11
+    }
+
+    RESULT {
+        1|'All I Want for Christmas Is you'
+        4|'Christmas Baby Please Come Home)'
+        6|'Christmas Baby Please Come Home)'
+    }
+}
+
