@@ -1,9 +1,9 @@
 METADATA {
     id: Book-F
     name: Christmas book
-    title: Christmas Sogns & Spells
+    title: Christmas Songs & Spells
     author: Maestro Codd
-    color: red
+    color: xmas
 }
 
 
