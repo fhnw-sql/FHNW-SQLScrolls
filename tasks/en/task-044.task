@@ -11,8 +11,8 @@ DESCRIPTION {
 PARSONS {
 
     SELECT title, name 
-	FROM song #distractor
-	FROM song, interpret
+	FROM song
+	FROM song, interpret #distractor
 	INNER JOIN interpret
 	ON interpret_id = interpret_fk
 	WHERE language = 'de'
