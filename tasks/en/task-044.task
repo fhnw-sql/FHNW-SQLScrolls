@@ -11,17 +11,18 @@ DESCRIPTION {
 PARSONS {
 
     SELECT title, name 
-	FROM song, interpret
 	FROM song #distractor
+	FROM song, interpret
+	INNER JOIN interpret
+	ON interpret_id = interpret_fk
 	WHERE language = 'de'
 	WHERE language is 'D' #distractor
-	AND interpret_id = interpret_fk
 	AND song_id = interpret_fk #distractor
 
 }
 
 ANSWER { 
-    SELECT title, name FROM song, interpret WHERE language = 'de' AND interpret_id = interpret_fk
+    SELECT title, name FROM song INNER JOIN interpret  ON interpret_id = interpret_fk WHERE language = 'de'
 }
 
 TEST {
