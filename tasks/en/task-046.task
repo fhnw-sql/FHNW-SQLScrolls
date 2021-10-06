@@ -5,7 +5,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Which song has no interpret and in wich album is that one?
+    Which songs are shorter than 2.5 minutes (150 seconds), who is the interpret and which is the album title?
 }
 
 PARSONS {
