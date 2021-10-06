@@ -69,9 +69,9 @@ TEST {
 	}
 
     RESULT {
-		Alle Jahre wieder|118|The Flippers|
+		Alle Jahre wieder|118|The Flippers|null
 		A Marshmallow World|143|Darlene Love|A Christmas Gift For You From Phil Spector
-		Christmasland|144||A Christmas Gift For You From Phil Spector
+		Christmasland|144|null|A Christmas Gift For You From Phil Spector
 		Winter Wonderland|146|Darlene Love|A Christmas Gift For You From Phil Spector
     }
 }
