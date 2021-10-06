@@ -51,7 +51,6 @@ TEST {
 		12|Vom Himmel hoch da komm ich her|180|de|7|2|12
 		13|Alle Jahre wieder|118|de|4|2|null
 		14|Christmasland|144|en|9|null|11
-
     }
 
     RESULT {
@@ -60,4 +59,3 @@ TEST {
 		A Christmas Gift For You From Phil Spector|6|978
     }
 }
-
