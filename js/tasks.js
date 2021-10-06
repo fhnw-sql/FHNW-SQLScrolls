@@ -381,10 +381,11 @@ class Table {
      * It is assumed that rows and header have same length.
      */
     static fromPlain(name, lines, headers) {
+        console.log("called Table.fromPlain", lines)
         return new Table({
             name: name,
             header: headers ? headers : [],
-            rows: lines.map((line) => line.split("|").map(function(item) { return item == "null" ? null : item ; })), // convert "null" to null value
+            rows: lines.map((line) => line.split("|").map(function(item) { console.log(item); return item == "null" ? null : item ; })), // convert "null" to null value
         });
     }
 
