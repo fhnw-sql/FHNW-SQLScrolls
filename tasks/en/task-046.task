@@ -16,8 +16,8 @@ PARSONS {
 	LEFT JOIN interpret i 
 	INNER JOIN interpret i #distractor
 	ON i.interpret_id = s.interpret_fk 
-	LEFT JOIN album a #distractor
-	INNER JOIN album a 
+	LEFT JOIN album a
+	INNER JOIN album a  #distractor
 	ON a.album_id = s.album_fk
 	WHERE s.seconds <= 150
 	WHERE a.seconds <= 150 #distractor
