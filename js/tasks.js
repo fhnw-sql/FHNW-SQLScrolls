@@ -384,7 +384,7 @@ class Table {
         return new Table({
             name: name,
             header: headers ? headers : [],
-            rows: lines.map((line) => line.split("|")),
+            rows: lines.map((line) => line.split("|").map(function(item) { return item == "null" ? null : item ; })), // convert "null" to null value
         });
     }
 
