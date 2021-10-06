@@ -459,6 +459,8 @@ class Table {
 
     isEqual(table, strict) {
         if (!table instanceof Table) return false;
+        console.log("this.rows = ", this.rows)
+        console.log("table.rows = ", table.rows)
         return isArrayEqual(this.rows, table.rows, strict);
     }
 }
