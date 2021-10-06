@@ -64,14 +64,14 @@ TEST {
 		10|Parade Of The Wooden Soldiers|175|en|2|3|11
 		11|Aber Heidschi Bum Beidschi|267|de|8|2|12
 		12|Vom Himmel hoch da komm ich her|180|de|7|2|12
-		13|Alle Jahre wieder|118|de|4|2|N
-		14|Christmasland|144|en|9|N|11
+		13|Alle Jahre wieder|118|de|4|2|null
+		14|Christmasland|144|en|9|null|11
 	}
 
     RESULT {
-		Alle Jahre wieder|118|The Flippers|N
+		Alle Jahre wieder|118|The Flippers|null
 		A Marshmallow World|143|Darlene Love|A Christmas Gift For You From Phil Spector
-		Christmasland|144|N|A Christmas Gift For You From Phil Spector
+		Christmasland|144|null|A Christmas Gift For You From Phil Spector
 		Winter Wonderland|146|Darlene Love|A Christmas Gift For You From Phil Spector
     }
 }
