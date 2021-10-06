@@ -431,6 +431,7 @@ class Table {
         const firstRow = this.rows[0];
         for (let i = 0; i < firstRow.length; i++) {
             const value = firstRow[i];
+            //TODO: handle nulls
             if (isNaN(value)) {
                 columnTypes[i] = "TEXT";
             } else {
@@ -453,7 +454,7 @@ class Table {
                 valuesWithTypes.push(columnTypes[i] === "TEXT" ? `'${row[i].split("'").join("\\''")}'` : row[i]);
             }
             // example: INSERT INTO Table (col1, col2) VALUES ("value", 0);
-            queries.push(`INSERT INTO ${this.name} (${this.header.join(",")}) VALUES (${valuesWithTypes.join(",")});`);
+            queries.push(`INSERT INTO ${this.name} (${this.header.join(",")}) VALUES (${valuesWithTypes.map(v => v == null ? 'null': v).join(",")});`);
         }
         return queries;
     }
