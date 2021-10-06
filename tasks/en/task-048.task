@@ -10,18 +10,18 @@ DESCRIPTION {
 
 PARSONS {
 
-	SELECT a.title, count(*) num_songs, sum(s.seconds) duration
+	SELECT a.title, count(*), sum(s.seconds)
 	FROM song s 
 	INNER JOIN album a ON a.album_id = s.album_fk
 	GROUP BY a.title   
-	SELECT a.title, sum(*) num_songs, sum(s.seconds) duration #distractor
+	SELECT a.title, sum(*), sum(s.seconds) #distractor
 	FROM album a  #distractor
 	LEFT JOIN album a ON a.album_id = s.album_fk #distractor
 	GROUP BY s.title #distractor
 }
 
 ANSWER { 
-	SELECT a.title, count(*) num_songs, sum(s.seconds) duration FROM song s INNER JOIN album a ON a.album_id = s.album_fk GROUP BY a.title
+	SELECT a.title, count(*), sum(s.seconds) FROM song s INNER JOIN album a ON a.album_id = s.album_fk GROUP BY a.title
 }
 
 TEST {
