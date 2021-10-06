@@ -10,8 +10,8 @@ DESCRIPTION {
 
 PARSONS {
 
-	SELECT s.title, s.seconds, i.name, a.title #distractor
-	SELECT s.title, i.seconds, a.name, a.title
+	SELECT s.title, s.seconds, i.name, a.title
+	SELECT s.title, i.seconds, a.name, a.title #distractor
 	FROM song s 
 	LEFT JOIN interpret i 
 	ON i.interpret_id = s.interpret_fk 
