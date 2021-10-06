@@ -12,16 +12,17 @@ PARSONS {
 
 	SELECT a.title, s.rating, s.title 
  	SELECT title, rating, name  #distractor
-   FROM song s, album a 
-    FROM song, album  #distractor
+    FROM song s, album a #distractor
+    FROM song s  
+	INNER JOIN album a
+ 	ON a.album_id = s.album_fk	
     WHERE s.rating = 3
     WHERE s.rating EQUAL 3 #distractor
-	AND a.album_id = s.album_fk	
 	AND s.album_id = a.album_fk #distractor
 }
 
 ANSWER { 
-	SELECT a.title, s.rating, s.title FROM song s, album a WHERE s.rating = 3 AND a.album_id = s.album_fk
+	SELECT a.title, s.rating, s.title FROM song s INNER JOIN album a ON a.album_id = s.album_fk WHERE s.rating = 3 
 	}
 
 TEST {
