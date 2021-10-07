@@ -33,7 +33,7 @@ for (let entry of Object.entries({
   "previous-answers": '<i class="fa fa-history"></i> Query history',
   "table-result": "Result",
   tables: "Tables",
-  "wanted-result": "Exected result",
+  "wanted-result": "Expected result",
   "query-results": "Query results",
   "books-text": "Books",
   "tasks-text": "Scrolls",
