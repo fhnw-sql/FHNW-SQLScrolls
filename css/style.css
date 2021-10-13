@@ -657,7 +657,7 @@ th {
 }
 
 .example #task-flame-container {
-  height: 125px;
+  height: 90px;
 }
 
 .task-flame {
@@ -1884,9 +1884,9 @@ body {
   margin-right: 0;
   top: -3.5rem;
   margin-left: -1rem;
-  -webkit-transform: scaleX(1.1);
-  -ms-transform: scaleX(1.1);
-  transform: scaleX(1.1);
+  -webkit-transform: scale(0.6);
+  -ms-transform: scale(0.6);
+  transform: scale(0.6);
   -webkit-transition: -webkit-transform 0.5s;
   transition: -webkit-transform 0.5s;
   -o-transition: transform 0.5s;
