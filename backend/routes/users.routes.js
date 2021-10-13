@@ -9,6 +9,10 @@ const postmark = require("postmark");
 const reqBodyValidator = require("../middlewares/reqBodyValidator");
 const { registerPOST, authenticatePOST, answerSqlPATCH, recoverPOST, resetPOST } = require("../schemes/users");
 
+const cors = require("cors");
+
+router.use(cors())
+
 // /users/register
 router.post("/register", reqBodyValidator(registerPOST), async function ({ body: user }, res, next) {
   // Get Users Collections
@@ -106,7 +110,7 @@ router.post("/recover", reqBodyValidator(recoverPOST), async function (req, res,
       // Send Mail if its not invoked by JEST
       if (!process.env.JEST_WORKER_ID) {
         const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
-        const link = "https://fhnw-sql-training-game.github.io/?action=resetPassword&token=" + user.resetPasswordToken;
+        const link = (process.env.IO_URL)+"/?action=resetPassword&token=" + user.resetPasswordToken;
         await client.sendEmail({
           From: process.env.FROM_SENDER,
           To: user.username,
