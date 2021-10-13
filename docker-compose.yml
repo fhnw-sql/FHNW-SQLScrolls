@@ -18,13 +18,14 @@ services:
     depends_on:
       - 'db'
     restart: always
-    build: https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game-API.git#main
+    build: ../FHNW-SQL-Training-Game-API
     environment:
       - MONGODB_URI=mongodb://mongo:27017/stg-api
       - JWT_SECRET=FHNW_2021
       - FROM_SENDER=${FROM_SENDER}
       - POSTMARK_API_KEY=${POSTMARK_API_KEY}
       - PORT=3000
+      - IO_URL=${IO_URL} 
     ports:
       - "3000:3000"
   frontend:
