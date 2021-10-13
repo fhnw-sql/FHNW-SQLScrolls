@@ -660,9 +660,6 @@ th {
   height: 90px;
 }
 
-.task-flame {
-  width: 90px;
-}
 .tests {
   border-color: var(--col-gold-40) !important;
   width: 100%;
