@@ -1,6 +1,6 @@
 METADATA {
     id: task-050
-    name: Games 
+    name: Games 1
     color: red
 	info: game release year
 	keywords: SELECT, SUBSTR, LENGTH
@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT DISTINCT(SUBSTR(release_date,LENGTH(release_date)-4,5)) as year
+    SELECT DISTINCT(SUBSTR(release_date,LENGTH(release_date)-3,5)) as year
 	FROM game order by year;
 }
 
@@ -71,7 +71,6 @@ TEST {
 		607|June 8 2021
 		608|April 27 2017
 		609|February 11 2021
-
     }
 
     RESULT {

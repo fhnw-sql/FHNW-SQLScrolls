@@ -1,0 +1,24 @@
+METADATA {
+    id: Book-G
+    name: Book G To be defined 
+    title: To be defined 
+    author: Maestro Codd
+    color: green
+}
+
+
+PAGE {
+    Lorem Ipsum
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            A
+            c1|c2
+            1|'A'
+            2|'T'
+            3|'S'
+        }
+    }
+}
