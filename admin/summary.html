@@ -41,11 +41,10 @@
 
   <script type="text/javascript"charset="utf-8">
 
+    // force since we are not in the same view
     const currentLang = 'en'
 
-    
     // read progression file into object
-    task_list = []
     for (const group of progression) { 
         const book_id = group.id
 
@@ -57,8 +56,6 @@
             for (const task_id of group.tasks){
 
                 parseTaskFrom(`../tasks/${currentLang}/task-${task_id}.task`).then((task) => {
-
-                    console.log(task.metadata)
 
                     const task_name = task.metadata.name
                     const task_info= task.metadata.info
@@ -76,10 +73,6 @@
 
     }
 
-    // read the books into an object
-    // iterate on the tasks files to get all the metadata
-    // and add rows
-    // $('#myTable > tbody:last-child').append('<tr>...</tr><tr>...</tr>');
 </script>
 </body>
 </html>
