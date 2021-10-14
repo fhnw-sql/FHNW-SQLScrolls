@@ -30,6 +30,11 @@ class MetaDataParser extends Parser {
       if (line.match(/title: .*/)) metadata.title = line.substr(7);
       if (line.match(/author: .*/)) metadata.author = line.substr(8);
       if (line.match(/color: .*/)) metadata.color = line.substr(7);
+      // custom metadata for tasks
+      if (line.match(/info: .*/)) metadata.info = line.substr(6);
+      if (line.match(/keywords: .*/)) metadata.keywords = line.substr(10);
+      if (line.match(/level: .*/)) metadata.level = line.substr(7);
+
     }
     return metadata;
   }

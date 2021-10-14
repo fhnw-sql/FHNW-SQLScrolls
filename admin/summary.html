@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <link href="css/summary_style.css" rel="stylesheet"/>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../tasks/progression.js"></script>
+    <script src="../js/utilities.js"></script>
+    <script src="../js/parsers.js"></script>
+    <script src="../js/itemTypes.js"></script>
+    <script src="../js/items.js"></script>
+    <script src="../js/tasks.js"></script>
+    <script src="../js/taskGroups.js"></script>
+    <script src="js/tableutils.js"></script>
+
+</head>
+<body>
+
+<h1 class="styled-text">Task Summary</h1>
+
+<table id="summary-table" class="styled-table">
+    <thead>
+        <tr>
+            <th onclick="sortTable('summary-table', 0)">Book ID</th>
+            <th onclick="sortTable('summary-table', 1)">Book Name</th>
+            <th onclick="sortTable('summary-table', 2)">Book Title</th>
+            <th onclick="sortTable('summary-table', 3)">Task ID</th>
+            <th onclick="sortTable('summary-table', 4)">Task Name</th>
+            <th onclick="sortTable('summary-table', 5)">Task Info</th>
+            <th onclick="sortTable('summary-table', 6)">Task Keywords</th>
+            <th onclick="sortTable('summary-table', 7)">Task Level</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table> 
+
+
+  <script type="text/javascript"charset="utf-8">
+
+    const currentLang = 'en'
+
+    
+    // read progression file into object
+    task_list = []
+    for (const group of progression) { 
+        const book_id = group.id
+
+        parseBookFrom(`../books/${currentLang}/Book-${book_id}.book`).then((book) => {
+
+            const book_name = book.metadata.name
+            const book_title = book.metadata.title
+
+            for (const task_id of group.tasks){
+
+                parseTaskFrom(`../tasks/${currentLang}/task-${task_id}.task`).then((task) => {
+
+                    console.log(task.metadata)
+
+                    const task_name = task.metadata.name
+                    const task_info= task.metadata.info
+                    const task_keywords= task.metadata.keywords
+                    const task_level= task.metadata.level
+
+                    const row_data = [book_id, book_name, book_title, task_id, task_name, task_info, task_keywords, task_level]
+                    const row_str = row_data.map(item => '<td>' + item + '</td>')
+
+                    $('#summary-table > tbody:last-child').append('<tr>' + row_str + '</tr>');
+                })
+                
+            }
+        })
+
+    }
+
+    // read the books into an object
+    // iterate on the tasks files to get all the metadata
+    // and add rows
+    // $('#myTable > tbody:last-child').append('<tr>...</tr><tr>...</tr>');
+</script>
+</body>
+</html>
+
