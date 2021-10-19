@@ -30,8 +30,11 @@ async function runSQL(context, query) {
   const SQL = await initSqlJs(config);
   const db = new SQL.Database();
   try {
+    //console.log(context)
     db.run(context);
     return db.exec(query);
+  } catch (error){
+      console.error(error);
   } finally {
     db.close();
   }
