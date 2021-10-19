@@ -39,3 +39,6 @@ typings
 
 # Env
 .env
+
+#ssl files
+ssl

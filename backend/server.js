@@ -16,8 +16,8 @@ const errorHandler = require("./middlewares/errorHandler");
 validateEnvVars();
 
 // setup ssl
-var privateKey = fs.readFileSync(process.env.SSL_KEY || '/etc/ssl/private/nginx-selfsigned.key');
-var certificate = fs.readFileSync(process.env.SSL_CERT || '/etc/ssl/certs/nginx-selfsigned.crt');
+var privateKey = fs.readFileSync(process.env.SSL_KEY || '/usr/local/etc/ssl/key.pem');
+var certificate = fs.readFileSync(process.env.SSL_CERT || '/usr/local/etc/ssl/cert.pem');
 var credentials = {key: privateKey, cert: certificate};
 
 var app = express();
