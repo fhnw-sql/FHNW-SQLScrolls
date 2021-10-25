@@ -3,7 +3,7 @@ METADATA {
     name: Games 1
     color: red
     info: game release year
-    keywords: SELECT, SUBSTR, LENGTH
+    keywords: SELECT, SUBSTR, LENGTH, DISTINCT
     level: 2
 }
 
