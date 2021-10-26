@@ -1,9 +1,8 @@
 METADATA {
-    id: task-039
-    name: Task 39
+    id: task-055
+    name: Task 55
     color: orange
-    info: list filtered fields from product table
-    keywords: SELECT, WHERE, CARTESIAN_PRODUCT
+    info: list filtered fields from joined table
     level: 4
 }
 
@@ -12,7 +11,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT g.name FROM Hauntings  h, PLACES p, Ghosts g WHERE g.id = h.ghost_id AND p.id = h.place_id AND p.name = "forest"
+   SELECT g.name FROM Hauntings h INNER JOIN PLACES p ON p.id = h.place_id INNER JOIN Ghosts g ON g.id = h.ghost_id WHERE p.name = "forest"
 }
 
 

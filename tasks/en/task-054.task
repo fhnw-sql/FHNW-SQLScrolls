@@ -39,8 +39,8 @@ TEST {
     RESULT {
        Arthur|Castel del Monte
        Desiree|Eltz Castle
-       Siegfried|NULL
-       Sieglinde|Castel del Monte
+       Siegfried|null
+       Sieglinde|Mont-Saint-Michel
        Kaaleppi|Kilkenny Castle
     }
 }
@@ -65,7 +65,7 @@ TEST {
 
     RESULT {
         Hipolito|Alhambra
-        Serendius|NULL
+        Serendius|null
         Marconi|Vianden Castle
         Musilda|Château de Suscinio
     }

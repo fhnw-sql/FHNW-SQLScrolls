@@ -1,9 +1,9 @@
 METADATA {
-    id: task-040
-    name: Task 40
-    color: red
-    info: list filtered fields from product table with subquery
-    keywords: SELECT, WHERE, CARTESIAN_PRODUCT, NESTED_QUERY
+    id: task-056
+    name: Task 56
+    color: orange
+    info: list filtered fields from joined table with subquery
+    keywords: SELECT, WHERE, INNER_JOIN, NESTED_QUERY
     level: 4
 }
 
@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT w.name FROM Wizards w, Lessons l  WHERE l.teacher_id = (SELECT w.id FROM Wizards w WHERE w.name = "Anna") and  l.pupil_id = w.id
+   SELECT w.name FROM Wizards w INNER JOIN Lessons l ON l.pupil_id = w.id WHERE l.teacher_id = (SELECT w.id FROM Wizards w WHERE w.name = "Anna")
 }
 
 
