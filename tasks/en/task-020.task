@@ -2,6 +2,9 @@ METADATA {
     id: task-020
     name: Task 20
     color: blue
+    info: list max field on condition
+    keywords: SELECT, MAX, WHERE, BETWEEN
+    level: 2
 }
 
 DESCRIPTION {

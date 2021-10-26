@@ -2,6 +2,9 @@ METADATA {
     id: task-017
     name: Task 17
     color: blue
+    info: list unique field on condition
+    keywords: SELECT, DISTINCT, WHERE, BETWEEN
+    level: 1
 }
 
 DESCRIPTION {
@@ -9,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT COUNT (DISTINCT NAME) FROM Ghosts WHERE YEAR BETWEEN '1600' AND '1700'
+   SELECT COUNT (DISTINCT name) FROM ghosts WHERE year BETWEEN '1600' AND '1700'
 }
 
 TEST {
@@ -26,7 +29,7 @@ TEST {
         7|Siegfried|1687
         8|Veronika|1777
         9|Veronika|1602
-	10|Veronika|1623
+	    10|Veronika|1623
     }
 
     RESULT {

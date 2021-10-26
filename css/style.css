@@ -461,6 +461,10 @@ button.col-yellow:focus {
   color:var(--col-xmas-red) !important;
 }
 
+.col-book-links {
+  color: #cc5803 !important;
+}
+
 .col-book-light-blue {
   color: #3f909a !important;
 }
@@ -1519,6 +1523,20 @@ body {
 
 .book-open.xmas-book {
   border-color: #550000;
+}
+
+.book.links-book {
+  border-color: #110700;
+}
+
+.book.links-book::after {
+  border-color: #110700;
+  background: url("/img/links-background.png");
+  background-size: cover;
+}
+
+.book-open.links-book {
+  border-color: #552d00;
 }
 
 .book.light-blue-book {

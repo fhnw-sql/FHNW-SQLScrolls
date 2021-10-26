@@ -2,6 +2,9 @@ METADATA {
     id: task-025
     name: Task 25
     color: blue
+    info: list count of unique field
+    keywords: SELECT, COUNT, DISTINCT
+    level: 2
 }
 
 DESCRIPTION {

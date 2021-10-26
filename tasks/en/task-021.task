@@ -2,6 +2,9 @@ METADATA {
     id: task-021
     name: Task 21
     color: blue
+    info: list count field on condition
+    keywords: SELECT, COUNT, WHERE
+    level: 2
 }
 
 DESCRIPTION {

@@ -2,6 +2,9 @@ METADATA {
     id: task-015
     name: Task 15
     color: purple
+    info: list field on condition
+    keywords: SELECT, WHERE, BETWEEN
+    level: 1
 }
 
 DESCRIPTION {

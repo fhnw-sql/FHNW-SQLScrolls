@@ -2,7 +2,7 @@ METADATA {
     id: task-000
     name: Task Demo
     color: grey
-    info: This is a first task 
+    info: introductory task 
     keywords: SELECT
     level: 0
 }

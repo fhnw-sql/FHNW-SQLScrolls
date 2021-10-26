@@ -2,6 +2,9 @@ METADATA {
     id: task-045
     name: Task 45
     color: xmas
+    info: list filtered fields from joined tables
+    keywords: SELECT, WHERE, INNER_JOIN
+    level: 3
 }
 
 DESCRIPTION {

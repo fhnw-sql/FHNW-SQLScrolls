@@ -2,7 +2,7 @@ METADATA {
     id: task-042
     name: Task 42
     color: blue
-    info: this is an introductory task
+    info: list sorted field
     keywords: SELECT, ORDER_BY
     level: 1
 }

@@ -1,18 +1,31 @@
 METADATA {
-    id: task-039
-    name: Task 39
+    id: task-053
+    name: Task 53
     color: orange
-    info: list filtered fields from product table
-    keywords: SELECT, WHERE, CARTESIAN_PRODUCT
+    info: list fields from multiple joined table
+    keywords: SELECT, WHERE, INNER_JOIN
     level: 4
 }
 
 DESCRIPTION {
-    Which ghosts have been seen in the forest?
+    Show all information you can get about ghosts.
 }
 
+PARSONS {
+  SELECT g.name, p.name 
+  FROM Hauntings  h
+  JOIN PLACES p
+  ON p.id = h.place_id
+  JOIN Ghosts g 
+  ON g.id = h.ghost_id 
+  FROM Hauntings t #distractor 
+  WHERE g.id = p.place_id #distractor
+  ON h.id = g.id #distractor
+}
+
+
 ANSWER {
-   SELECT g.name FROM Hauntings  h, PLACES p, Ghosts g WHERE g.id = h.ghost_id AND p.id = h.place_id AND p.name = "forest"
+   SELECT g.name, p.name FROM Hauntings h JOIN Places p ON p.id = h.place_id JOIN Ghosts g ON g.id = h.ghost_id 
 }
 
 
@@ -46,9 +59,11 @@ TEST {
     }
 
     RESULT {
-        Desiree
-        Siegfried
-        Sieglinde
+        Arthur|school
+        Desiree|forest
+        Desiree|mill
+        Siegfried|forest
+        Sieglinde|forest
     }
 }
 
@@ -57,7 +72,7 @@ TEST {
         Ghosts
         id|name
         1|Edmond
-        2|Desiree
+        2|Mercedes
         3|Fernand
         4|Valentine
         5|Haydee
@@ -83,7 +98,11 @@ TEST {
     }
 
     RESULT {
-        Edmond
-        Desiree
+        Edmond|school
+        Edmond|forest
+        Edmond|mill
+        Mercedes|school
+        Mercedes|forest
+        Mercedes|mill
     }
 }

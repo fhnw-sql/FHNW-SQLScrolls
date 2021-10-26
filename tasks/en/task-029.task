@@ -2,6 +2,9 @@ METADATA {
     id: task-029
     name: Task 29
     color: green
+    info: list count field grouped
+    keywords: SELECT, COUNT, GROUP_BY
+    level: 3
 }
 
 DESCRIPTION {

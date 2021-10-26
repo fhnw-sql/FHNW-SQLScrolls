@@ -2,6 +2,9 @@ METADATA {
     id: task-038
     name: Task 38
     color: orange
+    info: list filtered fields from product table
+    keywords: SELECT, WHERE, CARTESIAN_PRODUCT
+    level: 4
 }
 
 DESCRIPTION {

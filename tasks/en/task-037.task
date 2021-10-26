@@ -2,6 +2,9 @@ METADATA {
     id: task-037
     name: Task 37
     color: orange
+    info: list filtered fields from product table
+    keywords: SELECT, WHERE, CARTESIAN_PRODUCT
+    level: 4
 }
 
 DESCRIPTION {
@@ -20,7 +23,7 @@ PARSONS {
 
 
 ANSWER {
-   SELECT g.name, p.name FROM Hauntings  h, PLACES p, Ghosts g WHERE g.id = h.ghost_id AND p.id = h.place_id
+   SELECT g.name, p.name FROM Hauntings  h, Places p, Ghosts g WHERE g.id = h.ghost_id AND p.id = h.place_id
 }
 
 

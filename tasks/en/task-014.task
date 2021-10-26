@@ -2,6 +2,9 @@ METADATA {
     id: task-014
     name: Task 14
     color: purple
+    info: list unique sorted field on condition
+    keywords: SELECT, DISTINCT, WHERE, ORDER_BY
+    level: 1
 }
 
 DESCRIPTION {
@@ -9,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT DISTINCT NAME FROM Ghosts WHERE YEAR = 1777 ORDER BY NAME ASC
+   SELECT DISTINCT name FROM Ghosts WHERE year = 1777 ORDER BY name ASC
 }
 
 STRICT

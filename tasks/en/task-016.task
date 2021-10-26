@@ -2,6 +2,9 @@ METADATA {
     id: task-016
     name: Task 16
     color: purple
+    info: list sorted field on condition
+    keywords: SELECT, WHERE, ORDER_BY
+    level: 1
 }
 
 DESCRIPTION {
@@ -9,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-  SELECT Name FROM wizards where skill < 4 order by skill ASC
+  SELECT name FROM wizards WHERE skill < 4 ORDER BY skill ASC
 }
 
 STRICT 

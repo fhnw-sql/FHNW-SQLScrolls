@@ -2,6 +2,9 @@ METADATA {
     id: task-004
     name: Task 4
     color: purple
+    info: list field on gt value condition
+    keywords: SELECT, WHERE
+    level: 1
 }
 
 DESCRIPTION {

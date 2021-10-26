@@ -16,7 +16,6 @@ ANSWER {
     FROM game order by year;
 }
 
-
 TEST {
     TABLE {
         Game

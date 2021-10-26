@@ -2,6 +2,9 @@ METADATA {
     id: task-048
     name: Task 48
     color: xmas
+    info: list count and sum fields from joined tables and brouped
+    keywords: SELECT, COUNT, SUM, INNER_JOIN, GROUP_BY
+    level: 5
 }
 
 DESCRIPTION {

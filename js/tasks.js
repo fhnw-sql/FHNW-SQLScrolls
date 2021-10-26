@@ -223,6 +223,8 @@ class Task extends ItemType {
                 const resultSets = await runSQL(test.context, query);
                 if (resultSets.length) {
                     const table = Table.fromResultSet("", resultSets[0]); // i18n.get("i18n-table-result")
+                    console.log("table = ", table)
+                    console.log("wanted = ", wanted)
                     const correct = table.isEqual(wanted, test.strict);
                     results.push(new Result({source: test, correct, table, wanted}));
                 } else {

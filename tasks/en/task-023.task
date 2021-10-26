@@ -2,6 +2,9 @@ METADATA {
     id: task-023
     name: Task 23
     color: blue
+    info: list min/max field
+    keywords: SELECT, MIN, MAX
+    level: 2
 }
 
 DESCRIPTION {

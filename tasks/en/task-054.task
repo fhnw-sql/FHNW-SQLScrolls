@@ -1,0 +1,72 @@
+METADATA {
+    id: task-054
+    name: Task 54
+    color: orange
+    info: list fields from outer join table
+    keywords: SELECT, WHERE, LEFT_OUTER_JOIN
+    level: 4
+}
+
+DESCRIPTION {
+    List all the ghosts and their castles in case they own one
+}
+
+ANSWER {
+   SELECT g.name, c.name FROM Ghosts g LEFT OUTER JOIN Castles c ON g.id = c.owner
+}
+
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name
+        1|Arthur
+        2|Desiree
+        3|Siegfried
+        4|Sieglinde
+        5|Kaaleppi
+    }
+
+    TABLE {
+        Castles
+        id|name|owner
+        1|Eltz Castle|2
+        2|Kilkenny Castle|5
+        3|Mont-Saint-Michel|4
+        4|Castel del Monte|1
+    }
+
+    RESULT {
+       Arthur|Castel del Monte
+       Desiree|Eltz Castle
+       Siegfried|NULL
+       Sieglinde|Castel del Monte
+       Kaaleppi|Kilkenny Castle
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name
+        1|Hipolito
+        2|Serendius
+        3|Marconi
+        4|Musilda
+    }
+
+    TABLE {
+        Castles
+        id|name|owner
+        1|Alhambra|1
+        2|Vianden Castle|3
+        3|Château de Suscinio|4
+    }
+
+    RESULT {
+        Hipolito|Alhambra
+        Serendius|NULL
+        Marconi|Vianden Castle
+        Musilda|Château de Suscinio
+    }
+}
