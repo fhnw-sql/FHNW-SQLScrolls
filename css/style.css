@@ -1539,6 +1539,20 @@ body {
   border-color: #552d00;
 }
 
+.book.games-book {
+  border-color: #011705;
+}
+
+.book.games-book::after {
+  background: url("/img/games-background.png");
+  background-size: cover;
+  border-color: #011705;
+}
+
+.book-open.games-book {
+  border-color: #0e2b13;
+}
+
 .book.light-blue-book {
   border-color: #00181a;
 }
