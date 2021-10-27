@@ -11,12 +11,6 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-# COPY the certificates
-RUN mkdir -p /usr/local/etc/ssl
-
-COPY ssl/key.pem /usr/local/etc/ssl/
-COPY ssl/cert.pem /usr/local/etc/ssl/
-
 # Production
 RUN npm ci --only=production
 

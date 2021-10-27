@@ -1,9 +1,6 @@
 ﻿require("rootpath")();
 require("dotenv").config();
 
-var fs = require('fs');
-var https = require('https');
-
 const express = require("express");
 const cors = require("cors");
 const jwt = require("./middlewares/jwt");
@@ -14,12 +11,6 @@ const errorHandler = require("./middlewares/errorHandler");
 
 // Check all environment variables
 validateEnvVars();
-
-// setup ssl
-var privateKey = fs.readFileSync(process.env.SSL_KEY || '/usr/local/etc/ssl/key.pem');
-var certificate = fs.readFileSync(process.env.SSL_CERT || '/usr/local/etc/ssl/cert.pem');
-var credentials = {key: privateKey, cert: certificate};
-
 var app = express();
 
 // add BodyParser & Cors
@@ -45,11 +36,9 @@ app.use(errorHandler);
 const port = process.env.NODE_ENV === "production" ? process.env.PORT || 80 : process.env.PORT || 4000;
 
 // start server
-var httpsServer = https.createServer(credentials, app);
-
 if (!process.env.JEST_WORKER_ID) {
   db.connect().then((m) => {
-    httpsServer.listen(port, function () {
+    app.listen(port, function () {
       logger.info("Server listening on port " + port);
     });
   });
