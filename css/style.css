@@ -1517,7 +1517,7 @@ body {
 
 .book.xmas-book::after {
   border-color: #110000;
-  background: url("/img/stars-xmas-background.png");
+  background: url("../img/stars-xmas-background.png");
   background-size: cover;
 }
 
@@ -1531,7 +1531,7 @@ body {
 
 .book.links-book::after {
   border-color: #110700;
-  background: url("/img/links-background.png");
+  background: url("../img/links-background.png");
   background-size: cover;
 }
 
@@ -1544,7 +1544,7 @@ body {
 }
 
 .book.games-book::after {
-  background: url("/img/games-background.png");
+  background: url("../img/games-background.png");
   background-size: cover;
   border-color: #011705;
 }
