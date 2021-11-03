@@ -1,0 +1,32 @@
+METADATA {
+    id: task-058
+    name: Task DCL
+    color: blue
+    info: basic table creation
+    keywords: CREATE_TABLE
+    level: 3
+}
+
+DESCRIPTION {
+    Create a table.
+}
+
+PARSONS {
+    CREATE TABLE Potions (
+    potion_id INTEGER,
+    name TEXT )
+}
+
+ANSWER {
+    CREATE TABLE Potions (potion_id INTEGER, name TEXT )
+}
+
+TEST {
+    QUERY {
+        SELECT sql FROM sqlite_master WHERE name = 'Potions';
+    }
+
+    RESULT {
+      CREATE TABLE Potions (potion_id INTEGER PRIMARY KEY,name TEXT NOT NULL UNIQUE,level REAL)
+    }
+}

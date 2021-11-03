@@ -65,7 +65,10 @@ class StatementParser extends Parser {
       statements += line;
     }
     const matches = statements.match(/CREATE TABLE .*? ?\(/g);
-    return { sql: statements, tableNames: matches ? matches.map((match) => match.split(" ")[2]) : [] };
+
+    const tableNames = matches ? matches.map((match) => match.split(" ")[2]) : []
+
+    return { sql: statements, tableNames: tableNames};
   }
 }
 
@@ -195,6 +198,8 @@ class TestParser extends Parser {
 // Parses QUERY blocks
 class QueryParser extends Parser {
   async parse(context, lines) {
+
+    // add tables to context
     const tables = context.tables;
     let queryContext = "";
     for (let table of tables) {
@@ -202,16 +207,34 @@ class QueryParser extends Parser {
         queryContext += query;
       }
     }
+
+    // add statements to context
+    const statements = context.statements || [];
+    queryContext += statements
+
     let query = "";
     while (true) {
       const line = lines.shift().trim();
       if (line === "}") break;
       query += line + " ";
-    }
+    }    
 
     const resultTables = [];
     try {
       const resultSets = await runSQL(queryContext, query);
+
+      // if there are statements, check to format the sql
+      if(resultSets[0].columns[0] === "sql") {
+        let new_values = []
+        for(let sql_text of resultSets[0].values) {
+          new_values.push(sql_text[0].replaceAll(",", ",</br>&emsp;")
+          .replaceAll("(", "(</br>&emsp;") 
+          .replaceAll(")", "</br>)") )
+        }
+
+        resultSets[0].values = [new_values]
+      }
+      
       if (resultSets.length) {
         resultTables.push(Table.fromResultSet(i18n.get("i18n-table-result"), resultSets[0]));
       }
@@ -230,6 +253,8 @@ class ExampleParser extends Parser {
       tables: [],
       query: "",
       resultTables: [],
+      contextTableNames: [],
+      statements: []
     };
     while (true) {
       const line = lines.shift().trim();
@@ -237,10 +262,15 @@ class ExampleParser extends Parser {
       if (line === "TABLE {") {
         result.tables.push(PARSERS.TABLE.parse({}, lines));
       }
+      if (line === "SQL {") {
+        const parsed = PARSERS.SQL.parse({}, lines);
+        result.contextTableNames.push(...parsed.tableNames);
+        result.statements += parsed.sql;
+      }
       if (line === "QUERY {") {
-        const parsed = await PARSERS.QUERY.parse({ tables: result.tables }, lines);
-        result.query = parsed.query;
-        result.resultTables.push(...parsed.resultTables);
+        const parsedQuery = await PARSERS.QUERY.parse({statements: result.statements, tables: result.tables }, lines);
+        result.query = parsedQuery.query;
+        result.resultTables.push(...parsedQuery.resultTables);
       }
     }
     return result;
