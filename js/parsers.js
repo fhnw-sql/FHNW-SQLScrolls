@@ -239,7 +239,7 @@ class QueryParser extends Parser {
         resultTables.push(Table.fromResultSet(i18n.get("i18n-table-result"), resultSets[0]));
       }
     } catch (e) {
-      resultTables.push(Table.fromPlain("Virhe", ["" + e]));
+      resultTables.push(Table.fromPlain("Error", ["" + e]));
     }
 
     return { query, resultTables };

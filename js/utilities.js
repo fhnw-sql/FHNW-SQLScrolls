@@ -32,9 +32,11 @@ async function runSQL(context, query) {
   try {
     //console.log(context)
     db.run(context);
-    return db.exec(query);
+    let result =  db.exec(query);
+    return result
   } catch (error){
       console.error(error);
+      throw error
   } finally {
     db.close();
   }

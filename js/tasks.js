@@ -48,7 +48,7 @@ class Result {
             return `<div class="row justify-content-md-center">
                 <div class="table-paper"><p class="col-red">${(this.error + "")
                 .split("Error")
-                .join(i18n.get("error"))}</p></div>
+                .join(i18n.get("error"))}</p><p>Please review your query and submit again</p></div>
             </div>`;
         } else if (!this.table) {
             return `<div class="row justify-content-md-center">
