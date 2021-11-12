@@ -133,12 +133,11 @@ class Task extends ItemType {
             ...options,
         });
         const parsed = options.parsed;
-
         if (parsed) {
             this.id = parsed.metadata.id;
             this.item = new ImageItem({
                 id: this.id,
-                name: `${i18n.getWith("task", [Task.getNumericID(this.id)])}`,
+                name: `${i18n.get(parsed.metadata.name)}`,
                 onclick: `Views.TASK.show('${this.id}')`,
                 url: "./img/scroll.png",
             });

@@ -1,6 +1,6 @@
 METADATA {
     id: task-049
-    name: Task 49
+    name: Task F.15
     color: xmas
     info: list fields from joined tables filtered using subquery
     keywords: SELECT, MAX, WHERE, INNER_JOIN, NESTED_QUERY

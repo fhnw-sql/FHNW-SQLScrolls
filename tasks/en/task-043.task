@@ -1,6 +1,6 @@
 METADATA {
     id: task-043
-    name: Task 43
+    name: Task F.5
     color: xmas
     info: list field on string condition
     keywords: SELECT, WHERE, LIKE
