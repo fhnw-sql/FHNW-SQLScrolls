@@ -2,7 +2,16 @@ const logger = require("./logger");
 
 const environmentVariables = ["MONGODB_URI", "POSTMARK_API_KEY", "FROM_SENDER", "JWT_SECRET"];
 
+function setEnvVars() {
+  try {
+    require('dotenv').config();
+  } catch {}
+}
+
 function validateEnvVars() {
+  
+  setEnvVars()
+
   let err = environmentVariables.filter((m) => !process.env[m]);
   if (err.length > 0) {
     logger.error(`Environment variables: ${err.join(",")} is not set!`);

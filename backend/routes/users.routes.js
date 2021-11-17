@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const { ObjectID } = require("mongodb");
 const postmark = require("postmark");
 const reqBodyValidator = require("../middlewares/reqBodyValidator");
-const { registerPOST, authenticatePOST, answerSqlPATCH, recoverPOST, resetPOST } = require("../schemes/users");
+const { registerPOST, authenticatePOST, authenticateSWITCHaaiPOST, answerSqlPATCH, recoverPOST, resetPOST } = require("../schemes/users");
 
 const cors = require("cors");
 
@@ -41,11 +41,59 @@ router.post("/authenticate", reqBodyValidator(authenticatePOST), async function 
   const user = await users.findOne({ username: value.username });
 
   // Login failed
-  if (!user || !bcrypt.compareSync(value.password, user.password)) return next("Username or password is incorrect");
+  if (!user || !user.password || !bcrypt.compareSync(value.password, user.password)) return next("Username or password is incorrect");
 
   // Sign Token
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "365d" });
   const retVal = { token };
+  return res.json(retVal);
+});
+
+// /users/authenticate
+router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST), async function ({ body: value }, res, next) {
+  // Get Users Collections
+  const users = db.get().collection("users");
+  let user = await users.findOne({ username: value.username });
+
+  if (user) {
+    let needUpdate = false
+
+    // if switch data stored, compare it otherwise store it
+    for (const field of ["uid", "pid", "org"]) {
+      if (!user[field]) { 
+        user[field] = value[field]
+        needUpdate = true
+      } else {
+        if (user[field] != value[field])
+          return next("User data icorrect (different from registration)");
+      }
+    }
+
+    // add data if necessary
+    if (needUpdate){
+      users
+      .findOneAndUpdate(
+          { _id: user._id },
+          { $set: value },
+          { returnOriginal: false }
+        )
+        .catch((err) => next(err));
+    }
+  } 
+  else {
+    value.password = null
+    // register user
+    users
+    .insertOne(value)
+    .catch((err) => next(err));
+
+    user = value;
+  }
+
+  // Sign Token
+  const switchaai = true
+  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "365d" });
+  const retVal = { token, switchaai };
   return res.json(retVal);
 });
 

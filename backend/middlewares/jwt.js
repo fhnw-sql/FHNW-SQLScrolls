@@ -10,6 +10,7 @@ function jwt() {
       // public routes that don't require authentication
       "/",
       "/users/authenticate",
+      "/users/authenticateSWITCHaai",
       "/users/register",
       "/users/reset",
       "/users/recover",
