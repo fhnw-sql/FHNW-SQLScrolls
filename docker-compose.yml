@@ -9,6 +9,7 @@ services:
   db:
     container_name: mongo
     image: mongo
+    restart: on-failure
     volumes:
       - ./data:/data/db
     ports:
