@@ -136,3 +136,34 @@ function awaitUntil(predicateFunction) {
     handlerFunction();
   });
 }
+
+/**
+ * Returns a specific cookie from the document (null otherwise).
+ *
+ *
+ * @param name Name of the cookie
+ */
+function readCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0;i < ca.length;i++) {
+    var c = ca[i];
+    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+  }
+  return null;
+}
+
+
+function getAuthCookie(){
+    // check if there is a auth cookie
+    const authCookie = readCookie(Config.AUTH_COOKIE)
+
+    if (authCookie) {
+      let parsedCookie = {}
+      authCookie.split("|").map(pair => pair.split(":")).forEach(item => { parsedCookie[item[0]] = item[1]})
+      return(parsedCookie)
+    } else {
+      return null
+    }
+}

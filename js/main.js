@@ -195,9 +195,14 @@ async function loadGameElements(linesOfProgressionJs) {
 }
 
 async function logout() {
-  API.logout();
-  await changeView(Views.LOGIN);
-  window.location.href = "./"; // Reloads the page
+  if (API.isSWITCHaaiLogin()) {
+    API.logoutSWITCHaai();
+    window.location.href = Config.SWITCHAAI_LOGOUT_URL; // SWITCH logout page
+  } else {
+    API.logout();
+    await changeView(Views.LOGIN);
+    window.location.href = "./"; // Reloads the page
+  }
 }
 
 // This is a separate function in order to allow side-loading the task completion.
@@ -247,7 +252,13 @@ async function beginGame() {
         await showElementImmediately("counter-container");
         await showElementImmediately("right-sidebar");
       } else {
-        if (location.pathname !== "/editors.html") await showElementImmediately("login-view");
+        if (location.pathname !== "/editors.html") {
+          if (getAuthCookie()) {
+            await Views.LOGIN.loginSWITCHaai(getAuthCookie());
+          } else {
+            await showElementImmediately("login-view")
+          }
+      };
       }
     });
 

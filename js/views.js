@@ -619,7 +619,13 @@ class ProfileView extends View {
 
   async open() {
     const userProfile = await API.self();
-    document.getElementById("logged-in-as").innerHTML = i18n.getWith("logged-in-as", [userProfile.username]);
+    let extraData = ""
+
+    if (API.isSWITCHaaiLogin()) {
+      extraData += ` </br> (user ${userProfile.uid} at ${userProfile.org})`;
+    }
+
+    document.getElementById("logged-in-as").innerHTML = i18n.getWith("logged-in-as", [userProfile.username + extraData]);
     document.getElementById("task-completion-grid").innerHTML = this.renderTaskCompletionGrid();
 
     const trigger = document.activeElement;
@@ -716,6 +722,23 @@ class LoginView extends View {
     document.getElementById("loading-animation").remove();
     loginButton.removeAttribute("disabled");
     loginButton.setAttribute("aria-disabled", "false");
+  }
+
+  async loginSWITCHaai(authCookie){
+    try {
+      await API.loginSWITCHaai(authCookie);
+      if (API.loginStatus === LoginStatus.ERRORED) {
+        await this.showLoginError(i18n.get("login-error-failed-unknown"));
+      } else if (API.loginStatus === LoginStatus.LOGGED_IN) {
+        changeView(Views.LOADING);
+        await showElementImmediately("loading-view");
+        await showElementImmediately("counter-container");
+        await showElementImmediately("right-sidebar");
+        loadCompletionFromQuizzes();
+      }
+    } catch (e) {
+      await this.showLoginError(e);
+    }
   }
 
   async login() {

@@ -8,6 +8,7 @@ const API = {
   ADDRESS: Config.API_URL,
   loginStatus: LoginStatus.LOGGED_OUT,
   token: undefined,
+  switchaai: false,
   cachedAnswerData: {
     loading: false,
     loaded: false,
@@ -37,6 +38,46 @@ const API = {
       API.loginStatus = LoginStatus.LOGGED_IN;
       API.token = sessionToken;
     }
+  },
+  isSWITCHaaiLogin(){
+    this.switchaai = (sessionStorage.getItem("switchaai") === 'true');
+    return this.switchaai
+  },
+  loginSWITCHaai(authCookie) {
+
+    const authPayload = {
+      "username": authCookie.mail,
+      "uid": authCookie.user,
+      "pid": authCookie.pid,
+      "org": authCookie.org
+    }
+
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          if (xhr.status === 200) {
+            const responseJson = JSON.parse(this.response);
+            const token = responseJson.token;
+            API.loginStatus = LoginStatus.LOGGED_IN;
+            sessionStorage.setItem("fhnw-token", token);
+            sessionStorage.setItem("switchaai", true);
+            API.token = token;
+            API.switchaai = true;
+            resolve();
+          } else if (xhr.status === 400) {
+            API.loginStatus = LoginStatus.ERRORED;
+            reject(i18n.get("incorrect-login"));
+          } else {
+            API.loginStatus = LoginStatus.ERRORED;
+            reject(`Bad response code '${xhr.status}' for login`);
+          }
+        }
+      };
+      xhr.open("POST", `${this.ADDRESS}/users/authenticateSWITCHaai`, true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.send(body=JSON.stringify(authPayload));
+    });
   },
   login(username, password) {
     return new Promise((resolve, reject) => {
@@ -123,6 +164,12 @@ const API = {
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(`password=${encodeURIComponent(password)}&token=${encodeURIComponent(token)}`);
     });
+  },
+  logoutSWITCHaai() {
+    this.logout();
+    this.token = "";
+    this.switchaai = false;
+    sessionStorage.removeItem("switchaai");
   },
   logout() {
     this.loginStatus = LoginStatus.LOGGED_OUT;
