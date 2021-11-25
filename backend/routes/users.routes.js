@@ -50,7 +50,11 @@ router.post("/authenticate", reqBodyValidator(authenticatePOST), async function 
 });
 
 // /users/authenticate
-router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST), async function ({ body: value }, res, next) {
+router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST), async function ({ headers: headers, body: value }, res, next) {
+  
+  //TODO: Double check with this cookie
+  console.log("auth COOKIES", headers.cookie)
+  
   // Get Users Collections
   const users = db.get().collection("users");
   let user = await users.findOne({ username: value.username });
