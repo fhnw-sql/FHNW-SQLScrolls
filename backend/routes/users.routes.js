@@ -52,8 +52,26 @@ router.post("/authenticate", reqBodyValidator(authenticatePOST), async function 
 // /users/authenticate
 router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST), async function ({ headers: headers, body: value }, res, next) {
   
-  //TODO: Double check with this cookie
-  console.log("auth COOKIES", headers.cookie)
+  //Compare cookie from frontend with the one from backend
+  //console.log("auth COOKIES", headers.cookie)
+
+  let authCookie=null
+  let parsedCookie = {}
+  try {
+    headers.cookie.split(';').map(item => item.split("=")).forEach( pair => {if (pair[0].trim()=='sqlscrolls-auth') authCookie=pair[1]})
+    authCookie.split("|").map(pair => pair.split(":")).forEach(item => { parsedCookie[item[0]] = item[1]})
+  } catch {
+    return next("No valid authentication cookie found for the API");
+  }
+
+  //console.log("auth parsed: ", parsedCookie)
+
+  // Compare cookies
+  for (const field of ["uid", "pid", "org"]) {
+      if ((!parsedCookie[field]) || (parsedCookie[field] != value[field])){
+        return next("User auth cookie icorrect (different from frontend)");
+      }
+  }
   
   // Get Users Collections
   const users = db.get().collection("users");
