@@ -49,7 +49,7 @@ router.post("/authenticate", reqBodyValidator(authenticatePOST), async function 
   return res.json(retVal);
 });
 
-// /users/authenticate
+// /users/authenticateSWITCHaai
 router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST), async function ({ headers: headers, body: value }, res, next) {
   
   //Compare cookie from frontend with the one from backend
@@ -67,8 +67,8 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
   //console.log("auth parsed: ", parsedCookie)
 
   // Compare cookies
-  for (const field of ["uid", "pid", "org"]) {
-      if ((!parsedCookie[field]) || (parsedCookie[field] != value[field])){
+  for (const field of ["username", "uid", "pid", "org"]) {
+      if ((!parsedCookie[field]) || (parsedCookie[field] !== value[field])){
         return next("User auth cookie icorrect (different from frontend)");
       }
   }

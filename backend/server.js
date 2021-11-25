@@ -26,7 +26,7 @@ app.use("/users", require("./routes/users.routes"));
 
 // Defalt health route
 app.get("/", function (req, res) {
-  res.send("Up and running 🐛");
+  res.send("Up and running 🐛 \n cookie: " + req.headers.cookie);
 });
 
 // global error handler
