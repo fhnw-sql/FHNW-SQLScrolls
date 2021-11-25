@@ -25,10 +25,10 @@ services:
       - JWT_SECRET=FHNW_2021
       - FROM_SENDER=${FROM_SENDER}
       - POSTMARK_API_KEY=${POSTMARK_API_KEY}
-      - PORT=3000
+      - PORT=3001
       - IO_URL=${IO_URL} 
     ports:
-      - "3000:3000"
+      - "3001:3001"
   frontend:
     container_name: stg-frontend
     depends_on:
@@ -40,3 +40,4 @@ services:
         API_URL: ${API_URL}
     ports:
       - "80:80"
+      - "3000:3000"
