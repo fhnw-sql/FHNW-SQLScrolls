@@ -19,63 +19,40 @@ ANSWER {
 TEST {
     TABLE {
         Game
-        gameid|release_date
-        605|December 1 2015
-        604|November 13 2020
-        608|June 2 2020
-        600|March 3 2016
-        601|March 4 2019
-        602|August 22 2019
+        gameid|title|release_date
+        605|The Legend of Zelda|February 21 1986
+        604|Grand Theft Auto|October 21 1997
+        608|Minecraft|November 18 2011
+        600|Final Fantasy|December 18 1987
+        601|World of Warcraft|November 23 2004
+        602|Tetris|June 6 1984
+        603|Rayman Origins|November 11 2011
     }
 
     RESULT {
-        2015
-        2016
-        2019
-        2020
+        1984
+        1986
+        1987
+        1997
+        2004
+        2011
     }
 }
 
 TEST {
     TABLE {
         Game
-        gameid|release_date
-        600|November 13 2020
-        601|June 2 2020
-        603|March 4 2019
-        604|April 4 2014
-        605|June 9 2015
-        606|June 9 2015
-        607|June 8 2021
-        608|April 27 2017
-        609|February 11 2021
+        gameid|title|release_date
+        700|Super Mario Bros.|September 13 1985
+        701|Super Mario Galaxy|November 1 2007
+        702|Super Mario Kart|August 27 1992
     }
 
     RESULT {
-        2014
-        2015
-        2017
-        2019
-        2020
-        2021
+        1985
+        1992
+        2007
     }
 }
 
-TEST {
-    TABLE {
-        Game
-        gameid|release_date
-        605|June 9 2010
-        606|June 9 2015
-        607|June 8 2021
-        608|April 27 2017
-        609|February 11 2021
-    }
 
-    RESULT {
-        2010
-        2015
-        2017
-        2021
-    }
-}
