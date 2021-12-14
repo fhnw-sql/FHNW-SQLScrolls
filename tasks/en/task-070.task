@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    List five Pokemon names with the smallest Pokedex id and their region.
+    List names and the region of the pokemons with the smallest Pokedex id.
 }
 
 PARSONS {

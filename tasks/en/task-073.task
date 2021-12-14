@@ -1,0 +1,66 @@
+METADATA {
+    id: task-073
+    name: Games 7
+    color: blue
+    info: list sorted values joined from union table
+    keywords: SELECT, UNION, ORDER_BY
+    level: 3
+}
+
+DESCRIPTION {
+    List together all the pokemon names and the regions sorted alphabetically.
+}
+
+ANSWER {
+    SELECT name FROM Pokemon UNION SELECT name from Region ORDER BY name;
+}
+
+TEST {
+    TABLE {
+        Pokemon
+        id|name|type_id|generation
+        385|Jirachi|1|3
+        25|Pikachu|2|1
+        39|Jigglypuff|3|1
+        813|Scorbunny|4|8
+        690|Skrelp|5|6
+        103|Exeggutor|7|1
+        477|Dusknoir|10|4
+        264|Linoone|6|3
+    }
+
+    TABLE {
+        Region
+        id|name
+        1|Kanto
+        2|Johto
+        3|Hoenn
+        4|Sinnoh
+        5|Unova
+        6|Kalos
+        7|Alola
+        8|Galar
+    }
+
+    RESULT {
+        Alola
+        Dusknoir
+        Exeggutor
+        Galar
+        Hoenn
+        Jigglypuff
+        Jirachi
+        Johto
+        Kalos
+        Kanto
+        Linoone
+        Pikachu
+        Scorbunny
+        Sinnoh
+        Skrelp
+        Unova
+    }
+}
+
+
+

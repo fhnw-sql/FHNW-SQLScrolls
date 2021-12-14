@@ -1,0 +1,90 @@
+METADATA {
+    id: task-072
+    name: Games 6
+    color: blue
+    info: list sorted grouped fields joined from multiple tables
+    keywords: SELECT, COUNT, JOIN, GROUP_BY, ORDER_BY
+    level: 3
+}
+
+DESCRIPTION {
+    List all Regions and how many Pokemon are in each region sorted in descending order of the region ID.
+}
+
+PARSONS {
+
+    SELECT t.region_id, r.name, 
+    COUNT(*)
+    FROM Pokemon p 
+    JOIN Pokemon_region t 
+    ON p.id = t.pokedex_id
+    JOIN Region r 
+    ON r.id = t.region_id
+    TOTAL(*) #distractor
+    JOIN Pokemon_region b  #distractor
+    ON r.id = t.pokedex_id #distractor
+    ON p.id = t.region_id #distractor
+    GROUP BY region_id
+    ORDER BY region_id DESC
+}
+
+ANSWER {
+    SELECT t.region_id, r.name, COUNT(*)
+    FROM Pokemon p 
+    JOIN Pokemon_region t ON p.id = t.pokedex_id
+    JOIN Region r ON r.id = t.region_id
+    GROUP BY region_id
+    ORDER BY region_id DESC;
+}
+
+TEST {
+    TABLE {
+        Pokemon
+        id|name|type_id|generation
+        385|Jirachi|1|3
+        25|Pikachu|2|1
+        39|Jigglypuff|3|1
+        813|Scorbunny|4|8
+        690|Skrelp|5|6
+        103|Exeggutor|7|1
+        477|Dusknoir|10|4
+        264|Linoone|6|3
+    }
+
+    TABLE {
+        Region
+        id|name
+        1|Kanto
+        2|Johto
+        3|Hoenn
+        4|Sinnoh
+        5|Unova
+        6|Kalos
+        7|Alola
+        8|Galar
+    }
+
+    TABLE {
+        Pokemon_region
+        pokedex_id|region_id
+        385|3
+        25|1
+        39|1
+        813|8
+        690|6
+        103|1
+        477|4
+        264|8
+    }
+
+    RESULT {
+        8|Galar|2
+        6|Kalos|1
+        4|Sinnoh|1
+        3|Hoenn|1
+        1|Kanto|3
+    }
+}
+
+
+

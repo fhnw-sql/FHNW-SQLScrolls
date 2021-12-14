@@ -1,0 +1,65 @@
+METADATA {
+    id: task-076
+    name: Games 10
+    color: green
+    info: list sorted fields from multiple joined tables
+    keywords: SELECT, FROM, JOIN, ORDER_BY
+    level: 2
+}
+
+DESCRIPTION {
+    List the player names, their vehicles and equipment sorted ascending by their level.
+}
+
+PARSONS {
+    SELECT p.playerName, v.name, e.name
+    FROM player p JOIN vehicle v ON p.vehic_id = v.id
+    JOIN equipment e ON p.equip_id = e.id
+    ORDER BY p.level
+    SELECT p.name, v.name, e.name #distractor
+    JOIN equipment v ON p.id = v.id #distractor
+    ORDER BY p.level DESC #distractor
+}
+
+ANSWER {
+    SELECT p.playerName, v.name, e.name FROM player p JOIN vehicle v ON p.vehic_id = v.id JOIN equipment e ON p.equip_id = e.id ORDER BY p.level;
+}
+
+TEST {
+    TABLE {
+        Player
+        id|playerName|level|vehic_id|equip_id
+        1|John|3|1|4
+        2|Gollum|5|2|3
+        3|Franklin|0|3|2
+        4|Peach|10|4|1
+    }
+
+    TABLE {
+        Equipment
+        id|name|weight
+        1|Backpack|3
+        2|Armor|10
+        3|Cookie|0.5
+        4|Sword|6
+    }
+
+    TABLE {
+        Vehicle
+        id|name|horsepower
+        1|Car|200
+        2|Spaceship|10000
+        3|Truck|100
+        4|Motocycle|250
+    }
+
+    RESULT {
+        Franklin|Truck|Armor
+        John|Car|Sword
+        Gollum|Spaceship|Cookie
+        Peach|Motocycle|Backpack
+    }
+}
+
+
+
