@@ -2,8 +2,8 @@ METADATA {
     id: task-080
     name: Zoo 4
     color: green
-    info: list sorted fields from joined tables
-    keywords: SELECT, FROM, JOIN, ORDER_BY
+    info: list filtered fields from joined tables
+    keywords: SELECT, FROM, JOIN
     level: 2
 }
 
@@ -14,7 +14,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT f.name FROM zoo_food f LEFT JOIN zoo_animal a ON f.id = a.food_id WHERE a.name = 'Timon';
+    SELECT f.name FROM zoo_food f JOIN zoo_animal a ON f.id = a.food_id WHERE a.name = 'Timon';
 }
 
 TEST {
