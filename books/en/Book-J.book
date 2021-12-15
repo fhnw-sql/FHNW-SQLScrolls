@@ -1,0 +1,106 @@
+METADATA {
+    id: Book-J
+    name: Zoo book
+    title: Zoo Keeper Challenge 🐼
+    author: Dr. Jane Godall
+    color: zoo
+}
+
+PAGE {
+    <b>The IT Zoo Keeper Challenge 🐾</b>
+
+    Already on your first day of work as a computer scientist at the zoo, you have to save the business . 
+
+    Do you have the data under control?
+
+
+
+    <b>Data tables of the zoo database</b>
+
+    The tables in the next page provide an overview of all the data in the zoo database. 
+}
+
+
+PAGE {
+ <img src="img/zoo-schema.png" alt="Schema"> 
+}
+
+PAGE {
+    The following pages show some partial data from the tables.
+
+    This table contains the zoo animals:
+
+    EXAMPLE {
+        TABLE {
+            zoo_animal
+            id|type          |name      |cage_id|food_id|carnivore|birthdate |entry_date
+            1 |penguin       |Happy     |1      |1      |true     |2006-07-15|2006-07-15
+            2 |penguin       |Gloria    |1      |1      |true     |2008-03-12|2009-02-24
+            3 |penguin       |Lani      |1      |1      |true     |2013-12-24|2009-02-24
+            4 |bear          |Paddy     |2      |3      |true     |2015-01-25|2018-09-07
+            5 |bear          |Ursus     |2      |3      |false    |2014-06-02|2014-06-02
+            6 |bear          |Balu      |2      |3      |false    |2020-04-05|2020-04-05
+            7 |maggot        |Fred      |3      |4      |true     |2017-10-06|2017-10-06
+            8 |rhino         |Timon     |3      |5      |false    |1999-02-10|2000-10-06
+            9 |rhino         |Pumba     |3      |5      |false    |1999-02-10|2000-10-06
+        }
+    }
+}
+
+PAGE {
+}
+
+PAGE {
+    This table contains the the cages.
+    EXAMPLE {
+        TABLE {
+            zoo_cage
+            id|zone    |continent    |squaremeter
+            1 |north   |Antarctic    |100.00     
+            2 |north   |North America|120.00     
+            3 |south   |Africa       |378.00     
+            4 |south   |Oceania      |150.00     
+            5 |entrance|Europe       |220.00      
+       }
+    }
+}
+
+PAGE {
+    This table contains the food of the animals.
+    EXAMPLE {
+        TABLE {
+			zoo_food
+			id|name      |type_of|origin     
+			1 |anchovies |fish   |Antarctic  
+			2 |salmon    |fish   |Alaska     
+			3 |blueberry |plant  |Switzerland
+			4 |tick      |insects|null       
+			5 |thorn bush|plant  |Switzerland
+			6 |acacia    |plant  |Zimbabwe   
+			7 |corn      |plant  |Usa        
+			8 |maggots   |insects|Switzerland
+			9 |beef      |mammal |Switzerland
+       }
+    }
+}
+
+PAGE {
+    This table contains the employees in the zoo.
+    EXAMPLE {
+        TABLE {
+			zoo_employee
+			id|firstname|surname  |gender|hire_date |education   |cage_id
+			1 |Roger    |Buenter  |male  |2010-12-01|zoo_keeper  |1      
+			2 |Gregi    |Pfister  |male  |2008-03-01|zoologist   |2      
+			3 |Heidi    |Vonbergen|female|1995-08-01|zoo_keeper  |2      
+			4 |Taya     |Abena    |female|2020-01-01|trainee     |3      
+			5 |Diego    |Lopez    |male  |2020-01-01|trainee     |3      
+			6 |Doc      |Brown    |male  |1983-01-01|veterinarian|null   
+			7 |Dodo     |Pfister  |female|2009-09-01|zoo_keeper  |4      
+        }
+    }
+}
+
+PAGE {
+    <h2> <br><br> Good <br> luck! 🍀 </h2>
+}

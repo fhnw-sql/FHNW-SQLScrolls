@@ -1553,6 +1553,20 @@ body {
   border-color: #0e2b13;
 }
 
+ .book.zoo-book {
+  border-color: #010e17;
+}
+
+.book.zoo-book::after {
+  background: url("../img/zoo-background.png");
+  background-size: cover;
+  border-color: #010d17;
+}
+
+.book-open.zoo-book {
+  border-color: #0e1b2b;
+}
+
 .book.light-blue-book {
   border-color: #00181a;
 }

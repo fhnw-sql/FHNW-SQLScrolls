@@ -40,6 +40,11 @@ progression = [
         requires: ["A"],
     },
     {
+        id: "J",
+        tasks: ["077"],
+        requires: ["A"],
+    },
+    {
         id: "I",
         tasks: ["058", "999"],
         requires: ["A"],
