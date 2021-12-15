@@ -15,7 +15,6 @@ ANSWER {
    SELECT MIN(NAME) FROM GHOSTS ORDER BY NAME ASC
 }
 
-
 TEST {
     TABLE {
         Ghosts

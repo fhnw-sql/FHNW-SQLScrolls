@@ -222,6 +222,7 @@ class Task extends ItemType {
                 const resultSets = await runSQL(test.context, query);
                 if (resultSets.length) {
                     const table = Table.fromResultSet("", resultSets[0]); // i18n.get("i18n-table-result")
+                    console.log("strict = ", test.strict)
                     console.log("table = ", table)
                     console.log("wanted = ", wanted)
                     const correct = table.isEqual(wanted, test.strict);
@@ -451,7 +452,7 @@ class Table {
             const valuesWithTypes = [];
             for (let i = 0; i < row.length; i++) {
                 // Adds 'value' if TEXT and escapes ' if necessary, otherwise value (assuming number)
-                valuesWithTypes.push(columnTypes[i] === "TEXT" ? `'${row[i].split("'").join("\\''")}'` : row[i]);
+                valuesWithTypes.push((columnTypes[i] === "TEXT") && (row[i] != null) ? `'${row[i].split("'").join("\\''")}'` : row[i]);
             }
             // example: INSERT INTO Table (col1, col2) VALUES ("value", 0);
             queries.push(`INSERT INTO ${this.name} (${this.header.join(",")}) VALUES (${valuesWithTypes.map(v => v == null ? 'null': v).join(",")});`);

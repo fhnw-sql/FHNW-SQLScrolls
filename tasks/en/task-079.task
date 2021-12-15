@@ -1,32 +1,36 @@
 METADATA {
-    id: task-077
-    name: Zoo 1
+    id: task-079
+    name: Zoo 3
     color: green
-    info: list filtered fields from a single
-    keywords: SELECT, FROM, WHERE
+    info: list filtered fields from a single table
+    keywords: SELECT, FROM, WHERE, ORDER_BY
     level: 1
 }
-
 DESCRIPTION {
-    Panic !! 😱 An animal escaped on your first day at work. 
+    The zoo is busy producing offspring 🍼. 
     
-    Find out quickly which animal is not in a cage and prevent a mass panic!
+    The accounting department wants to know which animals were born in our zoo for a sponsorship event.
+
+    Make a list with the youngest animal on top.
 }
 
 PARSONS {
-    SELECT id, type, name, cage_id
+    SELECT name, type, birthdate
     FROM zoo_animal
-    WHERE cage_id IS NULL
-    SELECT * #distractor
+    WHERE birthdate = entry_date
+    ORDER BY birthdate DESC
     FROM zoo_animals #distractor
-    WHERE cage_id IS false  #distractor
+    WHERE birthdate < entry_date  #distractor
+    ORDER BY birthdate #distractor
 }
 
 ANSWER {
-    SELECT id, type, name, cage_id FROM zoo_animal WHERE cage_id IS NULL;
+    SELECT name, type, birthdate FROM zoo_animal WHERE birthdate = entry_date ORDER BY birthdate DESC;
 }
 
 TEST {
+    STRICT
+
     TABLE {
         zoo_animal
         id|type|name|cage_id|food_id|carnivore|birthdate|entry_date
@@ -51,7 +55,14 @@ TEST {
     }
 
     RESULT {
-        10|lion|Alex|null
+        Ursina|bear|2021-04-05
+        Balu|bear|2020-04-05
+        Nala|giraffe|2019-02-06
+        Dodo|kangaroo|2018-05-01
+        Diego|kangaroo|2018-05-01
+        Freddy|maggot chopper|2017-10-06
+        Ursus|bear|2014-06-02
+        Happyfeet|penguin|2006-07-15
     }
 }
 
