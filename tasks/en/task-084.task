@@ -1,23 +1,28 @@
 METADATA {
-    id: task-078
-    name: Zoo 2
-    color: green
-    info: list sorted fields from joined tables
-    keywords: SELECT, FROM, JOIN, ORDER_BY
-    level: 2
+    id: task-084
+    name: Zoo 8
+    color: blue
+    info: list filtered fields from joined tables
+    keywords: SELECT, FROM, JOIN, WHERE, GROUP_BY
+    level: 4
 }
 
 DESCRIPTION {
-    Coincidence or chaos in the personnel files? Which animals are called the same as one or more employees?
-    
-    List them sorted in descending order according to the employee's surname.
+	Oh dear, now the notice of the deployment plan has also been lost. 
+	And it is no longer clear which employee is responsible for how many animals. 
+	
+	The person who does the scheduling needs a list of it. 
+	The list should contain the number of animals per employee. 
+	Null values should not appear on the list. 
+	
+	💡 Tip: Use the count function for the number of animals.
 }
 
 ANSWER {
-    SELECT name, type, firstname, surname
-    FROM zoo_animal 
-    JOIN zoo_employee ON zoo_employee.firstname = zoo_animal.name 
-    ORDER BY surname ASC;
+		SELECT COUNT(*) AS amount, k.firstname
+		FROM zoo_animal A LEFT JOIN zoo_employee k ON A.cage_id = k.cage_id
+		WHERE k.firstname IS NOT NULL
+		GROUP BY k.firstname;
 }
 
 TEST {
@@ -57,38 +62,11 @@ TEST {
     }
 
     RESULT {
-        Diego|kangaroo|Diego|Lopez
-        Dodo|kangaroo|Dodo|Pfister
+		4|Dodo
+		5|Taya
+		3|Gregi
+		3|Heidi
+		3|Roger
+		5|Diego
     }
 }
-
-TEST {
-    TABLE {
-        zoo_animal
-        id|type|name|cage_id|food_id|carnivore|birthdate|entry_date
-		1|penguin|Anna|1|1|true|2006-07-15|2006-07-15
-		2|penguin|Gloria|1|1|true|2008-03-12|2009-02-24
-		3|penguin|Lani|1|1|true|2013-12-24|2009-02-24
-		4|bear|Paddington|2|3|true|2015-01-25|2018-09-07
-		5|bear|Ursus|2|3|false|2014-06-02|2014-06-02
-		6|bear|Manu|2|3|false|2020-04-05|2020-04-05
-    }
-
-    TABLE {
-        zoo_employee
-        id|firstname|surname|gender|hire_date|education|cage_id
-        1|Roger|Buenter|male|2010-12-01|zoo_keeper|1      
-        2|Gregi|Pfister|male|2008-03-01|zoologist|2      
-        3|Anna|Vonbergen|female|1995-08-01|zoo_keeper|2      
-        4|Taya|Abena|female|2020-01-01|trainee|3      
-        5|Diego|Lopez|male|2020-01-01|trainee|3      
-        6|Manu|Brown|male|1983-01-01|veterinarian|null   
-        7|Dodo|Pfister|female|2009-09-01|zoo_keeper|4      
-    }
-
-    RESULT {
-        Manu|bear|Manu|Brown
-        Anna|penguin|Anna|Vonbergen
-    }
-}
-

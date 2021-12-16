@@ -1,15 +1,15 @@
 METADATA {
     id: Book-J
     name: Zoo book
-    title: Zoo Keeper Challenge 🐼
+    title: Opal Zoo 🐼 Challenge 
     author: Dr. Jane Godall
     color: zoo
 }
 
 PAGE {
-    <b>The IT Zoo Keeper Challenge 🐾</b>
+    <b>The Opal Zoo Challenge 🐾</b>
 
-    Already on your first day of work as a computer scientist at the zoo, you have to save the business . 
+    Already on your first day of work as a computer scientist at the Opal zoo, you have to save the business . 
 
     Do you have the data under control?
 
@@ -102,5 +102,5 @@ PAGE {
 }
 
 PAGE {
-    <h2> <br><br> Good <br> luck! 🍀 </h2>
+    <h2> <br><br> Good <br> luck! 🍀 <br> </h2> <h4> The Opal Team </h4>
 }

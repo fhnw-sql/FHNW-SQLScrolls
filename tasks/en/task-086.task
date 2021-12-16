@@ -1,22 +1,33 @@
 METADATA {
-    id: task-080
-    name: Zoo 4
-    color: green
-    info: list filtered fields from joined tables
-    keywords: SELECT, FROM, JOIN
-    level: 2
+    id: task-086
+    name: Zoo 10
+    color: purple
+    info: calculated field from division including a nested query and joins
+    keywords: SELECT, FROM, SUM, ROUND, WHERE, JOIN, CAST, NESTED_QUERY
+    level: 5
 }
 
 DESCRIPTION {
-    What will Timon our rhinoceros eat again?
-
-    List the name of the food.
-
-     <h1>🦏</h1> 
+	The animal rights activists are demonstrating again in front of the zoo entrance. 
+	According to the calculations of my predecessor, an animal in the “north” zone has an average of 70m2 of space in the cage. 
+	Is that correct?
+	
+	How much space (squaremeter) do the animals have on average in the “north” zone?
+	
+	✅ Output: Please round the result to two decimal places.
+	
+	💡 Tip: To obtain a floating point result, you may need to convert an integer value to real using the 'CAST' function. 
 }
 
 ANSWER {
-    SELECT f.name FROM zoo_food f JOIN zoo_animal a ON f.id = a.food_id WHERE a.name = 'Timon';
+	SELECT ROUND(CAST(north_zone.squaremeter as REAL) /count(*),2)
+	FROM (SELECT zone, sum(squaremeter) squaremeter
+		FROM zoo_cage
+		WHERE zone = 'north'
+		GROUP BY zone) north_zone INNER JOIN 
+		zoo_cage c ON (north_zone.zone = c.zone) INNER JOIN
+		zoo_animal a ON (c.id = a.cage_id)
+	GROUP BY c.zone, north_zone.squaremeter;
 }
 
 TEST {
@@ -44,21 +55,17 @@ TEST {
     }
 
     TABLE {
-        zoo_food
-        id|name|type_of|origin     
-        1|anchovies|fish|Antarctic  
-        2|salmon|fish|Alaska     
-        3|blueberry|plant|Switzerland
-        4|tick|insects|null       
-        5|thorn bush|plant|Switzerland
-        6|acacia|plant|Zimbabwe   
-        7|corn|plant|Usa        
-        8|maggots|insects|Switzerland
-        9|beef|mammal|Switzerland     
+        zoo_cage
+        id|zone|continent|squaremeter
+        1|north|Antarctic|100.00     
+        2|north|North America|120.00     
+        3|south|Africa|378.00     
+        4|south|Oceania|150.00     
+        5|entrance|Europe|220.00   
     }
 
     RESULT {
-        thorn bush
+		36.67
     }
 }
 
@@ -73,7 +80,7 @@ TEST {
 		5|bear|Ursus|2|3|false|2014-06-02|2014-06-02
 		6|bear|Balu|2|3|false|2020-04-05|2020-04-05
 		7|maggot chopper|Freddy|3|4|true|2017-10-06|2017-10-06
-		8|rhino|Timon|3|6|false|1999-02-10|2000-10-06
+		8|rhino|Timon|3|5|false|1999-02-10|2000-10-06
 		9|rhino|Pumba|3|5|false|1999-02-10|2000-10-06
 		10|lion|Alex|null|9|true|2011-09-28|2013-09-01
 		11|giraffe|Shari|3|6|false|2001-05-30|2007-07-01
@@ -84,24 +91,22 @@ TEST {
 		16|kangaroo|Didier|4|5|false|2012-11-04|2013-11-03
 		17|peecock|Martin|5|5|false|null|2019-11-01
 		18|bear|Ursina|5|3|false|2021-04-05|2021-04-05
+		19|reindeer|Rudolph|6|10|false|2016-04-05|2019-07-15
+		20|reindeer|Kirsi|6|10|false|2014-04-05|019-07-15
     }
 
     TABLE {
-        zoo_food
-        id|name|type_of|origin     
-        1|anchovies|fish|Antarctic  
-        2|salmon|fish|Alaska     
-        3|blueberry|plant|Switzerland
-        4|tick|insects|null       
-        5|thorn bush|plant|Switzerland
-        6|acacia|plant|Zimbabwe   
-        7|corn|plant|Usa        
-        8|maggots|insects|Switzerland
-        9|beef|mammal|Switzerland     
+        zoo_cage
+        id|zone|continent|squaremeter
+        1|north|Antarctic|100.00     
+        2|north|North America|120.00     
+        3|south|Africa|378.00     
+        4|south|Oceania|150.00     
+        5|entrance|SouthEurope|220.00   
+        6|north|North Europe|337.00   
     }
 
     RESULT {
-        acacia
+		69.63
     }
 }
-

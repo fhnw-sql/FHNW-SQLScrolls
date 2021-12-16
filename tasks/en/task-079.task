@@ -7,7 +7,7 @@ METADATA {
     level: 1
 }
 DESCRIPTION {
-    The zoo is busy producing offspring 🍼. 
+    The animal families in the zoo are growing every year 🍼. 
     
     The accounting department wants to know which animals were born in our zoo for a sponsorship event.
 
@@ -50,7 +50,7 @@ TEST {
 		14|kangaroo|Diego|4|5|false|2018-05-01|2018-05-01
 		15|kangaroo|Domingo|4|5|false|2019-07-16|2020-04-01
 		16|kangaroo|Didier|4|5|false|2012-11-04|2013-11-03
-		17|peecock|Martin|5|5|false|null|2079-11-01
+		17|peecock|Martin|5|5|false|null|2019-11-01
 		18|bear|Ursina|5|3|false|2021-04-05|2021-04-05
     }
 
