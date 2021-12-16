@@ -20,7 +20,7 @@ PARSONS {
     WHERE f.name='blueberry' AND k.firstname = 'Heidi'
     SELECT f.name, a.type #distractor
     JOIN zoo_animal a ON c.cage_id = a.id #distractor
-    WHERE f.name='blueberry' AND k.firstname = 'Heidi' #distractor
+    WHERE a.name='blueberry' AND k.firstname = 'Heidi' #distractor
 }
 
 ANSWER {
