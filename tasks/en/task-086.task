@@ -3,7 +3,7 @@ METADATA {
     name: Zoo 10
     color: purple
     info: calculated field from division including a nested query and joins
-    keywords: SELECT, FROM, SUM, ROUND, WHERE, JOIN, CAST, NESTED_QUERY
+    keywords: SELECT, FROM, SUM, WHERE, JOIN, NESTED_QUERY
     level: 5
 }
 
@@ -13,14 +13,11 @@ DESCRIPTION {
 	Is that correct?
 	
 	How much space (squaremeter) do the animals have on average in the “north” zone?
-	
-	✅ Output: Please round the result to two decimal places.
-	
-	💡 Tip: To obtain a floating point result, you may need to convert an integer value to real using the 'CAST' function. 
+		
 }
 
 ANSWER {
-	SELECT ROUND(CAST(north_zone.squaremeter as REAL) /count(*),2)
+	SELECT north_zone.squaremeter/count(*)
 	FROM (SELECT zone, sum(squaremeter) squaremeter
 		FROM zoo_cage
 		WHERE zone = 'north'
@@ -58,14 +55,14 @@ TEST {
         zoo_cage
         id|zone|continent|squaremeter
         1|north|Antarctic|100.00     
-        2|north|North America|120.00     
+        2|north|North America|140.00     
         3|south|Africa|378.00     
         4|south|Oceania|150.00     
         5|entrance|Europe|220.00   
     }
 
     RESULT {
-		36.67
+		40
     }
 }
 
@@ -99,14 +96,14 @@ TEST {
         zoo_cage
         id|zone|continent|squaremeter
         1|north|Antarctic|100.00     
-        2|north|North America|120.00     
+        2|north|North America|150.00     
         3|south|Africa|378.00     
         4|south|Oceania|150.00     
         5|entrance|SouthEurope|220.00   
-        6|north|North Europe|337.00   
+        6|north|North Europe|350.00   
     }
 
     RESULT {
-		69.63
+		75
     }
 }

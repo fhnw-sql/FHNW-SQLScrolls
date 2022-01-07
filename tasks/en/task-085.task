@@ -14,8 +14,7 @@ DESCRIPTION {
 PARSONS {
     SELECT a.name, a.type
     FROM zoo_employee k 
-    JOIN zoo_cage c ON k.cage_id = c.id 
-    JOIN zoo_animal a ON a.cage_id = c.id 
+    JOIN zoo_animal a ON k.cage_id = a.cage_id
     JOIN zoo_food f ON  f.id = a.food_id
     WHERE f.name='blueberry' AND k.firstname = 'Heidi'
     SELECT f.name, a.type #distractor
@@ -25,7 +24,7 @@ PARSONS {
 
 ANSWER {
     SELECT a.name, a.type
-    FROM zoo_employee k JOIN zoo_cage c ON k.cage_id = c.id JOIN zoo_animal a ON a.cage_id = c.id JOIN zoo_food f ON f.id = a.food_id
+    FROM zoo_employee k JOIN zoo_animal a ON k.cage_id = a.cage_id JOIN zoo_food f ON f.id = a.food_id
     WHERE f.name='blueberry' AND k.firstname = 'Heidi';
 }
 
@@ -52,16 +51,6 @@ TEST {
 		16|kangaroo|Didier|4|5|false|2012-11-04|2013-11-03
 		17|peecock|Martin|5|5|false|null|2019-11-01
 		18|bear|Ursina|5|3|false|2021-04-05|2021-04-05
-    }
-    
-    TABLE {
-        zoo_cage
-        id|zone|continent|squaremeter
-        1|north|Antarctic|100.00     
-        2|north|North America|120.00     
-        3|south|Africa|378.00     
-        4|south|Oceania|150.00     
-        5|entrance|Europe|220.00   
     }
 
     TABLE {

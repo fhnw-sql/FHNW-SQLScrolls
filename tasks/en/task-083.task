@@ -19,11 +19,10 @@ PARSONS {
     FROM zoo_animal
     WHERE  birthdate = (SELECT MAX(birthdate) 
     FROM zoo_animal a 
-    JOIN zoo_cage c ON a.cage_id = c.id 
-    JOIN zoo_employee k ON c.id = k.cage_id 
+    JOIN zoo_employee k ON a.cage_id = k.cage_id 
     WHERE a.type='bear' AND k.firstname = 'Heidi')
     WHERE  birthdate = (SELECT birthdate #distractor
-    WHERE k.type='bear' AND c.firstname = 'Heidi') #distractor
+    WHERE k.type='bear' AND k.name = 'Heidi') #distractor
 }
 
 ANSWER {
@@ -31,8 +30,7 @@ ANSWER {
     FROM zoo_animal
     WHERE  birthdate = 
         (SELECT MAX(birthdate) 
-        FROM zoo_animal a JOIN zoo_cage c ON a.cage_id = c.id 
-                          JOIN zoo_employee k ON c.id = k.cage_id 
+        FROM zoo_animal a JOIN zoo_employee k ON a.cage_id = k.cage_id 
         WHERE a.type='bear' AND k.firstname = 'Heidi');
 }
 
@@ -73,16 +71,7 @@ TEST {
         6|Doc|Brown|male|1983-01-01|veterinarian|null   
         7|Dodo|Pfister|female|2009-09-01|zoo_keeper|4      
     }
-    
-    TABLE {
-        zoo_cage
-        id|zone|continent|squaremeter
-        1|north|Antarctic|100.00     
-        2|north|North America|120.00     
-        3|south|Africa|378.00     
-        4|south|Oceania|150.00     
-        5|entrance|Europe|220.00   
-    }
+
     RESULT {
         Balu|2020-04-05
     }
