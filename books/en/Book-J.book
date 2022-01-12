@@ -9,13 +9,13 @@ METADATA {
 PAGE {
     <b>The Opal Zoo Challenge 🐾</b>
 
-    Already on your first day of work as a computer scientist at the Opal zoo, you have to save the business . 
+    Already on your first day of work as a computer scientist at the Opal zoo, you have to save the business. 
 
     Do you have the data under control?
 
 
 
-    <b>Data tables of the zoo database</b>
+    <b>Data tables in the zoo database</b>
 
     The tables in the next page provide an overview of all the data in the zoo database. 
 }
@@ -28,7 +28,7 @@ PAGE {
 PAGE {
     The following pages show some partial data from the tables.
 
-    This table contains the zoo animals:
+    This table shows the animals:
 
     EXAMPLE {
         TABLE {
@@ -51,7 +51,7 @@ PAGE {
 }
 
 PAGE {
-    This table contains the the cages.
+    This table lists the the cages.
     EXAMPLE {
         TABLE {
             zoo_cage
@@ -66,7 +66,7 @@ PAGE {
 }
 
 PAGE {
-    This table contains the food of the animals.
+    This table lists the foods the animals eat.
     EXAMPLE {
         TABLE {
 			zoo_food
@@ -85,7 +85,7 @@ PAGE {
 }
 
 PAGE {
-    This table contains the employees in the zoo.
+    This table shows the zoo employees.
     EXAMPLE {
         TABLE {
 			zoo_employee
