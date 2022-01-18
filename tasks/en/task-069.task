@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    List the height of the smallest and the largest Pokemon.
+    Show the heights of the smallest and the largest Pokemon.
 }
 
 ANSWER {

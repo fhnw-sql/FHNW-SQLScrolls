@@ -1,22 +1,25 @@
 METADATA {
     id: Book-G
-    name: Games book 
-    title: Computer Games 💻
-    author: Ada Countess of Lovelace
+    name: Pokémon book 
+    title: Pokémon 💻
+    author: Satoshi Tajiri
     color: games
 }
 
 
 PAGE {
-    This book contain exercises based on computer games related data.
+    Here we meet 900 species of Pocket Monsters (Pokémon).
 
-    In the next pages you can find the main tables used in the exercises.
+    You a Pokémon Trainer. You have to 1. complete the regional Pokédex 
+    by collecting all of the available Pokémon species found here, 2. complete the 
+    national Pokédex by transferring Pokémon from other regions, and 3. train a team 
+    of powerful Pokémon to compete against teams owned by other Trainers, so that you 
+    win the Pokémon League and become the regional Champion. 
 }
 
 PAGE {
 
-    POKEMON: A set of exercises wil be based on the popular series of video games developed 
-    by Game Freak. Gotta catch them all! 
+    POKEMON: Gotta catch them all! 
     EXAMPLE {
         SQL {
             CREATE TABLE Pokemon (
@@ -43,7 +46,7 @@ PAGE {
 
 PAGE {
 
-    Tables related to the Pokemon 
+    Pokemon Attrributes
     EXAMPLE {
         SQL {
             CREATE TABLE Attributes (
@@ -69,7 +72,7 @@ PAGE {
 }
 
 PAGE {
-    Regions
+    Pokemon Regions
     EXAMPLE {
         SQL {
             CREATE TABLE Region (
@@ -93,7 +96,7 @@ PAGE {
 }
 
 PAGE {
-    Table linking the Pokemon to their regions
+    Pokemon to their regions
     EXAMPLE {
         SQL {
             CREATE TABLE Pokemon_region (

@@ -8,7 +8,8 @@ METADATA {
 }
 
 DESCRIPTION {
-    List all the Pokemon that have a name that starts with the letter “J”.
+    My last Pokemon has a name starting with J. Which one is it?
+    Please help me and list all the ones whose name starts with J.
 }
 
 PARSONS {

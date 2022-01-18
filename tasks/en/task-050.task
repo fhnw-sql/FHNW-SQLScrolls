@@ -1,6 +1,6 @@
 METADATA {
     id: task-050
-    name: Games 1
+    name: Pokémon 1
     color: red
     info: game release year
     keywords: SELECT, SUBSTR, LENGTH, DISTINCT
@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    List the year when games were released, sorted chronologically from old to new
+    List the years when the earliest Pokémon games were released, sorted chronologically from old to new.
 }
 
 ANSWER {
@@ -20,22 +20,21 @@ TEST {
     TABLE {
         Game
         gameid|title|release_date
-        605|The Legend of Zelda|February 21 1986
-        604|Grand Theft Auto|October 21 1997
-        608|Minecraft|November 18 2011
-        600|Final Fantasy|December 18 1987
-        601|World of Warcraft|November 23 2004
-        602|Tetris|June 6 1984
-        603|Rayman Origins|November 11 2011
+        605|Pocket Monsters: Red and Green|February 27 1996
+        604|Pocket Monsters: Blue|October 15 1996
+        608|Pokémon Red and Blue|September 28 1998
+        600|Pokémon Yellow|September 12 1998
+        601|Pokémon Gold and Silver|November 21 1999
+        602|Pokémon Crystal|December 14 2000
+        603|Pokémon Ruby and Sapphire|November 21 2002
     }
 
     RESULT {
-        1984
-        1986
-        1987
-        1997
-        2004
-        2011
+        1996
+        1998
+        1999
+        2000
+        2002
     }
 }
 
@@ -43,15 +42,14 @@ TEST {
     TABLE {
         Game
         gameid|title|release_date
-        700|Super Mario Bros.|September 13 1985
-        701|Super Mario Galaxy|November 1 2007
-        702|Super Mario Kart|August 27 1992
+        700|Pokémon FireRed and LeafGreen|January 29 2004
+        701|Pokémon Emerald|September 16 2004
+        702|Pokémon Diamond and Pearl|September 28 2006
     }
 
     RESULT {
-        1985
-        1992
-        2007
+        2004
+        2006
     }
 }
 

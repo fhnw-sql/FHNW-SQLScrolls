@@ -3,12 +3,12 @@ METADATA {
     name: Games 6
     color: blue
     info: list sorted grouped fields joined from multiple tables
-    keywords: SELECT, COUNT, JOIN, GROUP_BY, ORDER_BY
+    keywords: SELECT, COUNT, JOIN, GROUP_BY, ORDER_BY, DESC
     level: 3
 }
 
 DESCRIPTION {
-    List all Regions and how many Pokemon are in each region sorted in descending order of the region ID.
+    List all Regions and how many Pokemon there are in each region sorted in descending order of the region ID.
 }
 
 PARSONS {

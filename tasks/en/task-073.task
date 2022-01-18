@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    List together all the pokemon names and the regions sorted alphabetically.
+    Show all the Pokemon names you have now and their regions all as one list, sorted alphabetically.
 }
 
 ANSWER {

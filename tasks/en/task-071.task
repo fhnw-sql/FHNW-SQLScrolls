@@ -3,12 +3,12 @@ METADATA {
     name: Games 5
     color: blue
     info: list average of grouped values from joined tables
-    keywords: SELECT, COUNT, ROUND, WHERE, JOIN, GROUP BY, HAVING
+    keywords: SELECT, COUNT, ROUND, WHERE, JOIN, GROUP BY, HAVING, AVG
     level: 3
 }
 
 DESCRIPTION {
-    Show the Pokemon average height (2 decimal places) of the generations that have more than 1 Pokemon. 
+    Show the Pokemon average height (rounded to 2 decimal places) of the generations that have more than 1 Pokemon. 
 }
 ANSWER {
 SELECT generation, COUNT(*) as generation_count, ROUND(AVG(height_m), 2)

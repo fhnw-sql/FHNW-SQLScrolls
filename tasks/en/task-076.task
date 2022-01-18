@@ -8,7 +8,8 @@ METADATA {
 }
 
 DESCRIPTION {
-    List the player names, their vehicles and equipment sorted ascending by their level.
+    The players in your team each have a vehicle and a piece of equipment.
+    List player names in the increasing order of level, and their vehicles and equipment.
 }
 
 PARSONS {

@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    List the player's names and level for the ones with the minimum level.
+    A new player has just joined and they are at the lowest level. Show their name and level.
 }
 
 ANSWER {

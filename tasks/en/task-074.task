@@ -2,13 +2,13 @@ METADATA {
     id: task-074
     name: Games 8
     color: blue
-    info: list fields joined from intersected tables
-    keywords: SELECT, DISTINCT, FROM, WHERE
+    info: list fields joined from two tables
+    keywords: SELECT, FROM, WHERE
     level: 2
 }
 
 DESCRIPTION {
-    List all Regions and how many Pokemon are in each region sorted in descending order of the region ID.
+    You have eight Pokemon. What types of Pokemon do you have? List them.
 }
 
 PARSONS {
