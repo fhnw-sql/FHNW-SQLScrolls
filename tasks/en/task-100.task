@@ -1,19 +1,22 @@
 METADATA {
-    id: task-095
-    name: Sort by speed
+    id: task-100
+    name: Full names
     color: red
     info: Pokedex new arrivals
-    keywords: SELECT, ORDER BY ASC
+    keywords: SELECT, ||, AND, IS NOT NULL 
     level: 2
 }
 
 DESCRIPTION {
-     I think, strategically, speed is very important. Show name1
-     and speed of new Pokemon, in the order of increasing speed.
+     Show IDs and full names (concatenate names 
+     with string aka, also known as, with spaces around aka)
+     for all Pokemon who have two names.
 }
 
 ANSWER {
-    SELECT name1, speed from Pokedex_new ORDER BY SPEED ASC;
+    select ID, name1||' aka '||name2
+    from Pokedex_new 
+    where name1 IS NOT NULL AND name2 IS NOT NULL;
 }
 
 TEST {
@@ -39,22 +42,9 @@ TEST {
     }
 
     RESULT {
-        Omanyte	35
-        Porygon	40
-        Ditto	48
-        Omastar	55
-        Kabuto	55
-        Lapras	60
-        Vaporeon	65
-        Flareon	65
-        Eevee	75
-        Magikarp	80
-        Gyarados	81
-        Magmar	93
-        Electabuzz	105
-        Pinsir	105
-        Tauros	110
-        Jolteon	130
+        127	Pinsir aka Mega Pinsir
+        130	Gyarados aka Mega Gyarados
+        133	Eevee aka Partner Eevee	
     }
 }
 
@@ -71,11 +61,7 @@ TEST {
     }
 
     RESULT {
-       Totodile	43
-       Croconaw	58
-       Cyndaquil	65
-       Feraligatr	78
-       Quilava	80
+        null
     }
 }
 

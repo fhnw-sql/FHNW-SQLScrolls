@@ -1,55 +1,85 @@
 METADATA {
-    id: task-090
-    name: Pokémon 1
+    id: task-097
+    name: Price
     color: red
-    info: game release year
-    keywords: SELECT, COUNT(*)
+    info: Pokedex new arrivals
+    keywords: SELECT, AS, ORDER BY DESC
     level: 2
 }
 
 DESCRIPTION {
-    How many Pokémon are there?
+     Let us try to model the Pokemon selling price. What would the price be
+     if we take 3% of the sum of the hitPoints and speed?  
+     Show ID, name1, hitPoints, speed, and the newly calculated
+     price by which you should order the result, the highest price at the top.
 }
 
 ANSWER {
-    SELECT count(*)
-    FROM Pokedex;
+    select ID, name1, hitPoints, speed,  0.03* (hitPoints + speed) as price
+    from Pokedex_new order by price DESC;
 }
 
 TEST {
     TABLE {
-        Game
-        gameid|title|release_date
-        605|Pocket Monsters: Red and Green|February 27 1996
-        604|Pocket Monsters: Blue|October 15 1996
-        608|Pokémon Red and Blue|September 28 1998
-        600|Pokémon Yellow|September 12 1998
-        601|Pokémon Gold and Silver|November 21 1999
-        602|Pokémon Crystal|December 14 2000
-        603|Pokémon Ruby and Sapphire|November 21 2002
+        Pokedex_new
+        ID|name1|name2|type1|type2|total|hitPoints|attack|defense|attackSpecial|defenseSpecial|speed
+        125|Electabuzz|NULL|ELECTRIC|NULL|490|65|83|57|95|85|105
+        126|Magmar|NULL|FIRE|NULL|495|65|95|57|100|85|93
+        127|Pinsir|Mega Pinsir|BUG|FLYING|600|65|155|120|65|90|105
+        128|Tauros|NULL|NORMAL|NULL|490|75|100|95|40|70|110
+        129|Magikarp|NULL|WATER|NULL|200|20|10|55|15|20|80
+        130|Gyarados|Mega Gyarados|WATER|DARK|640|95|155|109|70|130|81
+        131|Lapras|NULL|WATER|ICE|535|130|85|80|85|95|60
+        132|Ditto|NULL|NORMAL|NULL|288|48|48|48|48|48|48
+        133|Eevee|Partner Eevee|NORMAL|NULL|435|65|75|70|65|85|75
+        134|Vaporeon|NULL|WATER|NULL|525|130|65|60|110|95|65
+        135|Jolteon|NULL|ELECTRIC|NULL|525|65|65|60|110|95|130
+        136|Flareon|NULL|FIRE|NULL|525|65|130|60|95|110|65
+        137|Porygon|NULL|NORMAL|NULL|395|65|60|70|85|75|40
+        138|Omanyte|NULL|ROCK|WATER|355|35|40|100|90|55|35
+        139|Omastar|NULL|ROCK|WATER|495|70|60|125|115|70|55
+        140|Kabuto|NULL|ROCK|WATER|355|30|80|90|55|45|55
     }
 
     RESULT {
-        1996
-        1998
-        1999
-        2000
-        2002
+        134	Vaporeon	130	65	5.85
+        135	Jolteon	65	130	5.85
+        131	Lapras	130	60	5.7
+        128	Tauros	75	110	5.55
+        130	Gyarados	95	81	5.28
+        125	Electabuzz	65	105	5.1
+        127	Pinsir	65	105	5.1
+        126	Magmar	65	93	4.74
+        133	Eevee	65	75	4.2
+        136	Flareon	65	65	3.9
+        139	Omastar	70	55	3.75
+        137	Porygon	65	40	3.15
+        129	Magikarp	20	80	3.0
+        132	Ditto	48	48	2.88
+        140	Kabuto	30	55	2.55
+        138	Omanyte	35	35	2.1
     }
 }
 
 TEST {
     TABLE {
-        Game
-        gameid|title|release_date
-        700|Pokémon FireRed and LeafGreen|January 29 2004
-        701|Pokémon Emerald|September 16 2004
-        702|Pokémon Diamond and Pearl|September 28 2006
+        Pokedex_new
+        ID|name1|name2|type1|type2|total|hitPoints|attack|defense|attackSpecial|defenseSpecial|speed
+        155|Cyndaquil|NULL|FIRE|NULL|309|39|52|43|60|50|65
+        156|Quilava|NULL|FIRE|NULL|405|58|64|58|80|65|80
+        157|Typhlosion|NULL|FIRE|NULL|534|78|84|78|109|85|100
+        158|Totodile|NULL|WATER|NULL|314|50|65|64|44|48|43
+        159|Croconaw|NULL|WATER|NULL|405|65|80|80|59|63|58
+        160|Feraligatr|NULL|WATER|NULL|530|85|105|100|79|83|78
     }
 
     RESULT {
-        2004
-        2006
+        157	Typhlosion	78	100	5.34
+        160	Feraligatr	85	78	4.89
+        156	Quilava	58	80	4.14
+        159	Croconaw	65	58	3.69
+        155	Cyndaquil	39	65	3.12
+        158	Totodile	50	43	2.79
     }
 }
 
