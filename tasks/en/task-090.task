@@ -1,6 +1,6 @@
 METADATA {
     id: task-090
-    name: New Pokémon
+    name: New Pokemon
     color: red
     info: game release year
     keywords: SELECT, COUNT(*)
@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Let's look at our new stock in table Pokedex_new. How many Pokémon were delivered yesterday?
+    Let's look at our new stock in table Pokedex_new. How many Pokemon were delivered yesterday?
 }
 
 ANSWER {

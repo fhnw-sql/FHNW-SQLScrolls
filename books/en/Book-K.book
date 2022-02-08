@@ -1,17 +1,17 @@
 METADATA {
     id: Book-K
-    name: A Pokémon Startup  
-    title: Pokémon Startup 💻
-    author: Ela Pokémon
+    name: A Pokemon Startup  
+    title: Pokemon Startup 💻
+    author: Ela Pokemon
     color: games
 }
 
 
 PAGE {
-    Our startup will be trading in Pokémon. We need some reports 
+    Our startup will be trading in Pokemon. We need some reports 
     to help us shape our business strategy. The Pokedex table
     constains more rows then we can see on a page, see 
-    https://pokemondb.net/pokedex/all. A Pokémon has
+    https://pokemondb.net/pokedex/all. A Pokemon has
     one or two names and belongs to one or two types.
 }
 
@@ -46,7 +46,7 @@ PAGE {
         }
 
         QUERY {
-            SELECT * FROM Pokemon;
+            SELECT * FROM Pokedex;
         }
     }
 }
@@ -57,14 +57,14 @@ PAGE {
 }
 
 PAGE {
-    Every Pokémon has HPs (Hit Points) which are its life force. If HP hits zero, 
+    Every Pokemon has HPs (Hit Points) which are its life force. If HP hits zero, 
     it faints and can't fight in battle (it can use Hidden Machines). The Speed 
-    decides which Pokémon will make the first move in battle. This is critical. 
+    decides which Pokemon will make the first move in battle. This is critical. 
     Attack and Special Attack measure the strength of moves; the higher this is, 
     the more damage you will do to opponents. Attack corresponds to moves in the
     Physical category, while Special Attack corresponds to Special moves. 
     Defense and Special Defense measure the ability to counter attacks from other 
-    Pokémon; the higher they are, the fewer Hit Points are lost when attacked. 
+    Pokemon; the higher they are, the fewer Hit Points are lost when attacked. 
     Defense corresponds to moves in the Physical category, while Special Defense
     corresponds to Special moves.
 }
