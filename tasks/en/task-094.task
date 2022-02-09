@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT * from Pokedex WHERE name1 IS NOT NULL and name2 IS NOT NULL;
+    SELECT * from Pokedex_new WHERE name2 IS NOT NULL;
 }
 
 TEST {
