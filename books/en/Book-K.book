@@ -13,6 +13,17 @@ PAGE {
     constains more rows then we can see on a page, see 
     https://pokemondb.net/pokedex/all. A Pokemon has
     one or two names and belongs to one or two types.
+
+    Every Pokemon has HPs (Hit Points) which are its life force. If HP hits zero, 
+    it faints and can't fight in battle (it can use Hidden Machines). The Speed 
+    decides which Pokemon will make the first move in battle. This is critical. 
+    Attack and Special Attack measure the strength of moves; the higher this is, 
+    the more damage you will do to opponents. Attack corresponds to moves in the
+    Physical category, while Special Attack corresponds to Special moves. 
+    Defense and Special Defense measure the ability to counter attacks from other 
+    Pokemon; the higher they are, the fewer Hit Points are lost when attacked. 
+    Defense corresponds to moves in the Physical category, while Special Defense
+    corresponds to Special moves.
 }
 
 PAGE {
@@ -26,23 +37,19 @@ PAGE {
             type1 TEXT,
             type2 TEXT,
             total INTEGER,
-            hitPoints INTEGER,
+            hP INTEGER,
             attack INTEGER,
             defense INTEGER,
-            attackSpecial INTEGER,
-            defenseSpecial INTEGER,
+            attackSp INTEGER,
+            defenseSp INTEGER,
             speed INTEGER);
 
-            INSERT INTO Pokedex (id, name1, name2, type1, type2, total, hitPoints, 
-            attack, defense, attackSpecial, defenseSpecial, speed)
-            VALUES (1,"Bulbasaur",NULL,"GRASS","POISON",318,45,49,49,65,65,45);
-            INSERT INTO Pokedex (id, name1, name2, type1, type2, total, hitPoints, 
-            attack, defense, attackSpecial, defenseSpecial, speed)
-            VALUES (2,"Ivysaur",NULL,"GRASS","POISON",405,60,62,63,80,80,60);
-            INSERT INTO Pokedex (id, name1, name2, type1, type2, total, hitPoints, 
-            attack, defense, attackSpecial, defenseSpecial, speed)
-            VALUES (3,"Venusaur","Mega Venusaur","GRASS","POISON",625,80,100,123,122,120,80);
-
+            INSERT INTO Pokedex (id, name1, name2, type1, type2, total, hP, 
+            attack, defense, attackSp, defenseSp, speed)
+            VALUES (1,"Bulbasaur",null,"GRASS","POISON",318,45,49,49,65,65,45);
+            INSERT INTO Pokedex (id, name1, name2, type1, type2, total, hP, 
+            attack, defense, attackSp, defenseSp, speed)
+            VALUES (2,"Ivysaur",null,"GRASS","POISON",405,60,62,63,80,80,60);
         }
 
         QUERY {
@@ -51,22 +58,5 @@ PAGE {
     }
 }
 
-PAGE {
-
-    
-}
-
-PAGE {
-    Every Pokemon has HPs (Hit Points) which are its life force. If HP hits zero, 
-    it faints and can't fight in battle (it can use Hidden Machines). The Speed 
-    decides which Pokemon will make the first move in battle. This is critical. 
-    Attack and Special Attack measure the strength of moves; the higher this is, 
-    the more damage you will do to opponents. Attack corresponds to moves in the
-    Physical category, while Special Attack corresponds to Special moves. 
-    Defense and Special Defense measure the ability to counter attacks from other 
-    Pokemon; the higher they are, the fewer Hit Points are lost when attacked. 
-    Defense corresponds to moves in the Physical category, while Special Defense
-    corresponds to Special moves.
-}
 
 }
