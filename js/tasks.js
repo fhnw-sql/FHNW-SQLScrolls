@@ -600,7 +600,7 @@ async function runQueryTests(allowCompletionAndStore) {
 
     if (API.loginStatus === LoginStatus.LOGGED_IN && allCorrect) {
         // Display Endgame dialog on last question submission & hide next button
-        if ((tasks["task-000"] !== null && Views.TASK.currentTask.getNumericID() + 1 === tasks.asList().length) || Views.TASK.currentTask.getNumericID() === tasks.asList().length) {
+        if (tasks.asList().filter(t => t.completed).length >= tasks.asList().length) {
             if (allowCompletionAndStore) {
                 await Views.TASK.currentTask.completeTask();
                 await changeView(Views.END_TEXT);
