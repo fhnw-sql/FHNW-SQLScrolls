@@ -222,20 +222,34 @@ class Task extends ItemType {
                 const resultSets = await runSQL(test.context, query);
                 if (resultSets.length) {
                     const table = Table.fromResultSet("", resultSets[0]); // i18n.get("i18n-table-result")
+                    console.log("resultSets = ", resultSets)
                     console.log("strict = ", test.strict)
                     console.log("table = ", table)
                     console.log("wanted = ", wanted)
                     const correct = table.isEqual(wanted, test.strict);
                     results.push(new Result({source: test, correct, table, wanted}));
                 } else {
-                    results.push(
-                        new Result({
-                            source: test,
-                            correct: false,
-                            table: Table.fromPlain("", [i18n.get("query-no-rows")], []),
-                            wanted,
-                        })
-                    );
+                    console.log("resultSets length = ", resultSets.length)
+                    console.log("wanted length (empty) = ", wanted.rows.length)
+                    if (resultSets.length == wanted.rows.length) {
+                        results.push(
+                            new Result({
+                                source: test,
+                                correct: true,
+                                table: Table.fromPlain("", [i18n.get("query-no-rows")], []),
+                                wanted,
+                            })                   
+                        );     
+                    } else {
+                        results.push(
+                            new Result({
+                                source: test,
+                                correct: false,
+                                table: Table.fromPlain("", [i18n.get("query-no-rows")], []),
+                                wanted,
+                            })
+                        );
+                    }
                 }
             } catch (error) {
                 results.push(new Result({source: test, correct: false, error, wanted}));

@@ -57,7 +57,6 @@ TEST {
     }
 
     RESULT {
-       Query matched zero rows
     }
 }
 
