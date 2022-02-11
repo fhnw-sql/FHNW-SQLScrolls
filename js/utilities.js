@@ -11,6 +11,7 @@ function isArrayEqual(a, b, strict) {
       if (!isArrayEqual(c[i], d[i], strict)) return false;
       // Result set might parse integers, but text parsing uses Strings, intentional type coercion.
     } else if (c[i] != d[i]) {
+      console.log('not equal: ', c[i], d[i]);
       return false;
     }
   }
@@ -25,15 +26,23 @@ function isArrayEqual(a, b, strict) {
  * @returns Promise, sql wasm result set.
  * @throws Error if SQL query fails
  */
-async function runSQL(context, query) {
+async function runSQL(context, query, taskType = "SQL") {
+  
   const config = { locateFile: (filename) => `dist/${filename}` };
   const SQL = await initSqlJs(config);
   const db = new SQL.Database();
+  
   try {
-    //console.log(context)
-    db.run(context);
-    let result =  db.exec(query);
-    return result
+
+    if (taskType == "DCL") {
+      db.run(query);
+      let result = db.exec(context);
+      return result
+    } else {
+      db.run(context);
+      let result =  db.exec(query);
+      return result
+    }
   } catch (error){
       console.error(error);
       throw error

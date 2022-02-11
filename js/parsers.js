@@ -34,7 +34,8 @@ class MetaDataParser extends Parser {
       if (line.match(/info: .*/)) metadata.info = line.substr(6);
       if (line.match(/keywords: .*/)) metadata.keywords = line.substr(10);
       if (line.match(/level: .*/)) metadata.level = line.substr(7);
-
+      if (line.match(/type: .*/)) metadata.type = line.substr(6).trim().toUpperCase()
+      else metadata.type = "SQL";
     }
     return metadata;
   }

@@ -123,6 +123,7 @@ class Task extends ItemType {
      * parsed.answer          Model answer of the Task
      * parsed.parsons          parsons of the Task
      * parsed.tests           Test objects parsed by TestParser, used to test if the query for the task was correct.
+     * parsed.type            Test type used to allow DCL tasks.
      *
      * @param options {parsed: {metadata: {id, name, color}, description, tests}}
      */
@@ -135,6 +136,7 @@ class Task extends ItemType {
         const parsed = options.parsed;
         if (parsed) {
             this.id = parsed.metadata.id;
+            this.type = parsed.metadata.type;
             this.item = new ImageItem({
                 id: this.id,
                 name: `${i18n.get(parsed.metadata.name)}`,
@@ -171,7 +173,7 @@ class Task extends ItemType {
         if (this.tests) {
             const firstTest = this.tests[0];
             wantedResult = firstTest.result;
-            if (firstTest) {
+            if (firstTest && firstTest.contextTableNames.length>0) {
                 taskTables = await queryAllContentsOfTables(firstTest.context, firstTest.contextTableNames);
             }
         }
@@ -193,6 +195,7 @@ class Task extends ItemType {
         for (let test of this.tests) {
             const wanted = test.result;
             if (query.length === 0 || query === i18n.get("i18n-query-placeholder")) {
+                console.warn("Empty query!!")
                 results.push(new Result({source: test, correct: false, wanted}));
                 continue;
             }
@@ -219,18 +222,14 @@ class Task extends ItemType {
                 continue;
             }
             try {
-                const resultSets = await runSQL(test.context, query);
+                const resultSets = await runSQL(test.context, query, this.type);
                 if (resultSets.length) {
                     const table = Table.fromResultSet("", resultSets[0]); // i18n.get("i18n-table-result")
-                    console.log("resultSets = ", resultSets)
-                    console.log("strict = ", test.strict)
                     console.log("table = ", table)
                     console.log("wanted = ", wanted)
                     const correct = table.isEqual(wanted, test.strict);
                     results.push(new Result({source: test, correct, table, wanted}));
                 } else {
-                    console.log("resultSets length = ", resultSets.length)
-                    console.log("wanted length (empty) = ", wanted.rows.length)
                     if (resultSets.length == wanted.rows.length) {
                         results.push(
                             new Result({
@@ -498,11 +497,14 @@ function getNextTaskId(currentTaskId) {
 }
 
 async function queryAllContentsOfTables(context, tableNames) {
-    const queries = tableNames.map((table) => `SELECT * FROM ${table};`).join("");
-    const resultSets = await runSQL(context, queries);
     const queryResults = [];
-    for (let i = 0; i < resultSets.length; i++) {
-        queryResults.push(Table.fromResultSet(tableNames[i], resultSets[i]));
+
+    if (tableNames.length > 0){
+        const queries = tableNames.map((table) => `SELECT * FROM ${table};`).join("");
+        const resultSets = await runSQL(context, queries);
+        for (let i = 0; i < resultSets.length; i++) {
+            queryResults.push(Table.fromResultSet(tableNames[i], resultSets[i]));
+        }
     }
     return queryResults;
 }
