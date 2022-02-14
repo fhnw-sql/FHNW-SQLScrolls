@@ -1,0 +1,39 @@
+METADATA {
+    id: task-102
+    name: Task Update
+    color: blue
+    info: basic table uodate
+    keywords: UPDATE
+    level: 3
+    type: DCL
+}
+
+DESCRIPTION {
+   There is a typo in the potions book! Change the name of the last potion in the list to 'Dragon Potion'.
+}
+
+ANSWER {
+    UPDATE Potions SET name = 'Dragon Potion' WHERE potion_id = 3;
+}
+
+TEST {
+    TABLE {
+        Potions
+        potion_id|name|level
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dungeon Potion|3       
+    }
+
+    SQL {
+        SELECT * FROM Potions;
+    }
+
+    RESULT {
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dragon Potion|3       
+    }
+}
+
+

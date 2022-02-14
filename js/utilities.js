@@ -26,20 +26,27 @@ function isArrayEqual(a, b, strict) {
  * @returns Promise, sql wasm result set.
  * @throws Error if SQL query fails
  */
-async function runSQL(context, query, taskType = "SQL") {
+async function runSQL(context, query, taskType = "SQL", statements = "") {
   
   const config = { locateFile: (filename) => `dist/${filename}` };
   const SQL = await initSqlJs(config);
   const db = new SQL.Database();
   
   try {
-
     if (taskType == "DCL") {
-      db.run(query);
-      let result = db.exec(context);
-      return result
+      if (query.trim().startsWith('CREATE')) {
+        db.run(query);
+        let result = db.exec(statements);
+        return result
+      } else {
+        db.run(context);
+        db.run(query);
+        let result = db.exec(statements);
+        return result
+      }
     } else {
       db.run(context);
+      db.run(statements);
       let result =  db.exec(query);
       return result
     }

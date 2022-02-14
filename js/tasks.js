@@ -222,7 +222,7 @@ class Task extends ItemType {
                 continue;
             }
             try {
-                const resultSets = await runSQL(test.context, query, this.type);
+                const resultSets = await runSQL(test.context, query, this.type, test.sqlStatements);
                 if (resultSets.length) {
                     const table = Table.fromResultSet("", resultSets[0]); // i18n.get("i18n-table-result")
                     console.log("table = ", table)

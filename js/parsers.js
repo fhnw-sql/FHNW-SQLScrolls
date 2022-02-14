@@ -169,6 +169,7 @@ class TestParser extends Parser {
     const test = {
       context: "",
       contextTableNames: [],
+      sqlStatements: "",
       strict: context.strict,
       denySubqueries: context.denySubqueries,
       result: null,
@@ -184,7 +185,7 @@ class TestParser extends Parser {
       if (line === "SQL {") {
         const parsed = PARSERS.SQL.parse({}, lines);
         test.contextTableNames.push(...parsed.tableNames);
-        test.context += parsed.sql;
+        test.sqlStatements += parsed.sql;
       }
       if (line === "STRICT") test.strict = true;
       if (line === "DENY_SUBQUERY") test.denySubqueries = true;
