@@ -38,11 +38,11 @@ TEST {
 
 TEST {
     SQL {
-        SELECT sql FROM sqlite_master WHERE name = 'Potions';
+        SELECT REPLACE(upper(sql), ' ', '') FROM sqlite_master WHERE name = 'Potions';
     }
 
     RESULT {
-      CREATE TABLE Potions (potion_id INTEGER, name TEXT, level REAL)
+      CREATETABLEPOTIONS(POTION_IDINTEGER,NAMETEXT,LEVELREAL)
     }
 }
 
