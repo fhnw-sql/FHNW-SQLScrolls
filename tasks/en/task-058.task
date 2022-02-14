@@ -1,6 +1,6 @@
 METADATA {
     id: task-058
-    name: Task DCL
+    name: Task Create
     color: blue
     info: basic table creation
     keywords: CREATE_TABLE
