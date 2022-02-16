@@ -1,19 +1,19 @@
 METADATA {
-    id: task-102
-    name: Task Update
+    id: task-103
+    name: Task Delete
     color: blue
-    info: basic table update
-    keywords: UPDATE
+    info: basic table deletion
+    keywords: DELETE
     level: 3
     type: DCL
 }
 
 DESCRIPTION {
-   There is a typo in the potions book! Change the name of the last potion in the list to 'Dragon Potion'.
+   An evil witch added a very dangerous potion to the book called "Backfire Potion" ☠️. Delete it form the potions list before someone gets hurt!
 }
 
 ANSWER {
-    UPDATE Potions SET name = 'Dragon Potion' WHERE potion_id = 3;
+    DELETE FROM Potions WHERE potion_id = 4;
 }
 
 TEST {
@@ -22,7 +22,8 @@ TEST {
         potion_id|name|level
         1|Magic Spell|2
         2|Black Mantra|1.5
-        3|Dungeon Potion|3       
+        3|Dragon Potion|3       
+        4|Backfire Potion|100
     }
 
     SQL {
