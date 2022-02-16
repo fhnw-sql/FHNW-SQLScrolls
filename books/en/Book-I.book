@@ -7,12 +7,12 @@ METADATA {
 }
 
 PAGE {
-    In this book, you will learn how to create new tables using the CREATE TABLE statement.
+    Let's learn how to create new tables using the CREATE TABLE statement.
     When you create a table you can specify the following parameters:</br>
-    &emsp;- The name of the new table (ex. Potions) </br>
-    &emsp;- The name of each column in the table and their type (TEXT, NUM, INT, REAL).</br>
+    &emsp;- Table name (ex. Potions) </br>
+    &emsp;- The name and data type (TEXT, NUM, INT, REAL) of each column.</br>
     &emsp;- A PRIMARY KEY for the table (ex. potion_id).</br>
-    &emsp;- A set of SQL constraints for each table. SQLite supports UNIQUE, NOT NULL, CHECK and FOREIGN KEY constraints.
+    &emsp;- SQL constraints for each table. SQLite supports UNIQUE, NOT NULL, CHECK and FOREIGN KEY constraints.
 }
 
 PAGE {
@@ -44,7 +44,7 @@ PAGE {
 
     - A PRIMARY KEY for the table.
 
-    - A set of SQL constraints for each table. SQLite supports UNIQUE, NOT NULL, CHECK and FOREIGN KEY constraints.
+    - SQL constraints for each table. SQLite supports UNIQUE, NOT NULL, CHECK and FOREIGN KEY constraints.
 }
 
 PAGE {

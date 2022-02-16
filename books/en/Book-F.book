@@ -10,13 +10,13 @@ METADATA {
 PAGE {
     Collection of SQL tasks in a musical Christmas ambiance.
 
-    You can see in the next page the relational model used for this tasks
+    You can see in the next page the relational model used for the tasks
 }
 
 PAGE {
     EXAMPLE {
         TABLE {
-            Interpret
+            Artist
             interpret_id|name|f_year|country
             1|'Darlene Love'|0|'US'
             2|'The Flippers'|1964|'D'

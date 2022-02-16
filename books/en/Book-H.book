@@ -8,11 +8,11 @@ METADATA {
 
 
 PAGE {
-    An SQL query can target multiple tables, so the results are based on all row combinations from the retrieved tables.
+    An SQL query can target multiple tables, in which case the results are based on all row combinations.
 
-    Join operators are an alternative to cartesian products.
+    Join operators are an alternative way of expressing Cartesian products.
 
-    To make the results meaningful, the rows in the different tables are joined together using a suitable join operator and condition.
+    To make the results meaningful, the tables are joined together using a suitable join operator and condition.
 }
 
 PAGE {
@@ -98,7 +98,7 @@ PAGE {
 PAGE {
     There are three main types of joins:
 
-    - CROSS JOIN
+    - CROSS JOIN (Cartesian join)
 
     - INNER JOIN (default)
 
@@ -106,16 +106,16 @@ PAGE {
 }
 
 PAGE {
-    In the next pages of this book you can find an example of each of this join operators.
+    In the next pages of this book you will find examples of each of the join operators.
 }
 
 PAGE {
 
-    CROSS JOIN matches every row of the first table with every row of the second table. 
+    CROSS JOIN (Cartesian product) matches every row of the first table with every row of the second table. 
     
-    If the input tables have x and y row, respectively, the resulting table will have x*y row. 
+    If the input tables have x and y rows, the resulting table will have x*y rows. 
     
-    Because CROSS JOINs have the potential to generate extremely large tables, care must be taken to only use them when appropriate.
+    Because CROSS JOINs may generate extremely large tables, care must be taken to only use them when appropriate.
 
 }
 
@@ -141,7 +141,7 @@ PAGE {
 
 PAGE {
 
-    INNER JOIN creates a new result table by combining column values of two tables (table1 and table2) based upon the join-predicate expressed using an ON, USING, or NATURAL keyword.
+    INNER JOIN creates a result table by combining column values of two tables (table1 and table2) based upon the join-predicate expressed using an ON, USING, or NATURAL keyword.
     
     The query compares each row of table1 with each row of table2 to find all pairs of rows which satisfy the join-predicate. 
     

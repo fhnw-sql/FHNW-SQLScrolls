@@ -2,15 +2,15 @@ METADATA {
     id: Book-E
     name: Connection book
     title: Cartesian Products
-    author: Maestro Codd
+    author: Chris Date
     color: orange
 }
 
 
 PAGE {
-    An SQL query can target multiple tables, so the results are based on all row combinations from the retrieved tables.
+    An SQL query can target several tables, in which case the results are based on all possible row combinations.
 
-    To make the results meaningful, the rows in the different tables are joined together using a suitable condition.
+    Often, the rows in the target tables are joined together using a suitable JOIN condition.
 }
 
 PAGE {
@@ -37,7 +37,7 @@ PAGE {
 
 
 PAGE {
-    In a multi-table query, the WHERE section may contain both join-related conditions and other conditions that limit the results.
+    In a multi-table query, the WHERE section may contain both join-related conditions and other selection conditions.
 }
 
 PAGE {
@@ -64,9 +64,9 @@ PAGE {
 
 
 PAGE {
-    The same table can appear multiple times in a query if the rows in the table have multiple different roles.
+    The same table can appear multiple times in a query if the columns in the table have various roles.
 
-    In the following example, the board Friends tells you which dragons are friends with each other.
+    In the following example, the table Friends tells you which dragons are friends with each other.
 }
 
 PAGE {

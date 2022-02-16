@@ -8,9 +8,9 @@ METADATA {
 
 
 PAGE {
-    The GROUP BY section groups the retrieved rows by a specific column or columns.
+    The GROUP BY expression groups the rows by a specific column or columns.
 
-    After grouping, a summary of each group can be retrieved.
+    After grouping, an aggregate value for each group can be calculated.
 }
 
 PAGE {
@@ -31,9 +31,9 @@ PAGE {
 }
 
 PAGE {
-    The COUNT, SUM, MAX, and MIN functions can be used in the summary in the same way as before.
+    The COUNT, SUM, MAX, and MIN functions can be used in the aggregation.
 
-    The only difference is that the function is used to calculate a summary of each group separately.
+    In a GROUP BY the aggregate value is calculated for each group separately.
 }
 
 PAGE {
@@ -54,7 +54,7 @@ PAGE {
 }
 
 PAGE {
-    You can use conditions with grouping in the same way as you would with queries.
+    You can use conditions with grouping in the same way as you would with other queries.
 }
 
 PAGE {
@@ -77,9 +77,9 @@ PAGE {
 PAGE {
     The word HAVING can be used to specify a condition that is checked only after grouping.
 
-    In this case, the condition can also refer to summary functions.
+    In this case, the condition can also refer to the aggregate.
 
-    For example, the following query only shows groups with more than 2 results.
+    For example, the following query only shows groups with more than 2 rows.
 }
 
 PAGE {

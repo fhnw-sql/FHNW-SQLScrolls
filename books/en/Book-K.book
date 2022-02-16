@@ -15,7 +15,7 @@ PAGE {
     one or two names and belongs to one or two types.
 
     Every Pokemon has HPs (Hit Points) which are its life force. If HP hits zero, 
-    it faints and can't fight in battle (it can use Hidden Machines). The Speed 
+    it faints and can't fight in battle (it can still use Hidden Machines). The Speed 
     decides which Pokemon will make the first move in battle. This is critical. 
     Attack and Special Attack measure the strength of moves; the higher this is, 
     the more damage you will do to opponents. Attack corresponds to moves in the

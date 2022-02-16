@@ -8,9 +8,9 @@ METADATA {
 
 
 PAGE {
-    The summary query returns a single result that is associated with all selected rows in the table.
+    The aggregate query returns a single result that is associated with all selected rows in the table.
 
-    Common summaries are COUNT (number of rows), SUM (sum of values), MIN (lowest value), and MAX (maximum value).
+    Common aggregates are COUNT (number of rows), SUM (sum of values), MIN (lowest value), and MAX (maximum value).
 }
 
 PAGE {
@@ -59,7 +59,7 @@ PAGE {
 }
 
 PAGE {
-    A summary survey can include a condition in the same way as a regular survey.
+    An aggregate query can include a condition in the same way as a regular query.
 }
 
 PAGE {
@@ -78,7 +78,7 @@ PAGE {
 }
 
 PAGE {
-    You can also use the word DISTINCT in a summary query to consider each different value only once.
+    You can also use the word DISTINCT in an aggregate query to consider each different value only once.
 }
 
 PAGE {

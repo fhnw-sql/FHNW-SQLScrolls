@@ -29,7 +29,7 @@ PAGE {
 }
 
 PAGE {
-    The search can be restricted by the WHERE section:
+    The query can be restricted by the WHERE section:
 
     SELECT {columns} FROM table WHERE {condition};
 
@@ -76,7 +76,7 @@ PAGE {
 }
 
 PAGE {
-    The word DISTINCT retrieves each different line only once.
+    The word DISTINCT retrieves each different value (or row) only once.
 
     SELECT DISTINCT {search};
 }
