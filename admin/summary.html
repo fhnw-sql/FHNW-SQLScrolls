@@ -64,7 +64,9 @@
                     const task_keywords= task.metadata.keywords
                     const task_level= task.metadata.level
                     const task_answer = task.answer
-                    const task_description= task.description
+                    const task_description= $(task.description).text()
+
+                    console.log(task_description)
 
                     const row_data = [book_id, book_name, book_title, task_id, task_name, task_info, task_level, task_keywords, task_answer, task_description]
                     const row_str = row_data.map(item => '<td>' + item + '</td>')

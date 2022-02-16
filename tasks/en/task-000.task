@@ -8,8 +8,8 @@ METADATA {
 }
 
 DESCRIPTION {
-    <small> There are two types of questions: Drag & Drop and writing plain queries. This one is an example for Drag & Drop.  </small>
-<br /><br />
+    There are two types of questions: Drag & Drop and writing plain queries. This one is an example for Drag & Drop.
+
     Try to list the ghost names.
 }
 

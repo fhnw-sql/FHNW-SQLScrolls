@@ -179,6 +179,7 @@ PAGE {
     }
 }
 
+
 PAGE {
     There are three main types of joins:
 
@@ -192,6 +193,7 @@ PAGE {
 PAGE {
     In the next pages of this book you will find examples of each of the join operators.
 }
+
 
 PAGE {
 
@@ -223,6 +225,7 @@ PAGE {
     }
 }
 
+
 PAGE {
 
     INNER JOIN creates a result table by combining column values of two tables (table1 and table2) based upon the join-predicate expressed using an ON, USING, or NATURAL keyword.
@@ -253,6 +256,7 @@ PAGE {
         }
     }
 }
+
 
 PAGE {
 
