@@ -30,9 +30,10 @@
             <th onclick="sortTable('summary-table', 3)">Task ID</th>
             <th onclick="sortTable('summary-table', 4)">Task Name</th>
             <th onclick="sortTable('summary-table', 5)">Task Info</th>
-            <th onclick="sortTable('summary-table', 6)">Task Keywords</th>
-            <th onclick="sortTable('summary-table', 7)">Task Level</th>
-            <th onclick="sortTable('summary-table', 8)">Task Description</th>
+            <th onclick="sortTable('summary-table', 6)">Task Level</th>
+            <th onclick="sortTable('summary-table', 7)">Task Keywords</th>
+            <th onclick="sortTable('summary-table', 8)">Task Answer</th>
+            <th onclick="sortTable('summary-table', 9)">Task Description</th>
         </tr>
     </thead>
     <tbody>
@@ -62,9 +63,10 @@
                     const task_info= task.metadata.info
                     const task_keywords= task.metadata.keywords
                     const task_level= task.metadata.level
+                    const task_answer = task.answer
                     const task_description= task.description
 
-                    const row_data = [book_id, book_name, book_title, task_id, task_name, task_info, task_keywords, task_level, task_description]
+                    const row_data = [book_id, book_name, book_title, task_id, task_name, task_info, task_level, task_keywords, task_answer, task_description]
                     const row_str = row_data.map(item => '<td>' + item + '</td>')
 
                     $('#summary-table > tbody:last-child').append('<tr>' + row_str + '</tr>');
