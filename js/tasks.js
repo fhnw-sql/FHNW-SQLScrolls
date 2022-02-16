@@ -489,6 +489,24 @@ function getNextTaskId(currentTaskId) {
         return my_string;
     }
 
+    let bookIndex = 0
+    for(const book of taskGroups.asList()) { 
+        if (book.tasks.find(taskId => taskId === currentTaskId)) {
+            const indexTask = book.tasks.indexOf(currentTaskId)
+            if (indexTask + 1 < book.tasks.length) {
+                return book.tasks[indexTask + 1]
+            } else {
+                if (bookIndex + 1 < taskGroups.asList().length) {
+                    const nextBook = taskGroups.asList()[bookIndex + 1]
+                    return nextBook.tasks[0]
+                }
+            }
+            break
+        }
+        bookIndex += 1
+
+    }
+    
     var getPart = currentTaskId.replace(/[^\d.]/g, ""); // returns 0023
     var num = parseInt(getPart); // returns 23
     var newVal = padWithZeroes(num + 1); // returns 24
