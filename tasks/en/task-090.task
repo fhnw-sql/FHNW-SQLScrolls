@@ -10,9 +10,17 @@ METADATA {
 DESCRIPTION {
     Let's look at our new stock in table Pokedex_new. How many Pokemon were delivered yesterday?
 }
+PARSONS {
+	SELECT COUNT #distractor
+	SELECT COUNT(*)
+    SELECT COUNT(type1) #distractor
+	FROM 
+    Pokemon; #distractor
+	Pokedex_new;
+}
 
 ANSWER {
-    SELECT count(*)
+    SELECT COUNT(*)
     FROM Pokedex_new;
 }
 

@@ -12,6 +12,18 @@ DESCRIPTION {
      Which Pokemon are ELECTRIC or FLYING or DARK?
      Show the ID, name1 and both type entries.
 }
+PARSONS {
+	SELECT 
+	ID, name1, type1, type2
+	FROM Pokedex_new
+	WHERE
+    type1 = ('ELECTRIC','FLYING','DARK') #distractor
+	type1 IN ('ELECTRIC','FLYING','DARK')
+    OR
+    AND #distractor
+    type2 in ('ELECTRIC','FLYING','DARK');
+    type2 = ('ELECTRIC','FLYING','DARK'); #distractor
+}
 
 ANSWER {
     select ID, name1, type1, type2

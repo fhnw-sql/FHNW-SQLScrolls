@@ -11,6 +11,16 @@ DESCRIPTION {
      Show ID, both names, both types and total of the Pokemon with the highest total.
 }
 
+PARSONS {
+	ID, name1, name2, type1, type2, total
+    FROM 
+    Pokedex_new;
+    SELECT
+    WHERE COUNT(type1) =    #distractor
+    WHERE total = 
+    (select max(total) from Pokedex_new );
+	(select avg(total) from Pokedex_new );     #distractor
+}
 ANSWER {
     SELECT ID, name1, name2, type1, type2, total 
     from Pokedex_new 

@@ -14,8 +14,23 @@ DESCRIPTION {
     Please list their name1, type1, hitPoints and speed.
 }
 
+PARSONS {
+	SELECT 
+    name1, type1,
+    total, speed 	 #distractor
+	hitPoints, speed
+    from Pokedex_new;
+    WHERE
+    hitPoints
+    > 70
+    AND
+    OR
+    speed
+    > 90
+    ;
+}
 ANSWER {
-    select * from Pokedex_new
+    select name1, type1, hitPoints, speed from Pokedex_new
     where hitpoints > 70 and speed > 90;
 }
 
