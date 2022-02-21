@@ -1,19 +1,20 @@
 METADATA {
-    id: task-091
-    name: Pokemon Types
+    id: task-113
+    name: Pokemon Name Lengths
     color: red
     info: types
-    keywords: SELECT, DISTINCT
+    keywords: SELECT, LENGTH, ORDER BY, LIMIT
     level: 2
 }
 
 DESCRIPTION {
-    Let's look at our new stock. What types of Pokemon were delivered yesterday?
-    List only type1, only different values.
+    Let's look at the name1 again, what is the longest name1? 
+    How long is it? Show the name and its length.
 }
 
 ANSWER {
-    SELECT distinct(type1) from Pokedex_new;
+    select name1, length(name1) from Pokedex_new
+    order by length(name1) DESC LIMIT 1;
 }
 
 TEST {
@@ -39,12 +40,7 @@ TEST {
     }
 
     RESULT {
-        BUG
-        ELECTRIC
-        FIRE
-        NORMAL
-        ROCK
-        WATER
+        Electabuzz|10
     }
 }
 
@@ -61,8 +57,7 @@ TEST {
     }
 
     RESULT {
-        FIRE
-        WATER
+        Typhlosion|10
     }
 }
 

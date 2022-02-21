@@ -1,19 +1,22 @@
 METADATA {
-    id: task-091
-    name: Pokemon Types
+    id: task-114
+    name: Nicknames report
     color: red
     info: types
-    keywords: SELECT, DISTINCT
+    keywords: SELECT, SUBSTRING, ||, ORDER BY
     level: 2
 }
 
 DESCRIPTION {
-    Let's look at our new stock. What types of Pokemon were delivered yesterday?
-    List only type1, only different values.
+    Let's prepare a report showing the proposed nicknames.
+    It should show each name as NAME followed by PROPOSED
+    NICKNAME and the nickname consisting of the first four
+    letters. The names are to be sorted alphabetically.
 }
 
 ANSWER {
-    SELECT distinct(type1) from Pokedex_new;
+    select 'NAME ' || name1 || ' NICKNAME '|| SUBSTRING(name1,1,4)
+    from Pokedex_new order by name1;
 }
 
 TEST {
@@ -39,12 +42,22 @@ TEST {
     }
 
     RESULT {
-        BUG
-        ELECTRIC
-        FIRE
-        NORMAL
-        ROCK
-        WATER
+        NAME Ditto NICKNAME Ditt
+        NAME Eevee NICKNAME Eeve
+        NAME Electabuzz NICKNAME Elec
+        NAME Flareon NICKNAME Flar
+        NAME Gyarados NICKNAME Gyar
+        NAME Jolteon NICKNAME Jolt
+        NAME Kabuto NICKNAME Kabu
+        NAME Lapras NICKNAME Lapr
+        NAME Magikarp NICKNAME Magi
+        NAME Magmar NICKNAME Magm
+        NAME Omanyte NICKNAME Oman
+        NAME Omastar NICKNAME Omas
+        NAME Pinsir NICKNAME Pins
+        NAME Porygon NICKNAME Pory
+        NAME Tauros NICKNAME Taur
+        NAME Vaporeon NICKNAME Vapo
     }
 }
 
@@ -61,8 +74,12 @@ TEST {
     }
 
     RESULT {
-        FIRE
-        WATER
+        NAME Croconaw NICKNAME Croc
+        NAME Cyndaquil NICKNAME Cynd
+        NAME Feraligatr NICKNAME Fera
+        NAME Quilava NICKNAME Quil
+        NAME Totodile NICKNAME Toto
+        NAME Typhlosion NICKNAME Typh
     }
 }
 

@@ -1,19 +1,22 @@
 METADATA {
-    id: task-091
-    name: Pokemon Types
+    id: task-115
+    name: HitPoints
     color: red
     info: types
-    keywords: SELECT, DISTINCT
+    keywords: SELECT, AVG, DESC, >, ORDER BY
     level: 2
 }
 
 DESCRIPTION {
-    Let's look at our new stock. What types of Pokemon were delivered yesterday?
-    List only type1, only different values.
+    Let's see which Pokemon have more than average hitPoints.
+    List their names and hitPoints in descending order, just for those
+    with hit points above average.
 }
 
 ANSWER {
-    SELECT distinct(type1) from Pokedex_new;
+    SELECT name1, hitPoints FROM Pokedex_new
+    WHERE hitPoints > (SELECT AVG(hitPoints) FROM Pokedex_new)
+    ORDER BY hitPoints DESC;
 }
 
 TEST {
@@ -39,12 +42,11 @@ TEST {
     }
 
     RESULT {
-        BUG
-        ELECTRIC
-        FIRE
-        NORMAL
-        ROCK
-        WATER
+        Lapras|130
+        Vaporeon|130
+        Gyarados|95
+        Tauros|75
+        Omastar|70
     }
 }
 
@@ -61,8 +63,9 @@ TEST {
     }
 
     RESULT {
-        FIRE
-        WATER
+        Feraligatr|85
+        Typhlosion|78
+        Croconaw|65
     }
 }
 

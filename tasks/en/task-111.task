@@ -1,19 +1,21 @@
 METADATA {
-    id: task-091
-    name: Pokemon Types
+    id: task-111
+    name: Pokemon Nicknames
     color: red
     info: types
-    keywords: SELECT, DISTINCT
+    keywords: SELECT, SUBSTRING
     level: 2
 }
 
 DESCRIPTION {
-    Let's look at our new stock. What types of Pokemon were delivered yesterday?
-    List only type1, only different values.
+    Let's look at our Pokemon and see if we could give them
+    nicknames that consist only of the first four letters 
+    of each name. What would those nicknames look like?
+    Show the real name and next to it the nickname.
 }
 
 ANSWER {
-    SELECT distinct(type1) from Pokedex_new;
+    SELECT name1, SUBSTRING(name1,1,4) from Pokedex_new;
 }
 
 TEST {
@@ -39,13 +41,23 @@ TEST {
     }
 
     RESULT {
-        BUG
-        ELECTRIC
-        FIRE
-        NORMAL
-        ROCK
-        WATER
-    }
+        Electabuzz|Elec
+        Magmar|Magm
+        Pinsir|Pins
+        Tauros|Taur
+        Magikarp|Magi
+        Gyarados|Gyar
+        Lapras|Lapr
+        Ditto|Ditt
+        Eevee|Eeve
+        Vaporeon|Vapo
+        Jolteon|Jolt
+        Flareon|Flar
+        Porygon|Pory
+        Omanyte|Oman
+        Omastar|Omas
+        Kabuto|Kabu
+}
 }
 
 TEST {
@@ -61,8 +73,12 @@ TEST {
     }
 
     RESULT {
-        FIRE
-        WATER
+        Cyndaquil|Cynd
+        Quilava|Quil
+        Typhlosion|Typh
+        Totodile|Toto
+        Croconaw|Croc
+        Feraligatr|Fera
     }
 }
 

@@ -1,19 +1,22 @@
 METADATA {
-    id: task-091
-    name: Pokemon Types
+    id: task-117
+    name: Total Range
     color: red
-    info: types
-    keywords: SELECT, DISTINCT
+    info: total
+    keywords: SELECT, BETWEEN AND, ORDER BY, DESC
     level: 2
 }
 
 DESCRIPTION {
-    Let's look at our new stock. What types of Pokemon were delivered yesterday?
-    List only type1, only different values.
+    Do we have any Pokemon in stock with a total score
+    between 400 and 500 inclusive? Please list their totals
+    and name1 ordered by increasing total.
 }
 
 ANSWER {
-    SELECT distinct(type1) from Pokedex_new;
+    select total, name1 from Pokedex_new
+    where total BETWEEN 400 AND 500
+    ORDER BY total desc;
 }
 
 TEST {
@@ -39,12 +42,11 @@ TEST {
     }
 
     RESULT {
-        BUG
-        ELECTRIC
-        FIRE
-        NORMAL
-        ROCK
-        WATER
+        495|Magmar
+        495|Omastar
+        490|Electabuzz
+        490|Tauros
+        435|Eevee
     }
 }
 
@@ -61,8 +63,8 @@ TEST {
     }
 
     RESULT {
-        FIRE
-        WATER
+        405|Quilava
+        405|Croconaw
     }
 }
 

@@ -1,19 +1,22 @@
 METADATA {
-    id: task-091
-    name: Pokemon Types
+    id: task-112
+    name: Different Nicknames
     color: red
     info: types
-    keywords: SELECT, DISTINCT
+    keywords: SELECT, COUNT, DISTINCT
     level: 2
 }
 
 DESCRIPTION {
-    Let's look at our new stock. What types of Pokemon were delivered yesterday?
-    List only type1, only different values.
+    Now we need to check if such nicknames which consist of 
+    just first four letters of the name are unique. How do we do that?
+    Maybe we could count the nicknames and the names?
+    Show the count of different name1 and different nickname.
 }
 
 ANSWER {
-    SELECT distinct(type1) from Pokedex_new;
+    SELECT count(distinct(name1)) as COUNT_NAME, 
+    count(distinct(SUBSTRING(name1,1,4))) as COUNT_Nickname from Pokedex_new;
 }
 
 TEST {
@@ -39,12 +42,7 @@ TEST {
     }
 
     RESULT {
-        BUG
-        ELECTRIC
-        FIRE
-        NORMAL
-        ROCK
-        WATER
+        16|16
     }
 }
 
@@ -61,8 +59,7 @@ TEST {
     }
 
     RESULT {
-        FIRE
-        WATER
+        6|6
     }
 }
 

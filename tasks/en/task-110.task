@@ -1,19 +1,21 @@
 METADATA {
-    id: task-091
-    name: Pokemon Types
+    id: task-110
+    name: Pokemon Both Types
     color: red
-    info: types
-    keywords: SELECT, DISTINCT
+    info: game release year
+    keywords: SELECT, UNION, DISTINCT
     level: 2
 }
 
 DESCRIPTION {
     Let's look at our new stock. What types of Pokemon were delivered yesterday?
-    List only type1, only different values.
+    List both type1 and type2 and do not show the names if they are null.
 }
 
 ANSWER {
-    SELECT distinct(type1) from Pokedex_new;
+    SELECT distinct(type1) from Pokedex_new where type1 is not null
+    UNION
+    SELECT distinct(type2) from Pokedex_new where type2 is not null;
 }
 
 TEST {
@@ -38,10 +40,13 @@ TEST {
         140|Kabuto|null|ROCK|WATER|355|30|80|90|55|45|55
     }
 
-    RESULT {
+    RESULT {     
         BUG
+        DARK
         ELECTRIC
         FIRE
+        FLYING
+        ICE
         NORMAL
         ROCK
         WATER

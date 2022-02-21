@@ -1,19 +1,22 @@
 METADATA {
-    id: task-091
-    name: Pokemon Types
+    id: task-116
+    name: HitPoints&Speed
     color: red
-    info: types
-    keywords: SELECT, DISTINCT
+    info: hitPoints, Speed
+    keywords: SELECT, >, AND 
     level: 2
 }
 
 DESCRIPTION {
-    Let's look at our new stock. What types of Pokemon were delivered yesterday?
-    List only type1, only different values.
+    I want to see all Pokemon who have more than
+    70 hitPoints and a speed over 90. I think their names 
+    start with a T. Do we have any powerful ones like that? 
+    Please list their name1, type1, hitPoints and speed.
 }
 
 ANSWER {
-    SELECT distinct(type1) from Pokedex_new;
+    select * from Pokedex_new
+    where hitpoints > 70 and speed > 90;
 }
 
 TEST {
@@ -39,12 +42,7 @@ TEST {
     }
 
     RESULT {
-        BUG
-        ELECTRIC
-        FIRE
-        NORMAL
-        ROCK
-        WATER
+        Tauros|NORMAL|75|110
     }
 }
 
@@ -61,8 +59,7 @@ TEST {
     }
 
     RESULT {
-        FIRE
-        WATER
+        Typhlosion|FIRE|78|100
     }
 }
 
