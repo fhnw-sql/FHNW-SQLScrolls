@@ -19,19 +19,26 @@ PARSONS {
     name1, type1,
     total, speed 	 #distractor
 	hitPoints, speed
-    from Pokedex_new;
+    from Pokedex_new
     WHERE
     hitPoints
     > 70
     AND
-    OR
+    OR 	 #distractor
     speed
-    > 90
-    ;
+    > 90;
 }
 ANSWER {
-    select name1, type1, hitPoints, speed from Pokedex_new
-    where hitpoints > 70 and speed > 90;
+	SELECT 
+    name1, type1,
+	hitPoints, speed
+    from Pokedex_new
+    WHERE
+    hitPoints
+    > 70
+    AND
+    speed
+    > 90;
 }
 
 TEST {

@@ -3,7 +3,7 @@ METADATA {
     name: Nicknames report
     color: red
     info: types
-    keywords: SELECT, SUBSTRING, ||, ORDER BY
+    keywords: SELECT, SUBSTR, ||, ORDER BY
     level: 2
 }
 
@@ -15,7 +15,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    select 'NAME ' || name1 || ' NICKNAME '|| SUBSTRING(name1,1,4)
+    select 'NAME ' || name1 || ' NICKNAME '|| SUBSTR(name1,1,4)
     from Pokedex_new order by name1;
 }
 

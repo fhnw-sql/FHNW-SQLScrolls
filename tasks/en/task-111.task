@@ -17,12 +17,12 @@ PARSONS {
 	SELECT 
     name1,
     TRIM(name1,4) 	 #distractor
-	SUBSTRING(name1,1,4)
+	SUBSTR(name1,1,4)
     SUBSTRING(name1,0,3) #distractor
     from Pokedex_new;
 }
 ANSWER {
-    SELECT name1, SUBSTRING(name1,1,4) from Pokedex_new;
+    SELECT name1, SUBSTR(name1,1,4) from Pokedex_new;
 }
 
 TEST {
