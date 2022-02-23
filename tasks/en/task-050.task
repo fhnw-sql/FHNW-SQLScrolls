@@ -16,6 +16,8 @@ ANSWER {
     FROM game order by year;
 }
 
+STRICT
+
 TEST {
     TABLE {
         Game
@@ -37,6 +39,8 @@ TEST {
         2002
     }
 }
+
+STRICT
 
 TEST {
     TABLE {
