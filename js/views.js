@@ -351,6 +351,18 @@ class TaskView extends View {
     }
   }
 
+  getTaskBookName(){
+    for (let group of taskGroups.asList()) {
+      for (let taskName of group.tasks) {
+        console.log(taskName, this.currentTask.id, taskName === this.currentTask.id)
+        if (taskName === this.currentTask.id) {
+            return(getItem(group.book).shortName)
+        }
+      }
+    }
+    return("Book")
+  }
+
   async showWithQuery(query) {
     await hideElementImmediately("model-answer");
     await hideElementImmediately("task-next-button");
@@ -358,7 +370,7 @@ class TaskView extends View {
     const task = this.currentTask;
     if (task instanceof LazyTask && !task.loaded) await task.loadTask();
 
-    document.getElementById("task-name").innerText = i18n.getWith("task", [task.getNumericID()]);
+    document.getElementById("task-name").innerText = this.getTaskBookName() + " - " + i18n.getWith("task", [task.getNumericID()]);
     await this.updateTaskCompleteMarker();
     const taskDescription = document.getElementById("task-description");
     taskDescription.innerHTML = i18n.get(task.description);
