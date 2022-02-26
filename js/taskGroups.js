@@ -86,7 +86,7 @@ class TaskGroup extends ItemType {
                 >
                     ${this.item.renderShowItem()}
                     ${this.newItem && this.unlocked ? `<div class="new-item-highlight"><div class="burst-12"> </div></div>` : ''}
-                    <p id="task-group-${this.id}-label">${completedIcon} ${completed} / ${outOf}</p>
+                    <p id="task-group-${this.id}-label">${getItem(this.book).shortName.split(' Book')[0]} </br> ${completedIcon} ${completed} / ${outOf}</p>
                 </button>`;
     }
 
