@@ -74,6 +74,10 @@ class TaskGroup extends ItemType {
         const completedIcon = outOf <= completed ? "<i class='fa fa-fw fa-star col-yellow' aria-hidden='true' '></i>" : '';
         const selected = Views.INVENTORY.currentTaskGroup && Views.INVENTORY.currentTaskGroup.item.id === this.item.id;
         if (selected) this.newItem = false;
+        let bookShortname = "Book"
+        if (getItem(this.book).shortName) {
+            bookShortname = getItem(this.book).shortName.split(' Book')[0]
+        }
         return `<button 
                     id="${this.item.id}"
                     class="item${selected ? " highlighted" : ""} ${this.unlocked ? '' : ' locked'}" 
@@ -86,7 +90,7 @@ class TaskGroup extends ItemType {
                 >
                     ${this.item.renderShowItem()}
                     ${this.newItem && this.unlocked ? `<div class="new-item-highlight"><div class="burst-12"> </div></div>` : ''}
-                    <p id="task-group-${this.id}-label">${getItem(this.book).shortName.split(' Book')[0]} </br> ${completedIcon} ${completed} / ${outOf}</p>
+                    <p id="task-group-${this.id}-label">${bookShortname} </br> ${completedIcon} ${completed} / ${outOf}</p>
                 </button>`;
     }
 
