@@ -2,14 +2,14 @@ METADATA {
     id: task-058
     name: Create Potions
     color: blue
-    info: basic table creation
+    info: table creation
     keywords: CREATE_TABLE
     level: 3
     type: DCL
 }
 
 DESCRIPTION {
-    Create a table called <b>Potions</b> containing exactly the following fields:
+    We want to manage information about the <b>Potions</b> we create containing exactly the following fields:
     <ul>
      <li>potion_id (integer number)</li>
      <li>name (text)</li>
