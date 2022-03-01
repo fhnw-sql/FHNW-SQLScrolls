@@ -1,6 +1,6 @@
 METADATA {
     id: task-101
-    name: Task Insert
+    name: Insert a potion
     color: blue
     info: basic table insert
     keywords: INSERT

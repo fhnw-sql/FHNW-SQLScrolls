@@ -1,6 +1,6 @@
 METADATA {
     id: task-103
-    name: Task Delete
+    name: Delete a potion
     color: blue
     info: basic table deletion
     keywords: DELETE

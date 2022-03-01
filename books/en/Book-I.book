@@ -2,13 +2,13 @@ METADATA {
     id: Book-I
     name: Creation Book
     title: Table Creation Operations
-    author: Maestra Grace Murray
+    author: Maestra Lucy the Great
     color: blue
 }
 
 PAGE {
     Let's learn how to create new tables using the CREATE TABLE statement.
-    When you create a table you can specify the following parameters:</br>
+    When you create a table you specify the following parameters:</br>
     &emsp;- Table name (ex. Potions) </br>
     &emsp;- The name and data type (TEXT, NUM, INT, REAL) of each column.</br>
     &emsp;- A PRIMARY KEY for the table (ex. potion_id).</br>
