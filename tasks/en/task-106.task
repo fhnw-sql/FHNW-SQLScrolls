@@ -1,6 +1,6 @@
 METADATA {
-    id: task-101
-    name: new potion
+    id: task-106
+    name: Midnight Surprise
     color: blue
     info: insert
     keywords: INSERT
@@ -9,11 +9,12 @@ METADATA {
 }
 
 DESCRIPTION {
-   Add a potion 🧪 called 'Horus Cast' with id 4 and level 2.5 to Potions.
+   Our witch has created a very powerful potion 🧪 called 'Midnight Surprise', with id 5 and level 10.
+   Please add it to Potions.
 }
 
 ANSWER {
-    INSERT INTO Potions (potion_id, name, level) VALUES (4, 'Horus Cast', 2.5);
+    INSERT INTO Potions (potion_id, name, level) VALUES (5, 'Midnight Surprise', 10);
 }
 
 
@@ -23,7 +24,8 @@ TEST {
         potion_id|name|level
         1|Magic Spell|2
         2|Black Mantra|1.5
-        3|Dragon Potion|3       
+        3|Dragon Potion|3
+        4|Horus Cast|2.5
     }
 
     SQL {
@@ -35,6 +37,7 @@ TEST {
         2|Black Mantra|1.5
         3|Dragon Potion|3       
         4|Horus Cast|2.5
+        5|Midnight Surprise|10
     }
 }
 

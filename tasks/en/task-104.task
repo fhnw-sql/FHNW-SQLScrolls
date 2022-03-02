@@ -1,8 +1,8 @@
 METADATA {
     id: task-104
-    name: Task Alter
+    name: Tested Potions
     color: blue
-    info: basic table changes
+    info: alter table
     keywords: ALTER_TABLE
     level: 3
     type: DCL
@@ -23,7 +23,8 @@ TEST {
         potion_id|name|level
         1|Magic Spell|2
         2|Black Mantra|1.5
-        3|Dragon Potion|3       
+        3|Dragon Potion|25       
+        5|Midnight Surprise|25       
     }
 
     SQL {
@@ -33,7 +34,8 @@ TEST {
     RESULT {
         1|Magic Spell|2|0
         2|Black Mantra|1.5|0
-        3|Dragon Potion|3|0    
+        3|Dragon Potion|25|0       
+        5|Midnight Surprise|25|0    
     }
 }
 
@@ -43,7 +45,8 @@ TEST {
         potion_id|name|level
         1|Magic Spell|2
         2|Black Mantra|1.5
-        3|Dragon Potion|3       
+        3|Dragon Potion|25       
+        5|Midnight Surprise|25       
     }
 
     SQL {
@@ -51,9 +54,9 @@ TEST {
     }
 
     RESULT {
-        0|potion_id|NUMBER|0|null|0
+        0|potion_id|INTEGER|0|null|1
         1|name|TEXT|0|null|0
-        2|level|NUMBER|0|null|0
+        2|level|REAL|0|null|0
         3|tested|INTEGER|0|0|0
     }
 }

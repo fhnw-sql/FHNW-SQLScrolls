@@ -1,15 +1,15 @@
 METADATA {
     id: task-102
-    name: Update a potion
+    name: Typo in potions
     color: blue
-    info: basic table update
+    info: update
     keywords: UPDATE
     level: 3
     type: DCL
 }
 
 DESCRIPTION {
-   There is a typo in the potions book! Change the name of potion with id 3 to 'Dragon Potion'.
+   There is a typo in the potions menu! Change the name of potion with id 3 to 'Dragon Potion'.
 }
 
 ANSWER {
@@ -22,7 +22,9 @@ TEST {
         potion_id|name|level
         1|Magic Spell|2
         2|Black Mantra|1.5
-        3|Dungeon Potion|3       
+        3|Dungeon Potion|3
+        4|Horus Cast|2.5
+        5|Midnight Surprise|10
     }
 
     SQL {
@@ -32,7 +34,9 @@ TEST {
     RESULT {
         1|Magic Spell|2
         2|Black Mantra|1.5
-        3|Dragon Potion|3       
+        3|Dragon Potion|3
+        4|Horus Cast|2.5
+        5|Midnight Surprise|10
     }
 }
 

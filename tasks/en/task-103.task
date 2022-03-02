@@ -1,8 +1,8 @@
 METADATA {
     id: task-103
-    name: Delete a potion
+    name: Backfire Potion
     color: blue
-    info: basic table deletion
+    info: deletion
     keywords: DELETE
     level: 3
     type: DCL
@@ -24,6 +24,7 @@ TEST {
         2|Black Mantra|1.5
         3|Dragon Potion|3       
         4|Backfire Potion|100
+        5|Midnight Surprise|10
     }
 
     SQL {
@@ -33,6 +34,7 @@ TEST {
     RESULT {
         1|Magic Spell|2
         2|Black Mantra|1.5
-        3|Dragon Potion|3       
+        3|Dragon Potion|3
+        5|Midnight Surprise|10
     }
 }
