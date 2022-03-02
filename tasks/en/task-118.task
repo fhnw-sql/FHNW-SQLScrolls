@@ -1,64 +1,55 @@
 METADATA {
     id: task-118
-    name: Potion side effects
+    name: Dangerous levels
     color: blue
     info: delete
-    keywords: CREATE_TABLE, PK
+    keywords: CREATE_TABLE, PRIMARY_KEY, UNIQUE
     level: 3
     type: DCL
 }
 
 DESCRIPTION {
    Potions have various levels. We now know that at level 25 people fly.
-   We want to store this information, i.e. which level maps to what danger.
-   There will be just one entry for each level, so level is a primary key. Create a table
-   called Levels with two columns: level integer primary key and danger text field. 
+   We want to store this information, i.e. which level maps to what expected danger.
+   There will be just one entry for each level, if at all, so level is a primary key, 
+   and the column danger has a UNIQUE constraint, that is it is a candidate key. Create a table
+   called Levels with two columns: level integer primary key and danger text field unique. 
 }
 
 ANSWER {
-    create table levels (level INTEGER PRIMARY KEY, danger text);
+    create table Levels (level INTEGER PRIMARY KEY, danger TEXT UNIQUE);
 }
 
 TEST {
-    TABLE {
-        Potions
-        potion_id|name|level
-        1|Magic Spell|2|0
-        2|Black Mantra|1.5|0
-        3|Dragon Potion|25|0
-        5|Midnight Surprise|25|0
-    }
-
     SQL {
-        SELECT * FROM Potions;
+        INSERT INTO Levels (level, danger) VALUES (25, 'FLYING'), (100, 'EXPLOSION!'); 
+        SELECT * FROM Levels;
     }
 
     RESULT {
-        1|Magic Spell|2|0
-        2|Black Mantra|1.5|0
-        3|Dragon Potion|25|1
-        5|Midnight Surprise|25|1
+        25|FLYING
+        100|EXPLOSION!
     }
 }
 
 TEST {
-    TABLE {
-        Potions
-        potion_id|name|level
-        1|Magic Spell|2|0
-        2|Black Mantra|1.5|0
-        3|Dragon Potion|25|0
-        5|Midnight Surprise|25|0
-    }
-
     SQL {
-        select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('Potions');    
+        SELECT REPLACE(upper(sql), ' ', '') FROM sqlite_master WHERE name = 'Levels';
     }
 
     RESULT {
-        0|potion_id|NUMBER|0|null|0
-        1|name|TEXT|0|null|0
-        2|level|NUMBER|0|null|0
-        3|tested|INTEGER|0|0|0
+      CREATETABLELEVELS(LEVELINTEGERPRIMARYKEY,DANGERTEXTUNIQUE)
     }
 }
+
+TEST {
+    SQL {
+        select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('Levels');    
+    }
+
+    RESULT {
+        0|level|INTEGER|0|null|1
+        1|danger|TEXT|0|null|0
+    }
+}
+

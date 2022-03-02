@@ -1,0 +1,36 @@
+METADATA {
+    id: task-119
+    name: Level info
+    color: blue
+    info: insert
+    keywords: INSERT, NTO, VALUES
+    level: 3
+    type: DCL
+}
+
+DESCRIPTION {
+   Add an entry to Levels, so that level 25 corresponds to 'FLYING'
+}
+
+ANSWER {
+    Insert into Levels VALUES (25, 'FLYING');
+}
+
+
+TEST {
+    TABLE {
+        Levels
+        level|danger
+        25|FLYING      
+    }
+
+    SQL {
+        SELECT * FROM Levels;
+    }
+
+    RESULT {
+        25|FLYING
+    }
+}
+
+
