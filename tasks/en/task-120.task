@@ -16,19 +16,35 @@ DESCRIPTION {
 
 ANSWER {
     create view PotionView as select
-    p.potion_id, p.name, p.level, p.tested, l.danger
+    p.name, p.level, l.danger
     from Potions p, Levels l
     where ROUND(p.level)=l.level;
 }
 
 TEST {
+    TABLE {
+        Potions
+        potion_id|name|level|tested
+        1|Magic Spell|2|0
+        2|Black Mantra|1.5|0
+        3|Dragon Potion|25|1
+        5|Midnight Surprise|25|1
+    }
+
+    TABLE {
+        Levels
+        level|danger
+        18|FIREBALL
+        25|FLYING
+    }
+
     SQL {
         SELECT * FROM PotionView;
     }
 
     RESULT {
-        3|Dragon Potion|25.0|1|FLYING
-        5|Midnight Surprise|25.0|1|FLYING
+        Dragon Potion|25|FLYING
+        Midnight Surprise|25|FLYING
     }
 }
 
@@ -38,21 +54,36 @@ TEST {
     }
 
     RESULT {
-      CREATEVIEWPOTIONVIEWASSELECT
-      P.POTION_ID,P.NAME,P.LEVEL,P.TESTED,L.DANGER
-      FROMPOTIONSP,LEVELSL
-      WHEREROUND(P.LEVEL)=L.LEVEL
+      CREATEVIEWPOTIONVIEWASSELECTP.NAME,P.LEVEL,L.DANGERFROMPOTIONSP,LEVELSLWHEREROUND(P.LEVEL)=L.LEVEL
     }
 }
 
 TEST {
+
+    TABLE {
+        Potions
+        potion_id|name|level|tested
+        1|Magic Spell|2|0
+        2|Black Mantra|1.5|0
+        3|Dragon Potion|25|1
+        5|Midnight Surprise|25|1
+    }
+
+    TABLE {
+        Levels
+        level|danger
+        18|FIREBALL
+        25|FLYING
+    }
+
     SQL {
         select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('PotionView');    
     }
 
     RESULT {
-        0|level|INTEGER|0|null|1
-        1|danger|TEXT|0|null|0
+        0|name|TEXT|0|null|0
+        1|level|NUMBER|0|null|0
+        2|danger|TEXT|0|null|0
     }
 }
 

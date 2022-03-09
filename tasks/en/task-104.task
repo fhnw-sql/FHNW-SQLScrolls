@@ -54,9 +54,9 @@ TEST {
     }
 
     RESULT {
-        0|potion_id|INTEGER|0|null|1
+        0|potion_id|NUMBER|0|null|0
         1|name|TEXT|0|null|0
-        2|level|REAL|0|null|0
+        2|level|NUMBER|0|null|0
         3|tested|INTEGER|0|0|0
     }
 }

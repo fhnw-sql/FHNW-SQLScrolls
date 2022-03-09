@@ -21,7 +21,7 @@ TEST {
     TABLE {
         Levels
         level|danger
-        25|FLYING      
+        18|FIREBALL
     }
 
     SQL {
@@ -29,6 +29,7 @@ TEST {
     }
 
     RESULT {
+        18|FIREBALL
         25|FLYING
     }
 }

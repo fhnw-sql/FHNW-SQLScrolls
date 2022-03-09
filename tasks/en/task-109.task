@@ -20,7 +20,7 @@ ANSWER {
 TEST {
     TABLE {
         Potions
-        potion_id|name|level
+        potion_id|name|level|tested
         1|Magic Spell|2|0
         2|Black Mantra|1.5|0
         3|Dragon Potion|25|0
@@ -36,27 +36,5 @@ TEST {
         2|Black Mantra|1.5|0
         3|Dragon Potion|25|1
         5|Midnight Surprise|25|1
-    }
-}
-
-TEST {
-    TABLE {
-        Potions
-        potion_id|name|level
-        1|Magic Spell|2|0
-        2|Black Mantra|1.5|0
-        3|Dragon Potion|25|0
-        5|Midnight Surprise|25|0
-    }
-
-    SQL {
-        select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('Potions');    
-    }
-
-    RESULT {
-        0|potion_id|NUMBER|0|null|0
-        1|name|TEXT|0|null|0
-        2|level|NUMBER|0|null|0
-        3|tested|INTEGER|0|0|0
     }
 }
