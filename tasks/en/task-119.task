@@ -1,7 +1,7 @@
 METADATA {
     id: task-119
     name: Level info
-    color: blue
+    color: green
     info: insert
     keywords: INSERT, NTO, VALUES
     level: 3

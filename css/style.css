@@ -1493,6 +1493,20 @@ body {
   border-color: #073b3a;
 }
 
+.book.creation-book {
+  border-color: #001010;
+}
+
+.book.creation-book::after {
+  background: url("../img/creation-background.png");
+  background-size: cover;
+  border-color: #001010;
+}
+
+.book-open.creation-book {
+  border-color: #073b3a;
+}
+
 .book.orange-book {
   border-color: #1c0900;
 }

@@ -1,7 +1,7 @@
 METADATA {
     id: task-102
     name: Typo in potions
-    color: blue
+    color: green
     info: update
     keywords: UPDATE
     level: 3

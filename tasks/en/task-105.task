@@ -1,7 +1,7 @@
 METADATA {
     id: task-105
     name: Add PK
-    color: blue
+    color: green
     info: PK addition
     keywords: CREATE_TABLE, PRIMARY_KEY
     level: 3

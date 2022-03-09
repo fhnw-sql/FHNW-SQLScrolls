@@ -1,7 +1,7 @@
 METADATA {
     id: task-109
     name: Tested Status
-    color: blue
+    color: green
     info: update
     keywords: UPDATE SET WHERE
     level: 3

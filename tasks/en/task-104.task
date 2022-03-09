@@ -1,7 +1,7 @@
 METADATA {
     id: task-104
     name: Tested Potions
-    color: blue
+    color: green
     info: alter table
     keywords: ALTER_TABLE
     level: 3

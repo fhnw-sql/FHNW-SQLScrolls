@@ -1,7 +1,7 @@
 METADATA {
     id: task-058
     name: Create Potions
-    color: blue
+    color: green
     info: table creation
     keywords: CREATE_TABLE
     level: 3

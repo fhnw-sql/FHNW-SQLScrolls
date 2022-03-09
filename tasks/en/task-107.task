@@ -1,7 +1,7 @@
 METADATA {
     id: task-107
     name: Flying potion
-    color: blue
+    color: green
     info: Update
     keywords: UPDATE, SET, WHERE, IN
     level: 3

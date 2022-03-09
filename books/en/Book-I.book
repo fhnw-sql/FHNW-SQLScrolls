@@ -3,7 +3,7 @@ METADATA {
     name: Creation Book
     title: Table Creation Operations
     author: Maestra Lucy the Great
-    color: blue
+    color: creation
 }
 
 PAGE {
