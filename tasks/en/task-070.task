@@ -1,7 +1,7 @@
 METADATA {
     id: task-070
     name: Games 4
-    color: blue
+    color: xmas
     info: list limited sorted fields joined from three tables
     keywords: SELECT, JOIN, ORDER_BY, LIMIT
     level: 2

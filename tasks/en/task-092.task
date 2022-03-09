@@ -1,7 +1,7 @@
 METADATA {
     id: task-092
     name: Pokemon HPs
-    color: red
+    color: blue
     info: Pokedex new arrivals
     keywords: SELECT, MIN, MAX, SUM, AVG
     level: 2

@@ -1,7 +1,7 @@
 METADATA {
     id: task-090
     name: New Pokemon
-    color: red
+    color: blue
     info: game release year
     keywords: SELECT, COUNT(*)
     level: 2

@@ -1544,18 +1544,32 @@ body {
   border-color: #552d00;
 }
 
-.book.games-book {
-  border-color: #011705;
+.book.pokemon1-book {
+  border-color: #010b17;
 }
 
-.book.games-book::after {
-  background: url("../img/games-background.png");
+.book.pokemon1-book::after {
+  background: url("../img/pokemon-1-background.png");
   background-size: cover;
-  border-color: #011705;
+  border-color: #010817;
 }
 
-.book-open.games-book {
-  border-color: #0e2b13;
+.book-open.pokemon1-book {
+  border-color: #0e162b;
+}
+
+.book.pokemon2-book {
+  border-color: #170101;
+}
+
+.book.pokemon2-book::after {
+  background: url("../img/pokemon-2-background.png");
+  background-size: cover;
+  border-color: #170101;
+}
+
+.book-open.pokemon2-book {
+  border-color: #2b0e0e;
 }
 
  .book.zoo-book {

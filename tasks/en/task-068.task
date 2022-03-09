@@ -1,7 +1,7 @@
 METADATA {
     id: task-068
     name: Games 2
-    color: blue
+    color: xmas
     info: list names filtered by starting letter
     keywords: SELECT, WHERE, LIKE
     level: 1

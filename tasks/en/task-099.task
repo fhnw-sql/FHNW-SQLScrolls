@@ -1,7 +1,7 @@
 METADATA {
     id: task-099
     name: Types
-    color: red
+    color: blue
     info: Pokedex new arrivals
     keywords: SELECT, IN, OR
     level: 2

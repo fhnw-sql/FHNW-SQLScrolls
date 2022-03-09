@@ -1,7 +1,7 @@
 METADATA {
     id: task-093
     name: Highest Total
-    color: red
+    color: blue
     info: Pokedex new arrivals
     keywords: SELECT, MAX, subquery
     level: 2

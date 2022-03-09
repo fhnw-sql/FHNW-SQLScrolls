@@ -1,7 +1,7 @@
 METADATA {
     id: task-091
     name: Pokemon Types
-    color: red
+    color: blue
     info: types
     keywords: SELECT, DISTINCT
     level: 2
