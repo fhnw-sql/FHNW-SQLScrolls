@@ -105,8 +105,10 @@ class TaskGroup extends ItemType {
         async function renderTask(taskID) {
             try {
                 // Task line break conditions: (<filter by task count> && current % <split every x tasks>)
-                const needsBreak = current !== 0 && (
-                    (toLoad > 6 && current % 4 === 0) // 7-8 tasks
+                const needsBreak = current > 1 && (
+                    (toLoad > 19 && (current + 1) % 6 === 0) // 20+ tasks
+                    || (toLoad > 11 && toLoad <= 19 && (current + 1) % 5 === 0) // 11-19 tasks
+                    || (toLoad > 6 && toLoad <= 11 && (current + 1) % 4 === 0) // 7-8 tasks
                     || (toLoad >= 5 && toLoad < 6 && (current + 1) % 3 === 0) // 5-6 tasks (+1 in here makes first cut at 2 tasks)
                 );
                 current++;
