@@ -171,6 +171,11 @@ img {
   padding-left: 0;
 }
 
+/* Darken background */
+.modal-backdrop.show {
+ opacity:.7;
+}
+
 /* Disable bootstrap collapse animation */
 .collapsing {
   -webkit-transition: none;
