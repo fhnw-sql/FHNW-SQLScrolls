@@ -176,6 +176,11 @@ img {
  opacity:.7;
 }
 
+/* max-width: 33.333333%; */
+.item.col-md-4 {
+  max-width:25%;
+ }
+ 
 /* Disable bootstrap collapse animation */
 .collapsing {
   -webkit-transition: none;
