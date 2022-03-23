@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Order all instruments by there name.
+    Order all instruments by their name.
 }
 
 ANSWER {
