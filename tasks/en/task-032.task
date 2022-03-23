@@ -8,7 +8,8 @@ METADATA {
 }
 
 DESCRIPTION {
-    List areas with poorly skilled magicians, i.e. skill level lower than 3.
+    List areas deficient in magical skills and their total of skills,
+    i.e. skill sum for area less than 5.
 }
 
 PARSONS {
@@ -23,7 +24,8 @@ PARSONS {
 }
 
 ANSWER {
-   SELECT Area FROM WIZARDS WHERE SKILL < 3 GROUP BY AREA
+   SELECT Area, sum(skill) FROM WIZARDS GROUP BY AREA
+   HAVING sum(skill) < 5
 }
 
 
