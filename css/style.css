@@ -565,7 +565,7 @@ th {
 }
 
 .table-paper th {
-  max-width: 100px;
+  max-width: 200px;
   overflow: hidden;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
@@ -1505,6 +1505,20 @@ body {
 
 .book-open.creation-book {
   border-color: #073b3a;
+}
+
+.book.music1-book {
+  border-color: #602889;
+}
+
+.book.music1-book::after {
+  background: url("../img/music1-background.png");
+  background-size: cover;
+  border-color: #602889;
+}
+
+.book-open.music1-book {
+  border-color: #602889;
 }
 
 .book.orange-book {
