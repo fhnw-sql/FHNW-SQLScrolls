@@ -51,28 +51,32 @@ router.post("/authenticate", reqBodyValidator(authenticatePOST), async function 
 
 // /users/authenticateSWITCHaai
 router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST), async function ({ headers: headers, body: value }, res, next) {
-  
-  //Compare cookie from frontend with the one from backend
-  //console.log("auth COOKIES", headers.cookie)
 
+
+  //Compare cookie from frontend with the one from backend
   let authCookie=null
   let parsedCookie = {}
   try {
-    headers.cookie.split(';').map(item => item.split("=")).forEach( pair => {if (pair[0].trim()=='sqlscrolls-auth') authCookie=pair[1]})
+    headers.cookie.split(';').map(item => item.split("=")).forEach( pair => {if (pair[0].trim()=='sqlscrolls-auth') authCookie=pair.slice(1).join('=')})
     authCookie.split("|").map(pair => pair.split(":")).forEach(item => { parsedCookie[item[0]] = item[1]})
   } catch {
+    console.log("auth COOKIES", headers.cookie)
+    console.log("auth parsed: ", parsedCookie)
+    console.error("No valid authentication cookie found for the API");
     return next("No valid authentication cookie found for the API");
   }
 
-  //console.log("auth parsed: ", parsedCookie)
 
   // Compare cookies
   for (const field of ["username", "uid", "pid", "org"]) {
       if ((!parsedCookie[field]) || (parsedCookie[field] !== value[field])){
-        return next("User auth cookie icorrect (different from frontend)");
+        console.log("auth COOKIES", headers.cookie)
+        console.log("auth parsed: ", parsedCookie)
+        console.error("User auth cookie incorrect (different from frontend) cookie = ", parsedCookie[field], " fontend = ", value[field]);
+        return next("User auth cookie incorrect (different from frontend)");
       }
   }
-  
+
   // Get Users Collections
   const users = db.get().collection("users");
   let user = await users.findOne({ username: value.username });
@@ -86,8 +90,12 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
         user[field] = value[field]
         needUpdate = true
       } else {
-        if (user[field] != value[field])
-          return next("User data icorrect (different from registration)");
+        if (user[field] != value[field]){
+              console.log("auth COOKIES", headers.cookie)
+              console.log("auth fontend: ", value)
+              console.error("User data icorrect (different from registration) user = ", user[field], " value = ", value[field])
+              return next("User data icorrect (different from registration)");
+          }
       }
     }
 
@@ -99,7 +107,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
           { $set: value },
           { returnOriginal: false }
         )
-        .catch((err) => next(err));
+        .catch((err) => {console.error("update error ", err); next(err)});
     }
   } 
   else {
@@ -107,8 +115,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
     // register user
     users
     .insertOne(value)
-    .catch((err) => next(err));
-
+    .catch((err) => {console.error("insert error ", err); next(err)});
     user = value;
   }
 
