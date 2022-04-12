@@ -101,7 +101,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
 
     // add data if necessary
     if (needUpdate){
-      users
+      await users
       .findOneAndUpdate(
           { _id: user._id },
           { $set: value },
@@ -113,7 +113,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
   else {
     value.password = null
     // register user
-    users
+    await users
     .insertOne(value)
     .catch((err) => {console.error("insert error ", err); next(err)});
     user = value;
