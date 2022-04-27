@@ -2,14 +2,14 @@ METADATA {
     id: task-032
     name: Task 32
     color: green
-    info: list field filterered grouped
-    keywords: SELECT, WHERE, GROUP_BY
+    info: list field filtered grouped
+    keywords: SELECT, WHERE, GROUP_BY, <, SUM
     level: 3
 }
 
 DESCRIPTION {
     List areas deficient in magical skills and their total of skills,
-    i.e. skill sum for area less than 5.
+    i.e. skill sum (per area) less than 5. Order  by area alphabetically.
 }
 
 PARSONS {
@@ -19,14 +19,16 @@ PARSONS {
     AREA
     HAVING 
     SUM(SKILL) < 5
+    ORDER BY AREA
     SELECT AREA, SKILL #distractor
     WHERE  #distractor
     SKILL < 5 #distractor
+    ORDER BY SUM(SKILL)  #distractor
 }
 
 ANSWER {
    SELECT AREA, SUM(SKILL) FROM WIZARDS GROUP BY AREA
-   HAVING SUM(SKILL) < 5
+   HAVING SUM(SKILL) < 5 ORDER BY AREA
 }
 
 
@@ -43,8 +45,8 @@ TEST {
     }
 
     RESULT {
-        Shadowland|3
         Mumba|2
+        Shadowland|4
     }
 }
 
