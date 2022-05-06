@@ -1,0 +1,73 @@
+METADATA {
+    id: task-127
+    name: Start of instruments
+    color: blue
+    info: sort and group counted substrings
+    keywords: SELECT, FROM, GROUP BY, ORDER BY, substr(), count(*)
+    level: 1
+}
+
+DESCRIPTION {
+    How many instruments start with the same letter? Order them by the amount (smallest amount first).
+}
+
+ANSWER {
+    SELECT substr(instrument_name,1,1) l, count(*) amount
+    FROM instrument
+    GROUP BY substr(instrument_name,1,1)
+    ORDER BY amount;    
+}
+
+TEST {
+    TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Violine|101
+        202|Viola|101
+        203|Cello|101
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Flute|102
+        207|Oboe|102
+        208|Horn|103
+        209|Trombone|103
+        210|Trumpet|103
+    }
+
+     RESULT {
+        O|1
+        H|1
+        F|1
+        T|2
+        V|2
+        C|3
+    }
+}
+
+TEST {
+    TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Banjo|101
+        202|Viola|101
+        203|Drums|101
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Guitar|102
+        207|Oboe|102
+        208|Horn|103
+        209|Triangle|103
+        210|Trumpet|103
+    }
+
+     RESULT {
+        B|1
+        D|1
+        G|1
+        H|1
+        O|1
+        V|1
+        C|2
+        T|2
+    }
+}

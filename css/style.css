@@ -14,7 +14,7 @@ body {
   --col-red: darkred;
   --col-light-red: #d74848;
   --col-xmas-red: #aa0000;
-
+  --col-music2-blue: #76DCE0;
   --col-rune-grey: #343434;
 
   --col-paper-divider: #e6dbd0;
@@ -497,6 +497,10 @@ button.col-yellow:focus {
 
 .col-book-grey {
   color: #70877f !important;
+}
+
+.col-book-music2 {
+  color:var(--col-music2-blue) !important;
 }
 
 .btn-light-blue {
@@ -1519,6 +1523,20 @@ body {
 
 .book-open.music1-book {
   border-color: #602889;
+}
+
+.book.music2-book {
+  border-color: var(--col-music2-blue);
+}
+
+/* TODO: add background for music 2*/
+.book.music2-book::after {
+  background-size: cover;
+  border-color: var(--col-music2-blue);
+}
+
+.book-open.music-book {
+  border-color: var(--col-music2-blue);
 }
 
 .book.orange-book {

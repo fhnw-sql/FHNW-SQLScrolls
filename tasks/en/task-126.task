@@ -1,0 +1,84 @@
+METADATA {
+    id: task-126
+    name: Length of Instruments
+    color: blue
+    info: list sorted and grouped fields
+    keywords: SELECT, FROM, GROUP BY, length(), Order BY, count(*)
+    level: 2
+}
+
+
+DESCRIPTION {
+    How many instrument names have the same length? Please list the length and the number of instruments, 
+    but only if at least one instrument name with this length exists. Order the result by length.
+}
+
+PARSONS {
+    SELECT length(instrument_name) length, count(*)
+    FROM instrument
+    GROUP BY 
+    length(instrument_name)
+    ORDER BY 
+    length
+    instrument_name #distractor
+    instrumentgroup_id#distractor
+    SELECT instrument_name, count(*) #distractor   
+}
+
+ANSWER {
+    SELECT length(instrument_name) length, count(*)
+    FROM instrument
+    GROUP BY length(instrument_name)
+    ORDER BY length;    
+}
+
+TEST {
+    TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Violine|101
+        202|Viola|101
+        203|Cello|101
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Flute|102
+        207|Oboe|102
+        208|Horn|103
+        209|Trombone|103
+        210|Trumpet|103
+    }
+
+     RESULT {
+        4|2
+        5|3
+        7|2
+        8|2
+        10|1
+    }
+}
+
+TEST {
+    TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Banjo|101
+        202|Viola|101
+        203|Drums|101
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Guitar|102
+        207|Oboe|102
+        208|Horn|103
+        209|Triangle|103
+        210|Trumpet|103
+    }
+
+     RESULT {
+        4|2
+        5|3
+        6|1
+        7|1
+        8|2
+        10|1
+    }
+}
