@@ -1782,6 +1782,7 @@ body {
 }
 
 #display-book .item {
+  min-width: fit-content;
   padding-right: 1rem;
   padding-left: 1rem;
 }
