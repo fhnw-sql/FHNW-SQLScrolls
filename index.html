@@ -414,19 +414,22 @@
     <section class="view hidden" id="loading-view" tabindex="-1">
         <h1 class="large-loading-text">
             <i class="fa fa-star loading-animation"></i>
-            <i class="far fa-star loading-animation offset"></i>
+            <i class="fa fa-star loading-animation offset"></i>
             <span class="i18n-loading"></span>
         </h1>
     </section>
 
     <!-- inventory-view -->
     <section class="m-2 col-md-10 view hidden" id="inventory-view" tabindex="-1">
-        <button class="col-white logout-button" onclick="logout()">
-            <i class="fa fa-fw fa-door-open"></i> <span class="i18n-logout"></span>
-        </button>
+
+        <div>
         <div>
             <h1 class="screen-reader-only i18n-task-groups"></h1>
+                <div class="" id="inventory-container" onmouseenter=showInventory() onmouseleave=hideInventory()>
+                    <i class="center col-white fa fa-fw fa-angle-up fa-4x" id="inventory-show-button"></i>
             <ul class="inventory-contents clickable-items col-12" id="inventory"></ul>
+                </div>
+            </div>
             <h2 class="screen-reader-only i18n-tasks" id="viewed-tasks-header" tabindex="-1"></h2>
             <ul class="inventory-contents clickable-items col-12 viewed-tasks" id="viewed-tasks"></ul>
         </div>
@@ -922,13 +925,17 @@
 
 <aside id="right-sidebar" class="right-sidebar clickable-items hidden">
     <h1 class="screen-reader-only i18n-right-sidebar"></h1>
+    <button class="center col-white hidden" id="book-menu" onclick="BookMenuButton.open(event)">
+        <i class="center fa fa-book fa-3x" id="book-menu-icon"></i>
+        <p class="center i18n-books-text" id="book-menu-text"></p>
+    </button>
     <button class="center col-white" id="profile-menu" onclick="changeSecondaryView(Views.PROFILE)">
         <i class="center fa fa-user fa-2x"></i>
         <p class="center i18n-profile"></p>
     </button>
-    <button class="center col-white hidden" id="book-menu" onclick="BookMenuButton.open(event)">
-        <i class="center fa fa-book fa-3x" id="book-menu-icon"></i>
-        <p class="center i18n-books-text" id="book-menu-text"></p>
+    <button class="center col-white" onclick="logout()">
+        <i class="center fa fa-fw fa-door-open fa-2x"></i>
+        <p class="center i18n-logout"></p>
     </button>
     <button class="center col-white hidden" id="task-view-swap" onclick="TaskViewSwap.toInventoryView()">
         <i class="center fa fa-scroll fa-3x" id="task-view-swap-icon"></i>

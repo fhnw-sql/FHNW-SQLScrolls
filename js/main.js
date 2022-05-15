@@ -57,6 +57,19 @@ function registerListeners() {
 
 registerListeners();
 
+async function showInventory() {
+  await hideElementImmediately("inventory-show-button");
+  await showElement("inventory");
+}
+
+async function hideInventory() {
+  await hideElement("inventory");
+  await showElement("inventory-show-button");
+}
+
+// default the inventroy is hidden
+hideInventory();
+
 function showError(error) {
   console.error(error);
   document.getElementById(
