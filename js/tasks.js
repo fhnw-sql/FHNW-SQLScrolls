@@ -286,6 +286,7 @@ class Task extends ItemType {
         }
         StarCounter.shake();
         showElement("task-complete-notification");
+        showInventory();
         await StarCounter.update();
         shootConfetti(200, 2);
         await taskGroup.checkGoal();
