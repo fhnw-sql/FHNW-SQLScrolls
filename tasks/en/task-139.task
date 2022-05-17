@@ -22,17 +22,17 @@ ANSWER {
 TEST {
     TABLE {
         person
-        person_id|fname|name|street|city|books|parents
-        501|Donald|Duck|Blumenweg|Entenhausen|5|Null
+        person_id|fname|name|street|city|books|parent
+        501|Donald|Duck|Blumenweg|Entenhausen|5|null
         502|Tick|Duck|Blumenweg|Entenhausen|41|501
         503|Trick|Duck|Blumenweg|Entenhausen|45|501
         504|Track|Duck|Blumenweg|Entenhausen|43|501
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|Null
+        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
         506|Marie|Maus|Blumenweg|Entenhausen|115|505
         507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|Null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|Null
-        510|Dagobert|Trump|Steinenberg|Usania|1|Null
+        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        510|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
     TABLE {
@@ -86,17 +86,17 @@ TEST {
 TEST {
     TABLE {
         person
-        person_id|fname|name|street|city|books|parents
-        501|Donald|Duck|Blumenweg|Entenhausen|5|Null
+        person_id|fname|name|street|city|books|parent
+        501|Donald|Duck|Blumenweg|Entenhausen|5|null
         502|Tick|Duck|Blumenweg|Entenhausen|41|501
         503|Trick|Duck|Blumenweg|Entenhausen|45|501
         504|Track|Duck|Blumenweg|Entenhausen|43|501
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|Null
+        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
         506|Marie|Maus|Blumenweg|Entenhausen|115|505
         507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|Null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|Null
-        510|Dagobert|Trump|Steinenberg|Usania|1|Null
+        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        510|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
     TABLE {

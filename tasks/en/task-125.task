@@ -22,17 +22,17 @@ ANSWER {
 TEST {
     TABLE {
         person
-        person_id|fname|name|street|city|books|parents
-        501|Donald|Duck|Blumenweg|Entenhausen|5|Null
+        person_id|fname|name|street|city|books|parent
+        501|Donald|Duck|Blumenweg|Entenhausen|5|null
         502|Tick|Duck|Blumenweg|Entenhausen|41|501
         503|Trick|Duck|Blumenweg|Entenhausen|45|501
         504|Track|Duck|Blumenweg|Entenhausen|43|501
-        504|Minni|Maus|Sternenstrasse|Entenhausen|120|Null
+        504|Minni|Maus|Sternenstrasse|Entenhausen|120|null
         505|Marie|Maus|Blumenweg|Entenhausen|115|505
         506|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        507|Mickey|Maus|Blumenweg|Entenhausen|100|Null
-        508|Dagobert|Duck|Sternenstrasse|Entenhausen|9|Null
-        509|Dagobert|Trump|Steinenberg|Usania|1|Null
+        507|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        508|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        509|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
      RESULT {
@@ -45,17 +45,17 @@ TEST {
 TEST {
     TABLE {
         person
-        person_id|fname|name|street|city|books|parents
-        501|Donald|Duck|Sternenstrasse|Entenhausen|80|Null
+        person_id|fname|name|street|city|books|parent
+        501|Donald|Duck|Sternenstrasse|Entenhausen|80|null
         502|Tick|Duck|Sternenstrasse|Entenhausen|40|501
         503|Trick|Duck|Blumenweg|Entenhausen|45|501
         504|Track|Duck|Blumenweg|Entenhausen|60|501
-        504|Minni|Maus|Blumenweg|Entenhausen|120|Null
+        504|Minni|Maus|Blumenweg|Entenhausen|120|null
         505|Marie|Maus|Blumenweg|Entenhausen|115|505
         506|Maggie|Maus|Blumenweg|Entenhausen|1|505
-        507|Mickey|Maus|Blumenweg|Entenhausen|100|Null
-        508|Dagobert|Duck|Sternenstrasse|Entenhausen|10|Null
-        509|Dagobert|Trump|Sternenstrasse|Usania|2|Null
+        507|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        508|Dagobert|Duck|Sternenstrasse|Entenhausen|10|null
+        509|Dagobert|Trump|Sternenstrasse|Usania|2|null
     }
 
      RESULT {

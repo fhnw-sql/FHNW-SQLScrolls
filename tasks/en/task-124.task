@@ -22,17 +22,17 @@ ANSWER {
 TEST {
     TABLE {
         person
-        person_id|fname|name|street|city|books|parents
-        501|Donald|Duck|Blumenweg|Entenhausen|5|Null
+        person_id|fname|name|street|city|books|parent
+        501|Donald|Duck|Blumenweg|Entenhausen|5|null
         502|Tick|Duck|Blumenweg|Entenhausen|41|501
         503|Trick|Duck|Blumenweg|Entenhausen|45|501
         504|Track|Duck|Blumenweg|Entenhausen|43|501
-        504|Minni|Maus|Sternenstrasse|Entenhausen|120|Null
+        504|Minni|Maus|Sternenstrasse|Entenhausen|120|null
         505|Marie|Maus|Blumenweg|Entenhausen|115|505
         506|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        507|Mickey|Maus|Blumenweg|Entenhausen|100|Null
-        508|Dagobert|Duck|Sternenstrasse|Entenhausen|9|Null
-        509|Dagobert|Trump|Steinenberg|Usania|1|Null
+        507|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        508|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        509|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
      RESULT {
@@ -45,17 +45,17 @@ TEST {
 TEST {
     TABLE {
         person
-        person_id|fname|name|street|city|books|parents
-        500|Grooby|Goof|Blumenweg|Entenhausen|5|Null
-        501|Donald|Duck|Blumenweg|Entenhausen|5|Null
+        person_id|fname|name|street|city|books|parent
+        500|Grooby|Goof|Blumenweg|Entenhausen|5|null
+        501|Donald|Duck|Blumenweg|Entenhausen|5|null
         502|Tick|Duck|Blumenweg|Entenhausen|41|501
         503|Trick|Duck|Blumenweg|Entenhausen|45|501
-        504|Minni|Maus|Sternenstrasse|Entenhausen|120|Null
+        504|Minni|Maus|Sternenstrasse|Entenhausen|120|null
         505|Marie|Maus|Blumenweg|Entenhausen|115|505
         506|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        507|Indiana|Goof|Blumenweg|Entenhausen|100|Null
-        509|Dagobert|Trump|Steinenberg|Usania|1|Null
-        510|Manfred|Maus|Sternenstrasse|Entenhausen|120|Null
+        507|Indiana|Goof|Blumenweg|Entenhausen|100|null
+        509|Dagobert|Trump|Steinenberg|Usania|1|null
+        510|Manfred|Maus|Sternenstrasse|Entenhausen|120|null
     }
 
      RESULT {

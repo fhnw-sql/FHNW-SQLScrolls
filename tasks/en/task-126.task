@@ -21,7 +21,7 @@ PARSONS {
     ORDER BY 
     length
     instrument_name #distractor
-    instrumentgroup_id#distractor
+    instrumentgroup_id #distractor
     SELECT instrument_name, count(*) #distractor   
 }
 
