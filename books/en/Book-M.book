@@ -41,7 +41,7 @@ PAGE {
             ) ;
 
             INSERT INTO person (person_id, fname, name, street, city, books, parent)
-            VALUES (501, 'Donald', 'Duck', 'Blumenweg', 'Entenhausen', 5, NULL);
+            VALUES (501, 'Donald', 'Duck', 'Blumenweg', 'Entenhausen', 5, null);
             INSERT INTO person (person_id, fname, name, street, city, books, parent)
             VALUES (502, 'Tick', 'Duck', 'Blumenweg', 'Entenhausen', 41, 501);
             INSERT INTO person (person_id, fname, name, street, city, books, parent)
@@ -49,17 +49,17 @@ PAGE {
             INSERT INTO person (person_id, fname, name, street, city, books, parent)
             VALUES (504, 'Track', 'Duck', 'Blumenweg', 'Entenhausen', 43, 501);
             INSERT INTO person (person_id, fname, name, street, city, books, parent)
-            VALUES (505, 'Minni', 'Maus', 'Sternenstrasse', 'Entenhausen', 120, NULL);
+            VALUES (505, 'Minni', 'Maus', 'Sternenstrasse', 'Entenhausen', 120, null);
             INSERT INTO person (person_id, fname, name, street, city, books, parent)
             VALUES (506, 'Marie', 'Maus', 'Blumenweg', 'Entenhausen', 115, 505);
             INSERT INTO person (person_id, fname, name, street, city, books, parent)
             VALUES (507, 'Maggie', 'Maus', 'Sternenstrasse', 'Entenhausen', 125, 505);
             INSERT INTO person (person_id, fname, name, street, city, books, parent)
-            VALUES (508, 'Mickey', 'Maus', 'Blumenweg', 'Entenhausen', 120, NULL);
+            VALUES (508, 'Mickey', 'Maus', 'Blumenweg', 'Entenhausen', 120, null);
             INSERT INTO person (person_id, fname, name, street, city, books, parent)
-            VALUES (509, 'Dagobert', 'Duck', 'Sternenstrasse', 'Entenhausen', 9, NULL);
+            VALUES (509, 'Dagobert', 'Duck', 'Sternenstrasse', 'Entenhausen', 9, null);
             INSERT INTO person (person_id, fname, name, street, city, books, parent)
-            VALUES (510, 'Dagobert', 'Trump', 'Steinenberg', 'Usania', 1, NULL);
+            VALUES (510, 'Dagobert', 'Trump', 'Steinenberg', 'Usania', 1, null);
 
         }
 
