@@ -46,7 +46,7 @@ TEST {
 
     RESULT {
         Mumba|2
-        Shadowland|4
+        Shadowland|3
     }
 }
 
