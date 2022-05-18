@@ -1150,8 +1150,21 @@ body {
   font-size: 1.2rem;
 }
 
+#task-view {
+  overflow: scroll;
+  margin-top: 2rem !important;
+}
+
 #task-view .task-description {
   max-width: 85%;
+}
+
+#task-name {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  min-width: fit-content;
+  transform: translateX(-50%);
 }
 
 @-webkit-keyframes moveBackground {
@@ -1251,6 +1264,8 @@ body {
 
 .task-container {
   padding-bottom: 2.5rem;
+  padding-top: 2rem;
+  overflow: auto;
 }
 
 #query-in-table {
@@ -1312,7 +1327,7 @@ body {
 
 .back-button {
   position: fixed;
-  top: 2rem;
+  top: 1rem;
   left: 2rem;
   z-index: 500;
   font-size: 1.5rem;
@@ -1330,11 +1345,9 @@ body {
     text-align: right;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
-    position: relative;
+    position: fixed;
     left: 2rem;
-    top: -1.35rem;
-    margin: -1rem;
+    top: 1rem;
   }
 }
 
