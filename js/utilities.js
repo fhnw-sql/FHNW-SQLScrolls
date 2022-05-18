@@ -34,11 +34,13 @@ async function runSQL(context, query, taskType = "SQL", statements = "") {
   
   try {
     if (taskType == "DCL") {
-      if (query.trim().startsWith('CREATE')) {
+      // if create table, do not create the example table
+      if (query.toUpperCase().split(' ').filter(e => e.length>0).join(' ').startsWith('CREATE TABLE')) {
         db.run(query);
         let result = db.exec(statements);
         return result
       } else {
+        // other DCL that run after table exists
         db.run(context);
         db.run(query);
         let result = db.exec(statements);

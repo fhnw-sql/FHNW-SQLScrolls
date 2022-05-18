@@ -1,0 +1,78 @@
+METADATA {
+    id: task-152
+    name: Unique Potions
+    color: green
+    info: Add Unique Index
+    keywords: ALTER_TABLE
+    level: 4
+    type: DCL
+}
+
+DESCRIPTION {
+   Add an index called "name_index" to help the wizards access the potions by name and make sure potion names are unique.
+}
+
+ANSWER {
+    CREATE UNIQUE INDEX test_idx ON Potions(name);
+}
+
+TEST {
+    
+    TABLE {
+        Potions
+        potion_id|name|level|tested
+        1|Magic Spell|2|0
+        2|Black Mantra|1.5|0
+        3|Dragon Potion|25|1
+        5|Midnight Surprise|25|1
+    }
+
+    SQL {
+        SELECT DISTINCT m.name as table_name, ii.name as column_name, il.name as index_name FROM sqlite_master AS m, pragma_index_list(m.name) AS il, pragma_index_info(il.name) AS ii WHERE m.type='table' AND il.[unique] = 1;    
+    }
+
+    RESULT {
+      Potions|name|test_idx
+    }
+}
+
+TEST {
+    
+    TABLE {
+        Potions
+        potion_id|name|level|tested
+        1|Magic Spell|2|0
+        2|Black Mantra|1.5|0
+        3|Dragon Potion|25|1
+        5|Midnight Surprise|25|1
+    }
+
+    SQL {
+        SELECT REPLACE(upper(sql), ' ', '') FROM sqlite_master WHERE name = 'test_idx';
+    }
+
+    RESULT {
+      CREATEUNIQUEINDEXTEST_IDXONPOTIONS(NAME)
+    }
+}
+
+TEST {
+
+    TABLE {
+        Potions
+        potion_id|name|level|tested
+        1|Magic Spell|2|0
+        2|Black Mantra|1.5|0
+        3|Dragon Potion|25|1
+        5|Midnight Surprise|25|1
+    }
+    
+    SQL {
+       EXPLAIN QUERY PLAN SELECT name from Potions WHERE name='Black Mantra';
+    }
+
+    RESULT {
+        2|0|0|SEARCH TABLE Potions USING COVERING INDEX test_idx (name=?)
+    }
+}
+
