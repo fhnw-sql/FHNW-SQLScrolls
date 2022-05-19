@@ -8,14 +8,14 @@ METADATA {
 }
 
 DESCRIPTION {
-    How many instruments start with the same letter? Order them by the amount (smallest amount first).
+    How many instrument names start with the same letter? Order them by count (smallest count first).
 }
 
 ANSWER {
-    SELECT substr(instrument_name,1,1) l, count(*) amount
+    SELECT substr(instrument_name,1,1) frst, count(*) count
     FROM instrument
-    GROUP BY substr(instrument_name,1,1)
-    ORDER BY amount;    
+    GROUP BY frst
+    ORDER BY count;    
 }
 
 TEST {

@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    How many books are there in total per street and how many in average? 
+    How many books are there in total per street and how many on average? 
     Please list the street, the total of books in the street and the average. Order the result by street.
 }
 

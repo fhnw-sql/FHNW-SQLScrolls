@@ -9,8 +9,7 @@ METADATA {
 
 
 DESCRIPTION {
-    How many instrument names have the same length? Please list the length and the number of instruments, 
-    but only if at least one instrument name with this length exists. Order the result by length.
+    How many instrument names have the same length? Please list the length and the number of instruments. Order the result by length.
 }
 
 PARSONS {
