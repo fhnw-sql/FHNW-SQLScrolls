@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Who is parent of Marie?
+    Show Marie’s first and last name and the first and last name of the parent responsible for her.
  }
 
 ANSWER {

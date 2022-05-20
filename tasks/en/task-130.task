@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    List all the instruments of the group Strings.
+    List all string instruments with type.
 }
 
 ANSWER {

@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Are there persons with the same fname and how many?
+     Show the people sharing the same first name and the count of people sharing it.
 }
 
 ANSWER {

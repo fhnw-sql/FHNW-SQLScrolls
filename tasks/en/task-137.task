@@ -8,19 +8,15 @@ METADATA {
 }
 
 DESCRIPTION {
-    Is there a person with the name Duck playing the clarinet?
+    Do any of the Ducks play the clarinet? 
 }
 
 PARSONS {
     SELECT i.instrument_name, pe.fname, pe.name
-    FROM person pe 
-    INNER JOIN
+    FROM person pe INNER JOIN
     playing pl ON (pe.person_id = pl.person_id)
-    INNER JOIN
-    instrument i ON (pl.instrument_id = i.instrument_id)
-    WHERE i.instrument_name = 'Clarinet'
-        AND pe.name = 'Duck'
-    playing pl ON (person = playing) #distractor
+    INNER JOIN instrument i ON (pl.instrument_id = i.instrument_id)
+    WHERE i.instrument_name = 'Clarinet' AND pe.name = 'Duck'
     WHERE inst.instrument_name EQUALS ('Clarinet') #distractor
     AND person.name = 'Duck' #distractor
 }
