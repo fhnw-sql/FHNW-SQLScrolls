@@ -18,8 +18,8 @@ PARSONS {
     playing pl ON (pe.person_id = pl.person_id)
     INNER JOIN
     instrument i ON (pl.instrument_id = i.instrument_id)
-    WHERE i.instrument_name IN ('Clarinet')
-    AND pe.name = 'Duck'
+    WHERE i.instrument_name = 'Clarinet'
+        AND pe.name = 'Duck'
     playing pl ON (person = playing) #distractor
     WHERE inst.instrument_name EQUALS ('Clarinet') #distractor
     AND person.name = 'Duck' #distractor
@@ -30,8 +30,8 @@ ANSWER {
     FROM person pe INNER JOIN
         playing pl ON (pe.person_id = pl.person_id) INNER JOIN
         instrument i ON (pl.instrument_id = i.instrument_id)
-    WHERE i.instrument_name IN ('Clarinet')
-    AND pe.name = 'Duck';
+    WHERE i.instrument_name = 'Clarinet'
+        AND pe.name = 'Duck';
 }
 
 TEST {
