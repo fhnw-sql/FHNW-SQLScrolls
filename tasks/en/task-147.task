@@ -8,8 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Which children have the surname Duck?
-    List their full name and sort them by first name
+    Show the instruments that have less than 8 letters and order them by their length and then in alphabetic order.
 }
 
 PARSONS {

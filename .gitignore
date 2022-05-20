@@ -78,3 +78,5 @@ data/
 # environment
 .env
 .vs/
+.vscode/launch.json
+js/configuration.js
