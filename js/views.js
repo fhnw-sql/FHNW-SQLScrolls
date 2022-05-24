@@ -642,7 +642,8 @@ class ProfileView extends View {
 
     const trigger = document.activeElement;
     document.getElementById(this.id).focus();
-    this.renderGraph();
+    // Uncomment this to render the graph
+    // this.renderGraph(); 
     await showModal("#" + this.id, DISPLAY_STATE.previousSecondaryView, trigger);
   }
 
@@ -668,6 +669,7 @@ class ProfileView extends View {
     saveFile("sqltrainer-sent-answers.json", JSON.stringify(data.history));
   }
 
+  // Graph is currently not rendered due to a bug in displaying the data
   async renderGraph() {
     const loadingIcon = document.querySelector(".graph-loading");
     loadingIcon.classList.remove("hidden");
