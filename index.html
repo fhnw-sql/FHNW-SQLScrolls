@@ -444,10 +444,21 @@
         ></div>
         <h1 class="col-white mb-1" id="task-name"></h1>
 
-        <div aria-hidden="true" class="task-complete-notification info-box hidden" id="task-complete-notification">
+        <div aria-hidden="true" class="task-notification info-box hidden" id="task-complete-notification">
             <p>
                 <i class="fa fa-star col-yellow"></i>
                 <span class="i18n-task-complete col-yellow"></span>
+            </p>
+        </div>
+
+        <!-- hint to check out the books after answering wrong multiple times -->
+        <div aria-hidden="true" class="task-notification info-box hidden" id="task-hint-notification">
+            <button class="center hint-book-menu" id="hint-book-menu" onclick="BookMenuButton.open(event)">
+                <i class="center fa fa-2x fa-book col-white" id="hint-book-menu-icon"></i>
+                <p class="center i18n-books-text col-white" id="hint-book-menu-text"></p>
+            </button>
+            <p class="center">
+                <span class="i18n-theory-hint hint-text smaller"></span>
             </p>
         </div>
 

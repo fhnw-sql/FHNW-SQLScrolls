@@ -1193,7 +1193,7 @@ body {
   padding: 1rem;
 }
 
-.task-complete-notification {
+.task-notification {
   position: fixed;
   left: 50%;
   top: 50%;
@@ -1209,8 +1209,56 @@ body {
   transition: opacity 0.5s;
 }
 
-.task-complete-notification * {
+.task-notification * {
   margin: 0;
+}
+
+.hint-text {
+  color: var(--col-good-blue-100);
+}
+
+.hint-book-menu {
+  background-color: transparent;
+  border-style: none;
+  color: white;
+  animation: wiggle 3s 0s infinite;
+  -webkit-animation: wiggle 3s 0s infinite;
+}
+
+@keyframes wiggle {
+	5%,
+	50% {
+    -webkit-transform: scale(1);
+		transform: scale(1);
+	}
+	10% {
+    -webkit-transform: scale(0.9);
+		transform: scale(0.9);
+	}
+	15% {
+    -webkit-transform: scale(1.15);
+		transform: scale(1.15);
+	}
+	20% {
+    -webkit-transform: scale(1.15) rotate(-5deg);
+		transform: scale(1.15) rotate(-5deg);
+	}
+	25% {
+    -webkit-transform: scale(1.15) rotate(5deg);
+		transform: scale(1.15) rotate(5deg);
+	}
+	30% {
+    -webkit-transform: scale(1.15) rotate(-3deg);
+		transform: scale(1.15) rotate(-3deg);
+	}
+	35% {
+    -webkit-transform: scale(1.15) rotate(2deg);
+		transform: scale(1.15) rotate(2deg);
+	}
+	40% {
+    -webkit-transform: scale(1.15) rotate(0);
+		transform: scale(1.15) rotate(0);
+	}
 }
 
 #task-completed-text {

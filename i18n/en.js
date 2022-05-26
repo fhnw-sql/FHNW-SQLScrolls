@@ -137,6 +137,7 @@ for (let entry of Object.entries({
   "display-profile": "Profile Modal",
   "close-modal": "close modal",
   "star-count": "Star count",
+  "theory-hint": "Hint: The necessary knowledge to solve this task can be found in the books!",
 })) {
   i18n[entry[0]] = entry[1];
 }

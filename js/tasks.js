@@ -257,6 +257,14 @@ class Task extends ItemType {
         return results;
     }
 
+    async showHint() {       
+        await hideElementImmediately("book-menu");
+        await showElement("task-hint-notification");
+        await delay(3000);
+        await hideElement("task-hint-notification");
+        await showElementImmediately("book-menu");
+    }
+    
     async completeTask() {
         if (this.completed) return;
         const taskGroup = taskGroups.lookupTaskGroupWithTaskId(this.id);
@@ -665,5 +673,13 @@ async function runQueryTests(allowCompletionAndStore) {
 
     if (allCorrect && allowCompletionAndStore && Views.TASK.currentTask) {
         await Views.TASK.currentTask.completeTask();
+    } else {
+        if(!allCorrect && allowCompletionAndStore && Views.TASK.currentTask && API.loginStatus === LoginStatus.LOGGED_IN ) {
+            const profile = await API.self();
+            const showHint = profile.history[Views.TASK.currentTask.id]?.length == Config.FALSE_ANSWER_UNTIL_BOOK_HINT;
+            if(showHint){
+                await Views.TASK.currentTask.showHint();
+            }
+        }
     }
 }
