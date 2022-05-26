@@ -145,6 +145,11 @@ class InventoryView extends View {
     if (this.currentTaskGroup) {
       document.getElementById("viewed-tasks-header").focus();
     }
+    // Opens the book, when the taskGroup is opened for the first time 
+    const newBook = document.getElementById(`Book-`+groupID)?.getElementsByClassName("new-item-highlight");
+    if(newBook.length>0){
+      document.getElementById(`Book-`+groupID).click();
+    }
   }
 }
 
