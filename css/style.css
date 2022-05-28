@@ -575,7 +575,7 @@ th {
   overflow: hidden;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-}
+}  
 
 .book-open .table-paper th {
   max-width: unset;
@@ -599,6 +599,7 @@ th {
   background: var(--col-rune-grey) url("../img/runestone-texture-seamless.png");
   -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  margin-right: 2rem;
 }
 [onclick]:hover {
   cursor: pointer;
@@ -1834,14 +1835,19 @@ body {
   border-width: 8px;
   position: relative;
   margin-bottom: 1rem;
+  width: 1000px;
+  min-width: 1000px;
 }
 
 .book-open .page {
+  min-width: 20%;
   font-family: var(--hand-font);
   font-size: 1.1rem;
   margin: 1rem;
-  height: 24.5rem;
-  width: 51rem;
+  height: 392px;
+  flex-direction: column;
+  display: flex;
+
 }
 
 .book-open .page:nth-child(2) {
@@ -1855,6 +1861,11 @@ body {
   padding: 0.5rem 0.2rem;
   margin-left: 0;
   margin-right: 0;
+  height: auto;
+  max-height: 70%;
+  width: auto;
+  max-width: 100%;
+  overflow: auto;
 }
 
 .book-open .multi-table .table-paper {
@@ -1891,12 +1902,32 @@ body {
   font-size: 1.2rem;
 }
 
-@media (max-width: 850px) {
+.book-img {
+  overflow: auto;
+  height: auto;
+  width: fit-content;
+  max-width: inherit;
+  align-items: center;
+  display: flex;
+}
+
+.book-img  img {
+ height: 100%;
+}
+
+@supports (-moz-appearance:none) {
+    img {
+    max-width: 100%; 
+    /* width: 100%; */
+  }
+}
+
+@media (max-width: 1000px) {
   .book-open .page {
     font-size: 1.1rem;
     margin: 0.5rem;
-    width: 100%;
-    min-height: 19rem;
+    min-height: 350px;
+    max-width: 999px;
   }
 
   .book-open > .row {
@@ -1908,7 +1939,24 @@ body {
   }
 
   .book-open {
-    height: 49rem;
+    min-height: 784px;
+    width: -webkit-fill-available;
+    width: 100%;
+    min-width: auto;
+  }
+
+  .book-img {
+    overflow: auto;
+    height: auto;
+    width: fit-content;
+    max-width: inherit;
+    align-self: center;
+  
+  }
+
+  .book-img  img {
+    height: 100%;
+    width: auto;  
   }
 
   .book-open .page:nth-child(1) {
@@ -1924,17 +1972,16 @@ body {
   }
 
   #display-close-button {
-    top: -22rem;
-    right: -2rem;
+    top: -25rem;
   }
 
   #display-prev-page {
-    top: 44.2rem;
+    top: 43.8rem;
     left: 0;
   }
 
   #display-next-page {
-    top: 23.5rem;
+    top: 20rem;
   }
 
   .multi-table .row {

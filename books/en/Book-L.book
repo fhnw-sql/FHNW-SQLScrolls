@@ -8,19 +8,22 @@ METADATA {
 
 
 PAGE {
-    
     <h2> Music 🎵</h2>
     This book contains SQL exercises with music data.
     </br>
     Below you can see the simplified schema for the exercises:
-
-    <img src="img/music1-simple-ERD.png" alt="Schema"> 
+    </br>
+    <div class="book-img">
+        <img src="img/music1-simple-ERD.png" alt="Schema"> 
+    </div>
 }
 
 PAGE {
     Detailed Entity-Relationship Schema
     </br>
-    <img src="img/music1-detail-ERD.png" alt="Schema"> 
+    <div class="book-img">
+        <img src="img/music1-detail-ERD.png" alt="Schema"> 
+    </div>
 }
 
 PAGE {

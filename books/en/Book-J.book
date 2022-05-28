@@ -16,13 +16,15 @@ PAGE {
 
 
     <b>Data tables in the zoo database</b>
-
+    
     The tables in the next page provide an overview of all the data in the zoo database. 
 }
 
 
 PAGE {
- <img src="img/zoo-schema.png" alt="Schema"> 
+    <div class="book-img">
+        <img src="img/zoo-schema.png" alt="Schema"> 
+    </div>
 }
 
 PAGE {

@@ -8,21 +8,24 @@ METADATA {
 
 
 PAGE {
-    
     <h2> Music II 🎵</h2>
     New musicians are in town! 
     We collected their data so that you can do some research about them.
     </br>
     Below you can see the simplified schema for the exercises:
-
-    <img src="img/music2-simple-ERD.png" alt="Schema"> 
+    </br>
+    <div class="book-img">
+        <img src="img/music2-simple-ERD.png" alt="Schema"> 
+    </div>
 }
 
 PAGE {
     Detailed Entity-Relationship Schema
     </br>
-    <img src="img/music2-detail-ERD.png" alt="Schema"> 
-}
+    <div class="book-img">
+        <img src="img/music2-detail-ERD.png" alt="Schema">
+    </div>
+    }
 
 PAGE {
     <h3> Person Data Table </h3>
