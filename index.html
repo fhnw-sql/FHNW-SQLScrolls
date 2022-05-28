@@ -897,7 +897,12 @@
             <div class="modal-content info-box">
                 <div class="info-box tests col-yellow" style="width: calc(100% - 2rem) !important;">
                     <div class="row justify-content-between">
+                        <div style="display: flex">
                         <h1 class="i18n-profile"></h1>
+                            <button class="col-yellow" style="padding-left: 10px" onclick="toggleMute()">
+                                    <i class="fa fa-volume-up" id="mute-button"></i>
+                            </button>
+                        </div>
                         <button class="float-right col-yellow close-button" data-dismiss="modal">
                             <span class="i18n-close"></span>
                             &times;
@@ -955,6 +960,20 @@
     </button>
 </aside>
 
+<!-- audios -->
+<audio id="sound_book_page_turn"> 
+    <source type="audio/wav" src="sounds/book_page_turn.wav" />   
+</audio>   
+<audio id="sound_book_open"> 
+    <source type="audio/wav" src="sounds/book_open.wav" />   
+</audio>   
+<audio id="sound_right_answer"> 
+    <source type="audio/wav" src="sounds/right_answer.wav" />   
+</audio>   
+<audio id="sound_wrong_answer"> 
+    <source type="audio/wav" src="sounds/wrong_answer.wav" />   
+</audio>   
+
 <!-- scripts -->
 <script src="vendor/jquery-3.5.1/jquery.min.js"></script>
 <script src="vendor/bootstrap-4.5.2-dist/js/popper.min.js"></script>
@@ -984,6 +1003,7 @@
 <script src="js/middlewares.js"></script>
 <script src="js/main.js"></script>
 <script src="js/saveState.js"></script>
+<script src="js/soundeffects.js"></script>
 
 <!-- Font Awesome, load & swap -->
 <link as="style" href="vendor/fontawesome-free-5.14.0-web/css/all.min.css" rel="preload"/>

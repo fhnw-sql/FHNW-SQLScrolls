@@ -404,3 +404,10 @@ called `Rsl1122/SQL-Training-Game-e755cc5` representing the state of the commit 
 .
 
 - [Rsl1122/SQL-Training-Game](https://github.com/Rsl1122/SQL-Training-game)
+
+
+Sound effects have been obtained from freesound.org under the Creative Commons License. 
+
+- book_page_turn: sound by SmartWentCody, original title "Book Page Turning.wav", license https://creativecommons.org/licenses/by/3.0/, *edited version*
+- right_answer: sound by rhodesmas, original title "Coins Purchase 4.wav", license https://creativecommons.org/licenses/by/3.0/
+- wrong_answer: sound by RICHERlandTV, original title "Magic.wav", license https://creativecommons.org/licenses/by/3.0/, *edited version* 

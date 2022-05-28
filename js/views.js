@@ -613,11 +613,13 @@ class ReadBookView extends View {
   }
 
   async nextPage() {
+    playSoundById("sound_book_page_turn");
     this.shownBookPage += 2;
     await this.showTheBook();
   }
 
   async previousPage() {
+    playSoundById("sound_book_page_turn");
     this.shownBookPage -= 2;
     await this.showTheBook();
   }

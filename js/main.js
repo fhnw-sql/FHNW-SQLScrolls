@@ -248,6 +248,9 @@ async function beginGame() {
     await inventory.update();
     if ($("#star-counter").length) await StarCounter.update();
 
+    // Default game is not muted
+    sessionStorage.setItem("mute", false);
+
     // Custom router if we ask to reset password
     await routeActionMiddleware("resetPassword", async (urlParams) => {
       const token = urlParams.get("token");
