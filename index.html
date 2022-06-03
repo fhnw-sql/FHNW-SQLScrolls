@@ -453,6 +453,11 @@
 
         <!-- hint to check out the books after answering wrong multiple times -->
         <div aria-hidden="true" class="task-notification info-box hidden" id="task-hint-notification">
+            <div class="row" style="margin: 0;justify-content: flex-end;">
+                <button class="close-button" id="close-hint-button">
+                    &times;
+                </button>
+            </div>
             <button class="center hint-book-menu" id="hint-book-menu" onclick="BookMenuButton.open(event)">
                 <i class="center fa fa-2x fa-book col-white" id="hint-book-menu-icon"></i>
                 <p class="center i18n-books-text col-white" id="hint-book-menu-text"></p>

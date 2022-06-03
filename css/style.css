@@ -1226,6 +1226,12 @@ body {
   -webkit-animation: wiggle 3s 0s infinite;
 }
 
+#task-hint-notification .close-button{
+  border: none;
+  color: white;
+  background:none;
+}
+
 @keyframes wiggle {
 	5%,
 	50% {

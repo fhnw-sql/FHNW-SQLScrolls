@@ -260,6 +260,13 @@ class Task extends ItemType {
     async showHint() {       
         await hideElementImmediately("book-menu");
         await showElement("task-hint-notification");
+        $("#close-hint-button")
+            .off()
+            .on("click", function (e) {
+                e.preventDefault();
+                hideElementImmediately("task-hint-notification");
+                showElementImmediately("book-menu");
+            });
         await delay(3000);
         await hideElement("task-hint-notification");
         await showElementImmediately("book-menu");
