@@ -661,7 +661,10 @@ class ProfileView extends View {
   renderTaskCompletionGrid() {
     let i = 0;
     let render = "<tbody><tr>";
-    for (const task of tasks.asList()) {
+    const orderedTaskList = tasks.asList().sort(function (x, y) {
+      return x.id.substring(5)- y.id.substring(5);
+    }); 
+    for (const task of orderedTaskList){
       render += `<td class="${task.completed ? "completed" : ""}">${task.getNumericID()}</td>`;
       i++;
       if (i % 10 === 0) {
