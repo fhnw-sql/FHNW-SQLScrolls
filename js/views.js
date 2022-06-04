@@ -342,6 +342,14 @@ class TaskView extends View {
 
         runQueryTests(true);
       });
+    $("#reset-input-button")
+      .off()
+      .on("click", function (e) {
+        e.preventDefault();
+        var initial = Views.TASK.currentTask.parsons.join("\n");
+        Views.TASK.parsons.init(initial);
+        Views.TASK.parsons.shuffleLines();
+       });
   }
 
   async toggleAnswer() {
@@ -404,6 +412,13 @@ class TaskView extends View {
         .on("click", function (e) {
           e.preventDefault();
           runQueryTests(true);
+        });
+      $("#reset-input-button")
+        .off()
+        .on("click", function (e) {
+          e.preventDefault();
+          query = null;
+          this.queryInputField = document.getElementById("query-input").value =  i18n.get("query-placeholder");
         });
     }
 

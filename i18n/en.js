@@ -66,6 +66,7 @@ for (let entry of Object.entries({
   "query-no-rows": "Query matched zero rows",
   "query-placeholder": "Write a SQL query...",
   "query-test": '<i class="fa fa-paper-plane"></i> Submit',
+  "query-reset": '<i class="fas fa-redo"></i> Restart',
   test: "Test {}",
   correct: "Correct",
   incorrect: "Incorrect",
