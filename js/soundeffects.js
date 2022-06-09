@@ -1,14 +1,21 @@
 function toggleMute(){
     var isMuted = sessionStorage.getItem("mute") == "true"? true : false;
 
-    //toogle mute button icon
-    var element = document.getElementById("mute-button");
+    //toogle mute button icon and text
+    var symbol = document.getElementById("mute-symbol");
+    var textMute = document.getElementById("mute-text");
+    var textUnmute = document.getElementById("unmute-text");
+
     if(isMuted){
-        element.classList.remove("fa-volume-mute");
-        element.classList.add("fa-volume-up");
+        symbol.classList.remove("fa-volume-mute");
+        symbol.classList.add("fa-volume-up");
+        textUnmute.classList.remove("hidden");
+        textMute.classList.add("hidden");
     } else {
-        element.classList.remove("fa-volume-up");
-        element.classList.add("fa-volume-mute");
+        symbol.classList.remove("fa-volume-up");
+        symbol.classList.add("fa-volume-mute");
+        textMute.classList.remove("hidden");
+        textUnmute.classList.add("hidden");
     }
 
     //update mute state

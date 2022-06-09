@@ -907,12 +907,7 @@
             <div class="modal-content info-box">
                 <div class="info-box tests col-yellow" style="width: calc(100% - 2rem) !important;">
                     <div class="row justify-content-between">
-                        <div style="display: flex">
                         <h1 class="i18n-profile"></h1>
-                            <button class="col-yellow" style="padding-left: 10px" onclick="toggleMute()">
-                                    <i class="fa fa-volume-up" id="mute-button"></i>
-                            </button>
-                        </div>
                         <button class="float-right col-yellow close-button" data-dismiss="modal">
                             <span class="i18n-close"></span>
                             &times;
@@ -926,6 +921,11 @@
                                 <div class="col-12">
                                     <button class="btn btn-rune" onclick="Views.PROFILE.downloadData()">
                                         <i class="fa fa-download"></i> <span class="i18n-download-your-data"></span>
+                                    </button>
+                                </div>
+                                <div class="col-12" style="margin-top: 0.5rem">
+                                    <button class="btn btn-rune" onclick="toggleMute()">
+                                        <i class="fa fa-volume-up" id="mute-symbol"></i> <span class="i18n-mute-soundeffects hidden " id="mute-text"></span><span class="i18n-unmute-soundeffects" id="unmute-text"></span>
                                     </button>
                                 </div>
                                 <!-- graph is currently not rendered -->
@@ -973,9 +973,6 @@
 <!-- audios -->
 <audio id="sound_book_page_turn"> 
     <source type="audio/wav" src="sounds/book_page_turn.wav" />   
-</audio>   
-<audio id="sound_book_open"> 
-    <source type="audio/wav" src="sounds/book_open.wav" />   
 </audio>   
 <audio id="sound_right_answer"> 
     <source type="audio/wav" src="sounds/right_answer.wav" />   
