@@ -654,6 +654,39 @@ th {
   color: var(--col-gold-85);
 }
 
+.confirm-modal {
+  background: #ffffee url("../img/scroll-texture-seamless.png");
+  font-family: var(--hand-font);
+}
+
+.confirm-modal .modal-header{
+ border: none;
+ padding-bottom: 0
+}
+
+.confirm-modal .modal-footer{
+  border: none;
+  padding-top: 0
+ }
+
+ .btn-rune-red{
+  background: none;
+  border-color: #920f18;
+  color: #920f18;
+  border-style: solid;
+  outline-width: 1px;
+ }
+
+ .btn-rune-red:hover{
+  border-color: #92000a;
+  color: #92000a;
+  box-shadow: 0 0 0 0.2rem #92000a88;
+ }
+
+ .btn-rune-red:focus{
+  box-shadow: 0 0 0 0.2rem #92000a88;
+ }
+
 .example,
 .tests {
   background: none;

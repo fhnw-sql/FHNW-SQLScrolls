@@ -928,6 +928,11 @@
                                         <i class="fa fa-volume-up" id="mute-symbol"></i> <span class="i18n-mute-soundeffects hidden " id="mute-text"></span><span class="i18n-unmute-soundeffects" id="unmute-text"></span>
                                     </button>
                                 </div>
+                                <div class="col-12" style="margin-top: 0.5rem">
+                                    <button class="btn btn-rune" data-toggle="modal" href="#confirmModal">
+                                        <i class="fa fa-trash"></i> <span class="i18n-delete-score" id="mute-text"></span>
+                                    </button>
+                                </div>
                                 <!-- graph is currently not rendered -->
                                 <!-- <div class="col-12 graph-loading">
                                     <p>
@@ -948,6 +953,36 @@
             </div>
         </div>
     </div>
+
+
+    <!-- delete score confirmation modal -->
+    <div class="modal fade" id="confirmModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"  style="background-color:rgba(0, 0, 0, 0.817)">
+        <div class="modal-dialog">
+            <div class="modal-content confirm-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title i18n-delete-score-confirm-title" id="staticBackdropLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <span class="i18n-delete-score-confirm-text1" style="font-weight: bold;">
+                    </span>  
+                    <br/>
+                    <br/>
+                  
+                    <i class="i18n-delete-score-confirm-text2" style="font-size:smaller;">
+                    </i>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-rune-red i18n-delete-score-confirm-button1" data-dismiss="modal"></button>
+                    <!-- TODO: add API call to delete the score -->
+                    <button type="button" class="btn btn-rune-red i18n-delete-score-confirm-button2"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+                                
 </div>
 
 <aside id="right-sidebar" class="right-sidebar clickable-items hidden">
