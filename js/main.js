@@ -287,4 +287,10 @@ async function beginGame() {
   }
 }
 
+async function restartUser() {
+  let res = API.restartUser();
+  console.log("restartUser", res)
+  window.location.href = "./"; // Reloads the page
+}
+
 beginGame().catch(showError);

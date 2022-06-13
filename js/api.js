@@ -216,4 +216,23 @@ const API = {
       xhr.send(`task=${task.id}&correct=${result}&query=${encodeURIComponent(sql)}`);
     });
   },
+  restartUser() {
+    console.log('** RESTART USER **')
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          if (this.status === 200) {
+            resolve();
+          } else {
+            reject(`Bad response code '${xhr.status}' for user restart`);
+          }
+        }
+      };
+      xhr.open("PATCH", `${this.ADDRESS}/users/self/restart`, true);
+      xhr.setRequestHeader("Authorization", "Bearer " + this.token);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send();
+    });
+  },
 };
