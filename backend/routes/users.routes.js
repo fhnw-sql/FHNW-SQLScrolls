@@ -166,6 +166,44 @@ router.patch("/self/answer_sql", reqBodyValidator(answerSqlPATCH), async functio
     .catch((err) => next(err));
 });
 
+// Delete history
+router.patch("/self/restart", async function (
+  { user: jwt },
+  res,
+  next
+) {
+
+  // Get Users Collections
+  const users = db.get().collection("users");
+  const archives = db.get().collection("users_archive");
+  let user = await users.findOne({ _id: new ObjectID(jwt.userId) });
+
+  // Archive current user
+  // clone user
+  let clone = JSON.parse(JSON.stringify(user))
+
+  // Build historical ID
+  clone._id = { '_id': user._id, 'date': Date.now()}
+
+  // save it
+  await archives.insertOne(clone)
+    .catch((err) => {console.error("insert error ", err); next(err)});
+
+  // Empty history
+  users
+    .findOneAndUpdate(
+      { _id: user._id },
+      { $unset: { 'history': 1 } },
+      { returnOriginal: false }
+    )
+    .then(({ value }) => {
+      var { password, ...user } = value;
+      console.log("Deleted history for user ", user.username)
+      return res.json(user);
+    })
+    .catch((err) => next(err));
+});
+
 // /users/recover
 // A reset link is created and an options object is created defining the from, to, subject and text and an email is sent to the user using the sendgrid package.
 router.post("/recover", reqBodyValidator(recoverPOST), async function (req, res, next) {
