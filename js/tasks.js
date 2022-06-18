@@ -626,8 +626,6 @@ async function runQueryTests(allowCompletionAndStore) {
     }
 
     const query = document.getElementById("query-input").value.trim();
-
-    animateFlame();
     animateQueryResultsClose();
     const results = await Views.TASK.currentTask.runTests(query);
 
@@ -683,6 +681,7 @@ async function runQueryTests(allowCompletionAndStore) {
         await Views.TASK.currentTask.completeTask();
     } else {
         if(!allCorrect && allowCompletionAndStore && Views.TASK.currentTask && API.loginStatus === LoginStatus.LOGGED_IN ) {
+            animateSubmitButton();
             playSoundById("sound_wrong_answer");
             const profile = await API.self();
             const showHint = profile.history[Views.TASK.currentTask.id]?.length == Config.FALSE_ANSWER_UNTIL_BOOK_HINT;

@@ -164,11 +164,11 @@ function shootConfetti(durationMs, particles) {
   })();
 }
 
-async function animateFlame() {
-  const flameStyle = document.getElementById("task-flame-container").style;
-  flameStyle.animation = "explode 1.2s";
-  await delay(1200);
-  flameStyle.animation = "";
+async function animateSubmitButton() {
+  const btnStyle = document.getElementById("query-run-button").style;
+  btnStyle.animation = "wiggle 1s";
+  await delay(1900);
+  btnStyle.animation = "";
 }
 
 function preserveTaskBoxHeight() {
