@@ -410,4 +410,4 @@ Sound effects have been obtained from freesound.org under the Creative Commons L
 
 - book_page_turn: sound by SmartWentCody, original title "Book Page Turning.wav", license https://creativecommons.org/licenses/by/3.0/, *edited version*
 - right_answer: sound by rhodesmas, original title "Coins Purchase 4.wav", license https://creativecommons.org/licenses/by/3.0/
-- wrong_answer: sound by RICHERlandTV, original title "Magic.wav", license https://creativecommons.org/licenses/by/3.0/, *edited version* 
+- wrong_answer: sound by Sjonas88, original title "fail-sound.wav", license https://creativecommons.org/publicdomain/zero/1.0/, *edited version* 
