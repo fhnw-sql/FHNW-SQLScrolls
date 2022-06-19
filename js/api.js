@@ -49,7 +49,9 @@ const API = {
       "username": authCookie.mail,
       "uid": authCookie.user,
       "pid": authCookie.pid,
-      "org": authCookie.org
+      "org": authCookie.org,
+      "givenname": authCookie.givenname,
+      "surname": authCookie.surname
     }
 
     return new Promise((resolve, reject) => {

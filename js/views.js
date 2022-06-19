@@ -657,8 +657,8 @@ class ProfileView extends View {
 
     if (API.isSWITCHaaiLogin()) {
       extraData += ` </br> (user ${userProfile.uid} at ${userProfile.org})`;
+      extraData += ` </br> ${userProfile.givenname} ${userProfile.surname}`;
     }
-
     document.getElementById("logged-in-as").innerHTML = i18n.getWith("logged-in-as", [userProfile.username + extraData]);
     document.getElementById("task-completion-grid").innerHTML = this.renderTaskCompletionGrid();
 
