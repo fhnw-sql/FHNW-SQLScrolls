@@ -53,7 +53,7 @@ router.post("/authenticate", reqBodyValidator(authenticatePOST), async function 
 router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST), async function ({ headers: headers, body: value }, res, next) {
 
 
-  //Compare cookie from frontend with the one from backend
+  // Parse the backend cookie
   let authCookie=null
   let parsedCookie = {}
   try {
@@ -67,7 +67,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
   }
 
 
-  // Compare cookies
+  // Compare cookie from frontend (value) with the one from backend
   for (const field of ["username", "uid", "pid", "org"]) {
       if ((!parsedCookie[field]) || (parsedCookie[field] !== value[field])){
         console.log("auth COOKIES", headers.cookie)
@@ -96,6 +96,13 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
               console.error("User data icorrect (different from registration) user = ", user[field], " value = ", value[field])
               return next("User data icorrect (different from registration)");
           }
+      }
+    }
+    // check display name changes
+    for (const field of ["givenname", "surname"]) {
+      if ((!user[field]) ||  (user[field] != value[field])){ 
+        user[field] = value[field]
+        needUpdate = true
       }
     }
 

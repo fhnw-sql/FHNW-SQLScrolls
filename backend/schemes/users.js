@@ -41,7 +41,9 @@ const userSchemas = {
       uid: Joi.string().required(),
       pid: Joi.string().required(),
       org: Joi.string().required(),
-    }),
+      givenname: Joi.string().optional(),
+      surname: Joi.string().optional(),
+   }),
 };
 
 module.exports = userSchemas;
