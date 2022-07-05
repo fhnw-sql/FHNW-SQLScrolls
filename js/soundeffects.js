@@ -27,6 +27,9 @@ function toggleMute(){
 }
 
 function playSoundById(id) {
+    // this is a hack to fix the delay in safari - see https://stackoverflow.com/a/54119854
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audioCtx = new AudioContext();
     var audio = document.getElementById(id);
     audio.play();
 }
