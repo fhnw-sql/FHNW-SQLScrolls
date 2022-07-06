@@ -1185,7 +1185,6 @@ body {
 }
 
 #task-view {
-  overflow: scroll;
   margin-top: 2rem !important;
 }
 
