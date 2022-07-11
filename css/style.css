@@ -1388,7 +1388,6 @@ body {
 .task-container {
   padding-bottom: 2.5rem;
   padding-top: 2rem;
-  overflow: auto;
 }
 
 #query-in-table {
