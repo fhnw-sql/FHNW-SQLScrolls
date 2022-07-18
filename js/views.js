@@ -694,6 +694,11 @@ class ProfileView extends View {
     saveFile("sqltrainer-sent-answers.json", JSON.stringify(data.history));
   }
 
+  async generateCertificate() {
+    const data = await API.generateCertificate();
+    console.log("generateCertificate", data)
+  }
+
   // Graph is currently not rendered due to a bug in displaying the data
   async renderGraph() {
     const loadingIcon = document.querySelector(".graph-loading");

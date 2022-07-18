@@ -237,4 +237,24 @@ const API = {
       xhr.send();
     });
   },
+  generateCertificate() {
+    console.log('** Generate Certificate **')
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          if (this.status === 200) {
+            var jsonObj = JSON.parse(this.response);
+            resolve(jsonObj);
+          } else {
+            reject(`Bad response code '${xhr.status}' for user restart`);
+          }
+        }
+      };
+      xhr.open("PATCH", `${this.ADDRESS}/users/self/certificate`, true);
+      xhr.setRequestHeader("Authorization", "Bearer " + this.token);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.send(body=JSON.stringify({progression: progression}));
+    });
+  },
 };
