@@ -8,6 +8,7 @@ const { ObjectID } = require("mongodb");
 const postmark = require("postmark");
 const reqBodyValidator = require("../middlewares/reqBodyValidator");
 const { registerPOST, authenticatePOST, authenticateSWITCHaaiPOST, answerSqlPATCH, recoverPOST, resetPOST } = require("../schemes/users");
+const { checkIfFinished, checkIfNew, generateCertificate } = require("../utils/certificate");
 
 const cors = require("cors");
 
@@ -140,6 +141,39 @@ router.get("/self", async function (req, res, next) {
   const user = await users.findOne({ _id: new ObjectID(req.user.userId) });
   const { password, ...retVal } = user;
   return res.json(retVal);
+});
+
+// /users/certificate
+router.patch("/self/certificate", async function (req, res, next) {
+  // Get Users Certificate if finished Game
+  const users = db.get().collection("users");
+  const user = await users.findOne({ _id: new ObjectID(req.user.userId) });
+
+  try {
+    
+    let progression = req.body.progression
+    if (! checkIfFinished(user, progression)){ return res.json({'success': false, 'reason': "GAME_NOT_FINISHED"})}
+    if (! checkIfNew(user, progression)){ return res.json({'success': false, 'reason': "CERTIFICATE_ALREADY_GENERATED"})}
+    let newCertificate = generateCertificate(user, progression)
+    console.log(newCertificate)
+
+    // Add certificate to user
+    users
+    .findOneAndUpdate(
+      { _id: user._id },
+      { $addToSet: { [`certificates`]: newCertificate } },
+      { returnOriginal: false }
+    )
+    .then( v => {
+      return res.json(newCertificate);
+    })
+    .catch((err) => next(err));
+
+  } catch (err){
+    console.error("Error parsing progression:", err); 
+    next(err)
+  }
+
 });
 
 // /users/self/answer_sql
