@@ -930,7 +930,20 @@
                                 </div>
                                 <div class="col-12" style="margin-top: 0.5rem">
                                     <button class="btn btn-rune" data-toggle="modal" href="#confirmModal">
-                                        <i class="fa fa-trash"></i> <span class="i18n-delete-score" id="mute-text"></span>
+                                        <i class="fa fa-trash"></i> <span class="i18n-delete-score" id="mute-text">
+                                    </button>
+                                </div>
+                                <div class="col-12" style="margin-top: 0.5rem">
+                                    <span class="i18n-your-certificates" style="margin-right: 0.3rem"></span>
+                                    <select class="select select-rune" name="select-certificates" id="select-certificates">
+                                    </select> 
+                                    <button class="btn-rune btn-rune-icon" onclick="Views.PROFILE.showCertificate()">
+                                        <i class="fa fa-eye"></i></span>
+                                    </button>
+                                </div>
+                                <div class="col-12"style="margin-top: 0.5rem">
+                                    <button class="btn btn-rune" onclick="Views.PROFILE.generateCertificate()">
+                                        <i class="fa fa-file-certificate"></i> TEST
                                     </button>
                                 </div>
                                 <!-- graph is currently not rendered -->

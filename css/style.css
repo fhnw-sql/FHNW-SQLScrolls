@@ -783,6 +783,23 @@ th {
   box-shadow: 0 0 0 0.2rem var(--col-gold-25);
 }
 
+
+.select-rune {
+  background-color: transparent;
+  color: var(--col-gold-70);
+  border-style: solid;
+  border-color: var(--col-gold-60);
+  border-width: 1px;
+}
+
+.select-rune option{
+  color: black;
+}
+
+.btn-rune-icon {
+border-style: none;
+}
+
 /* Inventory ------------------- */
 
 #inventory-container {

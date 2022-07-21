@@ -146,7 +146,10 @@ for (let entry of Object.entries({
   "delete-score-confirm-text1": "All collected stars are lost by deleting the score, and you have to start the game from the beginning. Are you sure you want to continue?",
   "delete-score-confirm-text2": 'Please note that your query history will still be used for data evaluation, further described in the <a href="https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game.github.io/blob/main/privacy.md" target="_blank" style="color: var(--col-button-blue);">data collection </a>.',
   "delete-score-confirm-button1": "Cancel",
-  "delete-score-confirm-button2": '<i class="fa fa-exclamation-triangle" style="color: #920f18"></i> Delete score'
+  "delete-score-confirm-button2": '<i class="fa fa-exclamation-triangle" style="color: #920f18"></i> Delete score',
+  "your-certificates": "Certificates:",
+  "no-certificates": "No certificates yet",
+  "certificates-stars": "stars",
 })) {
   i18n[entry[0]] = entry[1];
 }

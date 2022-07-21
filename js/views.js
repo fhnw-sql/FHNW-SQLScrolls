@@ -661,6 +661,7 @@ class ProfileView extends View {
     }
     document.getElementById("logged-in-as").innerHTML = i18n.getWith("logged-in-as", [userProfile.username + extraData]);
     document.getElementById("task-completion-grid").innerHTML = this.renderTaskCompletionGrid();
+    document.getElementById("select-certificates").innerHTML = this.renderSelectCertificatesList(userProfile.certificates);
 
     const trigger = document.activeElement;
     document.getElementById(this.id).focus();
@@ -689,9 +690,32 @@ class ProfileView extends View {
     return render + "</tr></tbody>";
   }
 
+  renderSelectCertificatesList(certificates){
+    console.log(certificates)
+    if (certificates && certificates.length > 0) {
+      let options = ""
+      for (let certificate of certificates) {
+        let date = new Date(certificate.date).toISOString().split('T')[0]
+        options += `<option value="${certificate._id}">${date} - ${certificate.stars} ${i18n.get("certificates-stars")}</option>\n`
+      }
+      return options
+    }     
+    return '<option value="">' + i18n.get("no-certificates")+'</option>';
+  }
+
   async downloadData() {
     const data = await API.self();
     saveFile("sqltrainer-sent-answers.json", JSON.stringify(data.history));
+  }
+
+  async showCertificate(){
+    const data = await API.self();
+    const certificates = data.certificates;
+    const selectedId = document.getElementById("select-certificates").value
+
+    if (certificates && selectedId) {
+      alert("show certificate " + selectedId)
+    }
   }
 
   async generateCertificate() {
