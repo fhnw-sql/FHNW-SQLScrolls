@@ -714,7 +714,34 @@ class ProfileView extends View {
     const selectedId = document.getElementById("select-certificates").value
 
     if (certificates && selectedId) {
-      alert("show certificate " + selectedId)
+      let selectedCertificate = undefined
+
+      for (let certificate of certificates) {
+        if (certificate._id == selectedId) selectedCertificate = certificate
+      }
+      if (selectedCertificate) {
+        console.log("show certificate " + selectedId + JSON.stringify(selectedCertificate))
+
+        $.get('certificate.html', null, function(text){
+
+          let mywindow = window.open('', 'PRINT', 'height=650,width=800,top=100,left=150');
+          mywindow.document.write(text);
+
+          mywindow.document.getElementById("p-certificate-data").innerHTML = JSON.stringify(selectedCertificate);
+
+          mywindow.document.getElementById("certificate-id").innerHTML = selectedCertificate._id;
+          mywindow.document.getElementById("certificate-name").innerHTML = selectedCertificate.name;
+          mywindow.document.getElementById("certificate-email").innerHTML = selectedCertificate.email;
+          mywindow.document.getElementById("certificate-date").innerHTML = new Date(selectedCertificate.date).toISOString().split('T')[0];
+          mywindow.document.getElementById("certificate-stars").innerHTML = selectedCertificate.stars;
+
+          mywindow.document.close(); // necessary for IE >= 10
+          mywindow.focus(); // necessary for IE >= 10*/
+        
+          mywindow.print();
+          mywindow.close();
+        });
+      }
     }
   }
 

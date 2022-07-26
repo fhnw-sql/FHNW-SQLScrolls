@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+</head>
+<style>
+body {
+    background-color: #fff2a2;  
+    background-image: url('./img/scroll-texture-seamless.png');
+}
+
+div {
+	background-color: white;
+
+    padding: 20px;
+	border-style: groove;
+	border-width: 5px;
+    width: 900px;
+}
+
+h1 {
+  color: black;
+  text-align: center;
+}
+
+span.data {
+  font-family: verdana;
+  font-size: 14px;
+}
+
+p.certificate-label{
+  font-size: 16px;
+  font-style: bold;
+
+}
+
+p.raw {
+  font-family: monospace;
+  font-style: italic;
+  font-size: 10px;
+}
+
+img.scrolls-icon {
+    border-bottom-style: solid;
+    border-bottom-width: 0px;
+    margin-bottom: -20px;
+}
+
+</style>
+<title> CERTIFICATE OF COMPLETION </title>
+</head>
+    <body>
+        <h1> SQL Scrolls Certificate <img src="./img/scrolls.png" height="60" class="scrolls-icon"/> </h1>  
+        <div id="div-certificate-template">
+            <h3>This document certifies the completion of the SQL learning game SQL Scrolls,
+            developed by the University of Applied Sciences and Arts Northwestern Switzerland (FHNW).
+            </h3>
+            <ul>
+                <li> 
+                    <p class="certificate-label"><b>Certificate Id:</b> <span class="data" id="certificate-id">CERT ID</span></p>
+                </li>
+            </ul>
+            <ul>
+                <li> 
+                    <p class="certificate-label"><b>Name:</b> <span class="data" id="certificate-name">NAME SURNAME</span></p>
+                </li>
+            </ul>
+            <ul>
+                <li> 
+                    <p class="certificate-label"><b>E-Mail:</b> <span class="data" id="certificate-email">EMAIL</span></p>
+                </li>
+            </ul>
+            <ul>
+                <li> 
+                    <p class="certificate-label"><b>Date:</b> <span class="data" id="certificate-date">DATE</span></p>
+                </li>
+            </ul>
+            <ul>
+                <li> 
+                    <p class="certificate-label"><b>Tasks Completed:</b> <span class="data" id="certificate-stars">STARS</span></p>
+                </li>
+            </ul>
+        </div>
+
+		<p class="raw" id="p-certificate-data">{raw data certificate}</p>
+    </body>
+</html>
