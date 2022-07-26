@@ -367,7 +367,7 @@ class TaskView extends View {
   getTaskBookName(){
     for (let group of taskGroups.asList()) {
       for (let taskName of group.tasks) {
-        console.log(taskName, this.currentTask.id, taskName === this.currentTask.id)
+        // console.log(taskName, this.currentTask.id, taskName === this.currentTask.id)
         if (taskName === this.currentTask.id) {
             return(getItem(group.book).shortName)
         }
@@ -1215,7 +1215,7 @@ class EndTextView extends View {
     await showElementImmediately(this.id);
     document.getElementById(this.id).focus();
     await BookMenuButton.hide();
-    await ProfileButton.hide();
+    await ProfileButton.show();
     await fadeFromBlack();
     endScreenAnimation();
   }

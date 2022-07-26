@@ -49,6 +49,7 @@ async function runSQL(context, query, taskType = "SQL", statements = "") {
     } else {
       db.run(context);
       db.run(statements);
+      // console.log(query)
       let result =  db.exec(query);
       return result
     }

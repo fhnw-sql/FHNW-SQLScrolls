@@ -47,10 +47,10 @@ async function load(completedTaskIDs) {
       Views.SHOW_ITEM.show("item-00");
     }
     await inventory.addItems(taskGroups.asList().map((taskGroup) => taskGroup.item.id));
-    await inventory.removeItem("task-group-X");
-    if (unlockedTaskGroups.includes("X")) {
-      await inventory.unlock("item-999");
-    }
+    // await inventory.removeItem("task-group-X");
+    // if (unlockedTaskGroups.includes("X")) {
+    //   await inventory.unlock("item-999");
+    // }
     //  await inventory.addItem("item-999"); -> Endgame isn't necessary for the study
   }
 
@@ -59,9 +59,9 @@ async function load(completedTaskIDs) {
       DISPLAY_STATE.bookMenuUnlocked = false;
       BookMenuButton.hide();
     }
-    if (unlockedTaskGroups.includes("X")) {
-      DISPLAY_STATE.endgame = true;
-    }
+    // if (unlockedTaskGroups.includes("X")) {
+    //   DISPLAY_STATE.endgame = true;
+    // }
     if (taskGroups.getCompletedTaskCount() >= taskGroups.getTaskCount()) {
       DISPLAY_STATE.gameCompleted = true;
     }

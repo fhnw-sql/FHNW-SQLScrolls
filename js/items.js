@@ -19,16 +19,16 @@ async function loadItems() {
       accessByTab: true,
       onShow: () => inventory.removeItem("item-00"),
     }),
-    new ImageItem({
-      id: `item-999`,
-      url: "img/questionmark.png",
-      alt: "i18n-describe-questionmark",
-      unlocks: [],
-      newItem: false,
-      unlocked: false,
-      accessByTab: true,
-      onclick: "Views.FLAME_ANIMATION.startEndGame()",
-    }),
+    // new ImageItem({
+    //   id: `item-999`,
+    //   url: "img/questionmark.png",
+    //   alt: "i18n-describe-questionmark",
+    //   unlocks: [],
+    //   newItem: false,
+    //   unlocked: false,
+    //   accessByTab: true,
+    //   onclick: "Views.FLAME_ANIMATION.startEndGame()",
+    // }),
   ]) {
     items[item.id] = item;
   }

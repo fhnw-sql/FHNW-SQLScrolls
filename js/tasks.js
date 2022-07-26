@@ -225,8 +225,8 @@ class Task extends ItemType {
                 const resultSets = await runSQL(test.context, query, this.type, test.sqlStatements);
                 if (resultSets.length) {
                     const table = Table.fromResultSet("", resultSets[0]); // i18n.get("i18n-table-result")
-                    console.log("table = ", table)
-                    console.log("wanted = ", wanted)
+                    // console.log("table = ", table)
+                    // console.log("wanted = ", wanted)
                     const correct = table.isEqual(wanted, test.strict);
                     results.push(new Result({source: test, correct, table, wanted}));
                 } else {
@@ -296,10 +296,10 @@ class Task extends ItemType {
 
         await awaitUntil(() => !particle.animated);
         await Views.TASK.updateTaskCompleteMarker();
-        if (DISPLAY_STATE.endgame) {
-            await Views.TASK.updateFlame();
-            await Views.MAP.render();
-        }
+        // if (DISPLAY_STATE.endgame) {
+        //     await Views.TASK.updateFlame();
+        //     await Views.MAP.render();
+        // }
         StarCounter.shake();
         showElement("task-complete-notification");
         showInventory();
@@ -649,9 +649,11 @@ async function runQueryTests(allowCompletionAndStore) {
 
     if (API.loginStatus === LoginStatus.LOGGED_IN && allCorrect) {
         // Display Endgame dialog on last question submission & hide next button
-        if (tasks.asList().filter(t => t.completed).length >= tasks.asList().length) {
+        if ((taskGroups.getCompletedTaskCount() + 1 >= taskGroups.getTaskCount()) && !DISPLAY_STATE.gameCompleted){
             if (allowCompletionAndStore) {
                 await Views.TASK.currentTask.completeTask();
+                let certRes = await API.generateCertificate();
+                DISPLAY_STATE.gameCompleted = true
                 await changeView(Views.END_TEXT);
             }
             await hideElementImmediately("task-next-button");
