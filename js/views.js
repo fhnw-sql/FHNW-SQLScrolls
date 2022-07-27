@@ -724,7 +724,7 @@ class ProfileView extends View {
 
         $.get('certificate.html', null, function(text){
 
-          let mywindow = window.open('', 'PRINT', 'height=650,width=800,top=100,left=150');
+          let mywindow = window.open('', 'CERTIFICATE', 'height=850,width=1200,top=100,left=150');
           mywindow.document.write(text);
 
           mywindow.document.getElementById("p-certificate-data").innerHTML = JSON.stringify(selectedCertificate);
@@ -737,9 +737,17 @@ class ProfileView extends View {
 
           mywindow.document.close(); // necessary for IE >= 10
           mywindow.focus(); // necessary for IE >= 10*/
-        
-          mywindow.print();
-          mywindow.close();
+
+          var element = mywindow.document.body;
+          var opt = {
+            filename: `sqlscrolls_certificate_${selectedCertificate._id}.pdf`,
+            margin:       0,
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+          };
+
+          // New Promise-based usage:
+          html2pdf().set(opt).from(element).save();
+
         });
       }
     }
