@@ -31,5 +31,7 @@ function playSoundById(id) {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     const audioCtx = new AudioContext();
     var audio = document.getElementById(id);
-    audio.play();
+    if (audio) {
+        audio.play();
+    }
 }
