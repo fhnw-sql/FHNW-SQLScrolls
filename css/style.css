@@ -1400,6 +1400,12 @@ body {
   color: var(--col-good-blue-80);
   border-color: var(--col-good-blue-50) !important;
   height: 6rem;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 .task-container {
@@ -1662,6 +1668,20 @@ body {
 
 .book-open.music2-book {
   border-color: var(--col-music2-blue);
+}
+
+.book.json-book {
+  border-color: #161616;
+}
+
+.book.json-book::after {
+  background: url("../img/json-background.png");
+  background-size: cover;
+  border-color: #141414;
+}
+
+.book-open.creation-book {
+  border-color: #313131;
 }
 
 .book.orange-book {
