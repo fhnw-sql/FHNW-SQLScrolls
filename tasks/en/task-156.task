@@ -1,0 +1,33 @@
+METADATA {
+    id: task-156
+    name: First Preference
+    color: blue
+    info: JSON operators
+    keywords: JSON
+    level: 5
+}
+
+DESCRIPTION {
+    List of first preference of users
+}
+
+ANSWER { 
+    SELECT id, name, interests->'likes'->>'[0]' as first_preference FROM user;
+}
+
+TEST {
+    
+    TABLE {
+        User
+        id|name|interests
+        1|John|{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}
+        2|Kate|{"likes": ["reading", "swimming"], "dislikes": ["skating"]}
+        3|Jim|{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}
+    }
+
+    RESULT {
+        1|John|skating
+        2|Kate|reading
+        3|Jim|reading
+    }
+}

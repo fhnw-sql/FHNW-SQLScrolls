@@ -464,7 +464,12 @@ class Table {
             const value = firstRow[i];
             //TODO: handle nulls
             if (isNaN(value)) {
-                columnTypes[i] = "TEXT";
+                try {
+                    JSON.parse(value);
+                    columnTypes[i] = "JSON";
+                } catch (e) {
+                    columnTypes[i] = "TEXT";
+                }              
             } else {
                 columnTypes[i] = "NUMBER";
             }
@@ -482,7 +487,7 @@ class Table {
             const valuesWithTypes = [];
             for (let i = 0; i < row.length; i++) {
                 // Adds 'value' if TEXT and escapes ' if necessary, otherwise value (assuming number)
-                valuesWithTypes.push((columnTypes[i] === "TEXT") && (row[i] != null) ? `'${row[i].split("'").join("\\''")}'` : row[i]);
+                valuesWithTypes.push(((columnTypes[i] === "TEXT")||(columnTypes[i] === "JSON"))&& (row[i] != null) ? `'${row[i].split("'").join("\\''")}'` : row[i]);
             }
             // example: INSERT INTO Table (col1, col2) VALUES ("value", 0);
             queries.push(`INSERT INTO ${this.name} (${this.header.join(",")}) VALUES (${valuesWithTypes.map(v => v == null ? 'null': v).join(",")});`);

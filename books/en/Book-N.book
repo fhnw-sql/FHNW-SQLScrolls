@@ -1,0 +1,170 @@
+METADATA {
+    id: Book-N
+    name: JSON Book 
+    title: NoSQL 
+    author: Jeson
+    color: json
+}
+
+
+PAGE {
+    
+    <h2> NoSQL 🎵</h2>
+   JSON functions in SQLite
+    </br>
+
+}
+
+PAGE {
+    <h3> User Data Table </h3>
+
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            SELECT * FROM user;
+        }
+    }
+}
+
+PAGE {
+    <h3> Operators </h3>
+
+    We can also the operators to get specific fields like queries.
+
+    List of first preference of users
+
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            select id, name, 
+                json_extract(interests, '$.likes[0]') as first_preference
+            from user;
+        }
+    }
+}
+
+
+PAGE {
+
+    Same exercise as before using the standard notation (compatible with mySQL and Postgres)
+
+    List of first preference of users
+
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            select id, name, 
+                interests->'likes'->>'[0]' as first_preference
+            from user;
+        }
+    }
+}
+
+PAGE {
+    <h3> Internal representation </h3>
+
+    SQLite supports JSON operators but the values are actually stored as text, even if you define the column type as 'json'.
+
+    In the example below, the field interests is defined as 'json'.
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            PRAGMA table_info([user]);
+        }
+    }
+}
+
+PAGE {
+
+    If you use the typeof method to show the actual affinity type of the column, the result is 'text'. 
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            SELECT typeof(interests) FROM user;
+        }
+    }
+}
+
+
+PAGE {
+
+    Since json is internally ou can manipulate and compare those values as usual strings as well as use the json operators.
+
+    In the example below, we use a string to do a normal text comparison on the interests field that was defined as json.
+
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            SELECT name, interests FROM user where interests = '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}';
+        }
+    }
+}
+
+PAGE {
+
+    Alternatively, you can use the operator 'json' to convert to json before performing a comparison. 
+    This method returns a an error if the JSON is not well formed and also removes unnecesary spaces.
+
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            SELECT name, interests FROM user where json(interests) = json('  {   "likes"  : [ "reading",  "swimming"  ],  "dislikes" : ["skating"] }');
+        }
+    }
+}
