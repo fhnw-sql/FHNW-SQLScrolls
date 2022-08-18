@@ -554,7 +554,8 @@ class ReadBookView extends View {
 
   async open() {
     const trigger = document.activeElement;
-    document.getElementById(this.id).focus();
+    console.log(this.id, document.getElementById(this.id))
+    if (!DISPLAY_STATE.editMode)  document.getElementById(this.id).focus();
     await showModal("#" + this.id, DISPLAY_STATE.previousSecondaryView, trigger);
   }
 
@@ -1197,7 +1198,7 @@ class FlameAnimationView extends View {
   async startEndGame() {
     await changeSecondaryView(Views.NONE);
     await changeView(Views.FLAME_ANIMATION);
-    await inventory.setAsViewed("item-999");
+    // await inventory.setAsViewed("item-999");
   }
 }
 

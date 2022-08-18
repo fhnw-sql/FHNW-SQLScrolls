@@ -16,12 +16,17 @@ DISPLAY_STATE = {
   bookMenuUnlocked: false,
   endgame: false,
   gameCompleted: false,
+  editMode: false,
 
   currentView: Views.LOGIN,
   secondaryView: Views.NONE,
   previousView: Views.NONE,
   previousSecondaryView: Views.NONE,
 };
+
+const inStoreMode = sessionStorage.getItem("mode");
+DISPLAY_STATE.editMode = inStoreMode ? (inStoreMode == "edit"): false;
+console.log("DISPLAY_STATE.editMode", DISPLAY_STATE.editMode)
 
 function registerListeners() {
   window.addEventListener("error", (event) => console.error(event.error));
@@ -68,7 +73,7 @@ async function hideInventory() {
 }
 
 // default the inventroy is hidden
-hideInventory();
+if (!DISPLAY_STATE.editMode) hideInventory();
 
 function showError(error) {
   console.error(error);
@@ -198,7 +203,7 @@ async function loadGameElements(linesOfProgressionJs) {
     }
     inventory.addItems(taskGroups.asList().map((taskGroup) => taskGroup.item.id));
     inventory.removeItem("task-group-X");
-    inventory.addItem("item-999");
+    // inventory.addItem("item-999");
   }
 
   preventLevelIdDuplicates();
@@ -262,7 +267,7 @@ async function beginGame() {
     // Default Middleware routing
     await routeActionMiddleware("", async (urlParams) => {
       API.loginExisting();
-      if (API.loginStatus === LoginStatus.LOGGED_IN) {
+      if (API.loginStatus === LoginStatus.LOGGED_IN && (!DISPLAY_STATE.editMode) ) {
         loadCompletionFromQuizzes(); // async load of task completion, see DISPLAY_STATE.saveLoaded
         changeView(Views.LOADING); // LOADING view awaits DISPLAY_STATE.saveLoaded and DISPLAY_STATE.loaded are true.
         await showElementImmediately("counter-container");
