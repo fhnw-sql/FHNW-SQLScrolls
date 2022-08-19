@@ -1,6 +1,6 @@
 METADATA {
     id: task-156
-    name: First Preference
+    name: Valid Preferences
     color: blue
     info: JSON operators
     keywords: JSON
@@ -8,11 +8,15 @@ METADATA {
 }
 
 DESCRIPTION {
-    List of first preference of users
-}
+    The users database has been corrupted and some records are no longer valid. 
+    Find the users with still have well-formed JSON interests information.
+
+    💡 Tip: Use the operator json_valid to check the correctness of a JSON field.
+
+ }
 
 ANSWER { 
-    SELECT id, name, interests->'likes'->>'[0]' as first_preference FROM user;
+    SELECT id, name FROM user where json_valid(interests)=1;
 }
 
 TEST {
@@ -21,13 +25,13 @@ TEST {
         User
         id|name|interests
         1|John|{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}
-        2|Kate|{"likes": ["reading", "swimming"], "dislikes": ["skating"]}
+        2|Kate|{"likes": ["reading", "swimming", "dislikes": ["skating"]}
         3|Jim|{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}
+        4|Mark|{"likes": ["reading, "swimming"], "dislikes": ["cooking"]}
     }
 
     RESULT {
-        1|John|skating
-        2|Kate|reading
-        3|Jim|reading
+        1|John
+        3|Jim
     }
 }

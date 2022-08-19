@@ -8,7 +8,9 @@ METADATA {
 }
 
 DESCRIPTION {
-    List of how many preferences has each user
+    List of how many preferences has each user.
+
+    💡 Tip: Use the json_array_length operator to get the length of a JSON array field.
 }
 
 ANSWER { 
