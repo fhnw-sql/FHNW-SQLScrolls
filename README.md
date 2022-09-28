@@ -33,13 +33,47 @@ The game is designed to support the latest web browsers. It supports the current
 
 ## 🔮 Deployment
 
-To deploy the Frontend one can consider one of the mentioned ways below: Docker, BareboneNodeJS, We recommend to use
-GitHub Pages or Docker Compose for enterprise grade. The illustration below shows a quick overview of the recommended
+To deploy the Frontend one can consider one of the mentioned ways below: Docker, BareboneNodeJS, We recommend to use Docker Compose. The illustration below shows a quick overview of the recommended
 solution.
 
 ![Architecture-Overview](stg-architecture.png)
 
-### 🖼️ Frontend Deployment
+### ⚡ Recommended Solution Deployment (Docker Compose) 
+
+The following steps assume that a basic understanding of docker already exists. If this is not the case, the following
+book is
+recommended [Docker: Up & Running: Shipping Reliable Containers in Production](https://www.oreilly.com/library/view/docker-up/9781492036722/)
+.
+
+To spin-up the whole solution on docker. The repository provides a [docker-compose yml file](https://gitlab.fhnw.ch/elzbieta.pustulka/FHNW-SQL-Training-Game.github.io/-/blob/main/docker-compose.yml). It includes the setup for the
+backend API, frontend interface and the databaseMongoDB container. 
+
+
+- Set up the environment user variables (may require restarting your machine depending on your OS):
+```
+ API_URL=http://localhost:3000 
+ IO_URL=http://localhost:80 
+ POSTMARK_API_KEY=blank
+ FROM_SENDER=stg@github.io
+
+ ```
+
+- Install [docker desktop](https://www.docker.com/products/docker-desktop/) (includes docker compose, recommended if you are on windows) or docker and docker compose as commandline (linux)
+
+- Clone repos both gitlab repos in the same root directory
+https://gitlab.fhnw.ch/elzbieta.pustulka/FHNW-SQL-Training-Game.github.io
+https://gitlab.fhnw.ch/elzbieta.pustulka/FHNW-SQL-Training-Game-API 
+
+- Go to a terminal, change directory to the root of the frontend repository (FHNW-Training-Game.github.io) and type the command (option -d at the end if you want it to run in the background): 
+```
+docker-compose up
+```
+
+- Open a browser and go to http://localhost:80 (recommended to open the developer tools to report the error in case there are any issues)
+
+For further configuration details consider the [docker-compose file](https://gitlab.fhnw.ch/elzbieta.pustulka/FHNW-SQL-Training-Game.github.io/-/blob/main/docker-compose.yml)directly.
+
+### 🖼️ Frontend Deployment (advanced)
 
 #### 🐋 Docker - Frontend
 
@@ -61,25 +95,6 @@ The API is now exposed on the PORT 80 on the docker host.
 To deploy the project on github pages. Simply fork the repository and name it `{your-gh-username}.github.io` and do the
 according configruation within `configuration.js`. More information concerning GH Pages can be
 found [GitHub Pages](https://pages.github.com/)
-
-### ⚡ Solution Deployment (Docker Compose)
-
-The following steps assume that a basic understanding of docker already exists. If this is not the case, the following
-book is
-recommended [Docker: Up & Running: Shipping Reliable Containers in Production](https://www.oreilly.com/library/view/docker-up/9781492036722/)
-.
-
-To spin-up the whole solution on docker. The repository provides a docker-compose file. It includes the setup for the
-API, Frontend and the MongoDB container. To use it consider the example below.
-
-```
- API_URL=http://localhost:3000 
- POSTMARK_API_KEY={API_KEY} 
- FROM_SENDER=stg@github.io 
- docker-compose up 
-```
-
-For further configurations consider the docker-compose file directly.
 
 ## 📚 Books syntax
 
