@@ -95,7 +95,7 @@ class Result {
                     <div class="tables">
                         <h4 class="col-yellow">${i18n.get("query-results")}</h4><hr>
                             <div class="table-paper">
-                                ${this.table.renderAsTable(false)}
+                                ${this.table.renderAsTable(true)}
                                 <p class="col-red">${i18n.get("incorrect")}</p>
                             </div>
                     </div>

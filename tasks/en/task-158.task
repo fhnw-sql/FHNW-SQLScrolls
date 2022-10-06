@@ -1,22 +1,22 @@
 METADATA {
     id: task-158
-    name: Leisure time
+    name: Activities time
     color: blue
     info: JSON operators
     keywords: JSON
-    level: 5
+    level: 4
 }
 
 DESCRIPTION {
     The table shows the leisure activities of different users and how much time in hours they dedicate to each activity.
-    Find out how many hours each user dedicates to leisure and list the results by decreasing time.
+    List the all the activites and the user (just the name) that performs it.
 
-    💡 Tip: Use the operator json_each(user.activities) in the FROM clause that will return you the column atom and then group by name.
+    💡 Tip: Use the operator json_each(user.activities) in the FROM clause that will return you the column <b>atom</b>. 
 
 }
 
 ANSWER { 
-    select user.id, name, SUM(atom) as leisure_time from user, json_each(user.activities) GROUP BY name ORDER BY leisure_time desc
+    SELECT id, name, atom FROM user, json_each(user.activities) 
 }
 
 TEST {
@@ -30,8 +30,16 @@ TEST {
     }
 
     RESULT {
-        1|John|11.5
-        3|Jim|8.5
-        2|Kate|3.5	
+        John|8
+        John|1
+        John|2
+        John|0.5
+        Kate|2
+        Kate|1
+        Kate|0.5
+        Jim|4
+        Jim|1
+        Jim|2
+        Jim|1.5
     }
 }

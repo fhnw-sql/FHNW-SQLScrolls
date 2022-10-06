@@ -5,7 +5,7 @@ body {
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --book-font: "Aclonica", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --code-font: "Space Mono", monospace;
+  --code-font: "Consolas", monospace;
 
   font-family: var(--main-font);
   height: 100vh;
