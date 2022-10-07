@@ -1,0 +1,38 @@
+METADATA {
+    id: task-167
+    name: Secure Data
+    color: blue
+    info: JSON operators
+    keywords: JSON
+    level: 4
+}
+
+DESCRIPTION {
+    The customer data needs to be provided to a shipping company.
+    The age and the password of the user are confidential so it needs to be removed before providing it.
+    All the other fields of the data column, the credentials with an email need to be in the result.
+
+    💡 Tip: Use the operator json_remove(json, field1, field2, ...)  deletes one or more fields from a JSON object
+
+}
+
+ANSWER { 
+    SELECT json_remove(data, '$.credentials.password', '$.age')
+    FROM customer
+}
+
+TEST {
+    TABLE {
+        Customer
+        id|name|data
+        1|John|{"address": "Elm Street", "phone": "938423984", "age": 33, "credentials": {"email": "jonnhy@mail.com", "password": "sfasdf"}}
+        2|Kate|{"address": "4th Avenue", "phone": "784584567", "age": 62, "credentials": {"email": "kate22@netsy.com", "password": "cvbxvb"}}
+        3|Jim|{"address": "Star Square", "phone": "134313443", "age": 51, "credentials": {"email": "jimmy@tech.com", "password": "bzcbvb"}}
+    }
+
+    RESULT {
+        John|{"address":"Elm Street","phone":"938423984","credentials":{"email":"jonnhy@mail.com"}}
+        Kate|{"address":"4th Avenue","phone":"784584567","credentials":{"email":"kate22@netsy.com"}}
+        Jim|{"address":"Star Square","phone":"134313443","credentials":{"email":"jimmy@tech.com"}}    
+    }
+}
