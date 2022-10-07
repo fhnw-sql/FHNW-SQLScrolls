@@ -16,7 +16,7 @@ DESCRIPTION {
 }
 
 ANSWER { 
-    SELECT id, name, atom FROM user, json_each(user.activities) 
+    SELECT name, atom FROM user, json_each(user.activities) 
 }
 
 TEST {

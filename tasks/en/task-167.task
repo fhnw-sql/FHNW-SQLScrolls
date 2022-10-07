@@ -17,7 +17,7 @@ DESCRIPTION {
 }
 
 ANSWER { 
-    SELECT json_remove(data, '$.credentials.password', '$.age')
+    SELECT name, json_remove(data, '$.credentials.password', '$.age')
     FROM customer
 }
 
