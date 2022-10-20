@@ -16,14 +16,21 @@ router.use(cors())
 
 // /users/register
 router.post("/register", reqBodyValidator(registerPOST), async function ({ body: user }, res, next) {
+
   // Get Users Collections
   const users = db.get().collection("users");
+
+  // Check if user is form the FHNW
+  if ((user.username.endsWith("@fhnw.ch") || (user.username.endsWith(".fhnw.ch")))) return next("FHNW users shoud use institutional login!");
 
   // Check if user already exists
   if (await users.findOne({ username: user.username })) return next("User already exists!");
 
   // Hash password
   user.password = bcrypt.hashSync(user.password, 10);
+
+  // Add registration date
+  user.registrationDate = new Date()
 
   // Insert into Database
   users
@@ -37,6 +44,7 @@ router.post("/register", reqBodyValidator(registerPOST), async function ({ body:
 
 // /users/authenticate
 router.post("/authenticate", reqBodyValidator(authenticatePOST), async function ({ body: value }, res, next) {
+
   // Get Users Collections
   const users = db.get().collection("users");
   const user = await users.findOne({ username: value.username });
@@ -120,6 +128,8 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
   } 
   else {
     value.password = null
+    // Add registration date
+    value.registrationDate = new Date()
     // register user
     await users
     .insertOne(value)
