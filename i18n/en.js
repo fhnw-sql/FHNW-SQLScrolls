@@ -8,6 +8,7 @@ for (let entry of Object.entries({
   "error-no-user": "Email is missing",
   "error-invalid-user": "Email is invalid",
   "error-no-password": "Password is missing",
+  "error-fhnw-user": "FHNW users should access through institutional login (same url without 'public')",
   login: "Login",
   "login-error-failed-unknown": "Login failed.",
   logout: "Logout",

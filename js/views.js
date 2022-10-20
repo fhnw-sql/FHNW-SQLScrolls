@@ -853,6 +853,9 @@ class LoginView extends View {
     if (!username) return await this.showLoginError(i18n.get("error-no-user"));
     if (!username.includes("@")) return await this.showLoginError(i18n.get("error-invalid-user"));
 
+    // FHNW specific validation
+    if ((username.endsWith("@fhnw.ch") || (username.endsWith(".fhnw.ch")))) return await this.showLoginError(i18n.get("error-fhnw-user"));
+
     // Validate password
     const password = document.getElementById("inputLoginPassword").value;
     if (!password) return await this.showLoginError(i18n.get("error-no-password"));
@@ -916,6 +919,8 @@ class RegisterView extends View {
     const username = document.getElementById("inputRegisterUser").value;
     if (!username) return await this.showRegisterError(i18n.get("error-no-user"));
     if (!username.includes("@")) return await this.showRegisterError(i18n.get("error-invalid-user"));
+
+    if ((username.endsWith("@fhnw.ch") || (username.endsWith(".fhnw.ch")))) return await this.showRegisterError(i18n.get("error-fhnw-user"));
 
     // Validate Password
     const password = document.getElementById("inputRegisterPassword").value;
@@ -1003,6 +1008,8 @@ class ForgotPasswordView extends View {
     const username = document.getElementById("inputForgotPasswordUser").value;
     if (!username) return await this.showForgotPasswordError(i18n.get("error-no-user"));
     if (!username.includes("@")) return await this.showForgotPasswordError(i18n.get("error-invalid-user"));
+
+    if ((username.endsWith("@fhnw.ch") || (username.endsWith(".fhnw.ch")))) return await this.showForgotPasswordError(i18n.get("error-fhnw-user"));
 
     this.startForgotPassword();
     try {
