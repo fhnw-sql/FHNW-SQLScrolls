@@ -54,6 +54,7 @@ async function runSQL(context, query, taskType = "SQL", statements = "") {
       return result
     }
   } catch (error){
+      console.error("ERROR: query=", query, " context=", context)
       console.error(error);
       throw error
   } finally {

@@ -274,6 +274,7 @@ async function beginGame() {
         await showElementImmediately("right-sidebar");
       } else {
         if (location.pathname !== "/editors.html") {
+          // TODO: check that it is not empty
           if (getAuthCookie()) {
             await Views.LOGIN.loginSWITCHaai(getAuthCookie());
           } else {
