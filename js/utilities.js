@@ -182,6 +182,13 @@ function getAuthCookie(){
     if (authCookie) {
       let parsedCookie = {}
       authCookie.split("|").map(pair => pair.split(":")).forEach(item => { parsedCookie[item[0]] = item[1]})
+      // console.log(parsedCookie)
+      
+      // if all empty return null
+      if ((parsedCookie.mail.length == 0) && (parsedCookie.user.length == 0)){
+        return null
+      }
+
       return(parsedCookie)
     } else {
       return null

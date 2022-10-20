@@ -554,7 +554,7 @@ class ReadBookView extends View {
 
   async open() {
     const trigger = document.activeElement;
-    console.log(this.id, document.getElementById(this.id))
+    // console.log(this.id, document.getElementById(this.id))
     if (!DISPLAY_STATE.editMode)  document.getElementById(this.id).focus();
     await showModal("#" + this.id, DISPLAY_STATE.previousSecondaryView, trigger);
   }
@@ -692,7 +692,7 @@ class ProfileView extends View {
   }
 
   renderSelectCertificatesList(certificates){
-    console.log(certificates)
+    // console.log(certificates)
     if (certificates && certificates.length > 0) {
       let options = ""
       for (let certificate of certificates) {
