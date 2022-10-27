@@ -48,7 +48,7 @@ const API = {
   },
   getAPIAddress(){
     // select proper API address depending on login type
-    if (this.isSWITCHaaiLogin){
+    if (this.isSWITCHaaiLogin()){
       return this.ADDRESS
     } else {
       return this.ADDRESS_PUBLIC
@@ -103,6 +103,7 @@ const API = {
             const token = responseJson.token;
             API.loginStatus = LoginStatus.LOGGED_IN;
             sessionStorage.setItem("fhnw-token", token);
+            sessionStorage.setItem("switchaai", false);
             API.token = token;
             resolve();
           } else if (xhr.status === 400) {
