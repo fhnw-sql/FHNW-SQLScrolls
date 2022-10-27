@@ -6,6 +6,7 @@ LoginStatus = {
 
 const API = {
   ADDRESS: Config.API_URL,
+  ADDRESS_PUBLIC: Config.API_URL_PUBLIC,
   loginStatus: LoginStatus.LOGGED_OUT,
   token: undefined,
   switchaai: false,
@@ -27,7 +28,9 @@ const API = {
           }
         }
       };
-      xhr.open("GET", `${this.ADDRESS}/users/self`, true);
+
+      
+      xhr.open("GET", `${this.getAPIAddress()}/users/self`, true);
       xhr.setRequestHeader("Authorization", "Bearer " + this.token);
       xhr.send();
     });
@@ -43,6 +46,15 @@ const API = {
     this.switchaai = (sessionStorage.getItem("switchaai") === 'true');
     return this.switchaai
   },
+  getAPIAddress(){
+    // select proper API address depending on login type
+    if (this.isSWITCHaaiLogin){
+      return this.ADDRESS
+    } else {
+      return this.ADDRESS_PUBLIC
+    }
+  },
+
   loginSWITCHaai(authCookie) {
 
     const authPayload = {
@@ -102,7 +114,7 @@ const API = {
           }
         }
       };
-      xhr.open("POST", `${this.ADDRESS}/users/authenticate`, true);
+      xhr.open("POST", `${this.ADDRESS_PUBLIC}/users/authenticate`, true);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(`username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
     });
@@ -122,7 +134,7 @@ const API = {
           }
         }
       };
-      xhr.open("POST", `${this.ADDRESS}/users/register`, true);
+      xhr.open("POST", `${this.ADDRESS_PUBLIC}/users/register`, true);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(`username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
     });
@@ -142,7 +154,7 @@ const API = {
           }
         }
       };
-      xhr.open("POST", `${this.ADDRESS}/users/recover`, true);
+      xhr.open("POST", `${this.ADDRESS_PUBLIC}/users/recover`, true);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(`username=${encodeURIComponent(username)}`);
     });
@@ -162,7 +174,7 @@ const API = {
           }
         }
       };
-      xhr.open("POST", `${this.ADDRESS}/users/reset`, true);
+      xhr.open("POST", `${this.ADDRESS_PUBLIC}/users/reset`, true);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(`password=${encodeURIComponent(password)}&token=${encodeURIComponent(token)}`);
     });
@@ -212,7 +224,8 @@ const API = {
           }
         }
       };
-      xhr.open("PATCH", `${this.ADDRESS}/users/self/answer_sql`, true);
+
+      xhr.open("PATCH", `${this.getAPIAddress()}/users/self/answer_sql`, true);
       xhr.setRequestHeader("Authorization", "Bearer " + this.token);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send(`task=${task.id}&correct=${result}&query=${encodeURIComponent(sql)}`);
@@ -231,7 +244,8 @@ const API = {
           }
         }
       };
-      xhr.open("PATCH", `${this.ADDRESS}/users/self/restart`, true);
+
+      xhr.open("PATCH", `${this.getAPIAddress()}/users/self/restart`, true);
       xhr.setRequestHeader("Authorization", "Bearer " + this.token);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send();
@@ -251,7 +265,7 @@ const API = {
           }
         }
       };
-      xhr.open("PATCH", `${this.ADDRESS}/users/self/certificate`, true);
+      xhr.open("PATCH", `${this.getAPIAddress()}/users/self/certificate`, true);
       xhr.setRequestHeader("Authorization", "Bearer " + this.token);
       xhr.setRequestHeader("Content-type", "application/json");
       xhr.send(body=JSON.stringify({progression: progression}));
