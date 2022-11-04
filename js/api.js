@@ -6,7 +6,7 @@ LoginStatus = {
 
 const API = {
   ADDRESS: Config.API_URL,
-  ADDRESS_PUBLIC: Config.API_URL_PUBLIC,
+  ADDRESS_PUBLIC: Config.API_URL_PUBLIC || Config.API_URL,
   loginStatus: LoginStatus.LOGGED_OUT,
   token: undefined,
   switchaai: false,
