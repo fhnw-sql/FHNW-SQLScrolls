@@ -42,3 +42,22 @@ TEST {
         3|Jim|reading
     }
 }
+
+TEST {
+
+    TABLE {
+        User
+        id|name|interests
+        1|Katherine|{"likes": ["dancing", "cooking"], "dislikes": ["shopping"]}
+        2|Jayson|{"likes": ["surfing"], "dislikes": ["dancing"]}
+        3|Dianne|{"likes": ["cooking", "shopping"], "dislikes": ["surfing"]}
+        4|Jake|{"likes": ["singing", "dancing", "surfing"], "dislikes": ["reading", "cooking"]}
+    }
+
+    RESULT {
+        1|Katherine|dancing
+        2|Jayson|surfing
+        3|Dianne|cooking
+        4|Jake|singing
+    }
+}

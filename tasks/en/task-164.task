@@ -37,3 +37,22 @@ TEST {
         autumn|{"sport":"biking","food":"cooking mushrooms","art":"photography"}
     }
 }
+
+TEST {
+
+    TABLE {
+        Leisure
+        id|season|sport|food|art
+        1|spring|track and field|strawberry picking|origami
+        2|summer|swimming|ice cream|pottery 
+        3|autumn|biking|pumpkin pie|photography  
+        4|winter|ice hockey|baking cookies|paper snowflake 
+    }
+
+    RESULT {
+        spring|{"sport":"track and field","food":"strawberry picking","art":"origami"}
+        summer|{"sport":"swimming","food":"ice cream","art":"pottery"}
+        autumn|{"sport":"biking","food":"pumpkin pie","art":"photography"}
+        winter|{"sport":"ice hockey","food":"baking cookies","art":"paper snowflake"}
+    }
+}

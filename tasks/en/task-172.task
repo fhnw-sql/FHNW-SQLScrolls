@@ -1,0 +1,65 @@
+METADATA {
+    id: task-172
+    name: Pets Food 1
+    color: black
+    info: JSON operators
+    keywords: JSON
+    level: 4
+}
+
+DESCRIPTION {
+    The table shows stores the people who have pets. Robin finds out his cat's favorite food. 
+    Update the list to show the people's pet with its favorite food, including Rob's cat.
+   
+   💡 Tip: The schemas is called 'pets' and contains the table 'pet'. 
+}
+
+PARSONS {
+    SELECT pets,
+    UPDATE pets,
+    FROM pet,
+    UPDATE pet,
+    SET pets =,
+    SET pet =,
+    json_insert(pets, '$[0].favorite_foods', json_array('tuna', 'turkey'));
+    json_insert(pets, '$[1].favorite_foods', json_array('tuna', 'turkey'));
+    json_insert(pets, '$[2].favorite_foods', json_array('tuna', 'turkey'));
+}
+
+ANSWER {
+    UPDATE pet
+    SET pets =  json_insert(pets, '$[1].favorite_foods', 
+                json_array('tuna', 'turkey'));
+}
+
+TEST {
+    TABLE {
+        Pet
+        id|name|pets
+        1|Robin|[{"name": "Max", "type": "dog", "favorite_foods": ["chicken", "peanut butter", "beef"]}, {"name": "Sally", "type": "cat"}]
+        2|Kathy|[{"name": "Princess", "type": "hamster", "favorite_foods": ["carrots", "celery"]}]
+    }
+
+    RESULT {
+        1|Robin|[{"name": "Max", "type": "dog", "favorite_foods": ["chicken", "peanut butter", "beef"]}, {"name": "Sally", "type": "cat", "favorite_foods": ["tuna", "turkey"]}]
+        2|Kathy|[{"name": "Princess", "type": "hamster", "favorite_foods": ["carrots", "celery"]}]
+    }
+}
+
+TEST {
+    TABLE {
+        Pet
+        id|name|pets
+        1|Jake|[{"name": "Layla", "type": "dog"}]
+        2|Jay|[{"name": "Honey", "type": "parrot", "favorite_foods": ["banana", "sunflower seed"]}]
+        1|Max|[{"name": "Owen", "type": "rabbit", "favorite_foods": ["carrots", "strawberry"]}]
+    }
+
+    RESULT {
+        1|Jake|[{"name": "Layla", "type": "dog", "favorite_foods": ["beef"]}]
+        2|Jay|[{"name": "Honey", "type": "parrot", "favorite_foods": ["banana", "sunflower seed"]}]
+        1|Max|[{"name": "Owen", "type": "rabbit", "favorite_foods": ["carrots", "strawberry"]}]
+    }
+}
+
+    
