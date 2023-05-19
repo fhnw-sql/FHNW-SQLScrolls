@@ -8,22 +8,20 @@ METADATA {
 }
 
 DESCRIPTION {
-    List all each pet to see each of their favorite food.
-
-    💡 Tip: The schemas is called 'pets' and contains the table 'pet'. 
+    List all pet to see each of their favorite food and which owner's id they have. 
 }
 
 PARSONS {
-    SELECT,
-    id, pet_type, pet_name, favorite_food,
+    SELECT
+    id, pet_type, pet_name, favorite_food
     FROM pet,
     FROM pets,
-    JSON_TABLE(pets, '$[*]' COLUMNS (,
+    JSON_TABLE(pets, '$[*]' COLUMNS (
         pet_type VARCHAR(10) PATH '$.type',
         pet_name VARCHAR(10) PATH '$.name',
-        favorite_food VARCHAR(25) PATH '$.favorite_foods')); ,
+        favorite_food VARCHAR(25) PATH '$.favorite_foods'));
         
-    JSON_TABLE(pets, '$[*]' COLUMNS (,
+    JSON_TABLE(pets, '$[*]' COLUMNS (
         pet_type VARCHAR(10) PATH '$.type',
         pet_name VARCHAR(10) PATH '$.name',
         NESTED PATH '$.favorite_foods[*]' 

@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT json_extract(data, '$.job', '$.name') as neighbors, ethnicity from employees as json_text;
+    SELECT json_extract(data, '$.job', '$.name') as neighbors, ethnicity from neighborhood as json_text;
 }
 
 TEST {
@@ -28,6 +28,7 @@ TEST {
     }
 
     RESULT {
+        neighbors|ethnicity
         ["Nurse", "Jane"]|Philippines
         ["Doctor", "Joe"]|Switzerland
         ["Lawyer", "Bob"]|Spain
@@ -49,6 +50,7 @@ TEST {
     }
 
     RESULT {
+        ethnicity|neighbors
         Philippines|["Nurse", "Jane"]
         Switzerland|["Doctor", "Joe"]
         Spain|["Lawyer", "Bob"]

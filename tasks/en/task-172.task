@@ -10,17 +10,15 @@ METADATA {
 DESCRIPTION {
     The table shows stores the people who have pets. Robin finds out his cat's favorite food. 
     Update the list to show the people's pet with its favorite food, including Rob's cat.
-   
-   💡 Tip: The schemas is called 'pets' and contains the table 'pet'. 
 }
 
 PARSONS {
-    SELECT pets,
-    UPDATE pets,
-    FROM pet,
-    UPDATE pet,
-    SET pets =,
-    SET pet =,
+    SELECT pets
+    UPDATE pets 
+    FROM pet
+    UPDATE pet 
+    SET pets =
+    SET pet =
     json_insert(pets, '$[0].favorite_foods', json_array('tuna', 'turkey'));
     json_insert(pets, '$[1].favorite_foods', json_array('tuna', 'turkey'));
     json_insert(pets, '$[2].favorite_foods', json_array('tuna', 'turkey'));
@@ -28,8 +26,7 @@ PARSONS {
 
 ANSWER {
     UPDATE pet
-    SET pets =  json_insert(pets, '$[1].favorite_foods', 
-                json_array('tuna', 'turkey'));
+    SET pets = json_insert(pets, '$[1].favorite_foods', json_array('tuna', 'turkey'));
 }
 
 TEST {
