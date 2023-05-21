@@ -33,3 +33,22 @@ TEST {
         Jim|4
     }
 }
+
+TEST {
+    TABLE {
+        User
+        id|name|interests
+        1|Katherine|{"likes": ["dancing", "cooking"], "dislikes": ["shopping"]}
+        2|Jayson|{"likes": ["surfing"], "dislikes": ["dancing"]}
+        3|Dianne|{"likes": ["cooking", "shopping"], "dislikes": ["surfing"]}
+        4|Jake|{"likes": ["singing", "dancing", "surfing"], "dislikes": ["reading", "cooking"]}
+    }
+
+    RESULT {
+        Katherine|2
+        Jayson|1
+        Dianne|2
+        Jake|3
+    }
+}
+

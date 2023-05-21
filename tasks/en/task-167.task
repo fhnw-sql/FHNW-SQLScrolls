@@ -36,3 +36,22 @@ TEST {
         Jim|{"address":"Star Square","phone":"134313443","credentials":{"email":"jimmy@tech.com"}}    
     }
 }
+
+TEST {
+    TABLE {
+        Customer
+        id|name|data
+        1|Katherine|{"address": "Daisy Street"," phone": "741258963", "age": 23, "credentials": {"email": "kathy@email.com", "password": "qaywsx"}}
+        2|Jayson|{"address": "Hogwart Square"," phone": "010203456", "age": 76, "credentials": {"email": "jaypotter@email.com", "password": "plmokn"}}
+        3|Dianne|{"address": "Robertson Lane"," phone": "987456321", "age": 45, "credentials": {"email": "dianne45@email.com", "password": "tgbnhz"}}
+        4|Jake|{"address": "Hybe Avenue"," phone": "004569871", "age": 21, "credentials": {"email": "02jake@email.com", "password": "enhypn"}}
+    }
+
+    RESULT {
+        Katherine|{"address":"Daisy Street","phone":"741258963","credentials":{"email":"kathy@email.com"}}
+        Jayson|{"address":"Hogwart Square","phone":"010203456","credentials":{"email":"jaypotter@email.com"}}
+        Dianne|{"address":"Robertson Lane","phone":"987456321","credentials":{"email":"dianne45@email.com"}}
+        Jake|{"address":"Hybe Avenue","phone":"004569871","credentials":{"email":"02jake@email.com"}}
+    }
+}
+

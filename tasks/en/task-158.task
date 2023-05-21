@@ -43,3 +43,26 @@ TEST {
         Jim|1.5
     }
 }
+
+TEST {
+
+    TABLE {
+        User
+        id|name|interests
+        1|Katherine|{"dancing": 4, "cooking": 3}
+        2|Jayson|{"surfing": 2.5}
+        3|Dianne|{"cooking": 1.5, "shopping": 5}
+        4|Jake|{"singing": 2, "dancing": 4.5, "surfing": 1}
+    }
+
+    RESULT {
+        Katherine|4
+        Katherine|3
+        Jayson|2.5
+        Dianne|1.5
+        Dianne|5
+        Jake|2
+        Jake|4.5
+        Jake|1
+    }
+}

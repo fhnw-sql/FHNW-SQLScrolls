@@ -1,0 +1,60 @@
+METADATA {
+    id: task-171
+    name: Neighborhood
+    color: black
+    info: JSON operators
+    keywords: JSON
+    level: 1
+}
+
+DESCRIPTION {
+    List out the jobs and the name as 'neighbors' in a json format and the ethnicity of each neighbor.
+}
+
+ANSWER {
+    SELECT json_extract(data, '$.job', '$.name') as neighbors, ethnicity from neighborhood as json_text;
+}
+
+TEST {
+
+    TABLE {
+        Neighborhood
+        data|ethnicity
+        {"id": 1, "job": "Nurse", "name": "Jane"}|Philippines
+        {"id": 2, "job": "Doctor", "name": "Joe"}|Switzerland
+        {"id": 3, "job": "Lawyer", "name": "Bob"}|Spain
+        {"id": 4, "job": "Waiter", "name": "Jay"}|Italy
+        {"id": 5, "job": "Singer", "name": "Sam"}|America
+    }
+
+    RESULT {
+        neighbors|ethnicity
+        ["Nurse", "Jane"]|Philippines
+        ["Doctor", "Joe"]|Switzerland
+        ["Lawyer", "Bob"]|Spain
+        ["Waiter", "Jay"]|Italy
+        ["Singer", "Sam"]|America
+    }
+}
+
+TEST {
+
+    TABLE {
+        Neighborhood
+        data|ethnicity
+        {"id": 1, "job": "Nurse", "name": "Jane"}|Philippines
+        {"id": 2, "job": "Doctor", "name": "Joe"}|Switzerland
+        {"id": 3, "job": "Lawyer", "name": "Bob"}|Spain
+        {"id": 4, "job": "Waiter", "name": "Jay"}|Italy
+        {"id": 5, "job": "Singer", "name": "Sam"}|America
+    }
+
+    RESULT {
+        ethnicity|neighbors
+        Philippines|["Nurse", "Jane"]
+        Switzerland|["Doctor", "Joe"]
+        Spain|["Lawyer", "Bob"]
+        Italy|["Waiter", "Jay"]
+        America|["Singer", "Sam"]
+    }
+}

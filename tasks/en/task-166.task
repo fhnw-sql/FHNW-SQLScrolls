@@ -47,3 +47,19 @@ TEST {
         object|array|text|integer
     }
 }
+
+TEST {
+
+    TABLE {
+        User
+        id|name|interests
+        1|Katherine|{"likes": ["dancing", "cooking"], "favorite": "drawing", "time":3}
+        2|Jayson|{"likes": ["surfing"], "favorite": "swimming", "time":2}
+        3|Dianne|{"likes": ["cooking", "shopping"], "favorite": "gaming", "time":5}
+        4|Jake|{"likes": ["singing", "dancing", "surfing"], "favorite": "crafting", "time":3}
+    }
+
+    RESULT {
+        object|array|text|integer
+    }
+}

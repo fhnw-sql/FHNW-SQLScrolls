@@ -48,3 +48,24 @@ TEST {
         2|Kate|3.5	
     }
 }
+
+TEST {
+
+    TABLE {
+        User
+        id|name|interests
+        1|Katherine|{"dancing": 4, "cooking": 3}
+        2|Jayson|{"surfing": 2.5}
+        3|Dianne|{"cooking": 1.5, "shopping": 5}
+        4|Jake|{"singing": 2, "dancing": 4.5, "surfing": 1}
+    }
+
+    RESULT {
+        ser
+        id|name|interests
+        4|Jake|7.5
+        1|Katherine|7
+        3|Dianne|6.5
+        2|Jayson|2.5
+    }
+}
