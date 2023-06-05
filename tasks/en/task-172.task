@@ -14,14 +14,14 @@ DESCRIPTION {
 
 PARSONS {
     SELECT pets
-    UPDATE pets 
+    UPDATE pets #distractor
     FROM pet
     UPDATE pet 
     SET pets =
-    SET pet =
-    json_insert(pets, '$[0].favorite_foods', json_array('tuna', 'turkey'));
+    SET pet = #distractor
+    json_insert(pets, '$[0].favorite_foods', json_array('tuna', 'turkey')); #distractor
     json_insert(pets, '$[1].favorite_foods', json_array('tuna', 'turkey'));
-    json_insert(pets, '$[2].favorite_foods', json_array('tuna', 'turkey'));
+    json_insert(pets, '$[2].favorite_foods', json_array('tuna', 'turkey')); #distractor
 }
 
 ANSWER {
