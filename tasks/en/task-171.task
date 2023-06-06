@@ -12,7 +12,8 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT json_extract(data, '$.job', '$.name') as neighbors, ethnicity from neighborhood as json_text;
+    SELECT json_extract(data, '$.job', '$.name') as neighbors, ethnicity 
+    FROM neighborhood as json_text;
 }
 
 TEST {
