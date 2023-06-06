@@ -16,31 +16,22 @@ PARSONS {
     id, pet_type, pet_name, favorite_food
     FROM pet,
     FROM pets, #distractor
-    JSON_TABLE(pets, '$[*]' COLUMNS (pet_type VARCHAR(10) PATH '$.type', pet_name VARCHAR(10) PATH '$.name', favorite_food VARCHAR(25) PATH '$.favorite_foods')); #distractor 
-        
+    JSON_TABLE(pets, '$[*]' COLUMNS (pet_type VARCHAR(10) PATH '$.type', pet_name VARCHAR(10) PATH '$.name', favorite_food VARCHAR(25) PATH '$.favorite_foods')); #distractor  
     JSON_TABLE(pets, '$[*]' COLUMNS (pet_type VARCHAR(10) PATH '$.type', pet_name VARCHAR(10) PATH '$.name', NESTED PATH '$.favorite_foods[*]' COLUMNS (favorite_food VARCHAR(25) PATH '$')));
-
-    
-
 }
 
 ANSWER {
-    SELECT id, pet_type, pet_name, favorite_food 
-    FROM pet,
-    JSON_TABLE(pets, '$[*]' COLUMNS (
-        pet_type VARCHAR(10) PATH '$.type',
-        pet_name VARCHAR(10) PATH '$.name',
-        NESTED PATH '$.favorite_foods[*]'
-            COLUMNS (favorite_food VARCHAR(25) PATH '$')
-    ));
+    SELECT id, pet_type, pet_name, favorite_food FROM pet, 
+    JSON_TABLE(pets, '$[*]' COLUMNS (pet_type VARCHAR(10) PATH '$.type', pet_name VARCHAR(10) PATH '$.name', 
+    NESTED PATH '$.favorite_foods[*]' COLUMNS (favorite_food VARCHAR(25) PATH '$')));
 }
 
 TEST {
     TABLE {
         Pet
         id|name|pets
-        1|Robin|[{"name": "Max", "type": "dog", "favorite_foods": ["chicken", "peanut butter", "beef"]}, {"name": "Sally", "type": "cat", "favorite_foods": ["tuna", "turkey"]}]
-        2|Kathy|[{"name": "Princess", "type": "hamster", "favorite_foods": ["carrots", "celery"]}]
+        1|Robin|{"name": "Max", "type": "dog", "favorite_foods": ["chicken", "peanut butter", "beef"]}, {"name": "Sally", "type": "cat", "favorite_foods": ["tuna", "turkey"]}
+        2|Kathy|{"name": "Princess", "type": "hamster", "favorite_foods": ["carrots", "celery"]}
     }
 
     RESULT {
@@ -58,9 +49,9 @@ TEST {
     TABLE {
         Pet
         id|name|pets
-        1|Jake|[{"name": "Layla", "type": "dog", "favorite_foods": ["beef"]}]
-        2|Jay|[{"name": "Honey", "type": "parrot", "favorite_foods": ["banana", "sunflower seed"]}]
-        1|Max|[{"name": "Owen", "type": "rabbit", "favorite_foods": ["carrots", "strawberry"]}]
+        1|Jake|{"name": "Layla", "type": "dog", "favorite_foods": ["beef"]}
+        2|Jay|{"name": "Honey", "type": "parrot", "favorite_foods": ["banana", "sunflower seed"]}
+        1|Max|{"name": "Owen", "type": "rabbit", "favorite_foods": ["carrots", "strawberry"]}
     }
 
     RESULT {
