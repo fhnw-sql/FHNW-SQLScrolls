@@ -30,7 +30,6 @@ TEST {
     }
 
     RESULT {
-        neighbors|ethnicity
         ["Nurse", "Jane", "Wills"]|Philippines
         ["Doctor", "Joe", "Max"]|Switzerland
         ["Lawyer", "Bob", "Cruz"]|Spain
@@ -51,7 +50,6 @@ TEST {
     }
 
     RESULT {
-        neighbors|ethnicity
         ["Climber", "Jane", "Wills"]|Philippines
         ["Pharmacist", "Joe", "Max"]|Finnland
         ["Singer", "Bob", "Cruz"]|Mexico
