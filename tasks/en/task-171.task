@@ -18,7 +18,6 @@ ANSWER {
 }
 
 TEST {
-
     TABLE {
         neighborhood
         id|data|ethnicity
@@ -30,18 +29,18 @@ TEST {
     }
 
     RESULT {
-        ["Nurse", "Jane", "Wills"]|Philippines
-        ["Doctor", "Joe", "Max"]|Switzerland
-        ["Lawyer", "Bob", "Cruz"]|Spain
-        ["Waiter", "Jay", "Marget"]|Italy
-        ["Singer", "Sam", "Smith"]|America
+        ["Nurse","Jane","Wills"]|Philippines
+        ["Doctor","Joe","Max"]|Switzerland
+        ["Lawyer","Bob","Cruz"]|Spain
+        ["Waiter","Jay","Marget"]|Italy
+        ["Singer","Sam","Smith"]|America
     }
 }
 
 TEST {
     TABLE {
         neighborhood
-        data|ethnicity
+        id|data|ethnicity
         1|{"job": "Climber", "lastname": "Wills", "firstname": "Jane"}|Philippines
         2|{"job": "Pharmacist", "lastname": "Max", "firstname": "Joe"}|Finnland
         3|{"job": "Singer", "lastname": "Cruz", "firstname": "Bob"}|Mexico
@@ -50,10 +49,10 @@ TEST {
     }
 
     RESULT {
-        ["Climber", "Jane", "Wills"]|Philippines
-        ["Pharmacist", "Joe", "Max"]|Finnland
-        ["Singer", "Bob", "Cruz"]|Mexico
-        ["Teacher", "Jay", "Marget"]|Italy
-        ["Photographer", "Sam", "Smith"]|Thailand
+        ["Climber","Jane","Wills"]|Philippines
+        ["Pharmacist","Joe","Max"]|Finnland
+        ["Singer","Bob","Cruz"]|Mexico
+        ["Teacher","Jay","Marget"]|Italy
+        ["Photographer","Sam","Smith"]|Thailand
     }
 }

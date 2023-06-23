@@ -21,8 +21,8 @@ PARSONS {
 }
 
 ANSWER {
-    SELECT id, pet_type, pet_name, favorite_food FROM pet, 
-    JSON_TABLE(pets, '$[*]' COLUMNS (pet_type VARCHAR(10) PATH '$.type', pet_name VARCHAR(10) PATH '$.name', 
+    SELECT id, pet_type, pet_name, favorite_food FROM pet,
+    JSON_TABLE(pets, '$[*]' COLUMNS (pet_type VARCHAR(10) PATH '$.type', pet_name VARCHAR(10) PATH '$.name',
     NESTED PATH '$.favorite_foods[*]' COLUMNS (favorite_food VARCHAR(25) PATH '$')));
 }
 
