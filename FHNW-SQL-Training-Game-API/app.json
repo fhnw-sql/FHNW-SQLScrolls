@@ -1,0 +1,7 @@
+
+{
+  "name": "FHNW-SQL-Training-Game-API",
+  "description": "Backend API in Node.JS for the FHNW-SQL-Training-Game",
+  "repository": "https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game-API/",
+  "image": "heroku/nodejs"
+}
