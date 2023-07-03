@@ -1,0 +1,44 @@
+METADATA {
+    id: task-106
+    name: Midnight Surprise
+    color: green
+    info: insert
+    keywords: INSERT
+    level: 3
+    type: DCL
+}
+
+DESCRIPTION {
+   Our witch has created a very powerful potion 🧪 called 'Midnight Surprise', with id 5 and level 10.
+   Please add it to Potions.
+}
+
+ANSWER {
+    INSERT INTO Potions (potion_id, name, level) VALUES (5, 'Midnight Surprise', 10);
+}
+
+
+TEST {
+    TABLE {
+        Potions
+        potion_id|name|level
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dragon Potion|3
+        4|Horus Cast|2.5
+    }
+
+    SQL {
+        SELECT * FROM Potions;
+    }
+
+    RESULT {
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dragon Potion|3       
+        4|Horus Cast|2.5
+        5|Midnight Surprise|10
+    }
+}
+
+

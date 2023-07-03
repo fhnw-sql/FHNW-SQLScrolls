@@ -1,0 +1,41 @@
+METADATA {
+    id: task-107
+    name: Flying potion
+    color: green
+    info: Update
+    keywords: UPDATE, SET, WHERE, IN
+    level: 3
+    type: DCL
+}
+
+DESCRIPTION {
+   After the last party where lots of people tested our potions, we saw that Midnight Suprise and Dragon Potion
+   are both much stronger than expected. They need to upgraded to level 25, and we need to be careful as people started
+   flying after taking them.
+}
+
+ANSWER {
+    UPDATE Potions SET level=25 WHERE potion_id IN (5,3);
+}
+
+TEST {
+    TABLE {
+        Potions
+        potion_id|name|level
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dragon Potion|3       
+        5|Midnight Surprise|10
+    }
+
+    SQL {
+        SELECT * FROM Potions;
+    }
+
+    RESULT {
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dragon Potion|25       
+        5|Midnight Surprise|25
+    }
+}

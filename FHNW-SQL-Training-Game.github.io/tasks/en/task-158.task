@@ -1,0 +1,45 @@
+METADATA {
+    id: task-158
+    name: Activities time
+    color: blue
+    info: JSON operators
+    keywords: JSON
+    level: 4
+}
+
+DESCRIPTION {
+    The table shows the leisure activities of different users and how much time in hours they dedicate to each activity.
+    List the all the activites and the user (just the name) that performs it.
+
+    💡 Tip: Use the operator json_each(user.activities) in the FROM clause that will return you the column <b>atom</b>. 
+
+}
+
+ANSWER { 
+    SELECT name, atom FROM user, json_each(user.activities) 
+}
+
+TEST {
+    
+    TABLE {
+        User
+        id|name|activities
+        1|John|{"walking": 8, "skating": 1, "reading": 2, "swimming": 0.5}
+        2|Kate|{"dancing": 2, "reading": 1, "running": 0.5}
+        3|Jim|{"drawing": 4, "cooking": 1, "dancing": 2, "yoga": 1.5}
+    }
+
+    RESULT {
+        John|8
+        John|1
+        John|2
+        John|0.5
+        Kate|2
+        Kate|1
+        Kate|0.5
+        Jim|4
+        Jim|1
+        Jim|2
+        Jim|1.5
+    }
+}

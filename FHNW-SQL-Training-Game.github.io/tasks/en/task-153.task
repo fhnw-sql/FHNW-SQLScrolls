@@ -1,0 +1,134 @@
+METADATA {
+    id: task-153
+    name: Magic Ingredients
+    color: green
+    info: Create table with constraints (PK, not null, FK)
+    keywords: CREATE_TABLE
+    level: 4
+    type: DCL
+}
+
+DESCRIPTION {
+   The wizards want to keep a recipes book for their magic potions.
+   Every potion needs to be linked to their ingredients.
+   The table called 'Recipes' should have the following columns:
+    <ul>
+     <li>potion_id: identifier of the potion (integer, foreign key)</li>
+     <li>ingredient_id: identifier of the ingredient (integer, foreign key)</li>
+     <li>amount: weight in gramms of the ingredient (real, greater than 0.0)</li>
+    </ul>
+    The primary keyof the table is the combination of the id s form the potion and the ingredient.
+
+    💡 Tip: Create the constraints in the following order: PK, FK Potions, FK Ingredients, CHECK on amount.
+
+}
+
+PARSONS {
+    CREATE TABLE Recipes (
+    potion_id INTEGER NOT NULL,
+    ingredient_id INTEGER NOT NULL,
+    ingredient_id INTEGER NULL, #distractor
+    amount REAL NOT NULL,
+    PRIMARY KEY (potion_id, ingredient_id),
+    FOREIGN KEY (potion_id, ingredient_id),  #distractor
+    PRIMARY KEY (ingredient_id),  #distractor
+    FOREIGN KEY (potion_id) 
+    REFERENCES Potions (potion_id), 
+    FOREIGN KEY (ingredient_id) 
+    REFERENCES Ingredients (ingredient_id), 
+    CHECK (amount > 0) 
+    CHECK (amount >= 0)  #distractor
+    );
+}
+
+ANSWER {
+    CREATE TABLE Recipes (
+        potion_id INTEGER NOT NULL,
+        ingredient_id INTEGER NOT NULL,
+        amount REAL NOT NULL,
+        PRIMARY KEY (potion_id, ingredient_id),
+        FOREIGN KEY (potion_id) 
+            REFERENCES Potions (potion_id), 
+        FOREIGN KEY (ingredient_id) 
+            REFERENCES Ingredients (ingredient_id), 
+        CHECK (amount > 0) 
+    );
+}
+
+TEST {
+    
+    TABLE {
+        Potions
+        potion_id|name|level|tested
+        1|Magic Spell|2|0
+        2|Black Mantra|1.5|0
+        3|Dragon Potion|25|1
+    }
+
+    TABLE {
+        Ingredients
+        ingredient_id|name|symbol
+        1|Rat tail|🐀 
+        2|Mushrooms|🍄
+        3|Dragon Fang|🐉
+        4|Bones|☠️
+        5|Star Dust|⭐
+    }
+    
+    TABLE {
+        Recipes
+        potion_id|ingredient_id|amount
+        1|2|0.5
+        1|4|20.0
+        2|1|3.0
+        2|5|18.3
+        3|3|7.2
+    }
+
+    SQL {
+        INSERT INTO Recipes (potion_id, ingredient_id,amount) VALUES (1, 2, 0.5), (1, 4, 20.0), (2, 1, 3.0), (2, 5, 18.3), (3, 3, 7.2); 
+        SELECT * FROM Recipes;
+    }
+
+    RESULT {
+        1|2|0.5
+        1|4|20.0
+        2|1|3.0
+        2|5|18.3
+        3|3|7.2   
+    }
+}
+
+TEST {
+    SQL {
+        select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('Recipes');    
+    }
+
+    RESULT {
+        0|potion_id|INTEGER|1|null|1
+        1|ingredient_id|INTEGER|1|null|2
+        2|amount|REAL|1|null|0
+    }
+}
+
+TEST {
+    SQL {
+        select id, seq, "table", "from", "to", on_update, on_delete, "match" from pragma_foreign_key_list('Recipes');    
+    }
+
+    RESULT {
+        0|0|Ingredients|ingredient_id|ingredient_id|NO ACTION|NO ACTION|NONE
+        1|0|Potions|potion_id|potion_id|NO ACTION|NO ACTION|NONE
+    }
+}
+
+TEST {
+    SQL {
+        SELECT REPLACE(upper(sql), ' ', '') FROM sqlite_master WHERE name = 'Recipes';
+    }
+
+    RESULT {
+        CREATETABLERECIPES(POTION_IDINTEGERNOTNULL,INGREDIENT_IDINTEGERNOTNULL,AMOUNTREALNOTNULL,PRIMARYKEY(POTION_ID,INGREDIENT_ID),FOREIGNKEY(POTION_ID)REFERENCESPOTIONS(POTION_ID),FOREIGNKEY(INGREDIENT_ID)REFERENCESINGREDIENTS(INGREDIENT_ID),CHECK(AMOUNT>0))    
+    }
+}
+

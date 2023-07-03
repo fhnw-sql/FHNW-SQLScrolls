@@ -1,0 +1,41 @@
+METADATA {
+    id: task-101
+    name: new potion
+    color: green
+    info: insert
+    keywords: INSERT
+    level: 3
+    type: DCL
+}
+
+DESCRIPTION {
+   Add a potion 🧪 called 'Horus Cast' with id 4 and level 2.5 to Potions.
+}
+
+ANSWER {
+    INSERT INTO Potions (potion_id, name, level) VALUES (4, 'Horus Cast', 2.5);
+}
+
+
+TEST {
+    TABLE {
+        Potions
+        potion_id|name|level
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dragon Potion|3       
+    }
+
+    SQL {
+        SELECT * FROM Potions;
+    }
+
+    RESULT {
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dragon Potion|3       
+        4|Horus Cast|2.5
+    }
+}
+
+

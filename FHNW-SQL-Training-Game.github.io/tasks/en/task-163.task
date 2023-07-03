@@ -1,0 +1,38 @@
+METADATA {
+    id: task-163
+    name: Last preference
+    color: blue
+    info: JSON operators
+    keywords: JSON
+    level: 5
+}
+
+DESCRIPTION {
+    Get the last preference from the ones that the users like using 'json_extract'.
+
+    💡 Tip: The accessor '[#-1]'gets the last element of an array
+
+}
+
+ANSWER { 
+    SELECT name, json_extract(interests, '$.likes[#-1]')
+    FROM user
+}
+
+STRICT
+
+TEST {
+    TABLE {
+        User
+        id|name|interests
+        1|John|{"likes": ["skating", "reading", "swimming", "jogging"], "dislikes": ["cooking"]}
+        2|Kate|{"likes": ["reading", "swimming"], "dislikes": ["skating"]}
+        3|Jim|{"likes": ["reading", "swimming", "baking"], "dislikes": ["cooking"]}
+    }
+
+    RESULT {
+        John|jogging
+        Kate|swimming
+        Jim|baking
+    }
+}
