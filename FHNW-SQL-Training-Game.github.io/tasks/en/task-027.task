@@ -1,0 +1,59 @@
+METADATA {
+    id: task-027
+    name: Task 27
+    color: green
+    info: list sum field grouped
+    keywords: SELECT, SUM, GROUP_BY
+    level: 3
+}
+
+DESCRIPTION {
+   List the areas where wizards live and the sum of the wizards skill levels in each area.
+}
+
+PARSONS {
+    SELECT 
+    AREA,
+    SUM(SKILL) 
+    FROM WIZARDS 
+    GROUP BY
+    AREA 
+}
+
+ANSWER {
+    SELECT AREA, SUM(SKILL) FROM WIZARDS GROUP BY AREA 
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Kumpula|1
+    }
+
+    RESULT {
+        Kumpula|4
+        Shadowland|11
+    }
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Soulness|5
+        2|Orz Orz|Leckrr|3
+        3|Bingo|Soulness|1
+        4|Solmu|Soulness|8
+        5|Rufus|Leckrr|6
+    }
+
+    RESULT {
+        Leckrr|9
+        Soulness|14
+    }
+}

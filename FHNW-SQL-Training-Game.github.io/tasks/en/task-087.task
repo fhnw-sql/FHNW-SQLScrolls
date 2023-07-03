@@ -1,0 +1,58 @@
+METADATA {
+    id: task-097
+    name: Games 1
+    color: red
+    info: game release year
+    keywords: SELECT, SUBSTR, LENGTH, DISTINCT
+    level: 2
+}
+
+DESCRIPTION {
+    List the years when games were released, sorted chronologically from old to new.
+}
+
+ANSWER {
+    SELECT DISTINCT(SUBSTR(release_date,LENGTH(release_date)-3,5)) as year
+    FROM game order by year;
+}
+
+TEST {
+    TABLE {
+        Game
+        gameid|title|release_date
+        605|The Legend of Zelda|February 21 1986
+        604|Grand Theft Auto|October 21 1997
+        608|Minecraft|November 18 2011
+        600|Final Fantasy|December 18 1987
+        601|World of Warcraft|November 23 2004
+        602|Tetris|June 6 1984
+        603|Rayman Origins|November 11 2011
+    }
+
+    RESULT {
+        1984
+        1986
+        1987
+        1997
+        2004
+        2011
+    }
+}
+
+TEST {
+    TABLE {
+        Game
+        gameid|title|release_date
+        700|Super Mario Bros.|September 13 1985
+        701|Super Mario Galaxy|November 1 2007
+        702|Super Mario Kart|August 27 1992
+    }
+
+    RESULT {
+        1985
+        1992
+        2007
+    }
+}
+
+

@@ -1,0 +1,63 @@
+METADATA {
+    id: task-008
+    name: Task 8
+    color: purple
+    info: list unique 
+    keywords: SELECT, DISTINCT
+    level: 1
+}
+
+DESCRIPTION {
+    List all different (unique) years of birth.
+}
+
+PARSONS {
+    SELECT 
+    DISTINCT
+    year
+    FROM
+    ghosts
+    UNIQUE #distractor
+    ONLY #distractor
+    birth_year #distractor
+}
+
+ANSWER {
+   SELECT DISTINCT year from ghosts
+}
+
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1833
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+    }
+
+    RESULT {
+        1650
+        1765
+        1833
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Edmond|1744
+        2|Mercedes|1744
+        3|Fernand|1790
+        4|Valentine|1744
+        5|Haydee|1744
+    }
+
+    RESULT {
+        1744
+        1790
+    }
+}

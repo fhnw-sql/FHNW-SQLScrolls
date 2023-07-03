@@ -1,0 +1,45 @@
+METADATA {
+    id: task-064
+    name: Task F.10
+    color: xmas
+    info: list count field grouped
+    keywords: SELECT, COUNT, GROUP_BY
+    level: 3
+}
+
+DESCRIPTION {
+	How many interpreters are there in each country?
+}
+
+PARSONS {
+	SELECT country, count(*)
+	SELECT name, count(country) #distractor
+	FROM interpret 
+	FROM interprets #distractor
+	GROUP BY country
+	ORDER BY country #distractor
+}
+
+ANSWER { 
+	SELECT country, count(*) FROM interpret GROUP BY country;
+}
+
+TEST {
+
+	TABLE {
+		Interpret
+		interpret_id|name|f_year|country
+		1|Darlene Love|0|US
+		2|The Flippers|1964|D
+		3|The Crystals|1961|US
+		4|Mariah Carey|0|US
+		5|Wham!|1981|UK
+	}
+
+    RESULT {
+		US|3
+		UK|1
+		D|1
+    }
+}
+

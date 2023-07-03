@@ -1,0 +1,58 @@
+METADATA {
+    id: task-045
+    name: Task F.8
+    color: xmas
+    info: list filtered fields from joined tables
+    keywords: SELECT, WHERE, INNER_JOIN
+    level: 3
+}
+
+DESCRIPTION {
+    Which albums contain songs with a rating of 3 and how are these songs called?
+}
+
+PARSONS {
+
+	SELECT a.title, s.rating, s.title 
+ 	SELECT title, rating, name  #distractor
+    FROM song s, album a #distractor
+    FROM song s  
+	INNER JOIN album a
+ 	ON a.album_id = s.album_fk	
+    WHERE s.rating = 3
+    WHERE s.rating EQUAL 3 #distractor
+	AND s.album_id = a.album_fk #distractor
+}
+
+ANSWER { 
+	SELECT a.title, s.rating, s.title FROM song s INNER JOIN album a ON a.album_id = s.album_fk WHERE s.rating = 3 
+	}
+
+TEST {
+
+	TABLE {
+		Album
+		album_id|title|year
+		11|A Christmas Gift For You From Phil Spector|1963
+		12|Original German Christmas With Die Flippers|1987
+		13|Merry Christmas|1994
+	}
+	
+    TABLE {
+        Song
+        song_id|title|seconds|language|rating|interpret_fk|album_fk
+		1|All I Want for Christmas Is you|241|en|4|4|13
+		2|O Holy Night|267|en|3|4|13
+		3|Christmas (Baby Please Come Home)|153|en|7|4|13
+		4|Parade Of The Wooden Soldiers|175|en|2|3|11
+		5|Aber Heidschi Bum Beidschi|267|de|8|2|12
+		6|Christmas (Baby Please Come Home)|166|en|3|1|11
+		7|Alle Jahre wieder|118|de|4|2|NULL
+    }
+
+    RESULT {
+		Merry Christmas|3|O Holy Night
+		A Christmas Gift For You From Phil Spector|3|Christmas (Baby Please Come Home)      
+    }
+}
+

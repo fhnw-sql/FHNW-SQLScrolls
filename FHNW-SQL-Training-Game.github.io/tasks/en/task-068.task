@@ -1,0 +1,51 @@
+METADATA {
+    id: task-068
+    name: Games 2
+    color: xmas
+    info: list names filtered by starting letter
+    keywords: SELECT, WHERE, LIKE
+    level: 1
+}
+
+DESCRIPTION {
+    My last Pokemon has a name starting with J. Which one is it?
+    Please help me and list all the ones whose name starts with J.
+}
+
+PARSONS {
+    SELECT name 
+    FROM Pokemon 
+    FROM Pokemons  #distractor
+    WHERE name 
+    LIKE 'J%'
+    LIKE 'J' #distractor
+    LIKE '%J' #distractor
+    LIKE 'J*' #distractor
+}
+
+ANSWER {
+    SELECT name FROM Pokemon WHERE name LIKE 'J%';
+}
+
+TEST {
+    TABLE {
+        Pokemon
+        id|name|type_id|generation
+        385|Jirachi|1|3
+        25|Pikachu|2|1
+        39|Jigglypuff|3|1
+        813|Scorbunny|4|8
+        690|Skrelp|5|6
+        103|Exeggutor|7|1
+        477|Dusknoir|10|4
+        264|Linoone|6|3
+    }
+
+    RESULT {
+        Jirachi
+        Jigglypuff
+    }
+}
+
+
+

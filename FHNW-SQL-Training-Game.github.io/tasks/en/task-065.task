@@ -1,0 +1,54 @@
+METADATA {
+    id: task-065
+    name: Task F.11
+    color: xmas
+    info: list count field grouped and sorted
+    keywords: SELECT, COUNT, GROUP_BY, ORDER_BY
+    level: 3
+}
+
+DESCRIPTION {
+	How many songs are there per language and rating? 
+
+	The list should be sorted by language in ascending order and rating in descending order.
+}
+
+ANSWER { 
+	SELECT language, rating, count(*) FROM song GROUP BY language, rating ORDER BY language, rating desc;
+}
+
+TEST {
+	
+    TABLE {
+		Song
+		song_id|title|seconds|language|rating|interpret_fk|album_fk
+		1|All I Want for Christmas Is you|241|en|4|4|13
+		2|Silent Night|219|en|1|4|13
+		3|O Holy Night|267|en|3|4|13
+		4|Christmas (Baby Please Come Home)|153|en|7|4|13
+		5|Santa Claus Is Comin to Town|204|en|8|4|13
+		6|Christmas (Baby Please Come Home)|166|en|3|1|11
+		7|Santa Claus Is Coming to Town|204|en|7|3|11
+		8|Winter Wonderland|146|en|7|1|11
+		9|A Marshmallow World|143|en|9|1|11
+		10|Parade Of The Wooden Soldiers|175|en|2|3|11
+		11|Aber Heidschi Bum Beidschi|267|de|8|2|12
+		12|Vom Himmel hoch da komm ich her|180|de|7|2|12
+		13|Alle Jahre wieder|118|de|4|2|null
+		14|Christmasland|144|en|9|null|11
+	}
+
+	RESULT {
+		de|8|1
+		de|7|1
+		de|4|1
+		en|9|2
+		en|8|1
+		en|7|3
+		en|4|1
+		en|3|2
+		en|2|1
+		en|1|1
+	}
+}
+

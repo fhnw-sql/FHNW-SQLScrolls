@@ -1,0 +1,78 @@
+METADATA {
+    id: task-052
+    name: Task 52
+    color: orange
+    info: list filtered fields from cross joined table
+    keywords: SELECT, WHERE, CROSS_JOIN
+    level: 4
+}
+
+DESCRIPTION {
+    On their graduation the wizards receive a nickname composed by adjetive and a noun depending on their category.
+    Which are the possible nicknames for a new gold wizard?
+}
+
+ANSWER {
+   SELECT a.name, n.name FROM Nouns n CROSS JOIN Adjectives a WHERE n.type = "gold"
+}
+
+
+TEST {
+    TABLE {
+        Nouns
+        id|name|type
+        1|Dragon|gold
+        2|Bat|silver
+        3|Salamander|bronze
+        4|Phoenix|gold
+        5|Wolf|silver
+        6|Cricket|bronze
+    }
+
+    TABLE {
+        Adjectives
+        id|name
+        1|Mystic
+        2|Dark
+        3|Misterious
+    }
+
+    RESULT {
+        Mystic|Dragon
+        Dark|Dragon
+        Misterious|Dragon        
+        Mystic|Phoenix
+        Dark|Phoenix
+        Misterious|Phoenix
+    }
+}
+
+TEST {
+    TABLE {
+        Nouns
+        id|name|type
+        1|Sphinx|gold
+        2|Tiger|silver
+        3|Spider|bronze
+        4|Pegasus|gold
+        5|Lion|silver
+        6|Scorpion|bronze
+    }
+
+    TABLE {
+        Adjectives
+        id|name
+        1|Infamous
+        2|Ghostly
+        3|Invisible
+    }
+
+    RESULT {
+        Infamous|Sphinx
+        Ghostly|Sphinx
+        Invisible|Sphinx
+        Infamous|Pegasus
+        Ghostly|Pegasus
+        Invisible|Pegasus
+    }
+}

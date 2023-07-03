@@ -1,0 +1,87 @@
+METADATA {
+    id: task-070
+    name: Games 4
+    color: xmas
+    info: list limited sorted fields joined from three tables
+    keywords: SELECT, JOIN, ORDER_BY, LIMIT
+    level: 2
+}
+
+DESCRIPTION {
+    List names and the region of the Pokemons with the smallest Pokedex id.
+}
+
+PARSONS {
+    SELECT p.id, p.name, r.name 
+    FROM Pokemon p 
+    JOIN  Pokemon_region pr 
+    ON p.id == pokedex_id
+    JOIN Region r 
+    ON r.id == region_id
+    ORDER BY p.id
+    LIMIT 5
+    ON pr.id == pokedex_id #distractor
+    ON pr.id == region_id #distractor
+    ORDER BY r.id #distractor
+}
+
+ANSWER {
+    SELECT p.id, p.name, r.name 
+    FROM Pokemon p 
+    JOIN  Pokemon_region pr ON p.id == pokedex_id
+    JOIN Region r ON r.id == region_id
+    ORDER BY p.id
+    LIMIT 5;
+}
+
+TEST {
+    TABLE {
+        Pokemon
+        id|name|type_id|generation
+        385|Jirachi|1|3
+        25|Pikachu|2|1
+        39|Jigglypuff|3|1
+        813|Scorbunny|4|8
+        690|Skrelp|5|6
+        103|Exeggutor|7|1
+        477|Dusknoir|10|4
+        264|Linoone|6|3
+    }
+
+    TABLE {
+        Region
+        id|name
+        1|Kanto
+        2|Johto
+        3|Hoenn
+        4|Sinnoh
+        5|Unova
+        6|Kalos
+        7|Alola
+        8|Galar
+    }
+
+    TABLE {
+        Pokemon_region
+        pokedex_id|region_id
+        385|3
+        25|1
+        39|1
+        813|8
+        690|6
+        103|1
+        477|4
+        264|8
+    }
+
+    RESULT {
+        25|Pikachu|Kanto
+        39|Jigglypuff|Kanto
+        103|Exeggutor|Kanto
+        264|Linoone|Galar
+        385|Jirachi|Hoenn
+    }
+}
+
+
+

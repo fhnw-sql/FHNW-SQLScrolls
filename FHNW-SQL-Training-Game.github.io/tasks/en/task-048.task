@@ -1,0 +1,64 @@
+METADATA {
+    id: task-048
+    name: Task F.14
+    color: xmas
+    info: list count and sum fields from joined tables and brouped
+    keywords: SELECT, COUNT, SUM, INNER_JOIN, GROUP_BY
+    level: 5
+}
+
+DESCRIPTION {
+    How many songs are in each album and what is the total duration of each album?
+}
+
+PARSONS {
+
+	SELECT a.title, count(*), sum(s.seconds)
+	FROM song s 
+	INNER JOIN album a ON a.album_id = s.album_fk
+	GROUP BY a.title   
+	SELECT a.title, sum(*), sum(s.seconds) #distractor
+	FROM album a  #distractor
+	LEFT JOIN album a ON a.album_id = s.album_fk #distractor
+	GROUP BY s.title #distractor
+}
+
+ANSWER { 
+	SELECT a.title, count(*), sum(s.seconds) FROM song s INNER JOIN album a ON a.album_id = s.album_fk GROUP BY a.title
+}
+
+TEST {
+
+	TABLE {
+		Album
+		album_id|title|year
+		11|A Christmas Gift For You From Phil Spector|1963
+		12|Original German Christmas With Die Flippers|1987
+		13|Merry Christmas|1994
+	}
+	
+    TABLE {
+        Song
+        song_id|title|seconds|language|rating|interpret_fk|album_fk
+		1|All I Want for Christmas Is you|241|en|4|4|13
+		2|Silent Night|219|en|1|4|13
+		3|O Holy Night|267|en|3|4|13
+		4|Christmas (Baby Please Come Home)|153|en|7|4|13
+		5|Santa Claus Is Comin to Town|204|en|8|4|13
+		6|Christmas Baby (Please Come Home)|166|en|3|1|11
+		7|Santa Claus Is Coming to Town|204|en|7|3|11
+		8|Winter Wonderland|146|en|7|1|11
+		9|A Marshmallow World|143|en|9|1|11
+		10|Parade Of The Wooden Soldiers|175|en|2|3|11
+		11|Aber Heidschi Bum Beidschi|267|de|8|2|12
+		12|Vom Himmel hoch da komm ich her|180|de|7|2|12
+		13|Alle Jahre wieder|118|de|4|2|null
+		14|Christmasland|144|en|9|null|11
+    }
+
+    RESULT {
+		Original German Christmas With Die Flippers|2|447
+		Merry Christmas|5|1084
+		A Christmas Gift For You From Phil Spector|6|978
+    }
+}
