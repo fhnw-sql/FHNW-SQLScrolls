@@ -1,6 +1,6 @@
 METADATA {
     id: task-052
-    name: Task 52
+    name: Nicknames
     color: orange
     info: list filtered fields from cross joined table
     keywords: SELECT, WHERE, CROSS_JOIN

@@ -1,6 +1,6 @@
 METADATA {
     id: task-095
-    name: Sort by speed
+    name: Speedy Pokemons
     color: blue
     info: Pokedex new arrivals
     keywords: SELECT, ORDER BY ASC

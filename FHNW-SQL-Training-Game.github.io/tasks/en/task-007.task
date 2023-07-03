@@ -1,6 +1,6 @@
 METADATA {
     id: task-007
-    name: Task 7
+    name: Young and Old
     color: purple
     info: list sorted field
     keywords: SELECT, ORDER_BY

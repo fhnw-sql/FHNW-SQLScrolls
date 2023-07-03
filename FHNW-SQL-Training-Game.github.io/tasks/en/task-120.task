@@ -1,6 +1,6 @@
 METADATA {
     id: task-120
-    name: View the danger
+    name: View the Danger
     color: green
     info: delete
     keywords: CREATE_VIEW

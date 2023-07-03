@@ -1,6 +1,6 @@
 METADATA {
     id: task-015
-    name: Task 15
+    name: Ghosts called Veronica
     color: purple
     info: list field on condition
     keywords: SELECT, WHERE, BETWEEN

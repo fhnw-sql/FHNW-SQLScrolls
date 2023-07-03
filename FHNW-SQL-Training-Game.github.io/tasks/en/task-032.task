@@ -1,6 +1,6 @@
 METADATA {
     id: task-032
-    name: Task 32
+    name: Less Magic here
     color: green
     info: list field filtered grouped
     keywords: SELECT, WHERE, GROUP_BY, <, SUM

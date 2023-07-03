@@ -1,6 +1,6 @@
 METADATA {
     id: task-097
-    name: Games 1
+    name: Game Releases
     color: red
     info: game release year
     keywords: SELECT, SUBSTR, LENGTH, DISTINCT

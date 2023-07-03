@@ -1,6 +1,6 @@
 METADATA {
     id: task-011
-    name: Task 11
+    name: Ghosts in 1650
     color: purple
     info: list all fields on condition
     keywords: SELECT, WHERE

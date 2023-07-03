@@ -1,6 +1,6 @@
 METADATA {
     id: task-054
-    name: Task 54
+    name: Spooky Castles
     color: orange
     info: list fields from outer join table
     keywords: SELECT, WHERE, LEFT_OUTER_JOIN

@@ -1,6 +1,6 @@
 METADATA {
     id: task-001
-    name: Task 1
+    name: Ghostly List
     color: purple
     info: list field
     keywords: SELECT

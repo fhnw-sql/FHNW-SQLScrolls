@@ -1,6 +1,6 @@
 METADATA {
     id: task-022
-    name: Task 22
+    name: Born in 18th Century
     color: blue
     info: list count field on condition
     keywords: SELECT, COUNT, WHERE, BETWEEN

@@ -1,6 +1,6 @@
 METADATA {
     id: task-084
-    name: Zoo 8
+    name: Scheduling
     color: blue
     info: list filtered fields from joined tables
     keywords: SELECT, FROM, JOIN, WHERE, GROUP_BY

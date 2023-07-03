@@ -1,6 +1,6 @@
 METADATA {
     id: task-067
-    name: Task F.16
+    name: No Artists
     color: xmas
     info: list fields from joined tables filtered using subquery then grouped
     keywords: SELECT, COUNT, INNER_JOIN, LEFT_OUTER_JOIN, NESTED_QUERY, GROUP_BY

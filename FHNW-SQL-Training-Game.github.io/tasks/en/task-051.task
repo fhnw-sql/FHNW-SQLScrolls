@@ -1,6 +1,6 @@
 METADATA {
     id: task-051
-    name: Task 51
+    name: Haunted by Arthur
     color: orange
     info: list filtered fields from joined table
     keywords: SELECT, WHERE, INNER_JOIN

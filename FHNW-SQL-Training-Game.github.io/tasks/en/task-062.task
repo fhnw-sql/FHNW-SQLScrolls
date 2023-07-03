@@ -1,6 +1,6 @@
 METADATA {
     id: task-062
-    name: Task F.4
+    name: Countries
     color: xmas
     info: list distinct field values
     keywords: SELECT, DISTINCT

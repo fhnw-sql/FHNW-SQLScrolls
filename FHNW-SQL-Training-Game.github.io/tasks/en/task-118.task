@@ -1,6 +1,6 @@
 METADATA {
     id: task-118
-    name: Dangerous levels
+    name: Dangerous Levels
     color: green
     info: delete
     keywords: CREATE_TABLE, PRIMARY_KEY, UNIQUE

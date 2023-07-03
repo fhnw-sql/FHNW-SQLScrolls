@@ -1,6 +1,6 @@
 METADATA {
     id: task-069
-    name: Games 3
+    name: Small and Large
     color: xmas
     info: list min and max values in the table
     keywords: SELECT, WHERE, MIN, MAX

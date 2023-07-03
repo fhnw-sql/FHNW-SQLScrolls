@@ -1,6 +1,6 @@
 METADATA {
     id: task-098
-    name: Top 3
+    name: The Top 3
     color: blue
     info: Pokedex new arrivals
     keywords: SELECT, ORDER BY DESC, LIMIT

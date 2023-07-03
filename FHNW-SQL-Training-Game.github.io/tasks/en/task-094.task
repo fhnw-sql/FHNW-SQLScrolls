@@ -1,6 +1,6 @@
 METADATA {
     id: task-094
-    name: Names
+    name: Two Names
     color: blue
     info: Pokedex new arrivals
     keywords: SELECT, WHERE, IS NOT NULL

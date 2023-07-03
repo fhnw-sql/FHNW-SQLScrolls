@@ -1,6 +1,6 @@
 METADATA {
     id: task-048
-    name: Task F.14
+    name: Counting Songs
     color: xmas
     info: list count and sum fields from joined tables and brouped
     keywords: SELECT, COUNT, SUM, INNER_JOIN, GROUP_BY

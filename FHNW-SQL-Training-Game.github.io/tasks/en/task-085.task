@@ -1,6 +1,6 @@
 METADATA {
     id: task-085
-    name: Zoo 9
+    name: Blueberries
     color: blue
     info: list filtered fields from nested query with joined tables
     keywords: SELECT, FROM, WHERE, NESTED_QUERY, MAX, JOIN

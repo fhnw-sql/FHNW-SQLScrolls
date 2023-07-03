@@ -1,6 +1,6 @@
 METADATA {
     id: task-068
-    name: Games 2
+    name: Pokemon with J
     color: xmas
     info: list names filtered by starting letter
     keywords: SELECT, WHERE, LIKE

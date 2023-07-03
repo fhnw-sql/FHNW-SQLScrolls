@@ -1,6 +1,6 @@
 METADATA {
     id: task-030
-    name: Task 30
+    name: Magical Level
     color: green
     info: list max field grouped
     keywords: SELECT, MAX, GROUP_BY

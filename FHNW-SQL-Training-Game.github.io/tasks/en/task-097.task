@@ -1,6 +1,6 @@
 METADATA {
     id: task-097
-    name: Price
+    name: Pricing
     color: blue
     info: Pokedex new arrivals
     keywords: SELECT, AS, ORDER BY DESC

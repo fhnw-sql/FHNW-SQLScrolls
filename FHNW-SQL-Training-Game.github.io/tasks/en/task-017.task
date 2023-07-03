@@ -1,6 +1,6 @@
 METADATA {
     id: task-017
-    name: Task 17
+    name: Unique Ghost Names
     color: blue
     info: list unique field on condition
     keywords: SELECT, DISTINCT, WHERE, BETWEEN

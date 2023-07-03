@@ -1,6 +1,6 @@
 METADATA {
     id: task-073
-    name: Games 7
+    name: Names of Pokemons
     color: blue
     info: list sorted values joined from union table
     keywords: SELECT, UNION, ORDER_BY

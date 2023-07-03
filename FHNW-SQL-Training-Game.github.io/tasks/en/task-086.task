@@ -1,6 +1,6 @@
 METADATA {
     id: task-086
-    name: Zoo 10
+    name: Protests
     color: purple
     info: calculated field from division including a nested query and joins
     keywords: SELECT, FROM, SUM, WHERE, JOIN, NESTED_QUERY

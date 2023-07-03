@@ -1,6 +1,6 @@
 METADATA {
     id: task-050
-    name: Pokemon 1
+    name: Chronological Pokemons
     color: xmas
     info: game release year
     keywords: SELECT, SUBSTR, LENGTH, DISTINCT

@@ -1,6 +1,6 @@
 METADATA {
     id: task-066
-    name: Task F.12
+    name: Single Ratings
     color: xmas
     info: list count field grouped and sorted
     keywords: SELECT, COUNT, GROUP_BY, HAVING

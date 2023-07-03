@@ -1,6 +1,6 @@
 METADATA {
     id: task-065
-    name: Task F.11
+    name: Languages
     color: xmas
     info: list count field grouped and sorted
     keywords: SELECT, COUNT, GROUP_BY, ORDER_BY

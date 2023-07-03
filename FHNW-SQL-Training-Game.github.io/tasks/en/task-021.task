@@ -1,6 +1,6 @@
 METADATA {
     id: task-021
-    name: Task 21
+    name: Serial Murder
     color: blue
     info: list count field on condition
     keywords: SELECT, COUNT, WHERE

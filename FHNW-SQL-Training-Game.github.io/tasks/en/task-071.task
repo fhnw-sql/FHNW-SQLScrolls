@@ -1,6 +1,6 @@
 METADATA {
     id: task-071
-    name: Games 5
+    name: Average Height
     color: blue
     info: list average of grouped values from joined tables
     keywords: SELECT, COUNT, ROUND, WHERE, JOIN, GROUP BY, HAVING, AVG

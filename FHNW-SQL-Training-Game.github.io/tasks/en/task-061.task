@@ -1,6 +1,6 @@
 METADATA {
     id: task-061
-    name: Task F.3
+    name: Worst Songs
     color: xmas
     info: list field on numeric condition
     keywords: SELECT, WHERE

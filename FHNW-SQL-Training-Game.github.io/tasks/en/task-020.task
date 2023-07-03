@@ -1,6 +1,6 @@
 METADATA {
     id: task-020
-    name: Task 20
+    name: The Youngest Ghost
     color: blue
     info: list max field on condition
     keywords: SELECT, MAX, WHERE, BETWEEN

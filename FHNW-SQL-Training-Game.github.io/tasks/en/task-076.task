@@ -1,6 +1,6 @@
 METADATA {
     id: task-076
-    name: Games 10
+    name: Equipment
     color: green
     info: list sorted fields from multiple joined tables
     keywords: SELECT, FROM, JOIN, ORDER_BY

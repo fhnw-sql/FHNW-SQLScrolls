@@ -1,6 +1,6 @@
 METADATA {
     id: task-041
-    name: Task 41
+    name: Studyfriends
     color: red
     info: list filtered fields from product table with subquery
     keywords: SELECT, WHERE, CARTESIAN_PRODUCT, NESTED_QUERY

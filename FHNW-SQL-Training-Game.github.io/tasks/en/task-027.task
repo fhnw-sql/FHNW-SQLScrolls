@@ -1,6 +1,6 @@
 METADATA {
     id: task-027
-    name: Task 27
+    name: Sum of Wizards
     color: green
     info: list sum field grouped
     keywords: SELECT, SUM, GROUP_BY

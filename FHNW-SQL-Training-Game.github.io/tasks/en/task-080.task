@@ -1,6 +1,6 @@
 METADATA {
     id: task-080
-    name: Zoo 4
+    name: Timo the Rhino
     color: green
     info: list filtered fields from joined tables
     keywords: SELECT, FROM, JOIN

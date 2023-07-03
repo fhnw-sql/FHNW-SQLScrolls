@@ -1,6 +1,6 @@
 METADATA {
     id: task-136
-    name: Who plays violine or viola
+    name: Who plays Violine or Viola?
     color: green
     info: list joined fields by condition
     keywords: SELECT, FROM, INNER JOIN, ON, ORDER_BY, WHERE
@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Who plays the violine or the viola? Please order by instrument and fname.
+    Who plays the violine or the viola? Please order by instrument and first name.
 }
 
 ANSWER {

@@ -1,6 +1,6 @@
 METADATA {
     id: task-137
-    name: Clarinet DUCK
+    name: Clarinet Duck
     color: green
     info: list joined fields by condition
     keywords: SELECT, FROM, GROUP BY, INNER JOIN, WHERE, ON, AND

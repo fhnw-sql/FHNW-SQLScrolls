@@ -1,6 +1,6 @@
 METADATA {
     id: task-128
-    name: Same address
+    name: Same Address
     color: green
     info: list grouped fields
     keywords: SELECT, FROM, GROUP BY, count(*)

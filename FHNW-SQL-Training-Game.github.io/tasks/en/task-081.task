@@ -1,6 +1,6 @@
 METADATA {
     id: task-081
-    name: Zoo 5
+    name: Most Animals
     color: green
     info: list grouped sorted fields from a single table
     keywords: SELECT, FROM, GROUP_BY, ORDER_BY

@@ -1,6 +1,6 @@
 METADATA {
     id: task-046
-    name: Task F.9
+    name: Short Songs
     color: xmas
     info: list filtered sorted fields from multiple joined tables
     keywords: SELECT, WHERE, LEFT_JOIN, ORDER_BY

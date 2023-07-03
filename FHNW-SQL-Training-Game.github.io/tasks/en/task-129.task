@@ -1,6 +1,6 @@
 METADATA {
     id: task-129
-    name: Same first name
+    name: Same First Name
     color: green
     info: list sorted fields by condition
     keywords: SELECT, FROM, GROUP BY, HAVING, count(*), >

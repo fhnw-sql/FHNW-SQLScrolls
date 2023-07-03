@@ -1,6 +1,6 @@
 METADATA {
     id: task-033
-    name: Task 33
+    name: Lonely Wizards
     color: green
     info: list field grouped on count condition
     keywords: SELECT, GROUP_BY, HAVING, COUNT

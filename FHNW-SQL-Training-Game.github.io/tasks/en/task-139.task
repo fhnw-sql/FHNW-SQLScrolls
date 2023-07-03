@@ -1,6 +1,6 @@
 METADATA {
     id: task-139
-    name: Most popular instrument
+    name: Most Popular Instrument
     color: green
     info: list joined, sorted and grouped fields by condition
     keywords: SELECT, FROM, GROUP BY, ORDER BY, DESC, count(*), INNER JOIN

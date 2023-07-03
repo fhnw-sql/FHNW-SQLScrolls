@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Make a list with all persons playing an instrument ordered by instrument and fname.
+    Make a list with all persons playing an instrument ordered by instrument and first name.
  }
 
 ANSWER {

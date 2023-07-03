@@ -1,6 +1,6 @@
 METADATA {
     id: task-037
-    name: Task 37
+    name: Ghostly Description
     color: orange
     info: list filtered fields from product table
     keywords: SELECT, WHERE, CARTESIAN_PRODUCT

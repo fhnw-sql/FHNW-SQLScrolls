@@ -1,6 +1,6 @@
 METADATA {
     id: task-131
-    name: What is a horn
+    name: What is a Horn?
     color: orange
     info: list joined fields by condition
     keywords: SELECT, FROM, INNER JOIN, WHERE, AND, ON

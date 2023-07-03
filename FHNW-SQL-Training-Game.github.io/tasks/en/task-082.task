@@ -1,6 +1,6 @@
 METADATA {
     id: task-082
-    name: Zoo 6
+    name: Forgetful Heidi
     color: green
     info: list filtered fields from subquery on a single table
     keywords: SELECT, FROM, WHERE, NESTED_QUERY, MAX
