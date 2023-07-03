@@ -1,0 +1,97 @@
+METADATA {
+    id: Book-B
+    name: Selection Book 📚
+    title: Book of Selection Spells
+    author: Maestro Codd
+    color: purple
+}
+
+PAGE {
+    The SELECT command retrieves the desired columns from the table.
+    The command is used as follows:
+
+    SELECT {columns} FROM {table};
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
+        }
+        QUERY {
+            SELECT name, weight FROM Dragons;
+        }
+    }
+}
+
+PAGE {
+    The query can be restricted by the WHERE section:
+
+    SELECT {columns} FROM table WHERE {condition};
+
+    For example, comparisons ==, <>,
+    <,>, <=,> = and AND and OR and LIKE.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
+        }
+        QUERY {
+            SELECT name FROM Dragons WHERE weight > 5000;
+        }
+    }
+}
+
+PAGE {
+    Search results can be sorted by ORDER BY section:
+
+    SELECT {columns} FROM {table} ORDER BY {columns};
+
+    If you want the order to be reversed, DESC is added to the end of the command.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
+        }
+        QUERY {
+            SELECT name, weight FROM Dragons ORDER BY weight;
+        }
+    }
+}
+
+PAGE {
+    The word DISTINCT retrieves each different value (or row) only once.
+
+    SELECT DISTINCT {search};
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Wilfried | 6000
+        }
+        QUERY {
+            SELECT DISTINCT name FROM Dragons;
+        }
+    }
+}

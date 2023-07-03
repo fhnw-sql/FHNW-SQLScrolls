@@ -1,0 +1,145 @@
+METADATA {
+    id: Book-L
+    name: Music 1 Book  
+    title: Music 1
+    author: Mme. Louise Farrenc
+    color: music1
+}
+
+
+PAGE {
+    <h2> Music 🎵</h2>
+    This book contains SQL exercises with music data.
+    </br>
+    Below you can see the simplified schema for the exercises:
+    </br>
+    <div class="book-img">
+        <img src="img/music1-simple-ERD.png" alt="Schema"> 
+    </div>
+}
+
+PAGE {
+    Detailed Entity-Relationship Schema
+    </br>
+    <div class="book-img">
+        <img src="img/music1-detail-ERD.png" alt="Schema"> 
+    </div>
+}
+
+PAGE {
+    <h3> Person Data Table </h3>
+
+    EXAMPLE {
+        SQL {
+            CREATE TABLE PERSON(
+                PERSON_ID              INTEGER PRIMARY KEY AUTOINCREMENT,
+                FNAME                  TEXT,
+                NAME                   TEXT,
+                STREET                 TEXT,
+                CITY                   TEXT,
+                BOOKS                  INTEGER,
+                PARENT                 INTEGER
+            ) ;
+
+            Insert Into Person (person_id, Fname, Name, Street, City, Books, Parent)
+            Values (501, 'Donald', 'Duck', 'Blumenweg', 'Entenhausen', 5, Null);
+            Insert Into Person (person_id, Fname, Name, Street, City, Books, Parent)
+            Values (502, 'Tick', 'Duck', 'Blumenweg', 'Entenhausen', 41, 501);
+            Insert Into Person (person_id, Fname, Name, Street, City, Books, Parent)
+            Values (503, 'Trick', 'Duck', 'Blumenweg', 'Entenhausen', 45, 501);
+            Insert Into Person (person_id, Fname, Name, Street, City, Books, Parent)
+            Values (504, 'Track', 'Duck', 'Blumenweg', 'Entenhausen', 43, 501);
+            Insert Into Person (person_id, Fname, Name, Street, City, Books, Parent)
+            Values (510, 'Dagobert', 'Trump', 'Steinenberg', 'Usania', 1, Null);
+
+        }
+
+        QUERY {
+            SELECT * FROM PERSON;
+        }
+    }
+}
+
+PAGE {
+    <h3> Instrument Group Data Table </h3>
+
+    EXAMPLE {
+        SQL {
+            CREATE TABLE INSTRUMENTGROUP
+            (
+                GROUP_ID                INTEGER PRIMARY KEY AUTOINCREMENT,
+                GROUP_NAME              TEXT 
+            ) ;
+
+            INSERT INTO INSTRUMENTGROUP (GROUP_ID, GROUP_NAME)
+            VALUES (101, 'Strings');
+            INSERT INTO INSTRUMENTGROUP (GROUP_ID, GROUP_NAME)
+            VALUES (102, 'Woodwind');
+            INSERT INTO INSTRUMENTGROUP (GROUP_ID, GROUP_NAME)
+            VALUES (103, 'Brass');
+        }
+
+        QUERY {
+            SELECT * FROM INSTRUMENTGROUP;
+        }
+    }
+}
+
+PAGE {
+    <h3> Instrument Data Table </h3>
+
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE INSTRUMENT
+            (
+                INSTRUMENT_ID          INTEGER PRIMARY KEY AUTOINCREMENT,
+                INSTRUMENT_NAME        TEXT,
+                INSTRUMENTGROUP_ID     INTEGER
+            ) ;
+
+            INSERT INTO INSTRUMENT (INSTRUMENT_ID, INSTRUMENT_NAME, INSTRUMENTGROUP_ID)
+            VALUES (201, 'Violine',101);
+            INSERT INTO INSTRUMENT (INSTRUMENT_ID, INSTRUMENT_NAME, INSTRUMENTGROUP_ID)
+            VALUES (202, 'Viola',101);
+            INSERT INTO INSTRUMENT (INSTRUMENT_ID, INSTRUMENT_NAME, INSTRUMENTGROUP_ID)
+            VALUES (203, 'Cello',101);
+            INSERT INTO INSTRUMENT (INSTRUMENT_ID, INSTRUMENT_NAME, INSTRUMENTGROUP_ID)
+            VALUES (204, 'Contrabass',101);
+            INSERT INTO INSTRUMENT (INSTRUMENT_ID, INSTRUMENT_NAME, INSTRUMENTGROUP_ID)
+            VALUES (205, 'Clarinet',102);
+        }
+
+        QUERY {
+            SELECT * FROM INSTRUMENT;
+        }
+    }
+}
+
+PAGE {
+    <h3> Playing Data Table </h3>
+
+    EXAMPLE {
+        SQL {
+            CREATE TABLE PLAYING(
+                PERSON_ID              INTEGER,
+                INSTRUMENT_ID          INTEGER
+            ) ;
+
+            INSERT INTO PLAYING (PERSON_ID, INSTRUMENT_ID)
+            VALUES (502,201);
+            INSERT INTO PLAYING (PERSON_ID, INSTRUMENT_ID)
+            VALUES (502,202);
+            INSERT INTO PLAYING (PERSON_ID, INSTRUMENT_ID)
+            VALUES (503,205);
+            INSERT INTO PLAYING (PERSON_ID, INSTRUMENT_ID)
+            VALUES (503,208);
+            INSERT INTO PLAYING (PERSON_ID, INSTRUMENT_ID)
+            VALUES (504,205);
+        }
+
+        QUERY {
+            SELECT * FROM PLAYING;
+        }
+    }
+}

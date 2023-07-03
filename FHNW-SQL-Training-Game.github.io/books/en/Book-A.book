@@ -1,0 +1,18 @@
+METADATA {
+    id: Book-A
+    name: Explanation Book 📚
+    title: Book of Explanation
+    author: Maestro Codd
+    color: grey
+}
+
+PAGE {
+    I'm a book. You find me in every chapter and I contain the necessary knowledge if you need help to solve the game tasks. \n\n
+    Try the first task to get in touch with the mechanics.
+}
+
+PAGE {
+
+ <small><b>Hint 1:</b> <i>Task colour is the same as book colour.</i></small> <br/ > <br />
+   <small><b>Hint 2:</b> <i>After five wrong answers Maestro Codd will help you by providing the model answer (in case you are stuck).</i></small>
+}
