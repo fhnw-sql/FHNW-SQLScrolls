@@ -1,5 +1,3 @@
-# SQLScrolls
-
 # SQLScrolls Installation Guide Prototype 
 
 ## Step 1
