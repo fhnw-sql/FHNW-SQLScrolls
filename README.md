@@ -1,4 +1,4 @@
-# SQLScrolls Installation Guide Prototype 
+# SQLScrolls Installation Guide OLD Prototype 
 
 ## Step 1
 Download the Game from Github -> Code -> Clone -> .zip
