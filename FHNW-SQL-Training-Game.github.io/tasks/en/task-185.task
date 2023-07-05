@@ -65,6 +65,10 @@ TEST {
        345675|Jan|Schmidt|Physics|Student
     }
 
+    SQL {
+        SELECT * FROM person;
+    }
+
     RESULT {
        1234|Julia|Schneider|Electrical Engineering|Lecturer
        1239|Anna|Neumann|Mechanical Engineering|Lecturer
@@ -149,6 +153,10 @@ TEST {
        90123|Lena|Schneider|Computer Science|Student
        99011|Robin|Hoffmann|Electrical Engineering|Student
        345675|Jan|Schmidt|Physics|Student
+    }
+
+    SQL {
+        SELECT * FROM person;
     }
 
     RESULT {
