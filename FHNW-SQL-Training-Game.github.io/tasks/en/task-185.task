@@ -63,7 +63,7 @@ TEST {
        345675|Jan|Schmidt|Physics|Student
     }
     SQL {
-        SELECT * FROM Person;
+        SELECT * FROM person;
     }
 
 
