@@ -14,19 +14,19 @@ DESCRIPTION {
 }
 
 ANSWER {
-SELECT p.personID, p.firstname, p.lastname, p.subject, p.persontype
-FROM person p INNER JOIN
-timetracking t ON (t.PersonID = p.PersonID) INNER JOIN
-area a ON (a.areaID = t.areaid)
-WHERE a.areaname = 'Mechanical Lab'
-INTERSECT
-SELECT p.personid, p.firstname, p.lastname, p.subject, p.persontype
-FROM person p INNER JOIN
-timetracking t ON (t.PersonID = p.PersonID) INNER JOIN
-area a ON (a.areaID = t.areaid)
-WHERE a.areaname = 'Research'
-AND t.entrytime <= '2023-03-30 17:30'
-AND (t.exittime IS NULL OR t.exittime >= '2023-03-30 17:00');
+    SELECT p.personID, p.firstname, p.lastname, p.subject, p.persontype
+    FROM person p INNER JOIN
+    timetracking t ON (t.PersonID = p.PersonID) INNER JOIN
+    area a ON (a.areaID = t.areaid)
+    WHERE a.areaname = 'Mechanical Lab'
+    INTERSECT
+    SELECT p.personid, p.firstname, p.lastname, p.subject, p.persontype
+    FROM person p INNER JOIN
+    timetracking t ON (t.PersonID = p.PersonID) INNER JOIN
+    area a ON (a.areaID = t.areaid)
+    WHERE a.areaname = 'Research'
+    AND t.entrytime <= '2023-03-30 17:30'
+    AND t.exittime >= '2023-03-30 17:00';
 }
 
 TEST {
