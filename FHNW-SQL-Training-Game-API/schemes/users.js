@@ -27,7 +27,15 @@ const userSchemas = {
     token: Joi.string().required(),
     password: Joi.string().min(5).max(20).required(),
   }),
-
+  // Authentication SWITCHaai
+  authenticateSWITCHaaiPOST: Joi.object().keys({
+    username: Joi.string().required(),
+      uid: Joi.string().required(),
+      pid: Joi.string().required(),
+      org: Joi.string().required(),
+      givenname: Joi.string().optional(),
+      surname: Joi.string().optional(),
+   }),
 };
 
 module.exports = userSchemas;
