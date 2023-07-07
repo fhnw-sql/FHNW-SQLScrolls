@@ -19,15 +19,15 @@ services:
     depends_on:
       - 'db'
     restart: always
-    image: janwilhelmfhnw/api
-      # build: ../FHNW-SQL-Training-Game-API
-      #environment:
-      # - MONGODB_URI=mongodb://mongo:27017/stg-api
-      # - JWT_SECRET=FHNW_2021
-      # - FROM_SENDER=${FROM_SENDER}
-      # - POSTMARK_API_KEY=${POSTMARK_API_KEY}
-    # - PORT=3001
-    #  - IO_URL=${IO_URL}
+    #image: janwilhelmfhnw/api
+    build: ../FHNW-SQL-Training-Game-API
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/stg-api
+       - JWT_SECRET=FHNW_2021
+       - FROM_SENDER=${FROM_SENDER}
+       - POSTMARK_API_KEY=${POSTMARK_API_KEY}
+      - PORT=3001
+      - IO_URL=${IO_URL}
     ports:
       - "3001:3001"
   frontend:
@@ -35,11 +35,11 @@ services:
     depends_on:
       - 'api'
     restart: always
-    image: janwilhelmfhnw/frontend
-      #build:
-      # context: .
-      # args:
-    # API_URL: ${API_URL}
+    #image: janwilhelmfhnw/frontend
+    build:
+       context: .
+       args:
+    API_URL: ${API_URL}
     ports:
       - "80:80"
       - "3000:3000"
