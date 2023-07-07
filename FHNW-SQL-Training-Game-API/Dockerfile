@@ -3,7 +3,11 @@ FROM node:10.19.0
 
 ## Set Port
 ENV PORT=3001
-
+ENV MONGODB_URI=mongodb://mongo:27017/stg-api
+ENV JWT_SECRET=FHNW_2021
+ENV FROM_SENDER=stg@github.io
+ENV POSTMARK_API_KEY=blank
+ENV IO_URL=http://localhost:80
 # Create app directory
 WORKDIR /usr/src/app
 

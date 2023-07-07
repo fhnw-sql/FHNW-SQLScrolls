@@ -2,7 +2,7 @@
 FROM nginx:alpine
 
 # API ARG
-ARG API_URL
+ARG API_URL=http://loalhosthost:3000
 RUN test -n "$API_URL" || (echo "API_URL  not set" && false)
 
 # Set app directory
