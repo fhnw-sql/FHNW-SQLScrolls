@@ -1,0 +1,54 @@
+METADATA {
+    id: task-156
+    name: Valid Preferences
+    color: blue
+    info: JSON operators
+    keywords: JSON
+    level: 5
+}
+
+DESCRIPTION {
+    The users database has been corrupted and some records are no longer valid. 
+    Find the users with still have well-formed JSON interests information.
+
+    💡 Tip: Use the operator json_valid to check the correctness of a JSON field.
+
+ }
+
+ANSWER { 
+    SELECT id, name FROM user where json_valid(interests)=1;
+}
+
+TEST {
+    
+    TABLE {
+        User
+        id|name|interests
+        1|John|{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}
+        2|Kate|{"likes": ["reading", "swimming", "dislikes": ["skating"]}
+        3|Jim|{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}
+        4|Mark|{"likes": ["reading, "swimming"], "dislikes": ["cooking"]}
+    }
+
+    RESULT {
+        1|John
+        3|Jim
+    }
+}
+
+TEST {
+
+    TABLE {
+        User
+        id|name|interests
+        1|Katherine|{"likes": "dancing", "cooking", "dislikes": ["shopping"]}
+        2|Jayson|{"likes": ["surfing"], "dislikes": ["dancing"]}
+        3|Dianne|{"likes": ["cooking", "shopping"], "dislikes": ["surfing"]}
+        4|Jake|{"likes": [singing, dancing, surfing], "dislikes": ["reading", "cooking"]}  
+    }
+    
+    RESULT {
+        2|Jayson
+        3|Dianne
+    }
+}

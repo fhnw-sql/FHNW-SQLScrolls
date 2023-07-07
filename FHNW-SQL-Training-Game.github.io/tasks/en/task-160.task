@@ -1,0 +1,57 @@
+METADATA {
+    id: task-160
+    name: Activities array
+    color: blue
+    info: JSON operators
+    keywords: JSON
+    level: 4
+}
+
+DESCRIPTION {
+    The table shows some of the typical leisure activities on different seasons. 
+
+    💡 Tip: Use the operator json_array(column1, column2, ...) to get the result as a JSON array.
+
+}
+
+ANSWER { 
+    SELECT id, season, json_array(sport, food, art) FROM leisure
+}
+
+TEST {
+    
+    TABLE {
+        Leisure
+        id|season|sport|food|art
+        1|winter|skiing|baking cookies|snowman
+        2|summer|surfing|grilling|sand castle
+        3|spring|hiking|garden party|flower arrangement
+        4|autumn|biking|cooking mushrooms|photography
+    }
+
+    RESULT {
+        1|winter|["skiing","baking cookies","snowman"]
+        2|summer|["surfing","grilling","sand castle"]
+        3|spring|["hiking","garden party","flower arrangement"]
+        4|autumn|["biking","cooking mushrooms","photography"]
+    }
+}
+
+TEST {
+
+    TABLE {
+        Leisure
+        id|season|sport|food|art
+        1|spring|track and field|strawberry picking|origami
+        2|summer|swimming|ice cream party|pottery 
+        3|autumn|biking|baking pie|photography  
+        4|winter|ice hockey|baking cookies|paper snowflake      
+    }
+
+    RESULT {
+        1|spring|["track and field","strawberry picking","origami"]
+        2|summer|["swimming","ice cream party","pottery"]
+        3|autumn|["biking","baking pie","photography"]
+        4|winter|["ice hockey","baking cookies","paper snowflake"]
+    }
+}
