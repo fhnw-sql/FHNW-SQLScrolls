@@ -1,17 +1,17 @@
 METADATA {
     id: task-185
-    name: List of the University
+    name: Conclusion
     color: red
-    info: list sorted, grouped fields
-    keywords: GROUP BY, ORDER BY
+    info: delete
+    keywords: DELETE
     level: 2
     type: DCL
 }
 
 DESCRIPTION {
-   Enola Holmes: "How many students, professors and others are at the university?"
+   The Killer confessed to have killed Professor Lehmann. She had found out that she had used AI tools to add invented data to all her projects to get a better result. He was about to expose her, which would not only have led to her being exmatriculated, but also to her current employer firing her as well.
 
-   You: "I will make a list that counts the people per person type with the largest group first"
+   Please remove her entries from the table to wipe her data.
 }
 
 ANSWER {
