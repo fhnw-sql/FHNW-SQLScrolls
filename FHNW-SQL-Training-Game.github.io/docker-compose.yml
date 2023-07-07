@@ -19,8 +19,8 @@ services:
     depends_on:
       - 'db'
     restart: always
-    #image: janwilhelmfhnw/api
-    build: ../FHNW-SQL-Training-Game-API
+    image: janwilhelmfhnw/api
+    #build: ../FHNW-SQL-Training-Game-API
       #environment:
       # - MONGODB_URI=mongodb://mongo:27017/stg-api
       # - JWT_SECRET=FHNW_2021
@@ -35,8 +35,8 @@ services:
     depends_on:
       - 'api'
     restart: always
-    #image: janwilhelmfhnw/frontend
-    build:
+    image: janwilhelmfhnw/frontend
+    # build:
       # context: .
      #  args:
     # API_URL: ${API_URL}
