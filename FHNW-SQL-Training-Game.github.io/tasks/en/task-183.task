@@ -14,9 +14,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    p.personid,
-    p.firstname,
-    p.lastname,
+    SELECT p.personid, p.firstname, p.lastname,
     strftime('%Y-%m-%d %H:%M', t.entrytime) AS entrytime,
     strftime('%Y-%m-%d %H:%M', t.exittime) AS exittime,
     (strftime('%s', t.exittime) - strftime('%s', t.entrytime)) / 60 AS duration_minutes
