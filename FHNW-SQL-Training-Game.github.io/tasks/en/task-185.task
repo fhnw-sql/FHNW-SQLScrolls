@@ -15,7 +15,10 @@ DESCRIPTION {
 }
 
 ANSWER {
-    DELETE FROM person WHERE firstname='Lena' AND lastname='Schneider';
+    DELETE
+    FROM person
+    WHERE firstname='Lena'
+    AND lastname='Schneider';
 }
 
 TEST {

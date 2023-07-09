@@ -14,10 +14,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT p.personid, p.firstname, p.lastname, strftime('%Y-%m-%d %H:%M', t.entrytime) AS entrytime, strftime('%Y-%m-%d %H:%M', t.exittime) AS exittime,
-    (strftime('%s', t.exittime) - strftime('%s', t.entrytime)) / 60 AS duration_minutes FROM person p INNER JOIN timetracking t ON t.personID = p.personID INNER JOIN area a ON a.areaID = t.areaID
-    WHERE a.areaname = 'Mechanical Lab'
-    ORDER BY duration_minutes DESC;
+    SELECT p.personid, p.firstname, p.lastname, strftime('%Y-%m-%d %H:%M', t.entrytime) AS entrytime, strftime('%Y-%m-%d %H:%M', t.exittime) AS exittime, (strftime('%s', t.exittime) - strftime('%s', t.entrytime)) / 60 AS duration_minutes FROM person p INNER JOIN timetracking t ON t.personID = p.personID INNER JOIN area a ON a.areaID = t.areaID WHERE a.areaname = 'Mechanical Lab' ORDER BY duration_minutes DESC;
 }
 
 TEST {
@@ -122,7 +119,12 @@ TABLE {
     012|Restaurant
         }
     RESULT {
-    90123|Lena|Schneider|Computer Science|Student
+    9012|Svenja|Schwarz|29.03.23 15:00|29.03.23 21:03|363
+    13345|Lisa|Weber|29.03.23 18:00|29.03.23 22:03|243
+    22334|Florian|Fuchs|28.03.23 09:15|28.03.23 13:18|243
+    11123|Carla|Klein|29.03.23 07:30|29.03.23 11:33|243
+    66778|Nina|Schuster|30.03.23 09:15|30.03.23 13:17|242
+    90123|Lena|Schneider|29.03.23 17:15|29.03.23 20:18|183
     }
 }
 
