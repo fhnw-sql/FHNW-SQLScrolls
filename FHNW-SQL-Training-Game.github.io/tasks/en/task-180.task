@@ -2,32 +2,32 @@ METADATA {
     id: task-180
     name: Who was in the Room?
     color: red
-    info: List with timestamps
+    info: list with timestamps
     keywords: STRFTIME, DATETIME, INNER JOIN, AND, ORDER BY
-    level: 2
+    level: 3
 }
 
 DESCRIPTION {
-    Enola Holmes: "If only we could find out who was in the research at the time of the power interruption..."
+	Enola Holmes: "If only we could find out who was in the research at the time of the power interruption..."
 
-    You: " Entry and exit to the research are recorded with time tracking."
+	You: " Entry and exit to the research are recorded with time tracking."
 
-    Enola Holmes: "Can you create a list consisting of PersonID, FirstName, LastName, AreaName, Entry Time, and Exit time of everyone who was in the research area between 5:00 PM and 5:30 PM according to the time-tracking? Please order it by entrytime."
+	Enola Holmes: "Can you create a list consisting of PersonID, FirstName, LastName, AreaName, Entry Time, and Exit time of everyone who was in the research area between 5:00 PM and 5:30 PM according to the time-tracking? Please order it by entrytime."
 
-    You: "That's not that easy. The entry time has to be before 5:30 and the exit time after 5:00 or empty."
-    }
+	You: "That's not that easy. The entry time has to be before 5:30 and the exit time after 5:00 or empty."
+}
 
 ANSWER {
-    SELECT p.personID, p.firstname, p.lastname, a.areaname,
-    strftime('%Y-%m-%d %H:%M', t.entrytime) AS entrytime,
-    strftime('%Y-%m-%d %H:%M', t.exittime) AS exittime
-    FROM person p
-    INNER JOIN timetracking t ON t.PersonID = p.PersonID
-    INNER JOIN area a ON a.areaID = t.areaid
-    WHERE a.areaname = 'Research'
-    AND t.entrytime <= datetime('2023-03-30 17:30')
-    AND (t.exittime IS NULL OR t.exittime >= datetime('2023-03-30 17:00'))
-    ORDER BY entrytime;
+	SELECT p.personID, p.firstname, p.lastname, a.areaname,
+	strftime('%Y-%m-%d %H:%M', t.entrytime) AS entrytime,
+	strftime('%Y-%m-%d %H:%M', t.exittime) AS exittime
+	FROM person p
+	INNER JOIN timetracking t ON t.PersonID = p.PersonID
+	INNER JOIN area a ON a.areaID = t.areaid
+	WHERE a.areaname = 'Research'
+	AND t.entrytime <= datetime('2023-03-30 17:30')
+	AND (t.exittime IS NULL OR t.exittime >= datetime('2023-03-30 17:00'))
+	ORDER BY entrytime;
 }
 
 TEST {
@@ -54,7 +54,7 @@ TEST {
        13345|Lisa|Weber|Physics|Student
        14456|Tina|Schwarz|Electrical Engineering|Student
        22334|Florian|Fuchs|Computer Science|Student
-       23451|Kim|Hoffmann|Computer Science|Lecturer
+       23451|Kim|Hoffmann|Computer Science|Staff
        23456|Lisa|Müller|Data Science|Student
        31234|Markus|Schmitt|Computer Science|Student
        33445|Svenja|Koch|Electrical Engineering|Student
@@ -75,20 +75,20 @@ TEST {
        345675|Jan|Schmidt|Physics|Student
     }
     TABLE {
-        area
-        areaID|areaName
-        001|Open Space
-        002|Entrance
-        003|Office
-        004|Conference
-        005|Classroom
-        006|Research
-        007|Development
-        008|Mechanical Lab
-        009|IT Lab
-        010|Cafeteria
-        011|Recreation
-        012|Restaurant
+		area
+		areaID|areaName
+		|Open Space
+		002|Entrance
+		003|Office
+		004|Conference
+		005|Classroom
+		006|Research
+		007|Development
+		008|Mechanical Lab
+		009|IT Lab
+		010|Cafeteria
+		011|Recreation
+		012|Restaurant
     }
     TABLE {
         timetracking
@@ -139,4 +139,5 @@ TEST {
         5678|Tim|Lehmann|Research|30.03.23 16:45|9999-12-31 23:59:59
     }
 }
+
 

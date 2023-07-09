@@ -14,123 +14,119 @@ DESCRIPTION {
 }
 
 ANSWER {
-SELECT
-  p.personid,
-  p.firstname,
-  p.lastname,
-  strftime('%Y-%m-%d %H:%M', t.entrytime) AS entrytime,
-  strftime('%Y-%m-%d %H:%M', t.exittime) AS exittime,
-  (strftime('%s', t.exittime) - strftime('%s', t.entrytime)) / 60 AS duration_minutes
-FROM
-  person p
-  INNER JOIN timetracking t ON t.personID = p.personID
-  INNER JOIN area a ON a.areaID = t.areaID
-WHERE
-  a.areaname = 'Mechanical Lab'
-ORDER BY
-  duration_minutes DESC;
+    p.personid,
+    p.firstname,
+    p.lastname,
+    strftime('%Y-%m-%d %H:%M', t.entrytime) AS entrytime,
+    strftime('%Y-%m-%d %H:%M', t.exittime) AS exittime,
+    (strftime('%s', t.exittime) - strftime('%s', t.entrytime)) / 60 AS duration_minutes
+    FROM person p
+    INNER JOIN timetracking t ON t.personID = p.personID
+    INNER JOIN area a ON a.areaID = t.areaID
+    WHERE a.areaname = 'Mechanical Lab'
+    ORDER BY duration_minutes DESC;
 }
 
 TEST {
     TABLE {
-         person
-                                             personID|firstname|lastname|subject|persontype
-                                             1234|Julia|Schneider|Electrical Engineering|Lecturer
-                                             1239|Anna|Neumann|Mechanical Engineering|Lecturer
-                                             2345|Thomas|Meier|Physics|Staff
-                                             3456|Anna|Müller|Data Science|Lecturer
-                                             4567|Lisa|Weber|Physics|Professor
-                                             5678|Tim|Lehmann|Computer Science|Professor
-                                             5688|Fabian|Wolf|Physics|Lecturer
-                                             6789|Markus|Schmidt|Data Science|Professor
-                                             7890|Nina|Fuchs|Electrical Engineering|Staff
-                                             8901|Jens|Schmidt|Data Science|Lecturer
-                                             9012|Svenja|Schwarz|Computer Science|Lecturer
-                                             10012|Max|Mayer|Mechanical Engineering|Student
-                                             10122|Katharina|Berg|Computer Science|Student
-                                             11123|Carla|Klein|Computer Science|Student
-                                             11223|Julia|Krause|Data Science|Student
-                                             12234|Felix|Schneider|Data Science|Student
-                                             12347|Esther|Wagner|Mechanical Engineering|Staff
-                                             13345|Lisa|Weber|Physics|Student
-                                             14456|Tina|Schwarz|Electrical Engineering|Student
-                                             22334|Florian|Fuchs|Computer Science|Student
-                                             23451|Kim|Hoffmann|Computer Science|Staff
-                                             23456|Lisa|Müller|Data Science|Student
-                                             31234|Markus|Schmitt|Computer Science|Student
-                                             33445|Svenja|Koch|Electrical Engineering|Student
-                                             34567|Brigitte|Berg|Data Science|Staff
-                                             44556|Marie|Schwarz|Mechanical Engineering|Student
-                                             45678|Sarah|Klein|Electrical Engineering|Student
-                                             55667|Tom|Lorenz|Computer Science|Student
-                                             56789|Tim|Weber|Mechanical Engineering|Student
-                                             66778|Nina|Schuster|Data Science|Student
-                                             67890|Anna|Bauer|Computer Science|Student
-                                             67899|Hannah|Becker|Computer Science|Lecturer
-                                             77889|Matthias|Neumann|Mechanical Engineering|Student
-                                             78901|Fabian|Wolf|Physics|Student
-                                             88900|Lea|Wagner|Physics|Student
-                                             89012|Hannah|Becker|Data Science|Student
-                                             90123|Lena|Schneider|Computer Science|Student
-                                             99011|Robin|Hoffmann|Electrical Engineering|Student
-                                             345675|Jan|Schmidt|Physics|Student
-    }
-TABLE {
-         timetracking
-                       personID|areaID|entrytime|exittime
-                       5678|006|2023-03-30 17:45:30|9999-12-31 23:59:59
-                       8901|006|2023-03-30 17:45:00|2023-03-30 20:21:00
-                       90123|006|2023-03-30 16:10:00|2023-03-30 17:45:00
-                       31234|006|2023-03-30 18:32:00|2023-03-30 20:22:00
-                       6789|006|2023-03-29 08:15:00|2023-03-29 12:10:00
-                       33445|006|2023-03-29 09:30:00|2023-03-29 13:00:00
-                       44556|006|2023-03-29 10:45:00|2023-03-29 14:40:00
-                       55667|006|2023-03-29 12:00:00|2023-03-29 15:45:00
-                       4567|006|2023-03-29 13:15:00|2023-03-29 16:20:00
-                       66778|006|2023-03-29 14:30:00|2023-03-29 18:20:00
-                       77889|006|2023-03-29 15:45:00|2023-03-29 19:00:00
-                       34567|006|2023-03-30 08:00:00|2023-03-30 11:30:00
-                       45678|006|2023-03-30 09:15:00|2023-03-30 13:00:00
-                       67890|006|2023-03-30 10:30:00|2023-03-30 14:15:00
-                       88900|006|2023-03-30 11:45:00|2023-03-30 15:30:00
-                       99011|006|2023-03-30 13:00:00|2023-03-30 16:45:00
-                       5688|006|2023-03-30 14:15:00|2023-03-30 18:00:00
-                       78901|006|2023-03-30 15:30:00|2023-03-30 19:00:00
-                       56789|006|2023-03-29 08:00:00|2023-03-29 11:00:00
-                       10122|006|2023-03-29 09:15:00|2023-03-29 12:30:00
-                       10122|006|2023-03-29 10:30:00|2023-03-29 14:00:00
-                       9012|008|2023-03-29 15:00:00|2023-03-29 21:03:00
-                       90123|008|2023-03-29 17:15:00|2023-03-29 20:18:00
-                       13345|008|2023-03-29 18:00:00|2023-03-29 22:03:00
-                       11123|008|2023-03-29 07:30:00|2023-03-29 11:33:00
-                       22334|008|2023-03-28 09:15:00|2023-03-28 13:18:00
-                       66778|008|2023-03-30 09:15:00|2023-03-30 13:17:00
-                       67890|007|2023-03-29 14:10:00|2023-03-29 18:13:00
-                       23456|007|2023-03-30 09:45:00|2023-03-30 13:48:00
-                       78901|007|2023-03-30 14:20:00|2023-03-30 18:23:00
-                       1234|007|2023-03-29 20:00:00|2023-03-29 22:03:00
-                       2345|009|2023-03-30 16:32:00|9999-12-31 23:59:59
-                       2345|009|2023-03-29 08:02:00|9999-12-31 23:59:59
-                       2345|009|2023-03-29 12:47:00|9999-12-31 23:59:59
-                       5678|006|2023-03-30 16:45:30|9999-12-31 23:59:59
-                       8901|006|2023-03-30 17:45:00|2023-03-30 20:21:00
-                       90123|006|2023-03-30 18:10:00|9999-12-31 23:59:59
+       person
+       personID|firstname|lastname|subject|persontype
+       1234|Julia|Schneider|Electrical Engineering|Lecturer
+       1239|Anna|Neumann|Mechanical Engineering|Lecturer
+       2345|Thomas|Meier|Physics|Staff
+       3456|Anna|Müller|Data Science|Lecturer
+       4567|Lisa|Weber|Physics|Professor
+       5678|Tim|Lehmann|Computer Science|Professor
+       5688|Fabian|Wolf|Physics|Lecturer
+       6789|Markus|Schmidt|Data Science|Professor
+       7890|Nina|Fuchs|Electrical Engineering|Staff
+       8901|Jens|Schmidt|Data Science|Lecturer
+       9012|Svenja|Schwarz|Computer Science|Lecturer
+       10012|Max|Mayer|Mechanical Engineering|Student
+       10122|Katharina|Berg|Computer Science|Student
+       11123|Carla|Klein|Computer Science|Student
+       11223|Julia|Krause|Data Science|Student
+       12234|Felix|Schneider|Data Science|Student
+       12347|Esther|Wagner|Mechanical Engineering|Staff
+       13345|Lisa|Weber|Physics|Student
+       14456|Tina|Schwarz|Electrical Engineering|Student
+       22334|Florian|Fuchs|Computer Science|Student
+       23451|Kim|Hoffmann|Computer Science|Staff
+       23456|Lisa|Müller|Data Science|Student
+       31234|Markus|Schmitt|Computer Science|Student
+       33445|Svenja|Koch|Electrical Engineering|Student
+       34567|Brigitte|Berg|Data Science|Staff
+       44556|Marie|Schwarz|Mechanical Engineering|Student
+       45678|Sarah|Klein|Electrical Engineering|Student
+       55667|Tom|Lorenz|Computer Science|Student
+       56789|Tim|Weber|Mechanical Engineering|Student
+       66778|Nina|Schuster|Data Science|Student
+       67890|Anna|Bauer|Computer Science|Student
+       67899|Hannah|Becker|Computer Science|Lecturer
+       77889|Matthias|Neumann|Mechanical Engineering|Student
+       78901|Fabian|Wolf|Physics|Student
+       88900|Lea|Wagner|Physics|Student
+       89012|Hannah|Becker|Data Science|Student
+       90123|Lena|Schneider|Computer Science|Student
+       99011|Robin|Hoffmann|Electrical Engineering|Student
+       345675|Jan|Schmidt|Physics|Student
     }
     TABLE {
-            area
-                         areaID|areaName
-                         001|Open Space
-                         002|Entrance
-                         003|Office
-                         004|Conference
-                         005|Classroom
-                         006|Research
-                         007|Development
-                         008|Mechanical Lab
-                         009|IT Lab
-                         010|Cafeteria
-                         011|Recreation
-                         012|Restaurant
+        timetracking
+        personID|areaID|entrytime|exittime
+        5678|006|2023-03-30 17:45:30|9999-12-31 23:59:59
+        8901|006|2023-03-30 17:45:00|2023-03-30 20:21:00
+        90123|006|2023-03-30 16:10:00|2023-03-30 17:45:00
+        31234|006|2023-03-30 18:32:00|2023-03-30 20:22:00
+        6789|006|2023-03-29 08:15:00|2023-03-29 12:10:00
+        33445|006|2023-03-29 09:30:00|2023-03-29 13:00:00
+        44556|006|2023-03-29 10:45:00|2023-03-29 14:40:00
+        55667|006|2023-03-29 12:00:00|2023-03-29 15:45:00
+        4567|006|2023-03-29 13:15:00|2023-03-29 16:20:00
+        66778|006|2023-03-29 14:30:00|2023-03-29 18:20:00
+        77889|006|2023-03-29 15:45:00|2023-03-29 19:00:00
+        34567|006|2023-03-30 08:00:00|2023-03-30 11:30:00
+        45678|006|2023-03-30 09:15:00|2023-03-30 13:00:00
+        67890|006|2023-03-30 10:30:00|2023-03-30 14:15:00
+        88900|006|2023-03-30 11:45:00|2023-03-30 15:30:00
+        99011|006|2023-03-30 13:00:00|2023-03-30 16:45:00
+        5688|006|2023-03-30 14:15:00|2023-03-30 18:00:00
+        78901|006|2023-03-30 15:30:00|2023-03-30 19:00:00
+        56789|006|2023-03-29 08:00:00|2023-03-29 11:00:00
+        10122|006|2023-03-29 09:15:00|2023-03-29 12:30:00
+        10122|006|2023-03-29 10:30:00|2023-03-29 14:00:00
+        9012|008|2023-03-29 15:00:00|2023-03-29 21:03:00
+        90123|008|2023-03-29 17:15:00|2023-03-29 20:18:00
+        13345|008|2023-03-29 18:00:00|2023-03-29 22:03:00
+        11123|008|2023-03-29 07:30:00|2023-03-29 11:33:00
+        22334|008|2023-03-28 09:15:00|2023-03-28 13:18:00
+        66778|008|2023-03-30 09:15:00|2023-03-30 13:17:00
+        67890|007|2023-03-29 14:10:00|2023-03-29 18:13:00
+        23456|007|2023-03-30 09:45:00|2023-03-30 13:48:00
+        78901|007|2023-03-30 14:20:00|2023-03-30 18:23:00
+        1234|007|2023-03-29 20:00:00|2023-03-29 22:03:00
+        2345|009|2023-03-30 16:32:00|9999-12-31 23:59:59
+        2345|009|2023-03-29 08:02:00|9999-12-31 23:59:59
+        2345|009|2023-03-29 12:47:00|9999-12-31 23:59:59
+        5678|006|2023-03-30 16:45:30|9999-12-31 23:59:59
+        8901|006|2023-03-30 17:45:00|2023-03-30 20:21:00
+        90123|006|2023-03-30 18:10:00|9999-12-31 23:59:59
+    }
+    TABLE {
+        area
+        areaID|areaName
+        001|Open Space
+        002|Entrance
+        003|Office
+        004|Conference
+        005|Classroom
+        006|Research
+        007|Development
+        008|Mechanical Lab
+        009|IT Lab
+        010|Cafeteria
+        011|Recreation
+        012|Restaurant
         }
     RESULT {
         9012|Svenja|Schwarz|29.03.23 15:00|29.03.23 21:03|363
@@ -139,7 +135,7 @@ TABLE {
         11123|Carla|Klein|29.03.23 07:30|29.03.23 11:33|243
         66778|Nina|Schuster|30.03.23 09:15|30.03.23 13:17|242
         90123|Lena|Schneider|29.03.23 17:15|29.03.23 20:18|183
-
     }
 }
+
 
