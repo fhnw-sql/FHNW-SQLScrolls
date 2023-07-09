@@ -1,4 +1,3 @@
-# Variables
 # API_URL -> http://localhost:3000
 # POSTMARK_API_KEY -> POSTMARK_API_KEY
 # FROM_SENDER -> POSTMARK_API_KEY
@@ -21,7 +20,7 @@ services:
     restart: always
     #image: janwilhelmfhnw/api
     build: ../FHNW-SQL-Training-Game-API
-      environment:
+    environment:
       - MONGODB_URI=mongodb://mongo:27017/stg-api
       - JWT_SECRET=FHNW_2021
       - FROM_SENDER=${FROM_SENDER}
@@ -39,7 +38,9 @@ services:
     build:
       context: .
       args:
-     API_URL: ${API_URL}
+        API_URL: ${API_URL}
     ports:
       - "80:80"
       - "3000:3000"
+
+
