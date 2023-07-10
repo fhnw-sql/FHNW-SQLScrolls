@@ -1,32 +1,25 @@
 METADATA {
     id: task-183
-    name: Who is the Killer?
+    name: Who had access to the Screw Driver?
     color: red
     info: timestamps
-    keywords: INNER JOIN, INTERSECT
+    keywords: DATES, INNER JOIN, ORDER BY
     level: 3
 }
 
 DESCRIPTION {
-    Enola Holmes : "Who of those, who were in the mechanical lab, were also in the research area at the time of the power outage (between 5:00 PM and 5:30 PM on the 30.03.2023)?"
+   Enola Holmes: "Let's go back to the screwdriver. Can you tell me who was in the mechanical lab and for how long?"
 
-    You: "I will try to find the person id, full name subject and person type. And I will try it with a set operation."
+   You: "Ok, I will order the list by the longest duration first"
 }
 
 ANSWER {
-    SELECT p.personID, p.firstname, p.lastname, p.subject, p.persontype
-    FROM person p INNER JOIN
-    timetracking t ON (t.PersonID = p.PersonID) INNER JOIN
-    area a ON (a.areaID = t.areaid)
+    SELECT p.personid, p.firstname, p.lastname, strftime('%Y-%m-%d %H:%M', t.entrytime) AS entrytime, strftime('%Y-%m-%d %H:%M', t.exittime) AS exittime, (strftime('%s', t.exittime) - strftime('%s', t.entrytime)) / 60 AS duration_minutes
+    FROM person p
+    INNER JOIN timetracking t ON t.personID = p.personID
+    INNER JOIN area a ON a.areaID = t.areaID
     WHERE a.areaname = 'Mechanical Lab'
-    INTERSECT
-    SELECT p.personid, p.firstname, p.lastname, p.subject, p.persontype
-    FROM person p INNER JOIN
-    timetracking t ON (t.PersonID = p.PersonID) INNER JOIN
-    area a ON (a.areaID = t.areaid)
-    WHERE a.areaname = 'Research'
-    AND t.entrytime <= '2023-03-30 17:30'
-    AND t.exittime >= '2023-03-30 17:00';
+    ORDER BY duration_minutes DESC;
 }
 
 TEST {
@@ -131,14 +124,13 @@ TABLE {
     012|Restaurant
         }
     RESULT {
-    9012|Svenja|Schwarz|29.03.23 15:00|29.03.23 21:03|363
-    11123|Carla|Klein|29.03.23 07:30|29.03.23 11:33|243
-    13345|Lisa|Weber|29.03.23 18:00|29.03.23 22:03|243
-    22334|Florian|Fuchs|28.03.23 09:15|28.03.23 13:18|243
-    66778|Nina|Schuster|30.03.23 09:15|30.03.23 13:17|242
-    90123|Lena|Schneider|29.03.23 17:15|29.03.23 20:18|183
+    9012|Svenja|Schwarz|2023-03-29 15:00|2023-03-29 21:03|363
+    11123|Carla|Klein|2023-03-29 07:30|2023-03-29 11:33|243
+    13345|Lisa|Weber|2023-03-29 18:00|2023-03-29 22:03|243
+    22334|Florian|Fuchs|2023-03-28 09:15|2023-03-28 13:18|243
+    66778|Nina|Schuster|2023-03-30 09:15|2023-03-30 13:17|242
+    90123|Lena|Schneider|2023-03-29 17:15|2023-03-29 20:18|183
     }
 }
-
 
 
