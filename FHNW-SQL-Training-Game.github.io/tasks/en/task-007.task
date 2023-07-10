@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT name from ghosts order by year desc
+   SELECT name from ghosts order by year DESC
 }
 
 STRICT
