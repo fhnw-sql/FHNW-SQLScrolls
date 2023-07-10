@@ -1,7 +1,7 @@
 METADATA {
     id: task-099
     name: Most Animals
-    color: green
+    color: blue
     info: list grouped sorted fields from a single table
     keywords: SELECT, FROM, GROUP_BY, ORDER_BY
     level: 2

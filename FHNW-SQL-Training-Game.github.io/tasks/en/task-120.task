@@ -1,7 +1,7 @@
 METADATA {
     id: task-120
     name: Instrument Groups
-    color: pink
+    color: purple
     info: list fields
     keywords: SELECT
     level: 1

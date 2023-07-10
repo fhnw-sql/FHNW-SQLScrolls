@@ -1,7 +1,7 @@
 METADATA {
     id: task-139
     name: String instruments
-    color: orange
+    color: green
     info: list joined fields by condition
     keywords: SELECT, FROM, GROUP BY, INNER JOIN, WHERE, ON, AND
     level: 2

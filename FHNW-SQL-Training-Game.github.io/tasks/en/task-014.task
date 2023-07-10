@@ -1,7 +1,7 @@
 METADATA {
     id: task-014
     name: Sorting Ghosts
-    color: purple
+    color: blue
     info: list sorted fields on conditions
     keywords: SELECT, WHERE, ORDER_BY
     level: 1

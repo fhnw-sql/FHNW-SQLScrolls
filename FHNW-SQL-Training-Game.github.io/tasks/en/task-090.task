@@ -1,7 +1,7 @@
 METADATA {
     id: task-090
     name: Counting Pokemons
-    color: blue
+    color: xmas
     info: list sorted grouped fields joined from multiple tables
     keywords: SELECT, COUNT, JOIN, GROUP_BY, ORDER_BY, DESC
     level: 3

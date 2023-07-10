@@ -1,7 +1,7 @@
 METADATA {
     id: task-029
     name: Increasing Magic
-    color: purple
+    color: green
     info: list sorted field on condition
     keywords: SELECT, WHERE, ORDER_BY
     level: 2

@@ -1,7 +1,7 @@
 METADATA {
     id: task-098
     name: Timo the Rhino
-    color: green
+    color: blue
     info: list filtered fields from joined tables
     keywords: SELECT, FROM, JOIN
     level: 2

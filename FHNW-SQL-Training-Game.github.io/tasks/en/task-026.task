@@ -1,7 +1,7 @@
 METADATA {
     id: task-026
     name: Different Years
-    color: blue
+    color: green
     info: list count of unique field
     keywords: SELECT, COUNT, DISTINCT
     level: 2

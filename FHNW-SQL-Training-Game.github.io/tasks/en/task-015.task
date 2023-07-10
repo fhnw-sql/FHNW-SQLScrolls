@@ -1,7 +1,7 @@
 METADATA {
     id: task-015
     name: More Alphabetical Ghosts
-    color: purple
+    color: blue
     info: list unique sorted field on condition
     keywords: SELECT, DISTINCT, WHERE, ORDER_BY
     level: 1

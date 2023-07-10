@@ -1,7 +1,7 @@
 METADATA {
     id: task-095
     name: Who Escaped?
-    color: green
+    color: blue
     info: list filtered fields from a single
     keywords: SELECT, FROM, WHERE
     level: 1

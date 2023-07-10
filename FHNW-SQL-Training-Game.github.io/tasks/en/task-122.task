@@ -1,7 +1,7 @@
 METADATA {
     id: task-122
     name: Starstreet
-    color: pink
+    color: purple
     info: list filtered, sorted fields
     keywords: SELECT, WHERE, ORDER_BY
     level: 2

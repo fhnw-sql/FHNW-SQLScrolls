@@ -1,7 +1,7 @@
 METADATA {
     id: task-134
     name: Books per Street
-    color: blue
+    color: green
     info: sum fields and group
     keywords: SELECT, FROM, GROUP BY, ORDER BY, sum(), avg()
     level: 1

@@ -1,7 +1,7 @@
 METADATA {
     id: task-119
     name: Recipe Symbols
-    color: xmas
+    color: green
     info: Join considering foreign keys
     keywords: JOIN, USING, SUM, GROUP_CONCAT
     level: 4

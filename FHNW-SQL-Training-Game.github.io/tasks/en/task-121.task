@@ -1,7 +1,7 @@
 METADATA {
     id: task-121
     name: Sort Instruments
-    color: pink
+    color: purple
     info: list sorted fields
     keywords: SELECT, ORDER_BY
     level: 1

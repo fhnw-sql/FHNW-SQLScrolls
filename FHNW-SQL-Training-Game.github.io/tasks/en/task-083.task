@@ -1,7 +1,7 @@
 METADATA {
     id: task-083
     name: Total Range
-    color: red
+    color: blue
     info: total
     keywords: SELECT, BETWEEN AND, ORDER BY, DESC
     level: 2

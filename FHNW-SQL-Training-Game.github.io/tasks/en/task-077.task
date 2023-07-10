@@ -1,7 +1,7 @@
 METADATA {
     id: task-077
     name: Pokemon Nicknames
-    color: red
+    color: blue
     info: types
     keywords: SELECT, SUBSTRING
     level: 2

@@ -1,7 +1,7 @@
 METADATA {
     id: task-136
     name: Start of instruments
-    color: blue
+    color: green
     info: sort and group counted substrings
     keywords: SELECT, FROM, GROUP BY, ORDER BY, substr(), count(*)
     level: 1

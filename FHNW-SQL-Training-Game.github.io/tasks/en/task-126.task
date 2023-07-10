@@ -1,7 +1,7 @@
 METADATA {
     id: task-126
     name: Children in a Street
-    color: blue
+    color: purple
     info: list filtered fields
     keywords: SELECT, WHERE
     level: 2

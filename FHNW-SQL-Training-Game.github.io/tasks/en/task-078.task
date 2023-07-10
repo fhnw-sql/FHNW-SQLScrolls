@@ -1,7 +1,7 @@
 METADATA {
     id: task-078
     name: Different Nicknames
-    color: red
+    color: blue
     info: types
     keywords: SELECT, COUNT, DISTINCT
     level: 2

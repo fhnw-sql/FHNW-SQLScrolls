@@ -1,7 +1,7 @@
 METADATA {
     id: task-079
     name: Pokemon Name Lengths
-    color: red
+    color: blue
     info: types
     keywords: SELECT, LENGTH, ORDER BY, LIMIT
     level: 2

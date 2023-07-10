@@ -1,7 +1,7 @@
 METADATA {
     id: task-093
     name: New Challenger
-    color: green
+    color: xmas
     info: list rows with minimum value
     keywords: SELECT, MIN, WHERE
     level: 2

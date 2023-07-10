@@ -1,7 +1,7 @@
 METADATA {
     id: task-092
     name: Different Types
-    color: blue
+    color: xmas
     info: list fields joined from two tables
     keywords: SELECT, FROM, WHERE
     level: 2

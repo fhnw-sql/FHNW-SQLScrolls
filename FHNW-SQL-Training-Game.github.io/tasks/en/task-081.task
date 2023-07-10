@@ -1,7 +1,7 @@
 METADATA {
     id: task-081
     name: HitPoints
-    color: red
+    color: blue
     info: types
     keywords: SELECT, AVG, DESC, >, ORDER BY
     level: 2

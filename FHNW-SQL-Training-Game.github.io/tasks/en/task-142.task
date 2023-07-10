@@ -1,7 +1,7 @@
 METADATA {
     id: task-142
     name: Kids of
-    color: orange
+    color: green
     info: list joined fields by condition
     keywords: SELECT, FROM, INNER JOIN, ON, WHERE, AND
     level: 2

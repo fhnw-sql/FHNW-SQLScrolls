@@ -1,7 +1,7 @@
 METADATA {
     id: task-091
     name: Names of Pokemons
-    color: blue
+    color: xmas
     info: list sorted values joined from union table
     keywords: SELECT, UNION, ORDER_BY
     level: 3

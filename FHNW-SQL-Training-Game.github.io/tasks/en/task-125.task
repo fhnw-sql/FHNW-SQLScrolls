@@ -1,7 +1,7 @@
 METADATA {
     id: task-125
     name: Duck Children
-    color: blue
+    color: purple
     info: list fields filtered and sorted
     keywords: SELECT, WHERE, ORDER_BY
     level: 2

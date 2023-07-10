@@ -1,7 +1,7 @@
 METADATA {
     id: task-094
     name: Equipment
-    color: green
+    color: xmas
     info: list sorted fields from multiple joined tables
     keywords: SELECT, FROM, JOIN, ORDER_BY
     level: 2

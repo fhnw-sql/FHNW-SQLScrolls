@@ -1,7 +1,7 @@
 METADATA {
     id: task-084
     name: Pokemon Both Types
-    color: red
+    color: blue
     info: game release year
     keywords: SELECT, UNION, DISTINCT
     level: 2

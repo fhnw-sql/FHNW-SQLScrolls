@@ -1,7 +1,7 @@
 METADATA {
     id: task-096
     name: Confusion
-    color: green
+    color: blue
     info: list sorted fields from joined tables
     keywords: SELECT, FROM, JOIN, ORDER_BY
     level: 2

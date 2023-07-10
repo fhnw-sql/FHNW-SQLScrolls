@@ -1,7 +1,7 @@
 METADATA {
     id: task-041
     name: Teacher of Magic
-    color: red
+    color: orange
     info: list filtered fields from product table with subquery
     keywords: SELECT, WHERE, CARTESIAN_PRODUCT, NESTED_QUERY
     level: 4

@@ -1,7 +1,7 @@
 METADATA {
     id: task-131
     name: Duck's Streets
-    color: green
+    color: purple
     info: list fields filtered
     keywords: SELECT, WHERE, GROUP_BY
     level: 3

@@ -1,7 +1,7 @@
 METADATA {
     id: task-100
     name: Forgetful Heidi
-    color: green
+    color: blue
     info: list filtered fields from subquery on a single table
     keywords: SELECT, FROM, WHERE, NESTED_QUERY, MAX
     level: 3

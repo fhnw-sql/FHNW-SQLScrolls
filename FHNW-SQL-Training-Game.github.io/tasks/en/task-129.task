@@ -1,7 +1,7 @@
 METADATA {
     id: task-129
     name: Count Instruments
-    color: blue
+    color: purple
     info: list count field
     keywords: SELECT, COUNT
     level: 2

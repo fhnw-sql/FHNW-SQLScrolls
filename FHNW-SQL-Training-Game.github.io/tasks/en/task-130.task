@@ -1,7 +1,7 @@
 METADATA {
     id: task-130
     name: 'V' Instruments
-    color: blue
+    color: purple
     info: list fields filtered
     keywords: SELECT, WHERE, LIKE
     level: 2

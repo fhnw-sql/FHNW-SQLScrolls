@@ -1,7 +1,7 @@
 METADATA {
     id: task-216
     name: Neighborhood
-    color: black
+    color: blue
     info: JSON operators
     keywords: JSON
     level: 1

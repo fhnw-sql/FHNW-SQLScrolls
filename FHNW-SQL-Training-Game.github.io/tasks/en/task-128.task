@@ -1,7 +1,7 @@
 METADATA {
     id: task-128
     name: Family Names
-    color: blue
+    color: purple
     info: list distinct fields
     keywords: SELECT, DISTINCT
     level: 2
