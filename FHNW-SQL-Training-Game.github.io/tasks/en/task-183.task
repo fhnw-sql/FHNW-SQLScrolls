@@ -131,7 +131,12 @@ TABLE {
     012|Restaurant
         }
     RESULT {
-    90123|Lena|Schneider|Computer Science|Student
+    9012|Svenja|Schwarz|29.03.23 15:00|29.03.23 21:03|363
+    11123|Carla|Klein|29.03.23 07:30|29.03.23 11:33|243
+    13345|Lisa|Weber|29.03.23 18:00|29.03.23 22:03|243
+    22334|Florian|Fuchs|28.03.23 09:15|28.03.23 13:18|243
+    66778|Nina|Schuster|30.03.23 09:15|30.03.23 13:17|242
+    90123|Lena|Schneider|29.03.23 17:15|29.03.23 20:18|183
     }
 }
 

@@ -66,7 +66,6 @@ TEST {
         SELECT * FROM person;
     }
     RESULT {
-       personID|firstname|lastname|subject|persontype
        1234|Julia|Schneider|Electrical Engineering|Lecturer
        1239|Anna|Neumann|Mechanical Engineering|Lecturer
        2345|Thomas|Meier|Physics|Staff
