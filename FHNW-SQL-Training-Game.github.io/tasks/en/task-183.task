@@ -1,16 +1,16 @@
 METADATA {
     id: task-183
-    name: Who had access to the Screw Driver?
+    name: Who is the Killer?
     color: red
     info: timestamps
-    keywords: DATES, INNER JOIN, ORDER BY
+    keywords: INNER JOIN, INTERSECT
     level: 3
 }
 
 DESCRIPTION {
-   Enola Holmes: "Let's go back to the screwdriver. Can you tell me who was in the mechanical lab and for how long?"
+    Enola Holmes : "Who of those, who were in the mechanical lab, were also in the research area at the time of the power outage (between 5:00 PM and 5:30 PM on the 30.03.2023)?"
 
-   You: "Ok, I will order the list by the longest duration first"
+    You: "I will try to find the person id, full name subject and person type. And I will try it with a set operation."
 }
 
 ANSWER {
@@ -124,13 +124,9 @@ TABLE {
     012|Restaurant
         }
     RESULT {
-    9012|Svenja|Schwarz|29.03.23 15:00|29.03.23 21:03|363
-    13345|Lisa|Weber|29.03.23 18:00|29.03.23 22:03|243
-    22334|Florian|Fuchs|28.03.23 09:15|28.03.23 13:18|243
-    11123|Carla|Klein|29.03.23 07:30|29.03.23 11:33|243
-    66778|Nina|Schuster|30.03.23 09:15|30.03.23 13:17|242
-    90123|Lena|Schneider|29.03.23 17:15|29.03.23 20:18|183
+    90123|Lena|Schneider|Computer Science|Student
     }
 }
+
 
 
