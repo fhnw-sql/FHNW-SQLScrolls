@@ -1,7 +1,7 @@
 METADATA {
     id: task-147
     name: Group Size
-    color: orange
+    color: green
     info: list grouped and joined fields
     keywords: SELECT, FROM, count(*), GROUP BY, INNER JOIN, ON
     level: 2
