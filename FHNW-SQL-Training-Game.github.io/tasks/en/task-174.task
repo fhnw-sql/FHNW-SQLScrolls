@@ -20,6 +20,8 @@ ANSWER {
     ORDER BY amount desc;
 }
 
+STRICT
+
 TEST {
     TABLE {
        person

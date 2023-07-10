@@ -31,6 +31,8 @@ ANSWER {
     ORDER BY entrytime;
 }
 
+STRICT
+
 TEST {
     TABLE {
     person

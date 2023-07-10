@@ -45,6 +45,8 @@ ANSWER {
     ORDER BY lastname, firstname;
 }
 
+STRICT
+
 TEST {
     TABLE {
         person

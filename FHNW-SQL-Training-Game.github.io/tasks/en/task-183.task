@@ -22,6 +22,8 @@ ANSWER {
     ORDER BY duration_minutes DESC;
 }
 
+STRICT
+
 TEST {
     TABLE {
     person

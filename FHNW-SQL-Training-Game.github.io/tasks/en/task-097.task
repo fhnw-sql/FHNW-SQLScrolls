@@ -19,6 +19,8 @@ ANSWER {
     from Pokedex_new order by price DESC;
 }
 
+STRICT
+
 TEST {
     TABLE {
         Pokedex_new
