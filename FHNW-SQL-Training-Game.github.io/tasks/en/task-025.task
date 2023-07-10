@@ -1,34 +1,33 @@
 METADATA {
     id: task-025
-    name: Different Years
+    name: Alphabetical Names
     color: blue
-    info: list count of unique field
-    keywords: SELECT, COUNT, DISTINCT
+    info: list min sorted field
+    keywords: SELECT, MIN, ORDER_BY
     level: 2
 }
 
 DESCRIPTION {
-    How many different years of birth do we have in the ghost table?
+    Which of the ghost names comes first in alphabetical order?
 }
 
 ANSWER {
-   SELECT COUNT(DISTINCT YEAR) FROM GHOSTS
+   SELECT MIN(NAME) FROM GHOSTS ORDER BY NAME ASC
 }
-
 
 TEST {
     TABLE {
         Ghosts
         id|name|year
         1|Arthur|1765
-        2|Desiree|1833
+        2|Desiree|1801
         3|Siegfried|1650
-        4|Sieglinde|1765
+        4|Sieglinde|1777
         5|Kaaleppi|1833
     }
 
     RESULT {
-        3
+        Arthur
     }
 }
 
@@ -36,14 +35,14 @@ TEST {
     TABLE {
         Ghosts
         id|name|year
-        1|Edmond|1744
-        2|Mercedes|1744
-        3|Fernand|1790
-        4|Valentine|1744
-        5|Haydee|1744
+        1|Mercedes|1801
+        2|Fernand|1790
+        3|Edmond|1744
+        4|Valentine|1885
+        5|Haydee|1604
     }
 
     RESULT {
-        2
+        Edmond
     }
 }

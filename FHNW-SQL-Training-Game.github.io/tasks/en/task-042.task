@@ -1,65 +1,71 @@
 METADATA {
     id: task-042
-    name: Descending Ghosts
-    color: purple
-    info: list sorted field
-    keywords: SELECT, ORDER_BY
-    level: 1
+    name: Studyfriends
+    color: red
+    info: list filtered fields from product table with subquery
+    keywords: SELECT, WHERE, CARTESIAN_PRODUCT, NESTED_QUERY
+    level: 4
 }
 
 DESCRIPTION {
-    List all the different ghost birth years in descending order.
+    Bingo is training to be a wizard. With whom has he studied so far?
 }
 
-PARSONS {
-    SELECT DISTINCT year 
-    FROM ghosts
-    ORDER BY year DESC
-    SELECT year #distractor
-    GET NAME OF GHOST #distractor
-    FROM ghost #distractor
-    SORT BY year #distractor
-    ORDER BY year #distractor
-
+ANSWER {
+    SELECT w.name FROM Wizards w, Lessons l  WHERE l.pupil_id = (SELECT w.id FROM Wizards w WHERE w.name = "Bingo") and  l.teacher_id = w.id
 }
 
-ANSWER { 
-    SELECT DISTINCT year FROM ghosts ORDER BY year DESC;
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Shadowland|1
+    }
+
+    TABLE {
+        Lessons
+        teacher_id|pupil_id
+        1|3
+        1|4
+        2|1
+        5|3
+        4|5
+        5|1
+    }
+
+    RESULT {
+        Anna
+        Rufus
+    }
 }
 
 TEST {
     TABLE {
-        Ghosts
-        id|name|year
-        1|Arthur|1650
-        2|Desiree|1801
-        3|Siegfried|1650
-        4|Sieglinde|1777
-        5|Kaaleppi|1833
+        Wizards
+        id|name|area|skill
+        1|Bingo|Kumpula|2
+        2|Orz Orz|Shadowland|3
+        3|Anna|Shadowland|5
+        4|Solmu|Shadowland|4
+        5|Rufus|Fabuland|1
     }
 
-    RESULT {
-        1833
-        1801
-        1777
-        1650
-    }
-}
-
-TEST {
     TABLE {
-        Ghosts
-        id|name|year
-        1|Edmond|1744
-        2|Mercedes|1885
-        3|Fernand|1744
-        4|Valentine|1885
-        5|Haydee|1604
+        Lessons
+        teacher_id|pupil_id
+        1|2
+        2|3
+        3|1
+        3|4
+        5|4
     }
 
     RESULT {
-        1885
-        1744
-        1604
+        Anna
     }
 }

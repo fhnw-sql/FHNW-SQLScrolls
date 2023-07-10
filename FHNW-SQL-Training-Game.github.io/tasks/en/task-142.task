@@ -1,26 +1,26 @@
 METADATA {
     id: task-142
-    name: Starstreet
-    color: pink
-    info: list filtered, sorted fields
-    keywords: SELECT, WHERE, ORDER_BY
+    name: Kids of
+    color: orange
+    info: list joined fields by condition
+    keywords: SELECT, FROM, INNER JOIN, ON, WHERE, AND
     level: 2
 }
 
 DESCRIPTION {
-    Who lives in Sternenstrasse, show names ordered by last name, then first name
-}
+    Who are the kids of Donald Duck?
+ }
 
 ANSWER {
-    SELECT name, fname 
-    FROM person 
-    WHERE street='Sternenstrasse' 
-    ORDER BY name, fname;
+    SELECT child.fname child_fn, child.name child_name, 
+        parent.fname parent_fn, parent.name parent_name
+    FROM person child INNER JOIN 
+        person parent ON (child.parent = parent.person_id)
+    WHERE parent.fname = 'Donald'
+    AND parent.name = 'Duck';
 }
 
-
 TEST {
-    STRICT 
     TABLE {
         person
         person_id|fname|name|street|city|books|parent
@@ -36,9 +36,31 @@ TEST {
         510|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
-    RESULT {
-        Dagobert|Duck
-        Maggie|Maus
-        Minni|Maus
+     RESULT {
+        Tick|Duck|Donald|Duck    
+        Trick|Duck|Donald|Duck    
+        Track|Duck|Donald|Duck      
+    }
+}
+
+TEST {
+     TABLE {
+        person
+        person_id|fname|name|street|city|books|parent
+        502|Tick|Duck|Blumenweg|Entenhausen|41|501
+        503|Trick|Duck|Blumenweg|Entenhausen|45|511
+        504|Track|Duck|Blumenweg|Entenhausen|43|511
+        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
+        506|Marie|Maus|Blumenweg|Entenhausen|115|508
+        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
+        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        510|Dagobert|Trump|Steinenberg|Usania|1|null
+        511|Donald|Duck|Blumenweg|Entenhausen|5|null
+    }
+
+     RESULT {
+        Track|Duck|Donald|Duck    
+        Trick|Duck|Donald|Duck      
     }
 }

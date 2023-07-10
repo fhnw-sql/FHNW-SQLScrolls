@@ -1,52 +1,130 @@
 METADATA {
     id: task-151
-    name: Duck's Streets
-    color: green
-    info: list fields filtered
-    keywords: SELECT, WHERE, GROUP_BY
-    level: 3
+    name: List of the University
+    color: red
+    info: list sorted, grouped fields
+    keywords: GROUP BY, ORDER BY
+    level: 2
 }
 
 DESCRIPTION {
-    Show the count of people with the family name Duck at each street
-}
+   Enola Holmes: "How many students, professors and others are at the university?"
 
-PARSONS {
-    SELECT street, count(name) 
-    SELECT name, count(street) #distractor
-    FROM person 
-    WHERE name = 'Duck' 
-    WHERE name == 'Duck'  #distractor
-    WHERE name equals 'Duck'  #distractor
-    GROUP BY street
-    GROUP BY name #distractor
+   You: "I will make a list that counts the people per person type with the largest group first"
 }
 
 ANSWER {
-    SELECT street, count(name) 
-    FROM person 
-    WHERE name = 'Duck' 
-    GROUP BY street;
+    SELECT count(*) amount, persontype
+    FROM person
+    GROUP BY persontype
+    ORDER BY amount desc;
+}
+
+STRICT
+
+TEST {
+    TABLE {
+       person
+       personID|firstname|lastname|subject|persontype
+       1234|Julia|Schneider|Electrical Engineering|Lecturer
+       1239|Anna|Neumann|Mechanical Engineering|Lecturer
+       2345|Thomas|Meier|Physics|Staff
+       3456|Anna|Müller|Data Science|Lecturer
+       4567|Lisa|Weber|Physics|Professor
+       5678|Tim|Lehmann|Computer Science|Professor
+       5688|Fabian|Wolf|Physics|Lecturer
+       6789|Markus|Schmidt|Data Science|Professor
+       7890|Nina|Fuchs|Electrical Engineering|Staff
+       8901|Jens|Schmidt|Data Science|Lecturer
+       9012|Svenja|Schwarz|Computer Science|Lecturer
+       10012|Max|Mayer|Mechanical Engineering|Student
+       10122|Katharina|Berg|Computer Science|Student
+       11123|Carla|Klein|Computer Science|Student
+       11223|Julia|Krause|Data Science|Student
+       12234|Felix|Schneider|Data Science|Student
+       12347|Esther|Wagner|Mechanical Engineering|Staff
+       13345|Lisa|Weber|Physics|Student
+       14456|Tina|Schwarz|Electrical Engineering|Student
+       22334|Florian|Fuchs|Computer Science|Student
+       23451|Kim|Hoffmann|Computer Science|Staff
+       23456|Lisa|Müller|Data Science|Student
+       31234|Markus|Schmitt|Computer Science|Student
+       33445|Svenja|Koch|Electrical Engineering|Student
+       34567|Brigitte|Berg|Data Science|Staff
+       44556|Marie|Schwarz|Mechanical Engineering|Student
+       45678|Sarah|Klein|Electrical Engineering|Student
+       55667|Tom|Lorenz|Computer Science|Student
+       56789|Tim|Weber|Mechanical Engineering|Student
+       66778|Nina|Schuster|Data Science|Student
+       67890|Anna|Bauer|Computer Science|Student
+       67899|Hannah|Becker|Computer Science|Lecturer
+       77889|Matthias|Neumann|Mechanical Engineering|Student
+       78901|Fabian|Wolf|Physics|Student
+       88900|Lea|Wagner|Physics|Student
+       89012|Hannah|Becker|Data Science|Student
+       90123|Lena|Schneider|Computer Science|Student
+       99011|Robin|Hoffmann|Electrical Engineering|Student
+       345675|Jan|Schmidt|Physics|Student
+    }
+
+    RESULT {
+       24|Student
+        7|Lecturer
+        5|Staff
+        3|Professor
+    }
 }
 
 TEST {
     TABLE {
-        person
-        person_id|fname|name|street|city|books|parent
-        501|Donald|Duck|Blumenweg|Entenhausen|5|null
-        502|Tick|Duck|Blumenweg|Entenhausen|41|501
-        503|Trick|Duck|Blumenweg|Entenhausen|45|501
-        504|Track|Duck|Blumenweg|Entenhausen|43|501
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        506|Marie|Maus|Blumenweg|Entenhausen|115|505
-        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
-        510|Dagobert|Trump|Steinenberg|Usania|1|null
+       person
+       personID|firstname|lastname|subject|persontype
+       1234|Julia|Schneider|Electrical Engineering|Lecturer
+       1239|Anna|Neumann|Mechanical Engineering|Lecturer
+       2345|Thomas|Meier|Physics|Staff
+       3456|Anna|Müller|Data Science|Lecturer
+       4567|Lisa|Weber|Physics|Professor
+       5678|Tim|Lehmann|Computer Science|Professor
+       5688|Fabian|Wolf|Physics|Lecturer
+       6789|Markus|Schmidt|Data Science|Professor
+       7890|Nina|Fuchs|Electrical Engineering|Staff
+       8901|Jens|Schmidt|Data Science|Lecturer
+       9012|Svenja|Schwarz|Computer Science|Lecturer
+       10012|Max|Mayer|Mechanical Engineering|Student
+       10122|Katharina|Berg|Computer Science|Student
+       11123|Carla|Klein|Computer Science|Student
+       11223|Julia|Krause|Data Science|Student
+       12234|Felix|Schneider|Data Science|Student
+       12347|Esther|Wagner|Mechanical Engineering|Staff
+       13345|Lisa|Weber|Physics|Student
+       14456|Tina|Schwarz|Electrical Engineering|Student
+       22334|Florian|Fuchs|Computer Science|Student
+       23451|Kim|Hoffmann|Computer Science|Lecturer
+       23456|Lisa|Müller|Data Science|Student
+       31234|Markus|Schmitt|Computer Science|Student
+       33445|Svenja|Koch|Electrical Engineering|Student
+       34567|Brigitte|Berg|Data Science|Staff
+       44556|Marie|Schwarz|Mechanical Engineering|Student
+       45678|Sarah|Klein|Electrical Engineering|Student
+       55667|Tom|Lorenz|Computer Science|Student
+       56789|Tim|Weber|Mechanical Engineering|Student
+       66778|Nina|Schuster|Data Science|Student
+       67890|Anna|Bauer|Computer Science|Student
+       67899|Hannah|Becker|Computer Science|Lecturer
+       77889|Matthias|Neumann|Mechanical Engineering|Student
+       78901|Fabian|Wolf|Physics|Student
+       88900|Lea|Wagner|Physics|Student
+       89012|Hannah|Becker|Data Science|Student
+       90123|Lena|Schneider|Computer Science|Student
+       99011|Robin|Hoffmann|Electrical Engineering|Student
+       345675|Jan|Schmidt|Physics|Student
     }
 
     RESULT {
-        Blumenweg|4
-        Sternenstrasse|1
+       24|Student
+        8|Lecturer
+        4|Staff
+        3|Professor
     }
 }
+

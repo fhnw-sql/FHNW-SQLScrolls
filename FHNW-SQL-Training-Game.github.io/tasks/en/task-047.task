@@ -1,55 +1,89 @@
 METADATA {
     id: task-047
-    name: Best Hits
-    color: xmas
-    info: list filtered fields using subquery
-    keywords: SELECT, MAX, WHERE, NESTED_QUERY
-    level: 3
+    name: In the Woods
+    color: orange
+    info: list filtered fields from joined table
+    keywords: SELECT, FROM, INNER_JOIN, WHERE
+    level: 4
 }
 
 DESCRIPTION {
-    List the songs with the highest rating?
+    Which ghosts have been seen in the forest?
 }
 
-PARSONS {
-
-	SELECT song_id, title, rating
-	FROM song
-	WHERE rating = (SELECT max(rating) FROM song)
-	SELECT id, title, rating  #distractor
-	FROM songs #distractor
-	WHERE rating = (SELECT max(rating) FROM album) #distractor
-
+ANSWER {
+   SELECT g.name FROM Hauntings h INNER JOIN Places p ON p.id = h.place_id INNER JOIN Ghosts g ON g.id = h.ghost_id WHERE p.name = "forest"
 }
 
-ANSWER { 
-	SELECT song_id, title, rating FROM song WHERE rating = (SELECT max(rating) FROM song)
-}
 
 TEST {
-	
     TABLE {
-        Song
-        song_id|title|seconds|language|rating|interpret_fk|album_fk
-		1|All I Want for Christmas Is you|241|en|4|4|13
-		2|Silent Night|219|en|1|4|13
-		3|O Holy Night|267|en|3|4|13
-		4|Christmas (Baby Please Come Home)|153|en|7|4|13
-		5|Santa Claus Is Comin to Town|204|en|8|4|13
-		6|Christmas Baby (Please Come Home)|166|en|3|1|11
-		7|Santa Claus Is Coming to Town|204|en|7|3|11
-		8|Winter Wonderland|146|en|7|1|11
-		9|A Marshmallow World|143|en|9|1|11
-		10|Parade Of The Wooden Soldiers|175|en|2|3|11
-		11|Aber Heidschi Bum Beidschi|267|de|8|2|12
-		12|Vom Himmel hoch da komm ich her|180|de|7|2|12
-		13|Alle Jahre wieder|118|de|4|2|null
-		14|Christmasland|144|en|9|null|11
+        Ghosts
+        id|name
+        1|Arthur
+        2|Desiree
+        3|Siegfried
+        4|Sieglinde
+        5|Kaaleppi
+    }
+
+    TABLE {
+        Places
+        id|name
+        1|school
+        2|forest
+        3|mill
+    }
+
+    TABLE {
+        Hauntings
+        ghost_id|place_id
+        1|1
+        2|2
+        2|3
+        3|2
+        4|2
     }
 
     RESULT {
-         9|A Marshmallow World|9
-        14|Christmasland|9
+        Desiree
+        Siegfried
+        Sieglinde
     }
 }
 
+TEST {
+    TABLE {
+        Ghosts
+        id|name
+        1|Edmond
+        2|Desiree
+        3|Fernand
+        4|Valentine
+        5|Haydee
+    }
+
+    TABLE {
+        Places
+        id|name
+        1|school
+        2|forest
+        3|mill
+    }
+
+    TABLE {
+        Hauntings
+        ghost_id|place_id
+        1|1
+        1|2
+        1|3
+        2|1
+        2|2
+        2|3
+    }
+
+    RESULT {
+        Edmond
+        Desiree
+    }
+}

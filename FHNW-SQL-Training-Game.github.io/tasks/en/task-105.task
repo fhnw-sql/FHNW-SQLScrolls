@@ -1,26 +1,25 @@
 METADATA {
     id: task-105
-    name: Add PK
+    name: Create Potions
     color: green
-    info: PK addition
-    keywords: CREATE_TABLE, PRIMARY_KEY
+    info: table creation
+    keywords: CREATE_TABLE
     level: 3
     type: DCL
 }
 
 DESCRIPTION {
-    <b>Potions</b> has to contain the following fields:
+    We want to manage information about the <b>Potions</b> we create containing exactly the following fields:
     <ul>
-     <li>potion_id (integer)</li>
+     <li>potion_id (integer number)</li>
      <li>name (text)</li>
-     <li>level (real)</li>
+     <li>level (real number)</li>
     </ul>
-    But we forgot something. The ID has to be unique (PRIMARY KEY). How do we ensure that?
-    We need to create a new table definition with this information.
+    💡 Tip: Below you can find an example of the data that will be stored in the table.
 }
 
 ANSWER {
-    CREATE TABLE Potions (potion_id INTEGER PRIMARY KEY, name TEXT, level REAL)
+    CREATE TABLE Potions (potion_id INTEGER, name TEXT, level REAL)
 }
 
 
@@ -43,7 +42,7 @@ TEST {
     }
 
     RESULT {
-      CREATETABLEPOTIONS(POTION_IDINTEGERPRIMARYKEY,NAMETEXT,LEVELREAL)
+      CREATETABLEPOTIONS(POTION_IDINTEGER,NAMETEXT,LEVELREAL)
     }
 }
 
@@ -53,7 +52,7 @@ TEST {
     }
 
     RESULT {
-        0|potion_id|INTEGER|0|null|1
+        0|potion_id|INTEGER|0|null|0
         1|name|TEXT|0|null|0
         2|level|REAL|0|null|0
     }

@@ -1,90 +1,66 @@
 METADATA {
     id: task-072
-    name: Counting Pokemons
+    name: Speed Range
     color: blue
-    info: list sorted grouped fields joined from multiple tables
-    keywords: SELECT, COUNT, JOIN, GROUP_BY, ORDER_BY, DESC
-    level: 3
+    info: Pokedex new arrivals
+    keywords: SELECT, BETWEEN, ORDER BY
+    level: 2
 }
 
 DESCRIPTION {
-    List all regions and how many Pokemon there are in each region sorted in descending order of the region ID.
-}
-
-PARSONS {
-
-    SELECT t.region_id, r.name, 
-    COUNT(*)
-    FROM Pokemon p 
-    JOIN Pokemon_region t 
-    ON p.id = t.pokedex_id
-    JOIN Region r 
-    ON r.id = t.region_id
-    TOTAL(*) #distractor
-    JOIN Pokemon_region b  #distractor
-    ON r.id = t.pokedex_id #distractor
-    ON p.id = t.region_id #distractor
-    GROUP BY region_id
-    ORDER BY region_id DESC
+     Show me the ID, name1, type1 and speed for the Pokemon whose speed is between 75 and 90 
+     ordered by increasing speed.
 }
 
 ANSWER {
-    SELECT t.region_id, r.name, COUNT(*)
-    FROM Pokemon p 
-    JOIN Pokemon_region t ON p.id = t.pokedex_id
-    JOIN Region r ON r.id = t.region_id
-    GROUP BY region_id
-    ORDER BY region_id DESC;
+    select ID, name1, type1, speed from Pokedex_new where speed BETWEEN 75 and 90 ORDER BY speed;
 }
 
 TEST {
     TABLE {
-        Pokemon
-        id|name|type_id|generation
-        385|Jirachi|1|3
-        25|Pikachu|2|1
-        39|Jigglypuff|3|1
-        813|Scorbunny|4|8
-        690|Skrelp|5|6
-        103|Exeggutor|7|1
-        477|Dusknoir|10|4
-        264|Linoone|6|3
-    }
-
-    TABLE {
-        Region
-        id|name
-        1|Kanto
-        2|Johto
-        3|Hoenn
-        4|Sinnoh
-        5|Unova
-        6|Kalos
-        7|Alola
-        8|Galar
-    }
-
-    TABLE {
-        Pokemon_region
-        pokedex_id|region_id
-        385|3
-        25|1
-        39|1
-        813|8
-        690|6
-        103|1
-        477|4
-        264|8
+        Pokedex_new
+        ID|name1|name2|type1|type2|total|hitPoints|attack|defense|attackSpecial|defenseSpecial|speed
+        127|Pinsir|Mega Pinsir|BUG|FLYING|600|65|155|120|65|90|105
+        125|Electabuzz|null|ELECTRIC|null|490|65|83|57|95|85|105
+        126|Magmar|null|FIRE|null|495|65|95|57|100|85|93
+        128|Tauros|null|NORMAL|null|490|75|100|95|40|70|110
+        129|Magikarp|null|WATER|null|200|20|10|55|15|20|80
+        130|Gyarados|Mega Gyarados|WATER|DARK|640|95|155|109|70|130|81
+        131|Lapras|null|WATER|ICE|535|130|85|80|85|95|60
+        132|Ditto|null|NORMAL|null|288|48|48|48|48|48|48
+        133|Eevee|Partner Eevee|NORMAL|null|435|65|75|70|65|85|75
+        134|Vaporeon|null|WATER|null|525|130|65|60|110|95|65
+        135|Jolteon|null|ELECTRIC|null|525|65|65|60|110|95|130
+        136|Flareon|null|FIRE|null|525|65|130|60|95|110|65
+        137|Porygon|null|NORMAL|null|395|65|60|70|85|75|40
+        138|Omanyte|null|ROCK|WATER|355|35|40|100|90|55|35
+        139|Omastar|null|ROCK|WATER|495|70|60|125|115|70|55
+        140|Kabuto|null|ROCK|WATER|355|30|80|90|55|45|55
     }
 
     RESULT {
-        8|Galar|2
-        6|Kalos|1
-        4|Sinnoh|1
-        3|Hoenn|1
-        1|Kanto|3
+        133|Eevee|NORMAL|75
+        129|Magikarp|WATER|80
+        130|Gyarados|WATER|81
     }
 }
 
+TEST {
+    TABLE {
+        Pokedex_new
+        ID|name1|name2|type1|type2|total|hitPoints|attack|defense|attackSpecial|defenseSpecial|speed
+        155|Cyndaquil|null|FIRE|null|309|39|52|43|60|50|65
+        156|Quilava|null|FIRE|null|405|58|64|58|80|65|80
+        157|Typhlosion|null|FIRE|null|534|78|84|78|109|85|100
+        158|Totodile|null|WATER|null|314|50|65|64|44|48|43
+        159|Croconaw|null|WATER|null|405|65|80|80|59|63|58
+        160|Feraligatr|null|WATER|null|530|85|105|100|79|83|78
+    }
+
+    RESULT {
+        160|Feraligatr|WATER|78
+        156|Quilava|FIRE|80
+    }
+}
 
 

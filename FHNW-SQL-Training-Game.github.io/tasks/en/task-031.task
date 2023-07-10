@@ -1,18 +1,18 @@
 METADATA {
     id: task-031
-    name: Powerful Wizards
+    name: Magical Level
     color: green
-    info: list count field filtered grouped
-    keywords: SELECT, COUNT, WHERE, GROUP_BY
+    info: list max field grouped
+    keywords: SELECT, MAX, GROUP_BY
     level: 3
 }
 
 DESCRIPTION {
-   List all areas and the number of level 5 wizards in each area.
+    List all areas and show the highest skill level of wizards in each area.
 }
 
 ANSWER {
-   SELECT area, COUNT(name) FROM wizards WHERE SKILL = 5 GROUP BY area
+    SELECT Area, MAX(skill) FROM WIZARDS GROUP BY AREA  
 }
 
 
@@ -21,14 +21,15 @@ TEST {
         Wizards
         id|name|area|skill
         1|Anna|Shadowland|5
-        2|Orz Orz|Kumpula|1
+        2|Orz Orz|Kumpula|3
         3|Bingo|Shadowland|2
-        4|Solmu|Shadowland|5
+        4|Solmu|Shadowland|4
         5|Rufus|Kumpula|1
     }
 
     RESULT {
-        Shadowland|2
+        Shadowland|5
+        Kumpula|3
     }
 }
 
@@ -37,16 +38,14 @@ TEST {
         Wizards
         id|name|area|skill
         1|Anna|Shadowland|5
-        2|Orz Orz|Shadowland|2
-        3|Bingo|Shadowland|5
-        4|Solmu|Shadowland|1
-        5|Rufus|Shadowland|5
-        6|Rasmus|Kumpula|5
+        2|Orz Orz|Shadowland|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Shadowland|1
     }
 
     RESULT {
-        Shadowland|3
-        Kumpula|1
+        Shadowland|5
     }
 }
 

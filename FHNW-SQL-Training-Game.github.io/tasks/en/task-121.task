@@ -1,41 +1,49 @@
 METADATA {
     id: task-121
-    name: Instrument Groups
+    name: Sort Instruments
     color: pink
-    info: list fields
-    keywords: SELECT
+    info: list sorted fields
+    keywords: SELECT, ORDER_BY
     level: 1
 }
 
 DESCRIPTION {
-    What instrument groups are there?
-}
-
-PARSONS {
-   SELECT group_name
-   FROM instrumentgroup
-   SELECT * #distractor
-   FROM groups #distractor
+    Show all instrument names alphabetically ordered by name
 }
 
 ANSWER {
-    SELECT group_name
-    FROM instrumentgroup
+    SELECT instrument_name
+    FROM instrument
+    ORDER BY instrument_name;
 }
 
 
 TEST {
     TABLE {
-        instrumentgroup
-        group_id|group_name 
-        101|Strings
-        102|Woodwind
-        103|Brass
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Violine|101
+        202|Viola|101
+        203|Cello|101
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Flute|102
+        207|Oboe|102
+        208|Horn|103
+        209|Trombone|103
+        210|Trumpet|103
     }
 
     RESULT {
-        Strings
-        Woodwind
-        Brass
+        Cello
+        Clarinet
+        Contrabass
+        Flute
+        Horn
+        Oboe
+        Trombone
+        Trumpet
+        Viola
+        Violine
     }
 }

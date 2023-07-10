@@ -1,18 +1,18 @@
 METADATA {
     id: task-030
-    name: Magical Level
+    name: Counting Wizards
     color: green
-    info: list max field grouped
-    keywords: SELECT, MAX, GROUP_BY
+    info: list count field grouped
+    keywords: SELECT, COUNT, GROUP_BY
     level: 3
 }
 
 DESCRIPTION {
-    List all areas and show the highest skill level of wizards in each area.
+    List all areas and the number of wizards in each area.
 }
 
 ANSWER {
-    SELECT Area, MAX(skill) FROM WIZARDS GROUP BY AREA  
+    SELECT Area, COUNT(*) FROM WIZARDS GROUP BY AREA  
 }
 
 
@@ -28,8 +28,8 @@ TEST {
     }
 
     RESULT {
-        Shadowland|5
-        Kumpula|3
+        Shadowland|3
+        Kumpula|2
     }
 }
 

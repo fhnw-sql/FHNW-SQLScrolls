@@ -1,19 +1,21 @@
 METADATA {
     id: task-015
-    name: Ghosts called Veronica
+    name: More Alphabetical Ghosts
     color: purple
-    info: list field on condition
-    keywords: SELECT, WHERE, BETWEEN
+    info: list unique sorted field on condition
+    keywords: SELECT, DISTINCT, WHERE, ORDER_BY
     level: 1
 }
 
 DESCRIPTION {
-    List all ghosts called Veronika born in the 18th century.
+    List all different (unique) ghost names for ghosts born in alphabetical order in 1777.
 }
 
 ANSWER {
-   SELECT * FROM Ghosts WHERE YEAR BETWEEN 1700 AND 1800 AND NAME = 'Veronika'
+   SELECT DISTINCT name FROM Ghosts WHERE year = 1777 ORDER BY name ASC
 }
+
+STRICT
 
 TEST {
     TABLE {
@@ -28,13 +30,13 @@ TEST {
         6|Hermine|1650
         7|Siegfried|1687
         8|Veronika|1777
-        9|Veronika|1602
-	    10|Veronika|1723
+        9|Veronika|1777
     }
 
     RESULT {
-       8|Veronika|1777
-       10|Veronika|1723
+       Desiree
+       Khaled
+       Veronika
     }
 }
 
@@ -43,22 +45,20 @@ TEST {
         Ghosts
         id|name|year
         1|Arthur|1765
-        2|Desiree|1777
+        2|Bilbo|1777
         3|Siegfried|1650
         4|Sieglinde|1765
         5|Kaaleppi|1833
-        5|Khaled|1777
+        5|Klex|1777
         6|Hermine|1650
         7|Siegfried|1687
-        8|Veronika|1777
-        9|Veronika|1602
-	    10|Veronika|1723
-        11|Veronika|1912
-        12|Veronika|1404
+        8|Zaptus|1777
+        9|Zaptus|1777
     }
 
     RESULT {
-       8|Veronika|1777
-       10|Veronika|1723
+       Bilbo
+       Klex
+       Zaptus
     }
 }

@@ -1,79 +1,45 @@
 METADATA {
     id: task-051
-    name: Haunted by Arthur
-    color: orange
-    info: list filtered fields from joined table
-    keywords: SELECT, WHERE, INNER_JOIN
-    level: 4
+    name: Alphabetical Singers
+    color: xmas
+    info: list sorted field
+    keywords: SELECT, ORDER_BY
+    level: 1
 }
 
 DESCRIPTION {
-    Where does Arthur haunt?
+	What are the names of the interprets in alphabetical order?
 }
 
 PARSONS {
-   SELECT p.name 
-   FROM 
-   GHOSTS g
-   PLACES p
-   INNER JOIN
-   WHERE 
-   ON
-   p.id = g.place_id 
-   g.name = "Arthur"
-   p.name = "Arthur" #distractor
-   p.ghost_id = g.id #distractor
+	SELECT interpret_id  #distractor
+	SELECT name 
+	FROM interpret 
+	SORT BY name #distractor
+	ORDER BY name
 }
 
-ANSWER {
-   SELECT p.name FROM GHOSTS g INNER JOIN PLACES p ON p.id = g.place_id WHERE g.name = "Arthur"
-}
-
-
-TEST {
-    TABLE {
-        Ghosts
-        id|name|place_id
-        1|Arthur|1
-        2|Desiree|3
-        3|Siegfried|2
-        4|Sieglinde|2
-        5|Kaaleppi|3
-    }
-
-    TABLE {
-        Places
-        id|name
-        1|school
-        2|forest
-        3|mill
-    }
-
-    RESULT {
-        school
-    }
+ANSWER { 
+	 SELECT name FROM interpret ORDER BY name;
 }
 
 TEST {
-    TABLE {
-        Ghosts
-        id|name|place_id
-        1|Edmond|2
-        2|Mercedes|2
-        3|Fernand|3
-        4|Valentine|2
-        5|Arthur|2
-    }
 
-    TABLE {
-        Places
-        id|name
-        1|school
-        2|mill
-        3|forest
-    }
+	TABLE {
+		Interpret
+		interpret_id|name|f_year|country
+		1|Darlene Love|0|US
+		2|The Flippers|1964|D
+		3|The Crystals|1961|US
+		4|Mariah Carey|0|US
+		5|Wham!|1981|UK
+	}
 
     RESULT {
-        mill
+		Darlene Love
+		Mariah Carey
+		The Crystals
+		The Flippers
+		Wham!
     }
 }

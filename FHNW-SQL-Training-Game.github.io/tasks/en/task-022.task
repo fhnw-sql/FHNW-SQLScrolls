@@ -1,63 +1,61 @@
 METADATA {
     id: task-022
-    name: Born in 18th Century
+    name: Serial Murder
     color: blue
     info: list count field on condition
-    keywords: SELECT, COUNT, WHERE, BETWEEN
+    keywords: SELECT, COUNT, WHERE
     level: 2
 }
 
 DESCRIPTION {
-    How many ghosts were born in the 18th century?
-}
-
-
-PARSONS {
-   SELECT 
-   COUNT (*)
-   FROM GHOSTS 
-   WHERE YEAR 
-   BETWEEN 
-   1700 
-   AND 
-   1800
-   SUM (*) #distractor
-   AND #distractor
+    How many ghosts have murdered at least 2 people?   
 }
 
 ANSWER {
-   SELECT COUNT (*) FROM GHOSTS WHERE YEAR BETWEEN 1700 AND 1800
-}
-
-
-TEST {
-    TABLE {
-        Ghosts
-        id|name|year
-        1|Arthur|1765
-        2|Desiree|1801
-        3|Siegfried|1650
-        4|Sieglinde|1777
-        5|Kaaleppi|1833
-    }
-
-    RESULT {
-        2
-    }
+   SELECT COUNT (NAME) FROM GHOSTS WHERE MURDERED >= 2  
 }
 
 TEST {
     TABLE {
         Ghosts
-        id|name|year
-        1|Edmond|1711
-        2|Mercedes|1722
-        3|Fernand|1733
-        4|Valentine|1744
-        5|Haydee|1755
+        id|name|year|murdered
+        1|Arthur|1765|0
+        2|Desiree|1777|1
+        3|Siegfried|1650|2
+        4|Sieglinde|1765|3
+        5|Kaaleppi|1833|2
+        5|Khaled|1777|0
+        6|Hermine|1650|4
+        7|Siegfried|1687|2
+        8|Veronika|1777|1
+        9|Veronika|1602|2
     }
 
     RESULT {
-        5
+       6
+    }
+}
+
+
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year|murdered
+        1|Arthur|1765|0
+        2|Desiree|1777|1
+        3|Siegfried|1650|2
+        4|Sieglinde|1765|3
+        5|Kaaleppi|1833|2
+        5|Khaled|1777|0
+        6|Hermine|1650|4
+        7|Siegfried|1687|2
+        8|Veronika|1777|1
+        9|Veronika|1602|2
+        10|Zaptus|1804|6
+    }
+
+    RESULT {
+       7
     }
 }

@@ -1,46 +1,225 @@
 METADATA {
     id: Book-O
-    name:  Murder at the University
-    title: Murder at the University   🔪💀
-    author: Jan Holmes
-    color: red
+    name: JSON Book 🔮
+    title: NoSQL 
+    author: Jeson
+    color: json
 }
+
+
+PAGE {
+    
+    <h2> NoSQL </h2>
+
+    SQLite(>3.38.0) supports a setJSON functions and operators. 
+
+    SQLite stores JSON as ordinary text for backwards compatibility. 
+    For functions that accept JSON as argument, that argument can be a JSON object, array, number, string, or NULL. 
+    SQLite numeric values and NULL values are interpreted as JSON numbers and nulls, while text values can be understood as JSON objects, arrays, or strings. 
+    
+    Leading, trailing and interior whitespaces on JSON inputs are ignored. 
+
+}
+PAGE {
+    <h3> User Data Table </h3>
+    In the example below, the interests of the users are stored as a JSON object.
+
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            SELECT * FROM user;
+        }
+    }
+}
+
+
+PAGE {
+    <h3> Internal representation </h3>
+
+    SQLite supports JSON operators but the values are actually stored as text, even if you define the column type as 'json'.
+
+    In the example below, the field interests is defined as 'json'.
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            PRAGMA table_info([user]);
+        }
+    }
+}
+PAGE {
+
+    If you use the typeof method to show the actual affinity type of the column, the result is 'text'. 
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            SELECT typeof(interests) FROM user;
+        }
+    }
+}
+
 
 PAGE {
 
-<h2>Murder at the University</h2>
+    Since json is internally text, you can manipulate and compare those values as usual strings as well as use the json operators.
 
- The university has launched a new interdisciplinary research project led by Tim Lehmann, Professor of Computer Science, Markus Schmidt, Professor of Data Science, and Lisa Weber, Professor of Physics. They were given dedicated areas in the university for this purpose.
-</br>
+    In the example below, we use a string to do a normal text comparison on the interests field that was defined as json.
 
- Unfortunately, the project was under a bad star already at the beginning. During the planning phase, it was not considered that an extremely large number of devices would be connected to the power supply. So, it happened again and again that the power failed for a short time.
+    EXAMPLE {
+        SQL {
 
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            SELECT name, interests FROM user where interests = '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}';
+        }
+    }
 }
+PAGE {
+
+    Alternatively, you can use the operator 'json' to convert to json before performing a comparison. 
+    This method returns a an error if the JSON is not well formed and also removes unnecesary spaces.
+
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            SELECT name, interests FROM user where json(interests) = json('  {   "likes"  : [ "reading",  "swimming"  ],  "dislikes" : ["skating"] }');
+        }
+    }
+}
+
 
 PAGE {
-But the students, as well as the professors did not let this get them down and often worked late into the evening. So also on this fateful day the 30.03.2023...
-</br>
+    <h3>Member Accessors and extractors</h3>
 
-At 5:00 p.m., while some were still working, there was another power interruption. When the lights came back on at 5:30 p.m., screams of horror echoed through the night. Professor Tim Lehmann was lying on the floor of his office in the research area, covered in blood with a screwdriver in his throat.
+    To access the different elements of a JSON object we use the dot notation (ex. interests.likes).
+    To access a particular element inside a JSON array we use square brackets (ex. likes[0] )
+
+    This notation is used in combination with an extractor, there are two possibilities:
+    <ul>
+    <li>The operator <b>json_extract</b>(X,P1,P2,...) extracts and returns one or more values from X </li>
+    <li>The operators -> and ->> operators are available for extracting subcomponents of JSON. </li>
+    </ul>
 }
+PAGE {
+    The -> and ->> operators strive to be compatible with both MySQL and PostgreSQL. 
+
+    The -> operator returns a JSON representation of the selected subcomponent or NULL</br>    
+    The ->> operator returns an SQL TEXT, INTEGER, REAL, or NULL value
+    
+    Examples:
+    
+     <ul>
+     <li>json_extract('{"a":2,"b":[4,5,6]}', '$.b[2]') returns '7'</li>
+    <li>'{"a":2,"b":[4,5,6]}' -> '$.b[2]' returns '7'</li>
+    <li>'{"a":2,"b":[4,5,6]}' ->> '$.a' returns 7</li>
+    </ul>
+}
+
+
 
 PAGE {
-It was obvious: he had been murdered!
-</br>
 
-Soon the police is on the scene under the direction of Enola Homes. The research area has been sealed off and as the responsible system admin you are asked to help the detective.
+    We can use the json_extract operator as well as -> and ->> to get specific fields in queries.
+
+    Example of retrieving the list of first preference of users using json_extract
+
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            select id, name
+            from user;
+        }
+    }
 }
+PAGE {
+
+    Same exercise as before using the operators
+
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE  user (id integer primary key, name text, interests json);
+
+            insert into user values(null, "John", '{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}');
+            insert into user values(null, "Kate", '{"likes": ["reading", "swimming"], "dislikes": ["skating"]}');
+            insert into user values(null, "Jim", '{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}');
+        }
+
+        QUERY {
+            select id, name, 
+                interests->'likes'->>'[0]' as first_preference
+            from user;
+        }
+    }
+}
+
 
 PAGE {
-You and Elona Holmes have access to the following tables to find the murderer:
-    <div class="book-img">
-        <img src="img/murder-ERD.png" alt="Schema">
-    </div>
-</br>
-It is now on you to find the murderer through the power of SQL!
-}
 
+    <h3> Operators json_each and json_tree</h3> 
+
+    The json_each table-valued function walks the immediate children of the top-level array or object.
+    
+    The json_tree function recursively walks through the JSON substructure starting with the top-level element. 
+    
+    The schema for the table returned by json_each (and json_tree) is shown on the next page.
+}
 PAGE {
-Thanks to Benjamin Dätwyler, Andreas Borner Murer and Rejo Valiaparampil for the story and idea.
+    <ul>
+        <li><b>key</b> ANY: key for current element relative to its parent</li>
+        <li><b>value</b> ANY: value for the current element</li>
+        <li><b>type</b> TEXT: 'object','array','string','integer', etc.</li>
+        <li><b>atom</b> ANY: value for primitive types, null for others</li>
+        <li><b>id</b> INTEGER: integer ID for this element</li>
+        <li><b>parent</b> INTEGER: integer ID for the parent of this element</li>
+        <li><b>fullkey</b> TEXT: full path describing the current element</li>
+        <li><b>path</b> TEXT: path to the container of the current row</li>
+        <li><b>json</b> JSON HIDDEN: the raw JSON parameter</li>
+        <li><b>root</b> TEXT HIDDEN: the start PATH parameter</li>
+    </ul>
 }
-

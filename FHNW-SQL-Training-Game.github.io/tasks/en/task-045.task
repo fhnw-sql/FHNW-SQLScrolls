@@ -1,58 +1,108 @@
 METADATA {
     id: task-045
-    name: Only 3 Rating
-    color: xmas
-    info: list filtered fields from joined tables
+    name: Description
+    color: orange
+    info: list fields from multiple joined table
     keywords: SELECT, WHERE, INNER_JOIN
-    level: 3
+    level: 4
 }
 
 DESCRIPTION {
-    Which albums contain songs with a rating of 3 and how are these songs called?
+    Show all information you can get about ghosts.
 }
 
 PARSONS {
-
-	SELECT a.title, s.rating, s.title 
- 	SELECT title, rating, name  #distractor
-    FROM song s, album a #distractor
-    FROM song s  
-	INNER JOIN album a
- 	ON a.album_id = s.album_fk	
-    WHERE s.rating = 3
-    WHERE s.rating EQUAL 3 #distractor
-	AND s.album_id = a.album_fk #distractor
+  SELECT g.name, p.name 
+  FROM Hauntings  h
+  JOIN PLACES p
+  ON p.id = h.place_id
+  JOIN Ghosts g 
+  ON g.id = h.ghost_id 
+  FROM Hauntings t #distractor 
+  WHERE g.id = p.place_id #distractor
+  ON h.id = g.id #distractor
 }
 
-ANSWER { 
-	SELECT a.title, s.rating, s.title FROM song s INNER JOIN album a ON a.album_id = s.album_fk WHERE s.rating = 3 
-	}
+
+ANSWER {
+   SELECT g.name, p.name FROM Hauntings h JOIN Places p ON p.id = h.place_id JOIN Ghosts g ON g.id = h.ghost_id 
+}
+
 
 TEST {
-
-	TABLE {
-		Album
-		album_id|title|year
-		11|A Christmas Gift For You From Phil Spector|1963
-		12|Original German Christmas With Die Flippers|1987
-		13|Merry Christmas|1994
-	}
-	
     TABLE {
-        Song
-        song_id|title|seconds|language|rating|interpret_fk|album_fk
-		1|All I Want for Christmas Is you|241|en|4|4|13
-		2|O Holy Night|267|en|3|4|13
-		3|Christmas (Baby Please Come Home)|153|en|7|4|13
-		4|Parade Of The Wooden Soldiers|175|en|2|3|11
-		5|Aber Heidschi Bum Beidschi|267|de|8|2|12
-		6|Christmas (Baby Please Come Home)|166|en|3|1|11
-		7|Alle Jahre wieder|118|de|4|2|NULL
+        Ghosts
+        id|name
+        1|Arthur
+        2|Desiree
+        3|Siegfried
+        4|Sieglinde
+        5|Kaaleppi
+    }
+
+    TABLE {
+        Places
+        id|name
+        1|school
+        2|forest
+        3|mill
+    }
+
+    TABLE {
+        Hauntings
+        ghost_id|place_id
+        1|1
+        2|2
+        2|3
+        3|2
+        4|2
     }
 
     RESULT {
-		Merry Christmas|3|O Holy Night
-		A Christmas Gift For You From Phil Spector|3|Christmas (Baby Please Come Home)      
+        Arthur|school
+        Desiree|forest
+        Desiree|mill
+        Siegfried|forest
+        Sieglinde|forest
     }
 }
 
+TEST {
+    TABLE {
+        Ghosts
+        id|name
+        1|Edmond
+        2|Mercedes
+        3|Fernand
+        4|Valentine
+        5|Haydee
+    }
+
+    TABLE {
+        Places
+        id|name
+        1|school
+        2|forest
+        3|mill
+    }
+
+    TABLE {
+        Hauntings
+        ghost_id|place_id
+        1|1
+        1|2
+        1|3
+        2|1
+        2|2
+        2|3
+    }
+
+    RESULT {
+        Edmond|school
+        Edmond|forest
+        Edmond|mill
+        Mercedes|school
+        Mercedes|forest
+        Mercedes|mill
+    }
+}

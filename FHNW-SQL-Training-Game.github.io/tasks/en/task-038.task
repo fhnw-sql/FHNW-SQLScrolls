@@ -1,6 +1,6 @@
 METADATA {
     id: task-038
-    name: Where is Desiree?
+    name: Ghostly Description
     color: orange
     info: list filtered fields from product table
     keywords: SELECT, WHERE, CARTESIAN_PRODUCT
@@ -8,11 +8,22 @@ METADATA {
 }
 
 DESCRIPTION {
-    What places does Desiree haunt?
+    Show all information you can get about ghosts.
 }
 
+PARSONS {
+  SELECT g.name, p.name 
+  FROM Hauntings  h, 
+  PLACES p, Ghosts g 
+  WHERE g.id = h.ghost_id 
+  AND p.id = h.place_id
+  AND g.id = p.place_id #distractor
+  WHERE h.id = g.id #distractor
+}
+
+
 ANSWER {
-   SELECT p.name FROM Hauntings  h, PLACES p, Ghosts g WHERE g.id = h.ghost_id AND p.id = h.place_id AND g.name = "Desiree"
+   SELECT g.name, p.name FROM Hauntings  h, Places p, Ghosts g WHERE g.id = h.ghost_id AND p.id = h.place_id
 }
 
 
@@ -46,8 +57,11 @@ TEST {
     }
 
     RESULT {
-        forest
-        mill
+        Arthur|school
+        Desiree|forest
+        Desiree|mill
+        Siegfried|forest
+        Sieglinde|forest
     }
 }
 
@@ -56,7 +70,7 @@ TEST {
         Ghosts
         id|name
         1|Edmond
-        2|Desiree
+        2|Mercedes
         3|Fernand
         4|Valentine
         5|Haydee
@@ -82,8 +96,11 @@ TEST {
     }
 
     RESULT {
-        school
-        forest
-        mill
+        Edmond|school
+        Edmond|forest
+        Edmond|mill
+        Mercedes|school
+        Mercedes|forest
+        Mercedes|mill
     }
 }

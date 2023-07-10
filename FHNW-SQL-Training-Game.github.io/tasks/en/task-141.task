@@ -1,24 +1,21 @@
 METADATA {
     id: task-141
-    name: Woodwind at Blumenweg
-    color: green
-    info: list distinct and joined fields by condition
-    keywords: SELECT, FROM, DISTINCT, GROUP BY, INNER JOIN, ON, WHERE
+    name: Parent of
+    color: orange
+    info: list joined fields by condition
+    keywords: SELECT, FROM, INNER JOIN, WHERE, ON
     level: 2
 }
 
 DESCRIPTION {
-    Who lives at Blumenweg and plays a woodwind instrument? Please list fname, name and street.
-}
+    Show Marie’s first and last name and the first and last name of the parent responsible for her.
+ }
 
 ANSWER {
-    SELECT DISTINCT p.fname, p.name, p.street
-    FROM person p INNER JOIN
-        playing pl ON (p.person_id = pl.person_id) INNER JOIN
-        instrument i ON (pl.instrument_id = i.instrument_id) INNER JOIN
-        instrumentgroup g ON (i.instrumentgroup_id = g.group_id)
-    WHERE p.street = 'Blumenweg'
-    AND g.group_name = "Woodwind";
+    SELECT child.fname child_fn, child.name child_name, parent.fname parent_fn, parent.name parent_name
+    FROM person child INNER JOIN 
+        person parent ON (child.parent = parent.person_id)
+    WHERE child.fname = 'Marie';
 }
 
 TEST {
@@ -37,111 +34,28 @@ TEST {
         510|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
-    TABLE {
-        instrument
-        instrument_id|instrument_name|instrumentgroup_id
-        201|Violine|101
-        202|Viola|101
-        203|Cello|101
-        204|Contrabass|101
-        205|Clarinet|102
-        206|Flute|102
-        207|Oboe|102
-        208|Horn|103
-        209|Trombone|103
-        210|Trumpet|103
-    }
-
-    TABLE {
-        instrumentgroup
-        group_id|group_name
-        101|Strings
-        102|Woodwind
-        103|Brass
-    }
-
-    TABLE {
-        playing
-        person_id|instrument_id
-        502|201
-        502|202
-        503|205
-        503|208
-        504|205
-        504|206
-        505|202
-        506|201
-        506|203
-        506|204
-        507|206
-        507|209
-        507|210
-        508|210
-        509|210
-    }
-
-    RESULT {
-        Trick|Duck|Blumenweg      
-        Track|Duck|Blumenweg          
+     RESULT {
+       Marie|Maus|Minni|Maus      
     }
 }
 
 TEST {
-    TABLE {
+     TABLE {
         person
-        person_id|fname|name|street|city|books|parents
-        501|Donald|Duck|Blumenweg|Entenhausen|5|Null
+        person_id|fname|name|street|city|books|parent
+        501|Donald|Duck|Blumenweg|Entenhausen|5|null
         502|Tick|Duck|Blumenweg|Entenhausen|41|501
         503|Trick|Duck|Blumenweg|Entenhausen|45|501
         504|Track|Duck|Blumenweg|Entenhausen|43|501
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|Null
-        506|Marie|Maus|Blumenweg|Entenhausen|115|505
+        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
+        506|Marie|Maus|Blumenweg|Entenhausen|115|508
         507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|Null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|Null
-        510|Dagobert|Trump|Steinenberg|Usania|1|Null
+        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        510|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
-    TABLE {
-        instrument
-        instrument_id|instrument_name|instrumentgroup_id
-        201|Violine|101
-        202|Viola|101
-        203|Cello|101
-        204|Contrabass|101
-        205|Clarinet|102
-        206|Flute|102
-        207|Oboe|102
-        208|Horn|103
-        209|Trombone|103
-        210|Trumpet|103
-    }
-
-    TABLE {
-        instrumentgroup
-        group_id|group_name
-        101|Strings
-        102|Woodwind
-        103|Brass
-    }
-
-    TABLE {
-        playing
-        person_id|instrument_id
-        501|202
-        501|208
-        501|206
-        505|202
-        506|201
-        506|203
-        506|208
-        507|206
-        507|209
-        507|210
-        508|210
-        509|210
-    }
-    RESULT {
-        Donald|Duck|Blumenweg   
+     RESULT {
+        Marie|Maus|Mickey|Maus      
     }
 }

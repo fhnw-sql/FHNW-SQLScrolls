@@ -1,63 +1,65 @@
 METADATA {
     id: task-013
-    name: Sorting Ghosts
+    name: Descending Ghosts
     color: purple
-    info: list sorted fields on conditions
-    keywords: SELECT, WHERE, ORDER_BY
+    info: list sorted field
+    keywords: SELECT, ORDER_BY
     level: 1
 }
 
 DESCRIPTION {
-  Show all ghosts born in the 17th century from the youngest to the oldest and if they were born in the same year, sort them in alphabetical order within each year.
+    List all the different ghost birth years in descending order.
 }
 
-ANSWER {
-    SELECT * FROM Ghosts WHERE YEAR BETWEEN 1600 AND 1700 ORDER BY YEAR DESC, NAME ASC
+PARSONS {
+    SELECT DISTINCT year 
+    FROM ghosts
+    ORDER BY year DESC
+    SELECT year #distractor
+    GET NAME OF GHOST #distractor
+    FROM ghost #distractor
+    SORT BY year #distractor
+    ORDER BY year #distractor
+
 }
 
-STRICT
+ANSWER { 
+    SELECT DISTINCT year FROM ghosts ORDER BY year DESC;
+}
 
 TEST {
     TABLE {
         Ghosts
         id|name|year
-        1|Arthur|1765
-        2|Desiree|1833
+        1|Arthur|1650
+        2|Desiree|1801
         3|Siegfried|1650
-        4|Sieglinde|1765
+        4|Sieglinde|1777
         5|Kaaleppi|1833
-        6|Hermine|1650
-        7|Siegfried|1687
-        8|Veronika|1602
     }
 
     RESULT {
-       7|Siegfried|1687
-       6|Hermine|1650
-       3|Siegfried|1650
-       8|Veronika|1602
+        1833
+        1801
+        1777
+        1650
     }
 }
-
 
 TEST {
     TABLE {
         Ghosts
         id|name|year
-        1|Arthur|1765
-        2|Desiree|1833
-        3|Solomun|1650
-        4|Sieglinde|1765
-        5|Kaaleppi|1833
-        6|Herold|1650
-        7|Solomun|1687
-        8|Zaptus|1602
+        1|Edmond|1744
+        2|Mercedes|1885
+        3|Fernand|1744
+        4|Valentine|1885
+        5|Haydee|1604
     }
 
     RESULT {
-       7|Solomun|1687
-       6|Herold|1650
-       3|Solomun|1650
-       8|Zaptus|1602
+        1885
+        1744
+        1604
     }
 }

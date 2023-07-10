@@ -1,78 +1,38 @@
 METADATA {
     id: task-052
-    name: Nicknames
-    color: orange
-    info: list filtered fields from cross joined table
-    keywords: SELECT, WHERE, CROSS_JOIN
-    level: 4
+    name: Worst Songs
+    color: xmas
+    info: list field on numeric condition
+    keywords: SELECT, WHERE
+    level: 1
 }
 
 DESCRIPTION {
-    On their graduation the wizards receive a nickname composed by adjetive and a noun depending on their category.
-    Which are the possible nicknames for a new gold wizard?
+    Which songs were rated less or equal than 3?
 }
 
-ANSWER {
-   SELECT a.name, n.name FROM Nouns n CROSS JOIN Adjectives a WHERE n.type = "gold"
-}
-
-
-TEST {
-    TABLE {
-        Nouns
-        id|name|type
-        1|Dragon|gold
-        2|Bat|silver
-        3|Salamander|bronze
-        4|Phoenix|gold
-        5|Wolf|silver
-        6|Cricket|bronze
-    }
-
-    TABLE {
-        Adjectives
-        id|name
-        1|Mystic
-        2|Dark
-        3|Misterious
-    }
-
-    RESULT {
-        Mystic|Dragon
-        Dark|Dragon
-        Misterious|Dragon        
-        Mystic|Phoenix
-        Dark|Phoenix
-        Misterious|Phoenix
-    }
+ANSWER { 
+    SELECT title, rating FROM song WHERE rating <= 3;
 }
 
 TEST {
     TABLE {
-        Nouns
-        id|name|type
-        1|Sphinx|gold
-        2|Tiger|silver
-        3|Spider|bronze
-        4|Pegasus|gold
-        5|Lion|silver
-        6|Scorpion|bronze
-    }
-
-    TABLE {
-        Adjectives
-        id|name
-        1|Infamous
-        2|Ghostly
-        3|Invisible
+        Song
+        song_id|title|seconds|language|rating|interpret_fk|album_fk
+        1|All I Want for Christmas Is you|241|en|4|4|13
+        2|Silent Night|219|en|1|4|13
+        3|O Holy Night|267|en|3|4|13
+        4|Christmas (Baby Please Come Home)|153|en|7|4|13
+        5|Santa Claus Is Comin'' to Town|204|en|8|4|13
+        6|Christmas (Baby Please Come Home)|166|en|3|1|11
+        7|Christmasland|144|en|9|NULL|11
+        10|Parade Of The Wooden Soldiers|175|en|2|3|11
     }
 
     RESULT {
-        Infamous|Sphinx
-        Ghostly|Sphinx
-        Invisible|Sphinx
-        Infamous|Pegasus
-        Ghostly|Pegasus
-        Invisible|Pegasus
+        Silent Night|1
+        O Holy Night|3
+        Christmas (Baby Please Come Home)|3
+        Parade Of The Wooden Soldiers|2
     }
 }

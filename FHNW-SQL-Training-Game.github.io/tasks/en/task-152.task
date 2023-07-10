@@ -1,78 +1,124 @@
 METADATA {
     id: task-152
-    name: Unique Potions
-    color: green
-    info: Add Unique Index
-    keywords: ALTER_TABLE
-    level: 4
-    type: DCL
+    name: Subjects
+    color: red
+    info: list sorted, grouped fields with "having"
+    keywords: WHERE, GROUP BY, HAVING
+    level: 2
 }
 
 DESCRIPTION {
-   Add an index called "name_index" to help the wizards access the potions by name and make sure potion names are unique.
+   Enola Holmes: "In which subjects do we have more than 4 students and how many"
 }
 
 ANSWER {
-    CREATE UNIQUE INDEX test_idx ON Potions(name);
+    SELECT count(*) amount, subject
+    FROM person
+    WHERE persontype='Student'
+    GROUP BY subject
+    HAVING count(*) >4;
 }
 
 TEST {
-    
     TABLE {
-        Potions
-        potion_id|name|level|tested
-        1|Magic Spell|2|0
-        2|Black Mantra|1.5|0
-        3|Dragon Potion|25|1
-        5|Midnight Surprise|25|1
-    }
-
-    SQL {
-        SELECT DISTINCT m.name as table_name, ii.name as column_name, il.name as index_name FROM sqlite_master AS m, pragma_index_list(m.name) AS il, pragma_index_info(il.name) AS ii WHERE m.type='table' AND il.[unique] = 1;    
+       person
+       personID|firstname|lastname|subject|persontype
+       1234|Julia|Schneider|Electrical Engineering|Lecturer
+       1239|Anna|Neumann|Mechanical Engineering|Lecturer
+       2345|Thomas|Meier|Physics|Staff
+       3456|Anna|Müller|Data Science|Lecturer
+       4567|Lisa|Weber|Physics|Professor
+       5678|Tim|Lehmann|Computer Science|Professor
+       5688|Fabian|Wolf|Physics|Lecturer
+       6789|Markus|Schmidt|Data Science|Professor
+       7890|Nina|Fuchs|Electrical Engineering|Staff
+       8901|Jens|Schmidt|Data Science|Lecturer
+       9012|Svenja|Schwarz|Computer Science|Lecturer
+       10012|Max|Mayer|Mechanical Engineering|Student
+       10122|Katharina|Berg|Computer Science|Student
+       11123|Carla|Klein|Computer Science|Student
+       11223|Julia|Krause|Data Science|Student
+       12234|Felix|Schneider|Data Science|Student
+       12347|Esther|Wagner|Mechanical Engineering|Staff
+       13345|Lisa|Weber|Physics|Student
+       14456|Tina|Schwarz|Electrical Engineering|Student
+       22334|Florian|Fuchs|Computer Science|Student
+       23451|Kim|Hoffmann|Computer Science|Staff
+       23456|Lisa|Müller|Data Science|Student
+       31234|Markus|Schmitt|Computer Science|Student
+       33445|Svenja|Koch|Electrical Engineering|Student
+       34567|Brigitte|Berg|Data Science|Staff
+       44556|Marie|Schwarz|Mechanical Engineering|Student
+       45678|Sarah|Klein|Electrical Engineering|Student
+       55667|Tom|Lorenz|Computer Science|Student
+       56789|Tim|Weber|Mechanical Engineering|Student
+       66778|Nina|Schuster|Data Science|Student
+       67890|Anna|Bauer|Computer Science|Student
+       67899|Hannah|Becker|Computer Science|Lecturer
+       77889|Matthias|Neumann|Mechanical Engineering|Student
+       78901|Fabian|Wolf|Physics|Student
+       88900|Lea|Wagner|Physics|Student
+       89012|Hannah|Becker|Data Science|Student
+       90123|Lena|Schneider|Computer Science|Student
+       99011|Robin|Hoffmann|Electrical Engineering|Student
+       345675|Jan|Schmidt|Physics|Student
     }
 
     RESULT {
-      Potions|name|test_idx
+        7|Computer Science
+        5|Data Science
     }
 }
 
-TEST {
-    
-    TABLE {
-        Potions
-        potion_id|name|level|tested
-        1|Magic Spell|2|0
-        2|Black Mantra|1.5|0
-        3|Dragon Potion|25|1
-        5|Midnight Surprise|25|1
-    }
 
-    SQL {
-        SELECT REPLACE(upper(sql), ' ', '') FROM sqlite_master WHERE name = 'test_idx';
+TEST {
+    TABLE {
+       person
+       personID|firstname|lastname|subject|persontype
+       1234|Julia|Schneider|Electrical Engineering|Lecturer
+       1239|Anna|Neumann|Mechanical Engineering|Student
+       2345|Thomas|Meier|Physics|Staff
+       3456|Anna|Müller|Data Science|Lecturer
+       4567|Lisa|Weber|Physics|Professor
+       5678|Tim|Lehmann|Computer Science|Professor
+       5688|Fabian|Wolf|Physics|Lecturer
+       6789|Markus|Schmidt|Data Science|Professor
+       7890|Nina|Fuchs|Electrical Engineering|Staff
+       8901|Jens|Schmidt|Data Science|Lecturer
+       9012|Svenja|Schwarz|Computer Science|Lecturer
+       10012|Max|Mayer|Mechanical Engineering|Student
+       10122|Katharina|Berg|Computer Science|Student
+       11123|Carla|Klein|Computer Science|Student
+       11223|Julia|Krause|Data Science|Student
+       12234|Felix|Schneider|Data Science|Student
+       12347|Esther|Wagner|Mechanical Engineering|Staff
+       13345|Lisa|Weber|Physics|Student
+       14456|Tina|Schwarz|Electrical Engineering|Student
+       22334|Florian|Fuchs|Computer Science|Student
+       23451|Kim|Hoffmann|Computer Science|Lecturer
+       23456|Lisa|Müller|Data Science|Student
+       31234|Markus|Schmitt|Computer Science|Student
+       33445|Svenja|Koch|Electrical Engineering|Student
+       34567|Brigitte|Berg|Data Science|Staff
+       44556|Marie|Schwarz|Mechanical Engineering|Student
+       45678|Sarah|Klein|Electrical Engineering|Student
+       55667|Tom|Lorenz|Computer Science|Student
+       56789|Tim|Weber|Mechanical Engineering|Student
+       66778|Nina|Schuster|Data Science|Staff
+       67890|Anna|Bauer|Computer Science|Student
+       67899|Hannah|Becker|Computer Science|Lecturer
+       77889|Matthias|Neumann|Mechanical Engineering|Student
+       78901|Fabian|Wolf|Physics|Student
+       88900|Lea|Wagner|Physics|Student
+       89012|Hannah|Becker|Data Science|Student
+       90123|Lena|Schneider|Computer Science|Student
+       99011|Robin|Hoffmann|Electrical Engineering|Student
+       345675|Jan|Schmidt|Physics|Student
     }
 
     RESULT {
-      CREATEUNIQUEINDEXTEST_IDXONPOTIONS(NAME)
-    }
-}
-
-TEST {
-
-    TABLE {
-        Potions
-        potion_id|name|level|tested
-        1|Magic Spell|2|0
-        2|Black Mantra|1.5|0
-        3|Dragon Potion|25|1
-        5|Midnight Surprise|25|1
-    }
-    
-    SQL {
-       EXPLAIN QUERY PLAN SELECT name from Potions WHERE name='Black Mantra';
-    }
-
-    RESULT {
-        2|0|0|SEARCH Potions USING COVERING INDEX test_idx (name=?)
+        7|Computer Science
+        5|Mechanical Engineering
     }
 }
 

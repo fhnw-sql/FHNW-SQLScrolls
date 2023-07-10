@@ -1,86 +1,70 @@
 METADATA {
     id: task-097
-    name: Pricing
-    color: blue
-    info: Pokedex new arrivals
-    keywords: SELECT, AS, ORDER BY DESC
-    level: 2
+    name: Young Animals
+    color: green
+    info: list filtered fields from a single table
+    keywords: SELECT, FROM, WHERE, ORDER_BY
+    level: 1
+}
+DESCRIPTION {
+    The animal families in the zoo are growing every year 🍼. 
+    
+    The accounting department wants to know which animals were born in our zoo for a sponsorship event.
+
+    Make a list with the youngest animal on top.
 }
 
-DESCRIPTION {
-     Let us try to model the Pokemon selling price. What would the price be
-     if we take 3% of the sum of the hitPoints and speed?  
-     Show ID, name1, hitPoints, speed, and the newly calculated
-     price by which you should order the result, the highest price at the top.
+PARSONS {
+    SELECT name, type, birthdate
+    FROM zoo_animal
+    WHERE birthdate = entry_date
+    ORDER BY birthdate DESC
+    FROM zoo_animals #distractor
+    WHERE birthdate < entry_date  #distractor
+    ORDER BY birthdate #distractor
 }
 
 ANSWER {
-    select ID, name1, hitPoints, speed,  0.03* (hitPoints + speed) as price
-    from Pokedex_new order by price DESC;
-}
-
-STRICT
-
-TEST {
-    TABLE {
-        Pokedex_new
-        ID|name1|name2|type1|type2|total|hitPoints|attack|defense|attackSpecial|defenseSpecial|speed
-        127|Pinsir|Mega Pinsir|BUG|FLYING|600|65|155|120|65|90|105
-        125|Electabuzz|null|ELECTRIC|null|490|65|83|57|95|85|105
-        126|Magmar|null|FIRE|null|495|65|95|57|100|85|93
-        128|Tauros|null|NORMAL|null|490|75|100|95|40|70|110
-        129|Magikarp|null|WATER|null|200|20|10|55|15|20|80
-        131|Lapras|null|WATER|ICE|535|130|85|80|85|95|60
-        132|Ditto|null|NORMAL|null|288|48|48|48|48|48|48
-        133|Eevee|Partner Eevee|NORMAL|null|435|65|75|70|65|85|75
-        134|Vaporeon|null|WATER|null|525|130|65|60|110|95|65
-        135|Jolteon|null|ELECTRIC|null|525|65|65|60|110|95|130
-        136|Flareon|null|FIRE|null|525|65|130|60|95|110|65
-        137|Porygon|null|NORMAL|null|395|65|60|70|85|75|40
-        138|Omanyte|null|ROCK|WATER|355|35|40|100|90|55|35
-        139|Omastar|null|ROCK|WATER|495|70|60|125|115|70|55
-        140|Kabuto|null|ROCK|WATER|355|30|80|90|55|45|55
-    }
-
-    RESULT {
-        134|Vaporeon|130|65|5.85
-        135|Jolteon|65|130|5.85
-        131|Lapras|130|60|5.7
-        128|Tauros|75|110|5.55
-        125|Electabuzz|65|105|5.1
-        127|Pinsir|65|105|5.1
-        126|Magmar|65|93|4.74
-        133|Eevee|65|75|4.2
-        136|Flareon|65|65|3.9
-        139|Omastar|70|55|3.75
-        137|Porygon|65|40|3.15
-        129|Magikarp|20|80|3
-        132|Ditto|48|48|2.88
-        140|Kabuto|30|55|2.55
-        138|Omanyte|35|35|2.1
-    }
+    SELECT name, type, birthdate FROM zoo_animal WHERE birthdate = entry_date ORDER BY birthdate DESC;
 }
 
 TEST {
+    STRICT
+
     TABLE {
-        Pokedex_new
-        ID|name1|name2|type1|type2|total|hitPoints|attack|defense|attackSpecial|defenseSpecial|speed
-        155|Cyndaquil|null|FIRE|null|309|39|52|43|60|50|65
-        156|Quilava|null|FIRE|null|405|58|64|58|80|65|80
-        157|Typhlosion|null|FIRE|null|534|78|84|78|109|85|100
-        158|Totodile|null|WATER|null|314|50|65|64|44|48|43
-        159|Croconaw|null|WATER|null|405|65|80|80|59|63|58
-        160|Feraligatr|null|WATER|null|530|85|105|100|79|83|78
+        zoo_animal
+        id|type|name|cage_id|food_id|carnivore|birthdate|entry_date
+		1|penguin|Happyfeet|1|1|true|2006-07-15|2006-07-15
+		2|penguin|Gloria|1|1|true|2008-03-12|2009-02-24
+		3|penguin|Lani|1|1|true|2013-12-24|2009-02-24
+		4|bear|Paddington|2|3|true|2015-01-25|2018-09-07
+		5|bear|Ursus|2|3|false|2014-06-02|2014-06-02
+		6|bear|Balu|2|3|false|2020-04-05|2020-04-05
+		7|maggot chopper|Freddy|3|4|true|2017-10-06|2017-10-06
+		8|rhino|Timon|3|5|false|1999-02-10|2000-10-06
+		9|rhino|Pumba|3|5|false|1999-02-10|2000-10-06
+		10|lion|Alex|null|9|true|2011-09-28|2013-09-01
+		11|giraffe|Shari|3|6|false|2001-05-30|2007-07-01
+		12|giraffe|Nala|3|6|false|2019-02-06|2019-02-06
+		13|kangaroo|Dodo|4|5|false|2018-05-01|2018-05-01
+		14|kangaroo|Diego|4|5|false|2018-05-01|2018-05-01
+		15|kangaroo|Domingo|4|5|false|2019-07-16|2020-04-01
+		16|kangaroo|Didier|4|5|false|2012-11-04|2013-11-03
+		17|peecock|Martin|5|5|false|null|2019-11-01
+		18|bear|Ursina|5|3|false|2021-04-05|2021-04-05
     }
 
     RESULT {
-        157|Typhlosion|78|100|5.34
-        160|Feraligatr|85|78|4.89
-        156|Quilava|58|80|4.14
-        159|Croconaw|65|58|3.69
-        155|Cyndaquil|39|65|3.12
-        158|Totodile|50|43|2.79
+        Ursina|bear|2021-04-05
+        Balu|bear|2020-04-05
+        Nala|giraffe|2019-02-06
+        Dodo|kangaroo|2018-05-01
+        Diego|kangaroo|2018-05-01
+        Freddy|maggot chopper|2017-10-06
+        Ursus|bear|2014-06-02
+        Happyfeet|penguin|2006-07-15
     }
 }
+
 
 

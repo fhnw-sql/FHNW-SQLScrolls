@@ -1,6 +1,6 @@
 METADATA {
     id: task-037
-    name: Ghostly Description
+    name: Ghosts in the Woods
     color: orange
     info: list filtered fields from product table
     keywords: SELECT, WHERE, CARTESIAN_PRODUCT
@@ -8,34 +8,23 @@ METADATA {
 }
 
 DESCRIPTION {
-    Show all information you can get about ghosts.
+    Which ghosts can I see in the woods?
 }
-
-PARSONS {
-  SELECT g.name, p.name 
-  FROM Hauntings  h, 
-  PLACES p, Ghosts g 
-  WHERE g.id = h.ghost_id 
-  AND p.id = h.place_id
-  AND g.id = p.place_id #distractor
-  WHERE h.id = g.id #distractor
-}
-
 
 ANSWER {
-   SELECT g.name, p.name FROM Hauntings  h, Places p, Ghosts g WHERE g.id = h.ghost_id AND p.id = h.place_id
+   SELECT g.name FROM GHOSTS  g, PLACES p WHERE p.id = g.place_id AND p.name = "forest"
 }
 
 
 TEST {
     TABLE {
         Ghosts
-        id|name
-        1|Arthur
-        2|Desiree
-        3|Siegfried
-        4|Sieglinde
-        5|Kaaleppi
+        id|name|place_id
+        1|Arthur|1
+        2|Desiree|3
+        3|Siegfried|2
+        4|Sieglinde|2
+        5|Kaaleppi|3
     }
 
     TABLE {
@@ -46,61 +35,32 @@ TEST {
         3|mill
     }
 
-    TABLE {
-        Hauntings
-        ghost_id|place_id
-        1|1
-        2|2
-        2|3
-        3|2
-        4|2
-    }
-
     RESULT {
-        Arthur|school
-        Desiree|forest
-        Desiree|mill
-        Siegfried|forest
-        Sieglinde|forest
+        Siegfried
+        Sieglinde
     }
 }
 
 TEST {
     TABLE {
         Ghosts
-        id|name
-        1|Edmond
-        2|Mercedes
-        3|Fernand
-        4|Valentine
-        5|Haydee
+        id|name|place_id
+        1|Edmond|2
+        2|Mercedes|2
+        3|Fernand|3
+        4|Valentine|2
+        5|Haydee|2
     }
 
     TABLE {
         Places
         id|name
         1|school
-        2|forest
-        3|mill
-    }
-
-    TABLE {
-        Hauntings
-        ghost_id|place_id
-        1|1
-        1|2
-        1|3
-        2|1
-        2|2
-        2|3
+        2|mill
+        3|forest
     }
 
     RESULT {
-        Edmond|school
-        Edmond|forest
-        Edmond|mill
-        Mercedes|school
-        Mercedes|forest
-        Mercedes|mill
+        Fernand
     }
 }

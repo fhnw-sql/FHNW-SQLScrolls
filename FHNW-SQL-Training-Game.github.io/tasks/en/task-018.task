@@ -1,35 +1,18 @@
 METADATA {
     id: task-018
-    name: The oldest Ghost
+    name: Unique Ghost Names
     color: blue
-    info: list min field on condition
-    keywords: SELECT, MIN, WHERE, BETWEEN
-    level: 2
+    info: list unique field on condition
+    keywords: SELECT, DISTINCT, WHERE, BETWEEN
+    level: 1
 }
 
 DESCRIPTION {
-    Find the earliest year of a ghost birth in the 18th century, i.e. when was the oldest ghost born in the 18th century born?
-}
-
-PARSONS {
-    SELECT 
-    MIN 
-    (YEAR)
-    FROM GHOSTS
-    WHERE 
-    YEAR 
-    BETWEEN
-    '1700' 
-    AND
-    '1800'
-    OR #distractor
-    LOW #distractor
-    AND #distractor
-    = #distractor
+    How many different ghost names belong to ghosts born in the 17th century?
 }
 
 ANSWER {
-   SELECT MIN (YEAR) FROM GHOSTS WHERE YEAR BETWEEN '1700' AND '1800'
+   SELECT COUNT (DISTINCT name) FROM ghosts WHERE year BETWEEN '1600' AND '1700'
 }
 
 TEST {
@@ -46,13 +29,14 @@ TEST {
         7|Siegfried|1687
         8|Veronika|1777
         9|Veronika|1602
-	10|Veronika|1623
+	    10|Veronika|1623
     }
 
     RESULT {
-       1765
+       3
     }
 }
+
 
 TEST {
     TABLE {
@@ -61,17 +45,18 @@ TEST {
         1|Arthur|1765
         2|Desiree|1777
         3|Siegfried|1650
-        4|Sieglinde|1712
+        4|Sieglinde|1765
         5|Kaaleppi|1833
         5|Khaled|1777
         6|Hermine|1650
         7|Siegfried|1687
         8|Veronika|1777
         9|Veronika|1602
-	10|Veronika|1623
+	    10|Veronika|1623
+        11|Zaptus|1623
     }
 
     RESULT {
-       1712
+       4
     }
 }

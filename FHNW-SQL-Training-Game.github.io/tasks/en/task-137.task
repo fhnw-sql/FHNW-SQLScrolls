@@ -1,33 +1,20 @@
 METADATA {
     id: task-137
-    name: Clarinet Duck
+    name: Same Address
     color: green
-    info: list joined fields by condition
-    keywords: SELECT, FROM, GROUP BY, INNER JOIN, WHERE, ON, AND
-    level: 3
+    info: list grouped fields
+    keywords: SELECT, FROM, GROUP BY, count(*)
+    level: 1
 }
 
 DESCRIPTION {
-    Do any of the Ducks play the clarinet? 
-}
-
-PARSONS {
-    SELECT i.instrument_name, pe.fname, pe.name
-    FROM person pe INNER JOIN
-    playing pl ON (pe.person_id = pl.person_id)
-    INNER JOIN instrument i ON (pl.instrument_id = i.instrument_id)
-    WHERE i.instrument_name = 'Clarinet' AND pe.name = 'Duck'
-    WHERE inst.instrument_name EQUALS ('Clarinet') #distractor
-    AND person.name = 'Duck' #distractor
+    How many people live at the same address? Please list the address and the number of people.
 }
 
 ANSWER {
-    SELECT i.instrument_name, pe.fname, pe.name
-    FROM person pe INNER JOIN
-        playing pl ON (pe.person_id = pl.person_id) INNER JOIN
-        instrument i ON (pl.instrument_id = i.instrument_id)
-    WHERE i.instrument_name = 'Clarinet'
-        AND pe.name = 'Duck';
+    SELECT street, city, count(*)
+    FROM person
+    GROUP BY street, city;
 }
 
 TEST {
@@ -46,44 +33,10 @@ TEST {
         510|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
-    TABLE {
-        instrument
-        instrument_id|instrument_name|instrumentgroup_id
-        201|Violine|101
-        202|Viola|101
-        203|Cello|101
-        204|Contrabass|101
-        205|Clarinet|102
-        206|Flute|102
-        207|Oboe|102
-        208|Horn|103
-        209|Trombone|103
-        210|Trumpet|103
-    }
-
-    TABLE {
-        playing
-        person_id|instrument_id
-        502|201
-        502|202
-        503|205
-        503|208
-        504|205
-        504|206
-        505|202
-        506|201
-        506|203
-        506|204
-        507|206
-        507|209
-        507|210
-        508|210
-        509|210
-    }
-
-    RESULT {
-        Clarinet|Trick|Duck      
-        Clarinet|Track|Duck      
+     RESULT {
+        Steinenberg|Usania|1
+        Blumenweg|Entenhausen|6
+        Sternenstrasse|Entenhausen|3
     }
 }
 
@@ -91,53 +44,21 @@ TEST {
     TABLE {
         person
         person_id|fname|name|street|city|books|parent
-        501|Donald|Duck|Blumenweg|Entenhausen|5|null
-        502|Tick|Duck|Blumenweg|Entenhausen|41|501
+        501|Donald|Duck|Sternenstrasse|Entenhausen|80|null
+        502|Tick|Duck|Sternenstrasse|Entenhausen|40|501
         503|Trick|Duck|Blumenweg|Entenhausen|45|501
-        504|Track|Duck|Blumenweg|Entenhausen|43|501
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
+        504|Track|Duck|Blumenweg|Entenhausen|60|501
+        505|Minni|Maus|Blumenweg|Entenhausen|120|null
         506|Marie|Maus|Blumenweg|Entenhausen|115|505
-        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
+        507|Maggie|Maus|Blumenweg|Entenhausen|1|505
         508|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
-        510|Dagobert|Trump|Steinenberg|Usania|1|null
+        509|Dagobert|Duck|Sternenstrasse|Entenhausen|10|null
+        510|Dagobert|Trump|Sternweg|Usania|2|null
     }
 
-    TABLE {
-        instrument
-        instrument_id|instrument_name|instrumentgroup_id
-        201|Violine|101
-        202|Viola|101
-        203|Cello|101
-        204|Contrabass|101
-        205|Clarinet|102
-        206|Flute|102
-        207|Oboe|102
-        208|Horn|103
-        209|Trombone|103
-        210|Trumpet|103
-    }
-
-    TABLE {
-        playing
-        person_id|instrument_id
-        502|201
-        502|209
-        503|202
-        503|210
-        504|210
-        504|210
-        505|202
-        506|203
-        506|207
-        506|203
-        507|206
-        507|209
-        507|203
-        508|210
-        509|207
-    }
-
-    RESULT {
+     RESULT {
+        Sternweg|Usania|1
+        Blumenweg|Entenhausen|6
+        Sternenstrasse|Entenhausen|3
     }
 }

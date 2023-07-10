@@ -1,71 +1,58 @@
 METADATA {
     id: task-057
-    name: Bingo Again
-    color: orange
-    info: list filtered fields from joined table with subquery
-    keywords: SELECT, WHERE, INNER_JOIN, NESTED_QUERY
-    level: 4
+    name: Only 3 Rating
+    color: xmas
+    info: list filtered fields from joined tables
+    keywords: SELECT, WHERE, INNER_JOIN
+    level: 3
 }
 
 DESCRIPTION {
-    Bingo is training to be a wizard. With whom has he studied so far?
+    Which albums contain songs with a rating of 3 and how are these songs called?
 }
 
-ANSWER {
-    SELECT w.name FROM Wizards w INNER JOIN Lessons l ON l.teacher_id = w.id WHERE l.pupil_id = (SELECT w.id FROM Wizards w WHERE w.name = "Bingo")
+PARSONS {
+
+	SELECT a.title, s.rating, s.title 
+ 	SELECT title, rating, name  #distractor
+    FROM song s, album a #distractor
+    FROM song s  
+	INNER JOIN album a
+ 	ON a.album_id = s.album_fk	
+    WHERE s.rating = 3
+    WHERE s.rating EQUAL 3 #distractor
+	AND s.album_id = a.album_fk #distractor
 }
 
+ANSWER { 
+	SELECT a.title, s.rating, s.title FROM song s INNER JOIN album a ON a.album_id = s.album_fk WHERE s.rating = 3 
+	}
 
 TEST {
-    TABLE {
-        Wizards
-        id|name|area|skill
-        1|Anna|Shadowland|5
-        2|Orz Orz|Kumpula|3
-        3|Bingo|Shadowland|2
-        4|Solmu|Shadowland|4
-        5|Rufus|Shadowland|1
-    }
 
+	TABLE {
+		Album
+		album_id|title|year
+		11|A Christmas Gift For You From Phil Spector|1963
+		12|Original German Christmas With Die Flippers|1987
+		13|Merry Christmas|1994
+	}
+	
     TABLE {
-        Lessons
-        teacher_id|pupil_id
-        1|3
-        1|4
-        2|1
-        5|3
-        4|5
-        5|1
+        Song
+        song_id|title|seconds|language|rating|interpret_fk|album_fk
+		1|All I Want for Christmas Is you|241|en|4|4|13
+		2|O Holy Night|267|en|3|4|13
+		3|Christmas (Baby Please Come Home)|153|en|7|4|13
+		4|Parade Of The Wooden Soldiers|175|en|2|3|11
+		5|Aber Heidschi Bum Beidschi|267|de|8|2|12
+		6|Christmas (Baby Please Come Home)|166|en|3|1|11
+		7|Alle Jahre wieder|118|de|4|2|NULL
     }
 
     RESULT {
-        Anna
-        Rufus
+		Merry Christmas|3|O Holy Night
+		A Christmas Gift For You From Phil Spector|3|Christmas (Baby Please Come Home)      
     }
 }
 
-TEST {
-    TABLE {
-        Wizards
-        id|name|area|skill
-        1|Bingo|Kumpula|2
-        2|Orz Orz|Shadowland|3
-        3|Anna|Shadowland|5
-        4|Solmu|Shadowland|4
-        5|Rufus|Fabuland|1
-    }
-
-    TABLE {
-        Lessons
-        teacher_id|pupil_id
-        1|2
-        2|3
-        3|1
-        3|4
-        5|4
-    }
-
-    RESULT {
-        Anna
-    }
-}
