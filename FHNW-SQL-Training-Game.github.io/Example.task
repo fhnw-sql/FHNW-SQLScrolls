@@ -1,0 +1,55 @@
+METADATA {
+    id: task-001
+    name: Example task
+    color: purple
+}
+
+DESCRIPTION {
+    Assignment and instructions for completing the task. Here you can connect the task to the magical world.
+    \ n force line breaks.
+
+    Assignment: Here are more detailed instructions
+}
+
+PARSONS {	
+  SELECT name, year	
+  FROM Ghosts	
+  SELECT name and yearOfBirth #distractor	
+  SELECT * #distractor	
+  SELECT name #distractor	
+}	
+
+
+ANSWER {
+    SELECT * FROM Test;
+}
+
+TEST {
+    TABLE {
+        Pets
+        id | animal | feeling
+        1 | 😻 | in love
+        2 | 🦑 | satisfied
+        3 | 🦎 | angry
+    }
+
+    TABLE {
+        Pets_copy
+        id | animal | feeling
+        1 | 😻 | in love
+        2 | 🦑 | satisfied
+        3 | 🦎 | angry
+    }
+
+    SQL {
+        CREATE TABLE Runes (id INTEGER PRIMARY KEY, rune TEXT, name TEXT);
+        INSERT INTO Runes (name, rune) VALUES ('Fe', 'ᚠ'), ('Thurs', 'ᚦ'), ('Kaun', 'ᚲ'), ('Algiz', 'ᛉ'), ( 'Berkanan', 'ᛒ'), ('Yngvi', 'ᛝ');
+    }
+
+    STRICT
+    RESULT {
+        1 | 😻 | in love
+        2 | 🦑 | satisfied
+        3 | 🦎 | angry
+    }
+}
