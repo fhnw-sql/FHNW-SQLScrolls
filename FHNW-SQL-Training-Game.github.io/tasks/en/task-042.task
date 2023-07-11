@@ -1,0 +1,71 @@
+METADATA {
+    id: task-042
+    name: Studyfriends
+    color: orange
+    info: list filtered fields from product table with subquery
+    keywords: SELECT, WHERE, CARTESIAN_PRODUCT, NESTED_QUERY
+    level: 4
+}
+
+DESCRIPTION {
+    Bingo is training to be a wizard. With whom has he studied so far?
+}
+
+ANSWER {
+    SELECT w.name FROM Wizards w, Lessons l  WHERE l.pupil_id = (SELECT w.id FROM Wizards w WHERE w.name = "Bingo") and  l.teacher_id = w.id
+}
+
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Shadowland|1
+    }
+
+    TABLE {
+        Lessons
+        teacher_id|pupil_id
+        1|3
+        1|4
+        2|1
+        5|3
+        4|5
+        5|1
+    }
+
+    RESULT {
+        Anna
+        Rufus
+    }
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Bingo|Kumpula|2
+        2|Orz Orz|Shadowland|3
+        3|Anna|Shadowland|5
+        4|Solmu|Shadowland|4
+        5|Rufus|Fabuland|1
+    }
+
+    TABLE {
+        Lessons
+        teacher_id|pupil_id
+        1|2
+        2|3
+        3|1
+        3|4
+        5|4
+    }
+
+    RESULT {
+        Anna
+    }
+}

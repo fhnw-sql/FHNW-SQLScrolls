@@ -1,0 +1,49 @@
+METADATA {
+    id: task-026
+    name: Different Years
+    color: green
+    info: list count of unique field
+    keywords: SELECT, COUNT, DISTINCT
+    level: 2
+}
+
+DESCRIPTION {
+    How many different years of birth do we have in the ghost table?
+}
+
+ANSWER {
+   SELECT COUNT(DISTINCT YEAR) FROM GHOSTS
+}
+
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1833
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+    }
+
+    RESULT {
+        3
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Edmond|1744
+        2|Mercedes|1744
+        3|Fernand|1790
+        4|Valentine|1744
+        5|Haydee|1744
+    }
+
+    RESULT {
+        2
+    }
+}

@@ -1,0 +1,75 @@
+METADATA {
+    id: task-099
+    name: Most Animals
+    color: blue
+    info: list grouped sorted fields from a single table
+    keywords: SELECT, FROM, GROUP_BY, ORDER_BY
+    level: 2
+}
+DESCRIPTION {
+
+    Of which animal species (type) are the most animals (individuals) in the zoo?
+
+    Make a list of the number of animals in descending order. 
+
+    💡 Tip: Use the count function for the number of animals.
+
+}
+
+PARSONS {
+    SELECT COUNT(type) AS amount, type
+    FROM zoo_animal
+    GROUP BY type 
+    ORDER BY amount DESC
+    SELECT COUNT(ALL) AS amount, type  #distractor
+    GROUP BY name   #distractor
+    ORDER BY amount   #distractor
+}
+
+ANSWER {
+    SELECT COUNT(type) AS amount, type
+    FROM zoo_animal
+    GROUP BY type 
+    ORDER BY amount DESC;
+}
+
+TEST {
+    STRICT
+
+    TABLE {
+        zoo_animal
+        id|type|name|cage_id|food_id|carnivore|birthdate|entry_date
+		1|penguin|Happyfeet|1|1|true|2006-07-15|2006-07-15
+		2|penguin|Gloria|1|1|true|2008-03-12|2009-02-24
+		3|penguin|Lani|1|1|true|2013-12-24|2009-02-24
+		4|bear|Paddington|2|3|true|2015-01-25|2018-09-07
+		5|bear|Ursus|2|3|false|2014-06-02|2014-06-02
+		6|bear|Balu|2|3|false|2020-04-05|2020-04-05
+		7|maggot chopper|Freddy|3|4|true|2017-10-06|2017-10-06
+		8|rhino|Timon|3|5|false|1999-02-10|2000-10-06
+		9|rhino|Pumba|3|5|false|1999-02-10|2000-10-06
+		10|lion|Alex|null|9|true|2011-09-28|2013-09-01
+		11|giraffe|Shari|3|6|false|2001-05-30|2007-07-01
+		12|giraffe|Nala|3|6|false|2019-02-06|2019-02-06
+		13|kangaroo|Dodo|4|5|false|2018-05-01|2018-05-01
+		14|kangaroo|Diego|4|5|false|2018-05-01|2018-05-01
+		15|kangaroo|Domingo|4|5|false|2019-07-16|2020-04-01
+		16|kangaroo|Didier|4|5|false|2012-11-04|2013-11-03
+		17|peecock|Martin|5|5|false|null|2019-11-01
+		18|bear|Ursina|5|3|false|2021-04-05|2021-04-05
+    }
+
+    RESULT {
+        4|kangaroo
+        4|bear
+        3|penguin
+        2|rhino
+        2|giraffe
+        1|peecock
+        1|maggot chopper
+        1|lion
+    }
+}
+
+
+

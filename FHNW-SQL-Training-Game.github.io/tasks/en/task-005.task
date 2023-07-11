@@ -1,0 +1,50 @@
+METADATA {
+    id: task-005
+    name: Ghosts of 1800
+    color: purple
+    info: list field on conditions (lt, gt)
+    keywords: SELECT, WHERE
+    level: 1
+}
+
+DESCRIPTION {
+    Show all names of ghosts born in the 18th century.
+}
+
+ANSWER {
+   SELECT name from ghosts where year > 1700 and year < 1800
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1801
+        3|Siegfried|1650
+        4|Sieglinde|1777
+        5|Kaaleppi|1833
+    }
+
+    RESULT {
+        Arthur
+        Sieglinde
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Edmond|1744
+        2|Mercedes|1801
+        3|Fernand|1790
+        4|Valentine|1885
+        5|Haydee|1604
+    }
+
+    RESULT {
+        Edmond
+        Fernand
+    }
+}

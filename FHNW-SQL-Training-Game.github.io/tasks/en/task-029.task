@@ -1,0 +1,54 @@
+METADATA {
+    id: task-029
+    name: Increasing Magic
+    color: green
+    info: list sorted field on condition
+    keywords: SELECT, WHERE, ORDER_BY
+    level: 2
+}
+
+DESCRIPTION {
+   Show the names of the wizards with skill level lower than 4 in the order of increasing skill level.
+}
+
+ANSWER {
+    SELECT NAME FROM WIZARDS WHERE SKILL <4 ORDER BY SKILL ASC
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Kumpula|1
+    }
+
+    RESULT {
+        Rufus
+        Bingo
+        Orz Orz
+    }
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Solomun|Kumpula|3
+        3|Fred|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Klex|Kumpula|2
+        6|Zaptus|Kumpula|1
+    }
+
+    RESULT {
+        Zaptus
+        Fred
+        Klex
+        Solomun
+    }
+}

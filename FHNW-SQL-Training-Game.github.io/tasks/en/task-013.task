@@ -1,0 +1,65 @@
+METADATA {
+    id: task-013
+    name: Descending Ghosts
+    color: purple
+    info: list sorted field
+    keywords: SELECT, ORDER_BY
+    level: 1
+}
+
+DESCRIPTION {
+    List all the different ghost birth years in descending order.
+}
+
+PARSONS {
+    SELECT DISTINCT year 
+    FROM ghosts
+    ORDER BY year DESC
+    SELECT year #distractor
+    GET NAME OF GHOST #distractor
+    FROM ghost #distractor
+    SORT BY year #distractor
+    ORDER BY year #distractor
+
+}
+
+ANSWER { 
+    SELECT DISTINCT year FROM ghosts ORDER BY year DESC;
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1650
+        2|Desiree|1801
+        3|Siegfried|1650
+        4|Sieglinde|1777
+        5|Kaaleppi|1833
+    }
+
+    RESULT {
+        1833
+        1801
+        1777
+        1650
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Edmond|1744
+        2|Mercedes|1885
+        3|Fernand|1744
+        4|Valentine|1885
+        5|Haydee|1604
+    }
+
+    RESULT {
+        1885
+        1744
+        1604
+    }
+}

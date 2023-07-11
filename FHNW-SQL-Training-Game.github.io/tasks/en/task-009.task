@@ -1,0 +1,60 @@
+METADATA {
+    id: task-009
+    name: Ordering Ghosts
+    color: purple
+    info: list sorted fields
+    keywords: SELECT, ORDER_BY
+    level: 1
+}
+
+DESCRIPTION {
+    Show all ghosts ordered from the oldest to the youngest and where they are of the same age, then in alphabetical order.
+}
+
+ANSWER {
+   SELECT * FROM Ghosts ORDER BY YEAR ASC, NAME ASC
+}
+
+STRICT 
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1833
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+    }
+
+    RESULT {
+       3|Siegfried|1650
+       1|Arthur|1765
+       4|Sieglinde|1765
+       2|Desiree|1833
+       5|Kaaleppi|1833
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1833
+        3|Zeptus|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+        6|Artus|1650
+    }
+
+    RESULT {
+       6|Artus|1650
+       3|Zeptus|1650
+       1|Arthur|1765
+       4|Sieglinde|1765
+       2|Desiree|1833
+       5|Kaaleppi|1833
+    }
+}

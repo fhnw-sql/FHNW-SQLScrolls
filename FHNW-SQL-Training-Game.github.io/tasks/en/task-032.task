@@ -1,0 +1,52 @@
+METADATA {
+    id: task-032
+    name: Powerful Wizards
+    color: green
+    info: list count field filtered grouped
+    keywords: SELECT, COUNT, WHERE, GROUP_BY
+    level: 3
+}
+
+DESCRIPTION {
+   List all areas and the number of level 5 wizards in each area.
+}
+
+ANSWER {
+   SELECT area, COUNT(name) FROM wizards WHERE SKILL = 5 GROUP BY area
+}
+
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|1
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|5
+        5|Rufus|Kumpula|1
+    }
+
+    RESULT {
+        Shadowland|2
+    }
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Shadowland|2
+        3|Bingo|Shadowland|5
+        4|Solmu|Shadowland|1
+        5|Rufus|Shadowland|5
+        6|Rasmus|Kumpula|5
+    }
+
+    RESULT {
+        Shadowland|3
+        Kumpula|1
+    }
+}
+
