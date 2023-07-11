@@ -1,0 +1,91 @@
+METADATA {
+    id: task-139
+    name: String instruments
+    color: green
+    info: list joined fields by condition
+    keywords: SELECT, FROM, GROUP BY, INNER JOIN, WHERE, ON, AND
+    level: 2
+}
+
+DESCRIPTION {
+    List all string instruments with type.
+}
+
+ANSWER {
+    SELECT group_name, instrument_name
+    FROM instrument i, instrumentgroup g
+    WHERE i.instrumentgroup_id = g.group_id
+    AND g.group_name = 'Strings';
+
+    OR
+
+    SELECT group_name, instrument_name
+    FROM instrument i INNER JOIN 
+        instrumentgroup g ON (i.instrumentgroup_id = g.group_id)
+    WHERE g.group_name = 'Strings';
+}
+
+TEST {
+    TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Violine|101
+        202|Viola|101
+        203|Cello|101
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Flute|102
+        207|Oboe|102
+        208|Horn|103
+        209|Trombone|103
+        210|Trumpet|103
+    }
+
+      TABLE {
+        instrumentgroup
+        group_id|group_name
+        101|Strings
+        102|Woodwind
+        103|Brass
+    }
+
+    RESULT {
+        Strings|Violine     
+        Strings|Viola       
+        Strings|Cello       
+        Strings|Contrabass  
+    }
+}
+
+TEST {
+      TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Banjo|101
+        202|Viola|101
+        203|Drums|104
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Guitar|101
+        207|Oboe|102
+        208|Horn|103
+        209|Trombone|103
+        210|Trumpet|103
+    }
+
+      TABLE {
+        instrumentgroup
+        group_id|group_name
+        101|Strings
+        102|Woodwind
+        103|Brass
+        104|Percussion
+    }
+
+    RESULT {
+        Strings|Banjo
+        Strings|Viola
+        Strings|Guitar
+        Strings|Contrabass
+    }
+}

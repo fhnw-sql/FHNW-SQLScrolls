@@ -1,0 +1,51 @@
+METADATA {
+    id: task-130
+    name: 'V' Instruments
+    color: purple
+    info: list fields filtered
+    keywords: SELECT, WHERE, LIKE
+    level: 2
+}
+
+DESCRIPTION {
+    How many instruments start with a ‘V’? 
+}
+
+PARSONS {
+    SELECT count(*) 
+    SELECT total(*)  #distractor
+    FROM instrument 
+    WHERE instrument_name like 'V%'
+    WHERE instrument_name is like 'V%' #distractor
+    WHERE instrument_name like 'V*' #distractor
+    WHERE instrument_name startswith 'V' #distractor
+}
+
+ANSWER {
+    SELECT count(*) 
+    FROM instrument 
+    WHERE instrument_name like 'V%'; 
+}
+
+TEST {
+    STRICT 
+
+    TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Violine|101
+        202|Viola|101
+        203|Cello|101
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Flute|102
+        207|Oboe|102
+        208|Horn|103
+        209|Trombone|103
+        210|Trumpet|103
+    }
+
+    RESULT {
+        2
+    }
+}

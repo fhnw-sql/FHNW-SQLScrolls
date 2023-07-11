@@ -1,0 +1,88 @@
+METADATA {
+    id: task-140
+    name: What is a Horn?
+    color: green
+    info: list joined fields by condition
+    keywords: SELECT, FROM, INNER JOIN, WHERE, AND, ON
+    level: 2
+}
+
+DESCRIPTION {
+    What instrument group does horn belong to?
+}
+
+PARSONS {
+    SELECT group_name
+    FROM instrument i, instrumentgroup g
+    WHERE 
+    i.instrumentgroup_id = g.group_id
+    AND i.instrument_name = 'Horn'
+    FROM instrument i AND instrumentgroup g #distractor
+    WHERE inst.instrumentgroup_id = gr.group_id #distractor
+    && i.instrument_name = 'Horn' #distractor
+}
+
+ANSWER {
+    SELECT group_name
+    FROM instrument i, instrumentgroup g
+    WHERE i.instrumentgroup_id = g.group_id
+    AND i.instrument_name = 'Horn';
+}
+
+TEST {
+    TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Violine|101
+        202|Viola|101
+        203|Cello|101
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Flute|102
+        207|Oboe|102
+        208|Horn|103
+        209|Trombone|103
+        210|Trumpet|103
+    }
+
+    TABLE {
+        instrumentgroup
+        group_id|group_name
+        101|Strings
+        102|Woodwind
+        103|Brass
+    }
+
+    RESULT {
+        Brass
+    }
+}
+
+TEST {
+    TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Violine|101
+        202|Viola|101
+        203|Cello|101
+        204|Contrabass|101
+        205|Clarinet|103
+        206|Flute|103
+        207|Oboe|103
+        210|Horn|102
+        208|Trombone|102
+        209|Trumpet|102
+    }
+
+      TABLE {
+        instrumentgroup
+        group_id|group_name
+        101|Strings
+        103|Woodwind
+        102|Brass
+    }
+
+    RESULT {
+        Brass
+    }
+}

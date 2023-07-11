@@ -1,0 +1,155 @@
+METADATA {
+    id: task-155
+    name: Area of the Murder
+    color: red
+    info: count wiht inner join
+    keywords: COUNT, INNER JOIN, WHERE
+    level: 2
+}
+
+DESCRIPTION {
+    Enola Holmes: "How many people have access to "Research" where the murder took place?"
+}
+
+ANSWER {
+    SELECT count(*) amount
+    FROM accessright ar INNER JOIN
+    area a ON (ar.areaid_fk=a.areaid)
+    WHERE a.areaname='Research';
+}
+
+TEST {
+    TABLE {
+        accessright
+        areaID_FK|personID_FK
+        006|5678
+        006|6789
+        006|4567
+        006|9012
+        006|8901
+        006|5688
+        006|10122
+        006|34567
+        006|45678
+        006|56789
+        006|67890
+        006|78901
+        006|89012
+        006|90123
+        006|31234
+        006|11223
+        006|22334
+        006|33445
+        006|44556
+        006|55667
+        006|66778
+        006|77889
+        006|88900
+        006|99011
+        006|10122
+        008|9012
+        008|90123
+        008|22334
+        008|11123
+        008|13345
+        009|2345
+        007|23456
+        007|34567
+        007|45678
+        007|56789
+        007|67890
+        007|78901
+        007|89012
+        007|1234
+        007|2345
+    }
+
+    TABLE {
+        area
+        areaID|areaName
+        001|Open Space
+        002|Entrance
+        003|Office
+        004|Conference
+        005|Classroom
+        006|Research
+        007|Development
+        008|Mechanical Lab
+        009|IT Lab
+        010|Cafeteria
+        011|Recreation
+        012|Restaurant
+    }
+
+    RESULT {
+        25
+    }
+}
+
+TEST {
+    TABLE {
+        accessright
+        areaID_FK|personID_FK
+        006|5678
+        006|6789
+        006|4567
+        006|9012
+        006|8901
+        006|5688
+        006|10122
+        006|34567
+        006|45678
+        006|56789
+        006|67890
+        006|78901
+        006|89012
+        006|90123
+        006|31234
+        006|11223
+        006|22334
+        006|33445
+        006|44556
+        006|55667
+        006|66778
+        006|77889
+        006|88900
+        006|99011
+        006|10122
+        008|9012
+        008|90123
+        008|22334
+        008|11123
+        008|13345
+        009|2345
+        007|23456
+        007|34567
+        007|45678
+        007|56789
+        007|67890
+        007|78901
+        007|89012
+        007|1234
+        007|2345
+    }
+
+    TABLE {
+        area
+        areaID|areaName
+        001|Open Space
+        002|Entrance
+        003|Office
+        004|Conference
+        005|Classroom
+        006|Development
+        007|Research
+        008|Mechanical Lab
+        009|IT Lab
+        010|Cafeteria
+        011|Recreation
+        012|Restaurant
+    }
+
+    RESULT {
+        9
+    }
+}

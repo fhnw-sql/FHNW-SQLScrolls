@@ -1,0 +1,62 @@
+METADATA {
+    id: task-112
+    name: Tested Potions
+    color: green
+    info: alter table
+    keywords: ALTER_TABLE
+    level: 3
+    type: DCL
+}
+
+DESCRIPTION {
+   After many issues when using potions, the witches have decided to add information in the list to know how many times the potions were previously tested.
+   To achieve this a new integer column called "tested" should be added (potions should not be tested by default).
+}
+
+ANSWER {
+    ALTER TABLE Potions ADD tested INTEGER DEFAULT 0;
+}
+
+TEST {
+    TABLE {
+        Potions
+        potion_id|name|level
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dragon Potion|25       
+        5|Midnight Surprise|25       
+    }
+
+    SQL {
+        SELECT * FROM Potions;
+    }
+
+    RESULT {
+        1|Magic Spell|2|0
+        2|Black Mantra|1.5|0
+        3|Dragon Potion|25|0       
+        5|Midnight Surprise|25|0    
+    }
+}
+
+TEST {
+    TABLE {
+        Potions
+        potion_id|name|level
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dragon Potion|25       
+        5|Midnight Surprise|25       
+    }
+
+    SQL {
+        select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('Potions');    
+    }
+
+    RESULT {
+        0|potion_id|NUMBER|0|null|0
+        1|name|TEXT|0|null|0
+        2|level|NUMBER|0|null|0
+        3|tested|INTEGER|0|0|0
+    }
+}

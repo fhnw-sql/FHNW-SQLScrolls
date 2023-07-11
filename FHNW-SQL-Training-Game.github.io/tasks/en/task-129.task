@@ -1,0 +1,38 @@
+METADATA {
+    id: task-129
+    name: Count Instruments
+    color: purple
+    info: list count field
+    keywords: SELECT, COUNT
+    level: 2
+}
+
+DESCRIPTION {
+    How many instruments do we have?
+}
+
+ANSWER {
+    SELECT count(*) 
+    FROM instrument;
+}
+
+TEST {
+    TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Violine|101
+        202|Viola|101
+        203|Cello|101
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Flute|102
+        207|Oboe|102
+        208|Horn|103
+        209|Trombone|103
+        210|Trumpet|103
+    }
+
+    RESULT {
+        10
+    }
+}

@@ -1,0 +1,49 @@
+METADATA {
+    id: task-121
+    name: Sort Instruments
+    color: purple
+    info: list sorted fields
+    keywords: SELECT, ORDER_BY
+    level: 1
+}
+
+DESCRIPTION {
+    Show all instrument names alphabetically ordered by name
+}
+
+ANSWER {
+    SELECT instrument_name
+    FROM instrument
+    ORDER BY instrument_name;
+}
+
+
+TEST {
+    TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Violine|101
+        202|Viola|101
+        203|Cello|101
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Flute|102
+        207|Oboe|102
+        208|Horn|103
+        209|Trombone|103
+        210|Trumpet|103
+    }
+
+    RESULT {
+        Cello
+        Clarinet
+        Contrabass
+        Flute
+        Horn
+        Oboe
+        Trombone
+        Trumpet
+        Viola
+        Violine
+    }
+}

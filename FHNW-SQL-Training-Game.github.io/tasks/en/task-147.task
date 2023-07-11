@@ -1,0 +1,83 @@
+METADATA {
+    id: task-147
+    name: Group Size
+    color: green
+    info: list grouped and joined fields
+    keywords: SELECT, FROM, count(*), GROUP BY, INNER JOIN, ON
+    level: 2
+}
+
+DESCRIPTION {
+    How many instruments are there per instrument group? 
+}
+
+ANSWER {
+    SELECT g.group_name, count(*)
+    FROM instrument i INNER JOIN 
+        instrumentgroup g ON (i.instrumentgroup_id = g.group_id)
+    GROUP BY g.group_name;
+}
+
+TEST {
+    TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Violine|101
+        202|Viola|101
+        203|Cello|101
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Flute|102
+        207|Oboe|102
+        208|Horn|103
+        209|Trombone|103
+        210|Trumpet|103
+    }
+
+      TABLE {
+        instrumentgroup
+        group_id|group_name
+        101|Strings
+        102|Woodwind
+        103|Brass
+    }
+
+    RESULT {
+        Brass|3
+        Woodwind|3
+        Strings|4
+    }
+}
+
+TEST {
+      TABLE {
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Banjo|101
+        202|Viola|101
+        203|Drums|104
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Guitar|101
+        207|Oboe|102
+        208|Horn|103
+        209|Trombone|103
+        210|Trumpet|103
+    }
+
+      TABLE {
+        instrumentgroup
+        group_id|group_name
+        101|Strings
+        102|Woodwind
+        103|Brass
+        104|Percussion
+    }
+
+    RESULT {
+        Brass|3
+        Percussion|1
+        Strings|4
+        Woodwind|2
+    }
+}

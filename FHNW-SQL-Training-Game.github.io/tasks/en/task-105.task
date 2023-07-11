@@ -1,0 +1,60 @@
+METADATA {
+    id: task-105
+    name: Create Potions
+    color: green
+    info: table creation
+    keywords: CREATE_TABLE
+    level: 3
+    type: DCL
+}
+
+DESCRIPTION {
+    We want to manage information about the <b>Potions</b> we create containing exactly the following fields:
+    <ul>
+     <li>potion_id (integer number)</li>
+     <li>name (text)</li>
+     <li>level (real number)</li>
+    </ul>
+    💡 Tip: Below you can find an example of the data that will be stored in the table.
+}
+
+ANSWER {
+    CREATE TABLE Potions (potion_id INTEGER, name TEXT, level REAL)
+}
+
+
+TEST {
+    SQL {
+        INSERT INTO Potions (potion_id, name, level) VALUES (1, 'Magic Spell', 2), (2, 'Black Mantra', 1.5), (3, 'Dragon Potion', 3); 
+        SELECT * FROM Potions;
+    }
+
+    RESULT {
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dragon Potion|3       
+    }
+}
+
+TEST {
+    SQL {
+        SELECT REPLACE(upper(sql), ' ', '') FROM sqlite_master WHERE name = 'Potions';
+    }
+
+    RESULT {
+      CREATETABLEPOTIONS(POTION_IDINTEGER,NAMETEXT,LEVELREAL)
+    }
+}
+
+TEST {
+    SQL {
+        select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('Potions');    
+    }
+
+    RESULT {
+        0|potion_id|INTEGER|0|null|0
+        1|name|TEXT|0|null|0
+        2|level|REAL|0|null|0
+    }
+}
+
