@@ -18,8 +18,10 @@ services:
     depends_on:
       - 'db'
     restart: always
-    #image: janwilhelmfhnw/api
+    # image: janwilhelmfhnw/api
     build: ../FHNW-SQL-Training-Game-API
+    env_file:
+      - .env
     environment:
       - MONGODB_URI=mongodb://mongo:27017/stg-api
       - JWT_SECRET=FHNW_2021
@@ -34,7 +36,7 @@ services:
     depends_on:
       - 'api'
     restart: always
-    #image: janwilhelmfhnw/frontend
+    # image: janwilhelmfhnw/frontend
     build:
       context: .
       args:
@@ -42,5 +44,3 @@ services:
     ports:
       - "80:80"
       - "3000:3000"
-
-
