@@ -1,0 +1,213 @@
+.particle * {
+    animation: none !important;
+    z-index: -1;
+    will-change: left, top;
+}
+
+/* End game content ----------- */
+
+.evil-task-description {
+    font-family: "Pangolin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: var(--col-evil-purple-100);
+    -webkit-text-fill-color: transparent;
+    background: -webkit-linear-gradient(transparent, transparent), url("../img/evil-magic-texture-seamless.png") repeat;
+    background: -o-linear-gradient(transparent, transparent);
+    -webkit-background-clip: text;
+    background-size: 200%;
+    /*animation: moveBackground 35.5s infinite linear, glow 2s infinite linear;*/
+    /*will-change: background-position-x, background-position-y, filter;*/
+    font-size: 1.4rem;
+    padding: 1rem;
+    text-shadow: var(--col-evil-purple-shadow) 0 0 7px;
+}
+
+.evil .example {
+    border-color: var(--col-evil-purple-50) !important;
+}
+
+.evil .col-model-blue {
+    color: var(--col-evil-purple-90);
+}
+
+.evil .example hr {
+    border-color: var(--col-evil-purple-50) !important;
+}
+
+#evil-flame-animation {
+    position: fixed;
+    margin-top: 1vw;
+    z-index: 1000;
+}
+
+#good-flame, #evil-flame {
+    position: absolute;
+    right: 5vw;
+    top: 6rem;
+}
+
+@media (max-width: 768px) {
+    #good-flame, #evil-flame {
+        position: absolute;
+        right: 30vw;
+    }
+}
+
+#end-evil-flame {
+    position: absolute;
+    right: 5rem;
+    top: 6rem;
+    transition: transform 3.5s, opacity 3.5s;
+    will-change: tranform, opacity;
+}
+
+#body {
+    transition: transform 50ms;
+}
+
+.flame-container {
+    cursor: pointer;
+    --image-size: 0.85;
+    border-style: none;
+    padding: 0.5rem 0.7rem 1rem 0;
+    margin: 0;
+    background: radial-gradient(closest-side, rgba(0, 0, 0, 0.9), transparent);
+}
+
+.flame-container * {
+    animation: none !important;
+    padding: 0;
+    margin: 0;
+}
+
+.flame-container:focus {
+    outline: white dotted 1px;
+}
+
+.flame-container svg {
+    transform: scale(0.3);
+    margin: -150px;
+}
+
+.flame-container img {
+    transform: scale(0.3);
+    top: -4.3rem;
+    left: -2.2rem;
+}
+
+.flame-container p {
+    font-family: "Pangolin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    position: relative;
+    top: 1rem;
+    left: 0.2rem;
+    font-size: 1.3rem;
+    color: whitesmoke;
+    text-shadow: 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
+}
+
+.flame-container i {
+    font-size: 1.5rem;
+    transform: translate(0.4rem, 1rem);
+}
+
+@media (max-width: 756px) {
+    .flame-container {
+        --image-size: 1;
+    }
+}
+
+.lightning-bolt {
+    position: fixed;
+    height: 90vh;
+    width: auto;
+    transform: scale(0.75, 1);
+}
+
+#lightning-bolt-right, #end-lightning-bolt-right {
+    top: 0;
+    right: -10vw;
+}
+
+#lightning-bolt-left, #end-lightning-bolt-left {
+    top: 0;
+    left: -10vw;
+    transform: scale(-0.75, 1);
+}
+
+.captured-flame-jar {
+    width: 120px;
+    height: 180px;
+    position: absolute;
+    z-index: 100;
+    left: 1.5rem;
+    top: 1.9rem;
+}
+
+#task-flame-container .captured-flame-jar {
+    width: 100px;
+    height: 160px;
+    left: 1.9rem;
+    top: 2.5rem;
+}
+
+@keyframes flamedie2 {
+    0% {
+        transform: scale(2) scaleX(1);
+    }
+    15% {
+        transform: scaleY(2.1) scaleX(2.1);
+    }
+    30% {
+        transform: scaleY(2.1) scaleX(2.1);
+    }
+    100% {
+        transform: scale(2) scaleX(1);
+    }
+}
+
+#task-animation-flame-speech, #end-flame-speech {
+    font-size: 1.4rem;
+}
+
+@media (max-width: 1200px) {
+    #task-animation-flame-speech, #end-flame-speech {
+        font-size: 1.2rem;
+    }
+}
+
+#map-view {
+    background-color: #AA8E4B;
+}
+
+#map-view img {
+    filter: brightness(0.8);
+}
+
+#map-tasks {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    #evil-flame-animation .col-md-6, #end-animation .col-md-6 {
+        padding: 1rem;
+        overflow-y: scroll;
+        max-height: 50vh;
+        width: 100%;
+    }
+}
+
+#end-view h1 {
+    font-size: 4rem;
+    text-shadow: black 0 0 10px;
+}
+
+#end-view p {
+    font-size: 1.4rem;
+    text-shadow: black 0 0 10px;
+}
+
+#end-view > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -1,0 +1,120 @@
+METADATA {
+    id: Book-G
+    name: Pokemon 2 Book 
+    title: Pokemon 🕹
+    author: Satoshi Tajiri
+    color: pokemon2
+}
+
+
+PAGE {
+    Here we meet 900 species of Pocket Monsters (Pokemon).
+
+    You are a Pokemon Trainer. You have to 1. complete the regional Pokedex 
+    by collecting all of the available Pokemon species found here, 2. complete the 
+    national Pokedex by transferring Pokemon from other regions, and 3. train a team 
+    of powerful Pokemon to compete against teams owned by other Trainers, so that you 
+    win the Pokemon League and become the regional Champion. 
+}
+
+PAGE {
+
+    POKEMON: Gotta catch them all! 
+    EXAMPLE {
+        SQL {
+            CREATE TABLE Pokemon (
+                id INT NOT NULL,
+                name VARCHAR(90) NOT NULL,
+                type_id INT NOT NULL,
+                generation INT NOT NULL );
+
+            INSERT INTO Pokemon VALUES ('385', 'Jirachi', '1', '3');
+            INSERT INTO Pokemon VALUES ('25', 'Pikachu', '2', '1');
+            INSERT INTO Pokemon VALUES ('39', 'Jigglypuff', '3', '1');
+            INSERT INTO Pokemon VALUES ('813', 'Scorbunny', '4', '8');
+            INSERT INTO Pokemon VALUES ('690', 'Skrelp', '5', '6');
+            INSERT INTO Pokemon VALUES ('103', 'Exeggutor', '7', '1');
+            INSERT INTO Pokemon VALUES ('477', 'Dusknoir', '10', '4');
+            INSERT INTO Pokemon VALUES ('264', 'Linoone', '6', '3');
+        }
+
+        QUERY {
+            SELECT * FROM Pokemon;
+        }
+    }
+}
+
+PAGE {
+
+    Pokemon Attrributes
+    EXAMPLE {
+        SQL {
+            CREATE TABLE Attributes (
+                pokedex_id INT NOT NULL,
+                weight_kg FLOAT NOT NULL,
+                height_m FLOAT NOT NULL, 
+                mythical BOOLEAN NOT NULL );
+
+            INSERT INTO Attributes VALUES ('385', '1.1', '0.3', '1');
+            INSERT INTO Attributes VALUES ('25', '6', '0.4', '0');
+            INSERT INTO Attributes VALUES ('39', '5.5', '0.5', '0');
+            INSERT INTO Attributes VALUES ('813', '4.5', '0.3', '0');
+            INSERT INTO Attributes VALUES ('690', '7.3', '0.5', '0');
+            INSERT INTO Attributes VALUES ('103', '120', '2', '0');
+            INSERT INTO Attributes VALUES ('477', '106.6', '2.2', '0');
+            INSERT INTO Attributes VALUES ('264', '32.5', '0.5', '0');
+        }
+
+        QUERY {
+            SELECT * FROM Attributes;
+        }
+    }
+}
+
+PAGE {
+    Pokemon Regions
+    EXAMPLE {
+        SQL {
+            CREATE TABLE Region (
+                id INT NOT NULL,
+                name VARCHAR(90));
+
+            INSERT INTO Region VALUES ('1', 'Kanto');
+            INSERT INTO Region VALUES ('2', 'Johto');
+            INSERT INTO Region VALUES ('3', 'Hoenn');
+            INSERT INTO Region VALUES ('4', 'Sinnoh');
+            INSERT INTO Region VALUES ('5', 'Unova');
+            INSERT INTO Region VALUES ('6', 'Kalos');
+            INSERT INTO Region VALUES ('7', 'Alola');
+            INSERT INTO Region VALUES ('8', 'Galar');
+        }
+
+        QUERY {
+            SELECT * FROM Region;
+        }
+    }
+}
+
+PAGE {
+    Pokemon to their regions
+    EXAMPLE {
+        SQL {
+            CREATE TABLE Pokemon_region (
+                pokedex_id INT NOT NULL,
+                region_id INT NOT NULL);
+
+            INSERT INTO Pokemon_region(pokedex_id, region_id) VALUES ('385', '3');
+            INSERT INTO Pokemon_region(pokedex_id, region_id) VALUES ('25', '1');
+            INSERT INTO Pokemon_region(pokedex_id, region_id) VALUES ('39', '1');
+            INSERT INTO Pokemon_region(pokedex_id, region_id) VALUES ('813', '8');
+            INSERT INTO Pokemon_region(pokedex_id, region_id) VALUES ('690', '6');
+            INSERT INTO Pokemon_region(pokedex_id, region_id) VALUES ('103', '1');
+            INSERT INTO Pokemon_region(pokedex_id, region_id) VALUES ('477', '4');
+            INSERT INTO Pokemon_region(pokedex_id, region_id) VALUES ('264', '8');
+        }
+
+        QUERY {
+            SELECT * FROM Pokemon_region;
+        }
+    }
+}

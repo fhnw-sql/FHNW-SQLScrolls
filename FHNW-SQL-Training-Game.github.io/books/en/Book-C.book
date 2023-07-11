@@ -1,0 +1,97 @@
+METADATA {
+    id: Book-C
+    name: Summary Book 📚
+    title: Summa Summarum
+    author: Maestro Codd
+    color: blue
+}
+
+
+PAGE {
+    The aggregate query returns a single result that is associated with all selected rows in the table.
+
+    Common aggregates are COUNT (number of rows), SUM (sum of values), MIN (lowest value), and MAX (maximum value).
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
+        }
+        QUERY {
+            SELECT COUNT (*) FROM Dragons;
+        }
+    }
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
+        }
+        QUERY {
+            SELECT MAX (weight) FROM Dragons;
+        }
+    }
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
+        }
+        QUERY {
+            SELECT COUNT (*), SUM (weight) FROM Dragons;
+        }
+    }
+}
+
+PAGE {
+    An aggregate query can include a condition in the same way as a regular query.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 6000
+        }
+        QUERY {
+            SELECT COUNT (*) FROM Dragons WHERE weight> 5000;
+        }
+    }
+}
+
+PAGE {
+    You can also use the word DISTINCT in an aggregate query to consider each different value only once.
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            Dragons
+            id | name | weight
+            1 | Wilfried | 3500
+            2 | Justus | 7500
+            3 | Tabaluca | 3500
+        }
+        QUERY {
+            SELECT COUNT (DISTINCT weight) FROM Dragons;
+        }
+    }
+}

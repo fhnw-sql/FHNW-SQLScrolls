@@ -1,0 +1,46 @@
+METADATA {
+    id: Book-N
+    name:  Murder at the University
+    title: Murder at the University   🔪💀
+    author: Jan Holmes
+    color: red
+}
+
+PAGE {
+
+<h2>Murder at the University</h2>
+
+ The university has launched a new interdisciplinary research project led by Tim Lehmann, Professor of Computer Science, Markus Schmidt, Professor of Data Science, and Lisa Weber, Professor of Physics. They were given dedicated areas in the university for this purpose.
+</br>
+
+ Unfortunately, the project was under a bad star already at the beginning. During the planning phase, it was not considered that an extremely large number of devices would be connected to the power supply. So, it happened again and again that the power failed for a short time.
+
+}
+
+PAGE {
+But the students, as well as the professors did not let this get them down and often worked late into the evening. So also on this fateful day the 30.03.2023...
+</br>
+
+At 5:00 p.m., while some were still working, there was another power interruption. When the lights came back on at 5:30 p.m., screams of horror echoed through the night. Professor Tim Lehmann was lying on the floor of his office in the research area, covered in blood with a screwdriver in his throat.
+}
+
+PAGE {
+It was obvious: he had been murdered!
+</br>
+
+Soon the police is on the scene under the direction of Enola Homes. The research area has been sealed off and as the responsible system admin you are asked to help the detective.
+}
+
+PAGE {
+You and Elona Holmes have access to the following tables to find the murderer:
+    <div class="book-img">
+        <img src="img/murder-ERD.png" alt="Schema">
+    </div>
+</br>
+It is now on you to find the murderer through the power of SQL!
+}
+
+PAGE {
+Thanks to Benjamin Dätwyler, Andreas Borner Murer and Rejo Valiaparampil for the story and idea.
+}
+
