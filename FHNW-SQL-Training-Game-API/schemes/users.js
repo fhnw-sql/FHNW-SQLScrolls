@@ -4,12 +4,12 @@ const Joi = require("joi");
 const userSchemas = {
   // Registration
   registerPOST: Joi.object().keys({
-    username: Joi.string().required(),
+    username: Joi.string().min(3).max(20).required(),
     password: Joi.string().min(5).max(20).required(),
   }),
   // Authentication
   authenticatePOST: Joi.object().keys({
-    username: Joi.string()
+    username: Joi.string().min(3).max(20).required(),
     password: Joi.string().required(),
   }),
   // AnswerSQL
@@ -20,7 +20,7 @@ const userSchemas = {
   }),
   // Recover
   recoverPOST: Joi.object().keys({
-    username: Joi.string().required(),
+    username: Joi.string().min(3).max(20).required(),
   }),
   // Reset
   resetPOST: Joi.object().keys({
