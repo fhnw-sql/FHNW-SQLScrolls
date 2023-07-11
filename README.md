@@ -30,6 +30,22 @@ SQLScrolls is a game developed by FHNW Nordwestschweiz.
 2. Access SQLScrolls by navigating to [http://localhost:80](http://localhost:80) in your web browser.
 3. Create an account and test your SQL Skills!
 
+## Useful Docker Commands
+
+Here are some useful Docker commands you might find helpful:
+
+- `docker-compose up` - Start the Docker containers for SQLScrolls.
+- `docker-compose down` - Stop and remove the Docker containers for SQLScrolls.
+- `docker ps` - List all running containers.
+- `docker images` - List all Docker images on your system.
+- `docker logs <container_id>` - View the logs of a specific container.
+- `docker exec -it <container_id> bash` - Start an interactive shell inside a running container.
+- `docker rm <container_id>` - Remove a specific container.
+- `docker rmi <image_id>` - Remove a specific Docker image.
+- `docker-compose build` - Build or rebuild the Docker containers for SQLScrolls.
+
+Please refer to the Docker documentation for more information on Docker commands and their usage.
+
 ## 📚 Books syntax
 
 In the following chapter, the outline of a book is explained and according to syntax. In the end, a full example is
