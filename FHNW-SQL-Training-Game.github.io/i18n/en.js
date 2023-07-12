@@ -1,10 +1,10 @@
 for (let entry of Object.entries({
-  "game-name": "SQL-Scrolls",
+  "game-name": "SQL Scrolls",
   error: "Error",
   username: "username",
   password: "password",
   "password-verify": "Password verify",
-  welcome: "Welcome to the magical world of SQL-Scrolls.",
+  welcome: "Welcome to the magical world of SQL Scrolls.",
   "error-no-user": "username is missing",
   "error-invalid-user": "username is invalid",
   "error-no-password": "Password is missing",
