@@ -1,12 +1,12 @@
 for (let entry of Object.entries({
-  "game-name": "SQL Training Game (beta)",
+  "game-name": "SQL-Scrolls",
   error: "Error",
-  username: "Email",
-  password: "Password",
+  username: "username",
+  password: "password",
   "password-verify": "Password verify",
-  welcome: "Welcome to the magical world of SQL-spells.",
-  "error-no-user": "Email is missing",
-  "error-invalid-user": "Email is invalid",
+  welcome: "Welcome to the magical world of SQL-Scrolls.",
+  "error-no-user": "username is missing",
+  "error-invalid-user": "username is invalid",
   "error-no-password": "Password is missing",
   "error-fhnw-user": "FHNW users should access through institutional login (same url without 'public')",
   login: "Login",
@@ -151,7 +151,7 @@ for (let entry of Object.entries({
   "your-certificates": "Certificates:",
   "no-certificates": "No certificates yet",
   "certificates-stars": "stars",
-  "new-certificate": "Go to your profile to dowload your completion certificate!",
+  "new-certificate": "Go to your profile to download your completion certificate!",
   "end-reset-game": " You can restart the game in your profile"
 })) {
   i18n[entry[0]] = entry[1];
