@@ -16,7 +16,7 @@ for (let entry of Object.entries({
   "login-error-failed-unknown": "Login failed.",
   logout: "Logout",
   "incorrect-login": "Incorrect username or password",
-  register: "Registration",
+  register: "Create an account here!",
   "register-success": "Your account was created. Redirect to login...",
   "error-password-missmatch": "Password doesn't match.",
   "forgot-password": "Forgot Password",
