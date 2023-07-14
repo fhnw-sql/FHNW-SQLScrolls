@@ -266,6 +266,16 @@ img {
   transform: translate(-50%, -50%);
 }
 
+#login-view .reference {
+  position: absolute;
+  width: 100%;
+  bottom: 0%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 #login-view .background {
   position: fixed;
   top: 0;
@@ -295,6 +305,20 @@ img {
   animation: levitate infinite 4s ease-in-out;
 }
 
+#login-view .right-logo {
+  position: fixed;
+  width: 10rem;
+  right: 1rem;
+  top: 1rem;
+}
+
+#login-view .left-logo {
+  position: fixed;
+  width: 10rem;
+  left: 1rem;
+  top: 1rem;
+}
+
 @media (max-width: 1200px) {
   #login-view .left-graphic {
     -webkit-transform: scale(0.6);
@@ -309,7 +333,21 @@ img {
     right: 2rem;
     bottom: 0;
   }
+
+
+  #login-view .right-logo {
+    width: calc(0.6 * 23rem);
+    right: 2rem;
+    top: 0;
+  }
+
+   #login-view .left-logo {
+     width: calc(0.6 * 23rem);
+     left: 2rem;
+     top: 0;
+   }
 }
+
 
 .logout-button {
   position: fixed;

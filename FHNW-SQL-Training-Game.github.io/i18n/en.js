@@ -1,6 +1,9 @@
 for (let entry of Object.entries({
   "game-name": "SQL Scrolls",
   error: "Error",
+  reference: "This game has been part of the following studies:\n",
+  reference1: "SQL Scrolls - A Reusable and Extensible DGBL Experiment",
+  reference2: "Extending SQL Scrolls to teach SQL DML",
   username: "username",
   password: "password",
   "password-verify": "Password verify",
