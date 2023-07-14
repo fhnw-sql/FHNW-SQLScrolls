@@ -41,6 +41,42 @@ It is now on you to find the murderer through the power of SQL!
 }
 
 PAGE {
+We have to work with timestamps in some of the tasks in this book. The syntax is strftime('%Y-%m-%d %H:%M', header) where represents the column containing the timestamp values.
+</br>
+The strftime function takes two parameters: the format string and the value you want to format. The format string specifies the desired output format for the date and time. In this case, %Y-%m-%d %H:%M represents the year (four digits), month (two digits), day (two digits), hour (24-hour format), and minute (two digits).
+</br>
+The command is used as follows:
+
+SELECT strftime('%Y-%m-%d %H:%M', timestamps) AS formatted_timestamp FROM time;
+}
+
+PAGE {
+    EXAMPLE {
+        TABLE {
+            time
+                ID | person | timestamps
+                1 | Jan | 2023-03-30 17:45:30
+                2 | Ela | 2023-03-30 17:45:00
+                3 | Andrea | 2023-03-30 16:10:00
+        }
+        QUERY {
+            SELECT strftime('%Y-%m-%d %H:%M', timestamps) AS formatted_timestamp
+            FROM time;
+        }
+    }
+}
+
+PAGE {
+We also use the "datetime" function. The datetime function is used to manipulate and work with date and time values. It allows you to perform various operations on dates, such as formatting, parsing, arithmetic calculations, and comparisons.
+</br>
+In our case, we use it to compare different time values. You can compare two dates or times to check if one is greater than, less than, or equal to the other.
+</br>
+    The command is used as follows:
+
+    SELECT datetime('2023-07-14') > datetime('2023-07-01');
+}
+
+PAGE {
 Thanks to Benjamin Dätwyler, Andreas Borner Murer and Rejo Valiaparampil for the story and idea.
 }
 

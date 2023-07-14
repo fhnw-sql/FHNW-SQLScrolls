@@ -15,6 +15,8 @@ DESCRIPTION {
 	Enola Holmes: "Can you create a list consisting of PersonID, FirstName, LastName, AreaName, Entry Time, and Exit time of everyone who was in the research area between 5:00 PM and 5:30 PM according to the time-tracking? Please order it by entrytime."
 
 	You: "That's not that easy. The entry time has to be before 5:30 and the exit time after 5:00 or empty."
+
+	Hint: This task utilises the "strftime" and "datetime" function. Go back to the book to see how they work.
 }
 
 ANSWER {
