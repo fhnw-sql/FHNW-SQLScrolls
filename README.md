@@ -10,8 +10,11 @@ Currenty, the game consists of 162 SQL tasks (task 1-162) and 17 JSON tasks (tas
   - [macOS Installation](#macos-installation)
 - [Usage](#usage)
 - [Useful Docker Commands](#useful-docker-commands)
+- [Configuration](#configuration)
 - [📚 Books syntax](#-books-syntax)
 - [📝 Tasks syntax](#-tasks-syntax)
+- [🔧Progression.js Syntax](#progressionjs-syntax)
+- [How to Create Your Own Books and Tasks](#how-to-create-your-own-books-and-tasks)
 - [🗣️ Acknowledgements](#-acknowledgements)
 - [🙏 Credits](#-credits)
 
@@ -61,6 +64,17 @@ Here are some useful Docker commands you might find helpful:
 - `docker-compose build` - Build or rebuild the Docker containers for SQLScrolls.
 
 Please refer to the Docker documentation for more information on Docker commands and their usage.
+
+## ⚙️ Configuration
+
+- Tasks and books can be configured via `.task` and `.book` files located in `/tasks` or `/books`. More information can be found under 
+- For translating into more languages, add a `/i18n/<lang>.js`, `/books/<lang>/Book-<>.book` files
+  and `/tasks/<lang>/Task-<>.task` files, as well as an option to `language-selector` element in `index.html`
+- Progression can be configured in `/tasks/progression.js`
+- General configurations can be found in `/js/configuration.js` like:
+    - `API_URL`
+    - `FALSE_ANSWER_UNTIL_MODEL_ANSWER`
+    - `EDITOR_PASSWORD`
 
 ## 📚 Books syntax
 [Table of Contents](#table-of-contents)
@@ -351,6 +365,52 @@ TEST {
 }
 ```
 
+## 🔧progression.js Syntax
+
+The ´progression.js´ file is used to structrure existing book and task files. The syntax is the following:
+
+```
+    {
+        id: "your-book-letter",
+        tasks: ["your-task-number", "your-task-number", "your-task-number"],
+        requires: ["A"],
+
+    }
+```
+
+Example:
+
+```
+    {
+        id: "X",
+        tasks: ["300", "301", "302"],
+        requires: ["A"],
+
+    }
+```
+
+## How to create your own Books and Tasks 
+Adding your own tasks and books to SQL Scrolls is easy and can be done with your preferred IDE or even directly through Github. Before diving into the process, let's take a quick overview of the important files involved in this process and where you can find them
+
+### Structure
+´FHNW-SQL-Training-Game.github.io/books/en´
+This is where you can add a new book.
+
+´FHNW-SQL-Training-Game.github.io/tasks/en´
+This is where all the tasks are stored.
+
+´FHNW-SQL-Training-Game.github.io/tasks/progression.js´
+This is used to tell the game which book includes which tasks through the metadata-id.
+
+### Adding a book
+Adding a book can be done by copying and pasting an existing book and renaming the file or creating a new text file with the followng syntax Book-´(your-letter).book´. For example ´Book-X.book´ . The book has to follow the following syntax [📚 Books syntax](#-books-syntax)
+
+To have the software recognize the file, progression.js has to be updated with the correct book id.
+
+### Adding a task
+Adding a task can be done by copying and pasting an existing book and renaming the file or creating a new text file with the followng syntax: Task-´(your-number).task´. For example ´Task-300.task´ . The task has to follow the following syntax [📝 Tasks syntax](#-tasks-syntax)
+
+To have the software recognize the file, progression.js has to be updated with the correct task id.
 
 ## 🗣️ Acknowledgements
 
