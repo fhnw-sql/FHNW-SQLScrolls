@@ -7,7 +7,7 @@ Currenty, the game consists of 162 SQL tasks (task 1-162) and 17 JSON tasks (tas
 
 ### Windows Installation
 
-1. Download Docker Desktop from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+1. Download Docker Desktop from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/) 
 2. Make sure Docker Desktop opens without any errors. If you encounter any errors, please follow the instructions provided by Docker.
 3. Download SQLScrolls from GitHub as a ZIP file. You can find the download link at: [<> Code -> Local -> Download ZIP](https://github.com/janwilhelmfhnw/SQLScrolls/archive/refs/heads/main.zip)
 4. Unzip the downloaded file to a location where you want to store SQLScrolls.
@@ -17,7 +17,7 @@ Currenty, the game consists of 162 SQL tasks (task 1-162) and 17 JSON tasks (tas
 
 ### macOS Installation
 
-1. Download Docker Desktop for macOS from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/) You can check which chip/processor your device has by pressing on the Apple logo in the taskbar and opening the "About this Mac" section.
+1. Download Docker Desktop for macOS from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/) You can check which chip/processor your device has by pressing on the Apple logo in the taskbar and opening the "About this Mac" section. Docker Desktop for Mac requires a 2010 computer model or later, OS 10.13 or later, and at least 4GB of RAM.
 2. Make sure Docker Desktop opens without any errors. If you encounter any errors, please follow the instructions provided by Docker.
 3. Download SQLScrolls from GitHub as a ZIP file. You can find the download link at: [<> Code -> Local -> Download ZIP](https://github.com/janwilhelmfhnw/SQLScrolls/archive/refs/heads/main.zip)
 4. Unzip the downloaded file to a location where you want to store SQLScrolls.
