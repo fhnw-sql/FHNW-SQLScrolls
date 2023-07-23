@@ -3,6 +3,19 @@
 SQLScrolls is a game developed by FHNW Nordwestschweiz.
 Currenty, the game consists of 162 SQL tasks (task 1-162) and 17 JSON tasks (task 200-217).
 
+## Table of Contents
+
+- [Installation](#installation)
+  - [Windows Installation](#windows-installation)
+  - [macOS Installation](#macos-installation)
+- [Usage](#usage)
+- [Useful Docker Commands](#useful-docker-commands)
+- [📚 Books syntax](#-books-syntax)
+- [📝 Tasks syntax](#-tasks-syntax)
+- [🗣️ Acknowledgements](#-acknowledgements)
+- [🙏 Credits](#-credits)
+
+
 ## Installation
 
 ### Windows Installation
@@ -16,7 +29,7 @@ Currenty, the game consists of 162 SQL tasks (task 1-162) and 17 JSON tasks (tas
 7. Run the following Docker command in the Command Prompt: `docker-compose up`.
 
 ### macOS Installation
-
+[Table of Contents](#table-of-contents)
 1. Download Docker Desktop for macOS from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/) You can check which chip/processor your device has by pressing on the Apple logo in the taskbar and opening the "About this Mac" section. Docker Desktop for Mac requires a 2010 computer model or later, OS 10.13 or later, and at least 4GB of RAM.
 2. Make sure Docker Desktop opens without any errors. If you encounter any errors, please follow the instructions provided by Docker.
 3. Download SQLScrolls from GitHub as a ZIP file. You can find the download link at: [<> Code -> Local -> Download ZIP](https://github.com/janwilhelmfhnw/SQLScrolls/archive/refs/heads/main.zip)
@@ -26,12 +39,14 @@ Currenty, the game consists of 162 SQL tasks (task 1-162) and 17 JSON tasks (tas
 7. Run the following Docker command in Terminal: `docker-compose up`.
 
 ## Usage
+[Table of Contents](#table-of-contents)
 
 1. Once the Docker containers are up and running, open your web browser.
 2. Access SQLScrolls by navigating to [http://localhost:80](http://localhost:80) in your web browser.
 3. Create an account and test your SQL Skills!
 
 ## Useful Docker Commands
+[Table of Contents](#table-of-contents)
 
 Here are some useful Docker commands you might find helpful:
 
@@ -48,6 +63,7 @@ Here are some useful Docker commands you might find helpful:
 Please refer to the Docker documentation for more information on Docker commands and their usage.
 
 ## 📚 Books syntax
+[Table of Contents](#table-of-contents)
 
 In the following chapter, the outline of a book is explained and according to syntax. In the end, a full example is
 shown.
