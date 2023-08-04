@@ -1,5 +1,6 @@
 # SQLScrolls
 
+[Trailer](https://youtu.be/M2IKETzrzwU) 
 SQLScrolls is a game developed by FHNW Nordwestschweiz.
 Currenty, the game consists of 162 SQL tasks (task 1-162) and 17 JSON tasks (task 200-217).
 
@@ -23,6 +24,7 @@ Currenty, the game consists of 162 SQL tasks (task 1-162) and 17 JSON tasks (tas
 
 ### Windows Installation
 
+[Tutorial Video](https://youtu.be/BIMhVkY4MP8) 
 1. Download Docker Desktop from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/) 
 2. Make sure Docker Desktop opens without any errors. If you encounter any errors, please follow the instructions provided by Docker.
 3. Download SQLScrolls from GitHub as a ZIP file. You can find the download link at: [<> Code -> Local -> Download ZIP](https://github.com/janwilhelmfhnw/SQLScrolls/archive/refs/heads/main.zip)
