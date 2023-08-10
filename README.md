@@ -5,6 +5,8 @@
 SQLScrolls is a game developed by FHNW Nordwestschweiz.
 Currenty, the game consists of 162 SQL tasks (task 1-162) and 17 JSON tasks (task 200-217).
 
+First version of the game was created by Kai Krause: [GitHub](https://https://github.com/elapustulka/FHNW-SQL-Training-Game.github.io)
+)
 ## Table of Contents
 
 - [Installation](#installation)
