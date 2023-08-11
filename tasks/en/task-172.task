@@ -8,23 +8,38 @@ METADATA {
 }
 
 DESCRIPTION {
-    The table shows which people have pets. Pet Max change it's favorite food to peanut butter and beef.
-    Update the array to show Max's new favorite food. 
-
-    💡 Tip: Use the operator json_replace to replace the desired json data.
+    The table shows which people have pets and their favortie treats. 
+    Extract the data.
 }
 
 PARSONS {
-    UPDATE pet 
-    SELECT pet #distractor
-    SET pets = json_replace(pets, '$.favorite_foods', 'peanut butter, beef') where id = 1;
-    SET pet json_replace(pet, '$.favorite_foods', 'peanut butter, beef') where id = 2; #distractor
-    FROM pet #distractor
+    SELECT
+    id,
+    AS id, #distractor
+    name,
+    AS name, #distractor
+    type,
+    AS pet type,
+    favorite_foods,
+    AS treats
+    FROM
+    Pet
+    Pets #distractor
+    JSON_EXTRACT(data, '$.name) #distractor
+    JSON_EXTRACT(data, '$.type) 
+    JSON_EXTRACT(data, '$.favorite_foods) 
 }
 
 ANSWER {
-    UPDATE pet 
-    SET pets = json_replace(pets, '$.favorite_foods', 'peanut butter, beef') where id = 1;
+    SELECT 
+    id,
+    name,
+    type,
+    favorite_foods,
+    JSON_EXTRACT(data, '$.type) AS pet_type,
+    JSON_EXTRACT(data, '$.favorite_foods) AS treats
+    FROM Pet
+
 }
 
 TEST {
@@ -36,8 +51,9 @@ TEST {
     }
 
     RESULT {
-        1|Robin|{"name":"Max","type":"dog","favorite_foods":"peanut butter","beef"}
-        2|Kathy|{"name":"Princess","type":"hamster","favorite_foods":["carrots","celery"]}
+        id|name|pet_type|treats
+        1|Robin|"dog"|["chicken", "peanut butter", "beef"]
+        2|Kathy|"hamster"|["carrots", "celery"]
     }
 }
 
@@ -51,9 +67,10 @@ TEST {
     }
 
     RESULT {
-        1|Jake|{"name":"Layla","type":"dog","favorite_foods":"beef"}
-        2|Jay|{"name":"Honey","type":"parrot","favorite_foods":["banana","sunflower seed"]}
-        1|Max|{"name":"Owen","type":"rabbit","favorite_foods":["carrots","strawberry"]}
+        id|name|pet_type|treats
+        1|Jake|"dog"|["beef"]
+        2|Jay|"parrot"|["banana","sunflower seed"]
+        1|Max|"rabbit"|["carrots","strawberry"]
     }
 }
 

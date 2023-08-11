@@ -8,22 +8,35 @@ METADATA {
 }
 
 DESCRIPTION {
-    List all pet to see each of their favorite food and which owner's id they have. 
+    List all the food one by one with the corresponding id, name, and pet type. 
 }
 
 PARSONS {
     SELECT
-    id, pet_type, pet_name, favorite_food
-    FROM pet,
-    FROM pets, #distractor
-    JSON_TABLE(pets, '$[*]' COLUMNS (pet_type VARCHAR(10) PATH '$.type', pet_name VARCHAR(10) PATH '$.name', favorite_food VARCHAR(25) PATH '$.favorite_foods')); #distractor  
-    JSON_TABLE(pets, '$[*]' COLUMNS (pet_type VARCHAR(10) PATH '$.type', pet_name VARCHAR(10) PATH '$.name', NESTED PATH '$.favorite_foods[*]' COLUMNS (favorite_food VARCHAR(25) PATH '$')));
+    id,
+    name,
+    type, #distractor
+    favorite_foods, #distractor
+    JSON_EXTRACT(pets, '$.type') 
+    AS type, #distractor
+    AS pet_type,
+    value AS 
+    favorite_food
+    favorite_foods #distractor
+    FROM Pet
+    CROSS JOIN 
+    JSON_EACH(pets->'favorite_foods')   
 }
 
 ANSWER {
-    SELECT id, pet_type, pet_name, favorite_food FROM pet,
-    JSON_TABLE(pets, '$[*]' COLUMNS (pet_type VARCHAR(10) PATH '$.type', pet_name VARCHAR(10) PATH '$.name',
-    NESTED PATH '$.favorite_foods[*]' COLUMNS (favorite_food VARCHAR(25) PATH '$')));
+    SELECT
+    id,
+    name,
+    JSON_EXTRACT(pets, '$.type') AS pet_type,
+    value AS favorite_food
+    FROM Pet
+    CROSS JOIN
+    JSON_EACH(pets->'favorite_foods')
 }
 
 TEST {
@@ -35,13 +48,14 @@ TEST {
     }
 
     RESULT {
-        1|dog|Max|chicken
-        1|dog|Max|peanut butter
-        1|dog|Max|beef
-        1|cat|Sally|tuna
-        1|cat|Sally|turkey
-        2|hamster|Princess|carrots
-        2|hamster|Princess|celery
+        id|name|pet_type|favorite_food
+        1|Max|dog|chicken
+        1|Max|dog|peanut butter
+        1|Max|dog|beef
+        1|Sally|cat|tuna
+        1|Sally|cat|turkey
+        2|Princess|hamster|carrots
+        2|Princess|hamster|celery
     }    
 }
 
@@ -55,10 +69,11 @@ TEST {
     }
 
     RESULT {
-        1|dog|Layla|beef
-        2|parrot|Honey|banana
-        2|parrot|Honey|sunflower seed
-        3|rabbit|Owen|carrots
-        3|rabbit|Owen|strawberry
+        id|name|pet_type|favorite_food
+        1|Layla|dog|beef
+        2|Honey|parrot|banana
+        2|Honey|parrot|sunflower seed
+        3|Owen|rabbit|carrots
+        3|Owen|rabbit|strawberry
     }
 }
