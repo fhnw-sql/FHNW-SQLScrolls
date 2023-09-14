@@ -1,44 +1,55 @@
 METADATA {
     id: task-062
-    name: Task F.4
+    name: Best Hits
     color: xmas
-    info: list distinct field values
-    keywords: SELECT, DISTINCT
-    level: 1
+    info: list filtered fields using subquery
+    keywords: SELECT, MAX, WHERE, NESTED_QUERY
+    level: 3
 }
 
 DESCRIPTION {
-	Which countries do the interprets come from?
+    List the songs with the highest rating?
 }
 
 PARSONS {
-	SELECT interpret_id  #distractor
-	SELECT country  #distractor
-	SELECT DISTINCT country
-	FROM interpret
-	FROM interprets #distractor
+
+	SELECT song_id, title, rating
+	FROM song
+	WHERE rating = (SELECT max(rating) FROM song)
+	SELECT id, title, rating  #distractor
+	FROM songs #distractor
+	WHERE rating = (SELECT max(rating) FROM album) #distractor
+
 }
 
 ANSWER { 
-	SELECT DISTINCT country FROM interpret;
+	SELECT song_id, title, rating FROM song WHERE rating = (SELECT max(rating) FROM song)
 }
 
 TEST {
-
-	TABLE {
-		Interpret
-		interpret_id|name|f_year|country
-		1|Darlene Love|0|US
-		2|The Flippers|1964|D
-		3|The Crystals|1961|US
-		4|Mariah Carey|0|US
-		5|Wham!|1981|UK
-	}
+	
+    TABLE {
+        Song
+        song_id|title|seconds|language|rating|interpret_fk|album_fk
+		1|All I Want for Christmas Is you|241|en|4|4|13
+		2|Silent Night|219|en|1|4|13
+		3|O Holy Night|267|en|3|4|13
+		4|Christmas (Baby Please Come Home)|153|en|7|4|13
+		5|Santa Claus Is Comin to Town|204|en|8|4|13
+		6|Christmas Baby (Please Come Home)|166|en|3|1|11
+		7|Santa Claus Is Coming to Town|204|en|7|3|11
+		8|Winter Wonderland|146|en|7|1|11
+		9|A Marshmallow World|143|en|9|1|11
+		10|Parade Of The Wooden Soldiers|175|en|2|3|11
+		11|Aber Heidschi Bum Beidschi|267|de|8|2|12
+		12|Vom Himmel hoch da komm ich her|180|de|7|2|12
+		13|Alle Jahre wieder|118|de|4|2|null
+		14|Christmasland|144|en|9|null|11
+    }
 
     RESULT {
-		US
-		UK
-		D
+         9|A Marshmallow World|9
+        14|Christmasland|9
     }
 }
 
