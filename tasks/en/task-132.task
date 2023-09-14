@@ -1,21 +1,21 @@
 METADATA {
     id: task-132
-    name: Parent of
-    color: orange
-    info: list joined fields by condition
-    keywords: SELECT, FROM, INNER JOIN, WHERE, ON
-    level: 2
+    name: Streets of Duck
+    color: green
+    info: list grouped fields by condition
+    keywords: SELECT, FROM, count(*), WHERE, GROUP BY
+    level: 1
 }
 
 DESCRIPTION {
-    Show Marie’s first and last name and the first and last name of the parent responsible for her.
- }
+    How many people of the family Duck live at which street? Please list the street and the number of Ducks which live there.
+}
 
 ANSWER {
-    SELECT child.fname child_fn, child.name child_name, parent.fname parent_fn, parent.name parent_name
-    FROM person child INNER JOIN 
-        person parent ON (child.parent = parent.person_id)
-    WHERE child.fname = 'Marie';
+    SELECT street, count(*)
+    FROM person
+    WHERE name = 'Duck'
+    GROUP BY street;
 }
 
 TEST {
@@ -35,27 +35,29 @@ TEST {
     }
 
      RESULT {
-       Marie|Maus|Minni|Maus      
+        Blumenweg|4
+        Sternenstrasse|1
     }
 }
 
 TEST {
-     TABLE {
+    TABLE {
         person
         person_id|fname|name|street|city|books|parent
-        501|Donald|Duck|Blumenweg|Entenhausen|5|null
-        502|Tick|Duck|Blumenweg|Entenhausen|41|501
-        503|Trick|Duck|Blumenweg|Entenhausen|45|501
-        504|Track|Duck|Blumenweg|Entenhausen|43|501
+        501|Donald|Duck|Steinenberg|Entenhausen|5|null
+        502|Tick|Duck|Steinenberg|Entenhausen|41|501
+        503|Trick|Duck|Steinenberg|Entenhausen|45|501
+        504|Track|Duck|Steinenberg|Entenhausen|43|501
         505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        506|Marie|Maus|Blumenweg|Entenhausen|115|508
+        506|Marie|Maus|Blumenweg|Entenhausen|115|505
         507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
         508|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        509|Dagobert|Duck|Blumenweg|Entenhausen|9|null
         510|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
      RESULT {
-        Marie|Maus|Mickey|Maus      
+        Steinenberg|4
+        Blumenweg|1
     }
 }

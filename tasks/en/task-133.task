@@ -1,23 +1,22 @@
 METADATA {
     id: task-133
-    name: Kids of
-    color: orange
-    info: list joined fields by condition
-    keywords: SELECT, FROM, INNER JOIN, ON, WHERE, AND
-    level: 2
+    name: Clans
+    color: green
+    info: list sorted and grouped fields
+    keywords: SELECT, FROM, GROUP BY, count(*), ORDER BY, DESC
+    level: 1
 }
 
 DESCRIPTION {
-    Who are the kids of Donald Duck?
- }
+    How big are the clans, that means: how many people have the same name? 
+    Please list the name and the clan size (biggest clan first).
+}
 
 ANSWER {
-    SELECT child.fname child_fn, child.name child_name, 
-        parent.fname parent_fn, parent.name parent_name
-    FROM person child INNER JOIN 
-        person parent ON (child.parent = parent.person_id)
-    WHERE parent.fname = 'Donald'
-    AND parent.name = 'Duck';
+    SELECT name, count(*)
+    FROM person
+    GROUP BY name
+    ORDER BY count(*) DESC;
 }
 
 TEST {
@@ -28,39 +27,42 @@ TEST {
         502|Tick|Duck|Blumenweg|Entenhausen|41|501
         503|Trick|Duck|Blumenweg|Entenhausen|45|501
         504|Track|Duck|Blumenweg|Entenhausen|43|501
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        506|Marie|Maus|Blumenweg|Entenhausen|115|505
-        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
-        510|Dagobert|Trump|Steinenberg|Usania|1|null
+        504|Minni|Maus|Sternenstrasse|Entenhausen|120|null
+        505|Marie|Maus|Blumenweg|Entenhausen|115|505
+        506|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
+        507|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        508|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        509|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
      RESULT {
-        Tick|Duck|Donald|Duck    
-        Trick|Duck|Donald|Duck    
-        Track|Duck|Donald|Duck      
+        Duck|5
+        Maus|4
+        Trump|1
     }
 }
 
 TEST {
-     TABLE {
+    TABLE {
         person
         person_id|fname|name|street|city|books|parent
+        500|Grooby|Goof|Blumenweg|Entenhausen|5|null
+        501|Donald|Duck|Blumenweg|Entenhausen|5|null
         502|Tick|Duck|Blumenweg|Entenhausen|41|501
-        503|Trick|Duck|Blumenweg|Entenhausen|45|511
-        504|Track|Duck|Blumenweg|Entenhausen|43|511
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        506|Marie|Maus|Blumenweg|Entenhausen|115|508
-        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
-        510|Dagobert|Trump|Steinenberg|Usania|1|null
-        511|Donald|Duck|Blumenweg|Entenhausen|5|null
+        503|Trick|Duck|Blumenweg|Entenhausen|45|501
+        504|Minni|Maus|Sternenstrasse|Entenhausen|120|null
+        505|Marie|Maus|Blumenweg|Entenhausen|115|505
+        506|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
+        507|Indiana|Goof|Blumenweg|Entenhausen|100|null
+        509|Dagobert|Trump|Steinenberg|Usania|1|null
+        510|Manfred|Maus|Sternenstrasse|Entenhausen|120|null
     }
 
      RESULT {
-        Track|Duck|Donald|Duck    
-        Trick|Duck|Donald|Duck      
+        Maus|4
+        Duck|3
+        Goof|2
+        Trump|1
     }
 }
+

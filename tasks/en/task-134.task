@@ -1,21 +1,22 @@
 METADATA {
     id: task-134
-    name: Same fname who
-    color: orange
-    info: list joined fields by condition
-    keywords: SELECT, FROM, WHERE, <, AND
-    level: 2
+    name: Books per Street
+    color: green
+    info: sum fields and group
+    keywords: SELECT, FROM, GROUP BY, ORDER BY, sum(), avg()
+    level: 1
 }
 
 DESCRIPTION {
-    List the persons with the same fname.
- }
+    How many books are there in total per street and how many on average? 
+    Please list the street, the total of books in the street and the average. Order the result by street.
+}
 
 ANSWER {
-    SELECT p1.fname p1_fn, p1.name p1_name, 
-        p2.fname p2_fn, p2.name p2_name
-    FROM person p1, person p2 
-    WHERE (p1.fname = p2.fname AND p1.person_id < p2.person_id);
+    SELECT street, sum(books), avg(books)
+    FROM person
+    GROUP BY street
+    ORDER BY street;
 }
 
 TEST {
@@ -26,37 +27,40 @@ TEST {
         502|Tick|Duck|Blumenweg|Entenhausen|41|501
         503|Trick|Duck|Blumenweg|Entenhausen|45|501
         504|Track|Duck|Blumenweg|Entenhausen|43|501
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        506|Marie|Maus|Blumenweg|Entenhausen|115|505
-        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
-        510|Dagobert|Trump|Steinenberg|Usania|1|null
+        504|Minni|Maus|Sternenstrasse|Entenhausen|120|null
+        505|Marie|Maus|Blumenweg|Entenhausen|115|505
+        506|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
+        507|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        508|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        509|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
      RESULT {
-        Dagobert|Duck|Dagobert|Trump        
+        Blumenweg|349|58.166666666666664
+        Steinenberg|1|1
+        Sternenstrasse|254|84.66666666666667
     }
 }
 
 TEST {
-     TABLE {
+    TABLE {
         person
         person_id|fname|name|street|city|books|parent
-        502|Tick|Duck|Blumenweg|Entenhausen|41|501
-        503|Trick|Duck|Blumenweg|Entenhausen|45|511
-        504|Track|Duck|Blumenweg|Entenhausen|43|511
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        506|Marie|Maus|Blumenweg|Entenhausen|115|508
-        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
-        510|Dagobert|Trump|Steinenberg|Usania|1|null
-        511|Mickey|Duck|Blumenweg|Entenhausen|5|null
+        501|Donald|Duck|Sternenstrasse|Entenhausen|80|null
+        502|Tick|Duck|Sternenstrasse|Entenhausen|40|501
+        503|Trick|Duck|Blumenweg|Entenhausen|45|501
+        504|Track|Duck|Blumenweg|Entenhausen|60|501
+        504|Minni|Maus|Blumenweg|Entenhausen|120|null
+        505|Marie|Maus|Blumenweg|Entenhausen|115|505
+        506|Maggie|Maus|Blumenweg|Entenhausen|1|505
+        507|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        508|Dagobert|Duck|Sternenstrasse|Entenhausen|10|null
+        509|Dagobert|Trump|Sternenstrasse|Usania|2|null
     }
 
      RESULT {
-        Dagobert|Duck|Dagobert|Trump        
-        Mickey|Duck|Mickey|Maus        
+        Blumenweg|441|73.5
+        Sternenstrasse|132|33
     }
 }
+
