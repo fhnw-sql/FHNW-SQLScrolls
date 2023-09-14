@@ -1,34 +1,18 @@
 METADATA {
     id: task-032
-    name: Task 32
+    name: Powerful Wizards
     color: green
-    info: list field filtered grouped
-    keywords: SELECT, WHERE, GROUP_BY, <, SUM
+    info: list count field filtered grouped
+    keywords: SELECT, COUNT, WHERE, GROUP_BY
     level: 3
 }
 
 DESCRIPTION {
-    List areas deficient in magical skills and their total of skills,
-    i.e. skill sum (per area) less than 5. Order  by area alphabetically.
-}
-
-PARSONS {
-    SELECT AREA, SUM(SKILL) 
-    FROM WIZARDS 
-    GROUP BY 
-    AREA
-    HAVING 
-    SUM(SKILL) < 5
-    ORDER BY AREA
-    SELECT AREA, SKILL #distractor
-    WHERE  #distractor
-    SKILL < 5 #distractor
-    ORDER BY SUM(SKILL)  #distractor
+   List all areas and the number of level 5 wizards in each area.
 }
 
 ANSWER {
-   SELECT AREA, SUM(SKILL) FROM WIZARDS GROUP BY AREA
-   HAVING SUM(SKILL) < 5 ORDER BY AREA
+   SELECT area, COUNT(name) FROM wizards WHERE SKILL = 5 GROUP BY area
 }
 
 
@@ -36,17 +20,15 @@ TEST {
     TABLE {
         Wizards
         id|name|area|skill
-        1|Anna|Blackforest|5
-        2|Orz Orz|Kumpula|3
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|1
         3|Bingo|Shadowland|2
-        4|Solmu|Shadowland|1
-        5|Rufus|Kumpula|4
-        6|Fred|Mumba|2
+        4|Solmu|Shadowland|5
+        5|Rufus|Kumpula|1
     }
 
     RESULT {
-        Mumba|2
-        Shadowland|3
+        Shadowland|2
     }
 }
 
@@ -55,14 +37,16 @@ TEST {
         Wizards
         id|name|area|skill
         1|Anna|Shadowland|5
-        2|Orz Orz|Shadowland|3
-        3|Bingo|Shadowland|2
-        4|Solmu|Kumpula|2
-        5|Rufus|Kumpula|2
+        2|Orz Orz|Shadowland|2
+        3|Bingo|Shadowland|5
+        4|Solmu|Shadowland|1
+        5|Rufus|Shadowland|5
+        6|Rasmus|Kumpula|5
     }
 
     RESULT {
-        Kumpula|4
+        Shadowland|3
+        Kumpula|1
     }
 }
 

@@ -1,83 +1,50 @@
 METADATA {
     id: task-034
-    name: Task 34
-    color: orange
-    info: list filtered fields from product table
-    keywords: SELECT, WHERE, CARTESIAN_PRODUCT
-    level: 4
+    name: Lonely Wizards
+    color: green
+    info: list field grouped on count condition
+    keywords: SELECT, GROUP_BY, HAVING, COUNT
+    level: 3
 }
 
 DESCRIPTION {
-    Which place does each ghost haunt?
+    Find areas with exactly one wizard.
 }
-PARSONS {
-    SELECT 
-    g.name, p.name
-    FROM
-    ghosts g, places p 
-    WHERE 
-    g.place_id == p.id
-    g.id == p.id #distractor
-    ghosts p, places g #distractor
-    ghost_name, place_name #distractor
-}
+
 ANSWER {
-   SELECT g.name, p.name from ghosts g, places p WHERE g.place_id == p.id
+   SELECT area from wizards group by area having count(*) = 1
 }
 
 
 TEST {
     TABLE {
-        Ghosts
-        id|name|place_id
-        1|Arthur|1
-        2|Desiree|3
-        3|Siegfried|2
-        4|Sieglinde|2
-        5|Kaaleppi|3
-    }
-
-    TABLE {
-        Places
-        id|name
-        1|school
-        2|forest
-        3|mill
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Shadowland|1
     }
 
     RESULT {
-        Arthur|school
-        Desiree|mill
-        Siegfried|forest
-        Sieglinde|forest
-        Kaaleppi|mill
+        Kumpula
     }
 }
 
 TEST {
     TABLE {
-        Ghosts
-        id|name|place_id
-        1|Edmond|2
-        2|Mercedes|2
-        3|Fernand|3
-        4|Valentine|2
-        5|Haydee|2
-    }
-
-    TABLE {
-        Places
-        id|name
-        1|school
-        2|forest
-        3|mill
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Shadowland|3
+        3|Bingo|Kumpula|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Fabuland|1
     }
 
     RESULT {
-        Edmond|forest
-        Mercedes|forest
-        Fernand|mill
-        Valentine|forest
-        Haydee|forest
+        Kumpula
+        Fabuland
     }
 }
