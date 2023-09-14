@@ -1,34 +1,45 @@
 METADATA {
     id: task-059
-    name: Task F.1
+    name: Sum in Countries
     color: xmas
-    info: list single field
-    keywords: SELECT
-    level: 1
+    info: list count field grouped
+    keywords: SELECT, COUNT, GROUP_BY
+    level: 3
 }
 
 DESCRIPTION {
-    How are the albums titled?
+	How many interpreters are there in each country?
+}
+
+PARSONS {
+	SELECT country, count(*)
+	SELECT name, count(country) #distractor
+	FROM interpret 
+	FROM interprets #distractor
+	GROUP BY country
+	ORDER BY country #distractor
 }
 
 ANSWER { 
-	SELECT title FROM album;
-	}
+	SELECT country, count(*) FROM interpret GROUP BY country;
+}
 
 TEST {
 
 	TABLE {
-		Album
-		album_id|title|year
-		11|A Christmas Gift For You From Phil Spector|1963
-		12|Original German Christmas With Die Flippers|1987
-		13|Merry Christmas|1994
+		Interpret
+		interpret_id|name|f_year|country
+		1|Darlene Love|0|US
+		2|The Flippers|1964|D
+		3|The Crystals|1961|US
+		4|Mariah Carey|0|US
+		5|Wham!|1981|UK
 	}
 
     RESULT {
-		A Christmas Gift For You From Phil Spector
-		Original German Christmas With Die Flippers
-		Merry Christmas
-	}
+		US|3
+		UK|1
+		D|1
+    }
 }
 
