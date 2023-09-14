@@ -1,18 +1,18 @@
 METADATA {
     id: task-021
-    name: Task 21
+    name: The Youngest Ghost
     color: blue
-    info: list count field on condition
-    keywords: SELECT, COUNT, WHERE
+    info: list max field on condition
+    keywords: SELECT, MAX, WHERE, BETWEEN
     level: 2
 }
 
 DESCRIPTION {
-    How many ghosts have murdered at least 2 people?   
+    In which year was the youngest ghost born in the 17th century?
 }
 
 ANSWER {
-   SELECT COUNT (NAME) FROM GHOSTS WHERE MURDERED >= 2  
+   SELECT MAX (YEAR) FROM GHOSTS WHERE YEAR BETWEEN 1600 AND 1700
 }
 
 TEST {
@@ -32,11 +32,9 @@ TEST {
     }
 
     RESULT {
-       6
+       1687
     }
 }
-
-
 
 TEST {
     TABLE {
@@ -49,13 +47,12 @@ TEST {
         5|Kaaleppi|1833|2
         5|Khaled|1777|0
         6|Hermine|1650|4
-        7|Siegfried|1687|2
+        7|Zaptos|1699|2
         8|Veronika|1777|1
         9|Veronika|1602|2
-        10|Zaptus|1804|6
     }
 
     RESULT {
-       7
+       1699
     }
 }

@@ -1,18 +1,19 @@
 METADATA {
     id: task-024
-    name: Task 24
+    name: Ghosts of all Ages
     color: blue
-    info: list min sorted field
-    keywords: SELECT, MIN, ORDER_BY
+    info: list min/max field
+    keywords: SELECT, MIN, MAX
     level: 2
 }
 
 DESCRIPTION {
-    Which of the ghost names comes first in alphabetical order?
+    Show the year of birth for the oldest and for the youngest ghost.
 }
 
+
 ANSWER {
-   SELECT MIN(NAME) FROM GHOSTS ORDER BY NAME ASC
+   SELECT MIN(year), MAX(year) from ghosts
 }
 
 TEST {
@@ -27,7 +28,7 @@ TEST {
     }
 
     RESULT {
-        Arthur
+        1650|1833
     }
 }
 
@@ -35,14 +36,14 @@ TEST {
     TABLE {
         Ghosts
         id|name|year
-        1|Mercedes|1801
-        2|Fernand|1790
-        3|Edmond|1744
+        1|Edmond|1744
+        2|Mercedes|1801
+        3|Fernand|1790
         4|Valentine|1885
         5|Haydee|1604
     }
 
     RESULT {
-        Edmond
+        1604|1885
     }
 }

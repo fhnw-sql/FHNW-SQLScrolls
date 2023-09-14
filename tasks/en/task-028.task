@@ -1,18 +1,27 @@
 METADATA {
     id: task-028
-    name: Task 28
-    color: purple
-    info: list sorted field on contdition
-    keywords: SELECT, WHERE, ORDER_BY
-    level: 2
+    name: Sum of Wizards
+    color: green
+    info: list sum field grouped
+    keywords: SELECT, SUM, GROUP_BY
+    level: 3
 }
 
 DESCRIPTION {
-   Show the names of the wizards with skill level lower than 4 in the order of increasing skill level.
+   List the areas where wizards live and the sum of the wizards skill levels in each area.
+}
+
+PARSONS {
+    SELECT 
+    AREA,
+    SUM(SKILL) 
+    FROM WIZARDS 
+    GROUP BY
+    AREA 
 }
 
 ANSWER {
-    SELECT NAME FROM WIZARDS WHERE SKILL <4 ORDER BY SKILL ASC
+    SELECT AREA, SUM(SKILL) FROM WIZARDS GROUP BY AREA 
 }
 
 TEST {
@@ -27,9 +36,8 @@ TEST {
     }
 
     RESULT {
-        Rufus
-        Bingo
-        Orz Orz
+        Kumpula|4
+        Shadowland|11
     }
 }
 
@@ -37,18 +45,15 @@ TEST {
     TABLE {
         Wizards
         id|name|area|skill
-        1|Anna|Shadowland|5
-        2|Solomun|Kumpula|3
-        3|Fred|Shadowland|2
-        4|Solmu|Shadowland|4
-        5|Klex|Kumpula|2
-        6|Zaptus|Kumpula|1
+        1|Anna|Soulness|5
+        2|Orz Orz|Leckrr|3
+        3|Bingo|Soulness|1
+        4|Solmu|Soulness|8
+        5|Rufus|Leckrr|6
     }
 
     RESULT {
-        Zaptus
-        Fred
-        Klex
-        Solomun
+        Leckrr|9
+        Soulness|14
     }
 }

@@ -1,20 +1,34 @@
 METADATA {
     id: task-023
-    name: Task 23
+    name: Born in 18th Century
     color: blue
-    info: list min/max field
-    keywords: SELECT, MIN, MAX
+    info: list count field on condition
+    keywords: SELECT, COUNT, WHERE, BETWEEN
     level: 2
 }
 
 DESCRIPTION {
-    Show the year of birth for the oldest and for the youngest ghost.
+    How many ghosts were born in the 18th century?
 }
 
+
+PARSONS {
+   SELECT 
+   COUNT (*)
+   FROM GHOSTS 
+   WHERE YEAR 
+   BETWEEN 
+   1700 
+   AND 
+   1800
+   SUM (*) #distractor
+   AND #distractor
+}
 
 ANSWER {
-   SELECT MIN(year), MAX(year) from ghosts
+   SELECT COUNT (*) FROM GHOSTS WHERE YEAR BETWEEN 1700 AND 1800
 }
+
 
 TEST {
     TABLE {
@@ -28,7 +42,7 @@ TEST {
     }
 
     RESULT {
-        1650|1833
+        2
     }
 }
 
@@ -36,14 +50,14 @@ TEST {
     TABLE {
         Ghosts
         id|name|year
-        1|Edmond|1744
-        2|Mercedes|1801
-        3|Fernand|1790
-        4|Valentine|1885
-        5|Haydee|1604
+        1|Edmond|1711
+        2|Mercedes|1722
+        3|Fernand|1733
+        4|Valentine|1744
+        5|Haydee|1755
     }
 
     RESULT {
-        1604|1885
+        5
     }
 }
