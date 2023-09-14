@@ -1,23 +1,22 @@
 METADATA {
     id: task-124
-    name: Clans
-    color: green
-    info: list sorted and grouped fields
-    keywords: SELECT, FROM, GROUP BY, count(*), ORDER BY, DESC
-    level: 1
+    name: No Children
+    color: purple
+    info: list filtered fields
+    keywords: SELECT, WHERE
+    level: 2
 }
 
 DESCRIPTION {
-    How big are the clans, that means: how many people have the same name? 
-    Please list the name and the clan size (biggest clan first).
+    List the names and surnames people who are not children (the parent is not listed)
 }
 
 ANSWER {
-    SELECT name, count(*)
-    FROM person
-    GROUP BY name
-    ORDER BY count(*) DESC;
+    SELECT fname, name 
+    FROM person 
+    WHERE parent is null;
 }
+
 
 TEST {
     TABLE {
@@ -27,42 +26,19 @@ TEST {
         502|Tick|Duck|Blumenweg|Entenhausen|41|501
         503|Trick|Duck|Blumenweg|Entenhausen|45|501
         504|Track|Duck|Blumenweg|Entenhausen|43|501
-        504|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        505|Marie|Maus|Blumenweg|Entenhausen|115|505
-        506|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        507|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        508|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
-        509|Dagobert|Trump|Steinenberg|Usania|1|null
+        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
+        506|Marie|Maus|Blumenweg|Entenhausen|115|505
+        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
+        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        510|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
-     RESULT {
-        Duck|5
-        Maus|4
-        Trump|1
-    }
-}
-
-TEST {
-    TABLE {
-        person
-        person_id|fname|name|street|city|books|parent
-        500|Grooby|Goof|Blumenweg|Entenhausen|5|null
-        501|Donald|Duck|Blumenweg|Entenhausen|5|null
-        502|Tick|Duck|Blumenweg|Entenhausen|41|501
-        503|Trick|Duck|Blumenweg|Entenhausen|45|501
-        504|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        505|Marie|Maus|Blumenweg|Entenhausen|115|505
-        506|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        507|Indiana|Goof|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Trump|Steinenberg|Usania|1|null
-        510|Manfred|Maus|Sternenstrasse|Entenhausen|120|null
-    }
-
-     RESULT {
-        Maus|4
-        Duck|3
-        Goof|2
-        Trump|1
+    RESULT {
+        Donald|Duck
+        Minni|Maus
+        Mickey|Maus
+        Dagobert|Duck
+        Dagobert|Trump
     }
 }
-
