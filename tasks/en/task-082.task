@@ -1,47 +1,88 @@
 METADATA {
     id: task-082
-    name: Zoo 6
-    color: green
-    info: list filtered fields from subquery on a single table
-    keywords: SELECT, FROM, WHERE, NESTED_QUERY, MAX
-    level: 3
+    name: HitPoints&Speed
+    color: blue
+    info: hitPoints, Speed
+    keywords: SELECT, >, AND 
+    level: 2
 }
 
 DESCRIPTION {
-    Oh, there comes a support request from the forgetful Heidi, one of our animal keepers:
-    
-   <i> « I urgently need to identify the youngest bear's food bowl. But I don't know what his name is anymore. Can you help me? » </i>
+    I want to see all Pokemon who have more than
+    70 hitPoints and a speed over 90. I think their names 
+    start with a T. Do we have any powerful ones like that? 
+    Please list their name1, type1, hitPoints and speed.
 }
 
+PARSONS {
+	SELECT 
+    name1, type1,
+    total, speed 	 #distractor
+	hitPoints, speed
+    from Pokedex_new
+    WHERE
+    hitPoints
+    > 70
+    AND
+    OR 	 #distractor
+    speed
+    > 90;
+}
 ANSWER {
-    SELECT name, birthdate FROM zoo_animal WHERE birthdate = (SELECT MAX(birthdate) FROM zoo_animal WHERE type = 'bear');
+	SELECT 
+    name1, type1,
+	hitPoints, speed
+    from Pokedex_new
+    WHERE
+    hitPoints
+    > 70
+    AND
+    speed
+    > 90;
 }
 
 TEST {
     TABLE {
-        zoo_animal
-        id|type|name|cage_id|food_id|carnivore|birthdate|entry_date
-		1|penguin|Happyfeet|1|1|true|2006-07-15|2006-07-15
-		2|penguin|Gloria|1|1|true|2008-03-12|2009-02-24
-		3|penguin|Lani|1|1|true|2013-12-24|2009-02-24
-		4|bear|Paddington|2|3|true|2015-01-25|2018-09-07
-		5|bear|Ursus|2|3|false|2014-06-02|2014-06-02
-		6|bear|Balu|2|3|false|2020-04-05|2020-04-05
-		7|maggot chopper|Freddy|3|4|true|2017-10-06|2017-10-06
-		8|rhino|Timon|3|5|false|1999-02-10|2000-10-06
-		9|rhino|Pumba|3|5|false|1999-02-10|2000-10-06
-		10|lion|Alex|null|9|true|2011-09-28|2013-09-01
-		11|giraffe|Shari|3|6|false|2001-05-30|2007-07-01
-		12|giraffe|Nala|3|6|false|2019-02-06|2019-02-06
-		13|kangaroo|Dodo|4|5|false|2018-05-01|2018-05-01
-		14|kangaroo|Diego|4|5|false|2018-05-01|2018-05-01
-		15|kangaroo|Domingo|4|5|false|2019-07-16|2020-04-01
-		16|kangaroo|Didier|4|5|false|2012-11-04|2013-11-03
-		17|peecock|Martin|5|5|false|null|2019-11-01
-		18|bear|Ursina|5|3|false|2021-04-05|2021-04-05
+        Pokedex_new
+        ID|name1|name2|type1|type2|total|hitPoints|attack|defense|attackSpecial|defenseSpecial|speed
+        127|Pinsir|Mega Pinsir|BUG|FLYING|600|65|155|120|65|90|105
+        125|Electabuzz|null|ELECTRIC|null|490|65|83|57|95|85|105
+        126|Magmar|null|FIRE|null|495|65|95|57|100|85|93
+        128|Tauros|null|NORMAL|null|490|75|100|95|40|70|110
+        129|Magikarp|null|WATER|null|200|20|10|55|15|20|80
+        130|Gyarados|Mega Gyarados|WATER|DARK|640|95|155|109|70|130|81
+        131|Lapras|null|WATER|ICE|535|130|85|80|85|95|60
+        132|Ditto|null|NORMAL|null|288|48|48|48|48|48|48
+        133|Eevee|Partner Eevee|NORMAL|null|435|65|75|70|65|85|75
+        134|Vaporeon|null|WATER|null|525|130|65|60|110|95|65
+        135|Jolteon|null|ELECTRIC|null|525|65|65|60|110|95|130
+        136|Flareon|null|FIRE|null|525|65|130|60|95|110|65
+        137|Porygon|null|NORMAL|null|395|65|60|70|85|75|40
+        138|Omanyte|null|ROCK|WATER|355|35|40|100|90|55|35
+        139|Omastar|null|ROCK|WATER|495|70|60|125|115|70|55
+        140|Kabuto|null|ROCK|WATER|355|30|80|90|55|45|55
     }
 
     RESULT {
-        Ursina|2021-04-05
+        Tauros|NORMAL|75|110
     }
 }
+
+TEST {
+    TABLE {
+        Pokedex_new
+        ID|name1|name2|type1|type2|total|hitPoints|attack|defense|attackSpecial|defenseSpecial|speed
+        155|Cyndaquil|null|FIRE|null|309|39|52|43|60|50|65
+        156|Quilava|null|FIRE|null|405|58|64|58|80|65|80
+        157|Typhlosion|null|FIRE|null|534|78|84|78|109|85|100
+        158|Totodile|null|WATER|null|314|50|65|64|44|48|43
+        159|Croconaw|null|WATER|null|405|65|80|80|59|63|58
+        160|Feraligatr|null|WATER|null|530|85|105|100|79|83|78
+    }
+
+    RESULT {
+        Typhlosion|FIRE|78|100
+    }
+}
+
+
