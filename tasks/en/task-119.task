@@ -1,37 +1,58 @@
-METADATA {
+﻿METADATA {
     id: task-119
-    name: Level info
+    name: Recipe Symbols
     color: green
-    info: insert
-    keywords: INSERT, NTO, VALUES
-    level: 3
-    type: DCL
+    info: Join considering foreign keys
+    keywords: JOIN, USING, SUM, GROUP_CONCAT
+    level: 4
 }
 
 DESCRIPTION {
-   Add an entry to Levels, so that level 25 corresponds to 'FLYING'
+    List the potion names and the symbols of the ingredients plus the total weight. 
+    Join the tables from the previous task that have foreign keys with the keywords JOIN ... USING.
+    
+    💡 Tip: Use the aggregation function GROUP_CONCAT to concatenate values.
+
+
 }
 
-ANSWER {
-    Insert into Levels VALUES (25, 'FLYING');
+ANSWER { 
+    SELECT p.name, SUM(amount), GROUP_CONCAT(symbol) FROM Potions p JOIN Recipes r USING (potion_id) JOIN Ingredients i USING(ingredient_id) GROUP BY potion_id
 }
-
 
 TEST {
+    
     TABLE {
-        Levels
-        level|danger
-        18|FIREBALL
+        Potions
+        potion_id|name|level|tested
+        1|Magic Spell|2|0
+        2|Black Mantra|1.5|0
+        3|Dragon Potion|25|1
     }
 
-    SQL {
-        SELECT * FROM Levels;
+    TABLE {
+        Ingredients
+        ingredient_id|name|symbol
+        1|Rat tail|🐀 
+        2|Mushrooms|🍄
+        3|Dragon Fang|🐉
+        4|Bones|☠️
+        5|Star Dust|⭐
+    }
+    
+    TABLE {
+        Recipes
+        potion_id|ingredient_id|amount
+        1|2|0.5
+        1|4|20.0
+        2|1|3.0
+        2|5|18.3
+        3|3|7.2
     }
 
     RESULT {
-        18|FIREBALL
-        25|FLYING
+        Magic Spell|20.5|🍄,☠️
+        Black Mantra|21.3|🐀,⭐
+        Dragon Potion|7.2|🐉  
     }
 }
-
-
