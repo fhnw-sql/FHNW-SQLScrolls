@@ -1,56 +1,64 @@
 METADATA {
     id: task-016
-    name: Task 16
-    color: purple
-    info: list sorted field on condition
-    keywords: SELECT, WHERE, ORDER_BY
+    name: Ghosts called Veronica
+    color: blue
+    info: list field on condition
+    keywords: SELECT, WHERE, BETWEEN
     level: 1
 }
 
 DESCRIPTION {
-   List the names of the wizards with skill level lower than 4, in increasing order of skill level
+    List all ghosts called Veronika born in the 18th century.
 }
 
 ANSWER {
-  SELECT name FROM wizards WHERE skill < 4 ORDER BY skill ASC
-}
-
-STRICT 
-
-TEST {
-    TABLE {
-        Wizards
-        id|name|area|skill
-        1|Anna|Shadowland|5
-        2|Orz Orz|Kumpula|3
-        3|Bingo|Shadowland|2
-        4|Solmu|Shadowland|4
-        5|Rufus|Kumpula|1
-    }
-
-    RESULT {
-        Rufus
-        Bingo
-        Orz Orz
-    }
+   SELECT * FROM Ghosts WHERE YEAR BETWEEN 1700 AND 1800 AND NAME = 'Veronika'
 }
 
 TEST {
     TABLE {
-        Wizards
-        id|name|area|skill
-        1|Anna|Shadowland|5
-        2|Orz Orz|Kumpula|3
-        3|Bingo|Shadowland|2
-        4|Solmu|Shadowland|4
-        5|Rufus|Kumpula|1
-        6|Zaptus|Kumpula|3
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1777
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+        5|Khaled|1777
+        6|Hermine|1650
+        7|Siegfried|1687
+        8|Veronika|1777
+        9|Veronika|1602
+	    10|Veronika|1723
     }
 
     RESULT {
-        Rufus
-        Bingo
-        Orz Orz
-        Zaptus
+       8|Veronika|1777
+       10|Veronika|1723
+    }
+}
+
+TEST {
+    TABLE {
+        Ghosts
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1777
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+        5|Khaled|1777
+        6|Hermine|1650
+        7|Siegfried|1687
+        8|Veronika|1777
+        9|Veronika|1602
+	    10|Veronika|1723
+        11|Veronika|1912
+        12|Veronika|1404
+    }
+
+    RESULT {
+       8|Veronika|1777
+       10|Veronika|1723
     }
 }

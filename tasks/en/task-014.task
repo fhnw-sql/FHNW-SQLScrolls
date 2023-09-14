@@ -1,18 +1,18 @@
 METADATA {
     id: task-014
-    name: Task 14
-    color: purple
-    info: list unique sorted field on condition
-    keywords: SELECT, DISTINCT, WHERE, ORDER_BY
+    name: Sorting Ghosts
+    color: blue
+    info: list sorted fields on conditions
+    keywords: SELECT, WHERE, ORDER_BY
     level: 1
 }
 
 DESCRIPTION {
-    List all different ghost names for ghosts born in 1777, in alphabetical order
+  Show all ghosts born in the 17th century from the youngest to the oldest and if they were born in the same year, sort them in alphabetical order within each year.
 }
 
 ANSWER {
-   SELECT DISTINCT name FROM Ghosts WHERE year = 1777 ORDER BY name ASC
+    SELECT * FROM Ghosts WHERE YEAR BETWEEN 1600 AND 1700 ORDER BY YEAR DESC, NAME ASC
 }
 
 STRICT
@@ -22,43 +22,42 @@ TEST {
         Ghosts
         id|name|year
         1|Arthur|1765
-        2|Desiree|1777
+        2|Desiree|1833
         3|Siegfried|1650
         4|Sieglinde|1765
         5|Kaaleppi|1833
-        5|Khaled|1777
         6|Hermine|1650
         7|Siegfried|1687
-        8|Veronika|1777
-        9|Veronika|1777
+        8|Veronika|1602
     }
 
     RESULT {
-       Desiree
-       Khaled
-       Veronika
+       7|Siegfried|1687
+       6|Hermine|1650
+       3|Siegfried|1650
+       8|Veronika|1602
     }
 }
+
 
 TEST {
     TABLE {
         Ghosts
         id|name|year
         1|Arthur|1765
-        2|Bilbo|1777
-        3|Siegfried|1650
+        2|Desiree|1833
+        3|Solomun|1650
         4|Sieglinde|1765
         5|Kaaleppi|1833
-        5|Klex|1777
-        6|Hermine|1650
-        7|Siegfried|1687
-        8|Zaptus|1777
-        9|Zaptus|1777
+        6|Herold|1650
+        7|Solomun|1687
+        8|Zaptus|1602
     }
 
     RESULT {
-       Bilbo
-       Klex
-       Zaptus
+       7|Solomun|1687
+       6|Herold|1650
+       3|Solomun|1650
+       8|Zaptus|1602
     }
 }
