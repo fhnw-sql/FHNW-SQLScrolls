@@ -1,58 +1,125 @@
 METADATA {
     id: task-154
-    name: Recipe Symbols
-    color: xmas
-    info: Join considering foreign keys
-    keywords: JOIN, USING, SUM, GROUP_CONCAT
-    level: 4
+    name: Computer Science?
+    color: red
+    info: list specific field with parameter
+    keywords: GROUP BY, HAVING, COUNT
+    level: 2
 }
 
 DESCRIPTION {
-    List the potion names and the symbols of the ingredients plus the total weight. 
-    Join the tables from the previous task that have foreign keys with the keywords JOIN ... USING.
-    
-    💡 Tip: Use the aggregation function GROUP_CONCAT to concatenate values.
+    Enola Holmes: "Is there a subject with more people than Data Science?"
 
-
+    You: "I will list the name and number of people."
 }
 
-ANSWER { 
-    SELECT p.name, SUM(amount), GROUP_CONCAT(symbol) FROM Potions p JOIN Recipes r USING (potion_id) JOIN Ingredients i USING(ingredient_id) GROUP BY potion_id
+ANSWER {
+    SELECT subject, count(*) amount
+    FROM person
+    GROUP BY subject
+    HAVING count(*)>
+    (SELECT count(*) amount
+    FROM person
+    WHERE subject='Data Science');
 }
+
 
 TEST {
-    
     TABLE {
-        Potions
-        potion_id|name|level|tested
-        1|Magic Spell|2|0
-        2|Black Mantra|1.5|0
-        3|Dragon Potion|25|1
-    }
-
-    TABLE {
-        Ingredients
-        ingredient_id|name|symbol
-        1|Rat tail|🐀 
-        2|Mushrooms|🍄
-        3|Dragon Fang|🐉
-        4|Bones|☠️
-        5|Star Dust|⭐
-    }
-    
-    TABLE {
-        Recipes
-        potion_id|ingredient_id|amount
-        1|2|0.5
-        1|4|20.0
-        2|1|3.0
-        2|5|18.3
-        3|3|7.2
+       person
+       personID|firstname|lastname|subject|persontype
+       1234|Julia|Schneider|Electrical Engineering|Lecturer
+       1239|Anna|Neumann|Mechanical Engineering|Lecturer
+       2345|Thomas|Meier|Physics|Staff
+       3456|Anna|Müller|Data Science|Lecturer
+       4567|Lisa|Weber|Physics|Professor
+       5678|Tim|Lehmann|Computer Science|Professor
+       5688|Fabian|Wolf|Physics|Lecturer
+       6789|Markus|Schmidt|Data Science|Professor
+       7890|Nina|Fuchs|Electrical Engineering|Staff
+       8901|Jens|Schmidt|Data Science|Lecturer
+       9012|Svenja|Schwarz|Computer Science|Lecturer
+       10012|Max|Mayer|Mechanical Engineering|Student
+       10122|Katharina|Berg|Computer Science|Student
+       11123|Carla|Klein|Computer Science|Student
+       11223|Julia|Krause|Data Science|Student
+       12234|Felix|Schneider|Data Science|Student
+       12347|Esther|Wagner|Mechanical Engineering|Staff
+       13345|Lisa|Weber|Physics|Student
+       14456|Tina|Schwarz|Electrical Engineering|Student
+       22334|Florian|Fuchs|Computer Science|Student
+       23451|Kim|Hoffmann|Computer Science|Staff
+       23456|Lisa|Müller|Data Science|Student
+       31234|Markus|Schmitt|Computer Science|Student
+       33445|Svenja|Koch|Electrical Engineering|Student
+       34567|Brigitte|Berg|Data Science|Staff
+       44556|Marie|Schwarz|Mechanical Engineering|Student
+       45678|Sarah|Klein|Electrical Engineering|Student
+       55667|Tom|Lorenz|Computer Science|Student
+       56789|Tim|Weber|Mechanical Engineering|Student
+       66778|Nina|Schuster|Data Science|Student
+       67890|Anna|Bauer|Computer Science|Student
+       67899|Hannah|Becker|Computer Science|Lecturer
+       77889|Matthias|Neumann|Mechanical Engineering|Student
+       78901|Fabian|Wolf|Physics|Student
+       88900|Lea|Wagner|Physics|Student
+       89012|Hannah|Becker|Data Science|Student
+       90123|Lena|Schneider|Computer Science|Student
+       99011|Robin|Hoffmann|Electrical Engineering|Student
+       345675|Jan|Schmidt|Physics|Student
     }
 
     RESULT {
-        Magic Spell|20.5|🍄,☠️
-        Black Mantra|21.3|🐀,⭐
-        Dragon Potion|7.2|🐉  
+        Computer Science|11
+    }
+}
+
+TEST {
+    TABLE {
+       person
+       personID|firstname|lastname|subject|persontype
+       1234|Julia|Schneider|Electrical Engineering|Lecturer
+       1239|Anna|Neumann|Mechanical Engineering|Lecturer
+       2345|Thomas|Meier|Physics|Staff
+       3456|Anna|Müller|Data Science|Lecturer
+       4567|Lisa|Weber|Physics|Professor
+       5678|Tim|Lehmann|Computer Science|Professor
+       5688|Fabian|Wolf|Physics|Lecturer
+       6789|Markus|Schmidt|Data Science|Professor
+       7890|Nina|Fuchs|Electrical Engineering|Staff
+       8901|Jens|Schmidt|Data Science|Lecturer
+       9012|Svenja|Schwarz|Computer Science|Lecturer
+       10012|Max|Mayer|Mechanical Engineering|Student
+       10122|Katharina|Berg|Computer Science|Student
+       11123|Carla|Klein|Computer Science|Student
+       11223|Julia|Krause|Data Science|Student
+       12234|Felix|Schneider|Data Science|Student
+       12347|Esther|Wagner|Mechanical Engineering|Staff
+       13345|Lisa|Weber|Physics|Student
+       14456|Tina|Schwarz|Electrical Engineering|Student
+       22334|Florian|Fuchs|Computer Science|Student
+       23451|Kim|Hoffmann|Computer Science|Lecturer
+       23456|Lisa|Müller|Data Science|Student
+       31234|Markus|Schmitt|Computer Science|Student
+       33445|Svenja|Koch|Electrical Engineering|Student
+       34567|Brigitte|Berg|Data Science|Staff
+       44556|Marie|Schwarz|Mechanical Engineering|Student
+       45678|Sarah|Klein|Electrical Engineering|Student
+       55667|Tom|Lorenz|Computer Science|Student
+       56789|Tim|Weber|Mechanical Engineering|Student
+       66778|Nina|Schuster|Data Science|Student
+       67890|Anna|Bauer|Mechanical Engineering|Student
+       67899|Hannah|Becker|Computer Science|Lecturer
+       77889|Matthias|Neumann|Mechanical Engineering|Student
+       78901|Fabian|Wolf|Physics|Student
+       88900|Lea|Wagner|Physics|Student
+       89012|Hannah|Becker|Data Science|Student
+       90123|Lena|Schneider|Computer Science|Student
+       99011|Robin|Hoffmann|Electrical Engineering|Student
+       345675|Jan|Schmidt|Physics|Student
+    }
+
+    RESULT {
+        Computer Science|10
     }
 }
