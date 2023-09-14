@@ -1,0 +1,56 @@
+METADATA {
+    id: task-212
+    name: Complete Data
+    color: blue
+    info: JSON operators
+    keywords: JSON
+    level: 4
+}
+
+DESCRIPTION {
+
+    The customer table has a column called 'name'and a JSON object in the data column.
+    Retrieve a table with the column data but including the name as a field called 'surname' inside this data.
+
+    💡 Tip: Use the operator json_insert(json, field1, value1, ...)  to insert a field in a JSON object
+
+}
+
+ANSWER { 
+    SELECT json_insert(data, '$.surname', name)
+    FROM customer
+}
+
+TEST {
+    TABLE {
+        Customer
+        id|name|data
+        1|John|{"address": "Elm Street", "phone": "938423984", "age": 33}
+        2|Kate|{"address": "4th Avenue", "phone": "784584567", "age": 62}
+        3|Jim|{"address": "Star Square", "phone": "134313443", "age": 51}
+    }
+
+    RESULT {
+        {"address":"Elm Street","phone":"938423984","age":33,"surname":"John"}
+        {"address":"4th Avenue","phone":"784584567","age":62,"surname":"Kate"}
+        {"address":"Star Square","phone":"134313443","age":51,"surname":"Jim"}
+   }
+}
+
+TEST {
+    TABLE {
+        Customer
+        id|name|data
+        1|Katherine|{"address": "Daisy Street", "phone": "741258963", "age": 23}
+        2|Jayson|{"address": "Hogwart Square", "phone": "010203456", "age": 76}
+        3|Dianne|{"address": "Robertson Lane", "phone": "987456321", "age": 45}
+        4|Jake|{"address": "Hybe Avenue", "phone": "004569871", "age": 21}
+    }
+
+    RESULT {
+        {"address":"Daisy Street","phone":"741258963","age":23,"surname":"Katherine"}
+        {"address":"Hogwart Square","phone":"010203456","age":76,"surname":"Jayson"}
+        {"address":"Robertson Lane","phone":"987456321","age":45,"surname":"Dianne"}
+        {"address":"Hybe Avenue","phone":"004569871","age":21,"surname":"Jake"}
+    }
+}

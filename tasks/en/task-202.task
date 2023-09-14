@@ -1,0 +1,63 @@
+METADATA {
+    id: task-202
+    name: First Preference
+    color: blue
+    info: JSON operators
+    keywords: JSON
+    level: 5
+}
+
+DESCRIPTION {
+    List the first preference of users
+
+    💡 Tip: Use '[0]' to retrieve the first element of a JSON array field.
+
+}
+PARSONS {
+
+        SELECT id, name, 
+        interests->'likes'->>'[0]' 
+        interests.likes->>'[0]' #distractor 
+        FROM user
+        FROM users #distractor 
+}
+
+ANSWER { 
+    SELECT id, name, interests->'likes'->>'[0]' FROM user;
+}
+
+TEST {
+    
+    TABLE {
+        User
+        id|name|interests
+        1|John|{"likes": ["skating", "reading", "swimming"], "dislikes": ["cooking"]}
+        2|Kate|{"likes": ["reading", "swimming"], "dislikes": ["skating"]}
+        3|Jim|{"likes": ["reading", "swimming"], "dislikes": ["cooking"]}
+    }
+
+    RESULT {
+        1|John|skating
+        2|Kate|reading
+        3|Jim|reading
+    }
+}
+
+TEST {
+
+    TABLE {
+        User
+        id|name|interests
+        1|Katherine|{"likes": ["dancing", "cooking"], "dislikes": ["shopping"]}
+        2|Jayson|{"likes": ["surfing"], "dislikes": ["dancing"]}
+        3|Dianne|{"likes": ["cooking", "shopping"], "dislikes": ["surfing"]}
+        4|Jake|{"likes": ["singing", "dancing", "surfing"], "dislikes": ["reading", "cooking"]}
+    }
+
+    RESULT {
+        1|Katherine|dancing
+        2|Jayson|surfing
+        3|Dianne|cooking
+        4|Jake|singing
+    }
+}
