@@ -1,34 +1,32 @@
 METADATA {
     id: task-106
-    name: Midnight Surprise
+    name: Add PK
     color: green
-    info: insert
-    keywords: INSERT
+    info: PK addition
+    keywords: CREATE_TABLE, PRIMARY_KEY
     level: 3
     type: DCL
 }
 
 DESCRIPTION {
-   Our witch has created a very powerful potion 🧪 called 'Midnight Surprise', with id 5 and level 10.
-   Please add it to Potions.
+    <b>Potions</b> has to contain the following fields:
+    <ul>
+     <li>potion_id (integer)</li>
+     <li>name (text)</li>
+     <li>level (real)</li>
+    </ul>
+    But we forgot something. The ID has to be unique (PRIMARY KEY). How do we ensure that?
+    We need to create a new table definition with this information.
 }
 
 ANSWER {
-    INSERT INTO Potions (potion_id, name, level) VALUES (5, 'Midnight Surprise', 10);
+    CREATE TABLE Potions (potion_id INTEGER PRIMARY KEY, name TEXT, level REAL)
 }
 
 
 TEST {
-    TABLE {
-        Potions
-        potion_id|name|level
-        1|Magic Spell|2
-        2|Black Mantra|1.5
-        3|Dragon Potion|3
-        4|Horus Cast|2.5
-    }
-
     SQL {
+        INSERT INTO Potions (potion_id, name, level) VALUES (1, 'Magic Spell', 2), (2, 'Black Mantra', 1.5), (3, 'Dragon Potion', 3); 
         SELECT * FROM Potions;
     }
 
@@ -36,9 +34,28 @@ TEST {
         1|Magic Spell|2
         2|Black Mantra|1.5
         3|Dragon Potion|3       
-        4|Horus Cast|2.5
-        5|Midnight Surprise|10
     }
 }
 
+TEST {
+    SQL {
+        SELECT REPLACE(upper(sql), ' ', '') FROM sqlite_master WHERE name = 'Potions';
+    }
+
+    RESULT {
+      CREATETABLEPOTIONS(POTION_IDINTEGERPRIMARYKEY,NAMETEXT,LEVELREAL)
+    }
+}
+
+TEST {
+    SQL {
+        select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('Potions');    
+    }
+
+    RESULT {
+        0|potion_id|INTEGER|0|null|1
+        1|name|TEXT|0|null|0
+        2|level|REAL|0|null|0
+    }
+}
 

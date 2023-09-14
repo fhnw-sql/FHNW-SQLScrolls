@@ -1,40 +1,90 @@
 METADATA {
     id: task-103
-    name: Backfire Potion
-    color: green
-    info: deletion
-    keywords: DELETE
-    level: 3
-    type: DCL
+    name: Blueberries
+    color: blue
+    info: list filtered fields from nested query with joined tables
+    keywords: SELECT, FROM, WHERE, NESTED_QUERY, MAX, JOIN
+    level: 4
+}
+DESCRIPTION {
+    Which animals (individuals) of which species (type) must Heidi feed blueberries? 
+    <h1>🫐</h1>
 }
 
-DESCRIPTION {
-   An evil witch added a very dangerous potion to the book called "Backfire Potion" ☠️. Delete it form the potions list before someone gets hurt!
+PARSONS {
+    SELECT a.name, a.type
+    FROM zoo_employee k 
+    JOIN zoo_animal a ON k.cage_id = a.cage_id
+    JOIN zoo_food f ON  f.id = a.food_id
+    WHERE f.name='blueberry' AND k.firstname = 'Heidi'
+    SELECT f.name, a.type #distractor
+    JOIN zoo_animal a ON c.cage_id = a.id #distractor
+    WHERE a.name='blueberry' AND k.firstname = 'Heidi' #distractor
 }
 
 ANSWER {
-    DELETE FROM Potions WHERE potion_id = 4;
+    SELECT a.name, a.type
+    FROM zoo_employee k JOIN zoo_animal a ON k.cage_id = a.cage_id JOIN zoo_food f ON f.id = a.food_id
+    WHERE f.name='blueberry' AND k.firstname = 'Heidi';
 }
 
 TEST {
+
     TABLE {
-        Potions
-        potion_id|name|level
-        1|Magic Spell|2
-        2|Black Mantra|1.5
-        3|Dragon Potion|3       
-        4|Backfire Potion|100
-        5|Midnight Surprise|10
+        zoo_animal
+        id|type|name|cage_id|food_id|carnivore|birthdate|entry_date
+		1|penguin|Happyfeet|1|1|true|2006-07-15|2006-07-15
+		2|penguin|Gloria|1|1|true|2008-03-12|2009-02-24
+		3|penguin|Lani|1|1|true|2013-12-24|2009-02-24
+		4|bear|Paddington|2|3|true|2015-01-25|2018-09-07
+		5|bear|Ursus|2|3|false|2014-06-02|2014-06-02
+		6|bear|Balu|2|3|false|2020-04-05|2020-04-05
+		7|maggot chopper|Freddy|3|4|true|2017-10-06|2017-10-06
+		8|rhino|Timon|3|5|false|1999-02-10|2000-10-06
+		9|rhino|Pumba|3|5|false|1999-02-10|2000-10-06
+		10|lion|Alex|null|9|true|2011-09-28|2013-09-01
+		11|giraffe|Shari|3|6|false|2001-05-30|2007-07-01
+		12|giraffe|Nala|3|6|false|2019-02-06|2019-02-06
+		13|kangaroo|Dodo|4|5|false|2018-05-01|2018-05-01
+		14|kangaroo|Diego|4|5|false|2018-05-01|2018-05-01
+		15|kangaroo|Domingo|4|5|false|2019-07-16|2020-04-01
+		16|kangaroo|Didier|4|5|false|2012-11-04|2013-11-03
+		17|peecock|Martin|5|5|false|null|2019-11-01
+		18|bear|Ursina|5|3|false|2021-04-05|2021-04-05
     }
 
-    SQL {
-        SELECT * FROM Potions;
+    TABLE {
+        zoo_food
+        id|name|type_of|origin     
+        1|anchovies|fish|Antarctic  
+        2|salmon|fish|Alaska     
+        3|blueberry|plant|Switzerland
+        4|tick|insects|null       
+        5|thorn bush|plant|Switzerland
+        6|acacia|plant|Zimbabwe   
+        7|corn|plant|Usa        
+        8|maggots|insects|Switzerland
+        9|beef|mammal|Switzerland     
+    }
+
+    TABLE {
+        zoo_employee
+        id|firstname|surname|gender|hire_date|education|cage_id
+        1|Roger|Buenter|male|2010-12-01|zoo_keeper|1      
+        2|Gregi|Pfister|male|2008-03-01|zoologist|2      
+        3|Heidi|Vonbergen|female|1995-08-01|zoo_keeper|2      
+        4|Taya|Abena|female|2020-01-01|trainee|3      
+        5|Diego|Lopez|male|2020-01-01|trainee|3      
+        6|Doc|Brown|male|1983-01-01|veterinarian|null   
+        7|Dodo|Pfister|female|2009-09-01|zoo_keeper|4      
     }
 
     RESULT {
-        1|Magic Spell|2
-        2|Black Mantra|1.5
-        3|Dragon Potion|3
-        5|Midnight Surprise|10
+        Paddington|bear
+        Ursus|bear
+        Balu|bear
     }
 }
+
+
+
