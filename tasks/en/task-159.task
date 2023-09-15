@@ -1,50 +1,129 @@
 METADATA {
     id: task-159
-    name: Leisure time
-    color: blue
-    info: JSON operators
-    keywords: JSON
-    level: 5
+    name: Duplicates
+    color: red
+    info: find duplicates
+    keywords: GROUP BY, ORDER BY
+    level: 2
 }
 
 DESCRIPTION {
-    The table shows the leisure activities of different users and how much time in hours they dedicate to each activity.
-    Find out how many hours each user dedicates to leisure and list the results by decreasing time.
+    Enola Holmes: "Are there more people with the same name?"
 
-    💡 Tip: Use the operator json_each(user.activities) in the FROM clause that will return you the column 'atom' with the hours as integers and then group by name.
-
+    You: "I will give you the name and the different subjects and persontypes"
 }
 
-PARSONS {
-        SELECT user.id, name, 
-        SUM(atom) as leisure_time
-        SUM(leisure_time) #distractor
-        FROM user, json_each(user.activities) 
-        FROM json_each(user.activities) #distractor
-        GROUP BY name 
-        ORDER BY leisure_time desc
-        ORDER BY leisure_time #distractor
+ANSWER {
+    SELECT p1.firstname, p1.lastname,
+    p1.subject subject_1, p1.persontype persontype_1,
+    p2.subject subject_2, p2.persontype persontype_2
+    FROM person p1 INNER JOIN person p2
+    ON (p1.firstname = p2.firstname AND
+    p1.lastname = p2.lastname AND
+    p1.personid < p2.personid);
 }
-
-ANSWER { 
-    select user.id, name, SUM(atom) as leisure_time from user, json_each(user.activities) GROUP BY name ORDER BY leisure_time desc
-}
-
-STRICT
 
 TEST {
-    
     TABLE {
-        User
-        id|name|activities
-        1|John|{"walking": 8, "skating": 1, "reading": 2, "swimming": 0.5}
-        2|Kate|{"dancing": 2, "reading": 1, "running": 0.5}
-        3|Jim|{"drawing": 4, "cooking": 1, "dancing": 2, "yoga": 1.5}
+       person
+       personID|firstname|lastname|subject|persontype
+       1234|Julia|Schneider|Electrical Engineering|Lecturer
+       1239|Anna|Neumann|Mechanical Engineering|Lecturer
+       2345|Thomas|Meier|Physics|Staff
+       3456|Anna|Müller|Data Science|Lecturer
+       4567|Lisa|Weber|Physics|Professor
+       5678|Tim|Lehmann|Computer Science|Professor
+       5688|Fabian|Wolf|Physics|Lecturer
+       6789|Markus|Schmidt|Data Science|Professor
+       7890|Nina|Fuchs|Electrical Engineering|Staff
+       8901|Jens|Schmidt|Data Science|Lecturer
+       9012|Svenja|Schwarz|Computer Science|Lecturer
+       10012|Max|Mayer|Mechanical Engineering|Student
+       10122|Katharina|Berg|Computer Science|Student
+       11123|Carla|Klein|Computer Science|Student
+       11223|Julia|Krause|Data Science|Student
+       12234|Felix|Schneider|Data Science|Student
+       12347|Esther|Wagner|Mechanical Engineering|Staff
+       13345|Lisa|Weber|Physics|Student
+       14456|Tina|Schwarz|Electrical Engineering|Student
+       22334|Florian|Fuchs|Computer Science|Student
+       23451|Kim|Hoffmann|Computer Science|Staff
+       23456|Lisa|Müller|Data Science|Student
+       31234|Markus|Schmitt|Computer Science|Student
+       33445|Svenja|Koch|Electrical Engineering|Student
+       34567|Brigitte|Berg|Data Science|Staff
+       44556|Marie|Schwarz|Mechanical Engineering|Student
+       45678|Sarah|Klein|Electrical Engineering|Student
+       55667|Tom|Lorenz|Computer Science|Student
+       56789|Tim|Weber|Mechanical Engineering|Student
+       66778|Nina|Schuster|Data Science|Student
+       67890|Anna|Bauer|Computer Science|Student
+       67899|Hannah|Becker|Computer Science|Lecturer
+       77889|Matthias|Neumann|Mechanical Engineering|Student
+       78901|Fabian|Wolf|Physics|Student
+       88900|Lea|Wagner|Physics|Student
+       89012|Hannah|Becker|Data Science|Student
+       90123|Lena|Schneider|Computer Science|Student
+       99011|Robin|Hoffmann|Electrical Engineering|Student
+       345675|Jan|Schmidt|Physics|Student
     }
 
     RESULT {
-        1|John|11.5
-        3|Jim|8.5
-        2|Kate|3.5	
+        Lisa|Weber|Physics|Professor|Physics|Student
+        Fabian|Wolf|Physics|Lecturer|Physics|Student
+        Hannah|Becker|Computer Science|Lecturer|Data Science|Student
     }
 }
+
+TEST {
+    TABLE {
+       person
+       personID|firstname|lastname|subject|persontype
+       1234|Julia|Schneider|Electrical Engineering|Lecturer
+       1239|Anna|Neumann|Mechanical Engineering|Lecturer
+       2345|Thomas|Meier|Physics|Staff
+       3456|Anna|Müller|Data Science|Lecturer
+       4567|Lisa|Weber|Physics|Professor
+       5678|Tim|Lehmann|Computer Science|Professor
+       5688|Fabian|Wolf|Physics|Lecturer
+       6789|Markus|Schmidt|Data Science|Professor
+       7890|Nina|Fuchs|Electrical Engineering|Staff
+       8901|Jens|Schmidt|Data Science|Lecturer
+       9012|Svenja|Schwarz|Computer Science|Lecturer
+       10012|Max|Mayer|Mechanical Engineering|Student
+       10122|Katharina|Berg|Computer Science|Student
+       11123|Carla|Klein|Computer Science|Student
+       11223|Julia|Krause|Data Science|Student
+       12234|Felix|Schneider|Data Science|Student
+       12347|Esther|Wagner|Mechanical Engineering|Staff
+       13345|Lisa|Weber|Physics|Student
+       14456|Tina|Schwarz|Electrical Engineering|Student
+       22334|Florian|Fuchs|Computer Science|Student
+       23451|Kim|Hoffmann|Computer Science|Lecturer
+       23456|Lisa|Müller|Data Science|Student
+       31234|Markus|Schmitt|Computer Science|Student
+       33445|Svenja|Koch|Electrical Engineering|Student
+       34567|Brigitte|Berg|Data Science|Staff
+       44556|Marie|Schwarz|Mechanical Engineering|Student
+       45678|Sarah|Klein|Electrical Engineering|Student
+       55667|Tom|Lorenz|Computer Science|Student
+       56789|Tim|Weber|Mechanical Engineering|Student
+       66778|Nina|Schuster|Data Science|Student
+       67890|Anna|Bauer|Computer Science|Student
+       67899|Hannah|Becker|Computer Science|Lecturer
+       77889|Matthias|Neumann|Mechanical Engineering|Student
+       78901|Fabian|Wolf|Physics|Student
+       88900|Lea|Wagner|Physics|Student
+       89012|Hannah|Becker|Data Science|Student
+       90123|Lena|Schneider|Computer Science|Student
+       99011|Robin|Hoffmann|Electrical Engineering|Student
+       345675|Jan|Schmidt|Physics|Student
+    }
+
+    RESULT {
+        Lisa|Weber|Physics|Professor|Physics|Student
+        Fabian|Wolf|Physics|Lecturer|Physics|Student
+        Hannah|Becker|Computer Science|Lecturer|Data Science|Student
+    }
+}
+

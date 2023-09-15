@@ -1,6 +1,6 @@
 METADATA {
     id: task-010
-    name: Task 10
+    name: Ghosts of 1833
     color: purple
     info: list fields on condition
     keywords: SELECT, WHERE
@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-    Show all different ghost names for ghosts born in 1833
+    Show all different (unique) ghost names for ghosts born in 1833.
 }
 
 ANSWER {

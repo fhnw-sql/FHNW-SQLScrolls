@@ -1,22 +1,21 @@
 METADATA {
     id: task-107
-    name: Flying potion
+    name: New potion
     color: green
-    info: Update
-    keywords: UPDATE, SET, WHERE, IN
+    info: insert
+    keywords: INSERT
     level: 3
     type: DCL
 }
 
 DESCRIPTION {
-   Ater last party where lots of people tested our potions, we saw that Midnight Suprise and Dragon Potion
-   are both much stronger than expected. They need to upgraded to level 25, and we need to be careful as people started
-   flying after taking them.
+   Add a potion called 'Horus Cast' with id 4 and level 2.5 to Potions.
 }
 
 ANSWER {
-    UPDATE Potions SET level=25 WHERE potion_id IN (5,3);
+    INSERT INTO Potions (potion_id, name, level) VALUES (4, 'Horus Cast', 2.5);
 }
+
 
 TEST {
     TABLE {
@@ -25,7 +24,6 @@ TEST {
         1|Magic Spell|2
         2|Black Mantra|1.5
         3|Dragon Potion|3       
-        5|Midnight Surprise|10
     }
 
     SQL {
@@ -35,7 +33,9 @@ TEST {
     RESULT {
         1|Magic Spell|2
         2|Black Mantra|1.5
-        3|Dragon Potion|25       
-        5|Midnight Surprise|25
+        3|Dragon Potion|3       
+        4|Horus Cast|2.5
     }
 }
+
+

@@ -1,41 +1,24 @@
 METADATA {
     id: task-136
-    name: Who plays violine or viola
+    name: Start of instruments
     color: green
-    info: list joined fields by condition
-    keywords: SELECT, FROM, INNER JOIN, ON, ORDER_BY, WHERE
-    level: 2
+    info: sort and group counted substrings
+    keywords: SELECT, FROM, GROUP BY, ORDER BY, substr(), count(*)
+    level: 1
 }
 
 DESCRIPTION {
-    Who plays the violine or the viola? Please order by instrument and fname.
+    How many instrument names start with the same letter? Order them by count (smallest count first).
 }
 
 ANSWER {
-    SELECT i.instrument_name, pe.fname, pe.name
-    FROM person pe INNER JOIN
-        playing pl ON (pe.person_id = pl.person_id) INNER JOIN
-        instrument i ON (pl.instrument_id = i.instrument_id)
-    WHERE i.instrument_name IN ('Violine', 'Viola')
-    ORDER BY i.instrument_name, pe.fname;
+    SELECT substr(instrument_name,1,1) frst, count(*) count
+    FROM instrument
+    GROUP BY frst
+    ORDER BY count;    
 }
 
 TEST {
-    TABLE {
-        person
-        person_id|fname|name|street|city|books|parent
-        501|Donald|Duck|Blumenweg|Entenhausen|5|null
-        502|Tick|Duck|Blumenweg|Entenhausen|41|501
-        503|Trick|Duck|Blumenweg|Entenhausen|45|501
-        504|Track|Duck|Blumenweg|Entenhausen|43|501
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        506|Marie|Maus|Blumenweg|Entenhausen|115|505
-        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
-        510|Dagobert|Trump|Steinenberg|Usania|1|null
-    }
-
     TABLE {
         instrument
         instrument_id|instrument_name|instrumentgroup_id
@@ -51,88 +34,40 @@ TEST {
         210|Trumpet|103
     }
 
-    TABLE {
-        playing
-        person_id|instrument_id
-        502|201
-        502|202
-        503|205
-        503|208
-        504|205
-        504|206
-        505|202
-        506|201
-        506|203
-        506|204
-        507|206
-        507|209
-        507|210
-        508|210
-        509|210
-    }
-
-    RESULT {
-        Viola|Minni|Maus      
-        Viola|Tick|Duck      
-        Violine|Marie|Maus      
-        Violine|Tick|Duck      
+     RESULT {
+        O|1
+        H|1
+        F|1
+        T|2
+        V|2
+        C|3
     }
 }
 
 TEST {
     TABLE {
-        person
-        person_id|fname|name|street|city|books|parent
-        501|Donald|Duck|Blumenweg|Entenhausen|5|null
-        502|Tick|Duck|Blumenweg|Entenhausen|41|501
-        503|Trick|Duck|Blumenweg|Entenhausen|45|501
-        504|Track|Duck|Blumenweg|Entenhausen|43|501
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        506|Marie|Maus|Blumenweg|Entenhausen|115|505
-        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
-        510|Dagobert|Trump|Steinenberg|Usania|1|null
-    }
-
-    TABLE {
         instrument
         instrument_id|instrument_name|instrumentgroup_id
-        201|Violine|101
+        201|Banjo|101
         202|Viola|101
-        203|Cello|101
+        203|Drums|101
         204|Contrabass|101
         205|Clarinet|102
-        206|Flute|102
+        206|Guitar|102
         207|Oboe|102
         208|Horn|103
-        209|Trombone|103
+        209|Triangle|103
         210|Trumpet|103
     }
 
-    TABLE {
-        playing
-        person_id|instrument_id
-        502|201
-        502|209
-        503|202
-        503|210
-        504|210
-        504|210
-        505|202
-        506|205
-        506|207
-        506|203
-        507|206
-        507|209
-        507|203
-        508|210
-        509|207
-    }
-
-    RESULT {
-        Viola|Minni|Maus
-        Viola|Trick|Duck
-        Violine|Tick|Duck
+     RESULT {
+        B|1
+        D|1
+        G|1
+        H|1
+        O|1
+        V|1
+        C|2
+        T|2
     }
 }

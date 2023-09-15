@@ -1,6 +1,6 @@
 METADATA {
     id: task-166
-    name: User data types
+    name: MOVED User data types
     color: blue
     info: JSON operators
     keywords: JSON
@@ -41,6 +41,22 @@ TEST {
         1|John|{"likes": ["swimming", "jogging"], "favorite": "cooking", "time":5}
         2|Kate|{"likes": ["reading", "swimming"], "favorite": "skating", "time":2}
         3|Jim|{"likes": ["reading"], "favorite": "cooking", "time":3}
+    }
+
+    RESULT {
+        object|array|text|integer
+    }
+}
+
+TEST {
+
+    TABLE {
+        User
+        id|name|interests
+        1|Katherine|{"likes": ["dancing", "cooking"], "favorite": "drawing", "time":3}
+        2|Jayson|{"likes": ["surfing"], "favorite": "swimming", "time":2}
+        3|Dianne|{"likes": ["cooking", "shopping"], "favorite": "gaming", "time":5}
+        4|Jake|{"likes": ["singing", "dancing", "surfing"], "favorite": "crafting", "time":3}
     }
 
     RESULT {

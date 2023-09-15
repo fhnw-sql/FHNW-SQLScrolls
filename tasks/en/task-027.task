@@ -1,27 +1,29 @@
 METADATA {
     id: task-027
-    name: Task 27
+    name: Magical Area
     color: green
-    info: list sum field grouped
-    keywords: SELECT, SUM, GROUP_BY
+    info: list count field grouped
+    keywords: SELECT, COUNT, GROUP_BY
     level: 3
 }
 
 DESCRIPTION {
-   List the areas where wizards live and the sum of wizard skill levels in each area.
+   For each area that the wizards inhabit, show the number of wizards who live there.
 }
 
 PARSONS {
-    SELECT 
-    AREA,
-    SUM(SKILL) 
-    FROM WIZARDS 
-    GROUP BY
-    AREA 
+     SELECT 
+     AREA, 
+     COUNT(*)
+     FROM WIZARDS
+     GROUP BY
+     AREA
+     COUNT OF WIZARDS #distractor
+     SUM (*) #distractor
 }
 
 ANSWER {
-    SELECT AREA, SUM(SKILL) FROM WIZARDS GROUP BY AREA 
+      SELECT Area, COUNT(*) FROM WIZARDS GROUP BY AREA  
 }
 
 TEST {
@@ -36,8 +38,8 @@ TEST {
     }
 
     RESULT {
-        Kumpula|4
-        Shadowland|11
+        Kumpula|2
+        Shadowland|3
     }
 }
 
@@ -45,15 +47,17 @@ TEST {
     TABLE {
         Wizards
         id|name|area|skill
-        1|Anna|Soulness|5
-        2|Orz Orz|Leckrr|3
-        3|Bingo|Soulness|1
-        4|Solmu|Soulness|8
-        5|Rufus|Leckrr|6
+        1|Anna|Dirtland|5
+        2|Orz Orz|Flempla|3
+        3|Bingo|Dirtland|2
+        4|Solmu|Dirtland|4
+        5|Rufus|Flempla|1
+        6|Zaptus|Flempla|7
+        7|Hermine|Flempla|1
     }
 
     RESULT {
-        Leckrr|9
-        Soulness|14
+        Flempla|4
+        Dirtland|3
     }
 }

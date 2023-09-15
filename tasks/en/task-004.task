@@ -1,6 +1,6 @@
 METADATA {
     id: task-004
-    name: Task 4
+    name: Ghosts after 1800
     color: purple
     info: list field on gt value condition
     keywords: SELECT, WHERE

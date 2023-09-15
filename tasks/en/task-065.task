@@ -1,33 +1,64 @@
 METADATA {
     id: task-065
-    name: Task F.11
+    name: No Artists
     color: xmas
-    info: list count field grouped and sorted
-    keywords: SELECT, COUNT, GROUP_BY, ORDER_BY
-    level: 3
+    info: list fields from joined tables filtered using subquery then grouped
+    keywords: SELECT, COUNT, INNER_JOIN, LEFT_OUTER_JOIN, NESTED_QUERY, GROUP_BY
+    level: 5
 }
 
 DESCRIPTION {
-	How many songs are there per language and rating? 
+    Who sings on the album with songs without an artist. How many songs are in the album and what is the name?
+}
 
-	The list should be sorted by language in ascending order and rating in descending order.
+PARSONS {
+	SELECT i.name, count(*), a.title
+	FROM album a 
+	INNER JOIN song s 
+	ON (a.album_id = s.album_fk) 
+	ON (a.album_id = s.album_id) #distractor
+	LEFT JOIN interpret i 
+	INNER JOIN interpret i #distractor
+	ON (i.interpret_id = s.interpret_fk) 
+	WHERE a.album_id IN
+	(SELECT album_fk FROM song WHERE interpret_fk IS NULL)
+	(SELECT album_fk FROM song WHERE interpret_id IS NULL) #distractor
+	GROUP BY i.name, a.title;
 }
 
 ANSWER { 
-	SELECT language, rating, count(*) FROM song GROUP BY language, rating ORDER BY language, rating desc;
+	SELECT i.name, count(*), a.title
+	FROM album a 
+	INNER JOIN song s 
+	ON (a.album_id = s.album_fk) 
+	LEFT JOIN interpret i 
+	ON (i.interpret_id = s.interpret_fk) 
+	WHERE a.album_id IN
+	(SELECT album_fk FROM song WHERE interpret_fk IS NULL)
+	GROUP BY i.name, a.title;
 }
 
 TEST {
+
+	TABLE {
+		Interpret
+		interpret_id|name|f_year|country
+		1|Darlene Love|0|US
+		2|The Flippers|1964|D
+		3|The Crystals|1961|US
+		4|Mariah Carey|0|US
+		5|Wham!|1981|UK
+	}
 	
     TABLE {
-		Song
-		song_id|title|seconds|language|rating|interpret_fk|album_fk
+        Song
+        song_id|title|seconds|language|rating|interpret_fk|album_fk
 		1|All I Want for Christmas Is you|241|en|4|4|13
 		2|Silent Night|219|en|1|4|13
 		3|O Holy Night|267|en|3|4|13
 		4|Christmas (Baby Please Come Home)|153|en|7|4|13
 		5|Santa Claus Is Comin to Town|204|en|8|4|13
-		6|Christmas (Baby Please Come Home)|166|en|3|1|11
+		6|Christmas Baby (Please Come Home)|166|en|3|1|11
 		7|Santa Claus Is Coming to Town|204|en|7|3|11
 		8|Winter Wonderland|146|en|7|1|11
 		9|A Marshmallow World|143|en|9|1|11
@@ -36,19 +67,22 @@ TEST {
 		12|Vom Himmel hoch da komm ich her|180|de|7|2|12
 		13|Alle Jahre wieder|118|de|4|2|null
 		14|Christmasland|144|en|9|null|11
+    }
+
+
+	TABLE {
+		Album
+		album_id|title|year
+		11|A Christmas Gift For You From Phil Spector|1963
+		12|Original German Christmas With Die Flippers|1987
+		13|Merry Christmas|1994
 	}
 
-	RESULT {
-		de|8|1
-		de|7|1
-		de|4|1
-		en|9|2
-		en|8|1
-		en|7|3
-		en|4|1
-		en|3|2
-		en|2|1
-		en|1|1
-	}
+
+    RESULT {
+		null|1|A Christmas Gift For You From Phil Spector        
+		Darlene Love|3|A Christmas Gift For You From Phil Spector        
+		The Crystals|2|A Christmas Gift For You From Phil Spector        
+    }
 }
 

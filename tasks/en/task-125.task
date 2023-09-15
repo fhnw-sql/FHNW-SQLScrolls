@@ -1,25 +1,39 @@
 METADATA {
     id: task-125
-    name: Books per street
-    color: blue
-    info: sum fields and group
-    keywords: SELECT, FROM, GROUP BY, ORDER BY, sum(), avg()
-    level: 1
+    name: Duck Children
+    color: purple
+    info: list fields filtered and sorted
+    keywords: SELECT, WHERE, ORDER_BY
+    level: 2
 }
 
 DESCRIPTION {
-    How many books are there in total per street and how many on average? 
-    Please list the street, the total of books in the street and the average. Order the result by street.
+    Which children have the surname Duck?
+    List their full name and sort them by first name
+}
+
+PARSONS {
+    SELECT fname, name
+    SELECT name, fname #distractor
+    FROM person 
+    WHERE name='Duck' 
+    AND parent IS NOT null
+    AND parent IS null #distractor
+    ORDER BY fname
+    ORDER BY name #distractor
 }
 
 ANSWER {
-    SELECT street, sum(books), avg(books)
-    FROM person
-    GROUP BY street
-    ORDER BY street;
+    SELECT * 
+    FROM person 
+    WHERE name='Duck' AND parent is not null
+    ORDER BY fname
 }
 
+
 TEST {
+    STRICT 
+
     TABLE {
         person
         person_id|fname|name|street|city|books|parent
@@ -27,40 +41,17 @@ TEST {
         502|Tick|Duck|Blumenweg|Entenhausen|41|501
         503|Trick|Duck|Blumenweg|Entenhausen|45|501
         504|Track|Duck|Blumenweg|Entenhausen|43|501
-        504|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        505|Marie|Maus|Blumenweg|Entenhausen|115|505
-        506|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        507|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        508|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
-        509|Dagobert|Trump|Steinenberg|Usania|1|null
+        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
+        506|Marie|Maus|Blumenweg|Entenhausen|115|505
+        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
+        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        510|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
-     RESULT {
-        Blumenweg|349|58.166666666666664
-        Steinenberg|1|1
-        Sternenstrasse|254|84.66666666666667
-    }
-}
-
-TEST {
-    TABLE {
-        person
-        person_id|fname|name|street|city|books|parent
-        501|Donald|Duck|Sternenstrasse|Entenhausen|80|null
-        502|Tick|Duck|Sternenstrasse|Entenhausen|40|501
-        503|Trick|Duck|Blumenweg|Entenhausen|45|501
-        504|Track|Duck|Blumenweg|Entenhausen|60|501
-        504|Minni|Maus|Blumenweg|Entenhausen|120|null
-        505|Marie|Maus|Blumenweg|Entenhausen|115|505
-        506|Maggie|Maus|Blumenweg|Entenhausen|1|505
-        507|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        508|Dagobert|Duck|Sternenstrasse|Entenhausen|10|null
-        509|Dagobert|Trump|Sternenstrasse|Usania|2|null
-    }
-
-     RESULT {
-        Blumenweg|441|73.5
-        Sternenstrasse|132|33
+    RESULT {
+        Tick|Duck
+        Track|Duck
+        Trick|Duck
     }
 }
-

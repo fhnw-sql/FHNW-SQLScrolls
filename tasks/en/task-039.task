@@ -1,6 +1,6 @@
 METADATA {
     id: task-039
-    name: Task 39
+    name: Where is Desiree?
     color: orange
     info: list filtered fields from product table
     keywords: SELECT, WHERE, CARTESIAN_PRODUCT
@@ -8,11 +8,11 @@ METADATA {
 }
 
 DESCRIPTION {
-    Which ghosts have been seen in the forest?
+    What places does Desiree haunt?
 }
 
 ANSWER {
-   SELECT g.name FROM Hauntings  h, PLACES p, Ghosts g WHERE g.id = h.ghost_id AND p.id = h.place_id AND p.name = "forest"
+   SELECT p.name FROM Hauntings  h, PLACES p, Ghosts g WHERE g.id = h.ghost_id AND p.id = h.place_id AND g.name = "Desiree"
 }
 
 
@@ -46,9 +46,8 @@ TEST {
     }
 
     RESULT {
-        Desiree
-        Siegfried
-        Sieglinde
+        forest
+        mill
     }
 }
 
@@ -83,7 +82,8 @@ TEST {
     }
 
     RESULT {
-        Edmond
-        Desiree
+        school
+        forest
+        mill
     }
 }

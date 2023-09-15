@@ -1,6 +1,6 @@
 METADATA {
     id: task-007
-    name: Task 7
+    name: Young and Old
     color: purple
     info: list sorted field
     keywords: SELECT, ORDER_BY
@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT name from ghosts order by year desc
+   SELECT name from ghosts order by year DESC
 }
 
 STRICT

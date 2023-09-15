@@ -1,30 +1,22 @@
 METADATA {
     id: task-143
-    name: Maus Family
-    color: blue
-    info: list fields
-    keywords: SELECT
+    name: Same Names
+    color: green
+    info: list joined fields by condition
+    keywords: SELECT, FROM, WHERE, <, AND
     level: 2
 }
 
 DESCRIPTION {
-    Who has the family name Maus and where do they live?
-}
-
-PARSONS {
-    SELECT fname, name, street, city
-    SELECT fname, street, city #distractor
-    FROM person
-    WHERE name = 'Maus'
-    WHERE fname = 'Maus' #distractor
-}
+    List the persons with the same first name.
+ }
 
 ANSWER {
-    SELECT fname, name, street, city
-    FROM person
-    WHERE name = 'Maus'
+    SELECT p1.fname p1_fn, p1.name p1_name, 
+        p2.fname p2_fn, p2.name p2_name
+    FROM person p1, person p2 
+    WHERE (p1.fname = p2.fname AND p1.person_id < p2.person_id);
 }
-
 
 TEST {
     TABLE {
@@ -42,10 +34,29 @@ TEST {
         510|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
-    RESULT {
-        Minni|Maus|Sternenstrasse|Entenhausen
-        Marie|Maus|Blumenweg|Entenhausen
-        Maggie|Maus|Sternenstrasse|Entenhausen
-        Mickey|Maus|Blumenweg|Entenhausen
+     RESULT {
+        Dagobert|Duck|Dagobert|Trump        
+    }
+}
+
+TEST {
+     TABLE {
+        person
+        person_id|fname|name|street|city|books|parent
+        502|Tick|Duck|Blumenweg|Entenhausen|41|501
+        503|Trick|Duck|Blumenweg|Entenhausen|45|511
+        504|Track|Duck|Blumenweg|Entenhausen|43|511
+        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
+        506|Marie|Maus|Blumenweg|Entenhausen|115|508
+        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
+        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        510|Dagobert|Trump|Steinenberg|Usania|1|null
+        511|Mickey|Duck|Blumenweg|Entenhausen|5|null
+    }
+
+     RESULT {
+        Dagobert|Duck|Dagobert|Trump        
+        Mickey|Duck|Mickey|Maus        
     }
 }

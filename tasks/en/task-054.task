@@ -1,72 +1,47 @@
 METADATA {
     id: task-054
-    name: Task 54
-    color: orange
-    info: list fields from outer join table
-    keywords: SELECT, WHERE, LEFT_OUTER_JOIN
-    level: 4
+    name: Christmas
+    color: xmas
+    info: list field on string condition
+    keywords: SELECT, WHERE, LIKE
+    level: 1
 }
 
 DESCRIPTION {
-    List all the ghosts and their castles in case they own one
+    Which songs have the word "Christmas" in the title?
 }
 
-ANSWER {
-   SELECT g.name, c.name FROM Ghosts g LEFT OUTER JOIN Castles c ON g.id = c.owner
+PARSONS {
+    SELECT song_id, title
+    SELECT year #distractor
+    FROM song
+    FROM songs #distractor
+    WHERE title LIKE '%Christmas %'
+    WHERE title LIKE '%Christmas%' #distractor
+    WHERE title IS 'Christmas' #distractor
 }
 
-
-TEST {
-    TABLE {
-        Ghosts
-        id|name
-        1|Arthur
-        2|Desiree
-        3|Siegfried
-        4|Sieglinde
-        5|Kaaleppi
-    }
-
-    TABLE {
-        Castles
-        id|name|owner
-        1|Eltz Castle|2
-        2|Kilkenny Castle|5
-        3|Mont-Saint-Michel|4
-        4|Castel del Monte|1
-    }
-
-    RESULT {
-       Arthur|Castel del Monte
-       Desiree|Eltz Castle
-       Siegfried|null
-       Sieglinde|Mont-Saint-Michel
-       Kaaleppi|Kilkenny Castle
-    }
+ANSWER { 
+    SELECT song_id, title FROM song WHERE title LIKE '%Christmas %'
 }
 
 TEST {
     TABLE {
-        Ghosts
-        id|name
-        1|Hipolito
-        2|Serendius
-        3|Marconi
-        4|Musilda
-    }
-
-    TABLE {
-        Castles
-        id|name|owner
-        1|Alhambra|1
-        2|Vianden Castle|3
-        3|Château de Suscinio|4
+        Song
+        song_id|title|seconds|language|rating|interpret_fk|album_fk
+        1|All I Want for Christmas Is you|241|en|4|4|13
+        2|Silent Night|219|en|1|4|13
+        3|O Holy Night|267|en|3|4|13
+        4|Christmas (Baby Please Come Home)|153|en|7|4|13
+        5|Santa Claus Is Comin'' to Town|204|en|8|4|13
+        6|Christmas (Baby Please Come Home)|166|en|3|1|11
+        7|Christmasland|144|en|9|NULL|11
     }
 
     RESULT {
-        Hipolito|Alhambra
-        Serendius|null
-        Marconi|Vianden Castle
-        Musilda|Château de Suscinio
+        1|All I Want for Christmas Is you
+        4|Christmas (Baby Please Come Home)
+        6|Christmas (Baby Please Come Home)
     }
 }
+

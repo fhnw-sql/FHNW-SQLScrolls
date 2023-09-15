@@ -1,63 +1,38 @@
 METADATA {
     id: task-129
-    name: Same first name
-    color: green
-    info: list sorted fields by condition
-    keywords: SELECT, FROM, GROUP BY, HAVING, count(*), >
-    level: 1
+    name: Count Instruments
+    color: purple
+    info: list count field
+    keywords: SELECT, COUNT
+    level: 2
 }
 
 DESCRIPTION {
-     Show the people sharing the same first name and the count of people sharing it.
+    How many instruments do we have?
 }
 
 ANSWER {
-    SELECT fname, count(*)
-    FROM person
-    GROUP BY fname
-    HAVING count(*) > 1;
-}
-
-
-TEST {
-    TABLE {
-        person
-        person_id|fname|name|street|city|books|parent
-        501|Donald|Duck|Blumenweg|Entenhausen|5|null
-        502|Tick|Duck|Blumenweg|Entenhausen|41|501
-        503|Trick|Duck|Blumenweg|Entenhausen|45|501
-        504|Track|Duck|Blumenweg|Entenhausen|43|501
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        506|Marie|Maus|Blumenweg|Entenhausen|115|505
-        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
-        510|Dagobert|Trump|Steinenberg|Usania|1|null
-    }
-
-     RESULT {
-       Dagobert|2
-    }
+    SELECT count(*) 
+    FROM instrument;
 }
 
 TEST {
     TABLE {
-        person
-        person_id|fname|name|street|city|books|parent
-        501|Donald|Duck|Sternenstrasse|Entenhausen|80|null
-        502|Trick|Duck|Sternenstrasse|Entenhausen|40|501
-        503|Trick|Duck|Blumenweg|Entenhausen|45|501
-        504|Trick|Duck|Blumenweg|Entenhausen|60|501
-        505|Minni|Maus|Blumenweg|Entenhausen|120|null
-        506|Marie|Maus|Blumenweg|Entenhausen|115|505
-        507|Maggie|Maus|Blumenweg|Entenhausen|1|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Duck|Sternenstrasse|Entenhausen|10|null
-        510|Dagobert|Trump|Sternweg|Usania|2|null
+        instrument
+        instrument_id|instrument_name|instrumentgroup_id
+        201|Violine|101
+        202|Viola|101
+        203|Cello|101
+        204|Contrabass|101
+        205|Clarinet|102
+        206|Flute|102
+        207|Oboe|102
+        208|Horn|103
+        209|Trombone|103
+        210|Trumpet|103
     }
 
-     RESULT {
-      Dagobert|2
-      Trick|3
+    RESULT {
+        10
     }
 }

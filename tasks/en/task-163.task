@@ -1,6 +1,6 @@
 METADATA {
     id: task-163
-    name: Last preference
+    name: MOVED Last preference
     color: blue
     info: JSON operators
     keywords: JSON
@@ -34,5 +34,24 @@ TEST {
         John|jogging
         Kate|swimming
         Jim|baking
+    }
+}
+
+TEST {
+
+    TABLE {
+        User
+        id|name|interests
+        1|Katherine|{"likes": ["dancing", "cooking"], "dislikes": ["shopping"]}
+        2|Jayson|{"likes": ["surfing", "drawing"], "dislikes": ["dancing"]}
+        3|Dianne|{"likes": ["cooking", "shopping", "painting", "gaming"], "dislikes": ["surfing"]}
+        4|Jake|{"likes": ["singing", "dancing", "surfing"], "dislikes": ["reading", "cooking"]}
+    }
+
+    RESULT {
+        Katherine|cooking
+        Jayson|drawing
+        Dianne|gaming
+        Jake|surfing
     }
 }

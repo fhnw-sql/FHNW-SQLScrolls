@@ -1,6 +1,6 @@
 METADATA {
     id: task-002
-    name: Task 2
+    name: Year of Ghosts
     color: purple
     info: list fields
     keywords: SELECT
@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-   List the ghost names and Years of Birth.
+   List the ghost names and years of birth.
 }
 
 PARSONS {

@@ -1,61 +1,78 @@
 METADATA {
     id: task-044
-    name: Task F.7
-    color: xmas
-    info: list filtered fields from joined tables
-    keywords: SELECT, WHERE, INNER_JOIN
-    level: 3
+    name: Nicknames
+    color: orange
+    info: list filtered fields from cross joined table
+    keywords: SELECT, WHERE, CROSS_JOIN
+    level: 4
 }
 
 DESCRIPTION {
-    How are the German songs called and who sings them?
+    On their graduation the wizards receive a nickname composed by adjetive and a noun depending on their category.
+    Which are the possible nicknames for a new gold wizard?
 }
 
-PARSONS {
-
-    SELECT title, name 
-	FROM song
-	FROM song, interpret #distractor
-	INNER JOIN interpret
-	ON interpret_id = interpret_fk
-	WHERE language = 'de'
-	WHERE language is 'D' #distractor
-	AND song_id = interpret_fk #distractor
-
+ANSWER {
+   SELECT a.name, n.name FROM Nouns n CROSS JOIN Adjectives a WHERE n.type = "gold"
 }
 
-ANSWER { 
-    SELECT title, name FROM song INNER JOIN interpret  ON interpret_id = interpret_fk WHERE language = 'de'
-}
 
 TEST {
-
-	TABLE {
-		Interpret
-		interpret_id|name|f_year|country
-		1|Darlene Love|0|US
-		2|The Flippers|1964|D
-		3|The Crystals|1961|US
-		4|Mariah Carey|0|US
-		5|Wham!|1981|UK
-	}
-	
     TABLE {
-        Song
-        song_id|title|seconds|language|rating|interpret_fk|album_fk
-		1|All I Want for Christmas Is you|241|en|4|4|13
-		2|O Holy Night|267|en|3|4|13
-		3|Christmas Baby Please Come Home)|153|en|7|4|13
-		4|Parade Of The Wooden Soldiers|175|en|2|3|11
-		5|Aber Heidschi Bum Beidschi|267|de|8|2|12
-		6|Vom Himmel hoch da komm ich her|180|de|7|2|12
-		7|Alle Jahre wieder|118|de|4|2|NULL
+        Nouns
+        id|name|type
+        1|Dragon|gold
+        2|Bat|silver
+        3|Salamander|bronze
+        4|Phoenix|gold
+        5|Wolf|silver
+        6|Cricket|bronze
+    }
+
+    TABLE {
+        Adjectives
+        id|name
+        1|Mystic
+        2|Dark
+        3|Misterious
     }
 
     RESULT {
-		Aber Heidschi Bum Beidschi|The Flippers        
-		Vom Himmel hoch da komm ich her|The Flippers        
-		Alle Jahre wieder|The Flippers        
+        Mystic|Dragon
+        Dark|Dragon
+        Misterious|Dragon        
+        Mystic|Phoenix
+        Dark|Phoenix
+        Misterious|Phoenix
     }
 }
 
+TEST {
+    TABLE {
+        Nouns
+        id|name|type
+        1|Sphinx|gold
+        2|Tiger|silver
+        3|Spider|bronze
+        4|Pegasus|gold
+        5|Lion|silver
+        6|Scorpion|bronze
+    }
+
+    TABLE {
+        Adjectives
+        id|name
+        1|Infamous
+        2|Ghostly
+        3|Invisible
+    }
+
+    RESULT {
+        Infamous|Sphinx
+        Ghostly|Sphinx
+        Invisible|Sphinx
+        Infamous|Pegasus
+        Ghostly|Pegasus
+        Invisible|Pegasus
+    }
+}

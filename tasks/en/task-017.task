@@ -1,62 +1,56 @@
 METADATA {
     id: task-017
-    name: Task 17
+    name: Lowly Wizards
     color: blue
-    info: list unique field on condition
-    keywords: SELECT, DISTINCT, WHERE, BETWEEN
+    info: list sorted field on condition
+    keywords: SELECT, WHERE, ORDER_BY
     level: 1
 }
 
 DESCRIPTION {
-    How many different ghost names belong to ghosts born in the 17th century?
+   List the names of the wizards with skill level lower than 4. Sort it in increasing order based of their skill level.
 }
 
 ANSWER {
-   SELECT COUNT (DISTINCT name) FROM ghosts WHERE year BETWEEN '1600' AND '1700'
+  SELECT name FROM wizards WHERE skill < 4 ORDER BY skill ASC
+}
+
+STRICT 
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Kumpula|1
+    }
+
+    RESULT {
+        Rufus
+        Bingo
+        Orz Orz
+    }
 }
 
 TEST {
     TABLE {
-        Ghosts
-        id|name|year
-        1|Arthur|1765
-        2|Desiree|1777
-        3|Siegfried|1650
-        4|Sieglinde|1765
-        5|Kaaleppi|1833
-        5|Khaled|1777
-        6|Hermine|1650
-        7|Siegfried|1687
-        8|Veronika|1777
-        9|Veronika|1602
-	    10|Veronika|1623
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Kumpula|1
+        6|Zaptus|Kumpula|3
     }
 
     RESULT {
-       3
-    }
-}
-
-
-TEST {
-    TABLE {
-        Ghosts
-        id|name|year
-        1|Arthur|1765
-        2|Desiree|1777
-        3|Siegfried|1650
-        4|Sieglinde|1765
-        5|Kaaleppi|1833
-        5|Khaled|1777
-        6|Hermine|1650
-        7|Siegfried|1687
-        8|Veronika|1777
-        9|Veronika|1602
-	    10|Veronika|1623
-        11|Zaptus|1623
-    }
-
-    RESULT {
-       4
+        Rufus
+        Bingo
+        Orz Orz
+        Zaptus
     }
 }

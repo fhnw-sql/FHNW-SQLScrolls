@@ -1,0 +1,77 @@
+METADATA {
+    id: task-172
+    name: MOVED Pets Food 1
+    color: black
+    info: JSON operators
+    keywords: JSON
+    level: 4
+}
+
+DESCRIPTION {
+    The table shows which people have pets and their favortie treats. 
+    Extract the data.
+}
+
+PARSONS {
+    SELECT
+    id,
+    AS id, #distractor
+    name,
+    AS name, #distractor
+    type,
+    AS pet type,
+    favorite_foods,
+    AS treats
+    FROM
+    Pet
+    Pets #distractor
+    JSON_EXTRACT(data, '$.name) #distractor
+    JSON_EXTRACT(data, '$.type) 
+    JSON_EXTRACT(data, '$.favorite_foods) 
+}
+
+ANSWER {
+    SELECT 
+    id,
+    name,
+    type,
+    favorite_foods,
+    JSON_EXTRACT(data, '$.type) AS pet_type,
+    JSON_EXTRACT(data, '$.favorite_foods) AS treats
+    FROM Pet
+
+}
+
+TEST {
+    TABLE {
+        Pet
+        id|name|pets
+        1|Robin|{"name": "Max", "type": "dog", "favorite_foods": ["chicken", "peanut butter", "beef"]}
+        2|Kathy|{"name": "Princess", "type": "hamster", "favorite_foods": ["carrots", "celery"]}
+    }
+
+    RESULT {
+        id|name|pet_type|treats
+        1|Robin|"dog"|["chicken", "peanut butter", "beef"]
+        2|Kathy|"hamster"|["carrots", "celery"]
+    }
+}
+
+TEST {
+    TABLE {
+        Pet
+        id|name|pets
+        1|Jake|{"name": "Layla", "type": "dog", "favorite_foods": ["chicken"]}
+        2|Jay|{"name": "Honey", "type": "parrot", "favorite_foods": ["banana", "sunflower seed"]}
+        1|Max|{"name": "Owen", "type": "rabbit", "favorite_foods": ["carrots", "strawberry"]}
+    }
+
+    RESULT {
+        id|name|pet_type|treats
+        1|Jake|"dog"|["beef"]
+        2|Jay|"parrot"|["banana","sunflower seed"]
+        1|Max|"rabbit"|["carrots","strawberry"]
+    }
+}
+
+    

@@ -1,24 +1,36 @@
 METADATA {
     id: task-127
-    name: Start of instruments
-    color: blue
-    info: sort and group counted substrings
-    keywords: SELECT, FROM, GROUP BY, ORDER BY, substr(), count(*)
-    level: 1
+    name: Instrument Length
+    color: purple
+    info: list fields filtered and sorted
+    keywords: SELECT, WHERE, ORDER_BY
+    level: 2
 }
 
 DESCRIPTION {
-    How many instrument names start with the same letter? Order them by count (smallest count first).
+    Show the instruments that have less than 8 letters and order them by their length and then in alphabetic order.
+}
+
+PARSONS {
+    SELECT instrument_name, length(instrument_name) 
+    FROM instrument 
+    WHERE length(instrument_name) < 8 
+    WHERE instrument_name < 8  #distractor
+    ORDER BY 2 DESC, instrument_name
+    ORDER BY length DESC, instrument_name #distractor
+    ORDER BY instrument_name #distractor
 }
 
 ANSWER {
-    SELECT substr(instrument_name,1,1) frst, count(*) count
-    FROM instrument
-    GROUP BY frst
-    ORDER BY count;    
+    SELECT instrument_name, length(instrument_name) 
+    FROM instrument 
+    WHERE length(instrument_name) < 8 
+    ORDER BY 2 DESC, instrument_name;
 }
 
 TEST {
+    STRICT 
+
     TABLE {
         instrument
         instrument_id|instrument_name|instrumentgroup_id
@@ -34,40 +46,13 @@ TEST {
         210|Trumpet|103
     }
 
-     RESULT {
-        O|1
-        H|1
-        F|1
-        T|2
-        V|2
-        C|3
-    }
-}
-
-TEST {
-    TABLE {
-        instrument
-        instrument_id|instrument_name|instrumentgroup_id
-        201|Banjo|101
-        202|Viola|101
-        203|Drums|101
-        204|Contrabass|101
-        205|Clarinet|102
-        206|Guitar|102
-        207|Oboe|102
-        208|Horn|103
-        209|Triangle|103
-        210|Trumpet|103
-    }
-
-     RESULT {
-        B|1
-        D|1
-        G|1
-        H|1
-        O|1
-        V|1
-        C|2
-        T|2
+    RESULT {
+        Trumpet|7
+        Violine|7
+        Cello|5
+        Flute|5
+        Viola|5
+        Horn|4
+        Oboe|4
     }
 }

@@ -1,22 +1,30 @@
 METADATA {
     id: task-123
-    name: Streets of Duck
-    color: green
-    info: list grouped fields by condition
-    keywords: SELECT, FROM, count(*), WHERE, GROUP BY
-    level: 1
+    name: Maus Family
+    color: purple
+    info: list fields
+    keywords: SELECT
+    level: 2
 }
 
 DESCRIPTION {
-    How many people of the family Duck live at which street? Please list the street and the number of Ducks which live there.
+    Who has the family name Maus and where do they live?
+}
+
+PARSONS {
+    SELECT fname, name, street, city
+    SELECT fname, street, city #distractor
+    FROM person
+    WHERE name = 'Maus'
+    WHERE fname = 'Maus' #distractor
 }
 
 ANSWER {
-    SELECT street, count(*)
+    SELECT fname, name, street, city
     FROM person
-    WHERE name = 'Duck'
-    GROUP BY street;
+    WHERE name = 'Maus'
 }
+
 
 TEST {
     TABLE {
@@ -34,30 +42,10 @@ TEST {
         510|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
-     RESULT {
-        Blumenweg|4
-        Sternenstrasse|1
-    }
-}
-
-TEST {
-    TABLE {
-        person
-        person_id|fname|name|street|city|books|parent
-        501|Donald|Duck|Steinenberg|Entenhausen|5|null
-        502|Tick|Duck|Steinenberg|Entenhausen|41|501
-        503|Trick|Duck|Steinenberg|Entenhausen|45|501
-        504|Track|Duck|Steinenberg|Entenhausen|43|501
-        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
-        506|Marie|Maus|Blumenweg|Entenhausen|115|505
-        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
-        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
-        509|Dagobert|Duck|Blumenweg|Entenhausen|9|null
-        510|Dagobert|Trump|Steinenberg|Usania|1|null
-    }
-
-     RESULT {
-        Steinenberg|4
-        Blumenweg|1
+    RESULT {
+        Minni|Maus|Sternenstrasse|Entenhausen
+        Marie|Maus|Blumenweg|Entenhausen
+        Maggie|Maus|Sternenstrasse|Entenhausen
+        Mickey|Maus|Blumenweg|Entenhausen
     }
 }

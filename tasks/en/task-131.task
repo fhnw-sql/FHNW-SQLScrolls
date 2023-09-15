@@ -1,88 +1,52 @@
 METADATA {
     id: task-131
-    name: What is a horn
-    color: orange
-    info: list joined fields by condition
-    keywords: SELECT, FROM, INNER JOIN, WHERE, AND, ON
-    level: 2
+    name: Duck's Streets
+    color: purple
+    info: list fields filtered
+    keywords: SELECT, WHERE, GROUP_BY
+    level: 3
 }
 
 DESCRIPTION {
-    What instrument group does horn belong to?
+    Show the count of people with the family name Duck at each street
 }
 
 PARSONS {
-    SELECT group_name
-    FROM instrument i, instrumentgroup g
-    WHERE 
-    i.instrumentgroup_id = g.group_id
-    AND i.instrument_name = 'Horn'
-    FROM instrument i AND instrumentgroup g #distractor
-    WHERE inst.instrumentgroup_id = gr.group_id #distractor
-    && i.instrument_name = 'Horn' #distractor
+    SELECT street, count(name) 
+    SELECT name, count(street) #distractor
+    FROM person 
+    WHERE name = 'Duck' 
+    WHERE name == 'Duck'  #distractor
+    WHERE name equals 'Duck'  #distractor
+    GROUP BY street
+    GROUP BY name #distractor
 }
 
 ANSWER {
-    SELECT group_name
-    FROM instrument i, instrumentgroup g
-    WHERE i.instrumentgroup_id = g.group_id
-    AND i.instrument_name = 'Horn';
+    SELECT street, count(name) 
+    FROM person 
+    WHERE name = 'Duck' 
+    GROUP BY street;
 }
 
 TEST {
     TABLE {
-        instrument
-        instrument_id|instrument_name|instrumentgroup_id
-        201|Violine|101
-        202|Viola|101
-        203|Cello|101
-        204|Contrabass|101
-        205|Clarinet|102
-        206|Flute|102
-        207|Oboe|102
-        208|Horn|103
-        209|Trombone|103
-        210|Trumpet|103
-    }
-
-    TABLE {
-        instrumentgroup
-        group_id|group_name
-        101|Strings
-        102|Woodwind
-        103|Brass
+        person
+        person_id|fname|name|street|city|books|parent
+        501|Donald|Duck|Blumenweg|Entenhausen|5|null
+        502|Tick|Duck|Blumenweg|Entenhausen|41|501
+        503|Trick|Duck|Blumenweg|Entenhausen|45|501
+        504|Track|Duck|Blumenweg|Entenhausen|43|501
+        505|Minni|Maus|Sternenstrasse|Entenhausen|120|null
+        506|Marie|Maus|Blumenweg|Entenhausen|115|505
+        507|Maggie|Maus|Sternenstrasse|Entenhausen|125|505
+        508|Mickey|Maus|Blumenweg|Entenhausen|100|null
+        509|Dagobert|Duck|Sternenstrasse|Entenhausen|9|null
+        510|Dagobert|Trump|Steinenberg|Usania|1|null
     }
 
     RESULT {
-        Brass
-    }
-}
-
-TEST {
-    TABLE {
-        instrument
-        instrument_id|instrument_name|instrumentgroup_id
-        201|Violine|101
-        202|Viola|101
-        203|Cello|101
-        204|Contrabass|101
-        205|Clarinet|103
-        206|Flute|103
-        207|Oboe|103
-        210|Horn|102
-        208|Trombone|102
-        209|Trumpet|102
-    }
-
-      TABLE {
-        instrumentgroup
-        group_id|group_name
-        101|Strings
-        103|Woodwind
-        102|Brass
-    }
-
-    RESULT {
-        Brass
+        Blumenweg|4
+        Sternenstrasse|1
     }
 }

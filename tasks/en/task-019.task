@@ -1,59 +1,77 @@
 METADATA {
     id: task-019
-    name: Task 19
+    name: The oldest Ghost
     color: blue
-    info: list sum field on condition
-    keywords: SELECT, SUM, WHERE
+    info: list min field on condition
+    keywords: SELECT, MIN, WHERE, BETWEEN
     level: 2
 }
 
 DESCRIPTION {
-   How many people were murdered by ghosts called Siegfried?  
+    Find the earliest year of a ghost birth in the 18th century, i.e. when was the oldest ghost born in the 18th century born?
+}
+
+PARSONS {
+    SELECT 
+    MIN 
+    (YEAR)
+    FROM GHOSTS
+    WHERE 
+    YEAR 
+    BETWEEN
+    '1700' 
+    AND
+    '1800'
+    OR #distractor
+    LOW #distractor
+    AND #distractor
+    = #distractor
 }
 
 ANSWER {
-   SELECT SUM(MURDERED) FROM GHOSTS WHERE NAME = 'Siegfried' 
+   SELECT MIN (YEAR) FROM GHOSTS WHERE YEAR BETWEEN '1700' AND '1800'
 }
 
 TEST {
     TABLE {
         Ghosts
-        id|name|year|murdered
-        1|Arthur|1765|0
-        2|Desiree|1777|1
-        3|Siegfried|1650|2
-        4|Sieglinde|1765|3
-        5|Kaaleppi|1833|2
-        5|Khaled|1777|0
-        6|Hermine|1650|4
-        7|Siegfried|1687|2
-        8|Veronika|1777|1
-        9|Veronika|1602|2
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1777
+        3|Siegfried|1650
+        4|Sieglinde|1765
+        5|Kaaleppi|1833
+        5|Khaled|1777
+        6|Hermine|1650
+        7|Siegfried|1687
+        8|Veronika|1777
+        9|Veronika|1602
+	10|Veronika|1623
     }
 
     RESULT {
-       4
+       1765
     }
 }
-
 
 TEST {
     TABLE {
         Ghosts
-        id|name|year|murdered
-        1|Arthur|1765|0
-        2|Desiree|1777|1
-        3|Siegfried|1650|8
-        4|Sieglinde|1765|3
-        5|Kaaleppi|1833|2
-        5|Khaled|1777|0
-        6|Hermine|1650|4
-        7|Siegfried|1687|2
-        8|Veronika|1777|1
-        9|Veronika|1602|2
+        id|name|year
+        1|Arthur|1765
+        2|Desiree|1777
+        3|Siegfried|1650
+        4|Sieglinde|1712
+        5|Kaaleppi|1833
+        5|Khaled|1777
+        6|Hermine|1650
+        7|Siegfried|1687
+        8|Veronika|1777
+        9|Veronika|1602
+	10|Veronika|1623
     }
 
     RESULT {
-       10
+       1712
     }
 }

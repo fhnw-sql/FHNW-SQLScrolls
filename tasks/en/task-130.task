@@ -1,31 +1,35 @@
 METADATA {
     id: task-130
-    name: String instruments
-    color: orange
-    info: list joined fields by condition
-    keywords: SELECT, FROM, GROUP BY, INNER JOIN, WHERE, ON, AND
+    name: 'V' Instruments
+    color: purple
+    info: list fields filtered
+    keywords: SELECT, WHERE, LIKE
     level: 2
 }
 
 DESCRIPTION {
-    List all string instruments with type.
+    How many instruments start with a ‘V’? 
+}
+
+PARSONS {
+    SELECT count(*) 
+    SELECT total(*)  #distractor
+    FROM instrument 
+    WHERE instrument_name like 'V%'
+    WHERE instrument_name is like 'V%' #distractor
+    WHERE instrument_name like 'V*' #distractor
+    WHERE instrument_name startswith 'V' #distractor
 }
 
 ANSWER {
-    SELECT group_name, instrument_name
-    FROM instrument i, instrumentgroup g
-    WHERE i.instrumentgroup_id = g.group_id
-    AND g.group_name = 'Strings';
-
-    OR
-
-    SELECT group_name, instrument_name
-    FROM instrument i INNER JOIN 
-        instrumentgroup g ON (i.instrumentgroup_id = g.group_id)
-    WHERE g.group_name = 'Strings';
+    SELECT count(*) 
+    FROM instrument 
+    WHERE instrument_name like 'V%'; 
 }
 
 TEST {
+    STRICT 
+
     TABLE {
         instrument
         instrument_id|instrument_name|instrumentgroup_id
@@ -41,51 +45,7 @@ TEST {
         210|Trumpet|103
     }
 
-      TABLE {
-        instrumentgroup
-        group_id|group_name
-        101|Strings
-        102|Woodwind
-        103|Brass
-    }
-
     RESULT {
-        Strings|Violine     
-        Strings|Viola       
-        Strings|Cello       
-        Strings|Contrabass  
-    }
-}
-
-TEST {
-      TABLE {
-        instrument
-        instrument_id|instrument_name|instrumentgroup_id
-        201|Banjo|101
-        202|Viola|101
-        203|Drums|104
-        204|Contrabass|101
-        205|Clarinet|102
-        206|Guitar|101
-        207|Oboe|102
-        208|Horn|103
-        209|Trombone|103
-        210|Trumpet|103
-    }
-
-      TABLE {
-        instrumentgroup
-        group_id|group_name
-        101|Strings
-        102|Woodwind
-        103|Brass
-        104|Percussion
-    }
-
-    RESULT {
-        Strings|Banjo
-        Strings|Viola
-        Strings|Guitar
-        Strings|Contrabass
+        2
     }
 }

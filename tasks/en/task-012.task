@@ -1,6 +1,6 @@
 METADATA {
     id: task-012
-    name: Task 12
+    name: Reverse Ghosts
     color: purple
     info: list sorted field on condition
     keywords: SELECT, WHERE, ORDER_BY
@@ -8,7 +8,7 @@ METADATA {
 }
 
 DESCRIPTION {
-  List the names of all different ghosts born in 1650 in reverse alphabetical order
+  List the names of all different ghosts born in 1650 in reverse alphabetical order.
 }
 
 PARSONS {

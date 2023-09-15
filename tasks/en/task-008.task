@@ -1,6 +1,6 @@
 METADATA {
     id: task-008
-    name: Task 8
+    name: Unique Birthyears
     color: purple
     info: list unique 
     keywords: SELECT, DISTINCT

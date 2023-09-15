@@ -1,30 +1,30 @@
 METADATA {
     id: task-109
-    name: Tested Status
+    name: Typo in Potions
     color: green
     info: update
-    keywords: UPDATE SET WHERE
+    keywords: UPDATE
     level: 3
     type: DCL
 }
 
 DESCRIPTION {
-   You will recall that after the party two potions made people fly, and we updated their level to 25.
-   Please change the tested status to 1 for those two potions.
+   There is a typo in the potions menu! Change the name of potion with id 3 to 'Dragon Potion'.
 }
 
 ANSWER {
-    UPDATE Potions SET tested=1 where level=25;
+    UPDATE Potions SET name = 'Dragon Potion' WHERE potion_id = 3;
 }
 
 TEST {
     TABLE {
         Potions
-        potion_id|name|level|tested
-        1|Magic Spell|2|0
-        2|Black Mantra|1.5|0
-        3|Dragon Potion|25|0
-        5|Midnight Surprise|25|0
+        potion_id|name|level
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dungeon Potion|3
+        4|Horus Cast|2.5
+        5|Midnight Surprise|10
     }
 
     SQL {
@@ -32,9 +32,12 @@ TEST {
     }
 
     RESULT {
-        1|Magic Spell|2|0
-        2|Black Mantra|1.5|0
-        3|Dragon Potion|25|1
-        5|Midnight Surprise|25|1
+        1|Magic Spell|2
+        2|Black Mantra|1.5
+        3|Dragon Potion|3
+        4|Horus Cast|2.5
+        5|Midnight Surprise|10
     }
 }
+
+

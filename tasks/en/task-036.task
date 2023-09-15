@@ -1,6 +1,6 @@
 METADATA {
     id: task-036
-    name: Task 36
+    name: Arthur the Ghost
     color: orange
     info: list filtered fields from product table
     keywords: SELECT, WHERE, CARTESIAN_PRODUCT
@@ -8,11 +8,23 @@ METADATA {
 }
 
 DESCRIPTION {
-    Which ghosts can I see in the woods?
+    Where does Arthur haunt?
+}
+
+PARSONS {
+   SELECT p.name 
+   FROM 
+   GHOSTS g,
+   PLACES p
+   WHERE 
+   p.id = g.place_id 
+   AND g.name = "Arthur"
+   AND p.name = "Arthur" #distractor
+   p.ghost_id = g.id #distractor
 }
 
 ANSWER {
-   SELECT g.name FROM GHOSTS  g, PLACES p WHERE p.id = g.place_id AND p.name = "forest"
+   SELECT p.name FROM GHOSTS g, PLACES p WHERE p.id = g.place_id AND g.name = "Arthur"
 }
 
 
@@ -36,8 +48,7 @@ TEST {
     }
 
     RESULT {
-        Siegfried
-        Sieglinde
+        school
     }
 }
 
@@ -49,7 +60,7 @@ TEST {
         2|Mercedes|2
         3|Fernand|3
         4|Valentine|2
-        5|Haydee|2
+        5|Arthur|2
     }
 
     TABLE {
@@ -61,6 +72,6 @@ TEST {
     }
 
     RESULT {
-        Fernand
+        mill
     }
 }

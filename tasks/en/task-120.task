@@ -1,89 +1,41 @@
 METADATA {
     id: task-120
-    name: View the danger
-    color: green
-    info: delete
-    keywords: CREATE_VIEW
-    level: 3
-    type: DCL
+    name: Instrument Groups
+    color: purple
+    info: list fields
+    keywords: SELECT
+    level: 1
 }
 
 DESCRIPTION {
-   We want to see the danger information when it is available. Create a view
-   PotionView which shows just the dangerous potions and what kind of danger it is.
-   You may have to use rounding as you are comparing a real number and an integer key.
+    What instrument groups are there?
+}
+
+PARSONS {
+   SELECT group_name
+   FROM instrumentgroup
+   SELECT * #distractor
+   FROM groups #distractor
 }
 
 ANSWER {
-    create view PotionView as select
-    p.name, p.level, l.danger
-    from Potions p, Levels l
-    where ROUND(p.level)=l.level;
+    SELECT group_name
+    FROM instrumentgroup
 }
+
 
 TEST {
     TABLE {
-        Potions
-        potion_id|name|level|tested
-        1|Magic Spell|2|0
-        2|Black Mantra|1.5|0
-        3|Dragon Potion|25|1
-        5|Midnight Surprise|25|1
-    }
-
-    TABLE {
-        Levels
-        level|danger
-        18|FIREBALL
-        25|FLYING
-    }
-
-    SQL {
-        SELECT * FROM PotionView;
+        instrumentgroup
+        group_id|group_name 
+        101|Strings
+        102|Woodwind
+        103|Brass
     }
 
     RESULT {
-        Dragon Potion|25|FLYING
-        Midnight Surprise|25|FLYING
+        Strings
+        Woodwind
+        Brass
     }
 }
-
-TEST {
-    SQL {
-        SELECT REPLACE(upper(sql), ' ', '') FROM sqlite_master WHERE name = 'PotionView';
-    }
-
-    RESULT {
-      CREATEVIEWPOTIONVIEWASSELECTP.NAME,P.LEVEL,L.DANGERFROMPOTIONSP,LEVELSLWHEREROUND(P.LEVEL)=L.LEVEL
-    }
-}
-
-TEST {
-
-    TABLE {
-        Potions
-        potion_id|name|level|tested
-        1|Magic Spell|2|0
-        2|Black Mantra|1.5|0
-        3|Dragon Potion|25|1
-        5|Midnight Surprise|25|1
-    }
-
-    TABLE {
-        Levels
-        level|danger
-        18|FIREBALL
-        25|FLYING
-    }
-
-    SQL {
-        select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('PotionView');    
-    }
-
-    RESULT {
-        0|name|TEXT|0|null|0
-        1|level|NUMBER|0|null|0
-        2|danger|TEXT|0|null|0
-    }
-}
-
