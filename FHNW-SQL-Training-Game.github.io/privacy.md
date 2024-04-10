@@ -44,13 +44,13 @@ To provide further transparency, the backend is open source and publicly availab
             "date": {
                 "$numberLong": "1612338698380"
             },
-            "query": "SELECT year from ghost WHERE NAME = \"Sieglinde\""
+            "query": "SELECT year FROM Ghost WHERE name = \"Sieglinde\""
         }, {
             "correct": true,
             "date": {
                 "$numberLong": "1612338708483"
             },
-            "query": "SELECT year from ghosts WHERE NAME = \"Sieglinde\""
+            "query": "SELECT year FROM Ghosts WHERE name = \"Sieglinde\""
         }]
     },
     "resetPasswordExpires": null,

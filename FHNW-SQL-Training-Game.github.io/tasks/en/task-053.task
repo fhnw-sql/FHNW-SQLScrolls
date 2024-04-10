@@ -15,16 +15,15 @@ PARSONS {
 	SELECT interpret_id  #distractor
 	SELECT country  #distractor
 	SELECT DISTINCT country
-	FROM interpret
-	FROM interprets #distractor
+	FROM Interpret
+	FROM Interprets #distractor
 }
 
 ANSWER { 
-	SELECT DISTINCT country FROM interpret;
+	SELECT DISTINCT country FROM Interpret
 }
 
 TEST {
-
 	TABLE {
 		Interpret
 		interpret_id|name|f_year|country

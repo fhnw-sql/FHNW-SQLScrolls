@@ -14,8 +14,8 @@ DESCRIPTION {
 }
 
 ANSWER {
-    select ID, name1||' aka '||name2
-    from Pokedex_new 
+    SELECT ID, name1||' aka '||name2
+    FROM Pokedex_new 
     where name1 IS NOT NULL AND name2 IS NOT NULL;
 }
 

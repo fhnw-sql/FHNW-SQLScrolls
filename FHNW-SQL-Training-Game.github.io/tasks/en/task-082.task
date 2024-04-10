@@ -15,24 +15,24 @@ DESCRIPTION {
 }
 
 PARSONS {
-	SELECT 
+    SELECT 
     name1, type1,
-    total, speed 	 #distractor
-	hitPoints, speed
-    from Pokedex_new
+    total, speed      #distractor
+    hitPoints, speed
+    FROM Pokedex_new
     WHERE
     hitPoints
     > 70
     AND
-    OR 	 #distractor
+    OR      #distractor
     speed
     > 90;
 }
 ANSWER {
-	SELECT 
+    SELECT 
     name1, type1,
-	hitPoints, speed
-    from Pokedex_new
+    hitPoints, speed
+    FROM Pokedex_new
     WHERE
     hitPoints
     > 70

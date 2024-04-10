@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT Area, COUNT(*) FROM WIZARDS GROUP BY AREA  
+    SELECT area, COUNT(*) FROM Wizards GROUP BY area
 }
 
 

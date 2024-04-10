@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT playerName, level FROM Player WHERE level = (SELECT MIN(level) from Player);
+    SELECT playerName, level FROM Player WHERE level = (SELECT MIN(level) FROM Player);
 }
 
 TEST {

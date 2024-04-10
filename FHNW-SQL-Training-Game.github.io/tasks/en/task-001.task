@@ -12,8 +12,8 @@ DESCRIPTION {
 }
 
 PARSONS {
-    SELECT name 
-    from ghosts
+    SELECT name
+    FROM Ghosts
     SELECT * #distractor
     GET NAME OF GHOST #distractor
     FROM ghost #distractor
@@ -21,7 +21,7 @@ PARSONS {
 }
 
 ANSWER {
-    SELECT name from ghosts
+    SELECT name FROM Ghosts
 }
 
 TEST {

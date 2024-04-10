@@ -8,11 +8,11 @@ METADATA {
 }
 
 DESCRIPTION {
-   How many people were murdered by ghosts called Siegfried?  
+    How many people were murdered by ghosts called Siegfried?  
 }
 
 ANSWER {
-   SELECT SUM(MURDERED) FROM GHOSTS WHERE NAME = 'Siegfried' 
+    SELECT SUM(murdered) FROM Ghosts WHERE name = 'Siegfried' 
 }
 
 TEST {

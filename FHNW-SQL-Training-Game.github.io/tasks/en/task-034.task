@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT area from wizards group by area having count(*) = 1
+    SELECT area FROM Wizards GROUP BY area HAVING count(*) = 1
 }
 
 

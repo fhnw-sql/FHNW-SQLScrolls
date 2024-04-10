@@ -44,7 +44,7 @@ TEST {
 
 TEST {
     SQL {
-        select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('Levels');    
+        SELECT cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('Levels');    
     }
 
     RESULT {

@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT name from ghosts order by name ASC
+   SELECT name FROM Ghosts ORDER BY name
 }
 
 STRICT

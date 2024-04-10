@@ -15,12 +15,12 @@ DESCRIPTION {
 
 PARSONS {
     SELECT name
-    from ghosts
+    FROM Ghosts
     SELECT * #distractor
 }
 
 ANSWER {
-    SELECT name from ghosts
+    SELECT name FROM Ghosts
 }
 
 TEST {

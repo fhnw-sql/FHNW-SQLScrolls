@@ -13,9 +13,9 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT distinct(type1) from Pokedex_new where type1 is not null
+    SELECT distinct(type1) FROM Pokedex_new where type1 is not null
     UNION
-    SELECT distinct(type2) from Pokedex_new where type2 is not null;
+    SELECT distinct(type2) FROM Pokedex_new where type2 is not null;
 }
 
 TEST {

@@ -14,11 +14,10 @@ DESCRIPTION {
 }
 
 ANSWER { 
-	SELECT language, rating, count(*) FROM song GROUP BY language, rating ORDER BY language, rating desc;
+	SELECT language, rating, count(*) FROM Song GROUP BY language, rating ORDER BY language, rating DESC;
 }
 
 TEST {
-	
     TABLE {
 		Song
 		song_id|title|seconds|language|rating|interpret_fk|album_fk

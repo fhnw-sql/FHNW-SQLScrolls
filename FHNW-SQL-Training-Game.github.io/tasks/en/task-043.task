@@ -12,21 +12,21 @@ DESCRIPTION {
 }
 
 PARSONS {
-   SELECT p.name 
-   FROM 
-   GHOSTS g
-   PLACES p
-   INNER JOIN
-   WHERE 
-   ON
-   p.id = g.place_id 
-   g.name = "Arthur"
-   p.name = "Arthur" #distractor
-   p.ghost_id = g.id #distractor
+    SELECT p.name
+    FROM
+    Ghosts g
+    Places p
+    INNER JOIN
+    WHERE
+    ON
+    p.id = g.place_id
+    g.name = 'Arthur'
+    p.name = 'Arthur' #distractor
+    p.ghost_id = g.id #distractor
 }
 
 ANSWER {
-   SELECT p.name FROM GHOSTS g INNER JOIN PLACES p ON p.id = g.place_id WHERE g.name = "Arthur"
+   SELECT p.name FROM Ghosts g INNER JOIN Places p ON p.id = g.place_id WHERE g.name = 'Arthur'
 }
 
 

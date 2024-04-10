@@ -13,7 +13,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT min(hitPoints), max(hitPoints), sum(hitPoints), avg(hitPoints) from Pokedex_new;
+    SELECT MIN(hitPoints), MAX(hitPoints), SUM(hitPoints), AVG(hitPoints) FROM Pokedex_new;
 }
 
 TEST {

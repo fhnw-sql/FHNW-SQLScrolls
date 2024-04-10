@@ -8,11 +8,11 @@ METADATA {
 }
 
 DESCRIPTION {
-    List all names of ghosts born after 1800.
+    List all names of Ghosts born after 1800.
 }
 
 ANSWER {
-   SELECT name from ghosts where year > 1800
+   SELECT name FROM Ghosts WHERE year > 1800
 }
 
 TEST {

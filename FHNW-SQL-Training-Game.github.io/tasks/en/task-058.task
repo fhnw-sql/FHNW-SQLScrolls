@@ -12,28 +12,25 @@ DESCRIPTION {
 }
 
 PARSONS {
-
 	SELECT s.title, s.seconds, i.name, a.title
 	SELECT s.title, i.seconds, a.name, a.title #distractor
-	FROM song s 
-	LEFT JOIN interpret i 
-	INNER JOIN interpret i #distractor
-	ON i.interpret_id = s.interpret_fk 
-	LEFT JOIN album a
-	INNER JOIN album a  #distractor
+	FROM Song s
+	LEFT JOIN Interpret i 
+	INNER JOIN Interpret i #distractor
+	ON i.interpret_id = s.interpret_fk
+	LEFT JOIN Album a
+	INNER JOIN Album a  #distractor
 	ON a.album_id = s.album_fk
 	WHERE s.seconds <= 150
 	WHERE a.seconds <= 150 #distractor
 	ORDER BY s.seconds
-
 }
 
 ANSWER { 
-	SELECT s.title, s.seconds, i.name, a.title FROM song s LEFT JOIN interpret i ON i.interpret_id = s.interpret_fk LEFT JOIN album a ON a.album_id = s.album_fk WHERE s.seconds <= 150 ORDER BY s.seconds
-	}
+	SELECT s.title, s.seconds, i.name, a.title FROM Song s LEFT JOIN Interpret i ON i.interpret_id = s.interpret_fk LEFT JOIN Album a ON a.album_id = s.album_fk WHERE s.seconds <= 150 ORDER BY s.seconds
+}
 
 TEST {
-
 	TABLE {
 		Interpret
 		interpret_id|name|f_year|country

@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER { 
-	SELECT title, seconds FROM song WHERE seconds BETWEEN 120 AND 180 ORDER BY seconds DESC
+	SELECT title, seconds FROM Song WHERE seconds BETWEEN 120 AND 180 ORDER BY seconds DESC
 }
 
 TEST {

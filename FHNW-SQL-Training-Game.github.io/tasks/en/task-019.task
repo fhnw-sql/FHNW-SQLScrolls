@@ -12,16 +12,16 @@ DESCRIPTION {
 }
 
 PARSONS {
-    SELECT 
-    MIN 
-    (YEAR)
-    FROM GHOSTS
-    WHERE 
-    YEAR 
+    SELECT
+    MIN
+    (year)
+    FROM Ghosts
+    WHERE
+    year
     BETWEEN
-    '1700' 
+    1701
     AND
-    '1800'
+    1800
     OR #distractor
     LOW #distractor
     AND #distractor
@@ -29,7 +29,7 @@ PARSONS {
 }
 
 ANSWER {
-   SELECT MIN (YEAR) FROM GHOSTS WHERE YEAR BETWEEN '1700' AND '1800'
+   SELECT MIN (year) FROM Ghosts WHERE year BETWEEN 1701 AND 1800
 }
 
 TEST {

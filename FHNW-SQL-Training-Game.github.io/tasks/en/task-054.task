@@ -22,7 +22,7 @@ PARSONS {
 }
 
 ANSWER { 
-    SELECT song_id, title FROM song WHERE title LIKE '%Christmas %'
+    SELECT song_id, title FROM Song WHERE title LIKE '%Christmas %'
 }
 
 TEST {

@@ -8,11 +8,11 @@ METADATA {
 }
 
 DESCRIPTION {
-   List all areas and the number of level 5 wizards in each area.
+    List all areas and the number of level 5 wizards in each area.
 }
 
 ANSWER {
-   SELECT area, COUNT(name) FROM wizards WHERE SKILL = 5 GROUP BY area
+    SELECT area, COUNT(*) FROM Wizards WHERE skill = 5 GROUP BY area
 }
 
 

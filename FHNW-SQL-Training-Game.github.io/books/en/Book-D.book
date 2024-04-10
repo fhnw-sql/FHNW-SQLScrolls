@@ -69,7 +69,7 @@ PAGE {
             5 | Ake | sheep | 800
         }
         QUERY {
-            SELECT species, COUNT (*) FROM Animals WHERE weight <5000 GROUP BY species;
+            SELECT species, COUNT (*) FROM Animals WHERE weight < 5000 GROUP BY species;
         }
     }
 }
@@ -94,7 +94,7 @@ PAGE {
             5 | Ake | sheep | 800
         }
         QUERY {
-            SELECT species, COUNT (*) FROM Animals GROUP BY species HAVING COUNT (*)> 2;
+            SELECT species, COUNT (*) FROM Animals GROUP BY species HAVING COUNT (*) > 2;
         }
     }
 }

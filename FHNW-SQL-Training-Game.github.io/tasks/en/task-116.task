@@ -77,7 +77,7 @@ TEST {
     }
 
     SQL {
-        select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('PotionView');    
+        SELECT cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('PotionView');    
     }
 
     RESULT {

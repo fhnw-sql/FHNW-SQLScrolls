@@ -15,8 +15,8 @@ DESCRIPTION {
 }
 
 ANSWER {
-    select 'NAME ' || name1 || ' NICKNAME '|| SUBSTR(name1,1,4)
-    from Pokedex_new order by name1;
+    SELECT 'NAME ' || name1 || ' NICKNAME '|| SUBSTR(name1,1,4)
+    FROM Pokedex_new order by name1;
 }
 
 TEST {

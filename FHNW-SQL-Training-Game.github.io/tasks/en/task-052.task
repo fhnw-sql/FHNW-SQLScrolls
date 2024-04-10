@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER { 
-    SELECT title, rating FROM song WHERE rating <= 3;
+    SELECT title, rating FROM Song WHERE rating <= 3
 }
 
 TEST {

@@ -14,7 +14,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    select total, name1 from Pokedex_new
+    SELECT total, name1 from Pokedex_new
     where total BETWEEN 400 AND 500
     ORDER BY total desc;
 }

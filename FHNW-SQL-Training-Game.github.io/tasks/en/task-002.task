@@ -12,15 +12,15 @@ DESCRIPTION {
 }
 
 PARSONS {
-    SELECT 
-    name, year 
-    from ghosts
+    SELECT
+    name, year
+    FROM Ghosts
     name and year #distractor
     name & year #distractor
 }
 
 ANSWER {
-   Select name, year from ghosts
+   Select name, year FROM Ghosts
 }
 
 TEST {

@@ -31,9 +31,9 @@ PAGE {
 PAGE {
     The query can be restricted by the WHERE section:
 
-    SELECT {columns} FROM table WHERE {condition};
+    SELECT {columns} FROM {table} WHERE {condition};
 
-    For example, comparisons ==, <>,
+    For example, comparisons =, <>,
     <,>, <=,> = and AND and OR and LIKE.
 }
 

@@ -8,11 +8,11 @@ METADATA {
 }
 
 DESCRIPTION {
-  Show all ghosts born in the 17th century from the youngest to the oldest and if they were born in the same year, sort them in alphabetical order within each year.
+    Show all ghosts born in the 17th century from the youngest to the oldest and if they were born in the same year, sort them in alphabetical order within each year.
 }
 
 ANSWER {
-    SELECT * FROM Ghosts WHERE YEAR BETWEEN 1600 AND 1700 ORDER BY YEAR DESC, NAME ASC
+    SELECT * FROM Ghosts WHERE year BETWEEN 1601 AND 1700 ORDER BY year DESC, name ASC
 }
 
 STRICT

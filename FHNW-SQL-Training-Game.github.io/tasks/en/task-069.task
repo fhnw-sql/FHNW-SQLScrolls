@@ -13,18 +13,18 @@ DESCRIPTION {
 
 PARSONS {
     SELECT
-	ID, name1, name2, type1, type2, total
-    FROM 
+    ID, name1, name2, type1, type2, total
+    FROM
     Pokedex_new
     WHERE COUNT(type1) =    #distractor
-    WHERE total = 
-    (select max(total) from Pokedex_new );
-	(select avg(total) from Pokedex_new );     #distractor
+    WHERE total =
+    (SELECT MAX(total) FROM Pokedex_new)
+    (SELECT AVG(total) FROM Pokedex_new)     #distractor
 }
 ANSWER {
     SELECT ID, name1, name2, type1, type2, total 
-    from Pokedex_new 
-    WHERE total = (select max(total) from Pokedex_new );
+    FROM Pokedex_new 
+    WHERE total = (SELECT MAX(total) FROM Pokedex_new)
 }
 
 TEST {

@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT name FROM Pokemon UNION SELECT name from Region ORDER BY name;
+    SELECT name FROM Pokemon UNION SELECT name FROM Region ORDER BY name;
 }
 
 TEST {

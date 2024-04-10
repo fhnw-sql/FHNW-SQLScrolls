@@ -13,7 +13,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT distinct(type1) from Pokedex_new;
+    SELECT distinct(type1) FROM Pokedex_new;
 }
 
 TEST {

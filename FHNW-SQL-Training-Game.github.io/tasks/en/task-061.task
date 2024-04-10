@@ -12,21 +12,20 @@ DESCRIPTION {
 }
 
 PARSONS {
-	SELECT rating, count(*)
+	SELECT rating, COUNT(*)
 	SELECT song_id, count(rating) #distractor
-	FROM song
+	FROM Song
 	GROUP BY rating
-	GROUP BY count(*) #distractor
-	HAVING count(*) = 1
+	GROUP BY COUNT(*) #distractor
+	HAVING COUNT(*) = 1
 	HAVING rating = 1 #distractor
 }
 
 ANSWER { 
-	SELECT rating, count(*) FROM song GROUP BY rating HAVING count(*) = 1
+	SELECT rating, COUNT(*) FROM Song GROUP BY rating HAVING COUNT(*) = 1
 }
 
 TEST {
-	
     TABLE {
 		Song
 		song_id|title|seconds|language|rating|interpret_fk|album_fk
