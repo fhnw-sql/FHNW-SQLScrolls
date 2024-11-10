@@ -9,6 +9,7 @@ const postmark = require("postmark");
 const reqBodyValidator = require("../middlewares/reqBodyValidator");
 const { registerPOST, authenticatePOST, authenticateSWITCHaaiPOST, answerSqlPATCH, recoverPOST, resetPOST } = require("../schemes/users");
 const { checkIfFinished, checkIfNew, generateCertificate } = require("../utils/certificate");
+const fetch = require("node-fetch");
 
 const cors = require("cors");
 
@@ -201,6 +202,8 @@ router.patch("/self/answer_sql", reqBodyValidator(answerSqlPATCH), async functio
     correct: JSON.parse(value.correct),
     date: Date.now(),
     query: value.query,
+    startTime: value.startTime,
+    endTime: value.endTime
   };
 
   // Update
@@ -328,6 +331,34 @@ router.post("/reset", reqBodyValidator(resetPOST), async function ({ body: value
       return res.json({ message: "Password reset was successfully!" });
     })
     .catch((err) => next(err));
+});
+
+router.get("/recommend-task", async function (req, res) {
+  console.log("Initializing routing");
+  const username = req.query.username;
+  console.log("Received request to recommend task for username:", username);
+  
+  if (!username) {
+      console.log("Username is required but not provided.");
+      return res.status(400).json({ error: "Username is required" });
+  }
+
+  try {
+      const response = await fetch(`http://model-python:5001/recommend-task?userID=${username}`);
+      const data = await response.text(); 
+      console.log("Response from recommendation API:", data);
+
+      // If the response status is not OK, return the status and data as error
+      if (!response.ok) {
+          console.error("Error response from recommendation API:", response.status, data);
+          return res.status(response.status).send(data);
+      }
+
+      res.status(response.status).send(data); // Send back the same status and data received from model-python API
+  } catch (error) {
+      console.error("Error occurred while recommending task:", error);
+      res.status(500).json({ error: "Internal server error while recommending task", details: error.message });
+  }
 });
 
 // export

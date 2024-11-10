@@ -1,4 +1,7 @@
-﻿require("rootpath")();
+﻿if (typeof globalThis === 'undefined') {
+  global.globalThis = global;
+}
+require("rootpath")();
 require("dotenv").config();
 
 const express = require("express");

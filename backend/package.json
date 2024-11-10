@@ -25,6 +25,7 @@
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
+    "node-fetch": "2.6.1",
     "postmark": "^2.7.1",
     "rootpath": "^0.1.2",
     "winston": "^3.3.3"
