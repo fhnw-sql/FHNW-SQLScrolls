@@ -9,7 +9,21 @@ const Colors = {
     LIGHT_BLUE: "col-book-light-blue",
     NONE: "col-book-white",
 };
+// Global timer variables
+let startTime;
 
+// Function to start the timer for each task attempt
+function startTimer() {
+    startTime = new Date(); // Record the current time when the task starts
+    //console.log(`Timer started at: ${startTime.toISOString()}`); // Log the start time for debugging
+}
+
+
+function stopTimer() {
+    const endTime = new Date(); // Record the current time when the task ends
+    console.log(`Timer stopped at: ${endTime.toISOString()}`); // Log the end time for debugging
+    return { startTime: startTime.toISOString(), endTime: endTime.toISOString() }; // Return startTime and endTime separately
+}
 // Tasks are filled in main.js#initializeGameDictionaries
 const tasks = {
     asList() {
@@ -168,6 +182,7 @@ class Task extends ItemType {
     }
 
     async renderTaskTables() {
+        startTimer();
         let taskTables;
         let wantedResult;
         if (this.tests) {
@@ -254,7 +269,10 @@ class Task extends ItemType {
                 results.push(new Result({source: test, correct: false, error, wanted}));
             }
         }
-        return results;
+        const { startTime, endTime } = stopTimer(); // Stop time after attempt is done
+        //console.log("Test Results:", results);
+        startTimer(); // Restart the timer again
+        return { results, startTime, endTime };
     }
 
     async showHint() {       
@@ -632,14 +650,14 @@ async function runQueryTests(allowCompletionAndStore) {
 
     const query = document.getElementById("query-input").value.trim();
     animateQueryResultsClose();
-    const results = await Views.TASK.currentTask.runTests(query);
+    const { results, startTime, endTime } = await Views.TASK.currentTask.runTests(query);
 
     let allCorrect = true; // The results are checked during rendering
     const allErrored = didAllError();
     let rendered = await render(); // Side effect: allCorrect is set as false sometimes
 
     if (API.loginStatus === LoginStatus.LOGGED_IN && allowCompletionAndStore) {
-        await API.quizzesSendRetryOnFail(Views.TASK.currentTask, query, allCorrect, 1);
+        await API.quizzesSendRetryOnFail(Views.TASK.currentTask, query, allCorrect, startTime, endTime, 1);
         await Views.TASK.updatePreviousAnswers(Views.TASK.currentTask);
     }
 
@@ -698,3 +716,87 @@ async function runQueryTests(allowCompletionAndStore) {
         }
     }    
 }
+
+// Implementation for get recommended task
+async function getUsername() {
+    try {
+      const userProfile = await API.self();
+      return userProfile.username;
+    } catch (error) {
+       console.error('Error fetching user profile:', error);
+      return null;
+    }
+  }
+  
+function getRecommendedTask(username) {
+  return new Promise((resolve, reject) => {
+    if (!API.token) {
+      reject('API token is not set. User might not be logged in.');
+      return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (this.readyState === 4) {
+        if (xhr.status === 200) {
+          const taskId = this.responseText.trim();
+          if (taskId) {
+            console.log('Recommended Task ID:', taskId);
+            resolve(taskId);
+          } else {
+            reject('No task ID returned from the recommendation API');
+          }
+        } else {
+          reject(`Bad response code '${xhr.status}' for task recommendation: ${xhr.responseText}`);
+        }
+      }
+    };
+    console.log('Sending request to recommend task for username:', username);
+    xhr.open("GET", `${API.getAPIAddress()}/users/recommend-task?username=${encodeURIComponent(username)}`, true);
+    xhr.setRequestHeader("Authorization", `Bearer ${API.token}`);
+    xhr.send();
+  });
+}
+  
+async function loadRecommendedTask() {
+    const username = await getUsername();
+    if (!username) {
+      console.error('Username not available.');
+      return;
+    }
+  
+    try {
+      // Check if there is a current task before trying to close it
+      if (Views.TASK.currentTask) {
+        await showElementImmediately("loading-view");// Switch to loading view before closing the task
+        await Views.TASK.close();        // Close the current task view
+      } else {
+        await showElementImmediately("loading-view");// Switch to loading view
+      }
+  
+      console.log('Loading recommended task'); 
+      const taskID = await getRecommendedTask(username);  
+      console.log('Recommended Task ID:', taskID); 
+  
+      if (taskID) {
+        // Ensure the task is in the tasks object
+        if (!tasks[taskID]) {
+          tasks[taskID] = new LazyTask(taskID);
+        }
+
+        await Views.TASK.show(taskID);
+  
+        // Ensure the task view is visible
+        await changeView(Views.TASK);
+        await Views.TASK.open();  
+      } else {
+        console.error('Failed to load recommended task. Reason: Task ID is null or undefined.');
+        console.log('Returned Task ID:', taskID); 
+      }
+    } catch (error) {
+      console.error('Error loading recommended task:', error);
+    } finally {
+      // Hide the loading view in all cases
+      await hideElementImmediately("loading-view");
+    }
+  }

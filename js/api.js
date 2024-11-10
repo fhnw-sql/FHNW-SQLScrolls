@@ -201,18 +201,18 @@ const API = {
     }
     return completedTaskIDs;
   },
-  async quizzesSendRetryOnFail(task, sql, result, attempt) {
+  async quizzesSendRetryOnFail(task, sql, result, startTime, endTime, attempt) {
     try {
-      await this.quizzesSend(task, sql, result);
+      await this.quizzesSend(task, sql, result, startTime, endTime);
     } catch (e) {
       if (attempt <= 3) {
-        await this.quizzesSendRetryOnFail(task, sql, result, attempt + 1);
+        await this.quizzesSendRetryOnFail(task, sql, result, attempt + 1, startTime, endTime);
       } else {
         showError("Failed to send answer to server, " + e);
       }
     }
   },
-  quizzesSend(task, sql, result) {
+  quizzesSend(task, sql, result, startTime, endTime) {
     this.cachedAnswerData.loaded = false;
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -229,7 +229,7 @@ const API = {
       xhr.open("PATCH", `${this.getAPIAddress()}/users/self/answer_sql`, true);
       xhr.setRequestHeader("Authorization", "Bearer " + this.token);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhr.send(`task=${task.id}&correct=${result}&query=${encodeURIComponent(sql)}`);
+      xhr.send(`task=${task.id}&correct=${result}&query=${encodeURIComponent(sql)}&startTime=${startTime}&endTime=${endTime}`);
     });
   },
   restartUser() {

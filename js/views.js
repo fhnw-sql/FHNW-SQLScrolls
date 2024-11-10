@@ -76,6 +76,15 @@ const ProfileButton = {
   },
 };
 
+const AIButton = {
+  async show() {
+    await showElementImmediately("ai-button");
+  },
+  async hide() {
+    await hideElementImmediately("ai-button");
+  },
+};
+
 // Functionality related to the star counter
 const StarCounter = {
   async update() {
@@ -171,6 +180,7 @@ class MapView extends View {
     }
     await ProfileButton.show();
     await TaskViewSwap.show();
+    await AIButton.show();
     showElement(this.id);
     await StarCounter.update();
     if (DISPLAY_STATE.previousView === Views.FLAME_ANIMATION || DISPLAY_STATE.previousView === Views.END_ANIMATION) {
@@ -289,6 +299,7 @@ class TaskView extends View {
     super("task-view");
     this.queryInputField = document.getElementById("query-input");
     this.parsonsInputDiv = document.getElementById("parsons-input");
+    this.recommendtaskInputDiv = document.getElementById("parsons-input");
     this.currentTask = null;
     this.selectedPreviousAnswer = false;
     this.parsons = null;
@@ -297,9 +308,11 @@ class TaskView extends View {
   async open() {
     await showElement(this.id);
     document.getElementById(this.id).focus();
+    createBookFromKeywords(this.currentTask.id);
   }
 
   async close() {
+    deleteBookById(this.currentTask.id);
     this.currentTask = null;
     await hideElement(this.id);
     removePreservedTaskBoxHeight();
@@ -320,6 +333,7 @@ class TaskView extends View {
 
   initParsonsProblem() {
     var initial = this.currentTask.parsons.join("\n");
+    // const  showkeywordsbook  = require('items.js');
     this.parsons = new ParsonsWidget({
       sortableId: "parsons-sortable",
       trashId: "parsons-sortableTrash",
@@ -350,6 +364,18 @@ class TaskView extends View {
         Views.TASK.parsons.init(initial);
         Views.TASK.parsons.shuffleLines();
        });
+       $("#recommend-task-in-view")
+       .off()
+       .on("click", function (e) {
+         e.preventDefault();
+         loadRecommendedTask();
+       });
+       $("#theory-button")
+       .off()
+       .on("click", function (e) {
+         e.preventDefault();
+          showkeywordsbook(new Event("click"), Views.TASK.currentTask.id);
+       });
   }
 
   async toggleAnswer() {
@@ -367,7 +393,7 @@ class TaskView extends View {
   getTaskBookName(){
     for (let group of taskGroups.asList()) {
       for (let taskName of group.tasks) {
-        // console.log(taskName, this.currentTask.id, taskName === this.currentTask.id)
+        console.log(taskName, this.currentTask.id, taskName === this.currentTask.id)
         if (taskName === this.currentTask.id) {
             return(getItem(group.book).shortName)
         }
@@ -377,6 +403,7 @@ class TaskView extends View {
   }
 
   async showWithQuery(query) {
+    // const { showkeywordsbook } = require('./items.js');
     await hideElementImmediately("model-answer");
     await hideElementImmediately("task-next-button");
     await hideElementImmediately("query-model-button");
@@ -403,8 +430,10 @@ class TaskView extends View {
     if (task.parsons) {
       await showElementImmediately("parsons-input");
       await hideElementImmediately("query-input");
+      await showElementImmediately("recommend-task-in-view");      
       this.initParsonsProblem();
     } else {
+      await showElementImmediately("recommend-task-in-view");
       await showElementImmediately("query-input");
       await hideElementImmediately("parsons-input");
       $("#query-run-button")
@@ -419,6 +448,18 @@ class TaskView extends View {
           e.preventDefault();
           query = null;
           this.queryInputField = document.getElementById("query-input").value =  i18n.get("query-placeholder");
+        });
+        $("#recommend-task-in-view")
+        .off()
+        .on("click", function (e) {
+          e.preventDefault();
+          loadRecommendedTask();
+        });
+        $("#theory-button")
+        .off()
+        .on("click", function (e) {
+          e.preventDefault();
+          showkeywordsbook(new Event("click"), task.id);
         });
     }
 
@@ -489,6 +530,7 @@ class TaskView extends View {
   }
 
   async show(taskID) {
+    console.log("taskID", taskID);
     this.currentTask = tasks[taskID];
     try {
       await this.showWithQuery();
@@ -554,7 +596,7 @@ class ReadBookView extends View {
 
   async open() {
     const trigger = document.activeElement;
-    // console.log(this.id, document.getElementById(this.id))
+    console.log(this.id, document.getElementById(this.id))
     if (!DISPLAY_STATE.editMode)  document.getElementById(this.id).focus();
     await showModal("#" + this.id, DISPLAY_STATE.previousSecondaryView, trigger);
   }
@@ -851,7 +893,7 @@ class LoginView extends View {
     // Validate username
     const username = document.getElementById("inputLoginUser").value;
     if (!username) return await this.showLoginError(i18n.get("error-no-user"));
-    if (!username.includes("@")) return await this.showLoginError(i18n.get("error-invalid-user"));
+    //  if (!username.includes("@")) return await this.showLoginError(i18n.get("error-invalid-user"));
 
     // FHNW specific validation
     if ((username.endsWith("@fhnw.ch") || (username.endsWith(".fhnw.ch")))) return await this.showLoginError(i18n.get("error-fhnw-user"));
@@ -918,7 +960,7 @@ class RegisterView extends View {
     // Validate User
     const username = document.getElementById("inputRegisterUser").value;
     if (!username) return await this.showRegisterError(i18n.get("error-no-user"));
-    if (!username.includes("@")) return await this.showRegisterError(i18n.get("error-invalid-user"));
+    //  if (!username.includes("@")) return await this.showRegisterError(i18n.get("error-invalid-user"));
 
     if ((username.endsWith("@fhnw.ch") || (username.endsWith(".fhnw.ch")))) return await this.showRegisterError(i18n.get("error-fhnw-user"));
 
@@ -1007,7 +1049,7 @@ class ForgotPasswordView extends View {
     // Validate User
     const username = document.getElementById("inputForgotPasswordUser").value;
     if (!username) return await this.showForgotPasswordError(i18n.get("error-no-user"));
-    if (!username.includes("@")) return await this.showForgotPasswordError(i18n.get("error-invalid-user"));
+    //  if (!username.includes("@")) return await this.showForgotPasswordError(i18n.get("error-invalid-user"));
 
     if ((username.endsWith("@fhnw.ch") || (username.endsWith(".fhnw.ch")))) return await this.showForgotPasswordError(i18n.get("error-fhnw-user"));
 
@@ -1188,6 +1230,7 @@ class FlameAnimationView extends View {
     document.getElementById(this.id).focus();
     await ProfileButton.hide();
     await BookMenuButton.hide();
+    await AIButton.hide();
     await TaskViewSwap.hide();
     await delay(500);
     await fadeFromBlack();
@@ -1225,6 +1268,7 @@ class EndAnimationView extends View {
     await showElementImmediately(this.id);
     document.getElementById(this.id).focus();
     await ProfileButton.hide();
+    await AIButton.hide();
     await BookMenuButton.hide();
     await TaskViewSwap.hide();
     await delay(500);
@@ -1259,6 +1303,7 @@ class EndTextView extends View {
     document.getElementById(this.id).focus();
     await BookMenuButton.hide();
     await ProfileButton.show();
+    await AIButton.show();
     await fadeFromBlack();
     endScreenAnimation();
   }
@@ -1268,9 +1313,56 @@ class EndTextView extends View {
 
     await BookMenuButton.show();
     //await TaskViewSwap.show();
+    await AIButton.show();
     await ProfileButton.show();
   }
 }
+
+class AIModalView extends View {
+  constructor() {
+    super("display-ai-modal"); 
+    // this.shownItem = null;
+    this.graph = undefined;
+    this.addAIButtonClickListener(); 
+  }
+
+  addAIButtonClickListener() {
+    const aiButton = document.getElementById("ai-button");
+    if (aiButton) {
+      aiButton.addEventListener("click", () => this.show());
+    } else {
+      console.warn("AI button not found in the DOM. Event listener not added.");
+    }
+  }
+
+  async open() {
+    const trigger = document.activeElement;
+    if (!DISPLAY_STATE.editMode)  document.getElementById(this.id).focus();
+    await showModal("#" + this.id, DISPLAY_STATE.previousSecondaryView, trigger);
+  }
+
+
+  async close() {
+    // this.shownItem = null;
+    $("#" + this.id).modal("hide");
+  }
+
+  addAIButtonClickListener() {
+    document.body.addEventListener('click', (event) => {
+      const aiButton = event.target.closest('#ai-button');
+      if (aiButton) {
+        // console.log("AI button clicked");
+        const icon = aiButton.querySelector('.jump-animation');
+        if (icon) {
+          icon.style.animation = 'none';
+        }
+        changeSecondaryView(Views.AIMODAL);
+      }
+    });
+  }
+}
+
+
 
 Views = {
   INVENTORY: new InventoryView(),
@@ -1288,4 +1380,5 @@ Views = {
   END_ANIMATION: new EndAnimationView(),
   END_TEXT: new EndTextView(),
   NONE: new View(),
+  AIMODAL: new AIModalView(),
 };
