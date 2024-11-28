@@ -8,15 +8,14 @@ METADATA {
 }
 
 DESCRIPTION {
-   List all the album titles?
+    List all the album titles?
 }
 
 ANSWER { 
-	SELECT title FROM album;
-	}
+    SELECT title FROM album
+}
 
 TEST {
-
 	TABLE {
 		Album
 		album_id|title|year

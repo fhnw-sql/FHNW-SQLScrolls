@@ -101,7 +101,7 @@ TEST {
 
 TEST {
     SQL {
-        select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('Recipes');    
+        SELECT cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('Recipes');    
     }
 
     RESULT {
@@ -113,7 +113,7 @@ TEST {
 
 TEST {
     SQL {
-        select id, seq, "table", "from", "to", on_update, on_delete, "match" from pragma_foreign_key_list('Recipes');    
+        SELECT id, seq, "table", "from", "to", on_update, on_delete, "match" from pragma_foreign_key_list('Recipes');    
     }
 
     RESULT {

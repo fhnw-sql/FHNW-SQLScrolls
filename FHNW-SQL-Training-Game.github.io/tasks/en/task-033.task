@@ -9,26 +9,26 @@ METADATA {
 
 DESCRIPTION {
     List areas deficient in magical skills and their total of skills,
-    i.e. skill sum (per area) less than 5. Order  by area alphabetically.
+    i.e. skill sum (per area) less than 5. Order by area alphabetically.
 }
 
 PARSONS {
-    SELECT AREA, SUM(SKILL) 
-    FROM WIZARDS 
-    GROUP BY 
-    AREA
-    HAVING 
-    SUM(SKILL) < 5
-    ORDER BY AREA
-    SELECT AREA, SKILL #distractor
+    SELECT area, SUM(skill)
+    FROM Wizards
+    GROUP BY
+    area
+    HAVING
+    SUM(skill) < 5
+    ORDER BY area
+    SELECT area, skill #distractor
     WHERE  #distractor
-    SKILL < 5 #distractor
-    ORDER BY SUM(SKILL)  #distractor
+    skill < 5 #distractor
+    ORDER BY SUM(skill)  #distractor
 }
 
 ANSWER {
-   SELECT AREA, SUM(SKILL) FROM WIZARDS GROUP BY AREA
-   HAVING SUM(SKILL) < 5 ORDER BY AREA
+    SELECT AREA, SUM(skill) FROM Wizards GROUP BY area
+    HAVING SUM(skill) < 5 ORDER BY area
 }
 
 

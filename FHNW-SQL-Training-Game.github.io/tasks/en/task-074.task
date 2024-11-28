@@ -15,8 +15,8 @@ DESCRIPTION {
 }
 
 ANSWER {
-    select ID, name1, (attackSpecial + defenseSpecial) as special
-    from Pokedex_new order by special desc limit 3;
+    SELECT ID, name1, (attackSpecial + defenseSpecial) as special
+    FROM Pokedex_new order by special desc limit 3;
 }
 
 TEST {

@@ -8,20 +8,20 @@ METADATA {
 }
 
 DESCRIPTION {
-   List the areas where wizards live and the sum of the wizards skill levels in each area.
+    List the areas where wizards live and the sum of the wizards skill levels in each area.
 }
 
 PARSONS {
-    SELECT 
-    AREA,
-    SUM(SKILL) 
-    FROM WIZARDS 
+    SELECT
+    area,
+    SUM(skill)
+    FROM Wizards
     GROUP BY
-    AREA 
+    area
 }
 
 ANSWER {
-    SELECT AREA, SUM(SKILL) FROM WIZARDS GROUP BY AREA 
+    SELECT area, SUM(skill) FROM Wizards GROUP BY area
 }
 
 TEST {

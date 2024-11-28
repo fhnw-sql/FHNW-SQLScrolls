@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT g.name, c.name FROM Ghosts g LEFT OUTER JOIN Castles c ON g.id = c.owner
+    SELECT g.name, c.name FROM Ghosts g LEFT OUTER JOIN Castles c ON g.id = c.owner
 }
 
 

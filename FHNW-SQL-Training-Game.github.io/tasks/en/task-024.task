@@ -13,7 +13,7 @@ DESCRIPTION {
 
 
 ANSWER {
-   SELECT MIN(year), MAX(year) from ghosts
+    SELECT MIN(year), MAX(year) FROM Ghosts
 }
 
 TEST {

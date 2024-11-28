@@ -12,20 +12,19 @@ DESCRIPTION {
 }
 
 PARSONS {
-	SELECT country, count(*)
-	SELECT name, count(country) #distractor
-	FROM interpret 
-	FROM interprets #distractor
-	GROUP BY country
-	ORDER BY country #distractor
+    SELECT country, count(*)
+    SELECT name, count(country) #distractor
+    FROM Interpret
+    FROM Interprets #distractor
+    GROUP BY country
+    ORDER BY country #distractor
 }
 
 ANSWER { 
-	SELECT country, count(*) FROM interpret GROUP BY country;
+	SELECT country, COUNT(*) FROM Interpret GROUP BY country;
 }
 
 TEST {
-
 	TABLE {
 		Interpret
 		interpret_id|name|f_year|country

@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 PARSONS {
-    SELECT 
+    SELECT
     DISTINCT
     year
     FROM
@@ -23,7 +23,7 @@ PARSONS {
 }
 
 ANSWER {
-   SELECT DISTINCT year from ghosts
+   SELECT DISTINCT year FROM Ghosts
 }
 
 

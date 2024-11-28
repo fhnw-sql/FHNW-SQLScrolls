@@ -72,7 +72,7 @@ PAGE {
             3 | Tabaluca | 6000
         }
         QUERY {
-            SELECT COUNT (*) FROM Dragons WHERE weight> 5000;
+            SELECT COUNT (*) FROM Dragons WHERE weight > 5000;
         }
     }
 }

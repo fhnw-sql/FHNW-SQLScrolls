@@ -13,7 +13,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    select ID, name1, type1, speed from Pokedex_new where speed BETWEEN 75 and 90 ORDER BY speed;
+    SELECT ID, name1, type1, speed from Pokedex_new WHERE speed BETWEEN 75 and 90 ORDER BY speed;
 }
 
 TEST {

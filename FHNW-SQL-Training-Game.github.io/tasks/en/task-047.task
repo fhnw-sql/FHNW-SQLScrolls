@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT g.name FROM Hauntings h INNER JOIN Places p ON p.id = h.place_id INNER JOIN Ghosts g ON g.id = h.ghost_id WHERE p.name = "forest"
+    SELECT g.name FROM Hauntings h INNER JOIN Places p ON p.id = h.place_id INNER JOIN Ghosts g ON g.id = h.ghost_id WHERE p.name = 'forest'
 }
 
 

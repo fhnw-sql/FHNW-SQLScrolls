@@ -12,20 +12,20 @@ DESCRIPTION {
 }
 
 PARSONS {
-    SELECT 
-    DISTINCT 
-    NAME 
-    FROM Ghosts 
-    WHERE YEAR='1650'
-    ORDER BY NAME 
+    SELECT
+    DISTINCT
+    name
+    FROM Ghosts
+    WHERE year = 1650
+    ORDER BY name
     DESC
     ASC #distractor
-    ORDER BY ID #distractor
+    ORDER BY id #distractor
     ALPHABETICAL #distractor
 }
 
 ANSWER {
-   SELECT DISTINCT NAME FROM Ghosts WHERE YEAR='1650' ORDER BY NAME DESC
+    SELECT DISTINCT name FROM Ghosts WHERE YEAR = 1650 ORDER BY name DESC
 }
 
 STRICT

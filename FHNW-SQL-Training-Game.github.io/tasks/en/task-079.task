@@ -13,8 +13,8 @@ DESCRIPTION {
 }
 
 ANSWER {
-    select name1, length(name1) from Pokedex_new
-    order by length(name1) DESC LIMIT 1;
+    SELECT name1, length(name1) FROM Pokedex_new
+    ORDER BY length(name1) DESC LIMIT 1
 }
 
 TEST {

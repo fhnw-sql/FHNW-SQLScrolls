@@ -15,8 +15,8 @@ DESCRIPTION {
 }
 
 ANSWER {
-    select ID, name1, hitPoints, speed,  0.03* (hitPoints + speed) as price
-    from Pokedex_new order by price DESC;
+    SELECT ID, name1, hitPoints, speed,  0.03* (hitPoints + speed) AS price
+    FROM Pokedex_new ORDER BY price DESC;
 }
 
 STRICT

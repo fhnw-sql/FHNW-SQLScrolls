@@ -16,7 +16,7 @@ DESCRIPTION {
 
 ANSWER {
     SELECT count(distinct(name1)) as COUNT_NAME, 
-    count(distinct(SUBSTR(name1,1,4))) as COUNT_Nickname from Pokedex_new;
+    count(distinct(SUBSTR(name1,1,4))) as COUNT_Nickname FROM Pokedex_new
 }
 
 TEST {

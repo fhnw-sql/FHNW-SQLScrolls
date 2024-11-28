@@ -8,11 +8,11 @@ METADATA {
 }
 
 DESCRIPTION {
-   List the names of the wizards with skill level lower than 4. Sort it in increasing order based of their skill level.
+    List the names of the wizards with skill level lower than 4. Sort it in increasing order based of their skill level.
 }
 
 ANSWER {
-  SELECT name FROM wizards WHERE skill < 4 ORDER BY skill ASC
+    SELECT name FROM Wizards WHERE skill < 4 ORDER BY skill ASC
 }
 
 STRICT 

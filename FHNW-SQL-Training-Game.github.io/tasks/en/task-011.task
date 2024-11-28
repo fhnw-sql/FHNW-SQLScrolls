@@ -13,7 +13,7 @@ DESCRIPTION {
 
 
 ANSWER {
-   SELECT * FROM Ghosts WHERE YEAR='1650'
+    SELECT * FROM Ghosts WHERE year = 1650
 }
 
 TEST {

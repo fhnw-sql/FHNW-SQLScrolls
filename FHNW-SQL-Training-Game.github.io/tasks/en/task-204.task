@@ -27,13 +27,12 @@ PARSONS {
 }
 
 ANSWER { 
-    select user.id, name, SUM(atom) as leisure_time from user, json_each(user.activities) GROUP BY name ORDER BY leisure_time desc
+    SELECT user.id, name, SUM(atom) AS leisure_time FROM user, json_each(user.activities) GROUP BY name ORDER BY leisure_time desc
 }
 
 STRICT
 
 TEST {
-    
     TABLE {
         User
         id|name|activities
@@ -50,7 +49,6 @@ TEST {
 }
 
 TEST {
-
     TABLE {
         User
         id|name|interests

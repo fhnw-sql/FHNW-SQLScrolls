@@ -14,15 +14,15 @@ DESCRIPTION {
     Show the real name and next to it the nickname.
 }
 PARSONS {
-	SELECT 
+    SELECT 
     name1,
-    TRIM(name1,4) 	 #distractor
-	SUBSTR(name1,1,4)
+    TRIM(name1,4)      #distractor
+    SUBSTR(name1,1,4)
     SUBSTRING(name1,0,3) #distractor
-    from Pokedex_new;
+    FROM Pokedex_new;
 }
 ANSWER {
-    SELECT name1, SUBSTR(name1,1,4) from Pokedex_new;
+    SELECT name1, SUBSTR(name1,1,4) FROM Pokedex_new
 }
 
 TEST {

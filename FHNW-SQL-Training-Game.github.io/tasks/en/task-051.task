@@ -13,18 +13,17 @@ DESCRIPTION {
 
 PARSONS {
 	SELECT interpret_id  #distractor
-	SELECT name 
-	FROM interpret 
+	SELECT name
+	FROM Interpret
 	SORT BY name #distractor
 	ORDER BY name
 }
 
 ANSWER { 
-	 SELECT name FROM interpret ORDER BY name;
+    SELECT name FROM Interpret ORDER BY name;
 }
 
 TEST {
-
 	TABLE {
 		Interpret
 		interpret_id|name|f_year|country

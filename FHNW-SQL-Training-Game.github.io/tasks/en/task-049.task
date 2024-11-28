@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT w.name FROM Wizards w INNER JOIN Lessons l ON l.teacher_id = w.id WHERE l.pupil_id = (SELECT w.id FROM Wizards w WHERE w.name = "Bingo")
+    SELECT w.name FROM Wizards w INNER JOIN Lessons l ON l.teacher_id = w.id WHERE l.pupil_id = (SELECT w.id FROM Wizards w WHERE w.name = 'Bingo')
 }
 
 

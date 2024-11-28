@@ -13,7 +13,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT name1, speed from Pokedex_new ORDER BY SPEED ASC;
+    SELECT name1, speed FROM Pokedex_new ORDER BY speed ASC;
 }
 
 TEST {

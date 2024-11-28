@@ -13,20 +13,20 @@ DESCRIPTION {
 
 
 PARSONS {
-   SELECT 
-   COUNT (*)
-   FROM GHOSTS 
-   WHERE YEAR 
-   BETWEEN 
-   1700 
-   AND 
-   1800
-   SUM (*) #distractor
-   AND #distractor
+    SELECT
+    COUNT (*)
+    FROM Ghosts
+    WHERE year
+    BETWEEN
+    1701
+    AND
+    1800
+    SUM (*) #distractor
+    AND #distractor
 }
 
 ANSWER {
-   SELECT COUNT (*) FROM GHOSTS WHERE YEAR BETWEEN 1700 AND 1800
+    SELECT COUNT (*) FROM Ghosts WHERE year BETWEEN 1701 AND 1800
 }
 
 

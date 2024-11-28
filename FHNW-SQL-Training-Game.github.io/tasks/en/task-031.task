@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-    SELECT Area, MAX(skill) FROM WIZARDS GROUP BY AREA  
+    SELECT area, MAX(skill) FROM Wizards GROUP BY area
 }
 
 

@@ -13,7 +13,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT a.name, n.name FROM Nouns n CROSS JOIN Adjectives a WHERE n.type = "gold"
+   SELECT a.name, n.name FROM Nouns n CROSS JOIN Adjectives a WHERE n.type = 'gold'
 }
 
 

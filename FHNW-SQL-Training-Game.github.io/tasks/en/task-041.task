@@ -12,7 +12,7 @@ DESCRIPTION {
 }
 
 ANSWER {
-   SELECT w.name FROM Wizards w, Lessons l  WHERE l.teacher_id = (SELECT w.id FROM Wizards w WHERE w.name = "Anna") and  l.pupil_id = w.id
+    SELECT w.name FROM Wizards w, Lessons l WHERE l.teacher_id = (SELECT w.id FROM Wizards w WHERE w.name = 'Anna') and  l.pupil_id = w.id
 }
 
 

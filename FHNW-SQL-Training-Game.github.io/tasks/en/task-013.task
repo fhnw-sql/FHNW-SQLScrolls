@@ -12,8 +12,8 @@ DESCRIPTION {
 }
 
 PARSONS {
-    SELECT DISTINCT year 
-    FROM ghosts
+    SELECT DISTINCT year
+    FROM Ghosts
     ORDER BY year DESC
     SELECT year #distractor
     GET NAME OF GHOST #distractor
@@ -24,7 +24,7 @@ PARSONS {
 }
 
 ANSWER { 
-    SELECT DISTINCT year FROM ghosts ORDER BY year DESC;
+    SELECT DISTINCT year FROM Ghosts ORDER BY year DESC
 }
 
 TEST {

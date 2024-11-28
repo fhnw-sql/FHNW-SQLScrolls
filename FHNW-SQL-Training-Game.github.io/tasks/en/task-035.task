@@ -11,18 +11,18 @@ DESCRIPTION {
     Which place does each ghost haunt?
 }
 PARSONS {
-    SELECT 
+    SELECT
     g.name, p.name
     FROM
-    ghosts g, places p 
-    WHERE 
+    Ghosts g, Places p
+    WHERE
     g.place_id == p.id
     g.id == p.id #distractor
-    ghosts p, places g #distractor
+    Ghosts p, Places g #distractor
     ghost_name, place_name #distractor
 }
 ANSWER {
-   SELECT g.name, p.name from ghosts g, places p WHERE g.place_id == p.id
+   SELECT g.name, p.name FROM Ghosts g, Places p WHERE g.place_id == p.id
 }
 
 
