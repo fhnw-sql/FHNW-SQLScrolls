@@ -1,5 +1,6 @@
 import pickle
 import numpy as np
+import requests
 from sklearn.metrics.pairwise import cosine_similarity
 import pymongo
 import sys
@@ -56,22 +57,21 @@ def extract_user_history(user_history):
     return task_ids, correctness, time_taken
 
 def get_user_data(username):
-    mongo_uri = os.getenv("MONGODB_URI")
-    if not mongo_uri:
-        raise EnvironmentError("The MONGODB_URI environment variable is not set.")
-
-    client = pymongo.MongoClient(mongo_uri)
-    db = client["stg-api"]  
-    collection = db["users"]  
-    user_document = collection.find_one({"username": username})
-
-    if user_document:
-        history = user_document.get("history", {})
-        user_data = history
-        return user_data
-    else:
+    hostname = os.getenv("HOSTNAME")
+    if not hostname:
+        print("HOSTNAME environment variable is not set.")
         return None
-
+    
+    api_url = f"http://{hostname}:5001/user-data"
+    
+    try:
+        response = requests.get(api_url, params={"userid": username})
+        response.raise_for_status()  
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error calling the API: {e}")
+        return None
+    
 def recommend_next_task_content_based(user_profile_vector, task_vectors, task_ids_list, completed_tasks):
     try:
         not_completed_mask = ~np.isin(task_ids_list, completed_tasks)

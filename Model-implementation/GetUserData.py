@@ -15,19 +15,22 @@ def get_user_data(username):
 
     if user_document:
         history = user_document.get("history", {})
-        return {"success": True, "data": history}
+        user_data = history
+        return user_data 
     else:
-        return {"success": False, "error": f"User '{username}' not found."}
-
+        return None 
 
 if __name__ == "__main__":
     try:
         username = sys.argv[1]  
         result = get_user_data(username)
-        print(json.dumps(result))  
-        if not result["success"]:
+        if result:  
+            print(json.dumps(result))  
+        else:
+            error_message = {"error": f"User '{username}' not found."}
+            print(json.dumps(error_message))
             sys.exit(1)  
     except Exception as e:
-        error_message = {"success": False, "error": str(e)}
+        error_message = {"error": str(e)}
         print(json.dumps(error_message))
         sys.exit(1)
