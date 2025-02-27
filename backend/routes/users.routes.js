@@ -32,6 +32,15 @@ router.post("/register", reqBodyValidator(registerPOST), async function ({ body:
   // Add registration date
   user.registrationDate = new Date()
 
+  // Initialize stars field with 0
+  user.stars = 0;
+
+  // Initialize timeLastActive field
+  user.timeLastActive = new Date();
+
+  // Initialize timeStarsEarned field
+  user.timeStarsEarned = null;
+
   // Insert into Database
   users
     .insertOne(user)
@@ -40,6 +49,164 @@ router.post("/register", reqBodyValidator(registerPOST), async function ({ body:
       return res.json(u);
     })
     .catch((err) => next(err));
+});
+
+// /users/self/stars
+router.patch("/self/stars", async function (req, res, next) {
+  const users = db.get().collection("users");
+
+  // Extract the stars value from the request body
+  const { stars } = req.body;
+
+  // Validate the stars value to ensure it's a number and non-negative
+  if (typeof stars !== 'number' || stars < 0) {
+    return res.status(400).json({ error: "Invalid stars value. It must be a non-negative number." });
+  }
+
+  try {
+    // Update the user's stars value without returning the updated document
+    const result = await users.findOneAndUpdate(
+        { _id: new ObjectID(req.user.userId) }, // Find the user by ID
+        { $set: { stars: stars } }              // Update only the stars field
+    );
+
+    if (!result.value) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    // Return success message
+    return res.json({ message: "stars updated successfully." });
+  } catch (err) {
+    console.error("Error updating stars:", err);
+    next(err);
+  }
+});
+
+// /users/self/timeLastActive
+router.patch("/self/timeLastActive", async function (req, res, next) {
+  const users = db.get().collection("users");
+
+  // No request body required, since we call this endpoint without any parameters
+  // Also, no checking of incoming parameters required here
+
+  try {
+    // Set the timestamp to the current time in the backend
+    const result = await users.findOneAndUpdate(
+        { _id: new ObjectID(req.user.userId) }, // Find the user by ID
+        { $set: { timeLastActive: new Date() } } // Set current time for timeStarsEarned
+    );
+
+    if (!result.value) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    // Return success message
+    return res.json({ message: "timeLastActive timestamp updated successfully." });
+  } catch (err) {
+    console.error("Error updating timeLastActive timestamp:", err);
+    next(err);
+  }
+});
+
+// /users/self/timeStarsEarned
+router.patch("/self/timeStarsEarned", async function (req, res, next) {
+  const users = db.get().collection("users");
+
+  //No request body required, since we call this endpoint without any parameters
+  // Also, no checking of incoming parameters required here
+
+  try {
+    // Set the timestamp to the current time in the backend
+    const result = await users.findOneAndUpdate(
+        { _id: new ObjectID(req.user.userId) }, // Find the user by ID
+        { $set: { timeStarsEarned: new Date() } } // Set current time for timeStarsEarned
+    );
+
+    if (!result.value) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    // Return success message
+    return res.json({ message: "timeStarsEarned timestamp updated successfully." });
+  } catch (err) {
+    console.error("Error updating timeStarsEarned timestamp:", err);
+    next(err);
+  }
+});
+
+// /users/self/classKey
+router.patch("/self/classKey", async function (req, res, next) {
+  const users = db.get().collection("users");
+
+  // Extract the classKey from the request body
+  const { classKey } = req.body;
+
+  // Validate that the classKey is not empty
+  if (!classKey || typeof classKey !== 'string' || classKey.trim() === '') {
+    return res.status(400).json({ error: "Invalid classKey. It must be a non-empty string." });
+  }
+
+  try {
+    // Update the user's classKey value without returning the updated document
+    const result = await users.findOneAndUpdate(
+        { _id: new ObjectID(req.user.userId) }, // Find the user by ID
+        { $set: { classKey: classKey} } // Update only the classKey field
+    );
+
+    if (!result.value) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    // Return success message
+    return res.json({ message: "classKey inserted successfully." });
+  } catch (err) {
+    console.error("Error inserting classKey:", err);
+    next(err);
+  }
+});
+
+// /users/self/togglePrivacy
+router.patch("/self/togglePrivacy", async function (req, res, next) {
+  const { makePrivate, aliasName } = req.body;  // Expects `makePrivate: true` or `false`, and `aliasName`
+  const users = db.get().collection("users");
+
+  try {
+    // Find the user in the database
+    const user = await users.findOne({ _id: new ObjectID(req.user.userId) });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    if (makePrivate) {
+      // User wants to anonymize; use the aliasName from the request if provided, or the already saved one
+      const newAliasName = user.aliasName || aliasName;
+
+      await users.updateOne(
+          { _id: user._id },
+          {
+            $set: {
+              isPublic: false,
+              aliasName: newAliasName,
+            },
+          }
+      );
+    } else {
+      // User wants to be public again; set `isPublic` to true and leave `aliasName` unchanged
+      await users.updateOne(
+          { _id: user._id },
+          {
+            $set: { isPublic: true },
+          }
+      );
+    }
+
+    // Return success message
+    return res.json({ message: "Privacy setting updated successfully." });
+  } catch (err) {
+    console.error("Error toggling privacy:", err);
+    next(err);
+  }
 });
 
 // /users/authenticate
@@ -95,7 +262,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
 
     // if switch data stored, compare it otherwise store it
     for (const field of ["uid", "pid", "org"]) {
-      if (!user[field]) { 
+      if (!user[field]) {
         user[field] = value[field]
         needUpdate = true
       } else {
@@ -109,7 +276,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
     }
     // check display name changes
     for (const field of ["givenname", "surname"]) {
-      if ((!user[field]) ||  (user[field] != value[field])){ 
+      if ((!user[field]) ||  (user[field] != value[field])){
         user[field] = value[field]
         needUpdate = true
       }
@@ -125,7 +292,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
         )
         .catch((err) => {console.error("update error ", err); next(err)});
     }
-  } 
+  }
   else {
     value.password = null
     // Add registration date
@@ -153,6 +320,63 @@ router.get("/self", async function (req, res, next) {
   return res.json(retVal);
 });
 
+// /users/all
+router.get("/all", async function (req, res, next) {
+  try {
+    // Get Users Collection
+    const users = db.get().collection("users");
+
+    // Calculate the date one year ago
+    const oneYearAgo = new Date();
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+    // Find all users
+    const allUsers = await users.find(
+        {timeLastActive: {$gte: oneYearAgo}}, // Include only users active in the last year
+        { projection: { password: 0 } })  // Exclude password field
+        .sort({ stars: -1, timeStarsEarned: 1 }) // Sort by stars (decending) and timeStarsEarned (ascending)
+        .toArray();
+
+    // Return users
+    return res.json(allUsers);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// /users/classFiltered
+router.get("/classFiltered", async function (req, res, next) {
+  try {
+    // Get Users Collection
+    const users = db.get().collection("users");
+
+    // Retrieve the requesting user's data
+    const currentUser = await users.findOne({ _id: new ObjectID(req.user.userId) });
+
+    // Check if the user exists
+    if (!currentUser) {
+      return res.status(404).send("User not found");
+    }
+
+    // If user exists but does not have a classKey, return only their data as an array
+    if (!currentUser.classKey) {
+      const { password, ...userData } = currentUser;  // Exclude the password
+      return res.json([userData]);  // Return the user data as an array
+    }
+
+    // Proceed to retrieve users with the same classKey if classKey exists
+    const filteredUsers = await users
+        .find({ classKey: currentUser.classKey }, { projection: { password: 0 } })
+        .sort({ stars: -1, timeStarsEarned: 1 })  // Sort by stars in descending order and timeStarsEarned (ascending)
+        .toArray();
+
+    // Return the filtered list of users
+    return res.json(filteredUsers);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // /users/certificate
 router.patch("/self/certificate", async function (req, res, next) {
   // Get Users Certificate if finished Game
@@ -160,7 +384,7 @@ router.patch("/self/certificate", async function (req, res, next) {
   const user = await users.findOne({ _id: new ObjectID(req.user.userId) });
 
   try {
-    
+
     let progression = req.body.progression
     if (! checkIfFinished(user, progression)){ return res.json({'success': false, 'reason': "GAME_NOT_FINISHED"})}
     if (! checkIfNew(user, progression)){ return res.json({'success': false, 'reason': "CERTIFICATE_ALREADY_GENERATED"})}
@@ -180,7 +404,7 @@ router.patch("/self/certificate", async function (req, res, next) {
     .catch((err) => next(err));
 
   } catch (err){
-    console.error("Error parsing progression:", err); 
+    console.error("Error parsing progression:", err);
     next(err)
   }
 
