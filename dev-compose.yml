@@ -1,8 +1,4 @@
-# Variables
-# API_URL -> http://localhost:3000
-# POSTMARK_API_KEY -> POSTMARK_API_KEY
-# FROM_SENDER -> POSTMARK_API_KEY
-
+# Docker deployment made for active development
 
 version: "3"
 services:
@@ -23,10 +19,10 @@ services:
     environment:
       - MONGODB_URI=mongodb://mongo:27017/stg-api
       - JWT_SECRET=FHNW_2021
-      - FROM_SENDER=${FROM_SENDER}
-      - POSTMARK_API_KEY=${POSTMARK_API_KEY}
+      - FROM_SENDER=stg@github.io                                 # Necessary env. variable on prod.
+      - POSTMARK_API_KEY=blank
       - PORT=3001
-      - IO_URL=${IO_URL}
+      - IO_URL=http://localhost:80                                # Necessary env. variable on prod.
     ports:
       - "3001:3001"
   frontend:
@@ -35,10 +31,12 @@ services:
       - 'api'
     restart: always
     build:
-      context: .
+      context: .                                                  # Use local directory for building process
       args:
-        API_URL: ${API_URL}
+        API_URL: http://localhost:3000                            # Necessary env. variable on prod.
         API_URL_PUBLIC: ${API_URL_PUBLIC}
     ports:
       - "80:80"
       - "3000:3000"
+    volumes:
+      - ../FHNW-SQL-Training-Game.github.io:/usr/share/nginx/html  # Mounting of frontend code

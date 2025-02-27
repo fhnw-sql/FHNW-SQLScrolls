@@ -1,0 +1,128 @@
+METADATA {
+    id: task-302
+    name: Analyzing producers
+    color: col-book-cars
+    info: list car makers by model and car count
+    keywords: SELECT, FROM, GROUP BY, HAVING, INTERSECT, JOIN
+    level: 3
+}
+
+DESCRIPTION {
+    Which car makers produce at least 2 models and 3 or more cars? List the Id and maker.
+}
+
+ANSWER {
+    SELECT T1.Id, T1.MAKER
+    FROM car_makers AS T1
+    JOIN model_list AS T2 ON T1.Id = T2.MAKER
+    GROUP BY T1.Id
+    HAVING COUNT(*) >= 2
+
+    INTERSECT
+
+    SELECT T1.Id, T1.MAKER
+    FROM car_makers AS T1
+    JOIN model_list AS T2 ON T1.Id = T2.MAKER
+    JOIN car_names AS T3 ON T2.MODEL = T3.MODEL
+    GROUP BY T1.Id
+    HAVING COUNT(*) >= 3;
+}
+
+TEST {
+    TABLE {
+        car_makers
+        Id|Maker|FullName|Country
+        1|Volkswagen|Volkswagen Group|1
+        2|BMW|Bayerische Motoren Werke AG|1
+        3|Mercedes-Benz|Daimler AG|1
+        4|Peugeot|Peugeot S.A.|2
+        5|Fiat|Fiat S.p.A.|3
+    }
+
+    TABLE {
+        model_list
+        ModelId|Maker|Model
+        1|1|Golf
+        2|1|Passat
+        3|2|X5
+        4|2|X3
+        5|3|C-Class
+        6|3|E-Class
+        7|3|S-Class
+        8|3|GLA
+        9|4|208
+        10|4|308
+        11|5|500
+    }
+
+    TABLE {
+        car_names
+        MakeId|Model|Make
+        1|Golf|Volkswagen
+        2|Passat|Volkswagen
+        3|X5|BMW
+        4|X3|BMW
+        5|C-Class|Mercedes-Benz
+        6|E-Class|Mercedes-Benz
+        7|S-Class|Mercedes-Benz
+        8|GLA|Mercedes-Benz
+        9|208|Peugeot
+        10|308|Peugeot
+        11|500|Fiat
+    }
+
+    RESULT {
+        3|Mercedes-Benz
+    }
+}
+
+TEST {
+    TABLE {
+        car_makers
+        Id|Maker|FullName|Country
+        1|Volkswagen|Volkswagen Group|1
+        2|BMW|Bayerische Motoren Werke AG|1
+        3|Mercedes-Benz|Daimler AG|1
+        4|Peugeot|Peugeot S.A.|2
+        5|Fiat|Fiat S.p.A.|3
+    }
+
+    TABLE {
+        model_list
+        ModelId|Maker|Model
+        1|1|Golf
+        2|1|Passat
+        3|2|X5
+        4|2|X3
+        5|3|C-Class
+        6|3|E-Class
+        7|3|S-Class
+        8|3|GLA
+        9|4|208
+        10|4|308
+        11|5|500
+        12|1|Tiguan
+    }
+
+    TABLE {
+        car_names
+        MakeId|Model|Make
+        1|Golf|Volkswagen
+        2|Passat|Volkswagen
+        3|X5|BMW
+        4|X3|BMW
+        5|C-Class|Mercedes-Benz
+        6|E-Class|Mercedes-Benz
+        7|S-Class|Mercedes-Benz
+        8|GLA|Mercedes-Benz
+        9|208|Peugeot
+        10|308|Peugeot
+        11|500|Fiat
+        12|Tiguan|Volkswagen
+    }
+
+    RESULT {
+        1|Volkswagen
+        3|Mercedes-Benz
+    }
+}

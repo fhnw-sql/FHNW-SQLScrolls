@@ -5,7 +5,7 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="FHNW-SQL-Training-Game" name="description"/>
-    <meta content="vitalragaz" name="author"/>
+    <meta content="vitalragaz, employees & students of FHNW" name="author"/>
     <meta content="FHNW Switzerland" name="creator"/>
     <meta content="SQL, Game, Magic, Learn, Teach, Study" name="keywords"/>
     <meta content="strict-origin" name="referrer"/>
@@ -419,155 +419,201 @@
         </h1>
     </section>
 
-    <!-- inventory-view -->
-    <section class="m-2 col-md-10 view hidden" id="inventory-view" tabindex="-1">
+    <!-- main-view-container -->
+    <div class="main-view-container" id="main-view-container">
 
-        <div>
-        <div>
-            <h1 class="screen-reader-only i18n-task-groups"></h1>
-                <div class="" id="inventory-container" onmouseenter=showInventory() onmouseleave=hideInventory()>
+        <!-- relative-leaderboard -->
+        <aside id="relative-leaderboard" class="hidden">
+            <h1 class="screen-reader-only i18n-relative-leaderboard"></h1>
+            <ul class="center col-white">
+                <p style="margin-top: 10em;"></p>
+                <p class="center i18n-sorcerer-above neighbor" id="sorcerer-above"></p>
+                <i class="center fa fa-fw fa-angle-double-up small-angle-icon-up" id="rel-arrow-up"></i>
+                <p style="margin-top: 0.5em;"></p>
+                <p class="center i18n-sorcerer-current" style="font-weight: bolder;"
+                   id="sorcerer-current"></p>
+                <p class="center i18n-rank-info" id="rank-info"></p>
+                <i class="center fa fa-fw fa-angle-double-down small-angle-icon-down" id="rel-arrow-down"></i>
+                <p style="margin-top: 0.5em;"></p>
+                <p class="center i18n-sorcerer-below neighbor" id="sorcerer-below"></p>
+                <p style="margin-top: 2em;"></p>
+            </ul>
+        </aside>
+
+        <!-- inventory-view -->
+        <section class="inventory-view hidden" id="inventory-view" tabindex="-1">
+            <div>
+                <h1 class="screen-reader-only i18n-task-groups"></h1>
+                <div id="inventory-container" onmouseenter="showInventory()" onmouseleave="hideInventory()">
                     <i class="center col-white fa fa-fw fa-angle-up fa-4x" id="inventory-show-button"></i>
-            <ul class="inventory-contents clickable-items col-12" id="inventory"></ul>
+                    <ul class="inventory-contents clickable-items col-12" id="inventory"></ul>
                 </div>
+                <h2 class="screen-reader-only i18n-tasks" id="viewed-tasks-header" tabindex="-1"></h2>
+                <ul class="inventory-contents clickable-items col-12 viewed-tasks" id="viewed-tasks"></ul>
             </div>
-            <h2 class="screen-reader-only i18n-tasks" id="viewed-tasks-header" tabindex="-1"></h2>
-            <ul class="inventory-contents clickable-items col-12 viewed-tasks" id="viewed-tasks"></ul>
-        </div>
-    </section>
+        </section>
 
-    <!-- task-view -->
-    <section class="m-2 view hidden" id="task-view" tabindex="-1">
-        <div
-                class="bg-transparent"
-                onclick="changeView(DISPLAY_STATE.previousView)"
-                style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; margin: 0;"
-        ></div>
-        <h1 class="col-white mb-1" id="task-name"></h1>
+        <!-- task-view -->
+        <section class="m-2 view hidden" id="task-view" tabindex="-1">
+            <div
+                    class="bg-transparent"
+                    onclick="changeView(DISPLAY_STATE.previousView)"
+                    style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; margin: 0;"
+            ></div>
+            <h1 class="col-white mb-1" id="task-name"></h1>
 
-        <div aria-hidden="true" class="task-notification info-box hidden" id="task-complete-notification">
-            <p>
-                <i class="fa fa-star col-yellow"></i>
-                <span class="i18n-task-complete col-yellow"></span>
-            </p>
-        </div>
-
-        <!-- hint to check out the books after answering wrong multiple times -->
-        <div aria-hidden="true" class="task-notification info-box hidden" id="task-hint-notification">
-            <div class="row" style="margin: 0;justify-content: flex-end;">
-                <button class="close-button" id="close-hint-button">
-                    &times;
-                </button>
+            <div aria-hidden="true" class="task-notification info-box hidden" id="task-complete-notification">
+                <p>
+                    <i class="fa fa-star col-yellow"></i>
+                    <span class="i18n-task-complete col-yellow"></span>
+                </p>
             </div>
-            <button class="center hint-book-menu" id="hint-book-menu" onclick="BookMenuButton.open(event)">
-                <i class="center fa fa-2x fa-book col-white" id="hint-book-menu-icon"></i>
-                <p class="center i18n-books-text col-white" id="hint-book-menu-text"></p>
-            </button>
-            <p class="center">
-                <span class="i18n-theory-hint hint-text smaller"></span>
-            </p>
-        </div>
 
-        <div class="task-container">
-            <div class="row justify-content-md-center mb-3">
-                <div class="col-sm-12 col-md-11">
-                    <button class="back-button clickable-items" onclick="changeView(DISPLAY_STATE.previousView)">
-                        <span class="col-white"><i class="fa fa-arrow-left"></i> <span class="i18n-back"></span></span>
+            <!-- hint to check out the books after answering wrong multiple times -->
+            <div aria-hidden="true" class="task-notification info-box hidden" id="task-hint-notification">
+                <div class="row" style="margin: 0;justify-content: flex-end;">
+                    <button class="close-button" id="close-hint-button">
+                        &times;
                     </button>
-                    <div class="info-box mb-3">
-                        <div class="row justify-content-between pt-3">
-                            <div class="info-box example col-12 mb-3">
-                                <div aria-live="polite" id="task-completed-text" role="alert"></div>
-                                <h2 class="screen-reader-only i18n-task-description"></h2>
-                                <div class="row justify-content-start" style="flex-wrap: nowrap">
-                                    <div id="task-flame-container"></div>
-                                    <p class="task-description" id="task-description"></p>
-                                </div>
-                                <h3 class="col-model-blue left i18n-example" style="font-size: 1.2rem;"></h3>
-                                <hr style="margin-top: 0;"/>
-                                <div style="overflow-x: auto; max-height: 250px; overflow-x: auto;">
-                                    <div class="row justify-content-center" id="query-in-table"></div>
+                </div>
+                <button class="center hint-book-menu" id="hint-book-menu" onclick="BookMenuButton.open(event)">
+                    <i class="center fa fa-2x fa-book col-white" id="hint-book-menu-icon"></i>
+                    <p class="center i18n-books-text col-white" id="hint-book-menu-text"></p>
+                </button>
+                <p class="center">
+                    <span class="i18n-theory-hint hint-text smaller"></span>
+                </p>
+            </div>
+
+            <div class="task-container">
+                <div class="row justify-content-md-center mb-3">
+                    <div class="col-sm-12 col-md-11">
+                        <button class="back-button clickable-items" onclick="changeView(DISPLAY_STATE.previousView)">
+                            <span class="col-white"><i class="fa fa-arrow-left"></i> <span
+                                    class="i18n-back"></span></span>
+                        </button>
+                        <div class="info-box mb-3">
+                            <div class="row justify-content-between pt-3">
+                                <div class="info-box example col-12 mb-3">
+                                    <div aria-live="polite" id="task-completed-text" role="alert"></div>
+                                    <h2 class="screen-reader-only i18n-task-description"></h2>
+                                    <div class="row justify-content-start" style="flex-wrap: nowrap">
+                                        <div id="task-flame-container"></div>
+                                        <p class="task-description" id="task-description"></p>
+                                    </div>
+                                    <h3 class="col-model-blue left i18n-example" style="font-size: 1.2rem;"></h3>
+                                    <hr style="margin-top: 0;"/>
+                                    <div style="overflow-x: auto; max-height: 250px; overflow-x: auto;">
+                                        <div class="row justify-content-center" id="query-in-table"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="tests-container">
-                        <div class="info-box">
-                            <div class="row justify-content-between pt-3">
-                                <h2 class="screen-reader-only i18n-task-area"></h2>
-                                <div class="col-md-10">
-                                    <!-- Query -->
-                                    <textarea
-                                            aria-label="SQL"
-                                            class="text-input i18n-query-placeholder i18n-aria-query-input-box"
-                                            id="query-input"
-                                    ></textarea>
-                                    <!-- Parsons -->
-                                    <div id="parsons-input">
-                                        <div id="parsons-sortableTrash" class="sortable-code"></div>
-                                        <div id="parsons-sortable" class="sortable-code"></div>
+                        <div id="tests-container">
+                            <div class="info-box">
+                                <div class="row justify-content-between pt-3">
+                                    <h2 class="screen-reader-only i18n-task-area"></h2>
+                                    <div class="col-md-10">
+                                        <!-- Query -->
+                                        <textarea
+                                                aria-label="SQL"
+                                                class="text-input i18n-query-placeholder i18n-aria-query-input-box"
+                                                id="query-input"
+                                        ></textarea>
+                                        <!-- Parsons -->
+                                        <div id="parsons-input">
+                                            <div id="parsons-sortableTrash" class="sortable-code"></div>
+                                            <div id="parsons-sortable" class="sortable-code"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <!-- Event handler gets bound within: Views.Tasks.showWithQuery -->
-                                    <button
-                                            class="float-right btn i18n-query-test mb-3 font-weight-bold"
-                                            id="query-run-button"
-                                            tabindex="0"
-                                    ></button>
-                                    <button
-                                        class="float-right btn i18n-query-reset mb-3 font-weight-bold"
-                                        id="reset-input-button"
-                                        tabindex="0"
-                                    ></button>
-                                    <!-- Event handler gets bound within: Tasks.runQueryTests -->
-                                    <button
-                                            class="float-right btn i18n-task-next hidden font-weight-bold"
-                                            id="task-next-button"
-                                            tabindex="0"
-                                    ></button>
-                                </div>
-                                <div class="col-md-12 mt-2">
-                                    <div class="dropdown btn btn-rune float-left mr-2" id="previous-answers">
+                                    <div class="col-md-2">
+                                        <!-- Event handler gets bound within: Views.Tasks.showWithQuery -->
                                         <button
-                                                aria-expanded="false"
-                                                aria-haspopup="true"
-                                                class="dropdown-toggle pt-0 pb-0 i18n-previous-answers"
-                                                data-toggle="dropdown"
-                                                id="dropdownMenuButton"
-                                                role="radio"
+                                                class="float-right btn i18n-query-test mb-3 font-weight-bold"
+                                                id="query-run-button"
+                                                tabindex="0"
                                         ></button>
-                                        <div
-                                                aria-labelledby="dropdownMenuButton"
-                                                class="dropdown-menu"
-                                                id="previous-answers-dropdown"
-                                        ></div>
+                                        <button
+                                                class="float-right btn i18n-query-reset mb-3 font-weight-bold"
+                                                id="reset-input-button"
+                                                tabindex="0"
+                                        ></button>
+                                        <!-- Event handler gets bound within: Tasks.runQueryTests -->
+                                        <button
+                                                class="float-right btn i18n-task-next hidden font-weight-bold"
+                                                id="task-next-button"
+                                                tabindex="0"
+                                        ></button>
                                     </div>
-                                    <button
-                                            class="btn btn-rune float-left hidden i18n-show-model-answer"
-                                            id="query-model-button"
-                                            onclick="Views.TASK.toggleAnswer()"
-                                    ></button>
-                                </div>
-                                <div class="col-md-10">
+                                    <div class="col-md-12 mt-2">
+                                        <div class="dropdown btn btn-rune float-left mr-2" id="previous-answers">
+                                            <button
+                                                    aria-expanded="false"
+                                                    aria-haspopup="true"
+                                                    class="dropdown-toggle pt-0 pb-0 i18n-previous-answers"
+                                                    data-toggle="dropdown"
+                                                    id="dropdownMenuButton"
+                                                    role="radio"
+                                            ></button>
+                                            <div
+                                                    aria-labelledby="dropdownMenuButton"
+                                                    class="dropdown-menu"
+                                                    id="previous-answers-dropdown"
+                                            ></div>
+                                        </div>
+                                        <button
+                                                class="btn btn-rune float-left hidden i18n-show-model-answer"
+                                                id="query-model-button"
+                                                onclick="Views.TASK.toggleAnswer()"
+                                        ></button>
+                                    </div>
+                                    <div class="col-md-10">
                       <textarea
                               aria-label="Model answer"
                               class="text-input mt-3 hidden i18n-aria-model-answer"
                               disabled
                               id="model-answer"
                       ></textarea>
-                                </div>
-                                <div class="info-box tests" tabindex="0">
-                                    <h3 class="screen-reader-only i18n-task-tests"></h3>
-                                    <ul class="nav nav-tabs" id="query-out-tables-nav"></ul>
-                                    <div id="query-out-table"></div>
+                                    </div>
+                                    <div class="info-box tests" tabindex="0">
+                                        <h3 class="screen-reader-only i18n-task-tests"></h3>
+                                        <ul class="nav nav-tabs" id="query-out-tables-nav"></ul>
+                                        <div id="query-out-table"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- right-sidebar -->
+        <aside id="right-sidebar" class="right-sidebar clickable-items hidden">
+            <h1 class="screen-reader-only i18n-right-sidebar"></h1>
+            <button class="center col-white hidden" id="book-menu" onclick="BookMenuButton.open(event)">
+                <i class="center fa fa-book fa-3x" id="book-menu-icon"></i>
+                <p class="center i18n-books-text" id="book-menu-text"></p>
+            </button>
+            <button class="center col-white" id="profile-menu" onclick="changeSecondaryView(Views.PROFILE)">
+                <i class="center fa fa-user fa-2x"></i>
+                <p class="center i18n-profile"></p>
+            </button>
+            <button class="center col-white" id="leaderboard-menu" onclick="changeSecondaryView(Views.LEADERBOARD)">
+                <i class="center fa fa-medal fa-2x"></i>
+                <p class="center i18n-leaderboard"></p>
+            </button>
+            <button class="center col-white" onclick="logout()">
+                <i class="center fa fa-fw fa-door-open fa-2x"></i>
+                <p class="center i18n-logout"></p>
+            </button>
+            <button class="center col-white hidden" id="task-view-swap" onclick="TaskViewSwap.toInventoryView()">
+                <i class="center fa fa-scroll fa-3x" id="task-view-swap-icon"></i>
+                <p class="center i18n-tasks-text" id="task-view-swap-text"></p>
+            </button>
+        </aside>
+
+    </div>
 
     <!-- task-group-complete-notification -->
     <div aria-live="polite" class="hidden" id="task-group-complete-notification" role="alert" tabindex="-1">
@@ -832,7 +878,8 @@
             <p class="col-white center i18n-ending-text-1"></p>
             <p class="col-white center i18n-ending-text-2"></p>
             <h2 class="col-white i18n-new-certificate"></h2>
-            <p class="col-yellow  center "><i class="fa fa-trash-alt col-yellow"></i> &nbsp; <span class="col-yellow i18n-end-reset-game"> </p>
+            <p class="col-yellow  center "><i class="fa fa-trash-alt col-yellow"></i> &nbsp; <span
+                    class="col-yellow i18n-end-reset-game"></span></p>
             <button
                     class="btn btn-light-blue i18n-return-to-game"
                     onclick="changeView(Views.INVENTORY)"
@@ -846,8 +893,8 @@
     </section>
 </section>
 
-<!-- Modals -->
-<div class="modals">
+<!-- modals -->
+<section class="modals">
     <!-- letter-modal -->
     <div
             aria-hidden="true"
@@ -907,6 +954,8 @@
     >
         <div class="modal-dialog modal-lg">
             <div class="modal-content info-box">
+                <!-- Toast container -->
+                <div id="toast-container" style="position: absolute; top: 2px; width: 100%; z-index: 999;"></div>
                 <div class="info-box tests col-yellow" style="width: calc(100% - 2rem) !important;">
                     <div class="row justify-content-between">
                         <h1 class="i18n-profile"></h1>
@@ -920,29 +969,53 @@
                         <div class="col-lg-7">
                             <div class="row">
                                 <div class="col-12"><p class="float-left" id="logged-in-as"></p></div>
-                                <div class="col-12">
+                                <div class="col-12"><p class="float-left" id="reg-date"></p></div>
+                                <div class="col-12"><p class="float-left" id="reg-class"></p></div>
+                                <div class="col-12"><p class="float-left" id="enter-class"></p></div>
+                                <div class="col-12" style="display: flex; align-items: center;">
+                                    <!-- placeholder is handled via i18n standard! -->
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="user-class-input"
+                                            placeholder="Enter a class-key here:"
+                                            aria-label="Enter a class-key:"
+                                            aria-describedby="user-input-help"
+                                            maxlength="15"
+                                            style="width: 55%; margin-right: 0.5rem;"
+                                    />
+                                    <button id="submit-btn" class="btn btn-secondary btn-sm rounded-circle"
+                                            onclick="API.setClassKey()" data-toggle="tooltip" title="Submit">
+                                        <i class="fa fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                                <div class="col-12" style="margin-top: 0.5rem">
                                     <button class="btn btn-rune" onclick="Views.PROFILE.downloadData()">
                                         <i class="fa fa-download"></i> <span class="i18n-download-your-data"></span>
                                     </button>
                                 </div>
                                 <div class="col-12" style="margin-top: 0.5rem">
                                     <button class="btn btn-rune" onclick="toggleMute()">
-                                        <i class="fa fa-volume-up" id="mute-symbol"></i> <span class="i18n-mute-soundeffects hidden " id="mute-text"></span><span class="i18n-unmute-soundeffects" id="unmute-text"></span>
+                                        <i class="fa fa-volume-up" id="mute-symbol"></i> <span
+                                            class="i18n-mute-soundeffects hidden " id="mute-text"></span><span
+                                            class="i18n-unmute-soundeffects" id="unmute-text"></span>
                                     </button>
                                 </div>
                                 <div class="col-12" style="margin-top: 0.5rem">
                                     <button class="btn btn-rune" data-toggle="modal" href="#confirmModal">
-                                        <i class="fa fa-trash"></i> <span class="i18n-delete-score" id="mute-text">
+                                        <i class="fa fa-trash"></i> <span class="i18n-delete-score"
+                                                                          id="delete-score"></span>
                                     </button>
                                 </div>
                                 <div class="col-12" style="margin-top: 0.5rem">
                                     <span class="i18n-your-certificates" style="margin-right: 0.3rem"></span>
-                                    <select class="select select-rune" name="select-certificates" id="select-certificates">
-                                    </select> 
+                                    <select class="select select-rune" name="select-certificates"
+                                            id="select-certificates">
+                                    </select>
                                     <button class="btn-rune btn-rune-icon" onclick="Views.PROFILE.showCertificate()">
                                         <i class="fa fa-eye"></i></span>
                                     </button>
-                                </div> 
+                                </div>
                                 <!-- graph is currently not rendered -->
                                 <!-- <div class="col-12 graph-loading">
                                     <p>
@@ -962,69 +1035,108 @@
                 </div>
             </div>
         </div>
+
+        <!-- delete score confirmation modal -->
+        <div class="modal fade" id="confirmModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"  style="background-color:rgba(0, 0, 0, 0.817)">
+            <div class="modal-dialog">
+                <div class="modal-content confirm-modal">
+                    <div class="modal-header">
+                        <h5 class="modal-title i18n-delete-score-confirm-title" id="staticBackdropLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <span class="i18n-delete-score-confirm-text1" style="font-weight: bold;">
+                    </span>
+                        <br/>
+                        <br/>
+
+                        <i class="i18n-delete-score-confirm-text2" style="font-size:smaller;">
+                        </i>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-rune-red i18n-delete-score-confirm-button1" data-dismiss="modal"></button>
+                        <!-- TODO: add API call to delete the score (Erm it is already there???) -->
+                        <button type="button" class="btn btn-rune-red i18n-delete-score-confirm-button2" onclick="restartUser()"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
+    <!-- leaderboard-modal -->
+    <div
+            aria-hidden="true"
+            aria-label="display leaderboard"
+            class="modal i18n-aria-display-leaderboard"
+            id="display-leaderboard-modal"
+            role="dialog"
+            tabindex="-1"
+    >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content info-box">
+                <div class="info-box tests col-yellow" style="width: calc(100% - 2rem) !important;">
+                    <div class="row justify-content-between">
+                        <h1 class="i18n-leaderboard"></h1>
+                        <button class="float-right col-yellow close-button" data-dismiss="modal">
+                            <span class="i18n-close"></span>
+                            &times;
+                        </button>
+                    </div>
+                    <hr/>
 
-    <!-- delete score confirmation modal -->
-    <div class="modal fade" id="confirmModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"  style="background-color:rgba(0, 0, 0, 0.817)">
-        <div class="modal-dialog">
-            <div class="modal-content confirm-modal">
-                <div class="modal-header">
-                    <h5 class="modal-title i18n-delete-score-confirm-title" id="staticBackdropLabel"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <span class="i18n-delete-score-confirm-text1" style="font-weight: bold;">
-                    </span>  
-                    <br/>
-                    <br/>
-                  
-                    <i class="i18n-delete-score-confirm-text2" style="font-size:smaller;">
-                    </i>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-rune-red i18n-delete-score-confirm-button1" data-dismiss="modal"></button>
-                    <!-- TODO: add API call to delete the score -->
-                    <button type="button" class="btn btn-rune-red i18n-delete-score-confirm-button2" onclick="restartUser()"></button>
+                    <!-- Top Three Scorers, Your Score, Rank -->
+                    <div class="col-12 mb-3"><p id="top-three-scorers">Top Three</p></div>
+                    <div class="col-12"><p id="your-score">Your Score</p></div>
+                    <div class="col-12"><p id="your-rank">Your Rank</p></div>
+
+                    <!-- Public Name and Anonymize Button -->
+                    <div class="col-12 mt-4">
+                        <p id="aliasNameText">Your Public Name</p>
+                        <button id="anonymize-btn" class="btn btn-rune" onclick="Views.LEADERBOARD.anonymize()">
+                            <i class="fa fa-exchange-alt"></i> <span class="i18n-anonymize-btn"></span>
+                        </button>
+                    </div>
+
+                    <!-- Title, Explanation Text, Refresh Button, and New Switch Button in Single Row -->
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <h4 id="leaderboard-title" class="i18n-global-leaderboard mr-2"></h4>
+                        <div class="ml-auto">
+                            <button id="refresh-leaderboard-btn" onclick="Views.LEADERBOARD.refreshLeaderboard()"
+                                    class="btn btn-secondary btn-sm rounded-circle" data-toggle="tooltip"
+                                    title="Refresh">
+                                <i class="fa fa-sync-alt"></i>
+                            </button>
+                            <button id="switch-leaderboard-btn" onclick="Views.LEADERBOARD.switchLeaderboard()"
+                                    class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="Switch">
+                                <i class="fa fa-exchange-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Leaderboard Table Section -->
+                    <div class="panel-body table-responsive" style="max-height: 400px; overflow-y: auto;">
+                        <table class="tab-pane w-100" id="leaderboard-table"></table>
+                        <!-- Full-width leaderboard table -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-                                
-</div>
-
-<aside id="right-sidebar" class="right-sidebar clickable-items hidden">
-    <h1 class="screen-reader-only i18n-right-sidebar"></h1>
-    <button class="center col-white hidden" id="book-menu" onclick="BookMenuButton.open(event)">
-        <i class="center fa fa-book fa-3x" id="book-menu-icon"></i>
-        <p class="center i18n-books-text" id="book-menu-text"></p>
-    </button>
-    <button class="center col-white" id="profile-menu" onclick="changeSecondaryView(Views.PROFILE)">
-        <i class="center fa fa-user fa-2x"></i>
-        <p class="center i18n-profile"></p>
-    </button>
-    <button class="center col-white" onclick="logout()">
-        <i class="center fa fa-fw fa-door-open fa-2x"></i>
-        <p class="center i18n-logout"></p>
-    </button>
-    <button class="center col-white hidden" id="task-view-swap" onclick="TaskViewSwap.toInventoryView()">
-        <i class="center fa fa-scroll fa-3x" id="task-view-swap-icon"></i>
-        <p class="center i18n-tasks-text" id="task-view-swap-text"></p>
-    </button>
-</aside>
+</section>
 
 <!-- audios -->
-<audio id="sound_book_page_turn"> 
-    <source type="audio/mpeg" src="sounds/book_page_turn.mp3" />   
-</audio>   
-<audio id="sound_right_answer"> 
-    <source type="audio/mpeg" src="sounds/right_answer.mp3" />   
-</audio>   
-<audio id="sound_wrong_answer"> 
-    <source type="audio/mpeg" src="sounds/wrong_answer.mp3" />   
-</audio>   
+<audio id="sound_book_page_turn">
+    <source type="audio/mpeg" src="sounds/book_page_turn.mp3"/>
+</audio>
+<audio id="sound_right_answer">
+    <source type="audio/mpeg" src="sounds/right_answer.mp3"/>
+</audio>
+<audio id="sound_wrong_answer">
+    <source type="audio/mpeg" src="sounds/wrong_answer.mp3"/>
+</audio>
 
 <!-- scripts -->
 <script src="vendor/jquery-3.5.1/jquery.min.js"></script>
@@ -1085,11 +1197,8 @@
 <link href="css/endgame.css" rel="stylesheet"/>
 <link as="style" href="vendor/dygraphs-2.1.0/dygraph.min.css"/>
 
-<div
-        aria-hidden="true"
-        class="preload-images"
-        style="width: 1px; height: 1px; position: fixed; bottom: 0; right: 0;"
->
+<div aria-hidden="true" class="preload-images"
+     style="width: 1px; height: 1px; position: fixed; bottom: 0; right: 0;">
     <img alt="lazy-loaded-icon" src="img/letter.png"/>
     <img alt="lazy-loaded-icon" src="img/scroll.png"/>
     <img alt="lazy-loaded-icon" src="img/questionmark.png"/>

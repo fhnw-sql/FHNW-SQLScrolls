@@ -276,8 +276,14 @@ class Task extends ItemType {
         if (this.completed) return;
         const taskGroup = taskGroups.lookupTaskGroupWithTaskId(this.id);
         this.completed = true;
-        inventory.update();
+        await inventory.update();
         await Views.INVENTORY.updateTaskGroup();
+
+        const completedTasksCount = taskGroups.getCompletedTaskCount(); //Get number of collected stars
+        await API.updateTimeStarsEarned(); //Trigger API call to update the timeStarsEarned timestamp
+        await API.updateStars(completedTasksCount); //Trigger API call to update stars by completed tasks amount
+        await RelativeLeaderboard.update(await LeaderboardView.getGlobalLeaderboard());
+
         const from = document.getElementById("query-run-button");
         const to = StarCounter.getElement();
         const particle = flyStarFromTo("task-view", from, to);
@@ -630,7 +636,8 @@ async function runQueryTests(allowCompletionAndStore) {
         }
     }
 
-    const query = document.getElementById("query-input").value.trim();
+    let query = document.getElementById("query-input").value.trim();
+    query = query.replace(/\n/g, ' ');
     animateQueryResultsClose();
     const results = await Views.TASK.currentTask.runTests(query);
 

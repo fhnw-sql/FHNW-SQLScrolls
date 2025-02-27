@@ -63,27 +63,3 @@ TEST {
         summer|{"sport":["surfing","beach volley","snorkeling","windsurfing"]}
     }
 }
-
-TEST {
-
-    TABLE {
-        Leisure
-        id|season|sport
-        1|spring|tennis
-        2|autumn|biking
-        3|autumn|darts
-        4|winter|skating
-        5|winter|snowboarding
-        6|winter|curling
-        7|summer|surfing
-        8|summer|skateboarding
-        9|summer|swimming
-    }
-
-    RESULT {
-        summer|{"sport":["surfing","skateboarding","swimming"]}   
-        winter|{"sport":["skating","snowboarding","curling"]}
-        autumn|{"sport":["biking","darts"]}
-        spring|{"sport":["tennis"]}     
-    }
-}

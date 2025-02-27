@@ -39,7 +39,7 @@ TEST {
 
 TEST {
     SQL {
-        SELECT REPLACE(upper(sql), ' ', '') FROM sqlite_master WHERE name = 'Potions';
+        SELECT REPLACE(upper(sql), ' ', '') FROM sqlite_master WHERE lower(name) = 'potions';
     }
 
     RESULT {
@@ -49,7 +49,7 @@ TEST {
 
 TEST {
     SQL {
-        select cid, name, upper(type), "notnull", dflt_value, pk from pragma_table_info('Potions');    
+        select cid, lower(name), upper(type), "notnull", dflt_value, pk from pragma_table_info('Potions');
     }
 
     RESULT {

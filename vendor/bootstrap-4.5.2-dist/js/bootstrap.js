@@ -2759,7 +2759,7 @@
     for (var i = 0, len = elements.length; i < len; i++) {
       var _ret = _loop(i);
 
-      if (_ret === "continue")
+      if (_ret === "continue"); // TODO: Error fixed through semicolon. Check!
           }
 
     return createdDocument.body.innerHTML;

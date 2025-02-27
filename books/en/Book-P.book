@@ -1,0 +1,100 @@
+METADATA {
+    id: Book-P
+    name: Cars
+    title: Cars: The World of Producers and Models 🚗
+    author: Michael Jackson
+    color: cars
+}
+
+PAGE {
+
+<h2>Cars: The World of Manufacturers and Models</h2>
+
+Cars have revolutionized transportation, and the global automotive industry boasts a wide range of manufacturers and models. From high-performance vehicles to eco-friendly alternatives, each country contributes to this evolving industry. This book explores the data behind car manufacturers, models, and their geographical origins.
+</br>
+Whether you are a fan of speed or efficiency, understanding the patterns and trends in this vast industry is essential for both car enthusiasts and data analysts alike.
+
+}
+
+PAGE {
+The first step is to dive into the continent of Europe, known for its rich car-making tradition. Some European countries have become iconic for producing a large number of car manufacturers. But which countries have at least three manufacturers?
+</br>
+
+Time to explore the database and uncover these countries!
+</br>
+    QUERY {
+        SELECT T1.CountryName
+        FROM COUNTRIES AS T1
+        JOIN CONTINENTS AS T2 ON T1.Continent = T2.ContId
+        JOIN CAR_MAKERS AS T3 ON T1.CountryId = T3.Country
+        WHERE T2.Continent = 'europe'
+        GROUP BY T1.CountryName
+        HAVING count(*) >= 3;
+    }
+}
+
+PAGE {
+Now, let’s look at car engines. We are interested in cars with horsepower above the minimum in the dataset, but with fewer than 3 cylinders. This will help us identify manufacturers focusing on small, efficient engines.
+</br>
+
+    QUERY {
+        SELECT T2.MakeId, T2.Make
+        FROM CARS_DATA AS T1
+        JOIN CAR_NAMES AS T2 ON T1.Id = T2.MakeId
+        WHERE T1.Horsepower > (SELECT min(Horsepower) FROM CARS_DATA)
+        AND T1.Cylinders <= 3;
+    }
+}
+
+PAGE {
+Some car makers are more prolific, producing a variety of models. Here, we identify the manufacturers that produce at least two models, but also ensure they are producing more than three cars overall.
+</br>
+The complexity of car manufacturing becomes clearer through this query.
+</br>
+    QUERY {
+        SELECT T1.Id, T1.MAKER
+        FROM CAR_MAKERS AS T1
+        JOIN MODEL_LIST AS T2 ON T1.Id = T2.MAKER
+        GROUP BY T1.Id
+        HAVING COUNT(*) >= 2
+        INTERSECT
+        SELECT T1.Id, T1.MAKER
+        FROM CAR_MAKERS AS T1
+        JOIN MODEL_LIST AS T2 ON T1.Id = T2.MAKER
+        JOIN CAR_NAMES AS T3 ON T2.MODEL = T3.MODEL
+        GROUP BY T1.Id
+        HAVING COUNT(*) > 3;
+    }
+}
+
+PAGE {
+Some countries are known for their robust car manufacturing industry. Here, we are looking for countries that have more than three manufacturers or produce the famous 'Fiat' model. Fiat, an iconic brand, adds an interesting twist to our exploration.
+</br>
+    QUERY {
+        SELECT T1.countryId, T1.CountryName
+        FROM Countries AS T1
+        JOIN CAR_MAKERS AS T2 ON T1.CountryId = T2.Country
+        GROUP BY T1.countryId
+        HAVING count(*) > 3
+        UNION
+        SELECT T1.countryId, T1.CountryName
+        FROM Countries AS T1
+        JOIN CAR_MAKERS AS T2 ON T1.CountryId = T2.Country
+        JOIN MODEL_LIST AS T3 ON T2.Id = T3.Maker
+        WHERE T3.Model = 'fiat';
+    }
+}
+
+PAGE {
+Data manipulation in SQL becomes even more powerful when using date and time functions. We can leverage the datetime function to manipulate timestamps for better comparisons and queries. Use the following syntax to work with timestamps:
+</br>
+The syntax for strftime is as follows:
+</br>
+    strftime('%Y-%m-%d %H:%M', timestamp_column);
+}
+
+PAGE {
+We also want to thank the SQL team for developing these queries and exploring the wonderful world of cars with us.
+</br>
+A special thanks to Alex Wheeler, the creator of this book, and the SQL enthusiasts who have contributed to the learning experience.
+}

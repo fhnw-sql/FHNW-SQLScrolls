@@ -1,4 +1,4 @@
-# 🕹️ FHNW SQL Training Game
+# 🕹️ FHNW SQL Training Game (Leaderboard Branch Token)
 
 This repository is the frontend for the FHNW-SQL-Training-Game which is used to determine the effectiveness and
 acceptance of a learning game as an alternative learning method within the Bachelor of Business Information Technology
@@ -71,7 +71,27 @@ docker-compose up
 
 - Open a browser and go to http://localhost:80 (recommended to open the developer tools to report the error in case there are any issues)
 
-For further configuration details consider the [docker-compose file](https://gitlab.fhnw.ch/elzbieta.pustulka/FHNW-SQL-Training-Game.github.io/-/blob/main/docker-compose.yml)directly.
+For further configuration details consider the [docker-compose file](https://gitlab.fhnw.ch/elzbieta.pustulka/FHNW-SQL-Training-Game.github.io/-/blob/main/docker-compose.yml) directly.
+
+### 💻 Deplyoment for Development
+
+To develop on this project it is recommended to work within an IDE such as Jetbrains Webstorm.
+
+#### 🌟 Running the code
+
+To quickly deploy the code for development a separate docker compose configuration file named [dev-compose.yml](dev-compose.yml) has been added. The docker configuration does not require any environment variables to be setup allowing for quick and easy execution of the docker containers for a development environment. Once it is up and running simply connect to [localhost on port 80 (http://localhost)](http://localhost/) through your browser.
+
+#### 💡 Developing with Webstorm
+
+To continue development on the project it is recommended to use Jetbrains Webstorm by using either the Enterprise or Community Edition available [online](https://www.jetbrains.com/webstorm/) as it was successfully used to previously continue development on the project. Furthermore, it already features an already present [run configuration](.idea/runConfigurations/Dev_Compose.xml) for executing the [dev-compose.yml](dev-compose.yml) file through the press of the green "Run" button.
+
+#### 🔨 Developing without Webstorm / another IDE
+
+To run the project without Webstorm simply execute the commands `docker-compose build` (to create the docker container) and `docker-compose up` (to run the docker container and the code). Depending on the type of changes that have been made, reflection of those changes might either show up immediately during runtime(eg. HTML, CSS), after stopping and restarting the containers (eg. various Javascript files) or after rebuilding the containers (eg. API changes).
+
+#### 🐛 Debugging
+
+While debugging inside an IDE is possible, the docker containers usually do not show any actual runtime errors of the javascript code itself inside the log or console. To debug web application code, one should use the developer console adn tools (`Press F12`) within a Chromium-based browser such as Edge, Chrome or Brave for example.
 
 ### 🖼️ Frontend Deployment (advanced)
 
@@ -93,8 +113,8 @@ The API is now exposed on the PORT 80 on the docker host.
 #### 🐱 GitHub Pages
 
 To deploy the project on github pages. Simply fork the repository and name it `{your-gh-username}.github.io` and do the
-according configruation within `configuration.js`. More information concerning GH Pages can be
-found [GitHub Pages](https://pages.github.com/)
+according configuration within `configuration.js`. More information concerning GH Pages can be
+found on [GitHub Pages](https://pages.github.com/)
 
 ## 📚 Books syntax
 

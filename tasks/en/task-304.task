@@ -1,0 +1,101 @@
+METADATA {
+    id: task-304
+    name: Car makers
+    color: col-book-cars
+    info: list car makers by model and car count
+    keywords: SELECT, FROM, GROUP BY, HAVING, INTERSECT, JOIN
+    level: 3
+}
+
+DESCRIPTION {
+    How many car makers come from asia? List their Id and FullName.
+}
+
+ANSWER {
+    SELECT car_makers.Id, car_makers.FullName FROM car_makers JOIN countries ON car_makers.Country = countries.CountryId WHERE countries.Continent = 2;
+}
+
+TEST {
+    TABLE {
+        countries
+        CountryId|CountryName|Continent
+        1|Germany|1
+        2|France|1
+        3|Italy|1
+        4|Spain|1
+        5|Netherlands|1
+        6|Japan|2
+    }
+
+    TABLE {
+        continents
+        ContId|Continent
+        1|europe
+        2|asia
+    }
+
+    TABLE {
+        car_makers
+        Id|Maker|FullName|Country
+        1|Volkswagen|Volkswagen Group|1
+        2|BMW|Bayerische Motoren Werke AG|1
+        3|Mercedes|Mercedes-Benz AG|1
+        4|Peugeot|Peugeot S.A.|2
+        5|Citroën|Citroën S.A.|2
+        6|Renault|Renault S.A.|2
+        7|Fiat|Fiat S.p.A.|3
+        8|Ferrari|Ferrari S.p.A.|3
+        9|Alfa Romeo|Alfa Romeo Automobiles S.p.A.|3
+        10|SEAT|SEAT S.A.|4
+        11|Honda|Honda Motor Co., Ltd.|6
+    }
+
+    RESULT {
+        11|Honda Motor Co., Ltd.
+    }
+}
+
+TEST {
+    TABLE {
+        countries
+        CountryId|CountryName|Continent
+        1|Germany|1
+        2|France|1
+        3|Italy|1
+        4|Spain|1
+        5|Netherlands|1
+        6|Japan|2
+    }
+
+    TABLE {
+        continents
+        ContId|Continent
+        1|europe
+        2|asia
+    }
+
+    TABLE {
+        car_makers
+        Id|Maker|FullName|Country
+        1|Volkswagen|Volkswagen Group|1
+        2|BMW|Bayerische Motoren Werke AG|1
+        3|Mercedes|Mercedes-Benz AG|1
+        4|Peugeot|Peugeot S.A.|2
+        5|Citroën|Citroën S.A.|2
+        7|Fiat|Fiat S.p.A.|3
+        8|Ferrari|Ferrari S.p.A.|3
+        9|Alfa Romeo|Alfa Romeo Automobiles S.p.A.|3
+        10|SEAT|SEAT S.A.|4
+        11|Honda|Honda Motor Co., Ltd.|6
+        12|Toyota|Toyota Motor Corporation|6
+        13|Nissan|Nissan Motor Co., Ltd.|6
+        14|Mazda|Mazda Motor Corporation|6
+    }
+
+    RESULT {
+        11|Honda Motor Co., Ltd.
+        12|Toyota Motor Corporation
+        13|Nissan Motor Co., Ltd.
+        14|Mazda Motor Corporation
+    }
+}
