@@ -72,7 +72,7 @@ async function hideInventory() {
   await showElement("inventory-show-button");
 }
 
-// default the inventroy is hidden
+// by default the inventory is hidden
 if (!DISPLAY_STATE.editMode) hideInventory();
 
 function showError(error) {
@@ -258,8 +258,7 @@ async function beginGame() {
 
     // Custom router if we ask to reset password
     await routeActionMiddleware("resetPassword", async (urlParams) => {
-      const token = urlParams.get("token");
-      document.getElementById("inputResetPasswordToken").value = token;
+      document.getElementById("inputResetPasswordToken").value = urlParams.get("token");
       API.logout();
       await changeView(Views.RESET_PASSWORD);
     });
@@ -272,6 +271,7 @@ async function beginGame() {
         changeView(Views.LOADING); // LOADING view awaits DISPLAY_STATE.saveLoaded and DISPLAY_STATE.loaded are true.
         await showElementImmediately("counter-container");
         await showElementImmediately("right-sidebar");
+        await showElementImmediately("relative-leaderboard");
       } else {
         if (location.pathname !== "/editors.html") {
           // TODO: check that it is not empty
@@ -280,7 +280,7 @@ async function beginGame() {
           } else {
             await showElementImmediately("login-view")
           }
-      };
+        }
       }
     });
 
@@ -295,7 +295,7 @@ async function beginGame() {
 
 async function restartUser() {
   let res = API.restartUser();
-  console.log("restartUser", res)
+  console.log("restartUser", res);
   window.location.href = "./"; // Reloads the page
 }
 

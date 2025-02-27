@@ -1,0 +1,66 @@
+METADATA {
+    id: task-303
+    name: Horsepower in 1980
+    color: col-book-cars
+    info: list car make id and name based on conditions
+    keywords: SELECT, FROM, JOIN, WHERE, MIN, SUBQUERY
+    level: 4
+}
+
+DESCRIPTION {
+    What is the average Horsepower of cars build in 1980? Print the average.
+}
+
+ANSWER {
+    SELECT AVG(Horsepower) AS Average_Horsepower FROM cars_data WHERE Year = 1980;
+}
+
+TEST {
+    TABLE {
+        cars_data
+        Id|MPG|Cylinders|Edispl|Horsepower|Weight|Accelerate|Year
+        1|25|3|1.4|50|2300|12.5|1980
+        2|35|4|2.0|60|2400|11.5|1980
+        3|20|3|1.6|75|2500|13.0|1981
+        4|30|3|1.5|55|2200|11.0|1979
+    }
+
+    TABLE {
+        car_names
+        MakeId|Model|Make
+        1|Golf|Volkswagen
+        2|X5|BMW
+        3|Passat|Volkswagen
+        4|Fiat500|Fiat
+    }
+
+    RESULT {
+        55
+    }
+}
+
+TEST {
+    TABLE {
+        cars_data
+        Id|MPG|Cylinders|Edispl|Horsepower|Weight|Accelerate|Year
+        1|25|3|1.4|50|2300|12.5|1980
+        2|35|4|2.0|60|2400|11.5|1980
+        3|20|3|1.6|75|2500|13.0|1981
+        4|30|2|1.5|55|2200|11.0|1979
+        5|28|4|1.8|70|2350|12.0|1980
+    }
+
+    TABLE {
+        car_names
+        MakeId|Model|Make
+        1|Golf|Volkswagen
+        2|X5|BMW
+        3|Passat|Volkswagen
+        4|Fiat500|Fiat
+        5|Civic|Honda 6
+    }
+
+    RESULT {
+        60
+    }
+}

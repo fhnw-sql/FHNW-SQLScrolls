@@ -1,0 +1,71 @@
+METADATA {
+    id: task-301
+    name: Horsepower and cylinders
+    color: col-book-cars
+    info: list car make id and name based on conditions
+    keywords: SELECT, FROM, JOIN, WHERE, MIN, SUBQUERY
+    level: 4
+}
+
+DESCRIPTION {
+    Among the cars with more than the lowest horsepower, which ones do have more than 2 cylinders? List the car MakeId and Make name.
+}
+
+ANSWER {
+    SELECT T2.MakeId, T2.Make
+    FROM CARS_DATA AS T1
+    JOIN CAR_NAMES AS T2 ON T1.Id = T2.MakeId
+    WHERE T1.Horsepower > (SELECT min(Horsepower) FROM CARS_DATA)
+    AND T1.Cylinders >= 3;
+}
+
+TEST {
+    TABLE {
+        cars_data
+        Id|MPG|Cylinders|Edispl|Horsepower|Weight|Accelerate|Year
+        1|25|3|1.4|50|2300|12.5|1980
+        2|35|4|2.0|60|2400|11.5|1980
+        3|20|3|1.6|75|2500|13.0|1981
+        4|30|3|1.5|55|2200|11.0|1979
+    }
+
+    TABLE {
+        car_names
+        MakeId|Model|Make
+        1|Golf|Volkswagen
+        2|X5|BMW
+        3|Passat|Volkswagen
+        4|Fiat500|Fiat
+    }
+
+    RESULT {
+        2|BMW
+        3|Volkswagen
+        4|Fiat
+    }
+}
+
+TEST {
+    TABLE {
+        cars_data
+        Id|MPG|Cylinders|Edispl|Horsepower|Weight|Accelerate|Year
+        1|25|3|1.4|50|2300|12.5|1980
+        2|35|4|2.0|60|2400|11.5|1980
+        3|20|3|1.6|75|2500|13.0|1981
+        4|30|2|1.5|55|2200|11.0|1979
+    }
+
+    TABLE {
+        car_names
+        MakeId|Model|Make
+        1|Golf|Volkswagen
+        2|X5|BMW
+        3|Passat|Volkswagen
+        4|Fiat500|Fiat
+    }
+
+    RESULT {
+        2|BMW
+        3|Volkswagen
+    }
+}

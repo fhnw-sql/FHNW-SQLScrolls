@@ -7,7 +7,7 @@ body {
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --code-font: "Consolas", monospace;
 
-  font-family: var(--main-font);
+  font-family: var(--main-font), serif;
   height: 100vh;
   --col-green: green;
   --col-light-green: #1ccb1c;
@@ -15,6 +15,7 @@ body {
   --col-light-red: #d74848;
   --col-xmas-red: #aa0000;
   --col-music2-blue: #59888A;
+  --col-cars-red: #ff0000;
   --col-rune-grey: #343434;
 
   --col-paper-divider: #e6dbd0;
@@ -180,7 +181,7 @@ img {
 .item.col-md-4 {
   max-width:25%;
  }
- 
+
 /* Disable bootstrap collapse animation */
 .collapsing {
   -webkit-transition: none;
@@ -504,6 +505,9 @@ button.col-yellow:focus {
 .col-book-music2 {
   color:var(--col-music2-blue) !important;
 }
+.col-book-cars {
+  color:var(--col-cars-red) !important;
+}
 
 .btn-light-blue {
   background-color: var(--col-button-blue) !important;
@@ -575,7 +579,7 @@ th {
   overflow: hidden;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-}  
+}
 
 .book-open .table-paper th {
   max-width: unset;
@@ -1506,23 +1510,78 @@ body {
   will-change: tranform;
 }
 
-.left-sidebar {
-  position: fixed;
-  left: 2rem;
-  top: 20%;
-  opacity: 0.3;
-  -webkit-transition: opacity 0.5s;
-  -o-transition: opacity 0.5s;
-  transition: opacity 0.5s;
-  z-index: 10000;
+.highlight-user {
+  color: #1E90FF;
+  font-weight: bold;
 }
 
-.left-sidebar:hover {
-  opacity: 1;
+/* Parent container setup */
+.main-view-container {
+  overflow: visible;
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr; /* Left, Center (Task/Inventory), Right */
+  width: 100%;
+  height: 100%;
+  gap: 0.1rem; /* Space between columns */
+  box-sizing: border-box;
+  align-items: start;
 }
 
+.neighbor {
+  opacity: 0.6;
+  transition: opacity 0.3s ease; /* Smooth transition for dynamic effects */
+  font-size: 1em;
+}
+
+.neighbor:hover {
+  opacity: 1; /* Slightly less transparent on hover */
+}
+
+.small-angle-icon-up {
+  opacity: 0.8;
+  font-size: 2em; /* Adjust the size here */
+  background: linear-gradient(to bottom, #00ff00, transparent); /* Green fade effect */
+  -webkit-background-clip: text; /* Ensures gradient is clipped to the text */
+  -webkit-text-fill-color: transparent; /* Makes the text color transparent */
+}
+
+.small-angle-icon-down {
+  opacity: 0.8;
+  font-size: 2em; /* Adjust the size here */
+  background: linear-gradient(to top, #ff0000, transparent); /* Red fade effect */
+  -webkit-background-clip: text; /* Ensures gradient is clipped to the text */
+  -webkit-text-fill-color: transparent; /* Makes the text color transparent */
+}
+
+/* Inventory section styling */
+.inventory-view {
+  color: #fff;
+  grid-column: 2;
+  grid-row: 1;
+  padding: 1rem;
+  height: auto;
+}
+
+/* Task view styling */
+#task-view {
+  grid-column: 2; /* Center column */
+  grid-row: 1; /* Same row */
+  height: 100%; /* Full height of container */
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow: auto; /* Allow content to scroll if needed */
+  z-index: 1; /* Ensure it's above any overlapping elements */
+}
+
+/* Right sidebar container */
 .right-sidebar {
+  grid-column: 3; /* Right column */
+  grid-row: 1;
   position: fixed;
+  padding: 1rem;
+  z-index: 2; /* Ensure it's above task-view */
+  color: #fff;
+  height: auto;
   right: 2rem;
   top: 20%;
   display: -webkit-box;
@@ -1532,6 +1591,21 @@ body {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+
+/* Prevent overlapping on smaller screens */
+@media screen and (max-width: 768px) {
+  .main-view-container {
+    grid-template-columns: 1fr; /* Stack vertically */
+    grid-template-rows: auto; /* Dynamic row height */
+  }
+  #task-view {
+    grid-column: 1; /* Span the full width */
+  }
+  .right-sidebar {
+    grid-column: 1; /* Stack below task-view */
+    position: static; /* Remove fixed positioning */
+  }
 }
 
 .right-sidebar > * {
@@ -1555,6 +1629,44 @@ body {
 
 .right-sidebar *:focus {
   outline: white dotted 1px;
+}
+
+/* Relative leaderboard styling */
+.relative-leaderboard {
+    grid-column: 1; /* Right column */
+    grid-row: 1;
+    position: fixed;
+    padding: 1rem;
+    z-index: 2; /* Ensure it's above task-view */
+    color: #fff;
+    height: auto;
+    right: 2rem;
+    top: 20%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.relative-leaderboard > * {
+  padding: 0;
+  position: relative;
+}
+
+.relative-leaderboard * {
+  font-size: inherit;
+  -webkit-transition: font 2s, -webkit-transform 0.1s ease;
+  transition: font 2s, -webkit-transform 0.1s ease;
+  transition: font 2s, transform 0.1s ease;
+  transition: font 2s, transform 0.1s ease, -webkit-transform 0.1s ease;
+  -webkit-transition: font 2s, transform 0.1s ease;
+  -moz-transition: font 2s, transform 0.1s ease;
+  -o-transition: font 2s, transform 0.1s ease;
+  background-color: transparent;
+  border-style: none;
 }
 
 #star-counter {
@@ -1668,6 +1780,20 @@ body {
 
 .book-open.music2-book {
   border-color: var(--col-music2-blue);
+}
+
+.book.cars-book {
+  border-color: var(--col-cars-red);
+}
+
+.book.cars-book::after {
+  background: url("../img/cars-background.png");
+  background-size: cover;
+  border-color: var(--col-cars-red);
+}
+
+.book-open.cars-book {
+  border-color: var(--col-cars-red);
 }
 
 .book.json-book {
@@ -2027,7 +2153,7 @@ body {
 
 @supports (-moz-appearance:none) {
     img {
-    max-width: 100%; 
+    max-width: 100%;
     /* width: 100%; */
   }
 }
@@ -2061,12 +2187,12 @@ body {
     width: fit-content;
     max-width: inherit;
     align-self: center;
-  
+
   }
 
   .book-img  img {
     height: 100%;
-    width: auto;  
+    width: auto;
   }
 
   .book-open .page:nth-child(1) {
@@ -2319,6 +2445,18 @@ body {
   margin-right: 1rem;
 }
 
+#display-leaderboard-modal hr {
+}
+
+#display-leaderboard-modal h1 {
+}
+
+#display-leaderboard-modal .close-button {
+}
+
+#display-leaderboard-modal .row {
+}
+
 /* Fixes handle bars of the graph area picker */
 #display-profile-modal img {
   width: unset;
@@ -2373,3 +2511,61 @@ body {
     zoom: 80%;
   }
 }
+
+/* Toast container styles */
+#toast-container {
+  position: fixed; /* Ensures it's on top and doesn't disrupt the layout */
+  top: 10px; /* Space from the top */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Centering the container */
+  z-index: 9999; /* Ensure it's above other elements */
+  width: 90%; /* Responsive width */
+  max-width: 400px; /* Limit width for large screens */
+  text-align: center; /* Center the text */
+  pointer-events: none; /* Avoid blocking clicks on underlying elements */
+}
+
+/* Individual toast message styles */
+.toast {
+  display: inline-block;
+  background-color: #343a40; /* Neutral dark background */
+  color: #ffffff; /* White text */
+  padding: 0.5rem 0.5rem; /* Spacing inside the toast */
+  margin: 0.5rem 0; /* Space between toasts */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for elevation */
+  font-size: 1rem; /* Readable text size */
+  opacity: 0; /* Start hidden */
+  transform: translateY(-10px); /* Slightly off position for animation */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth animation */
+}
+
+/* Success toast */
+.toast-success {
+  background-color: #28a745; /* Green for success */
+  color: #fff;
+}
+
+/* Error toast */
+.toast-error {
+  background-color: #dc3545; /* Red for errors */
+  color: #fff;
+}
+
+/* Toast animation when shown */
+.toast.show {
+  opacity: 1; /* Fully visible */
+  transform: translateY(0); /* Original position */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #toast-container {
+    width: 95%; /* More compact for smaller screens */
+  }
+  .toast {
+    font-size: 0.9rem; /* Adjust text size */
+    padding: 0.8rem 1rem; /* Adjust padding */
+  }
+}
+

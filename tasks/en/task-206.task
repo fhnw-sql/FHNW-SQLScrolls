@@ -51,22 +51,3 @@ TEST {
         winter|["skiing","ice skating","baking cookies"]
     }
 }
-
-TEST {
-
-    TABLE {
-        Leisure
-        id|season|activities
-        1|winter|{"sport:" ["ice hockey"], "food:" ["baking cookies"]}
-        2|summer|{"sport:" ["surfing", "swimming"] "food:" ["ice cream party"]}
-        3|spring|{"sport:" ["hiking", "tack and field"], "food:" ["strawberry", "baking cake"]}
-        4|autumn|{"sport:" ["biking", "darts"], "food:" ["baking pie"]}
-    }
-
-    RESULT {
-        autumn|["biking","darts","baking pie"]
-        spring|["hiking","track and field","strawberry","baking cake"]
-        summer|["surfing","swimming","ice cream party"]
-        winter|["ice hockey","baking cookies"]
-    }
-}
