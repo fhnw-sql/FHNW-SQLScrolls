@@ -504,3 +504,6 @@ async function parseTask(lines) {
 async function parseTaskFrom(address) {
   return await parseTask(await readLines(address));
 }
+async function parseBookFromContent(content) {
+  return parseBook(content.split('\n'));
+}

@@ -89,6 +89,16 @@ const LeaderboardButton = {
     },
 };
 
+// Functionality related to the AI button
+const AIButton = {
+  async show() {
+    await showElementImmediately("ai-button");
+  },
+  async hide() {
+    await hideElementImmediately("ai-button");
+  },
+};
+
 // Functionality related to the star counter
 const StarCounter = {
     async update() {
@@ -265,6 +275,7 @@ class MapView extends View {
         await LeaderboardButton.show();
         await RelativeLeaderboard.show();
         await TaskViewSwap.show();
+        await AIButton.show();
         showElement(this.id);
         await StarCounter.update();
         if (DISPLAY_STATE.previousView === Views.FLAME_ANIMATION || DISPLAY_STATE.previousView === Views.END_ANIMATION) {
@@ -383,6 +394,7 @@ class TaskView extends View {
         super("task-view");
         this.queryInputField = document.getElementById("query-input");
         this.parsonsInputDiv = document.getElementById("parsons-input"); //unused variable
+        this.recommendtaskInputDiv = document.getElementById("parsons-input");
         this.currentTask = null;
         this.selectedPreviousAnswer = false;
         this.parsons = null;
@@ -391,10 +403,11 @@ class TaskView extends View {
     async open() {
         await showElement(this.id);
         document.getElementById(this.id).focus();
-    }
+        createBookFromKeywords(this.currentTask.id);
+  }
 
     async close() {
-        this.currentTask = null;
+        deleteBookById(this.currentTask.id);this.currentTask = null;
         await hideElement(this.id);
         removePreservedTaskBoxHeight();
     }
@@ -414,6 +427,7 @@ class TaskView extends View {
 
     initParsonsProblem() {
         var initial = this.currentTask.parsons.join("\n");
+        // const  showkeywordsbook  = require('items.js');this.parsons = new ParsonsWidget({
         this.parsons = new ParsonsWidget({
             sortableId: "parsons-sortable",
             trashId: "parsons-sortableTrash",
@@ -434,17 +448,29 @@ class TaskView extends View {
                     .trim();
                 if (parsonsInput) $("#query-input").val(parsonsInput);
 
-                runQueryTests(true);
-            });
-        $("#reset-input-button")
-            .off()
-            .on("click", function (e) {
-                e.preventDefault();
-                var initial = Views.TASK.currentTask.parsons.join("\n");
-                Views.TASK.parsons.init(initial);
-                Views.TASK.parsons.shuffleLines();
-            });
-    }
+        runQueryTests(true);
+      });
+    $("#reset-input-button")
+      .off()
+      .on("click", function (e) {
+        e.preventDefault();
+        var initial = Views.TASK.currentTask.parsons.join("\n");
+        Views.TASK.parsons.init(initial);
+        Views.TASK.parsons.shuffleLines();
+       });
+       $("#recommend-task-in-view")
+       .off()
+       .on("click", function (e) {
+         e.preventDefault();
+         loadRecommendedTask();
+       });
+       $("#theory-button")
+       .off()
+       .on("click", function (e) {
+         e.preventDefault();
+          showkeywordsbook(new Event("click"), Views.TASK.currentTask.id);
+       });
+  }
 
     async toggleAnswer() {
         const currentTask = this.currentTask;
@@ -471,7 +497,7 @@ class TaskView extends View {
     }
 
     async showWithQuery(query) {
-        await hideElementImmediately("model-answer");
+        // const { showkeywordsbook } = require('./items.js');await hideElementImmediately("model-answer");
         await hideElementImmediately("task-next-button");
         await hideElementImmediately("query-model-button");
         const task = this.currentTask;
@@ -497,8 +523,9 @@ class TaskView extends View {
         if (task.parsons) {
             await showElementImmediately("parsons-input");
             await hideElementImmediately("query-input");
-            this.initParsonsProblem();
+            await showElementImmediately("recommend-task-in-view");this.initParsonsProblem();
         } else {
+            await showElementImmediately("recommend-task-in-view");
             await showElementImmediately("query-input");
             await hideElementImmediately("parsons-input");
             $("#query-run-button")
@@ -514,7 +541,19 @@ class TaskView extends View {
                     query = null;
                     this.queryInputField = document.getElementById("query-input").value = i18n.get("query-placeholder");
                 });
-        }
+        $("#recommend-task-in-view")
+        .off()
+        .on("click", function (e) {
+          e.preventDefault();
+          loadRecommendedTask();
+        });
+        $("#theory-button")
+        .off()
+        .on("click", function (e) {
+          e.preventDefault();
+          showkeywordsbook(new Event("click"), task.id);
+        });
+    }
 
         if (API.loginStatus === LoginStatus.LOGGED_IN) {
             this.loadPreviousAnswers(task);
@@ -583,7 +622,7 @@ class TaskView extends View {
     }
 
     async show(taskID) {
-        this.currentTask = tasks[taskID];
+        console.log("taskID", taskID);this.currentTask = tasks[taskID];
         try {
             await this.showWithQuery();
         } catch (e) {
@@ -1504,6 +1543,7 @@ class FlameAnimationView extends View {
         await ProfileButton.hide();
         await LeaderboardButton.hide();
         await BookMenuButton.hide();
+        await AIButton.hide();
         await RelativeLeaderboard.hide();
         await TaskViewSwap.hide();
         await delay(500);
@@ -1544,6 +1584,7 @@ class EndAnimationView extends View {
         await ProfileButton.hide();
         await LeaderboardButton.hide();
         await BookMenuButton.hide();
+        await AIButton.hide();
         await RelativeLeaderboard.hide();
         await TaskViewSwap.hide();
         await delay(500);
@@ -1579,6 +1620,7 @@ class EndTextView extends View {
         await BookMenuButton.hide();
         await ProfileButton.show();
         await LeaderboardButton.show();
+        await AIButton.show();
         await RelativeLeaderboard.show();
         await fadeFromBlack();
         endScreenAnimation();
@@ -1591,9 +1633,56 @@ class EndTextView extends View {
         //await TaskViewSwap.show();
         await ProfileButton.show();
         await LeaderboardButton.show();
+        await AIButton.show();
         await RelativeLeaderboard.show();
     }
 }
+
+class AIModalView extends View {
+  constructor() {
+    super("display-ai-modal");
+    // this.shownItem = null;
+    this.graph = undefined;
+    this.addAIButtonClickListener();
+  }
+
+  addAIButtonClickListener() {
+    const aiButton = document.getElementById("ai-button");
+    if (aiButton) {
+      aiButton.addEventListener("click", () => this.show());
+    } else {
+      console.warn("AI button not found in the DOM. Event listener not added.");
+    }
+  }
+
+  async open() {
+    const trigger = document.activeElement;
+    if (!DISPLAY_STATE.editMode)  document.getElementById(this.id).focus();
+    await showModal("#" + this.id, DISPLAY_STATE.previousSecondaryView, trigger);
+  }
+
+
+  async close() {
+    // this.shownItem = null;
+    $("#" + this.id).modal("hide");
+  }
+
+  addAIButtonClickListener() {
+    document.body.addEventListener('click', (event) => {
+      const aiButton = event.target.closest('#ai-button');
+      if (aiButton) {
+        // console.log("AI button clicked");
+        const icon = aiButton.querySelector('.jump-animation');
+        if (icon) {
+          icon.style.animation = 'none';
+        }
+        changeSecondaryView(Views.AIMODAL);
+      }
+    });
+  }
+}
+
+
 
 Views = {
     INVENTORY: new InventoryView(),
@@ -1607,6 +1696,7 @@ Views = {
     RESET_PASSWORD: new ResetPasswordView(),
     PROFILE: new ProfileView(),
     LEADERBOARD: new LeaderboardView(),
+    AIMODAL: new AIModalView(),
     LOADING: new LoadingView(),
     FLAME_ANIMATION: new FlameAnimationView(),
     END_ANIMATION: new EndAnimationView(),

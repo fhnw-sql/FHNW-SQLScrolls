@@ -5,11 +5,16 @@ acceptance of a learning game as an alternative learning method within the Bache
 at the FHNW, concerning practising the structured query language (SQL) which is taught as part of the Database
 Technology course.
 
+# 🤖 Adaptive version of SQL Scrolls
+
+We integrated an AI algorithm that dynamically adjusts the task difficulty based on the user performance, ensuring a tailored learning experience. Users receive personalized task suggestions to keep them engaged and help them improve in areas where they need more practice. The recommendation system is fully integrated into the game, providing an optimized learning journey.
+
 **Technologies:**
 
 - Javascript
 - HTML
 - CSS
+- Python
 
 **Supported browsers:**
 The game is designed to support the latest web browsers. It supports the current versions of:

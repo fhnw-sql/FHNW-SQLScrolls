@@ -83,3 +83,87 @@ function getItem(itemID) {
         onclick: "",
       });
 }
+
+async function loadKeywordsData(currentLang) {
+  try {
+    const response = await fetch(`books/${currentLang}/keywords_data.json`); 
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.Keywords;
+  } catch (error) {
+    console.error("Failed to load keywords data:", error);
+    return [];
+  }
+}
+
+async function createBookFromKeywords(taskId) {
+  try {
+    const keywordsData = await loadKeywordsData(currentLang);
+    const taskFilePath = `tasks/${currentLang}/${taskId}.task`;
+    const task = await parseTaskFrom(taskFilePath);
+
+
+    if (task.metadata && task.metadata.keywords) {
+      const keywords = task.metadata.keywords.split(',').map(keyword => keyword.trim());
+
+      const bookId = `Book-${taskId}`;
+      const bookMetadata = `METADATA {
+                              id: ${taskId}
+                              name: theory task
+                              title: ${task.metadata.title || "Generated Title"}
+                              author: ${task.metadata.author || "Unknown Author"}
+                              color: ${task.metadata.color || "default"}
+                            }`;
+
+      const pagesWithKeywords = keywords.map(keyword => {
+        const keywordData = keywordsData.find(k => k.keyword === keyword) || {};
+        const description = keywordData.description || 'No description available.';
+        const example = keywordData.example ? `\n${keywordData.example}\n` : 'No example available.';
+        return `PAGE {
+                      <h2>${keyword}</h2>
+                      <p>${description}</p>
+                      <p>Example:</p>
+                      ${example}
+                      }`;
+                      }).join('\n');
+
+      const bookContent = `${bookMetadata}\n${pagesWithKeywords}`;
+
+      const newBook = new BookItem({
+        id: bookId,
+        accessByTab: true,
+        parsed: await parseBookFromContent(bookContent),
+      });
+
+      items[newBook.id] = newBook;
+
+      //console.debug(`New book created: ${newBook.id}`, newBook);
+
+    } else {
+      //console.log("Keywords not found for task", taskId);
+    }
+  } catch (error) {
+    //console.error("Error:", error);
+  }
+}
+
+async function showkeywordsbook(event, itemID) {
+  // console.debug("showKeywordsBook is called");
+  // console.debug(itemID);
+  await Views.READ_BOOK.show(event, itemID);
+}
+
+async function deleteBookById(bookId) {
+  if (items[bookId]) {
+    delete items[bookId];
+    //console.debug(`Book with ID ${bookId} has been deleted.`);
+  } else {
+    //console.warn(`Book with ID ${bookId} does not exist.`);
+  }
+}
+
+window.createBookFromKeywords = createBookFromKeywords;
+window.showkeywordsbook = showkeywordsbook;
+window.deleteBookById = deleteBookById;

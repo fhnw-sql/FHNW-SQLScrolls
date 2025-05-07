@@ -1,0 +1,334 @@
+{
+  "Keywords": [
+    {
+      "keyword": "SELECT",
+      "description": "The SELECT statement is used to query data from a database. It retrieves data from one or more tables or expressions.",
+      "example": "SELECT name, age FROM students;"
+    },
+    {
+      "keyword": "FROM",
+      "description": "The FROM clause specifies the table or tables from which to retrieve data.",
+      "example": "SELECT * FROM users;"
+    },
+    {
+      "keyword": "WHERE",
+      "description": "The WHERE clause is used to filter records. It specifies a condition that must be met for the records to be included in the result set.",
+      "example": "SELECT * FROM products WHERE price > 100;"
+    },
+    {
+      "keyword": "AND",
+      "description": "The AND operator is used to combine multiple conditions in a WHERE clause. It requires that all conditions must be true for the record to be included in the result set.",
+      "example": "SELECT * FROM customers WHERE age > 18 AND country = 'USA';"
+    },
+    {
+      "keyword": "BETWEEN",
+      "description": "The BETWEEN operator is used to filter records based on a range of values.",
+      "example": "SELECT * FROM students WHERE age BETWEEN 18 AND 25;"
+    },
+    {
+      "keyword": "=",
+      "description": "The equal sign (=) is used as a comparison operator to test for equality between two expressions.",
+      "example": "SELECT * FROM employees WHERE department = 'IT';"
+    },
+    {
+      "keyword": ">",
+      "description": "The greater-than symbol (>) is used as a comparison operator to test if the value on the left is greater than the value on the right.",
+      "example": "SELECT * FROM orders WHERE total_price > 1000;"
+    },
+    {
+      "keyword": "<",
+      "description": "The less-than symbol (<) is used as a comparison operator to test if the value on the left is less than the value on the right.",
+      "example": "SELECT * FROM products WHERE price < 50;"
+    },
+    {
+      "keyword": "ORDER_BY",
+      "description": "The ORDER BY clause is used to sort the result set based on one or more columns. It can sort in ascending (ASC) or descending (DESC) order.",
+      "example": "SELECT * FROM products ORDER BY price DESC;"
+    },
+    {
+      "keyword": "ASC",
+      "description": "ASC is used in conjunction with the ORDER BY clause to sort the result set in ascending order.",
+      "example": "SELECT * FROM users ORDER BY age ASC;"
+    },
+    {
+      "keyword": "DESC",
+      "description": "DESC is used in conjunction with the ORDER BY clause to sort the result set in descending order.",
+      "example": "SELECT * FROM orders ORDER BY order_date DESC;"
+    },
+    {
+      "keyword": "DISTINCT",
+      "description": "The DISTINCT keyword is used in a SELECT statement to remove duplicate rows from the result set.",
+      "example": "SELECT DISTINCT department FROM employees;"
+    },
+    {
+      "keyword": "COUNT",
+      "description": "The COUNT function is used to count the number of rows in a result set or the number of non-null values in a column.",
+      "example": "SELECT COUNT(*) FROM orders;"
+    },
+    {
+      "keyword": "*",
+      "description": "The asterisk (*) is a wildcard character used in the SELECT statement to retrieve all columns from a table.",
+      "example": "SELECT * FROM products;"
+    },
+    {
+      "keyword": "MIN",
+      "description": "The MIN function is used to find the minimum value in a set of values.",
+      "example": "SELECT MIN(price) FROM products;"
+    },
+    {
+      "keyword": "MAX",
+      "description": "The MAX function is used to find the maximum value in a set of values.",
+      "example": "SELECT MAX(salary) FROM employees;"
+    },
+    {
+      "keyword": "SUM",
+      "description": "The SUM function is used to calculate the sum of values in a column.",
+      "example": "SELECT SUM(sales) FROM monthly_sales;"
+    },
+    {
+      "keyword": "AVG",
+      "description": "The AVG function is used to calculate the average value of a set of values.",
+      "example": "SELECT AVG(age) FROM students;"
+    },
+    {
+      "keyword": "GROUP BY",
+      "description": "The GROUP BY clause is used to group rows that have the same values into summary rows.",
+      "example": "SELECT department, COUNT(*) FROM employees GROUP BY department;"
+    },
+    {
+      "keyword": "HAVING",
+      "description": "The HAVING clause is used to filter groups based on a specified condition.",
+      "example": "SELECT department, COUNT(*) FROM employees GROUP BY department HAVING COUNT(*) > 5;"
+    },
+    {
+      "keyword": "JOIN",
+      "description": "The JOIN keyword is used to combine rows from two or more tables based on a related column between them.",
+      "example": "SELECT * FROM orders JOIN customers ON orders.customer_id = customers.id;"
+    },
+    {
+      "keyword": "INNER JOIN",
+      "description": "The INNER JOIN keyword is used to combine rows from two or more tables based on a related column between them.",
+      "example": "SELECT * FROM employees INNER JOIN departments ON employees.department_id = departments.id;"
+    },
+    {
+      "keyword": "ON",
+      "description": "The ON keyword is used to specify the join condition in an INNER JOIN clause.",
+      "example": "SELECT * FROM orders JOIN customers ON orders.customer_id = customers.id;"
+    },
+    {
+      "keyword": "OUTER JOIN",
+      "description": "The OUTER JOIN keyword is used to return all rows from both tables, with NULL values where the join condition is not met.",
+      "example": "SELECT * FROM customers LEFT OUTER JOIN orders ON customers.id = orders.customer_id;"
+    },
+    {
+      "keyword": "LEFT JOIN",
+      "description": "The LEFT JOIN keyword returns all rows from the left table (table1), and the matched rows from the right table (table2). The result is NULL from the right side if there is no match.",
+      "example": "SELECT * FROM customers LEFT JOIN orders ON customers.id = orders.customer_id;"
+    },
+    {
+      "keyword": "LIKE",
+      "description": "The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.",
+      "example": "SELECT * FROM products WHERE name LIKE 'Apple%';"
+    },
+    {
+      "keyword": "NULL",
+      "description": "The NULL keyword represents a missing or unknown value.",
+      "example": "SELECT * FROM students WHERE grade IS NULL;"
+    },
+    {
+      "keyword": "IS",
+      "description": "The IS operator is used to test for NULL values in a column.",
+      "example": "SELECT * FROM employees WHERE manager_id IS NOT NULL;"
+    },
+    {
+      "keyword": "IN",
+      "description": "The IN operator is used to specify multiple values in a WHERE clause.",
+      "example": "SELECT * FROM products WHERE category IN ('Electronics', 'Clothing', 'Furniture');"
+    },
+    {
+      "keyword": "NOT",
+      "description": "The NOT operator reverses the result of a Boolean expression.",
+      "example": "SELECT * FROM customers WHERE NOT city = 'New York';"
+    },
+    {
+      "keyword": "AS",
+      "description": "The AS keyword is used to alias a column or a table in a SELECT statement.",
+      "example": "SELECT first_name AS 'First Name', last_name AS 'Last Name' FROM employees;"
+    },
+    {
+      "keyword": "LIMIT",
+      "description": "The LIMIT clause is used to limit the number of rows returned in a result set.",
+      "example": "SELECT * FROM products LIMIT 10;"
+    },
+    {
+      "keyword": "OR",
+      "description": "The OR operator is used to combine multiple conditions in a WHERE clause. It requires that at least one condition must be true for the record to be included in the result set.",
+      "example": "SELECT * FROM employees WHERE department = 'IT' OR department = 'HR';"
+    },
+    {
+      "keyword": "SUBSTR",
+      "description": "The SUBSTR function is used to extract a substring from a string.",
+      "example": "SELECT SUBSTR(name, 1, 3) FROM customers;"
+    },
+    {
+      "keyword": "LENGTH",
+      "description": "The LENGTH function is used to return the length of a string.",
+      "example": "SELECT LENGTH(description) FROM products;"
+    },
+    {
+      "keyword": "UNION",
+      "description": "The UNION operator is used to combine the result sets of two or more SELECT statements.",
+      "example": "SELECT name FROM customers UNION SELECT name FROM suppliers;"
+    },
+    {
+      "keyword": "ROUND",
+      "description": "The ROUND function is used to round a numeric value to a specified number of decimal places.",
+      "example": "SELECT ROUND(price, 2) FROM products;"
+    },
+    {
+      "keyword": "CREATE TABLE",
+      "description": "The CREATE TABLE statement is used to create a new table in a database.",
+      "example": "CREATE TABLE employees ( id INT PRIMARY KEY, name VARCHAR(50), department VARCHAR(50) );"
+    },
+    {
+      "keyword": "PRIMARY KEY",
+      "description": "The PRIMARY KEY constraint uniquely identifies each record in a table.",
+      "example": "CREATE TABLE students ( student_id INT PRIMARY KEY, name VARCHAR(50), age INT );"
+    },
+    {
+      "keyword": "FOREIGN KEY",
+      "description": "The FOREIGN KEY constraint establishes a relationship between two tables.",
+      "example": "CREATE TABLE orders ( order_id INT PRIMARY KEY, customer_id INT, FOREIGN KEY (customer_id) REFERENCES customers(customer_id) );"
+    },
+    {
+      "keyword": "INSERT INTO",
+      "description": "The INSERT INTO statement is used to insert new records into a table.",
+      "example": "INSERT INTO employees (name, department) VALUES ('John Doe', 'IT');"
+    },
+    {
+      "keyword": "VALUES",
+      "description": "The VALUES clause is used to specify the values to be inserted into a table in an INSERT INTO statement.",
+      "example": "INSERT INTO products (name, price) VALUES ('Laptop', 999.99);"
+    },
+    {
+      "keyword": "SET",
+      "description": "The SET keyword is used to assign values to variables in SQL.",
+      "example": "SET @max_price = (SELECT MAX(price) FROM products);"
+    },
+    {
+      "keyword": "UPDATE",
+      "description": "The UPDATE statement is used to modify existing records in a table.",
+      "example": "UPDATE products SET price = price * 1.1 WHERE category = 'Electronics';"
+    },
+    {
+      "keyword": "DELETE",
+      "description": "The DELETE statement is used to remove one or more records from a table.",
+      "example": "DELETE FROM customers WHERE last_purchase_date < '2022-01-01';"
+    },
+    {
+      "keyword": "ADD",
+      "description": "The ADD keyword is used to add columns to an existing table.",
+      "example": "ALTER TABLE employees ADD COLUMN salary INT;"
+    },
+    {
+      "keyword": "ALTER",
+      "description": "The ALTER statement is used to modify the structure of an existing database table.",
+      "example": "ALTER TABLE customers MODIFY COLUMN email VARCHAR(100);"
+    },
+    {
+      "keyword": "DEFAULT",
+      "description": "The DEFAULT keyword is used to specify a default value for a column.",
+      "example": "CREATE TABLE users ( id INT PRIMARY KEY, name VARCHAR(50), status VARCHAR(20) DEFAULT 'active' );"
+    },
+    {
+      "keyword": "UNIQUE",
+      "description": "The UNIQUE constraint ensures that all values in a column are unique.",
+      "example": "CREATE TABLE products ( id INT PRIMARY KEY, sku VARCHAR(50) UNIQUE, name VARCHAR(100) );"
+    },
+    {
+      "keyword": "INDEX",
+      "description": "The INDEX keyword is used to create an index on a table.",
+      "example": "CREATE INDEX idx_lastname ON employees (last_name);"
+    },
+    {
+      "keyword": "REFERENCES",
+      "description": "The REFERENCES keyword is used to establish a relationship between tables.",
+      "example": "CREATE TABLE orders ( order_id INT PRIMARY KEY, customer_id INT, FOREIGN KEY (customer_id) REFERENCES customers(customer_id) );"
+    },
+    {
+      "keyword": "CHECK",
+      "description": "The CHECK constraint is used to specify a condition that must be met for the record to be inserted or updated.",
+      "example": "CREATE TABLE employees ( id INT PRIMARY KEY, age INT CHECK (age >= 18) );"
+    },
+    {
+      "keyword": "INTERSECT",
+      "description": "The INTERSECT operator is used to combine the result sets of two SELECT statements, returning only the rows that appear in both result sets.",
+      "example": "SELECT name FROM students INTERSECT SELECT name FROM teachers;"
+    },
+    {
+      "keyword": "JSON_ARRAY_LENGTH",
+      "description": "The JSON_ARRAY_LENGTH function is used to return the number of elements in a JSON array.",
+      "example": "SELECT JSON_ARRAY_LENGTH('[1, 2, 3, 4]');"
+    },
+    {
+      "keyword": "JSON_VALID",
+      "description": "The JSON_VALID function is used to check if a string contains valid JSON data.",
+      "example": "SELECT JSON_VALID('{\"name\": \"John\", \"age\": 30}');"
+    },
+    {
+      "keyword": "JSON_EACH",
+      "description": "The JSON_EACH function is used to return each key-value pair from a JSON object.",
+      "example": "SELECT * FROM JSON_EACH('{\"name\": \"John\", \"age\": 30}');"
+    },
+    {
+      "keyword": "JSON_ARRAY",
+      "description": "The JSON_ARRAY function is used to create a JSON array from a list of values.",
+      "example": "SELECT JSON_ARRAY(1, 2, 3, 4);"
+    },
+    {
+      "keyword": "JSON_GROUP_ARRAY",
+      "description": "The JSON_GROUP_ARRAY function is used to aggregate values into a JSON array.",
+      "example": "SELECT JSON_GROUP_ARRAY(name) FROM students;"
+    },
+    {
+      "keyword": "JSON_TREE",
+      "description": "The JSON_TREE function is used to return a JSON representation of hierarchical data.",
+      "example": "SELECT JSON_TREE('{\"id\": 1, \"name\": \"John\", \"children\": [{\"id\": 2, \"name\": \"Alice\"}]}');"
+    },
+    {
+      "keyword": "JSON_EXTRACT",
+      "description": "The JSON_EXTRACT function is used to extract a value from a JSON document.",
+      "example": "SELECT JSON_EXTRACT('{\"name\": \"John\", \"age\": 30}', '$.name');"
+    },
+    {
+      "keyword": "JSON_OBJECT",
+      "description": "The JSON_OBJECT function is used to create a JSON object from a list of key-value pairs.",
+      "example": "SELECT JSON_OBJECT('name', 'John', 'age', 30);"
+    },
+    {
+      "keyword": "JSON_TYPE",
+      "description": "The JSON_TYPE function is used to return the type of a JSON value.",
+      "example": "SELECT JSON_TYPE('{\"name\": \"John\", \"age\": 30}');"
+    },
+    {
+      "keyword": "JSON_REMOVE",
+      "description": "The JSON_REMOVE function is used to remove one or more elements from a JSON document.",
+      "example": "SELECT JSON_REMOVE('{\"name\": \"John\", \"age\": 30}', '$.age');"
+    },
+    {
+      "keyword": "JSON_INSERT",
+      "description": "The JSON_INSERT function is used to insert a new element into a JSON document at the specified path.",
+      "example": "SELECT JSON_INSERT('{\"name\": \"John\"}', '$.age', 30);"
+    },
+    {
+      "keyword": "JSON_SET",
+      "description": "The JSON_SET function is used to update or insert a new value into a JSON document at the specified path.",
+      "example": "SELECT JSON_SET('{\"name\": \"John\", \"age\": 30}', '$.age', 40);"
+    },
+    {
+      "keyword": "JSON_GROUP_OBJECT",
+      "description": "The JSON_GROUP_OBJECT function is used to aggregate values into a JSON object.",
+      "example": "SELECT JSON_GROUP_OBJECT(name, age) FROM people;"
+    }
+  ]
+}
