@@ -40,3 +40,16 @@ services:
       - "3000:3000"
     volumes:
       - ../FHNW-SQL-Training-Game.github.io:/usr/share/nginx/html  # Mounting of frontend code
+  model:
+    container_name: model-python
+    restart: always
+    build:
+      context: .
+      dockerfile: Model-implementation/Dockerfile
+      args:
+        API_URL: ${API_URL}
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/stg-api
+    ports:
+      - "5001:5001"
+
