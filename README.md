@@ -41,7 +41,7 @@ The game is designed to support the latest web browsers. It supports the current
 To deploy the Frontend one can consider one of the mentioned ways below: Docker, BareboneNodeJS, We recommend to use Docker Compose. The illustration below shows a quick overview of the recommended
 solution.
 
-![Architecture-Overview](stg-architecture.png)
+![Architecture-Overview](img/stg-architecture.png)
 
 ### ⚡ Recommended Solution Deployment (Docker Compose) 
 
