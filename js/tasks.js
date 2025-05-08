@@ -22,8 +22,9 @@ function startTimer() {
 function stopTimer() {
     const endTime = new Date(); // Record the current time when the task ends
     console.log(`Timer stopped at: ${endTime.toISOString()}`); // Log the end time for debugging
-    return { startTime: startTime.toISOString(), endTime: endTime.toISOString() }; // Return startTime and endTime separately
+    return {startTime: startTime.toISOString(), endTime: endTime.toISOString()}; // Return startTime and endTime separately
 }
+
 // Tasks are filled in main.js#initializeGameDictionaries
 const tasks = {
     asList() {
@@ -188,7 +189,7 @@ class Task extends ItemType {
         if (this.tests) {
             const firstTest = this.tests[0];
             wantedResult = firstTest.result;
-            if (firstTest && firstTest.contextTableNames.length>0) {
+            if (firstTest && firstTest.contextTableNames.length > 0) {
                 taskTables = await queryAllContentsOfTables(firstTest.context, firstTest.contextTableNames);
             }
         }
@@ -252,8 +253,8 @@ class Task extends ItemType {
                                 correct: true,
                                 table: Table.fromPlain("", [i18n.get("query-no-rows")], []),
                                 wanted,
-                            })                   
-                        );     
+                            })
+                        );
                     } else {
                         results.push(
                             new Result({
@@ -269,13 +270,13 @@ class Task extends ItemType {
                 results.push(new Result({source: test, correct: false, error, wanted}));
             }
         }
-        const { startTime, endTime } = stopTimer(); // Stop time after attempt is done
+        const {startTime, endTime} = stopTimer(); // Stop time after attempt is done
         //console.log("Test Results:", results);
         startTimer(); // Restart the timer again
-        return { results, startTime, endTime };
+        return {results, startTime, endTime};
     }
 
-    async showHint() {       
+    async showHint() {
         await hideElementImmediately("book-menu");
         await showElement("task-hint-notification");
         $("#close-hint-button")
@@ -289,7 +290,7 @@ class Task extends ItemType {
         await hideElement("task-hint-notification");
         await showElementImmediately("book-menu");
     }
-    
+
     async completeTask() {
         if (this.completed) return;
         const taskGroup = taskGroups.lookupTaskGroupWithTaskId(this.id);
@@ -440,7 +441,9 @@ class Table {
         return new Table({
             name: name,
             header: headers ? headers : [],
-            rows: lines.map((line) => line.split("|").map(function(item) { return item === "null" ? null : item ; })), // convert "null" to null value
+            rows: lines.map((line) => line.split("|").map(function (item) {
+                return item === "null" ? null : item;
+            })), // convert "null" to null value
         });
     }
 
@@ -493,7 +496,7 @@ class Table {
                     columnTypes[i] = "JSON";
                 } catch (e) {
                     columnTypes[i] = "TEXT";
-                }              
+                }
             } else {
                 columnTypes[i] = "NUMBER";
             }
@@ -506,15 +509,19 @@ class Table {
 
         const queries = [];
         // example: CREATE TABLE Table (col1 TEXT, col2 NUMBER);
-        queries.push(`CREATE TABLE ${this.name} (${columns.join(",")});`);
+        queries.push(`CREATE TABLE ${this.name}
+                      (
+                          ${columns.join(",")}
+                      );`);
         for (let row of this.rows) {
             const valuesWithTypes = [];
             for (let i = 0; i < row.length; i++) {
                 // Adds 'value' if TEXT and escapes ' if necessary, otherwise value (assuming number)
-                valuesWithTypes.push(((columnTypes[i] === "TEXT")||(columnTypes[i] === "JSON"))&& (row[i] != null) ? `'${row[i].split("'").join("\\''")}'` : row[i]);
+                valuesWithTypes.push(((columnTypes[i] === "TEXT") || (columnTypes[i] === "JSON")) && (row[i] != null) ? `'${row[i].split("'").join("\\''")}'` : row[i]);
             }
             // example: INSERT INTO Table (col1, col2) VALUES ("value", 0);
-            queries.push(`INSERT INTO ${this.name} (${this.header.join(",")}) VALUES (${valuesWithTypes.map(v => v == null ? 'null': v).join(",")});`);
+            queries.push(`INSERT INTO ${this.name} (${this.header.join(",")})
+                          VALUES (${valuesWithTypes.map(v => v == null ? 'null' : v).join(",")});`);
         }
         return queries;
     }
@@ -536,7 +543,7 @@ function getNextTaskId(currentTaskId) {
     }
 
     let bookIndex = 0
-    for(const book of taskGroups.asList()) { 
+    for (const book of taskGroups.asList()) {
         if (book.tasks.find(taskId => taskId === currentTaskId)) {
             const indexTask = book.tasks.indexOf(currentTaskId)
             if (indexTask + 1 < book.tasks.length) {
@@ -552,7 +559,7 @@ function getNextTaskId(currentTaskId) {
         bookIndex += 1
 
     }
-    
+
     var getPart = currentTaskId.replace(/[^\d.]/g, ""); // returns 0023
     var num = parseInt(getPart); // returns 23
     var newVal = padWithZeroes(num + 1); // returns 24
@@ -563,8 +570,9 @@ function getNextTaskId(currentTaskId) {
 async function queryAllContentsOfTables(context, tableNames) {
     const queryResults = [];
 
-    if (tableNames.length > 0){
-        const queries = tableNames.map((table) => `SELECT * FROM ${table};`).join("");
+    if (tableNames.length > 0) {
+        const queries = tableNames.map((table) => `SELECT *
+                                                   FROM ${table};`).join("");
         const resultSets = await runSQL(context, queries);
         for (let i = 0; i < resultSets.length; i++) {
             queryResults.push(Table.fromResultSet(tableNames[i], resultSets[i]));
@@ -657,7 +665,7 @@ async function runQueryTests(allowCompletionAndStore) {
     let query = document.getElementById("query-input").value.trim();
     query = query.replace(/\n/g, ' ');
     animateQueryResultsClose();
-    const { results, startTime, endTime } = await Views.TASK.currentTask.runTests(query);
+    const {results, startTime, endTime} = await Views.TASK.currentTask.runTests(query);
 
     let allCorrect = true; // The results are checked during rendering
     const allErrored = didAllError();
@@ -679,7 +687,7 @@ async function runQueryTests(allowCompletionAndStore) {
 
     if (API.loginStatus === LoginStatus.LOGGED_IN && allCorrect) {
         // Display Endgame dialog on last question submission & hide next button
-        if ((taskGroups.getCompletedTaskCount() + 1 >= taskGroups.getTaskCount()) && !DISPLAY_STATE.gameCompleted){
+        if ((taskGroups.getCompletedTaskCount() + 1 >= taskGroups.getTaskCount()) && !DISPLAY_STATE.gameCompleted) {
             if (allowCompletionAndStore) {
                 await Views.TASK.currentTask.completeTask();
                 let certRes = await API.generateCertificate();
@@ -712,98 +720,98 @@ async function runQueryTests(allowCompletionAndStore) {
     if (allCorrect && allowCompletionAndStore && Views.TASK.currentTask) {
         await Views.TASK.currentTask.completeTask();
     } else {
-        if(!allCorrect && allowCompletionAndStore && Views.TASK.currentTask && API.loginStatus === LoginStatus.LOGGED_IN ) {
+        if (!allCorrect && allowCompletionAndStore && Views.TASK.currentTask && API.loginStatus === LoginStatus.LOGGED_IN) {
             animateSubmitButton();
             playSoundById("sound_wrong_answer");
             const profile = await API.self();
             const showHint = profile.history[Views.TASK.currentTask.id]?.length == Config.FALSE_ANSWER_UNTIL_BOOK_HINT;
-            if(showHint){
+            if (showHint) {
                 await Views.TASK.currentTask.showHint();
             }
         }
-    }    
+    }
 }
 
 // Implementation for get recommended task
 async function getUsername() {
     try {
-      const userProfile = await API.self();
-      return userProfile.username;
+        const userProfile = await API.self();
+        return userProfile.username;
     } catch (error) {
-       console.error('Error fetching user profile:', error);
-      return null;
+        console.error('Error fetching user profile:', error);
+        return null;
     }
-  }
-  
-function getRecommendedTask(username) {
-  return new Promise((resolve, reject) => {
-    if (!API.token) {
-      reject('API token is not set. User might not be logged in.');
-      return;
-    }
-
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (this.readyState === 4) {
-        if (xhr.status === 200) {
-          const taskId = this.responseText.trim();
-          if (taskId) {
-            console.log('Recommended Task ID:', taskId);
-            resolve(taskId);
-          } else {
-            reject('No task ID returned from the recommendation API');
-          }
-        } else {
-          reject(`Bad response code '${xhr.status}' for task recommendation: ${xhr.responseText}`);
-        }
-      }
-    };
-    console.log('Sending request to recommend task for username:', username);
-    xhr.open("GET", `${API.getAPIAddress()}/users/recommend-task?username=${encodeURIComponent(username)}`, true);
-    xhr.setRequestHeader("Authorization", `Bearer ${API.token}`);
-    xhr.send();
-  });
 }
-  
+
+function getRecommendedTask(username) {
+    return new Promise((resolve, reject) => {
+        if (!API.token) {
+            reject('API token is not set. User might not be logged in.');
+            return;
+        }
+
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                if (xhr.status === 200) {
+                    const taskId = this.responseText.trim();
+                    if (taskId) {
+                        console.log('Recommended Task ID:', taskId);
+                        resolve(taskId);
+                    } else {
+                        reject('No task ID returned from the recommendation API');
+                    }
+                } else {
+                    reject(`Bad response code '${xhr.status}' for task recommendation: ${xhr.responseText}`);
+                }
+            }
+        };
+        console.log('Sending request to recommend task for username:', username);
+        xhr.open("GET", `${API.getAPIAddress()}/users/recommend-task?username=${encodeURIComponent(username)}`, true);
+        xhr.setRequestHeader("Authorization", `Bearer ${API.token}`);
+        xhr.send();
+    });
+}
+
 async function loadRecommendedTask() {
     const username = await getUsername();
     if (!username) {
-      console.error('Username not available.');
-      return;
+        console.error('Username not available.');
+        return;
     }
-  
+
     try {
-      // Check if there is a current task before trying to close it
-      if (Views.TASK.currentTask) {
-        await showElementImmediately("loading-view");// Switch to loading view before closing the task
-        await Views.TASK.close();        // Close the current task view
-      } else {
-        await showElementImmediately("loading-view");// Switch to loading view
-      }
-  
-      console.log('Loading recommended task'); 
-      const taskID = await getRecommendedTask(username);  
-      console.log('Recommended Task ID:', taskID); 
-  
-      if (taskID) {
-        // Ensure the task is in the tasks object
-        if (!tasks[taskID]) {
-          tasks[taskID] = new LazyTask(taskID);
+        // Check if there is a current task before trying to close it
+        if (Views.TASK.currentTask) {
+            await showElementImmediately("loading-view");// Switch to loading view before closing the task
+            await Views.TASK.close();        // Close the current task view
+        } else {
+            await showElementImmediately("loading-view");// Switch to loading view
         }
 
-        await Views.TASK.show(taskID);
-  
-        // Ensure the task view is visible
-        await changeView(Views.TASK);
-        await Views.TASK.open();  
-      } else {
-        console.error('Failed to load recommended task. Reason: Task ID is null or undefined.');
-        console.log('Returned Task ID:', taskID); 
-      }
+        console.log('Loading recommended task');
+        const taskID = await getRecommendedTask(username);
+        console.log('Recommended Task ID:', taskID);
+
+        if (taskID) {
+            // Ensure the task is in the tasks object
+            if (!tasks[taskID]) {
+                tasks[taskID] = new LazyTask(taskID);
+            }
+
+            await Views.TASK.show(taskID);
+
+            // Ensure the task view is visible
+            await changeView(Views.TASK);
+            await Views.TASK.open();
+        } else {
+            console.error('Failed to load recommended task. Reason: Task ID is null or undefined.');
+            console.log('Returned Task ID:', taskID);
+        }
     } catch (error) {
-      console.error('Error loading recommended task:', error);
+        console.error('Error loading recommended task:', error);
     } finally {
-      // Hide the loading view in all cases
-      await hideElementImmediately("loading-view");
+        // Hide the loading view in all cases
+        await hideElementImmediately("loading-view");
     }
-  }
+}

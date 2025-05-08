@@ -91,12 +91,12 @@ const LeaderboardButton = {
 
 // Functionality related to the AI button
 const AIButton = {
-  async show() {
-    await showElementImmediately("ai-button");
-  },
-  async hide() {
-    await hideElementImmediately("ai-button");
-  },
+    async show() {
+        await showElementImmediately("ai-button");
+    },
+    async hide() {
+        await hideElementImmediately("ai-button");
+    },
 };
 
 // Functionality related to the star counter
@@ -144,7 +144,7 @@ const RelativeLeaderboard = {
                 name: shortenedUserName,
                 label: "sorcerer-above"
             });
-        } else if(allUsers.length === 1) {
+        } else if (allUsers.length === 1) {
             this.getElement("sorcerer-above").innerHTML = i18n.get("relative-alone");
         } else {
             this.getElement("sorcerer-above").innerHTML = i18n.get("relative-congrats");
@@ -404,10 +404,11 @@ class TaskView extends View {
         await showElement(this.id);
         document.getElementById(this.id).focus();
         createBookFromKeywords(this.currentTask.id);
-  }
+    }
 
     async close() {
-        deleteBookById(this.currentTask.id);this.currentTask = null;
+        deleteBookById(this.currentTask.id);
+        this.currentTask = null;
         await hideElement(this.id);
         removePreservedTaskBoxHeight();
     }
@@ -448,29 +449,29 @@ class TaskView extends View {
                     .trim();
                 if (parsonsInput) $("#query-input").val(parsonsInput);
 
-        runQueryTests(true);
-      });
-    $("#reset-input-button")
-      .off()
-      .on("click", function (e) {
-        e.preventDefault();
-        var initial = Views.TASK.currentTask.parsons.join("\n");
-        Views.TASK.parsons.init(initial);
-        Views.TASK.parsons.shuffleLines();
-       });
-       $("#recommend-task-in-view")
-       .off()
-       .on("click", function (e) {
-         e.preventDefault();
-         loadRecommendedTask();
-       });
-       $("#theory-button")
-       .off()
-       .on("click", function (e) {
-         e.preventDefault();
-          showkeywordsbook(new Event("click"), Views.TASK.currentTask.id);
-       });
-  }
+                runQueryTests(true);
+            });
+        $("#reset-input-button")
+            .off()
+            .on("click", function (e) {
+                e.preventDefault();
+                var initial = Views.TASK.currentTask.parsons.join("\n");
+                Views.TASK.parsons.init(initial);
+                Views.TASK.parsons.shuffleLines();
+            });
+        $("#recommend-task-in-view")
+            .off()
+            .on("click", function (e) {
+                e.preventDefault();
+                loadRecommendedTask();
+            });
+        $("#theory-button")
+            .off()
+            .on("click", function (e) {
+                e.preventDefault();
+                showkeywordsbook(new Event("click"), Views.TASK.currentTask.id);
+            });
+    }
 
     async toggleAnswer() {
         const currentTask = this.currentTask;
@@ -523,7 +524,8 @@ class TaskView extends View {
         if (task.parsons) {
             await showElementImmediately("parsons-input");
             await hideElementImmediately("query-input");
-            await showElementImmediately("recommend-task-in-view");this.initParsonsProblem();
+            await showElementImmediately("recommend-task-in-view");
+            this.initParsonsProblem();
         } else {
             await showElementImmediately("recommend-task-in-view");
             await showElementImmediately("query-input");
@@ -541,19 +543,19 @@ class TaskView extends View {
                     query = null;
                     this.queryInputField = document.getElementById("query-input").value = i18n.get("query-placeholder");
                 });
-        $("#recommend-task-in-view")
-        .off()
-        .on("click", function (e) {
-          e.preventDefault();
-          loadRecommendedTask();
-        });
-        $("#theory-button")
-        .off()
-        .on("click", function (e) {
-          e.preventDefault();
-          showkeywordsbook(new Event("click"), task.id);
-        });
-    }
+            $("#recommend-task-in-view")
+                .off()
+                .on("click", function (e) {
+                    e.preventDefault();
+                    loadRecommendedTask();
+                });
+            $("#theory-button")
+                .off()
+                .on("click", function (e) {
+                    e.preventDefault();
+                    showkeywordsbook(new Event("click"), task.id);
+                });
+        }
 
         if (API.loginStatus === LoginStatus.LOGGED_IN) {
             this.loadPreviousAnswers(task);
@@ -622,7 +624,8 @@ class TaskView extends View {
     }
 
     async show(taskID) {
-        console.log("taskID", taskID);this.currentTask = tasks[taskID];
+        console.log("taskID", taskID);
+        this.currentTask = tasks[taskID];
         try {
             await this.showWithQuery();
         } catch (e) {
@@ -1639,49 +1642,48 @@ class EndTextView extends View {
 }
 
 class AIModalView extends View {
-  constructor() {
-    super("display-ai-modal");
-    // this.shownItem = null;
-    this.graph = undefined;
-    this.addAIButtonClickListener();
-  }
-
-  addAIButtonClickListener() {
-    const aiButton = document.getElementById("ai-button");
-    if (aiButton) {
-      aiButton.addEventListener("click", () => this.show());
-    } else {
-      console.warn("AI button not found in the DOM. Event listener not added.");
+    constructor() {
+        super("display-ai-modal");
+        // this.shownItem = null;
+        this.graph = undefined;
+        this.addAIButtonClickListener();
     }
-  }
 
-  async open() {
-    const trigger = document.activeElement;
-    if (!DISPLAY_STATE.editMode)  document.getElementById(this.id).focus();
-    await showModal("#" + this.id, DISPLAY_STATE.previousSecondaryView, trigger);
-  }
-
-
-  async close() {
-    // this.shownItem = null;
-    $("#" + this.id).modal("hide");
-  }
-
-  addAIButtonClickListener() {
-    document.body.addEventListener('click', (event) => {
-      const aiButton = event.target.closest('#ai-button');
-      if (aiButton) {
-        // console.log("AI button clicked");
-        const icon = aiButton.querySelector('.jump-animation');
-        if (icon) {
-          icon.style.animation = 'none';
+    addAIButtonClickListener() {
+        const aiButton = document.getElementById("ai-button");
+        if (aiButton) {
+            aiButton.addEventListener("click", () => this.show());
+        } else {
+            console.warn("AI button not found in the DOM. Event listener not added.");
         }
-        changeSecondaryView(Views.AIMODAL);
-      }
-    });
-  }
-}
+    }
 
+    async open() {
+        const trigger = document.activeElement;
+        if (!DISPLAY_STATE.editMode) document.getElementById(this.id).focus();
+        await showModal("#" + this.id, DISPLAY_STATE.previousSecondaryView, trigger);
+    }
+
+
+    async close() {
+        // this.shownItem = null;
+        $("#" + this.id).modal("hide");
+    }
+
+    addAIButtonClickListener() {
+        document.body.addEventListener('click', (event) => {
+            const aiButton = event.target.closest('#ai-button');
+            if (aiButton) {
+                // console.log("AI button clicked");
+                const icon = aiButton.querySelector('.jump-animation');
+                if (icon) {
+                    icon.style.animation = 'none';
+                }
+                changeSecondaryView(Views.AIMODAL);
+            }
+        });
+    }
+}
 
 
 Views = {
