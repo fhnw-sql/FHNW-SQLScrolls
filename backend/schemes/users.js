@@ -5,14 +5,14 @@ const userSchemas = {
   // Registration
   registerPOST: Joi.object().keys({
     username: Joi.string()
-      .email({ tlds: { allow: false } })
+ //     .email({ tlds: { allow: false } })
       .required(),
     password: Joi.string().min(5).max(20).required(),
   }),
   // Authentication
   authenticatePOST: Joi.object().keys({
     username: Joi.string()
-      .email({ tlds: { allow: false } })
+//      .email({ tlds: { allow: false } })
       .required(),
     password: Joi.string().required(),
   }),
@@ -21,11 +21,13 @@ const userSchemas = {
     task: Joi.string().required(),
     correct: Joi.boolean().required(),
     query: Joi.string().required(),
+    startTime: Joi.string().isoDate().required(),
+    endTime: Joi.string().isoDate().required(),
   }),
   // Recover
   recoverPOST: Joi.object().keys({
     username: Joi.string()
-      .email({ tlds: { allow: false } })
+ //     .email({ tlds: { allow: false } })
       .required(),
   }),
   // Reset
