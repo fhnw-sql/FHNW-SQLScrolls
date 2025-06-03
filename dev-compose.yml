@@ -3,7 +3,7 @@
 version: "3"
 services:
   db:
-    container_name: mongo
+    container_name: stg-mongo
     image: mongo
     restart: on-failure
     volumes:
@@ -41,7 +41,7 @@ services:
     volumes:
       - ../FHNW-SQL-Training-Game.github.io:/usr/share/nginx/html  # Mounting of frontend code
   model:
-    container_name: model-python
+    container_name: stg-model
     restart: always
     build:
       context: .

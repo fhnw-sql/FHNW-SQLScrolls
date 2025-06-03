@@ -7,7 +7,7 @@
 version: "3"
 services:
   db:
-    container_name: mongo
+    container_name: stg-mongo
     image: mongo
     restart: on-failure
     volumes:
@@ -43,7 +43,7 @@ services:
       - "80:80"
       - "3000:3000"
   model:
-    container_name: model-python
+    container_name: stg-python
     restart: always
     build:
       context: .
