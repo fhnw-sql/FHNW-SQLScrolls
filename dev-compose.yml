@@ -45,7 +45,7 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: Model-implementation/Dockerfile
+      dockerfile: model/Dockerfile
       args:
         API_URL: ${API_URL}
     environment:
