@@ -3,7 +3,7 @@ FROM python:3.10-slim
 RUN mkdir -p /v1
 WORKDIR /v1
 
-COPY ./Model-implementation .
+COPY ./model .
 COPY ./tasks ./tasks
 
 RUN pip install --no-cache-dir -r requirements.txt
