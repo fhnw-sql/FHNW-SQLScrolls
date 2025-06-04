@@ -2,7 +2,7 @@ const db = require("../utils/db");
 const ObjectId = require("mongodb").ObjectId;
 
 function getTasks(progression) {
-   return [].concat.apply([], progression.map(b => b.tasks)).slice(0, 5)
+    return [].concat.apply([], progression.map(b => b.tasks)).slice(0, 5)
 }
 
 function checkIfFinished(user, progression) {
@@ -12,8 +12,8 @@ function checkIfFinished(user, progression) {
     if (!history) {
         return false
     }
-    
-    for(let task of tasks) {
+
+    for (let task of tasks) {
         let taskName = 'task-' + task
         let answers = history[taskName]
 
@@ -25,11 +25,11 @@ function checkIfFinished(user, progression) {
 
         if (correct.length < 1) {
             return false
-        }        
+        }
     }
     return true
 }
-  
+
 function checkIfNew(user, progression) {
     let certificates = user.certificates
 
@@ -41,11 +41,11 @@ function checkIfNew(user, progression) {
     let startDate = user.history['task-000'][0].date
     let numStars = getTasks(progression).length
 
-    let duplicates = certificates.filter(c => (c.stars >= numStars)&&(c.date>=startDate))
+    let duplicates = certificates.filter(c => (c.stars >= numStars) && (c.date >= startDate))
 
     return (duplicates.length == 0);
 }
-  
+
 function generateCertificate(user, progression) {
 
     let certificate = {
@@ -58,7 +58,7 @@ function generateCertificate(user, progression) {
 
     return certificate;
 }
-  
+
 module.exports = {
     checkIfFinished,
     checkIfNew,
