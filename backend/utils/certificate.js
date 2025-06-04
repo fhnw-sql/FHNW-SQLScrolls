@@ -1,4 +1,3 @@
-const db = require("../utils/db");
 const ObjectId = require("mongodb").ObjectId;
 
 function getTasks(progression) {
@@ -40,23 +39,19 @@ function checkIfNew(user, progression) {
     //check previous certificates
     let startDate = user.history['task-000'][0].date
     let numStars = getTasks(progression).length
-
     let duplicates = certificates.filter(c => (c.stars >= numStars) && (c.date >= startDate))
 
-    return (duplicates.length == 0);
+    return (duplicates.length === 0);
 }
 
 function generateCertificate(user, progression) {
-
-    let certificate = {
+    return {
         _id: new ObjectId(),
         date: Date.now(),
         stars: getTasks(progression).length,
         name: user.givenname + ' ' + user.surname,
         email: user.username
-    }
-
-    return certificate;
+    };
 }
 
 module.exports = {
