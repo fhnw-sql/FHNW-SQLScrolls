@@ -791,7 +791,6 @@ async function loadRecommendedTask() {
 
         console.log('Loading recommended task');
         const taskID = await getRecommendedTask(username);
-        console.log('Recommended Task ID:', taskID);
 
         if (taskID) {
             // Ensure the task is in the tasks object
