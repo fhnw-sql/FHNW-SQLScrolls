@@ -690,7 +690,7 @@ async function runQueryTests(allowCompletionAndStore) {
         if ((taskGroups.getCompletedTaskCount() + 1 >= taskGroups.getTaskCount()) && !DISPLAY_STATE.gameCompleted) {
             if (allowCompletionAndStore) {
                 await Views.TASK.currentTask.completeTask();
-                let certRes = await API.generateCertificate();
+                await API.generateCertificate();
                 DISPLAY_STATE.gameCompleted = true
                 await changeView(Views.END_TEXT);
             }
