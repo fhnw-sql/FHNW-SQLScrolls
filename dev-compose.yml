@@ -1,6 +1,5 @@
 # Docker deployment made for active development
 
-version: "3"
 services:
   db:
     container_name: stg-mongo
@@ -21,10 +20,10 @@ services:
       - JWT_SECRET=FHNW_2021
       - FROM_SENDER=stg@github.io                                 # Necessary env. variable on prod.
       - POSTMARK_API_KEY=blank
-      - PORT=3001
+      - PORT=4001
       - IO_URL=http://localhost:80                                # Necessary env. variable on prod.
     ports:
-      - "3001:3001"
+      - "4001:4001"
   frontend:
     container_name: stg-frontend
     depends_on:
@@ -33,7 +32,7 @@ services:
     build:
       context: .                                                  # Use local directory for building process
       args:
-        API_URL: http://localhost:3000                            # Necessary env. variable on prod.
+        API_URL: http://localhost:4001                            # Necessary env. variable on prod.
         API_URL_PUBLIC: ${API_URL_PUBLIC}
     ports:
       - "80:80"

@@ -3,8 +3,6 @@
 # POSTMARK_API_KEY -> POSTMARK_API_KEY
 # FROM_SENDER -> POSTMARK_API_KEY
 
-
-version: "3"
 services:
   db:
     container_name: stg-mongo
@@ -21,14 +19,14 @@ services:
     restart: always
     build: ../FHNW-SQL-Training-Game-API
     environment:
-      - MONGODB_URI=mongodb://mongo:27017/stg-api
+      - MONGODB_URI=mongodb://stg-mongo:27017/stg-api
       - JWT_SECRET=FHNW_2021
       - FROM_SENDER=${FROM_SENDER}
       - POSTMARK_API_KEY=${POSTMARK_API_KEY}
-      - PORT=3001
+      - PORT=4001
       - IO_URL=${IO_URL}
     ports:
-      - "3001:3001"
+      - "4001:4001"
   frontend:
     container_name: stg-frontend
     depends_on:
@@ -43,7 +41,7 @@ services:
       - "80:80"
       - "3000:3000"
   model:
-    container_name: stg-python
+    container_name: stg-model
     restart: always
     build:
       context: .
@@ -51,6 +49,6 @@ services:
       args:
         API_URL: ${API_URL}
     environment:
-      - MONGODB_URI=mongodb://mongo:27017/stg-api
+      - MONGODB_URI=mongodb://stg-mongo:27017/stg-api
     ports:
       - "5001:5001"
