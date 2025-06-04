@@ -16,7 +16,7 @@ services:
     restart: always
     build: ../FHNW-SQL-Training-Game-API
     environment:
-      - MONGODB_URI=mongodb://mongo:27017/stg-api
+      - MONGODB_URI=mongodb://stg-mongo:27017/stg-api
       - JWT_SECRET=FHNW_2021
       - FROM_SENDER=stg@github.io                                 # Necessary env. variable on prod.
       - POSTMARK_API_KEY=blank
@@ -48,7 +48,7 @@ services:
       args:
         API_URL: ${API_URL}
     environment:
-      - MONGODB_URI=mongodb://mongo:27017/stg-api
+      - MONGODB_URI=mongodb://stg-mongo:27017/stg-api
     ports:
       - "5001:5001"
 
