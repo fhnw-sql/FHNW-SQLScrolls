@@ -1,8 +1,7 @@
-FROM node:10.19.0
-#FROM node:14
+FROM node:20-slim
 
 ## Set Port
-ENV PORT=3001
+ENV PORT=4001
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -18,5 +17,5 @@ RUN npm ci --only=production
 # Bundle app source
 COPY . .
 
-EXPOSE 3001
+EXPOSE 4001
 CMD [ "node", "server.js" ]

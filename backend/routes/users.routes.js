@@ -4,16 +4,15 @@ const db = require("../utils/db");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
-const { ObjectID } = require("mongodb");
+const { ObjectId } = require("mongodb");
 const postmark = require("postmark");
 const reqBodyValidator = require("../middlewares/reqBodyValidator");
 const { registerPOST, authenticatePOST, authenticateSWITCHaaiPOST, answerSqlPATCH, recoverPOST, resetPOST } = require("../schemes/users");
 const { checkIfFinished, checkIfNew, generateCertificate } = require("../utils/certificate");
-const fetch = require("node-fetch");
 
 const cors = require("cors");
 
-router.use(cors())
+router.use(cors());
 
 // /users/register
 router.post("/register", reqBodyValidator(registerPOST), async function ({ body: user }, res, next) {
@@ -67,13 +66,14 @@ router.patch("/self/stars", async function (req, res, next) {
   try {
     // Update the user's stars value without returning the updated document
     const result = await users.findOneAndUpdate(
-        { _id: new ObjectID(req.user.userId) }, // Find the user by ID
+        { _id: new ObjectId(req.auth.userId) }, // Find the user by ID
         { $set: { stars: stars } }              // Update only the stars field
     );
-
+/*
     if (!result.value) {
       return res.status(404).json({ error: "User not found." });
     }
+*/
 
     // Return success message
     return res.json({ message: "stars updated successfully." });
@@ -82,32 +82,35 @@ router.patch("/self/stars", async function (req, res, next) {
     next(err);
   }
 });
-
-// /users/self/timeLastActive
 router.patch("/self/timeLastActive", async function (req, res, next) {
+  console.log("🔥 PATCH /users/self/timeLastActive hit");
+
   const users = db.get().collection("users");
+  console.log("ALL USERS", users);
 
-  // No request body required, since we call this endpoint without any parameters
-  // Also, no checking of incoming parameters required here
+  console.log("🔍 req.auth.userId =", req.auth.userId);
+  console.log("🧪 Type of req.auth.userId:", typeof req.auth.userId);
 
-  try {
-    // Set the timestamp to the current time in the backend
-    const result = await users.findOneAndUpdate(
-        { _id: new ObjectID(req.user.userId) }, // Find the user by ID
-        { $set: { timeLastActive: new Date() } } // Set current time for timeStarsEarned
-    );
+  const userId = new ObjectId(req.auth.userId);
+  console.log("🔍 Converted ObjectId:", userId);
 
-    if (!result.value) {
-      return res.status(404).json({ error: "User not found." });
-    }
+  const result = await users.findOneAndUpdate(
+      { _id: userId },
+      { $set: { timeLastActive: new Date() } },
+      { returnDocument: "after" }
+  );
 
-    // Return success message
-    return res.json({ message: "timeLastActive timestamp updated successfully." });
-  } catch (err) {
-    console.error("Error updating timeLastActive timestamp:", err);
-    next(err);
+  console.log("🔧 MongoDB result:", result);
+/*
+  if (!result.value) {
+    console.log("❌ No user found with that ID");
+    return res.status(404).json({ error: "User not found." });
   }
+*/
+
+  return res.json({ message: "timeLastActive updated successfully." });
 });
+
 
 // /users/self/timeStarsEarned
 router.patch("/self/timeStarsEarned", async function (req, res, next) {
@@ -119,14 +122,14 @@ router.patch("/self/timeStarsEarned", async function (req, res, next) {
   try {
     // Set the timestamp to the current time in the backend
     const result = await users.findOneAndUpdate(
-        { _id: new ObjectID(req.user.userId) }, // Find the user by ID
+        { _id: new ObjectId(req.auth.userId) }, // Find the user by ID
         { $set: { timeStarsEarned: new Date() } } // Set current time for timeStarsEarned
     );
-
+/*
     if (!result.value) {
       return res.status(404).json({ error: "User not found." });
     }
-
+*/
     // Return success message
     return res.json({ message: "timeStarsEarned timestamp updated successfully." });
   } catch (err) {
@@ -150,14 +153,14 @@ router.patch("/self/classKey", async function (req, res, next) {
   try {
     // Update the user's classKey value without returning the updated document
     const result = await users.findOneAndUpdate(
-        { _id: new ObjectID(req.user.userId) }, // Find the user by ID
+        { _id: new ObjectId(req.auth.userId) }, // Find the user by ID
         { $set: { classKey: classKey} } // Update only the classKey field
     );
-
+/*
     if (!result.value) {
       return res.status(404).json({ error: "User not found." });
     }
-
+*/
     // Return success message
     return res.json({ message: "classKey inserted successfully." });
   } catch (err) {
@@ -173,7 +176,7 @@ router.patch("/self/togglePrivacy", async function (req, res, next) {
 
   try {
     // Find the user in the database
-    const user = await users.findOne({ _id: new ObjectID(req.user.userId) });
+    const user = await users.findOne({ _id: new ObjectId(req.auth.userId) });
 
     if (!user) {
       return res.status(404).json({ error: "User not found." });
@@ -221,7 +224,7 @@ router.post("/authenticate", reqBodyValidator(authenticatePOST), async function 
   if (!user || !user.password || !bcrypt.compareSync(value.password, user.password)) return next("Username or password is incorrect");
 
   // Sign Token
-  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "365d" });
+  const token = jwt.sign({ userId: user._id.toString() }, process.env.JWT_SECRET, { expiresIn: "365d" });
   const retVal = { token };
   return res.json(retVal);
 });
@@ -289,7 +292,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
       .findOneAndUpdate(
           { _id: user._id },
           { $set: value },
-          { returnOriginal: false }
+          { returnDocument: "after" }
         )
         .catch((err) => {console.error("update error ", err); next(err)});
     }
@@ -316,7 +319,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
 router.get("/self", async function (req, res, next) {
   // Get Users Collections
   const users = db.get().collection("users");
-  const user = await users.findOne({ _id: new ObjectID(req.user.userId) });
+  const user = await users.findOne({ _id: new ObjectId(req.auth.userId) });
   const { password, ...retVal } = user;
   return res.json(retVal);
 });
@@ -352,7 +355,7 @@ router.get("/classFiltered", async function (req, res, next) {
     const users = db.get().collection("users");
 
     // Retrieve the requesting user's data
-    const currentUser = await users.findOne({ _id: new ObjectID(req.user.userId) });
+    const currentUser = await users.findOne({ _id: new ObjectId(req.auth.userId) });
 
     // Check if the user exists
     if (!currentUser) {
@@ -382,7 +385,7 @@ router.get("/classFiltered", async function (req, res, next) {
 router.patch("/self/certificate", async function (req, res, next) {
   // Get Users Certificate if finished Game
   const users = db.get().collection("users");
-  const user = await users.findOne({ _id: new ObjectID(req.user.userId) });
+  const user = await users.findOne({ _id: new ObjectId(req.auth.userId) });
 
   try {
 
@@ -397,7 +400,7 @@ router.patch("/self/certificate", async function (req, res, next) {
     .findOneAndUpdate(
       { _id: user._id },
       { $addToSet: { [`certificates`]: newCertificate } },
-      { returnOriginal: false }
+      { returnDocument: "after" }
     )
     .then( v => {
       return res.json(newCertificate);
@@ -413,13 +416,12 @@ router.patch("/self/certificate", async function (req, res, next) {
 
 // /users/self/answer_sql
 router.patch("/self/answer_sql", reqBodyValidator(answerSqlPATCH), async function (
-  { user: jwt, body: value },
-  res,
-  next
+    req, res, next
 ) {
-  // Get Users Collections
+  const value = req.body;
   const users = db.get().collection("users");
-  const user = await users.findOne({ _id: new ObjectID(jwt.userId) });
+  const user = await users.findOne({ _id: new ObjectId(req.auth.userId) });
+
 
   // conduct payload
   const payload = {
@@ -435,7 +437,7 @@ router.patch("/self/answer_sql", reqBodyValidator(answerSqlPATCH), async functio
     .findOneAndUpdate(
       { _id: user._id },
       { $addToSet: { [`history.${value.task}`]: payload } },
-      { returnOriginal: false }
+      { returnDocument: "after" }
     )
     .then(({ value }) => {
       var { password, ...user } = value;
@@ -445,42 +447,39 @@ router.patch("/self/answer_sql", reqBodyValidator(answerSqlPATCH), async functio
 });
 
 // Delete history
-router.patch("/self/restart", async function (
-  { user: jwt },
-  res,
-  next
-) {
-
-  // Get Users Collections
+router.patch("/self/restart", async function (req, res, next) {
   const users = db.get().collection("users");
   const archives = db.get().collection("users_archive");
-  let user = await users.findOne({ _id: new ObjectID(jwt.userId) });
+
+  const user = await users.findOne({ _id: new ObjectId(req.auth.userId) });
+
+  if (!user) {
+    return res.status(404).json({ error: "User not found." });
+  }
 
   // Archive current user
-  // clone user
-  let clone = JSON.parse(JSON.stringify(user))
+  const clone = { ...user, _id: { _id: user._id, date: Date.now() } };
 
-  // Build historical ID
-  clone._id = { '_id': user._id, 'date': Date.now()}
-
-  // save it
-  await archives.insertOne(clone)
-    .catch((err) => {console.error("insert error ", err); next(err)});
+  await archives.insertOne(clone).catch((err) => {
+    console.error("insert error ", err);
+    return next(err);
+  });
 
   // Empty history
   users
-    .findOneAndUpdate(
-      { _id: user._id },
-      { $unset: { 'history': 1 } },
-      { returnOriginal: false }
-    )
-    .then(({ value }) => {
-      var { password, ...user } = value;
-      console.log("Deleted history for user ", user.username)
-      return res.json(user);
-    })
-    .catch((err) => next(err));
+      .findOneAndUpdate(
+          { _id: user._id },
+          { $unset: { history: 1 } },
+          { returnDocument: "after" }
+      )
+      .then(({ value }) => {
+        const { password, ...sanitizedUser } = value;
+        console.log("Deleted history for user", sanitizedUser.username);
+        return res.json(sanitizedUser);
+      })
+      .catch((err) => next(err));
 });
+
 
 // /users/recover
 // A reset link is created and an options object is created defining the from, to, subject and text and an email is sent to the user using the sendgrid package.
@@ -496,7 +495,7 @@ router.post("/recover", reqBodyValidator(recoverPOST), async function (req, res,
           resetPasswordExpires: Date.now() + 3600000,
         },
       },
-      { returnOriginal: false }
+      { returnDocument: "after" }
     )
     .then(async ({ value: user }) => {
       if (!user) return next("User not found");
@@ -535,7 +534,7 @@ router.post("/reset", reqBodyValidator(resetPOST), async function ({ body: value
           resetPasswordExpires: undefined,
         },
       },
-      { returnOriginal: false }
+      { returnDocument: "after" }
     )
     .then(async ({ value: user }) => {
       if (!user) return next("Token invalid or expired! Request a new one!");
@@ -568,7 +567,7 @@ router.get("/recommend-task", async function (req, res) {
   }
 
   try {
-      const response = await fetch(`http://model-python:5001/recommend-task?userID=${username}`);
+      const response = await fetch(`http://stg-model:5001/recommend-task?userID=${username}`);
       const data = await response.text(); 
       console.log("Response from recommendation API:", data);
 
@@ -578,7 +577,7 @@ router.get("/recommend-task", async function (req, res) {
           return res.status(response.status).send(data);
       }
 
-      res.status(response.status).send(data); // Send back the same status and data received from model-python API
+      res.status(response.status).send(data); // Send back the same status and data received from stg-model API
   } catch (error) {
       console.error("Error occurred while recommending task:", error);
       res.status(500).json({ error: "Internal server error while recommending task", details: error.message });
