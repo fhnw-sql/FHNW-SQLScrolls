@@ -246,7 +246,7 @@ class Task extends ItemType {
                     const correct = table.isEqual(wanted, test.strict);
                     results.push(new Result({source: test, correct, table, wanted}));
                 } else {
-                    if (resultSets.length == wanted.rows.length) {
+                    if (resultSets.length === wanted.rows.length) {
                         results.push(
                             new Result({
                                 source: test,
@@ -724,7 +724,7 @@ async function runQueryTests(allowCompletionAndStore) {
             animateSubmitButton();
             playSoundById("sound_wrong_answer");
             const profile = await API.self();
-            const showHint = profile.history[Views.TASK.currentTask.id]?.length == Config.FALSE_ANSWER_UNTIL_BOOK_HINT;
+            const showHint = profile.history[Views.TASK.currentTask.id]?.length === Config.FALSE_ANSWER_UNTIL_BOOK_HINT;
             if (showHint) {
                 await Views.TASK.currentTask.showHint();
             }
