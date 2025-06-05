@@ -72,7 +72,7 @@ router.patch("/self/stars", async function (req, res, next) {
 
     try {
         // Update the user's stars value without returning the updated document
-        const result = await users.findOneAndUpdate(
+        await users.findOneAndUpdate(
             {_id: new ObjectId(req.auth.userId)}, // Find the user by ID
             {$set: {stars: stars}}              // Update only the stars field
         );
@@ -128,7 +128,7 @@ router.patch("/self/timeStarsEarned", async function (req, res, next) {
 
     try {
         // Set the timestamp to the current time in the backend
-        const result = await users.findOneAndUpdate(
+        await users.findOneAndUpdate(
             {_id: new ObjectId(req.auth.userId)}, // Find the user by ID
             {$set: {timeStarsEarned: new Date()}} // Set current time for timeStarsEarned
         );
@@ -159,7 +159,7 @@ router.patch("/self/classKey", async function (req, res, next) {
 
     try {
         // Update the user's classKey value without returning the updated document
-        const result = await users.findOneAndUpdate(
+        await users.findOneAndUpdate(
             {_id: new ObjectId(req.auth.userId)}, // Find the user by ID
             {$set: {classKey: classKey}} // Update only the classKey field
         );
@@ -244,7 +244,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
         let parsedCookie = {}
         try {
             headers.cookie.split(';').map(item => item.split("=")).forEach(pair => {
-                if (pair[0].trim() == 'sqlscrolls-auth') authCookie = pair.slice(1).join('=')
+                if (pair[0].trim() === 'sqlscrolls-auth') authCookie = pair.slice(1).join('=')
             })
             authCookie.split("|").map(pair => pair.split(":")).forEach(item => {
                 parsedCookie[item[0]] = item[1]
@@ -279,7 +279,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
                     user[field] = value[field]
                     needUpdate = true
                 } else {
-                    if (user[field] != value[field]) {
+                    if (user[field] !== value[field]) {
                         console.log("auth COOKIES", headers.cookie)
                         console.log("auth fontend: ", value)
                         console.error("User data icorrect (different from registration) user = ", user[field], " value = ", value[field])
@@ -289,7 +289,7 @@ router.post("/authenticateSWITCHaai", reqBodyValidator(authenticateSWITCHaaiPOST
             }
             // check display name changes
             for (const field of ["givenname", "surname"]) {
-                if ((!user[field]) || (user[field] != value[field])) {
+                if ((!user[field]) || (user[field] !== value[field])) {
                     user[field] = value[field]
                     needUpdate = true
                 }
