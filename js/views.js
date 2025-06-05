@@ -498,8 +498,9 @@ class TaskView extends View {
     }
 
     async showWithQuery(query) {
-        // const { showkeywordsbook } = require('./items.js');await hideElementImmediately("model-answer");
+        // const { showkeywordsbook } = require('./items.js');
         await hideElementImmediately("task-next-button");
+        await hideElementImmediately("model-answer");
         await hideElementImmediately("query-model-button");
         const task = this.currentTask;
         if (task instanceof LazyTask && !task.loaded) await task.loadTask();
