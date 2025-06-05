@@ -433,34 +433,36 @@ router.patch("/self/certificate", async function (req, res, next) {
 });
 
 // /users/self/answer_sql
-router.patch("/self/answer_sql", reqBodyValidator(answerSqlPATCH), async function (
-    req, res, next
-) {
-    const value = req.body;
-    const users = db.get().collection("users");
-    const user = await users.findOne({_id: new ObjectId(req.auth.userId)});
+router.patch("/self/answer_sql", reqBodyValidator(answerSqlPATCH), async function (req, res, next) {
+    try {
+        const body = req.body;
+        const users = db.get().collection("users");
+        const user = await users.findOne({ _id: new ObjectId(req.auth.userId) });
 
-    // conduct payload
-    const payload = {
-        correct: JSON.parse(value.correct),
-        date: Date.now(),
-        query: value.query,
-        startTime: value.startTime,
-        endTime: value.endTime
-    };
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
 
-    // Update
-    users
-        .findOneAndUpdate(
-            {_id: user._id},
-            {$addToSet: {[`history.${value.task}`]: payload}},
-            {returnDocument: "after"}
-        )
-        .then(({value}) => {
-            var {password, ...user} = value;
-            return res.json(user);
-        })
-        .catch((err) => next(err));
+        const payload = {
+            correct: JSON.parse(body.correct),
+            date: Date.now(),
+            query: body.query,
+            startTime: body.startTime,
+            endTime: body.endTime,
+        };
+
+        const result = await users.findOneAndUpdate(
+            { _id: user._id },
+            { $addToSet: { [`history.${body.task}`]: payload } },
+            { returnDocument: "after" }
+        );
+
+        const { password, ...userData } = result.value || {};
+        return res.json(userData);
+    } catch (err) {
+        console.error("🔥 Error in PATCH /self/answer_sql:", err);
+        return res.status(500).json({ error: "Internal server error" });
+    }
 });
 
 // Delete history
