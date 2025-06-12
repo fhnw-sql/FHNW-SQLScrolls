@@ -12,7 +12,7 @@ async function loadItems() {
     for (let item of [
         new ImageItem({
             id: `item-00`,
-            url: "img/letter.png",
+            url: "assets/ui/letter.png",
             alt: "i18n-describe-letter",
             unlocks: [],
             newItem: true,
@@ -21,7 +21,7 @@ async function loadItems() {
         }),
         // new ImageItem({
         //   id: `item-999`,
-        //   url: "img/questionmark.png",
+        //   url: "assets/ui/questionmark.png",
         //   alt: "i18n-describe-questionmark",
         //   unlocks: [],
         //   newItem: false,
@@ -79,7 +79,7 @@ function getItem(itemID) {
         : new ImageItem({
             id: itemID,
             name: "Missing " + itemID + " see console.",
-            url: "img/glass-jar.png",
+            url: "assets/ui/glass-jar.png",
             onclick: "",
         });
 }

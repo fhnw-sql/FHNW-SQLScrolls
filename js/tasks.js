@@ -156,7 +156,7 @@ class Task extends ItemType {
                 id: this.id,
                 name: `${i18n.get(parsed.metadata.name)}`,
                 onclick: `Views.TASK.show('${this.id}')`,
-                url: "./img/scroll.png",
+                url: "./assets/ui/scroll.png",
             });
             this.color =
                 parsed.metadata.color && parsed.metadata.color.startsWith("col-book-")

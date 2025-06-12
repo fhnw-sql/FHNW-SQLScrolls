@@ -256,7 +256,7 @@ class Flame {
     }
 
     render() {
-        if (this.dead) return '<img src="img/glass-jar.png" alt="glass jar" class="captured-flame-jar">' + this.renderEvilFlame();
+        if (this.dead) return '<ui src="assets/ui/glass-jar.png" alt="glass jar" class="captured-flame-jar">' + this.renderEvilFlame();
         return this.evil ? this.renderEvilFlame() : this.renderGoodFlame();
     }
 }

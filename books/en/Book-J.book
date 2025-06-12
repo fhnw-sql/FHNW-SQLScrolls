@@ -23,7 +23,7 @@ PAGE {
 
 PAGE {
     <div class="book-img">
-        <img src="img/zoo-schema.png" alt="Schema"> 
+        <img src="assets/task-schemas/zoo-schema.png" alt="Schema">
     </div>
 }
 

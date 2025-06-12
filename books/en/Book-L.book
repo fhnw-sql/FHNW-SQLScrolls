@@ -14,7 +14,7 @@ PAGE {
     Below you can see the simplified schema for the exercises:
     </br>
     <div class="book-img">
-        <img src="img/music1-simple-ERD.png" alt="Schema"> 
+        <img src="assets/task-schemas/music1-simple-ERD.png" alt="Schema">
     </div>
 }
 
@@ -22,7 +22,7 @@ PAGE {
     Detailed Entity-Relationship Schema
     </br>
     <div class="book-img">
-        <img src="img/music1-detail-ERD.png" alt="Schema"> 
+        <img src="assets/task-schemas/music1-detail-ERD.png" alt="Schema">
     </div>
 }
 

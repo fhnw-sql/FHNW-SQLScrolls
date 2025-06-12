@@ -44,7 +44,7 @@ class TaskGroup extends ItemType {
                 id: `task-group-${options.id}`,
                 name: `i18n-group-${options.id}-name`,
                 onclick: `Views.INVENTORY.showTaskGroup('${options.id}')`,
-                url: './img/scrolls.png',
+                url: './assets/ui/scrolls.png',
                 alt: "task group ${options.id}"
             }),
             unlocked: false,
@@ -118,7 +118,7 @@ class TaskGroup extends ItemType {
                 }
             } catch (e) {
                 rendered[taskID] = `<button class="item${tasks[taskID].completed ? " done" : ""}">
-                    <img class="item-icon" alt="missing task ${taskID}" src="img/scroll.png" draggable="false">
+                    <img class="item-icon" alt="missing task ${taskID}" src="assets/ui/scroll.png" draggable="false">
                     <i class="task-group-color fa fa-fw fa-2x fa-bookmark"></i>
                     <p>${taskID} doesn't exist</p>     
                 </button>`
