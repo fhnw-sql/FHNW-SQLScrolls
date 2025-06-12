@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8"/>
     <link href="css/summary_style.css" rel="stylesheet"/>
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../tasks/progression.js"></script>
@@ -15,6 +14,7 @@
     <script src="../js/tasks.js"></script>
     <script src="../js/taskGroups.js"></script>
     <script src="js/tableutils.js"></script>
+    <title>Summary</title>
 
 </head>
 <body>
@@ -23,31 +23,31 @@
 
 <table id="summary-table" class="styled-table">
     <thead>
-        <tr>
-            <th onclick="sortTable('summary-table', 0)">Book ID</th>
-            <th onclick="sortTable('summary-table', 1)">Book Name</th>
-            <th onclick="sortTable('summary-table', 2)">Book Title</th>
-            <th onclick="sortTable('summary-table', 3)">Task ID</th>
-            <th onclick="sortTable('summary-table', 4)">Task Name</th>
-            <th onclick="sortTable('summary-table', 5)">Task Info</th>
-            <th onclick="sortTable('summary-table', 6)">Task Level</th>
-            <th onclick="sortTable('summary-table', 7)">Task Keywords</th>
-            <th onclick="sortTable('summary-table', 8)">Task Answer</th>
-            <th onclick="sortTable('summary-table', 9)">Task Description</th>
-        </tr>
+    <tr>
+        <th onclick="sortTable('summary-table', 0)">Book ID</th>
+        <th onclick="sortTable('summary-table', 1)">Book Name</th>
+        <th onclick="sortTable('summary-table', 2)">Book Title</th>
+        <th onclick="sortTable('summary-table', 3)">Task ID</th>
+        <th onclick="sortTable('summary-table', 4)">Task Name</th>
+        <th onclick="sortTable('summary-table', 5)">Task Info</th>
+        <th onclick="sortTable('summary-table', 6)">Task Level</th>
+        <th onclick="sortTable('summary-table', 7)">Task Keywords</th>
+        <th onclick="sortTable('summary-table', 8)">Task Answer</th>
+        <th onclick="sortTable('summary-table', 9)">Task Description</th>
+    </tr>
     </thead>
     <tbody>
     </tbody>
-  </table> 
+</table>
 
 
-  <script type="text/javascript"charset="utf-8">
+<script type="text/javascript" charset="utf-8">
 
     // force since we are not in the same view
     const currentLang = 'en'
 
     // read progression file into object
-    for (const group of progression) { 
+    for (const group of progression) {
         const book_id = group.id
 
         parseBookFrom(`../books/${currentLang}/Book-${book_id}.book`).then((book) => {
@@ -55,16 +55,16 @@
             const book_name = book.metadata.name
             const book_title = book.metadata.title
 
-            for (const task_id of group.tasks){
+            for (const task_id of group.tasks) {
 
                 parseTaskFrom(`../tasks/${currentLang}/task-${task_id}.task`).then((task) => {
 
                     const task_name = task.metadata.name
-                    const task_info= task.metadata.info
-                    const task_keywords= task.metadata.keywords
-                    const task_level= task.metadata.level
+                    const task_info = task.metadata.info
+                    const task_keywords = task.metadata.keywords
+                    const task_level = task.metadata.level
                     const task_answer = task.answer
-                    const task_description= $(task.description).text()
+                    const task_description = $(task.description).text()
 
                     console.log(task_description)
 
@@ -73,12 +73,9 @@
 
                     $('#summary-table > tbody:last-child').append('<tr>' + row_str + '</tr>');
                 })
-                
             }
         })
-
     }
-
 </script>
 </body>
 </html>

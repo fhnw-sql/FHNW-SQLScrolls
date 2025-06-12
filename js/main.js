@@ -25,7 +25,7 @@ DISPLAY_STATE = {
 };
 
 const inStoreMode = sessionStorage.getItem("mode");
-DISPLAY_STATE.editMode = inStoreMode ? (inStoreMode == "edit") : false;
+DISPLAY_STATE.editMode = inStoreMode ? (inStoreMode === "edit") : false;
 console.log("DISPLAY_STATE.editMode", DISPLAY_STATE.editMode)
 
 function registerListeners() {
@@ -73,7 +73,7 @@ async function hideInventory() {
 }
 
 // by default the inventory is hidden
-if (!DISPLAY_STATE.editMode) hideInventory();
+if (!DISPLAY_STATE.editMode) hideInventory().then(r => {});
 
 function showError(error) {
     console.error(error);
@@ -236,7 +236,7 @@ async function beginGame() {
         // Notification if user tries to leave the page, as it is a vanilla js app without a SPA router like in react
         // we need to notify the user as the back button would result leaving the page
         window.addEventListener("beforeunload", function (e) {
-            var confirmationMessage = i18n.get("leave-page-alert");
+            let confirmationMessage = i18n.get("leave-page-alert");
             (e || window.event).returnValue = confirmationMessage; //Gecko + IE
             return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
         });
@@ -267,8 +267,8 @@ async function beginGame() {
         await routeActionMiddleware("", async (urlParams) => {
             API.loginExisting();
             if (API.loginStatus === LoginStatus.LOGGED_IN && (!DISPLAY_STATE.editMode)) {
-                loadCompletionFromQuizzes(); // async load of task completion, see DISPLAY_STATE.saveLoaded
-                changeView(Views.LOADING); // LOADING view awaits DISPLAY_STATE.saveLoaded and DISPLAY_STATE.loaded are true.
+                await loadCompletionFromQuizzes(); // async load of task completion, see DISPLAY_STATE.saveLoaded
+                await changeView(Views.LOADING); // LOADING view awaits DISPLAY_STATE.saveLoaded and DISPLAY_STATE.loaded are true.
                 await showElementImmediately("counter-container");
                 await showElementImmediately("right-sidebar");
                 await showElementImmediately("relative-leaderboard");
