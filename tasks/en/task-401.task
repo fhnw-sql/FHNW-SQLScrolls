@@ -1,0 +1,95 @@
+METADATA {
+    id: task-401
+    name: Average Difficulty per NPC
+    color: purple
+}
+
+DESCRIPTION {
+List the NPC names and the average Difficulty (Level of Monsters) which the quests of these NPCs contain. List only the Average Difficulties above 20 and order them in descending order.
+}
+
+ANSWER {
+SELECT N.NPC_NAME, AVG(M.MONSTER_LEVEL)
+FROM NPC N
+JOIN QUEST Q ON Q.NPC_ID = N.NPC_ID
+JOIN QUEST_MONSTER QM ON QM.QUEST_ID = Q.QUEST_ID
+JOIN MONSTER M ON M.MONSTER_ID = QM.MONSTER_ID
+GROUP BY N.NPC_NAME
+HAVING AVG(M.MONSTER_LEVEL) > 20
+ORDER BY AVG(M.MONSTER_LEVEL) DESC;
+}
+
+TEST {
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME|NPC_ROLE|REGION_ID
+        1|Yennefer von Vengerberg|Sorceress|4
+        9|Gaunter ODimm|Mysterious Man|2
+        10|Regis|Vampire Ally|6
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|NPC_ID
+        1|The Beast of White Orchard|1
+        9|Scenes From a Marriage|9
+        10|The Night of Long Fangs|10
+    }
+    TABLE {
+        QUEST_MONSTER
+        QUEST_ID|MONSTER_ID
+        1|1
+        1|4
+        9|9
+        10|10
+        10|5
+    }
+    TABLE {
+        MONSTER
+        MONSTER_ID|MONSTER_NAME|MONSTER_LEVEL|MONSTER_TYPE
+        1|Royal Griffin|6|Hybrid
+        4|Basilisk|10|Draconid
+        5|Katakan|20|Vampire
+        9|Ekimmara|22|Vampire
+        10|Fiend|25|Relict
+    }
+    RESULT {
+        Regis|22.5
+        Gaunter ODimm|22
+    }
+}
+
+TEST {
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME|NPC_ROLE|REGION_ID
+        4|Keira Metz|Sorceress|2
+        5|Triss Marygold|Sorceress|3
+        9|Gaunter ODimm|Mysterious Man|2
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|NPC_ID
+        3|A Towerful of Mice|4
+        4|Wild at Heart|5
+        9|Scenes From a Marriage|9
+    }
+    TABLE {
+        QUEST_MONSTER
+        QUEST_ID|MONSTER_ID
+        3|3
+        3|5
+        4|6
+        9|9
+    }
+    TABLE {
+        MONSTER
+        MONSTER_ID|MONSTER_NAME|MONSTER_LEVEL|MONSTER_TYPE
+        3|Water Hag|7|Necrophage
+        5|Katakan|20|Vampire
+        6|Werewolve|15|Therianthropes
+        9|Ekimmara|22|Vampire
+    }
+    RESULT {
+        Gaunter ODimm|22
+    }
+}

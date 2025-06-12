@@ -1,0 +1,71 @@
+METADATA {
+    id: task-400
+    name: Witcher Unstarted Quests
+    color: purple
+}
+
+DESCRIPTION {
+List the QUEST_ID, QUEST_NAME, QUEST_GOLD and QUEST_XP from all Quests that are assigned to Gerald of Rivia, which are not yet started and order the result by gold reward and XP.
+}
+
+ANSWER {
+SELECT Q.QUEST_ID, Q.QUEST_NAME, Q.QUEST_GOLD, Q.QUEST_XP
+FROM QUEST Q
+JOIN WITCHER_QUEST WQ
+  ON Q.QUEST_ID = WQ.QUEST_ID
+JOIN WITCHER W ON W.WITCHER_ID = WQ.WITCHER_ID
+WHERE W.WITCHER_NAME = 'Geralt of Rivia'
+  AND WQ.QUEST_STATE = 'Not Started'
+ORDER BY Q.QUEST_GOLD, Q.QUEST_XP ASC;
+}
+
+TEST {
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_GOLD|QUEST_XP
+        1|The Beast of White Orchard|100|200
+        3|A Towerful of Mice|250|400
+        4|Wild at Heart|500|750
+    }
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME
+        1|Geralt of Rivia
+        2|Vesemir
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        1|1|Completed
+        1|3|Not Started
+        1|4|Not Started
+    }
+    RESULT {
+        3|A Towerful of Mice|250|400
+        4|Wild at Heart|500|750
+    }
+}
+
+TEST {
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_GOLD|QUEST_XP
+        6|Imperial Audience|100|50
+        8|Dead Mans Party|600|800
+    }
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME
+        1|Geralt of Rivia
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        1|6|Not Started
+        1|8|Not Started
+    }
+    RESULT {
+        6|Imperial Audience|100|50
+        8|Dead Mans Party|600|800
+    }
+}

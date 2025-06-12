@@ -1,0 +1,73 @@
+METADATA {
+    id: task-405
+    name: Region Quest Aggregates
+    color: purple
+}
+
+DESCRIPTION {
+List all Region Names, the 'Number of Quests', 'Average Gold Reward' and 'Average XP Reward', order the result by Number of Quests, Average Gold Reward and Average XP Reward all in descending order.
+}
+
+ANSWER {
+SELECT REGION_NAME,
+       COUNT(QUEST_ID) AS "Number of Quests",
+       AVG(QUEST_GOLD) AS "Average Gold Reward",
+       AVG(QUEST_XP)   AS "Average XP Reward"
+FROM REGION
+JOIN NPC   USING(REGION_ID)
+JOIN QUEST USING(NPC_ID)
+GROUP BY REGION_NAME
+ORDER BY COUNT(QUEST_ID) DESC,
+         AVG(QUEST_GOLD) DESC,
+         AVG(QUEST_XP)   DESC;
+}
+
+TEST {
+    TABLE {
+        REGION
+        REGION_ID|REGION_NAME
+        2|Velen
+        3|Novigrad
+    }
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME|NPC_ROLE|REGION_ID
+        3|Baron Phillip Strenger|Quest Giver|2
+        2|Emhyr var Emreis|Emperor|3
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|NPC_ID|QUEST_GOLD|QUEST_XP
+        2|Family Matters|3|300|500
+        6|Imperial Audience|2|100|50
+    }
+    RESULT {
+        Velen|1|300|500
+        Novigrad|1|100|50
+    }
+}
+
+TEST {
+    TABLE {
+        REGION
+        REGION_ID|REGION_NAME
+        4|Skellige
+        6|Toussaint
+    }
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME|NPC_ROLE|REGION_ID
+        1|Yennefer von Vengerberg|Sorceress|4
+        6|Anna Henrietta|Duchess|6
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|NPC_ID|QUEST_GOLD|QUEST_XP
+        1|The Beast of White Orchard|1|100|200
+        5|A Tome Entombed|6|800|1000
+    }
+    RESULT {
+        Toussaint|1|800|1000
+        Skellige|1|100|200
+    }
+}

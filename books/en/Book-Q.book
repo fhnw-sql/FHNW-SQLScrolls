@@ -1,0 +1,63 @@
+METADATA {
+     id: Book-Q
+     name: The Witcher Quests 🐺⚔️
+     title: Exploring Quests of The Witcher
+     author: F.A., R.B., S.M., F.S.
+     color: witcher
+}
+
+PAGE {
+     In this book you can challenge yourself with 16 different SQLite queries on the topic of the video game The Witcher 3: Wild Hunt.
+
+     Have fun!
+
+    📄 Download the README: 
+    <a href="/README.docx" target="_blank" download>README.docx</a>
+
+}
+
+PAGE {
+  EXAMPLE {
+    TABLE {
+      npcs
+      npc_id|npc_name|npc_role
+      1|Yennefer von Vengerberg|Sorceress
+      3|Baron Phillip Strenger|Quest Giver
+      5|Triss Marygold|Sorceress
+    }
+    QUERY {
+      SELECT npc_name FROM npcs WHERE npc_role = 'Sorceress';
+    }
+  }
+}
+
+PAGE {
+    <h1>SQL Scrolls</h1>
+    <h2>Chosen Topic: Video Game - The Witcher 3: Wild Hunt</h2>
+    Authors: Fabian Arnold, Remy Brunner, Silvan Meier, Florian Stiegeler
+    Lecturer: Elzbieta Pustulka</p>
+    Class: Database Technology - PT2b - Basel
+    Date: 13 May 2025
+}
+
+PAGE {
+    The tables in this SQL Scrolls tasks resemble parts of the world of the video game The Witcher 3: Wild Hunt. In this game, the main characters, the Witchers, travel through the game world to take quests from the many NPCs located at different regions. Most of these quests bring different variations of monsters to fight. Additionally, Witchers usually receive gold and XP for quests from which they can obtain different types of items.
+    
+    The following tasks contain 16 different complex select statements, where it is often required to collect and combine data from multiple different tables. 
+}
+
+PAGE {
+    Logical diagram of the The Witcher schema.
+    <br />
+    <div class="book-img">
+        <img src="assets/task-schemas/witcher_logical.png">
+    </div>
+}
+
+PAGE {
+    Corresponding relational schema.
+    <br />
+    <div class="book-img">
+        <img src="assets/task-schemas/witcher_relational.png">
+    </div>
+}

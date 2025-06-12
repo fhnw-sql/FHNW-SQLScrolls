@@ -1,0 +1,61 @@
+METADATA {
+    id: task-408
+    name: Item Level Gaps
+    color: purple
+}
+
+DESCRIPTION {
+List all Item Names, Witcher Names, Item Levels, Witcher Levels and calculate the 'Missing Level' for all Items, which have a higher level than the Witcher which owns it. Order the result by Item Name, Witcher Name in ascending Order and the Missing Level in descending order.
+}
+
+ANSWER {
+SELECT I.ITEM_NAME, W.WITCHER_NAME, I.ITEM_LEVEL, W.WITCHER_LEVEL,
+       I.ITEM_LEVEL - W.WITCHER_LEVEL AS MISSING_LEVEL
+FROM ITEM I
+JOIN WITCHER_ITEM WI ON I.ITEM_ID = WI.ITEM_ID
+JOIN WITCHER W      ON W.WITCHER_ID = WI.WITCHER_ID
+WHERE I.ITEM_LEVEL > W.WITCHER_LEVEL
+ORDER BY I.ITEM_NAME ASC, W.WITCHER_NAME ASC, MISSING_LEVEL DESC;
+}
+
+TEST {
+    TABLE {
+        ITEM
+        ITEM_ID|ITEM_NAME|ITEM_LEVEL
+        5|Wolf School Armor|15
+    }
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_LEVEL
+        3|Lambert|10
+    }
+    TABLE {
+        WITCHER_ITEM
+        WITCHER_ID|ITEM_ID
+        3|5
+    }
+    RESULT {
+        Wolf School Armor|Lambert|15|10|5
+    }
+}
+
+TEST {
+    TABLE {
+        ITEM
+        ITEM_ID|ITEM_NAME|ITEM_LEVEL
+        8|Griffin School Armor|12
+    }
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_LEVEL
+        4|Eskel|10
+    }
+    TABLE {
+        WITCHER_ITEM
+        WITCHER_ID|ITEM_ID
+        4|8
+    }
+    RESULT {
+        Griffin School Armor|Eskel|12|10|2
+    }
+}

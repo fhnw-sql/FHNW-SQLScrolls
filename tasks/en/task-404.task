@@ -1,0 +1,73 @@
+METADATA {
+    id: task-404
+    name: Witcher Gold Balance Summary
+    color: purple
+}
+
+DESCRIPTION {
+List each Witcher’s name and new gold balance after adding completed quest rewards, ordered by balance descending.
+}
+
+ANSWER {
+SELECT W.WITCHER_NAME,
+       W.WITCHER_GOLD + SUM(Q.QUEST_GOLD) AS GOLD_BALANCE
+FROM WITCHER W
+JOIN WITCHER_QUEST WQ
+  ON W.WITCHER_ID = WQ.WITCHER_ID
+ AND WQ.QUEST_STATE = 'Completed'
+JOIN QUEST Q
+  ON Q.QUEST_ID = WQ.QUEST_ID
+GROUP BY W.WITCHER_NAME, W.WITCHER_GOLD
+ORDER BY GOLD_BALANCE DESC;
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_LEVEL|WITCHER_GOLD
+        1|Geralt of Rivia|20|1000
+        2|Vesemir|15|500
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        1|1|Completed
+        2|2|Completed
+        2|9|Completed
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_GOLD
+        1|100
+        2|300
+        9|900
+    }
+    RESULT {
+        Vesemir|1700
+        Geralt of Rivia|1100
+    }
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_LEVEL|WITCHER_GOLD
+        3|Lambert|10|500
+        4|Eskel|10|250
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        3|1|Completed
+        4|5|In Progress
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_GOLD
+        1|100
+        5|800
+    }
+    RESULT {
+        Lambert|600
+    }
+}

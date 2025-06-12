@@ -1,0 +1,70 @@
+METADATA {
+    id: task-402
+    name: Witcher Gold and XP Summary
+    color: purple
+}
+
+DESCRIPTION {
+List all distinct Witchers and the total Gold Reward and XP Reward of the quests they have assigned to them and are completed or currently in progress.
+}
+
+ANSWER {
+SELECT DISTINCT W.WITCHER_NAME, SUM(Q.QUEST_GOLD), SUM(Q.QUEST_XP)
+FROM WITCHER W
+JOIN WITCHER_QUEST WQ
+  ON W.WITCHER_ID = WQ.WITCHER_ID
+JOIN QUEST Q
+  ON Q.QUEST_ID = WQ.QUEST_ID
+WHERE WQ.QUEST_STATE = 'Completed'
+   OR WQ.QUEST_STATE = 'In Progress'
+GROUP BY W.WITCHER_NAME;
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_GOLD
+        1|Geralt of Rivia|1000
+        2|Vesemir|500
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_GOLD|QUEST_XP
+        1|The Beast of White Orchard|100|200
+        2|Family Matters|300|500
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        1|1|Completed
+        1|2|In Progress
+        2|2|Completed
+    }
+    RESULT {
+        Geralt of Rivia|400|700
+        Vesemir|300|500
+    }
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_GOLD
+        3|Lambert|500
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_GOLD|QUEST_XP
+        1|The Beast of White Orchard|100|200
+        10|The Night of Long Fangs|1200|1500
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        3|1|Completed
+        3|10|In Progress
+    }
+    RESULT {
+        Lambert|1300|1700
+    }
+}

@@ -1,0 +1,98 @@
+METADATA {
+    id: task-409
+    name: Region-Level Mismatch
+    color: purple
+}
+
+DESCRIPTION {
+List all Witcher Names, Region Names, Quest Names, Region Minimal Levels, Witcher Levels and the calculated MISSING_LEVEL (Difference between Region Minimal Level and Witcher Level) for all Witchers, which have a quest assigned to them from a region, which has a higher minimal Level requirement than their level. Order the result by MISSING_LEVEL in descending order.
+}
+
+ANSWER {
+SELECT W.WITCHER_NAME,
+       R.REGION_NAME,
+       Q.QUEST_NAME,
+       R.MIN_LEVEL,
+       W.WITCHER_LEVEL,
+       R.MIN_LEVEL - W.WITCHER_LEVEL AS MISSING_LEVEL
+FROM WITCHER W
+JOIN WITCHER_QUEST WQ ON W.WITCHER_ID = WQ.WITCHER_ID
+JOIN QUEST Q           ON Q.QUEST_ID     = WQ.QUEST_ID
+JOIN NPC N             ON N.NPC_ID       = Q.NPC_ID
+JOIN REGION R          ON R.REGION_ID    = N.REGION_ID
+WHERE R.MIN_LEVEL > W.WITCHER_LEVEL
+ORDER BY MISSING_LEVEL DESC;
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_LEVEL|WITCHER_GOLD
+        2|Vesemir|15|500
+        4|Eskel|10|250
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID
+        2|2
+        4|5
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_DESCRIPTION|NPC_ID
+        2|Family Matters|Help the Bloody Baron find his wife and daughter.|3
+        5|A Tome Entombed|Investigate the tomb and fight the Katakan|6
+    }
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME|NPC_ROLE|REGION_ID
+        3|Baron Phillip Strenger|Quest Giver|2
+        6|Anna Henrietta|Duchess|6
+    }
+    TABLE {
+        REGION
+        REGION_ID|REGION_NAME|MIN_LEVEL
+        2|Velen|5
+        6|Toussaint|30
+    }
+    RESULT {
+        Eskel|Toussaint|A Tome Entombed|30|10|20
+    }
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_LEVEL|WITCHER_GOLD
+        3|Lambert|10|500
+        4|Eskel|10|250
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID
+        3|1
+        4|5
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_DESCRIPTION|NPC_ID
+        1|The Beast of White Orchard|Investigate the griffin terrorizing the region.|1
+        5|A Tome Entombed|Investigate the tomb and fight the Katakan|6
+    }
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME|NPC_ROLE|REGION_ID
+        1|Yennefer von Vengerberg|Sorceress|4
+        6|Anna Henrietta|Duchess|6
+    }
+    TABLE {
+        REGION
+        REGION_ID|REGION_NAME|MIN_LEVEL
+        4|Skellige|15
+        6|Toussaint|30
+    }
+    RESULT {
+        Eskel|Toussaint|A Tome Entombed|30|10|20
+        Lambert|Skellige|The Beast of White Orchard|15|10|5
+    }
+}

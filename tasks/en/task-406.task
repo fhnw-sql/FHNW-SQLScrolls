@@ -1,0 +1,67 @@
+METADATA {
+    id: task-406
+    name: Witcher Item Aggregates
+    color: purple
+}
+
+DESCRIPTION {
+List all Witcher Names, Item Types they own, the total value of the items and the average level of the items (Rounded to whole numbers). Group them by the Witcher Names and Item Types and Order them in ascending order by Witcher Name and Item Type.
+}
+
+ANSWER {
+SELECT W.WITCHER_NAME,
+       I.ITEM_TYPE,
+       SUM(I.ITEM_PRICE)        AS TOTAL_ITEM_VALUE,
+       ROUND(AVG(I.ITEM_LEVEL),0) AS AVERAGE_ITEM_LEVEL
+FROM WITCHER W
+JOIN WITCHER_ITEM WI ON W.WITCHER_ID = WI.WITCHER_ID
+JOIN ITEM I         ON I.ITEM_ID      = WI.ITEM_ID
+GROUP BY W.WITCHER_NAME, I.ITEM_TYPE
+ORDER BY W.WITCHER_NAME ASC, I.ITEM_TYPE ASC;
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME
+        1|Geralt of Rivia
+        2|Vesemir
+    }
+    TABLE {
+        ITEM
+        ITEM_ID|ITEM_NAME|ITEM_LEVEL|ITEM_PRICE|ITEM_TYPE
+        1|Silver Sword of the Griffin|5|500|Weapon
+        2|Specter Oil|3|150|Alchemy
+    }
+    TABLE {
+        WITCHER_ITEM
+        WITCHER_ID|ITEM_ID
+        1|1
+        1|2
+    }
+    RESULT {
+        Geralt of Rivia|Alchemy|150|3
+        Geralt of Rivia|Weapon|500|5
+    }
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME
+        4|Eskel
+    }
+    TABLE {
+        ITEM
+        ITEM_ID|ITEM_NAME|ITEM_LEVEL|ITEM_PRICE|ITEM_TYPE
+        7|Moon Dust Bomb|8|300|Alchemy
+    }
+    TABLE {
+        WITCHER_ITEM
+        WITCHER_ID|ITEM_ID
+        4|7
+    }
+    RESULT {
+        Eskel|Alchemy|300|8
+    }
+}

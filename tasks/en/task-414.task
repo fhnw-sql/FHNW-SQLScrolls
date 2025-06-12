@@ -1,0 +1,81 @@
+METADATA {
+    id: task-414
+    name: Incomplete Quests by Region
+    color: purple
+}
+
+DESCRIPTION {
+List all Region Names and Quest Names, from all Quests, which are not completed. Order the result by Region Name and Quest Name in ascending order.
+}
+
+ANSWER {
+SELECT DISTINCT R.REGION_NAME, Q.QUEST_NAME
+FROM REGION R
+JOIN NPC N ON R.REGION_ID = N.REGION_ID
+JOIN QUEST Q ON N.NPC_ID = Q.NPC_ID
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM WITCHER_QUEST WQ
+    WHERE WQ.QUEST_ID = Q.QUEST_ID
+      AND WQ.QUEST_STATE = 'Completed'
+)
+ORDER BY R.REGION_NAME ASC, Q.QUEST_NAME ASC;
+}
+
+TEST {
+    TABLE {
+        REGION
+        REGION_ID|REGION_NAME
+        3|Novigrad
+    }
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME|NPC_ROLE|REGION_ID
+        7|Zoltan Chivay|Merchant|3
+        8|Dandelion|Bard|3
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_DESCRIPTION|QUEST_GOLD|QUEST_XP|NPC_ID
+        7|Of Swords and Dumplings|Help Hattori reopen his forge.|350|450|7
+        8|Dead Mans Party|Attend a wedding with Shani.|600|800|8
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        1|7|In Progress
+        1|8|Not Started
+    }
+    RESULT {
+        Novigrad|Dead Mans Party
+        Novigrad|Of Swords and Dumplings
+    }
+}
+
+TEST {
+    TABLE {
+        REGION
+        REGION_ID|REGION_NAME
+        2|Velen
+    }
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME|NPC_ROLE|REGION_ID
+        4|Keira Metz|Sorceress|2
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_DESCRIPTION|QUEST_GOLD|QUEST_XP|NPC_ID
+        3|A Towerful of Mice|Lift the curse from Fyke Isle.|250|400|4
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        1|3|Not Started
+    }
+    RESULT {
+        Velen|A Towerful of Mice
+    }
+}
+
+

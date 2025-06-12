@@ -1,0 +1,80 @@
+METADATA {
+    id: task-403
+    name: Quests Without Monsters
+    color: purple
+}
+
+DESCRIPTION {
+List all Witchers, Quest Names and Quest Descriptions from Quests which have no monsters to fight.
+}
+
+ANSWER {
+SELECT W.WITCHER_NAME, Q.QUEST_NAME, Q.QUEST_DESCRIPTION
+FROM WITCHER W
+JOIN WITCHER_QUEST WQ ON W.WITCHER_ID=WQ.WITCHER_ID
+JOIN QUEST Q ON WQ.QUEST_ID=Q.QUEST_ID
+WHERE WQ.QUEST_ID NOT IN (SELECT QUEST_ID FROM QUEST_MONSTER)
+ORDER BY W.WITCHER_NAME, Q.QUEST_NAME;
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_SCHOOL
+        1|Geralt of Rivia|School of the Wolf
+        2|Lambert|School of the Wolf
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_DESCRIPTION|NPC_ID
+        1|Monster Hunt|Slay the griffin in White Orchard|5
+        2|Herb Gathering|Collect medicinal herbs near Oxenfurt|3
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID
+        1|1
+        2|2
+    }
+    TABLE {
+        QUEST_MONSTER
+        QUEST_ID|MONSTER_ID
+        1|1
+    }
+    RESULT {
+        Lambert|Herb Gathering|Collect medicinal herbs near Oxenfurt
+    }
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_SCHOOL
+        1|Geralt of Rivia|School of the Wolf
+        3|Eskel|School of the Wolf
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_DESCRIPTION|NPC_ID
+        1|Monster Hunt|Slay the griffin in White Orchard|5
+        2|Herb Gathering|Collect medicinal herbs near Oxenfurt|3
+        3|Map Exploration|Chart the caves of Kaer Morhen|4
+        4|Peasant Aid|Help villagers repair fences|2
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID
+        1|1
+        3|3
+        3|4
+    }
+    TABLE {
+        QUEST_MONSTER
+        QUEST_ID|MONSTER_ID
+        1|1
+    }
+    RESULT {
+        Eskel|Map Exploration|Chart the caves of Kaer Morhen
+        Eskel|Peasant Aid|Help villagers repair fences
+    }
+}

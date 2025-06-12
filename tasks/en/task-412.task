@@ -1,0 +1,86 @@
+METADATA {
+    id: task-412
+    name: Unique Monster Types per Witcher
+    color: purple
+}
+
+DESCRIPTION {
+List all Witcher Names and the Count of all unique monster types the Witcher has faced (UNIQUE_MONSTER_TYPES). Group the result by each Witcher and order it by the number of unique monster types faced in descending order.
+}
+
+ANSWER {
+SELECT W.WITCHER_NAME, COUNT(DISTINCT M.MONSTER_TYPE) AS UNIQUE_MONSTER_TYPES
+FROM WITCHER W
+JOIN WITCHER_QUEST WQ ON W.WITCHER_ID=WQ.WITCHER_ID
+JOIN QUEST_MONSTER QM ON WQ.QUEST_ID=QM.QUEST_ID
+JOIN MONSTER M ON QM.MONSTER_ID=M.MONSTER_ID
+GROUP BY W.WITCHER_NAME
+ORDER BY UNIQUE_MONSTER_TYPES DESC;
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_LEVEL|WITCHER_GOLD
+        1|Geralt of Rivia|20|1000
+        2|Vesemir|15|500
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID
+        1|1
+        1|2
+        2|2
+    }
+    TABLE {
+        QUEST_MONSTER
+        QUEST_ID|MONSTER_ID
+        1|1
+        1|4
+        2|2
+    }
+    TABLE {
+        MONSTER
+        MONSTER_ID|MONSTER_NAME|MONSTER_LEVEL|MONSTER_TYPE
+        1|Royal Griffin|6|Hybrid
+        4|Basilisk|10|Draconid
+        2|Noonwraith|5|Specter
+    }
+    RESULT {
+        Geralt of Rivia|3
+        Vesemir|1
+    }
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_LEVEL|WITCHER_GOLD
+        3|Lambert|10|500
+        4|Eskel|10|250
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID
+        3|1
+        4|5
+    }
+    TABLE {
+        QUEST_MONSTER
+        QUEST_ID|MONSTER_ID
+        1|1
+        1|4
+        5|5
+    }
+    TABLE {
+        MONSTER
+        MONSTER_ID|MONSTER_NAME|MONSTER_LEVEL|MONSTER_TYPE
+        1|Royal Griffin|6|Hybrid
+        4|Basilisk|10|Draconid
+        5|Katakan|20|Vampire
+    }
+    RESULT {
+        Lambert|2
+        Eskel|1
+    }
+}

@@ -1,0 +1,71 @@
+METADATA {
+    id: task-415
+    name: Richest Witcher
+    color: purple
+}
+
+DESCRIPTION {
+Find out, which Witcher has the most gold after adding the gold from completed quests, by listing the name of the Witcher, their gold balance from the start, the sum of the gold earned from completed quests (QUEST_GOLD_EARNED), and the sum of both amounts together (TOTAL_GOLD_BALANCE). Only list the Witcher with the most gold.
+}
+
+ANSWER {
+SELECT W.WITCHER_NAME,
+       W.WITCHER_GOLD,
+       SUM(Q.QUEST_GOLD) AS QUEST_GOLD_EARNED,
+       W.WITCHER_GOLD + SUM(Q.QUEST_GOLD) AS TOTAL_GOLD_BALANCE
+FROM WITCHER W
+JOIN WITCHER_QUEST WQ ON W.WITCHER_ID = WQ.WITCHER_ID
+JOIN QUEST Q           ON Q.QUEST_ID     = WQ.QUEST_ID
+WHERE WQ.QUEST_STATE = 'Completed'
+GROUP BY W.WITCHER_NAME, W.WITCHER_GOLD
+ORDER BY TOTAL_GOLD_BALANCE DESC
+LIMIT 1;
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_SCHOOL|WITCHER_GOLD
+        1|Geralt of Rivia|School of the Wolf|1000
+        2|Vesemir|School of the Wolf|500
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        1|1|Completed
+        2|2|Completed
+        2|9|Completed
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_DESCRIPTION|QUEST_GOLD|QUEST_XP|NPC_ID
+        1|The Beast of White Orchard|Investigate the griffin terrorizing the region.|100|200|1
+        2|Family Matters|Help the Bloody Baron find his wife and daughter.|300|500|3
+        9|Scenes From a Marriage|Retrieve Iris rose from the Painted World.|900|1200|9
+    }
+    RESULT {
+        Vesemir|500|1200|1700
+    }
+}
+
+TEST {
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_SCHOOL|WITCHER_GOLD
+        3|Lambert|School of the Wolf|500
+        4|Eskel|School of the Cat|250
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        3|1|Completed
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_DESCRIPTION|QUEST_GOLD|QUEST_XP|NPC_ID
+        1|The Beast of White Orchard|Investigate the griffin terrorizing the region.|100|200|1
+    }
+    RESULT {
+        Lambert|500|100|600
+    }
+}

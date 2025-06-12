@@ -1,0 +1,71 @@
+METADATA {
+    id: task-411
+    name: Open Quests per NPC
+    color: purple
+}
+
+DESCRIPTION {
+List all NPC_Names, The Count of Open Quests (OPEN_QUESTS), The total gold (TOTAL_GOLD_REWARD), total XP (TOTAL_XP_REWARD) of all Quests which are not yet started or are not assigned to a Witcher. Group The result by the respective NPC who offers the Quest and order the Result by the number of Open quests, total gold reward and xp reward all in descending order.
+}
+
+ANSWER {
+SELECT N.NPC_NAME,
+       COUNT(Q.QUEST_ID) AS OPEN_QUESTS,
+       SUM(Q.QUEST_GOLD) AS TOTAL_GOLD_REWARD,
+       SUM(Q.QUEST_XP)   AS TOTAL_XP_REWARD
+FROM NPC N
+JOIN QUEST Q           ON Q.NPC_ID = N.NPC_ID
+LEFT JOIN WITCHER_QUEST WQ ON Q.QUEST_ID = WQ.QUEST_ID
+WHERE WQ.QUEST_STATE = 'Not Started'
+   OR WQ.QUEST_ID IS NULL
+GROUP BY N.NPC_NAME
+ORDER BY OPEN_QUESTS DESC, TOTAL_GOLD_REWARD DESC, TOTAL_XP_REWARD DESC;
+}
+
+TEST {
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME
+        3|Baron Phillip Strenger
+        4|Keira Metz
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|NPC_ID|QUEST_GOLD|QUEST_XP
+        2|Family Matters|3|300|500
+        3|A Towerful of Mice|4|250|400
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        2|2|Completed
+        1|3|Not Started
+    }
+    RESULT {
+        Keira Metz|1|250|400
+    }
+}
+
+TEST {
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME
+        1|Yennefer von Vengerberg
+        2|Emhyr var Emreis
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|NPC_ID|QUEST_GOLD|QUEST_XP
+        1|The Beast of White Orchard|1|100|200
+        6|Imperial Audience|2|100|50
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        1|1|Completed
+        2|6|Not Started
+    }
+    RESULT {
+        Emhyr var Emreis|1|100|50
+    }
+}

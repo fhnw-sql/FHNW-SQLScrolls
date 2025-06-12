@@ -1,0 +1,76 @@
+METADATA {
+    id: task-407
+    name: Vampire Quest Details
+    color: purple
+}
+
+DESCRIPTION {
+List all NPC Names, Quest Names and Monster Names of all Quests that involve Vampires, Order them by NPC Name, Monster Name and Quest Name.
+}
+
+ANSWER {
+SELECT N.NPC_NAME, Q.QUEST_NAME, M.MONSTER_NAME
+FROM NPC N
+JOIN QUEST Q ON Q.NPC_ID = N.NPC_ID
+JOIN QUEST_MONSTER QM ON QM.QUEST_ID = Q.QUEST_ID
+JOIN MONSTER M      ON M.MONSTER_ID = QM.MONSTER_ID
+WHERE M.MONSTER_TYPE = 'Vampire'
+ORDER BY N.NPC_NAME, M.MONSTER_NAME, Q.QUEST_NAME;
+}
+
+TEST {
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME|NPC_ROLE|REGION_ID
+        6|Anna Henrietta|Duchess|6
+        9|Gaunter ODimm|Mysterious Man|2
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|NPC_ID
+        5|A Tome Entombed|6
+        9|Scenes From a Marriage|9
+    }
+    TABLE {
+        QUEST_MONSTER
+        QUEST_ID|MONSTER_ID
+        5|5
+        9|9
+    }
+    TABLE {
+        MONSTER
+        MONSTER_ID|MONSTER_NAME|MONSTER_LEVEL|MONSTER_TYPE
+        5|Katakan|20|Vampire
+        9|Ekimmara|22|Vampire
+    }
+    RESULT {
+        Anna Henrietta|A Tome Entombed|Katakan
+        Gaunter ODimm|Scenes From a Marriage|Ekimmara
+    }
+}
+
+TEST {
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME|NPC_ROLE|REGION_ID
+        4|Keira Metz|Sorceress|2
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|NPC_ID
+        3|A Towerful of Mice|4
+    }
+    TABLE {
+        QUEST_MONSTER
+        QUEST_ID|MONSTER_ID
+        3|5
+    }
+    TABLE {
+        MONSTER
+        MONSTER_ID|MONSTER_NAME|MONSTER_LEVEL|MONSTER_TYPE
+        5|Katakan|20|Vampire
+    }
+    RESULT {
+        Keira Metz|A Towerful of Mice|Katakan
+    }
+}

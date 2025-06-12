@@ -1,0 +1,84 @@
+METADATA {
+    id: task-413
+    name: Highest Payout NPC-Witcher
+    color: purple
+}
+
+DESCRIPTION {
+Find out which NPC has paid the highest total Gold amount to which Witcher by Listing the NPC name, Witcher Name and the Sum of Gold paid (TOTAL_GOLD_PAID) for all quests which are completed. Group the result by NPC name and Witcher Name.
+}
+
+ANSWER {
+SELECT N.NPC_NAME, W.WITCHER_NAME, SUM(Q.QUEST_GOLD) AS TOTAL_GOLD_PAID
+FROM NPC N
+JOIN QUEST Q ON Q.NPC_ID = N.NPC_ID
+JOIN WITCHER_QUEST WQ ON WQ.QUEST_ID = Q.QUEST_ID
+JOIN WITCHER W ON W.WITCHER_ID = WQ.WITCHER_ID
+WHERE WQ.QUEST_STATE = 'Completed'
+GROUP BY N.NPC_NAME, W.WITCHER_NAME
+ORDER BY TOTAL_GOLD_PAID DESC
+LIMIT 1;
+}
+
+TEST {
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME|NPC_ROLE|REGION_ID
+        1|Yennefer von Vengerberg|Sorceress|4
+        2|Emhyr var Emreis|Emperor|3
+        3|Baron Phillip Strenger|Quest Giver|2
+    }
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_LEVEL|WITCHER_GOLD
+        1|Geralt of Rivia|20|1000
+        2|Vesemir|15|500
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_DESCRIPTION|QUEST_GOLD|QUEST_XP|NPC_ID
+        1|The Beast of White Orchard|Investigate the griffin terrorizing the region.|100|200|1
+        2|Family Matters|Help the Bloody Baron find his wife and daughter.|300|500|3
+        6|Imperial Audience|Talk to Emhyr var Emreis.|100|50|2
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        1|1|Completed
+        2|2|Completed
+        2|6|Completed
+    }
+    RESULT {
+        Baron Phillip Strenger|Vesemir|300
+    }
+}
+
+TEST {
+    TABLE {
+        NPC
+        NPC_ID|NPC_NAME|NPC_ROLE|REGION_ID
+        1|Yennefer von Vengerberg|Sorceress|4
+        9|Gaunter ODimm|Mysterious Man|2
+    }
+    TABLE {
+        WITCHER
+        WITCHER_ID|WITCHER_NAME|WITCHER_LEVEL|WITCHER_GOLD
+        2|Vesemir|15|500
+        3|Lambert|10|500
+    }
+    TABLE {
+        QUEST
+        QUEST_ID|QUEST_NAME|QUEST_DESCRIPTION|QUEST_GOLD|QUEST_XP|NPC_ID
+        1|The Beast of White Orchard|Investigate the griffin terrorizing the region.|100|200|1
+        9|Scenes From a Marriage|Retrieve Iris rose from the Painted World.|900|1200|9
+    }
+    TABLE {
+        WITCHER_QUEST
+        WITCHER_ID|QUEST_ID|QUEST_STATE
+        2|9|Completed
+        3|1|Completed
+    }
+    RESULT {
+        Gaunter ODimm|Vesemir|900
+    }
+}
