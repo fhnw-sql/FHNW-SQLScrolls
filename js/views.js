@@ -1647,16 +1647,6 @@ class AIModalView extends View {
         super("display-ai-modal");
         // this.shownItem = null;
         this.graph = undefined;
-        this.addAIButtonClickListener();
-    }
-
-    addAIButtonClickListener() {
-        const aiButton = document.getElementById("ai-button");
-        if (aiButton) {
-            aiButton.addEventListener("click", () => this.show());
-        } else {
-            console.warn("AI button not found in the DOM. Event listener not added.");
-        }
     }
 
     async open() {
@@ -1669,20 +1659,6 @@ class AIModalView extends View {
     async close() {
         // this.shownItem = null;
         $("#" + this.id).modal("hide");
-    }
-
-    addAIButtonClickListener() {
-        document.body.addEventListener('click', (event) => {
-            const aiButton = event.target.closest('#ai-button');
-            if (aiButton) {
-                // console.log("AI button clicked");
-                const icon = aiButton.querySelector('.jump-animation');
-                if (icon) {
-                    icon.style.animation = 'none';
-                }
-                changeSecondaryView(Views.AIMODAL);
-            }
-        });
     }
 }
 
