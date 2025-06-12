@@ -39,11 +39,9 @@
 
     <script>
         function isIE() {
-            ua = navigator.userAgent;
+            const ua = navigator.userAgent;
             /* MSIE used to detect old browsers and Trident used to newer ones*/
-            var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
-
-            return is_ie;
+            return ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
         }
 
         // Create an alert to show that the browser isn't supported
