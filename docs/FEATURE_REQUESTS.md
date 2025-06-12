@@ -1,0 +1,3 @@
+# Future Features
+
+- [ ] 🆕 XYZ
