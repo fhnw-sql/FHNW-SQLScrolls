@@ -22,7 +22,7 @@ The game is designed to support the latest web browsers. It supports the current
 - Chrome
 - Firefox
 - Safari
-- Microsoft Edge
+- Microsoft Edge (Chromium)
 
 ## ⚙️ Configuration
 
@@ -41,7 +41,7 @@ The game is designed to support the latest web browsers. It supports the current
 To deploy the Frontend one can consider one of the mentioned ways below: Docker, BareboneNodeJS, We recommend to use Docker Compose. The illustration below shows a quick overview of the recommended
 solution.
 
-![Architecture-Overview](img/stg-architecture.png)
+![Architecture-Overview](docs/resources/stg-architecture.png)
 
 ### ⚡ Recommended Solution Deployment (Docker Compose) 
 
@@ -412,15 +412,15 @@ TEST {
 ## 🔨 Editor (Experimental)
 
 As mentioned within the introduction tasks and books can be edited over a handy realtime online editor
-located `/editors.html`. For the purpose of the study the editor remains as experimental and needs further work for the
-use of an ordinary user. However an advanced users that knows what todo if a `js` expection is thrown can make use of
-this gem. Recommended browser is chrome. To edit a book or a task over the editor one needs to select the task/book from
+located `/html/editors.html`. For the purpose of the study the editor remains as experimental and needs further work for the
+use of an ordinary user. However an advanced users that knows what todo if a `js` exception is thrown can make use of
+this gem. Recommended browser is chrome. To edit a book or a task over the editor, one needs to select the task/book from
 the dropdown or load an existing task from the local environment over the upload button. As the editing is finished the
 task/book needs to be saved over the save button and copied over manually into the according directory.
 
 ## 🔐 Usage of Data
 
-The collected data and their according usage are explained within [privacy.md](privacy.md).
+The collected data and their according usage are explained within [privacy.md](PRIVACY.md).
 
 ## 🗣️ Acknowledgements
 
@@ -436,14 +436,14 @@ The collected data and their according usage are explained within [privacy.md](p
 
 ## 🙏 Credits
 
-At this point we want to say thanksa to Risto Lahtela from Helsinki who created the original codebase called
-SQL-Training-Game. This work is a customisation Risto Lahtela work adapoted to the needs of the FHNW. One can diff the
+At this point we want to say thanks to Aurora Lahtela from Helsinki who created the original codebase called
+SQL-Training-Game. This work is a customization of Aurora Lahtela's work, adapted to the needs of the FHNW. One can diff the
 changes between the original code base and the one of FHNW-SQL-Training-Game through the created tag
-called `Rsl1122/SQL-Training-Game-e755cc5` representing the state of the commit `e755cc5`
-.  [Compare the changes](https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game.github.io/compare/Rsl1122/SQL-Training-Game-e755cc5...main)
+called `AuroraLS3/SQL-Training-Game-e755cc5` representing the state of the commit `e755cc5`
+.  [Compare the changes](https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game.github.io/compare/AuroraLS3/SQL-Training-Game-e755cc5...main)
 .
 
-- [Rsl1122/SQL-Training-Game](https://github.com/Rsl1122/SQL-Training-game)
+- [AuroraLS3/SQL-Training-Game](https://github.com/AuroraLS3/SQL-Training-game)
 
 
 Sound effects have been obtained from freesound.org under the Creative Commons License. 
