@@ -6,13 +6,14 @@ services:
     image: mongo
     restart: on-failure
     volumes:
-      - ./data:/data/db
+      - mongo-data:/data/db                                       # Use named volume
     ports:
       - "27017:27017"
+
   api:
     container_name: stg-api
     depends_on:
-      - 'db'
+      - db
     restart: always
     build: ../FHNW-SQL-Training-Game-API
     environment:
@@ -24,10 +25,11 @@ services:
       - IO_URL=http://localhost:80                                # Necessary env. variable on prod.
     ports:
       - "4001:4001"
+
   frontend:
     container_name: stg-frontend
     depends_on:
-      - 'api'
+      - api
     restart: always
     build:
       context: .                                                  # Use local directory for building process
@@ -39,6 +41,7 @@ services:
       - "3000:3000"
     volumes:
       - ../FHNW-SQL-Training-Game.github.io:/usr/share/nginx/html  # Mounting of frontend code
+
   model:
     container_name: stg-model
     restart: always
@@ -46,9 +49,11 @@ services:
       context: .
       dockerfile: model/Dockerfile
       args:
-        API_URL: ${API_URL}
+        API_URL: http://localhost:4001
     environment:
       - MONGODB_URI=mongodb://stg-mongo:27017/stg-api
     ports:
       - "5001:5001"
 
+volumes:
+  mongo-data:
