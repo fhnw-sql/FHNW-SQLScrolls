@@ -409,7 +409,7 @@ class PageParser extends Parser {
     }
 }
 
-// Parses .task files. See Example.task for format.
+// Parses .task files. See example.task for format.
 class TaskParser extends Parser {
     parse(context, lines) {
         const task = {
@@ -451,7 +451,7 @@ class TaskParser extends Parser {
     }
 }
 
-// Parses .book files. See Example.book for format.
+// Parses .book files. See example.book for format.
 class BookParser extends Parser {
     async parse(context, lines) {
         const book = {

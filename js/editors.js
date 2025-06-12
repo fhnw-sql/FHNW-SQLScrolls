@@ -108,7 +108,7 @@ function onBookEditorPageSwap(event) {
 
 async function showBookEditor() {
     await hideElement("inventory-view");
-    const lines = await readLines("./Example.book");
+    const lines = await readLines("./books/example.book");
 
     bookEditorField.value = lines.join("\n");
     bookEditorField.setAttribute("rows", `${Math.min(lines.length, 30)}`);
@@ -184,7 +184,7 @@ async function uploadBook() {
 
 async function showTaskEditor() {
     await hideElement("inventory-view");
-    const lines = await readLines("./Example.task");
+    const lines = await readLines("./tasks/example.task");
 
     taskEditorField.value = lines.join("\n");
     taskEditorField.setAttribute("rows", `${Math.min(lines.length, 30)}`);
@@ -216,7 +216,12 @@ async function updateEditedTask() {
             ? `Task id: ${taskID}, Quizzes id: ${Views.TASK.currentTask.getNumericID()}`
             : "<span style='color: lightcoral;'>id should be of format 'task-{number}'!</span>";
         await Views.TASK.showWithQuery(document.getElementById("query-input").value);
-        await runQueryTests();
+        if (!Views.TASK.currentTask) {
+            console.warn("No current task selected; skipping test run.");
+            return;
+        } else {
+            await runQueryTests();
+        }
     } catch (e) {
         console.error(e);
         document.getElementById("task-editor-error").innerText = `${e}`;
@@ -267,7 +272,7 @@ async function beginEditor() {
     await loadGameElements(await readLines("./tasks/progression.js"));
     // Load the book items from files and add as options.
     await loadItems();
-    let bookOptions = `<option>Example.book</option>`;
+    let bookOptions = `<option>example.book</option>`;
     for (let item of items.asList()) {
         if (item instanceof BookItem) {
             bookOptions += `<option>./books/en/${item.id}.book</option>`;
@@ -275,7 +280,7 @@ async function beginEditor() {
     }
     document.getElementById("book-editor-existing").innerHTML = bookOptions;
 
-    let taskOptions = `<option>Example.task</option>`;
+    let taskOptions = `<option>example.task</option>`;
     for (let taskID of tasks.getIDs()) {
         taskOptions += `<option>./tasks/en/${taskID}.task</option>`;
     }
