@@ -1,9 +1,9 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import RedirectResponse, PlainTextResponse
-from fastapi.middleware.cors import CORSMiddleware
-import subprocess
-import json
 import os
+import subprocess
+
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse, PlainTextResponse
 
 app = FastAPI()
 

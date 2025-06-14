@@ -5,8 +5,8 @@ RUN mkdir -p /v1
 WORKDIR /v1
 
 # Copy model files from current folder (context is FHNW-SQL-Training-Game-API)
-COPY ./model .
-COPY ./tasks ./tasks
+COPY backend/model .
+COPY frontend/tasks ./tasks
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt

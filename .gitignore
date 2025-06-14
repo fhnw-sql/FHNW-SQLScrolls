@@ -80,3 +80,4 @@ data/
 .vs/
 .vscode/launch.json
 js/configuration.js
+/frontend/vendor/fontawesome-free-6.7.2-web/

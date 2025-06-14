@@ -60,13 +60,13 @@ TEST {
         id|name|owner
         1|Alhambra|1
         2|Vianden Castle|3
-        3|Château de Suscinio|4
+        3|Chï¿½teau de Suscinio|4
     }
 
     RESULT {
         Hipolito|Alhambra
         Serendius|null
         Marconi|Vianden Castle
-        Musilda|Château de Suscinio
+        Musilda|Chï¿½teau de Suscinio
     }
 }

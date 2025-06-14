@@ -7,7 +7,7 @@ services:
   db:
     container_name: stg-mongo
     image: mongo
-    restart: on-failure
+    restart: always
     volumes:
       - ./data:/data/db
     ports:
@@ -17,7 +17,7 @@ services:
     depends_on:
       - 'db'
     restart: always
-    build: ../FHNW-SQL-Training-Game-API
+    build: ../backend
     environment:
       - MONGODB_URI=mongodb://stg-mongo:27017/stg-api
       - JWT_SECRET=FHNW_2021
@@ -45,7 +45,7 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: model/Dockerfile
+      dockerfile: ../model/Dockerfile
       args:
         API_URL: ${API_URL}
     environment:

@@ -14,9 +14,9 @@ Welcome to the official documentation for the **FHNW SQL Training Game** project
 
 ## 🚀 Development & Roadmap
 
-- [CHANGELOG.md](CHANGELOG.md) – Version history and what’s changed.
-- [KNOWN_ISSUES.md](KNOWN_ISSUES.md) – Open bugs and technical issues.
-- [FEATURE_REQUESTS.md](FEATURE_REQUESTS.md) – Planned or requested improvements.
+- [CHANGELOG.md](changelog.md) – Version history and what’s changed.
+- [KNOWN_ISSUES.md](known_issues.md) – Open bugs and technical issues.
+- [FEATURE_REQUESTS.md](feature_requests.md) – Planned or requested improvements.
 
 ---
 

@@ -34,7 +34,7 @@ Soon the police is on the scene under the direction of Enola Homes. The research
 PAGE {
 You and Elona Holmes have access to the following tables to find the murderer:
     <div class="book-img">
-        <img src="img/murder-ERD.png" alt="Schema">
+        <img src="assets/task-schemas/murder-ERD.png" alt="Schema">
     </div>
 </br>
 It is now on you to find the murderer through the power of SQL!

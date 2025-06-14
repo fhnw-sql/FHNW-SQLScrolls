@@ -4,7 +4,7 @@ services:
   db:
     container_name: stg-mongo
     image: mongo
-    restart: on-failure
+    restart: always
     volumes:
       - mongo-data:/data/db                                       # Use named volume
     ports:
@@ -15,7 +15,7 @@ services:
     depends_on:
       - db
     restart: always
-    build: ../FHNW-SQL-Training-Game-API
+    build: backend
     environment:
       - MONGODB_URI=mongodb://stg-mongo:27017/stg-api
       - JWT_SECRET=FHNW_2021
@@ -32,22 +32,22 @@ services:
       - api
     restart: always
     build:
-      context: .                                                  # Use local directory for building process
+      context: frontend
       args:
         API_URL: http://localhost:4001                            # Necessary env. variable on prod.
         API_URL_PUBLIC: ${API_URL_PUBLIC}
     ports:
       - "80:80"
       - "3000:3000"
-    volumes:
-      - ../FHNW-SQL-Training-Game.github.io:/usr/share/nginx/html  # Mounting of frontend code
+    #volumes:
+    # - /frontend:/usr/share/nginx/html  # Mounting of frontend code
 
   model:
     container_name: stg-model
     restart: always
     build:
       context: .
-      dockerfile: model/Dockerfile
+      dockerfile: backend/model/Dockerfile
       args:
         API_URL: http://localhost:4001
     environment:
