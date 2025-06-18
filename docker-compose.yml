@@ -9,15 +9,16 @@ services:
     image: mongo
     restart: always
     volumes:
-      - ./data:/data/db
+      - mongo-data:/data/db
     ports:
       - "27017:27017"
+
   api:
     container_name: stg-api
     depends_on:
-      - 'db'
+      - db
     restart: always
-    build: ../backend
+    build: backend
     environment:
       - MONGODB_URI=mongodb://stg-mongo:27017/stg-api
       - JWT_SECRET=FHNW_2021
@@ -27,28 +28,33 @@ services:
       - IO_URL=${IO_URL}
     ports:
       - "4001:4001"
+
   frontend:
     container_name: stg-frontend
     depends_on:
-      - 'api'
+      - api
     restart: always
     build:
-      context: .
+      context: frontend
       args:
         API_URL: ${API_URL}
         API_URL_PUBLIC: ${API_URL_PUBLIC}
     ports:
       - "80:80"
       - "3000:3000"
+
   model:
     container_name: stg-model
     restart: always
     build:
       context: .
-      dockerfile: ../model/Dockerfile
+      dockerfile: backend/model/Dockerfile
       args:
         API_URL: ${API_URL}
     environment:
       - MONGODB_URI=mongodb://stg-mongo:27017/stg-api
     ports:
       - "5001:5001"
+
+volumes:
+  mongo-data:
