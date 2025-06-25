@@ -18,7 +18,7 @@ services:
     depends_on:
       - db
     restart: always
-    build: backend
+    build: backend/api
     environment:
       - MONGODB_URI=mongodb://stg-mongo:27017/stg-api
       - JWT_SECRET=FHNW_2021
