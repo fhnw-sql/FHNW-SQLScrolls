@@ -1,10 +1,10 @@
 function toggleMute() {
-    var isMuted = sessionStorage.getItem("mute") == "true" ? true : false;
+    const isMuted = sessionStorage.getItem("mute") === "true";
 
     //toogle mute button icon and text
-    var symbol = document.getElementById("mute-symbol");
-    var textMute = document.getElementById("mute-text");
-    var textUnmute = document.getElementById("unmute-text");
+    const symbol = document.getElementById("mute-symbol");
+    const textMute = document.getElementById("mute-text");
+    const textUnmute = document.getElementById("unmute-text");
 
     if (isMuted) {
         symbol.classList.remove("fa-volume-mute");
@@ -30,7 +30,7 @@ function playSoundById(id) {
     // this is a hack to fix the delay in safari - see https://stackoverflow.com/a/54119854
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     const audioCtx = new AudioContext();
-    var audio = document.getElementById(id);
+    const audio = document.getElementById(id);
     if (audio) {
         audio.play();
     }

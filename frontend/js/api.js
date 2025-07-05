@@ -21,7 +21,7 @@ const API = {
             xhr.onreadystatechange = function () {
                 if (this.readyState === 4) {
                     if (this.status === 200) {
-                        var jsonObj = JSON.parse(this.response);
+                        const jsonObj = JSON.parse(this.response);
                         resolve(jsonObj);
                     } else {
                         reject(`Bad response code '${xhr.status}' for API query`);
@@ -40,7 +40,7 @@ const API = {
             xhr.onreadystatechange = function () {
                 if (this.readyState === 4) {
                     if (this.status === 200) {
-                        var jsonObj = JSON.parse(this.response);
+                        const jsonObj = JSON.parse(this.response);
                         resolve(jsonObj);
                     } else {
                         reject(`Bad response code '${xhr.status}' for API query`);
@@ -59,7 +59,7 @@ const API = {
             xhr.onreadystatechange = function () {
                 if (this.readyState === 4) {
                     if (this.status === 200) {
-                        var jsonObj = JSON.parse(this.response);
+                        const jsonObj = JSON.parse(this.response);
                         resolve(jsonObj);
                     } else {
                         reject(`Bad response code '${xhr.status}' for API query`);
@@ -296,7 +296,7 @@ const API = {
             xhr.onreadystatechange = function () {
                 if (this.readyState === 4) {
                     if (this.status === 200) {
-                        var jsonObj = JSON.parse(this.response);
+                        const jsonObj = JSON.parse(this.response);
                         resolve(jsonObj);
                     } else {
                         reject(`Bad response code '${xhr.status}' for user restart`);

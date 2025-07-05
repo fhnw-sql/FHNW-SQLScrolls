@@ -218,7 +218,7 @@ async function updateEditedTask() {
         await Views.TASK.showWithQuery(document.getElementById("query-input").value);
         if (!Views.TASK.currentTask) {
             console.warn("No current task selected; skipping test run.");
-            return;
+
         } else {
             await runQueryTests();
         }

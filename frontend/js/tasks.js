@@ -136,7 +136,7 @@ class Task extends ItemType {
      * parsed.metadata.color  Color of the book related to this task.
      * parsed.description     Instructions about how the task needs to be done.
      * parsed.answer          Model answer of the Task
-     * parsed.parsons          parsons of the Task
+     * parsed.parsons         parsons of the Task
      * parsed.tests           Test objects parsed by TestParser, used to test if the query for the task was correct.
      * parsed.type            Test type used to allow DCL tasks.
      *
@@ -535,7 +535,7 @@ class Table {
 // Returns the next higher taskId based on a given taskId
 function getNextTaskId(currentTaskId) {
     function padWithZeroes(number, length = 3) {
-        var my_string = "" + number;
+        let my_string = "" + number;
         while (my_string.length < length) {
             my_string = "0" + my_string;
         }
@@ -560,10 +560,10 @@ function getNextTaskId(currentTaskId) {
 
     }
 
-    var getPart = currentTaskId.replace(/[^\d.]/g, ""); // returns 0023
-    var num = parseInt(getPart); // returns 23
-    var newVal = padWithZeroes(num + 1); // returns 24
-    var reg = new RegExp(getPart); // create dynamic regexp
+    const getPart = currentTaskId.replace(/[^\d.]/g, ""); // returns 0023
+    const num = parseInt(getPart); // returns 23
+    const newVal = padWithZeroes(num + 1); // returns 24
+    const reg = new RegExp(getPart); // create dynamic regexp
     return currentTaskId.replace(reg, newVal); // returns Task-0024
 }
 

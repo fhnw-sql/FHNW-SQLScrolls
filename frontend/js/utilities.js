@@ -37,21 +37,18 @@ async function runSQL(context, query, taskType = "SQL", statements = "") {
             // if create table, do not create the example table
             if (query.toUpperCase().split(' ').filter(e => e.length > 0).join(' ').startsWith('CREATE TABLE')) {
                 db.run(query);
-                let result = db.exec(statements);
-                return result
+                return db.exec(statements)
             } else {
                 // other DCL that run after table exists
                 db.run(context);
                 db.run(query);
-                let result = db.exec(statements);
-                return result
+                return db.exec(statements)
             }
         } else {
             db.run(context);
             db.run(statements);
             // console.log(query)
-            let result = db.exec(query);
-            return result
+            return db.exec(query)
         }
     } catch (error) {
         console.error("ERROR: query=", query, " context=", context)
