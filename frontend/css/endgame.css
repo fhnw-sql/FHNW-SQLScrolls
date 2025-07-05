@@ -180,6 +180,8 @@
 
 #map-view img {
     filter: brightness(0.8);
+    align-content: center;
+    horiz-align: center;
 }
 
 #map-tasks {
