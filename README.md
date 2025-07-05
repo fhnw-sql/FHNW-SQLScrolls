@@ -1,132 +1,150 @@
-# 🕹️ FHNW SQL Training Game (Leaderboard Branch Token)
+# 🕹️ FHNW SQL Training Game
 
-This repository is the frontend for the FHNW-SQL-Training-Game which is used to determine the effectiveness and
-acceptance of a learning game as an alternative learning method within the Bachelor of Business Information Technology
-at the FHNW, concerning practising the structured query language (SQL) which is taught as part of the Database
-Technology course.
+This repository contains the full-stack implementation of the **FHNW SQL Training Game**, a gamified learning platform
+developed as part of multiple studies for the Bachelor of Business Information Technology at FHNW. The goal is to
+evaluate the effectiveness and acceptance of a learning game as an alternative method for teaching SQL, a core part of
+the "Database Technology" course.
 
-# 🤖 Adaptive version of SQL Scrolls
+## ✨ Features
 
-We integrated an AI algorithm that dynamically adjusts the task difficulty based on the user performance, ensuring a tailored learning experience. Users receive personalized task suggestions to keep them engaged and help them improve in areas where they need more practice. The recommendation system is fully integrated into the game, providing an optimized learning journey.
+- 🎯 **AI-based Task Recommendation System**  
+  Dynamically adjusts task difficulty based on user performance to keep players challenged and engaged.
 
-**Technologies:**
+- 📚 **Books & Task System**  
+  Organize lessons into themed books. Supports rich HTML, SQL examples, and JSON-style tasks.
 
-- Javascript
-- HTML
-- CSS
+- 🎨 **Multiple Themes**  
+  Books and tasks can be styled with different visual themes for varied learning experiences.
+
+- 🧩 **SQL & JSON Task Support**  
+  Create interactive SQL or JSON-based exercises with validation logic, results, and distractors.
+
+- 🏆 **Points & Scoring System**  
+  Earn points for correct answers and progress tracking.
+
+- 📈 **Leaderboards**  
+  Global or local leaderboards for a competitive edge and classroom motivation.
+
+- ⚙️ **Admin Tools**  
+  Includes a book/task editor (experimental), configuration controls, and a summary page (WIP).
+
+---
+
+## 🧰 Technologies
+
+**Built with**
+
+- JavaScript (Vanilla)
+- HTML / CSS
 - Python
+- MongoDB
 
-**Supported browsers:**
-The game is designed to support the latest web browsers. It supports the current versions of:
+**Infrastructure**
+
+- Docker (Node.js, Nginx)
+
+**Supported Browsers**
 
 - Chrome
 - Firefox
 - Safari
 - Microsoft Edge (Chromium)
 
+---
+
 ## ⚙️ Configuration
 
-- Tasks and books can be configured via `.task` and `.book` files located in `/tasks` or `/books`. More information to
-  the syntax can be found below.
-- For translating into more languages, add a `/i18n/<lang>.js`, `/books/<lang>/Book-<>.book` files
-  and `/tasks/<lang>/Task-<>.task` files, as well as an option to `language-selector` element in `index.html`
-- Progression can be configured in `/tasks/progression.js`
-- General configurations can be found in `/js/configuration.js` like:
-    - `API_URL`
-    - `FALSE_ANSWER_UNTIL_MODEL_ANSWER`
-    - `EDITOR_PASSWORD`
+- **Books & Tasks**  
+  Configurable via `.task` and `.book` files in `/frontend/tasks` and `/frontend/books`.
 
-## 🔮 Deployment
+- **Language Support**  
+  Add translations via:
+  - `/i18n/<lang>.js`
+  - `/books/<lang>/Book-<>.book`
+  - `/tasks/<lang>/Task-<>.task`
+  - Update the `language-selector` in `index.html`
 
-To deploy the Frontend one can consider one of the mentioned ways below: Docker, BareboneNodeJS, We recommend to use Docker Compose. The illustration below shows a quick overview of the recommended
-solution.
+- **Progression Rules**  
+  Found in `/frontend/tasks/progression.js`.
 
-![Architecture-Overview](docs/resources/stg-architecture.png)
+- **General Settings**  
+  Configurable in `/frontend/js/configuration.js`:
+  - `API_URL`
+  - `FALSE_ANSWER_UNTIL_MODEL_ANSWER`
+  - `EDITOR_PASSWORD`
 
-### ⚡ Recommended Solution Deployment (Docker Compose) 
+---
 
-The following steps assume that a basic understanding of docker already exists. If this is not the case, the following
-book is
-recommended [Docker: Up & Running: Shipping Reliable Containers in Production](https://www.oreilly.com/library/view/docker-up/9781492036722/)
-.
+## 🚀 Deployment with Docker
 
-To spin-up the whole solution on docker. The repository provides a [docker-compose yml file](https://gitlab.fhnw.ch/elzbieta.pustulka/FHNW-SQL-Training-Game.github.io/-/blob/main/docker-compose.yml). It includes the setup for the
-backend API, frontend interface and the databaseMongoDB container. 
+### ⚡ Quick-Start
 
+**1. Prerequisites**
 
-- Set up the environment user variables (may require restarting your machine depending on your OS):
+- Virtualization must be enabled in BIOS.
+
+**2. Install Docker**
+
+- On Windows/macOS install [Docker Desktop](https://www.docker.com/products/docker-desktop)
+  - Please refer to https://docs.docker.com/desktop/setup/install/windows-install/ for installation instructions
+  - Make sure to enable and use WSL 2.0 for the virtualization engine
+- On Linux CLI install `docker` and `docker-compose` through your package manager
+
+**3. Download the Repository**
+
+- Use the `main` branch for stable builds.
+
+**4. Create a `.env` File**
+
+```env
+API_URL=http://localhost:3000
+IO_URL=http://localhost:80
+POSTMARK_API_KEY=blank
+FROM_SENDER=stg@github.io
 ```
- API_URL=http://localhost:3000 
- IO_URL=http://localhost:80 
- POSTMARK_API_KEY=blank
- FROM_SENDER=stg@github.io
 
- ```
+**5. Build and Run**
 
-- Install [docker desktop](https://www.docker.com/products/docker-desktop/) (includes docker compose, recommended if you are on windows) or docker and docker compose as commandline (linux)
-
-- Clone repos both gitlab repos in the same root directory
-https://gitlab.fhnw.ch/elzbieta.pustulka/FHNW-SQL-Training-Game.github.io
-https://gitlab.fhnw.ch/elzbieta.pustulka/FHNW-SQL-Training-Game-API 
-
-- Go to a terminal, change directory to the root of the frontend repository (FHNW-Training-Game.github.io) and type the command (option -d at the end if you want it to run in the background): 
-```
-docker-compose up
+```bash
+    docker-compose build
+    docker-compose up
 ```
 
-- Open a browser and go to http://localhost:80 (recommended to open the developer tools to report the error in case there are any issues)
+---
 
-For further configuration details consider the [docker-compose file](https://gitlab.fhnw.ch/elzbieta.pustulka/FHNW-SQL-Training-Game.github.io/-/blob/main/docker-compose.yml) directly.
+### 💻 Development Setup
 
-### 💻 Deplyoment for Development
+#### 🧪 Quickstart with `dev-compose.yml`
 
-To develop on this project it is recommended to work within an IDE such as Jetbrains Webstorm.
+This is the fastest way to start the development environment. It follows the same steps as the regular deployment, **but
+you can skip step 4 (setting environment variables)**.
 
-#### 🌟 Running the code
+```bash
+    docker-compose build
+    docker-compose -f dev-compose.yml up
+```
 
-To quickly deploy the code for development a separate docker compose configuration file named [dev-compose.yml](dev-compose.yml) has been added. The docker configuration does not require any environment variables to be setup allowing for quick and easy execution of the docker containers for a development environment. Once it is up and running simply connect to [localhost on port 80 (http://localhost)](http://localhost/) through your browser.
+#### 💡 JetBrains WebStorm
 
-#### 💡 Developing with Webstorm
+Includes a preconfigured [Dev_Compose.xml](.idea/runConfigurations/Dev_Compose.xml) to start via UI.
 
-To continue development on the project it is recommended to use Jetbrains Webstorm by using either the Enterprise or Community Edition available [online](https://www.jetbrains.com/webstorm/) as it was successfully used to previously continue development on the project. Furthermore, it already features an already present [run configuration](.idea/runConfigurations/Dev_Compose.xml) for executing the [dev-compose.yml](dev-compose.yml) file through the press of the green "Run" button.
+#### 🐞 Debugging
 
-#### 🔨 Developing without Webstorm / another IDE
+- Use browser dev tools (`F12`) for live feedback
+- Use container logs for backend issues
 
-To run the project without Webstorm simply execute the commands `docker-compose build` (to create the docker container) and `docker-compose up` (to run the docker container and the code). Depending on the type of changes that have been made, reflection of those changes might either show up immediately during runtime(eg. HTML, CSS), after stopping and restarting the containers (eg. various Javascript files) or after rebuilding the containers (eg. API changes).
+---
 
-#### 🐛 Debugging
+## 🖼️Frontend
 
-While debugging inside an IDE is possible, the docker containers usually do not show any actual runtime errors of the javascript code itself inside the log or console. To debug web application code, one should use the developer console adn tools (`Press F12`) within a Chromium-based browser such as Edge, Chrome or Brave for example.
+**[Dockerfile](frontend/Dockerfile)**
 
-### 🖼️ Frontend Deployment (advanced)
-
-#### 🐋 Docker - Frontend
-
-The following steps assume that a basic understanding of docker already exists. If this is not the case, the following
-book is
-recommended [Docker: Up & Running: Shipping Reliable Containers in Production](https://www.oreilly.com/library/view/docker-up/9781492036722/)
-.
-
-To spin-up the container run the following commands, don't forget to replace the environments variables with your actual
-configuration:
-
-1. Run `docker build -t FHNW-SQL-Training-Game:1.0 --build-arg API_URL='{API_URL}' .`
-2. Run `docker run -dp 80:80 FHNW-SQL-Training-Game:1.0`
-
-The API is now exposed on the PORT 80 on the docker host.
-
-#### 🐱 GitHub Pages
-
-To deploy the project on github pages. Simply fork the repository and name it `{your-gh-username}.github.io` and do the
-according configuration within `configuration.js`. More information concerning GH Pages can be
-found on [GitHub Pages](https://pages.github.com/)
-
-## 📚 Books syntax
+### 📚 Books syntax
 
 In the following chapter, the outline of a book is explained and according to syntax. In the end, a full example is
 shown.
 
-### METADATA
+#### METADATA
 
 Within the `METADATA` one can specify:
 
@@ -146,7 +164,7 @@ METADATA {
 }
 ```
 
-### PAGE
+#### PAGE
 
 Representation of a page within the book. Within one can use plain text or HTML syntax to describe the content of the
 page. A page further supports the `EXAMPLE` tag, which can be used to display a theoretical example. Consider the
@@ -171,7 +189,7 @@ PAGE {
 }
 ```
 
-### Example
+#### Example
 
 ```
 METADATA {
@@ -208,12 +226,12 @@ PAGE {
 }
 ```
 
-## 📝 Tasks syntax
+### 📝 Tasks syntax
 
 In the following chapter, the outline of a task is explained and the according to syntax. In the end, a full example is
 shown.
 
-### METADATA
+#### METADATA
 
 Within the `METADATA` one can specify:
 
@@ -233,7 +251,7 @@ METADATA {
 }
 ```
 
-### DESCRIPTION
+#### DESCRIPTION
 
 The description is used to assign instruction to the task. The content should consist of plain text.
 
@@ -246,7 +264,7 @@ DESCRIPTION {
 }
 ```
 
-### PARSONS (optional)
+#### PARSONS (optional)
 
 The `PARSONS` Section is optional and specifies whether a task needs to be solved by using
 the  [Parsons Programming Puzzle](https://github.com/js-parsons/js-parsons) (if set). The outline needs to follow the
@@ -263,7 +281,7 @@ PARSONS {
 }   
 ```
 
-### ANSWER (optional)
+#### ANSWER (optional)
 
 The `ANSWER` section can be set if the teacher wants to allow the display of a model answer after the task is completed
 successfully by the student.
@@ -274,7 +292,7 @@ ANSWER {
 }
 ```
 
-### STRICT (optional)
+#### STRICT (optional)
 
 The `STRICT` can be used to enable strict validation of the test result (order).
 
@@ -286,7 +304,7 @@ TEST {
 }
 ```
 
-### TEST
+#### TEST
 
 The section `TEST` is used to validate the task. A teacher can specify multiple `TEST` if needed in order to validate
 the answer. There are two possible approaches, on the one hand, by defining a DB scheme by using the `TABLE` section
@@ -349,7 +367,7 @@ TEST {
 }
 ```
 
-### Example
+#### Example
 
 ```
 METADATA {
@@ -409,35 +427,100 @@ TEST {
 }
 ```
 
-## 🔨 Editor (Experimental)
+### 🔨 Experimental Editor
 
-As mentioned within the introduction tasks and books can be edited over a handy realtime online editor
-located `/html/editors.html`. For the purpose of the study the editor remains as experimental and needs further work for the
-use of an ordinary user. However an advanced users that knows what todo if a `js` exception is thrown can make use of
-this gem. Recommended browser is chrome. To edit a book or a task over the editor, one needs to select the task/book from
-the dropdown or load an existing task from the local environment over the upload button. As the editing is finished the
-task/book needs to be saved over the save button and copied over manually into the according directory.
+Located at `/html/editors.html`, this in-browser editor allows advanced users to edit `.task` and `.book` files.
+Experimental features may crash and require JS troubleshooting.
+
+---
+
+## 🌐 Backend: REST API (Node.js + MongoDB)
+
+**[Dockerfile](backend/api/Dockerfile)**
+
+### 💾 Getting Started
+
+```bash
+npm i
+npm run start        # production
+npm run start:dev    # dev with nodemon
+npm run test         # run jest tests
+npm run test:watch   # jest with livereload
+npm run test:coverage
+```
+
+### ⚡ API Overview
+
+**Status Codes**
+
+- `200 OK`
+- `400 Bad Request`
+- `401 Unauthorized`
+- `500 Server Error`
+
+#### /users Endpoints
+
+- `POST /register`: `{username, password}`
+- `POST /authenticate`: `{username, password}`
+- `POST /recover`: `{username}`
+- `POST /reset`: `{token, password}`
+- `GET /self`
+- `PATCH /self/answer_sql`: `{task, correct, query}`
+
+### 📦 Dependencies
+
+- `bcryptjs`, `body-parser`, `cors`, `dotenv`, `express`, `express-jwt`
+- `joi`, `jsonwebtoken`, `mongodb`, `postmark`, `rootpath`, `winston`
+
+---
+
+## 🧠 Backend: Python Recommendation Model (FastAPI)
+
+**[Dockerfile](backend/model/Dockerfile)**
+
+### 🧰 Python Dependencies
+
+```
+MarkupSafe==2.1.3
+flasgger==0.9.7.1
+pymongo==4.7.2
+gunicorn==22.0.0
+scikit-learn==1.4.2 
+fastapi==0.114.0
+uvicorn==0.30.6
+numpy==2.1.1
+pandas==2.2.2
+requests==2.26.0
+```
+
+### 🚀 Serving the Model
+
+Start locally with:
+
+```bash
+    uvicorn app:app --host 0.0.0.0 --port 8000
+```
+
+Or using Gunicorn:
+
+```bash
+    gunicorn -w 4 -k uvicorn.workers.UvicornWorker app:app
+```
+
+---
 
 ## 🔐 Usage of Data
 
 The collected data and their according usage are explained within [privacy.md](PRIVACY.md).
 
-## 🗣️ Acknowledgements
 
-- [sql.js](https://github.com/sql-js/sql.js) SQLite compiled to wasm
-- [canvas confetti](https://github.com/catdad/canvas-confetti) JS Confetti cannon
-- [Bootstrap 4](https://getbootstrap.com/) HTML, CSS & JS toolkit
-- [Font Awesome 5](https://fontawesome.com/) SVG icons
-- [RealFaviconGenerator](https://realfavicongenerator.net/) Favicon from image generator
-- [Dygraphs](http://dygraphs.com/) Line graphing library
-- Public domain or CC0 asset creators
-- [pllk/sqltrainer](https://github.com/pllk/sqltrainer)
-- [js-parsons](https://github.com/js-parsons/js-parsons)
+---
 
 ## 🙏 Credits
 
 At this point we want to say thanks to Aurora Lahtela from Helsinki who created the original codebase called
-SQL-Training-Game. This work is a customization of Aurora Lahtela's work, adapted to the needs of the FHNW. One can diff the
+SQL-Training-Game. This work is a customization of Aurora Lahtela's work, adapted to the needs of the FHNW. One can diff
+the
 changes between the original code base and the one of FHNW-SQL-Training-Game through the created tag
 called `AuroraLS3/SQL-Training-Game-e755cc5` representing the state of the commit `e755cc5`
 .  [Compare the changes](https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game.github.io/compare/AuroraLS3/SQL-Training-Game-e755cc5...main)
@@ -445,9 +528,14 @@ called `AuroraLS3/SQL-Training-Game-e755cc5` representing the state of the commi
 
 - [AuroraLS3/SQL-Training-Game](https://github.com/AuroraLS3/SQL-Training-game)
 
+Sound effects have been obtained from freesound.org under the Creative Commons License.
 
-Sound effects have been obtained from freesound.org under the Creative Commons License. 
+- book_page_turn: sound by SmartWentCody, original title "Book Page Turning.wav",
+  license https://creativecommons.org/licenses/by/3.0/, *edited version*
+- right_answer: sound by rhodesmas, original title "Coins Purchase 4.wav",
+  license https://creativecommons.org/licenses/by/3.0/, *edited version*
+- wrong_answer: sound by Sjonas88, original title "fail-sound.wav",
+  license https://creativecommons.org/publicdomain/zero/1.0/, *edited version* 
 
-- book_page_turn: sound by SmartWentCody, original title "Book Page Turning.wav", license https://creativecommons.org/licenses/by/3.0/, *edited version*
-- right_answer: sound by rhodesmas, original title "Coins Purchase 4.wav", license https://creativecommons.org/licenses/by/3.0/, *edited version* 
-- wrong_answer: sound by Sjonas88, original title "fail-sound.wav", license https://creativecommons.org/publicdomain/zero/1.0/, *edited version* 
+
+

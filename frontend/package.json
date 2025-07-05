@@ -1,0 +1,39 @@
+{
+  "name": "my-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "prepare": "npm run copy-libs",
+    "copy-libs": "npx npm-run-all --parallel copy-*",
+    "copy-sqljs": "copyfiles -f node_modules/sql.js/dist/sql-wasm.{js,wasm,debug.js} libs/sql.js/",
+    "copy-jquery": "copyfiles -f node_modules/jquery/dist/jquery.min.js libs/jquery/",
+    "copy-jquery-ui": "copyfiles -f node_modules/jquery-ui/dist/jquery-ui.min.js libs/jquery-ui/",
+    "copy-touch-punch": "copyfiles -f node_modules/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js libs/jquery-ui-touch-punch/",
+    "copy-bootstrap": "copyfiles -f node_modules/bootstrap/dist/js/bootstrap.min.js node_modules/bootstrap/dist/css/bootstrap.min.css libs/bootstrap/",
+    "copy-fontawesome": "npm run copy-fontawesome-css && npm run copy-fontawesome-webfonts",
+    "copy-fontawesome-css": "copyfiles -f -u 4 node_modules/@fortawesome/fontawesome-free/css/** libs/fontawesome-free/css/",
+    "copy-fontawesome-webfonts": "copyfiles -f -u 4 node_modules/@fortawesome/fontawesome-free/webfonts/** libs/fontawesome-free/webfonts/",
+    "copy-html2pdf": "copyfiles -f node_modules/html2pdf.js/dist/html2pdf.bundle.min.js libs/html2pdf.js/",
+    "copy-dygraphs": "copyfiles -f node_modules/dygraphs/dist/dygraph.{min.js,css} libs/dygraphs/",
+    "copy-confetti": "copyfiles -f node_modules/canvas-confetti/dist/confetti.browser.js libs/canvas-confetti/",
+    "copy-lodash": "copyfiles -f node_modules/lodash/lodash.min.js libs/lodash/",
+    "copy-moment": "copyfiles -f node_modules/moment/min/moment.min.js libs/moment/"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "audit": "^0.0.6",
+    "bootstrap": "4.6.2",
+    "canvas-confetti": "^1.9.3",
+    "dygraphs": "^2.2.1",
+    "html2pdf.js": "^0.10.1",
+    "jquery": "^3.7.1",
+    "jquery-ui": "^1.13.2",
+    "jquery-ui-touch-punch": "^0.2.3",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "sql.js": "^1.13.0"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "npm-run-all": "^4.1.5"
+  }
+}
