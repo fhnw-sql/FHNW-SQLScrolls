@@ -34,7 +34,7 @@
             overflow: hidden;
         }
     </style>
-    <link href="vendor/bootstrap-4.5.2-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="libs/bootstrap/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
 
     <script>
@@ -450,6 +450,13 @@
             </div>
         </section>
 
+        <!-- map-view -->
+        <section class="m-2 view hidden" id="map-view" tabindex="-1">
+            <img alt="Map of the world" class="col-white" loading="lazy" src="assets/backgrounds/worldmap.jpg"/>
+            <h1 class="screen-reader-only i18n-map-view"></h1>
+            <ul id="map-tasks"></ul>
+        </section>
+
         <!-- task-view -->
         <section class="m-2 view hidden" id="task-view" tabindex="-1">
             <div
@@ -637,18 +644,9 @@
         <p class="col-white" id="star-counter" tabindex="0"></p>
     </div>
 
-    <!-- map-view -->
-    <section class="col-md-9 view hidden" id="map-view" tabindex="-1">
-        <img alt="Map of the world" class="col-white" loading="lazy" src="assets/backgrounds/worldmap.jpg"/>
-        <button class="col-white logout-button" onclick="logout()">
-            <i class="fa fa-fw fa-door-open"></i> <span class="i18n-logout"></span>
-        </button>
-        <h1 class="screen-reader-only i18n-map-view"></h1>
-        <ul id="map-tasks"></ul>
-    </section>
 
     <!-- evil-flame-animation -->
-    <section class="view col-md-8 hidden" id="evil-flame-animation" tabindex="-1">
+    <section class="m-2 hidden" id="evil-flame-animation" tabindex="-1">
         <h1 class="screen-reader-only i18n-transformation-animation"></h1>
         <div class="row">
             <div class="col-md-4">
@@ -786,7 +784,7 @@
     </section>
 
     <!-- end-animation -->
-    <section class="view col-md-8 hidden" id="end-animation" tabindex="-1">
+    <section class="m-2 hidden" id="end-animation" tabindex="-1">
         <h1 class="screen-reader-only i18n-end-animation"></h1>
         <div class="row">
             <div class="col-md-4">
@@ -1210,7 +1208,7 @@
     <source type="audio/mpeg" src="sounds/wrong_answer.mp3"/>
 </audio>
 
-<!-- script libraries-->
+<!-- npm managed script libraries-->
 <script src="libs/jquery/jquery.min.js"></script>
 <script src="libs/bootstrap/bootstrap.min.js"></script>
 <script src="libs/canvas-confetti/confetti.browser.js"></script>
@@ -1220,8 +1218,9 @@
 <script src="libs/jquery-ui/jquery-ui.min.js"></script>
 <script src="libs/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 <script src="libs/html2pdf.js/html2pdf.bundle.min.js"></script>
+<script src="libs/sql.js/sql-wasm.js"></script>
 
-<script src="dist/sql-wasm.js"></script>
+<!-- manually managed script libraries-->
 <script src="vendor/js-parsons/lis.js"></script>
 <script src="vendor/js-parsons/parsons.js"></script>
 
@@ -1269,7 +1268,7 @@
 />
 <link href="vendor/js-parsons/parsons.css" rel="stylesheet"/>
 <link href="css/endgame.css" rel="stylesheet"/>
-<link as="style" href="vendor/dygraphs-2.1.0/dygraph.min.css"/>
+<link as="style" href="libs/dygraphs/dygraph.min.css"/>
 
 <div aria-hidden="true" class="preload-images"
      style="width: 1px; height: 1px; position: fixed; bottom: 0; right: 0;">

@@ -28,7 +28,7 @@ function isArrayEqual(a, b, strict) {
  */
 async function runSQL(context, query, taskType = "SQL", statements = "") {
 
-    const config = {locateFile: (filename) => `dist/${filename}`};
+    const config = { locateFile: (filename) => `libs/sql.js/${filename}` };
     const SQL = await initSqlJs(config);
     const db = new SQL.Database();
 
