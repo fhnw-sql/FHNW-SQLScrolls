@@ -1129,7 +1129,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-rune-red i18n-delete-score-confirm-button1"
                             data-dismiss="modal"></button>
-                    <!-- TODO: add API call to delete the score (Erm it is already there???) -->
                     <button type="button" class="btn btn-rune-red i18n-delete-score-confirm-button2"
                             onclick="restartUser()"></button>
                 </div>
@@ -1211,20 +1210,22 @@
     <source type="audio/mpeg" src="sounds/wrong_answer.mp3"/>
 </audio>
 
-<!-- scripts -->
-<script src="vendor/jquery-3.5.1/jquery.min.js"></script>
-<script src="vendor/bootstrap-4.5.2-dist/js/popper.min.js"></script>
-<script src="vendor/bootstrap-4.5.2-dist/js/bootstrap.bundle.min.js"></script>
+<!-- script libraries-->
+<script src="libs/jquery/jquery.min.js"></script>
+<script src="libs/bootstrap/bootstrap.min.js"></script>
+<script src="libs/canvas-confetti/confetti.browser.js"></script>
+<script src="libs/dygraphs/dygraph.min.js"></script>
+<script src="libs/lodash/lodash.min.js"></script>
+<script src="libs/moment/moment.min.js"></script>
+<script src="libs/jquery-ui/jquery-ui.min.js"></script>
+<script src="libs/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+<script src="libs/html2pdf.js/html2pdf.bundle.min.js"></script>
+
 <script src="dist/sql-wasm.js"></script>
-<script src="vendor/canvas-confetti-1.2.0/confetti.browser.min.js"></script>
-<script src="vendor/dygraphs-2.1.0/dygraph.min.js"></script>
-<script src="vendor/lodash-4.17.20/lodash.min.js"></script>
-<script src="vendor/moment-2.29.1/moment.min.js"></script>
-<script src="vendor/jquery-ui-1.12.1/jquery-ui.min.js"></script>
-<script src="vendor/jquery-ui-touch-punch-0.2.3/jquery.ui.touch-punch.min.js"></script>
 <script src="vendor/js-parsons/lis.js"></script>
 <script src="vendor/js-parsons/parsons.js"></script>
-<script src="vendor/html2pdf/html2pdf.bundle.min.js"></script>
+
+<!-- script files-->
 <script src="js/configuration.js"></script>
 <script src="js/i18n.js"></script>
 <script src="js/particles.js"></script>
@@ -1245,9 +1246,9 @@
 
 
 <!-- Font Awesome, load & swap -->
-<link as="style" href="vendor/fontawesome-free-5.14.0-web/css/all.min.css" rel="preload"/>
+<link as="style" href="libs/fontawesome-free/css/all.min.css" rel="preload"/>
 <link
-        href="vendor/fontawesome-free-5.14.0-web/css/all.min.css"
+        href="libs/fontawesome-free/css/all.min.css"
         media="print"
         onload="this.media='all'"
         rel="stylesheet"
