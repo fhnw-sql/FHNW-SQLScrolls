@@ -25,16 +25,16 @@ class MetaDataParser extends Parser {
         while (true) {
             const line = lines.shift().trim();
             if (line === "}") break;
-            if (line.match(/id: .*/)) metadata.id = line.substr(4);
-            if (line.match(/name: .*/)) metadata.name = line.substr(6);
-            if (line.match(/title: .*/)) metadata.title = line.substr(7);
-            if (line.match(/author: .*/)) metadata.author = line.substr(8);
-            if (line.match(/color: .*/)) metadata.color = line.substr(7);
+            if (line.match(/id: .*/)) metadata.id = line.substring(4);
+            if (line.match(/name: .*/)) metadata.name = line.substring(6);
+            if (line.match(/title: .*/)) metadata.title = line.substring(7);
+            if (line.match(/author: .*/)) metadata.author = line.substring(8);
+            if (line.match(/color: .*/)) metadata.color = line.substring(7);
             // custom metadata for tasks
-            if (line.match(/info: .*/)) metadata.info = line.substr(6);
-            if (line.match(/keywords: .*/)) metadata.keywords = line.substr(10);
-            if (line.match(/level: .*/)) metadata.level = line.substr(7);
-            if (line.match(/type: .*/)) metadata.type = line.substr(6).trim().toUpperCase()
+            if (line.match(/info: .*/)) metadata.info = line.substring(6);
+            if (line.match(/keywords: .*/)) metadata.keywords = line.substring(10);
+            if (line.match(/level: .*/)) metadata.level = line.substring(7);
+            if (line.match(/type: .*/)) metadata.type = line.substring(6).trim().toUpperCase()
             else metadata.type = "SQL";
         }
         return metadata;
