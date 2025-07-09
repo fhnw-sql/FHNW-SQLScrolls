@@ -1,0 +1,113 @@
+METADATA {
+    id: task-034j
+    name: Full combination
+    color: green
+    info: list field grouped on count condition
+    keywords: FULL OUTER JOIN
+    level: 3
+}
+
+DESCRIPTION {
+    Show the complete information for all the wands used and all the wizard information.
+       }
+
+ANSWER {
+    SELECT * FROM Wizards w
+    FULL OUTER JOIN wizards_use_wands ww ON w.id = ww.id
+    FULL OUTER JOIN Wands wa ON ww.name = wa.name;
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Shadowland|1
+    }
+
+    TABLE {
+        Wands
+        wand_name|length|strength
+        Dragon heartstring|20|9
+        Phoenix feather|15|8
+        Unicorn tail hair|18|6
+        Troll whisker|12|8
+        Wampus cat hair|16|9
+    }
+
+    TABLE {
+        wizards_use_wands
+        wizard_id|wand_name
+        1|Dragon heartstring
+        1|Phoenix feather
+        2|Phoenix feather
+        3|Phoenix feather
+        5|Troll whisker
+        5|Wampus cat hair
+        4|Unicorn tail hair
+        3|Unicorn tail hair
+
+    }
+        
+    RESULT {
+        1|Anna|Shadowland|5|1|Dragon heartstring|Dragon heartstring|20|9
+        1|Anna|Shadowland|5|1|Phoenix feather|Phoenix feather|15|8
+        2|Orz Orz|Kumpula|3|2|Phoenix feather|Phoenix feather|15|8
+        3|Bingo|Shadowland|2|3|Phoenix feather|Phoenix feather|15|8
+        3|Bingo|Shadowland|2|3|Unicorn tail hair|Unicorn tail hair|18|6
+        4|Solmu|Shadowland|4|4|Unicorn tail hair|Unicorn tail hair|18|6
+        5|Rufus|Shadowland|1|5|Troll whisker|Troll whisker|12|8
+        5|Rufus|Shadowland|1|5|Wampus cat hair|Wampus cat hair|16|9
+    }
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|wizard_name|area|skill
+        1|Olbus|Witches|Forest|5
+        2|Merlin|Seabed Temple|5
+        3|Morden|Witches|Forest|4
+        4|Bella|Tasmania|1
+        5|Kara|Tasmania|3
+        6|Shaka	Seabed|Temple|3
+    }
+
+    TABLE {
+        Wands
+        name|length|strength
+        Coral|12|9
+        Shell|12|7
+        Basilisk horn|11|8
+        Jackalope|15|5
+        Wampus cat hair|17|10
+    }
+
+    TABLE {
+        wizards_use_wands
+        ID|NAME
+        1|Coral
+        1|Jackalope
+        3|Basilisk horn
+        3|Shell
+        5|Basilisk horn
+        5|Wampus cat hair
+        6|Wampus cat hair
+    }
+      
+    RESULT {
+        1|Olbus|Witches Forest|5|1|Coral|Coral|12|9
+        1|Olbus|Witches Forest|5|1|Jackalope|Jackalope|15|5
+        2|Merlin|Seabed Temple|5|2|Jackalope|Jackalope|15|5
+        3|Morden|Witches Forest|4|3|Basilisk horn|Basilisk horn|11|8
+        3|Morden|Witches Forest|4|3|Shell|Shell|12|7
+        5|Kara|Tasmania|3|5|Basilisk horn|Basilisk horn|11|8
+        5|Kara|Tasmania|3|5|Wampus cat hair|Wampus cat hair|17|10
+        6|Shaka|Seabed Temple|3|6|Wampus cat hair|Wampus cat hair|17|10
+        4|Bella|Tasmania|1|-|-|-|-|-
+    }
+}
+

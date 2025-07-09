@@ -1,0 +1,140 @@
+METADATA {
+    id: Book-R
+    name: The Sims 2 Book 🟢💎👤
+    title: The Sims 2
+    author: Lisa
+    color: green
+}
+
+PAGE {
+    <h2> The Sims 2 🟢💎👤</h2>
+    The Sims 2 is a life simulation game where players control virtual characters (Sims) in customizable households, managing their daily needs, careers, and relationships.
+    The game introduced genetics, allowing Sims to pass traits to offspring, and deep personality systems with wants and fears that influence behavior.
+    Players build homes, pursue aspirations, and explore dynamic neighborhoods with aging and story progression.
+    Its open-ended gameplay, humor, and emotional depth made it a landmark sequel in the series.
+    </br>
+}
+
+PAGE {
+    Logical model
+    <div class="book-img">
+        <img src="assets/task-schemas/sims2_logical.png" alt="Schema">
+    </div>
+}
+
+PAGE {
+
+    Detailed Entity-Relationship Schema
+    </br>
+    <div class="book-img">
+        <img src="assets/task-schemas/sims2_relational.png" alt="Schema">
+    </div>
+
+}
+
+PAGE {
+    <h3> Family Data Table </h3>
+
+    EXAMPLE {
+        SQL {
+
+            CREATE TABLE Family (
+                FamilyID INT PRIMARY KEY,
+                FamilyName VARCHAR(50),
+                Funds INT
+            );
+
+
+            INSERT INTO Family (FamilyID, FamilyName, Funds) VALUES (1, 'Goth', 50000);
+            INSERT INTO Family (FamilyID, FamilyName, Funds) VALUES (2, 'Pleasant', 20000);
+            INSERT INTO Family (FamilyID, FamilyName, Funds) VALUES (3, 'Dreamer', 15000);
+            INSERT INTO Family (FamilyID, FamilyName, Funds) VALUES (4, 'Caliente', 18000);
+            INSERT INTO Family (FamilyID, FamilyName, Funds) VALUES (5, 'Broke', 500);
+        }
+
+        QUERY {
+            SELECT * FROM Family;
+        }
+    }
+}
+
+
+PAGE {
+    <h3> House Data Table </h3>
+    EXAMPLE {
+        SQL {
+            CREATE TABLE House (
+                HouseID INT PRIMARY KEY,
+                Address VARCHAR(100),
+                LotSize INT
+            );
+
+            INSERT INTO House (HouseID, Address, LotSize) VALUES (1, '5 Sim Lane', 30);
+            INSERT INTO House (HouseID, Address, LotSize) VALUES (2, '215 Sim Avenue', 40);
+            INSERT INTO House (HouseID, Address, LotSize) VALUES (3, '101 Sim Street', 25);
+            INSERT INTO House (HouseID, Address, LotSize) VALUES (4, '400 Dreamer Way', 35);
+            INSERT INTO House (HouseID, Address, LotSize) VALUES (5, '13 Broke Road', 20);
+        }
+        QUERY {
+            SELECT * FROM House;
+        }
+    }
+}
+PAGE {
+
+    <h3> Job Data Table </h3>
+    EXAMPLE {
+        SQL {
+            CREATE TABLE Job (
+                JobID INT PRIMARY KEY,
+                Title VARCHAR(50),
+                CareerTrack VARCHAR(50),
+                Salary INT,
+                WorkHours INT
+            );
+
+            INSERT INTO Job (JobID, Title, CareerTrack, Salary, WorkHours) VALUES (1, 'Team Mascot', 'Athletic', 300, 8);
+            INSERT INTO Job (JobID, Title, CareerTrack, Salary, WorkHours) VALUES (2, 'EMT', 'Medical', 500, 10);
+            INSERT INTO Job (JobID, Title, CareerTrack, Salary, WorkHours) VALUES (3, 'Campaign Intern', 'Politics', 350, 9);
+            INSERT INTO Job (JobID, Title, CareerTrack, Salary, WorkHours) VALUES (4, 'Counter Intelligence', 'Intelligence', 700, 6);
+            INSERT INTO Job (JobID, Title, CareerTrack, Salary, WorkHours) VALUES (5, 'Lab Assistant', 'Science', 400, 8);
+        }
+        QUERY {
+            SELECT * FROM Job;
+        }
+    }
+}
+
+
+PAGE {
+
+    <h3> Sim Data Table </h3>
+    EXAMPLE {
+        SQL {
+            CREATE TABLE Sim (
+                SimID INT PRIMARY KEY,
+                FirstName VARCHAR(50),
+                LastName VARCHAR(50),
+                Age VARCHAR(20),
+                Gender VARCHAR(10),
+                Aspiration VARCHAR(50),
+                JobID INT,
+                FamilyID INT NOT NULL,
+                HouseID INT,
+                FOREIGN KEY (JobID) REFERENCES Job(JobID),
+                FOREIGN KEY (FamilyID) REFERENCES Family(FamilyID),
+                FOREIGN KEY (HouseID) REFERENCES House(HouseID)
+            );
+
+            INSERT INTO Sim (SimID, FirstName, LastName, Age, Gender, Aspiration, JobID, FamilyID, HouseID) VALUES (1, 'Mortimer', 'Goth', 'Adult', 'Male', 'Knowledge', 5, 1, 1);
+            INSERT INTO Sim (SimID, FirstName, LastName, Age, Gender, Aspiration, JobID, FamilyID, HouseID) VALUES (2, 'Bella', 'Goth', 'Adult', 'Female', 'Romance', 4, 1, 1);
+            INSERT INTO Sim (SimID, FirstName, LastName, Age, Gender, Aspiration, JobID, FamilyID, HouseID) VALUES (3, 'Daniel', 'Pleasant', 'Adult', 'Male', 'Fortune', 1, 2, 2);
+            INSERT INTO Sim (SimID, FirstName, LastName, Age, Gender, Aspiration, JobID, FamilyID, HouseID) VALUES (4, 'Darren', 'Dreamer', 'Adult', 'Male', 'Family', 3, 3, 4);
+            INSERT INTO Sim (SimID, FirstName, LastName, Age, Gender, Aspiration, JobID, FamilyID, HouseID) VALUES (5, 'Dina', 'Caliente', 'Adult', 'Female', 'Romance', 2, 4, 3);
+        }
+        QUERY {
+            SELECT * FROM Sim;
+        }
+    }
+
+}

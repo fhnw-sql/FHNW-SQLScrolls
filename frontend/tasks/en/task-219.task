@@ -1,0 +1,137 @@
+METADATA {
+    id: task-219
+    name: Total salary
+    color: green
+    info: JOIN, aggregation, grouping operators
+    keywords: JOIN, Grouping, Aggregation
+    level: 5
+}
+
+DESCRIPTION {
+    Calculate how much money each family earns in total.
+    Display family name and totaly salary, order by descending total salary
+}
+
+PARSONS {
+    SELECT
+        f.FamilyName,
+        COUNT(s.SimID) AS MemberCount,  #distractor
+        AVG(COALESCE(j.Salary, 0)) AS AvgSalary,  #distractor
+        SUM(COALESCE(j.Salary, 0)) AS TotalSalary
+        MAX(j.Salary) AS HighestSalary  #distractor
+    FROM 
+        Family f
+        LEFT JOIN Sim s ON f.FamilyID = s.FamilyID  #distractor
+        RIGHT JOIN Sim s ON f.FamilyID = s.FamilyID  #distractor
+        INNER JOIN Sim s ON f.FamilyID = s.FamilyID
+        INNER JOIN Job j ON s.JobID = j.JobID
+    WHERE j.Salary > 30000  #distractor
+    GROUP BY 
+        f.FamilyName
+        f.Funds  #distractor
+    HAVING COUNT(s.SimID) > 1  #distractor
+    ORDER BY 
+        f.FamilyName ASC,  #distractor
+        TotalSalary DESC;
+    LIMIT 10;  #distractor
+}
+
+ANSWER { 
+    SELECT 
+        f.FamilyName,
+        SUM(COALESCE(j.Salary, 0)) AS TotalSalary
+    FROM 
+        Family f
+        INNER JOIN Sim s ON f.FamilyID = s.FamilyID
+        INNER JOIN Job j ON s.JobID = j.JobID
+    GROUP BY 
+        f.FamilyName
+    ORDER BY 
+        TotalSalary DESC;
+}
+
+
+TEST {
+    TABLE {
+        Job
+        JobID|Title|CareerTrack|Salary|WorkHours
+        1|CEO|Business|100000|9-5
+        2|Doctor|Medical|90000|9-5
+        3|Artist|Creative|50000|Flex
+        4|Lawyer|Business|95000|9-5
+        5|Scientist|Science|80000|Flex
+    }
+
+    TABLE {
+        Family
+        FamilyID|FamilyName|Funds
+        1|Goth|50000
+        2|Pleasant|20000
+        3|Dreamer|15000
+    }
+
+    TABLE {
+        Sim
+        SimID|FirstName|LastName|Age|Gender|Aspiration|FamilyID|JobID|HouseID
+        1|Mortimer|Goth|45|M|Knowledge|1|1|1
+        2|Bella|Goth|42|F|Romance|1|4|1
+        3|Daniel|Pleasant|40|M|Fortune|2|2|2
+        4|Mary-Sue|Pleasant|39|F|Family|2|5|2
+        5|Darren|Dreamer|38|M|Creativity|3|3|3
+    }
+
+    TABLE {
+        House
+        HouseID|Address|LotSize
+        1|1 Manor Lane|5
+        2|2 Pleasant St|3
+        3|3 Dreamer Ave|2
+    }
+
+    RESULT {
+        Goth|195000
+        Pleasant|170000
+        Dreamer|50000
+    }
+}
+
+TEST {
+    TABLE {
+        Job
+        JobID|Title|CareerTrack|Salary|WorkHours
+        1|CEO|Business|100000|9-5
+        2|Doctor|Medical|90000|9-5
+        3|Artist|Creative|50000|Flex
+    }
+
+    TABLE {
+        Family
+        FamilyID|FamilyName|Funds
+        1|Goth|50000
+        2|Pleasant|20000
+        3|Dreamer|10000
+    }
+
+    TABLE {
+        Sim
+        SimID|FirstName|LastName|Age|Gender|Aspiration|FamilyID|JobID|HouseID
+        1|Mortimer|Goth|45|M|Knowledge|1|1|1
+        2|Cassandra|Goth|18|F|Knowledge|1|NULL|1
+        3|Daniel|Pleasant|40|M|Fortune|2|2|2
+        4|Lilith|Pleasant|17|F|Popularity|2|NULL|2
+        5|Darren|Dreamer|38|M|Creativity|3|NULL|3
+    }
+
+    TABLE {
+        House
+        HouseID|Address|LotSize
+        1|1 Goth Manor|5
+        2|2 Pleasant St|3
+        3|3 Dreamer Lane|2
+    }
+
+    RESULT {
+        Goth|100000
+        Pleasant|90000
+    }
+}

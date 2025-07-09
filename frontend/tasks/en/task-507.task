@@ -1,0 +1,100 @@
+METADATA {
+    id: task-034h
+    name: Weakest wand
+    color: green
+    info: natural join list field grouped on count condition
+    keywords: NATURAL JOIN, WHERE, MIN
+    level: 3
+}
+
+DESCRIPTION {
+    What is the weakest wand and which wizard uses it?
+       }
+
+ANSWER {
+    SELECT wizard_name, name FROM Wizards
+    NATURAL JOIN wizards_use_wands
+    NATURAL JOIN Wands
+    WHERE strength = (SELECT MIN(strength) FROM Wands)
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|wizard_name|area|skill
+        1|Anna|Shadowland|5
+        2|Orz Orz|Kumpula|3
+        3|Bingo|Shadowland|2
+        4|Solmu|Shadowland|4
+        5|Rufus|Shadowland|1
+    }
+
+    TABLE {
+        Wands
+        name|length|strength
+        Dragon heartstring|20|9
+        Phoenix feather|15|8
+        Unicorn tail hair|18|6
+        Troll whisker|12|8
+        Wampus cat hair|16|9
+    }
+
+    TABLE {
+        wizards_use_wands
+        id|name
+        1|Dragon heartstring
+        1|Phoenix feather
+        2|Phoenix feather
+        3|Phoenix feather
+        5|Troll whisker
+        5|Wampus cat hair
+        4|Unicorn tail hair
+        3|Unicorn tail hair
+    }
+        
+    RESULT {
+        Bingo|Unicorn tail hair
+        Solmu|Unicorn tail hair
+    }
+}
+
+TEST {
+    TABLE {
+        Wizards
+        id|wizard_name|area|skill
+        1|Olbus|Witches Forest|5
+        2|Merlin|Seabed Temple|5
+        3|Morden|Witches Forest|4
+        4|Bella|Tasmania|1
+        5|Kara|Tasmania|3
+        6|Shaka|Seabed Temple|3
+    }
+
+    TABLE {
+        Wands
+        name|length|strength
+        Coral|12|9
+        Shell|12|7
+        Basilisk horn|11|8
+        Jackalope|15|5
+        Wampus cat hair|17|10
+    }
+
+    TABLE {
+        wizards_use_wands
+        ID|NAME
+        1|Coral
+        1|Jackalope
+        2|Jackalope
+        3|Basilisk horn
+        3|Shell
+        5|Basilisk horn
+        5|Wampus cat hair
+        6|Wampus cat hair
+    }
+      
+    RESULT {
+        Olbus|Jackalope
+        Merlin|Jackalope
+    }
+}

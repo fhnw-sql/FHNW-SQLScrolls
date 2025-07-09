@@ -1,0 +1,109 @@
+METADATA {
+    id: task-218
+    name: Empty rooms
+    color: green
+    info: JOIN, aggregation, grouping operators
+    keywords: JOIN, Grouping, Aggregation
+    level: 5
+}
+
+DESCRIPTION {
+    Find all houses that have available rooms for additional family members.
+    House's LotSize - total possible rooms.
+    Show all available houses sorted by most empty rooms to least.
+}
+
+PARSONS {
+    SELECT
+        h.Address AS House,
+        (h.LotSize - COUNT(s.SimID)) AS EmptyRooms
+        COUNT(s.SimID) AS Residents,  #distractor
+        h.LotSize AS TotalRooms  #distractor
+    FROM
+        House h
+    LEFT JOIN Sim s ON h.HouseID = s.HouseID
+    WHERE
+        h.LotSize IS NOT NULL
+        AND s.Age > 18  #distractor
+    GROUP BY
+        h.HouseID, h.LotSize  #distractor
+        h.HouseID, h.Address, h.LotSize
+    HAVING
+        (h.LotSize - COUNT(s.SimID)) < 0  #distractor
+        (h.LotSize - COUNT(s.SimID)) > 0
+        (h.LotSize - COUNT(s.SimID), 0) > 0  #distractor
+    ORDER BY
+        h.Address ASC,  #distractor
+        EmptyRooms DESC;
+    LIMIT 5;  #distractor
+}
+
+ANSWER { 
+    SELECT
+        h.Address AS House,
+        (h.LotSize - COUNT(s.SimID)) AS EmptyRooms
+    FROM
+        House h
+    LEFT JOIN
+        Sim s ON h.HouseID = s.HouseID
+    WHERE
+        h.LotSize IS NOT NULL
+    GROUP BY
+        h.HouseID, h.Address, h.LotSize
+    HAVING
+        (h.LotSize - COUNT(s.SimID), 0) > 0
+    ORDER BY
+        EmptyRooms DESC;
+}
+
+TEST {
+    TABLE {
+        House
+        HouseID|Address|LotSize
+        1|123 Sunny Lane|3
+        2|456 Oak Street|2
+        3|789 Pine Road|4
+        4|101 Cloudy Blvd|1
+    }
+
+    TABLE {
+        Sim
+        SimID|FirstName|LastName|Age|Gender|Aspiration|FamilyID|JobID|HouseID
+        1|John|Doe|30|M|Knowledge|1|1|1
+        2|Jane|Doe|28|F|Family|1|2|1
+        3|Bob|Smith|35|M|Fortune|2|3|3
+        4|Alice|Smith|32|F|Popularity|2|4|3
+        5|Tom|Brown|40|M|Romance|3|5|3
+        6|Emma|Wilson|25|F|Creativity|4|6|4
+    }
+
+    RESULT {
+        456 Oak Street|2
+        789 Pine Road|1
+        123 Sunny Lane|1
+    }
+}
+
+TEST {
+    TABLE {
+        House
+        HouseID|Address|LotSize
+        1|Empty Mansion|10
+        2|Full Apartment|2
+        3|Vacation Home|5
+        4|Tiny House|1
+    }
+
+    TABLE {
+        Sim
+        SimID|FirstName|LastName|Age|Gender|Aspiration|FamilyID|JobID|HouseID
+        1|Mike|Jones|45|M|Knowledge|1|1|2
+        2|Sarah|Jones|42|F|Family|1|2|2
+        3|Chris|Lee|30|M|Fortune|2|3|4
+    }
+
+    RESULT {
+        Empty Mansion|10
+        Vacation Home|5
+    }
+}
