@@ -10,11 +10,11 @@
     <meta content="SQL, Game, Magic, Learn, Teach, Study" name="keywords"/>
     <meta content="strict-origin" name="referrer"/>
     <meta content="nofollow" name="robots"/>
-    <link href="/assets/icons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
-    <link href="/assets/icons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
-    <link href="/assets/icons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
-    <link href="/assets/site.webmanifest" rel="manifest"/>
-    <link color="#5bbad5" href="/assets/icons/safari-pinned-tab.svg" rel="mask-icon"/>
+    <link href="assets/icons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+    <link href="assets/icons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+    <link href="assets/icons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="assets/site.webmanifest" rel="manifest"/>
+    <link color="#5bbad5" href="assets/icons/safari-pinned-tab.svg" rel="mask-icon"/>
     <meta content="#da532c" name="msapplication-TileColor"/>
     <meta content="#ffffff" name="theme-color"/>
     <title class="i18n-game-name"></title>
@@ -121,7 +121,7 @@
                 <div class="info-box justify-content-center">
                     <h1
                             class="task-description center i18n-game-name"
-                            style="font-size: 3.5rem; font-family: var(--book-font);"
+                            style="font-size: 3.5rem; font-family: var(--book-font),sans-serif;"
                     ></h1>
                 </div>
                 <div class="row justify-content-center">
@@ -208,7 +208,7 @@
                 <div class="info-box justify-content-center">
                     <h1
                             class="task-description center i18n-game-name"
-                            style="font-size: 3.5rem; font-family: var(--book-font);"
+                            style="font-size: 3.5rem; font-family: var(--book-font),sans-serif;"
                     ></h1>
                 </div>
                 <div class="row justify-content-center">
@@ -290,7 +290,7 @@
                 <div class="info-box justify-content-center">
                     <h1
                             class="task-description center i18n-game-name"
-                            style="font-size: 3.5rem; font-family: var(--book-font);"
+                            style="font-size: 3.5rem; font-family: var(--book-font),sans-serif;"
                     ></h1>
                 </div>
                 <div class="row justify-content-center">
@@ -342,7 +342,7 @@
                 <div class="info-box justify-content-center">
                     <h1
                             class="task-description center i18n-game-name"
-                            style="font-size: 3.5rem; font-family: var(--book-font);"
+                            style="font-size: 3.5rem; font-family: var(--book-font),sans-serif;"
                     ></h1>
                 </div>
                 <div class="row justify-content-center">
@@ -511,7 +511,7 @@
                                     </div>
                                     <h3 class="col-model-blue left i18n-example" style="font-size: 1.2rem;"></h3>
                                     <hr style="margin-top: 0;"/>
-                                    <div style="overflow-x: auto; max-height: 250px; overflow-x: auto;">
+                                    <div style="overflow-x: auto; max-height: 250px;">
                                         <div class="row justify-content-center" id="query-in-table"></div>
                                     </div>
                                 </div>
@@ -1252,8 +1252,10 @@
         onload="this.media='all'"
         rel="stylesheet"
 />
+
 <!-- preload is used to connect to the gstatic server which speeds up font loading. -->
 <link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+
 <!-- Google fonts Aclonica var(--book-font), Nunito var(--main-font), Pangolin var(--hand-font), load & swap -->
 <link
         as="style"
