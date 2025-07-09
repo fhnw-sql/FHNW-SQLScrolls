@@ -393,8 +393,6 @@ class TaskView extends View {
     constructor() {
         super("task-view");
         this.queryInputField = document.getElementById("query-input");
-        this.parsonsInputDiv = document.getElementById("parsons-input"); //unused variable
-        this.recommendtaskInputDiv = document.getElementById("parsons-input");
         this.currentTask = null;
         this.selectedPreviousAnswer = false;
         this.parsons = null;
@@ -427,8 +425,7 @@ class TaskView extends View {
     }
 
     initParsonsProblem() {
-        var initial = this.currentTask.parsons.join("\n");
-        // const  showkeywordsbook  = require('items.js');this.parsons = new ParsonsWidget({
+        const initial = this.currentTask.parsons.join("\n");
         this.parsons = new ParsonsWidget({
             sortableId: "parsons-sortable",
             trashId: "parsons-sortableTrash",
@@ -455,7 +452,7 @@ class TaskView extends View {
             .off()
             .on("click", function (e) {
                 e.preventDefault();
-                var initial = Views.TASK.currentTask.parsons.join("\n");
+                const initial = Views.TASK.currentTask.parsons.join("\n");
                 Views.TASK.parsons.init(initial);
                 Views.TASK.parsons.shuffleLines();
             });
@@ -786,7 +783,6 @@ class ReadBookView extends View {
 class ProfileView extends View {
     constructor() {
         super("display-profile-modal");
-        this.graph = undefined;
     }
 
     /**
@@ -854,8 +850,6 @@ class ProfileView extends View {
 
         const trigger = document.activeElement;
         document.getElementById(this.id).focus();
-        // Uncomment this to render the graph
-        // this.renderGraph();
         await showModal("#" + this.id, DISPLAY_STATE.previousSecondaryView, trigger);
     }
 
@@ -952,8 +946,8 @@ class ProfileView extends View {
                     mywindow.document.close(); // necessary for IE >= 10
                     mywindow.focus(); // necessary for IE >= 10*/
 
-                    var element = mywindow.document.body;
-                    var opt = {
+                    const element = mywindow.document.body;
+                    const opt = {
                         filename: `sqlscrolls_certificate_${selectedCertificate._id}.pdf`,
                         margin: 0,
                         jsPDF: {unit: 'in', format: 'letter', orientation: 'landscape'}
@@ -965,39 +959,6 @@ class ProfileView extends View {
                 });
             }
         }
-    }
-
-    async generateCertificate() {
-        const data = await API.generateCertificate();
-        console.log("generateCertificate", data)
-    }
-
-    // Graph is currently not rendered due to a bug in displaying the data
-    async renderGraph() {
-        const loadingIcon = document.querySelector(".graph-loading");
-        loadingIcon.classList.remove("hidden");
-        const userProfile = await API.self();
-
-        // Transform Data
-        const historyData = [].concat(...Object.entries(userProfile.history).map((m) => m[1])).filter((m) => m.correct);
-        var groups = _.groupBy(historyData, (m) => moment(m.date).startOf("day").format());
-        var chartData = Object.entries(groups).map((m) => [new Date(m[0]), m[1].length]);
-
-        if (this.graph) {
-            this.graph.updateOptions({file: chartData});
-        } else {
-            this.graph = new Dygraph(document.getElementById("task-completion-graph"), chartData, {
-                labels: [i18n.get("time"), i18n.get("completed-tasks")],
-                colors: ["#f2cd60"],
-                customBars: false,
-                showRangeSelector: true,
-                rangeSelectorPlotStrokeColor: "#f2cd60",
-                rangeSelectorPlotFillColor: "",
-                strokeWidth: 1,
-                includeZero: true,
-            });
-        }
-        loadingIcon.classList.add("hidden");
     }
 }
 
@@ -1566,7 +1527,7 @@ class FlameAnimationView extends View {
     async startEndGame() {
         await changeSecondaryView(Views.NONE);
         await changeView(Views.FLAME_ANIMATION);
-        // await inventory.setAsViewed("item-999");
+        await inventory.setAsViewed("item-999");
     }
 }
 
@@ -1646,7 +1607,6 @@ class AIModalView extends View {
     constructor() {
         super("display-ai-modal");
         // this.shownItem = null;
-        this.graph = undefined;
     }
 
     async open() {

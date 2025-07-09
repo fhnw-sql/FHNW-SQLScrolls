@@ -1,7 +1,6 @@
 function isArrayEqual(a, b, strict) {
     if (a.length !== b.length) return false;
-    const c = [...a],
-        d = [...b];
+    const c = [...a], d = [...b];
     if (!strict) {
         c.sort();
         d.sort();
@@ -161,19 +160,19 @@ function awaitUntil(predicateFunction) {
  * @param name Name of the cookie
  */
 function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
 }
 
 
 function getAuthCookie() {
-    // check if there is a auth cookie
+    // check if there is an auth cookie
     const authCookie = readCookie(Config.AUTH_COOKIE)
 
     if (authCookie) {
@@ -183,7 +182,7 @@ function getAuthCookie() {
         })
         // console.log(parsedCookie)
 
-        // if all empty return null
+        // if all empty returns null
         if ((parsedCookie.mail.length == 0) && (parsedCookie.user.length == 0)) {
             return null
         }
