@@ -4,19 +4,27 @@ Welcome to the official documentation for the **FHNW SQL Training Game** project
 
 ---
 
-## 📘 Main Documentation
+## 📘 Overviews
 
-- [README.md](../README.md) – Project overview, setup, and architecture.
+- [README.md](../README.md) – Project overview, quick-start setup, and architecture.
 - [PRIVACY.md](../PRIVACY.md) – Privacy policy and data usage information.
 - [LICENSE](../LICENSE) – Licensing details for this repository.
 
 ---
 
-## 🚀 Development & Roadmap
+## 🚀 Development Notes
 
-- [CHANGELOG.md](changelog.md) – Version history and what’s changed.
-- [KNOWN_ISSUES.md](known_issues.md) – Open bugs and technical issues.
-- [FEATURE_REQUESTS.md](feature_requests.md) – Planned or requested improvements.
+- [Changelog.md](development_notes/changelog.md) – Version history and what’s changed.
+- [Know Issues.md](development_notes/known_issues.md) – Open bugs and technical issues.
+- [Possible Features](development_notes/feature_requests.md) – Planned or requested improvements.
+
+---
+
+## ⚙️ Technical Documentation
+
+- [Frontend](technical/frontend.md) – Version history and what’s changed.
+- [API](technical/api.md) – Version history and what’s changed.
+- [Model](technical/model.md) – Version history and what’s changed.
 
 ---
 

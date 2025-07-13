@@ -511,7 +511,7 @@ Or using Gunicorn:
 
 ## 🔐 Usage of Data
 
-The collected data and their according usage are explained within [privacy.md](PRIVACY.md).
+The collected data and their according usage are explained within [PRIVACY.md](PRIVACY.md).
 
 
 ---

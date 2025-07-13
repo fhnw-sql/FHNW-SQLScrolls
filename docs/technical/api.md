@@ -48,7 +48,7 @@ node server.js
 ```
 
 #### ☁️ Heroku
-To easily spin-up and instance the one-click deployment to Heroku can be used by using the button below (don't forget to configure the environment variables).
+To easily spin-up and instance, the one-click deployment to Heroku can be used by using the button below (don't forget to configure the environment variables).
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game-API)
 
