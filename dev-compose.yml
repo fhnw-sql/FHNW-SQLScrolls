@@ -1,4 +1,4 @@
-# Docker deployment made for active development
+# Docker deployment made for local machine development_notes
 
 services:
   db:
@@ -6,7 +6,7 @@ services:
     image: mongo
     restart: always
     volumes:
-      - mongo-data:/data/db                                       # Use named volume
+      - mongo-data:/data/db                                       # Database inside a named volume
     ports:
       - "27017:27017"
 
@@ -19,10 +19,10 @@ services:
     environment:
       - MONGODB_URI=mongodb://stg-mongo:27017/stg-api
       - JWT_SECRET=FHNW_2021
-      - FROM_SENDER=stg@github.io                                 # Necessary env. variable on prod.
+      - FROM_SENDER=stg@github.io                                 # Necessary environment variable on production
       - POSTMARK_API_KEY=blank
       - PORT=4001
-      - IO_URL=http://localhost:80                                # Necessary env. variable on prod.
+      - IO_URL=http://localhost:80                                # Necessary environment variable on production
     ports:
       - "4001:4001"
 
@@ -34,7 +34,7 @@ services:
     build:
       context: frontend
       args:
-        API_URL: http://localhost:4001                            # Necessary env. variable on prod.
+        API_URL: http://localhost:4001                            # Necessary environment variable on production
         API_URL_PUBLIC: ${API_URL_PUBLIC}
     ports:
       - "80:80"
