@@ -774,6 +774,12 @@ function getRecommendedTask(username) {
 }
 
 async function loadRecommendedTask() {
+    const completed = taskGroups.getCompletedTaskCount();
+    if (completed < 1) {
+        // Show a toast warning in the UI
+        showError('Please complete your first task before using AI recommendations!');
+        return;
+    }
     const username = await getUsername();
     if (!username) {
         console.error('Username not available.');
@@ -809,6 +815,8 @@ async function loadRecommendedTask() {
         }
     } catch (error) {
         console.error('Error loading recommended task:', error);
+        // Optionally show a toast for unexpected errors:
+        Views.PROFILE.displayToast(i18n.get('recommendation-error'), 'error', 3000);
     } finally {
         // Hide the loading view in all cases
         await hideElementImmediately("loading-view");

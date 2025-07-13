@@ -572,10 +572,12 @@ class TaskView extends View {
 
     async renderPreviousAnswers(task, changeQuery) {
         const profile = await API.self();
-        const previousAnswers = _.orderBy(profile.history[task.id], ["date"], ["desc"]);
+        // Guard: if there is no history for this task yet, use an empty array
+        const historyForTask = (profile.history && profile.history[task.id]) || [];
+        const previousAnswers = _.orderBy(historyForTask, ["date"], ["desc"]);
         const dropdown = document.getElementById("previous-answers-dropdown");
         if (dropdown && previousAnswers.length) {
-            if (changeQuery) await this.setQuery(previousAnswers[0].query); // First entry is latest answer
+            if (changeQuery) await this.setQuery(previousAnswers[0].query); // The first entry is the latest answer
             let render = "";
             for (let answer of previousAnswers) {
                 let selected = !render;
@@ -1585,8 +1587,8 @@ class EndTextView extends View {
         await BookMenuButton.hide();
         await ProfileButton.show();
         await LeaderboardButton.show();
-        await AIButton.show();
         await RelativeLeaderboard.show();
+        await AIButton.show();
         await fadeFromBlack();
         endScreenAnimation();
     }

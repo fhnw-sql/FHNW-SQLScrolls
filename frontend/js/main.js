@@ -203,7 +203,7 @@ async function loadGameElements(linesOfProgressionJs) {
         }
         inventory.addItems(taskGroups.asList().map((taskGroup) => taskGroup.item.id));
         inventory.removeItem("task-group-X");
-        // inventory.addItem("item-999");
+        // inventory.addItem("item-999"); // Item needed to trigger Endgame
     }
 
     preventLevelIdDuplicates();
@@ -233,14 +233,13 @@ async function loadCompletionFromQuizzes() {
 
 async function beginGame() {
     try {
-        // Notification if user tries to leave the page, as it is a vanilla js app without a SPA router like in react
-        // we need to notify the user as the back button would result leaving the page
+        // Notification if user tries to leave the page, as it is a vanilla js app without an SPA router like in react
+        // we need to notify the user as the back button would result in leaving the page
         window.addEventListener("beforeunload", function (e) {
             let confirmationMessage = i18n.get("leave-page-alert");
             (e || window.event).returnValue = confirmationMessage; //Gecko + IE
             return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
         });
-
         await loadLanguage(currentLang);
 
         try {

@@ -76,13 +76,6 @@ router.patch("/self/stars", async function (req, res, next) {
             {_id: new ObjectId(req.auth.userId)}, // Find the user by ID
             {$set: {stars: stars}}              // Update only the stars field
         );
-        /*
-            if (!result.value) {
-              return res.status(404).json({ error: "User not found." });
-            }
-        */
-
-        // Return success message
         return res.json({message: "stars updated successfully."});
     } catch (err) {
         console.error("Error updating stars:", err);
@@ -91,31 +84,13 @@ router.patch("/self/stars", async function (req, res, next) {
 });
 
 router.patch("/self/timeLastActive", async function (req, res, next) {
-    console.log("🔥 PATCH /users/self/timeLastActive hit");
-
     const users = db.get().collection("users");
-    console.log("ALL USERS", users);
-
-    console.log("🔍 req.auth.userId =", req.auth.userId);
-    console.log("🧪 Type of req.auth.userId:", typeof req.auth.userId);
-
     const userId = new ObjectId(req.auth.userId);
-    console.log("🔍 Converted ObjectId:", userId);
-
     const result = await users.findOneAndUpdate(
         {_id: userId},
         {$set: {timeLastActive: new Date()}},
         {returnDocument: "after"}
     );
-
-    console.log("🔧 MongoDB result:", result);
-    /*
-      if (!result.value) {
-        console.log("❌ No user found with that ID");
-        return res.status(404).json({ error: "User not found." });
-      }
-    */
-
     return res.json({message: "timeLastActive updated successfully."});
 });
 
@@ -123,7 +98,7 @@ router.patch("/self/timeLastActive", async function (req, res, next) {
 router.patch("/self/timeStarsEarned", async function (req, res, next) {
     const users = db.get().collection("users");
 
-    //No request body required, since we call this endpoint without any parameters
+    // No request body required, since we call this endpoint without any parameters
     // Also, no checking of incoming parameters required here
 
     try {
@@ -132,11 +107,6 @@ router.patch("/self/timeStarsEarned", async function (req, res, next) {
             {_id: new ObjectId(req.auth.userId)}, // Find the user by ID
             {$set: {timeStarsEarned: new Date()}} // Set current time for timeStarsEarned
         );
-        /*
-            if (!result.value) {
-              return res.status(404).json({ error: "User not found." });
-            }
-        */
         // Return success message
         return res.json({message: "timeStarsEarned timestamp updated successfully."});
     } catch (err) {
@@ -163,12 +133,6 @@ router.patch("/self/classKey", async function (req, res, next) {
             {_id: new ObjectId(req.auth.userId)}, // Find the user by ID
             {$set: {classKey: classKey}} // Update only the classKey field
         );
-        /*
-            if (!result.value) {
-              return res.status(404).json({ error: "User not found." });
-            }
-        */
-        // Return success message
         return res.json({message: "classKey inserted successfully."});
     } catch (err) {
         console.error("Error inserting classKey:", err);
@@ -212,7 +176,7 @@ router.patch("/self/togglePrivacy", async function (req, res, next) {
             );
         }
 
-        // Return success message
+        // Return a success message
         return res.json({message: "Privacy setting updated successfully."});
     } catch (err) {
         console.error("Error toggling privacy:", err);
@@ -344,7 +308,7 @@ router.get("/all", async function (req, res, next) {
         // Get Users Collection
         const users = db.get().collection("users");
 
-        // Calculate the date one year ago
+        // Calculate the date of one year prior
         const oneYearAgo = new Date();
         oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
@@ -437,10 +401,10 @@ router.patch("/self/answer_sql", reqBodyValidator(answerSqlPATCH), async functio
     try {
         const body = req.body;
         const users = db.get().collection("users");
-        const user = await users.findOne({ _id: new ObjectId(req.auth.userId) });
+        const user = await users.findOne({_id: new ObjectId(req.auth.userId)});
 
         if (!user) {
-            return res.status(404).json({ error: "User not found" });
+            return res.status(404).json({error: "User not found"});
         }
 
         const payload = {
@@ -452,16 +416,16 @@ router.patch("/self/answer_sql", reqBodyValidator(answerSqlPATCH), async functio
         };
 
         const result = await users.findOneAndUpdate(
-            { _id: user._id },
-            { $addToSet: { [`history.${body.task}`]: payload } },
-            { returnDocument: "after" }
+            {_id: user._id},
+            {$addToSet: {[`history.${body.task}`]: payload}},
+            {returnDocument: "after"}
         );
 
-        const { password, ...userData } = result.value || {};
+        const {password, ...userData} = result.value || {};
         return res.json(userData);
     } catch (err) {
         console.error("🔥 Error in PATCH /self/answer_sql:", err);
-        return res.status(500).json({ error: "Internal server error" });
+        return res.status(500).json({error: "Internal server error"});
     }
 });
 
