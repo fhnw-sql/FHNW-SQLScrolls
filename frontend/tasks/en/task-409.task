@@ -2,6 +2,8 @@ METADATA {
     id: task-409
     name: Region-Level Mismatch
     color: purple
+    keywords: LEFT JOIN, INNER JOIN, NATURAL JOIN, AS, ON, SUM, WHERE, GROUP BY, FROM
+    level: 5
 }
 
 DESCRIPTION {

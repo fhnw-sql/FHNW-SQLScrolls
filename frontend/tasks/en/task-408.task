@@ -2,6 +2,8 @@ METADATA {
     id: task-408
     name: Item Level Gaps
     color: purple
+    keywords: LEFT JOIN, INNER JOIN, NATURAL JOIN, AS, ON, SUM, WHERE, GROUP BY, FROM
+    level: 5
 }
 
 DESCRIPTION {

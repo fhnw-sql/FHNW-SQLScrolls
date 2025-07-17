@@ -2,6 +2,8 @@ METADATA {
     id: task-412
     name: Unique Monster Types per Witcher
     color: purple
+    keywords: LEFT JOIN, INNER JOIN, NATURAL JOIN, AS, ON, SUM, WHERE, GROUP BY, FROM
+    level: 5
 }
 
 DESCRIPTION {

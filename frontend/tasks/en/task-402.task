@@ -2,6 +2,8 @@ METADATA {
     id: task-402
     name: Witcher Gold and XP Summary
     color: purple
+    keywords: LEFT JOIN, INNER JOIN, NATURAL JOIN, AS, ON, SUM, WHERE, GROUP BY, FROM
+    level: 5
 }
 
 DESCRIPTION {
