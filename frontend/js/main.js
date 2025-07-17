@@ -72,7 +72,7 @@ async function hideInventory() {
     await showElement("inventory-show-button");
 }
 
-// by default the inventory is hidden
+// by default, the inventory is hidden
 if (!DISPLAY_STATE.editMode) hideInventory().then(r => {});
 
 function showError(error) {
@@ -266,8 +266,8 @@ async function beginGame() {
         await routeActionMiddleware("", async (urlParams) => {
             API.loginExisting();
             if (API.loginStatus === LoginStatus.LOGGED_IN && (!DISPLAY_STATE.editMode)) {
-                await loadCompletionFromQuizzes(); // async load of task completion, see DISPLAY_STATE.saveLoaded
-                await changeView(Views.LOADING); // LOADING view awaits DISPLAY_STATE.saveLoaded and DISPLAY_STATE.loaded are true.
+                loadCompletionFromQuizzes(); // async load of task completion, see DISPLAY_STATE.saveLoaded
+                changeView(Views.LOADING); // LOADING view awaits DISPLAY_STATE.saveLoaded and DISPLAY_STATE.loaded are true.
                 await showElementImmediately("counter-container");
                 await showElementImmediately("right-sidebar");
                 await showElementImmediately("relative-leaderboard");
