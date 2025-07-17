@@ -1,8 +1,3 @@
-# Variables
-# API_URL -> http://localhost:3000
-# POSTMARK_API_KEY -> POSTMARK_API_KEY
-# FROM_SENDER -> POSTMARK_API_KEY
-
 services:
   db:
     container_name: stg-mongo
@@ -18,7 +13,9 @@ services:
     depends_on:
       - db
     restart: always
-    build: backend/api
+    build:
+      context: .
+      dockerfile: backend/api/Dockerfile
     environment:
       - MONGODB_URI=mongodb://stg-mongo:27017/stg-api
       - JWT_SECRET=FHNW_2021

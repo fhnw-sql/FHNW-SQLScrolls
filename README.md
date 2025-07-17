@@ -30,6 +30,161 @@ the "Database Technology" course.
 
 ---
 
+## 🚀 Deployment with Docker
+
+### ⚡ Quick Start: Production Ready
+
+**1. Prerequisites**
+
+- An internet connection to build the project (automatically downloads dependencies)
+- **Virtualization must be enabled in your BIOS/UEFI**  
+  Docker Desktop requires virtualization (Intel VT-x or AMD-V) to be enabled.  
+  If virtualization is disabled, Docker Desktop will not start.
+
+<details>
+<summary><strong>How to Check if Virtualization is Enabled (Windows)</strong></summary>
+
+1. Press <kbd>Win</kbd>+<kbd>R</kbd>, type <code>msinfo32</code>, and press <strong>Enter</strong>.
+2. In the <strong>System Summary</strong> window, look for:
+    - <strong>Virtualization Enabled In Firmware</strong> (should say <strong>Yes</strong>)
+    - <strong>Virtualization-based Security Services Running</strong> (should say <strong>Yes</strong>)
+
+</details>
+
+<details>
+<summary><strong>How to Enable Virtualization in BIOS/UEFI</strong></summary>
+
+1. Restart your PC and enter BIOS/UEFI (usually by pressing <kbd>DEL</kbd>, <kbd>F2</kbd>, <kbd>F10</kbd>, or <kbd>
+   F12</kbd> during startup).
+2. Navigate to the <strong>Virtualization</strong> / <strong>Intel VT-x</strong> / <strong>AMD-V</strong> setting (often
+   under "Advanced" or "CPU Configuration").
+3. Set virtualization to <strong>Enabled</strong>.
+4. Save changes and restart your computer.
+5. Try running Docker Desktop again.
+
+</details>
+
+> For more troubleshooting, see
+> the [Docker Desktop troubleshooting guide](https://docs.docker.com/desktop/troubleshoot/).
+
+**2. Install Docker**
+
+- **Windows / macOS:**
+    - Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop).
+    - Need help? See the [Windows install guide](https://docs.docker.com/desktop/install/windows-install/)
+      or [Mac install guide](https://docs.docker.com/desktop/install/mac-install/).
+    - ⚠️ **Windows users:** Make sure [WSL 2.0](https://docs.microsoft.com/en-us/windows/wsl/install) is enabled and set
+      as the backend for Docker Desktop.
+
+- **Linux:**
+    - Install Docker and Docker Compose using your system’s package manager, e.g.:
+      ```bash
+      sudo apt update
+      sudo apt install docker.io docker-compose
+      ```
+    - For more details, see the [Docker Engine Linux installation guide](https://docs.docker.com/engine/install/).
+
+**3. Download the Repository**
+
+- Use the `main` branch for stable builds.
+
+**4. Create a `.env` File**
+
+In the **root directory** of the project, create a file named `.env` with the following contents:
+
+```env
+# URL for the backend API (do not change unless you modified docker-compose.yml)
+API_URL=http://localhost:4001
+
+# URL for socket.io communications (frontend-backend real-time)
+IO_URL=http://localhost:80
+
+# Email provider API key (set to 'blank' if not using email features)
+POSTMARK_API_KEY=blank
+
+# The sender address for outgoing emails (used for password reset, etc)
+FROM_SENDER=stg@github.io
+```
+
+Tips:
+
+- Lines starting with # are comments.
+- The default values above will work for most local setups using Docker Compose.
+- Make sure your .env file is in the root folder (beside your docker-compose.yml).
+- If you need to change ports or email setup, adjust these values accordingly.
+
+<details>
+<summary><strong>What is POSTMARK_API_KEY and how does email sending work?</strong></summary>
+
+**Postmark** is a transactional email service used by the backend to send emails (e.g., password resets, notifications).
+
+- By default, if you set `POSTMARK_API_KEY=blank` in your `.env`, email sending is disabled. This is fine for local
+  development.
+- To enable real email sending (e.g. for production or testing password resets):
+    1. [Create a Postmark account](https://postmarkapp.com/), make a server, and copy your API key.
+    2. Set `POSTMARK_API_KEY=your_real_postmark_key` in your `.env` file.
+    3. Set `FROM_SENDER` to an email address you have verified in your Postmark account.
+
+If you prefer a different email provider (SMTP or another service), you’ll need to adapt the backend code.
+
+> For most local/dev work, you can leave the key as `blank` and ignore email errors.
+
+</details>
+
+**5. Build and Run**
+
+```bash
+    docker-compose build
+    docker-compose up
+```
+
+---
+
+### 💻 Quick Start: Development Ready
+
+#### 🧪 Using `dev-compose.yml`
+
+This is the fastest way to start developing: Follow the same steps as the regular deployment, **but
+you can skip step 4 (setting environment variables)**.
+
+```bash
+    docker-compose build
+    docker-compose -f dev-compose.yml up
+```
+
+#### 💡 JetBrains WebStorm
+
+Includes a preconfigured [Dev_Compose.xml](.idea/runConfigurations/Dev_Compose.xml) to start via UI.
+
+#### 🐞 Debugging
+
+- Use browser dev tools (`F12`) for live feedback
+- Use container logs for backend issues
+
+---
+
+## 📖 Documentation Hub
+
+Comprehensive technical documents, development notes, and further details to frontend and backend components can be
+found inside the
+[**Documentation Hub**](docs/index.md).
+
+---
+
+## 📂 Project Structure
+
+```
+/
+├── backend/
+│ ├── api/              # Backend REST API (Node.js server)
+│ └── model/            # Python AI/ML recommendation service
+├── docs/               # Documentation hub (technical docs, development docs, etc.)
+├── frontend/           # Frontend web client (HTML, CSS, JS, localization, books and tasks)
+└── *                   # Root level files for configuration and documentation
+```
+
+---
+
 ## 🧰 Technologies
 
 **Built with**
@@ -52,490 +207,26 @@ the "Database Technology" course.
 
 ---
 
-## ⚙️ Configuration
+## 🔐 Data Usage
 
-- **Books & Tasks**  
-  Configurable via `.task` and `.book` files in `/frontend/tasks` and `/frontend/books`.
-
-- **Language Support**  
-  Add translations via:
-  - `/i18n/<lang>.js`
-  - `/books/<lang>/Book-<>.book`
-  - `/tasks/<lang>/Task-<>.task`
-  - Update the `language-selector` in `index.html`
-
-- **Progression Rules**  
-  Found in `/frontend/tasks/progression.js`.
-
-- **General Settings**  
-  Configurable in `/frontend/js/configuration.js`:
-  - `API_URL`
-  - `FALSE_ANSWER_UNTIL_MODEL_ANSWER`
-  - `EDITOR_PASSWORD`
-
----
-
-## 🚀 Deployment with Docker
-
-### ⚡ Quick-Start
-
-**1. Prerequisites**
-
-- Virtualization must be enabled in BIOS.
-
-**2. Install Docker**
-
-- On Windows/macOS install [Docker Desktop](https://www.docker.com/products/docker-desktop)
-  - Please refer to https://docs.docker.com/desktop/setup/install/windows-install/ for installation instructions
-  - Make sure to enable and use WSL 2.0 for the virtualization engine
-- On Linux CLI install `docker` and `docker-compose` through your package manager
-
-**3. Download the Repository**
-
-- Use the `main` branch for stable builds.
-
-**4. Create a `.env` File**
-
-```env
-API_URL=http://localhost:3000
-IO_URL=http://localhost:80
-POSTMARK_API_KEY=blank
-FROM_SENDER=stg@github.io
-```
-
-**5. Build and Run**
-
-```bash
-    docker-compose build
-    docker-compose up
-```
-
----
-
-### 💻 Development Setup
-
-#### 🧪 Quickstart with `dev-compose.yml`
-
-This is the fastest way to start the development environment. It follows the same steps as the regular deployment, **but
-you can skip step 4 (setting environment variables)**.
-
-```bash
-    docker-compose build
-    docker-compose -f dev-compose.yml up
-```
-
-#### 💡 JetBrains WebStorm
-
-Includes a preconfigured [Dev_Compose.xml](.idea/runConfigurations/Dev_Compose.xml) to start via UI.
-
-#### 🐞 Debugging
-
-- Use browser dev tools (`F12`) for live feedback
-- Use container logs for backend issues
-
----
-
-## 🖼️Frontend
-
-**[Dockerfile](frontend/Dockerfile)**
-
-### 📚 Books syntax
-
-In the following chapter, the outline of a book is explained and according to syntax. In the end, a full example is
-shown.
-
-#### METADATA
-
-Within the `METADATA` one can specify:
-
-- `id` of the book which should follow the naming convention `book-[id]`
-- `name` of the book
-- `title` of the book -> shown on the cover
-- `author` of the book
-- `color` of the book a.e green, purple, red
-
-```
-METADATA {
-     id: Book-A
-     name: Example book
-     title: Awesome Example Book
-     author: Author of the Book
-     color: purple
-}
-```
-
-#### PAGE
-
-Representation of a page within the book. Within one can use plain text or HTML syntax to describe the content of the
-page. A page further supports the `EXAMPLE` tag, which can be used to display a theoretical example. Consider the
-snippet below for the usage:
-
-```
-PAGE {
-    Sample of a page. You can write several paragraphs on the page.
-    EXAMPLE {
-        TABLE {
-            Examples
-            id | name | field
-            1 | Example | From the table
-            2 | Here | Fits
-            3 | Three | Rows
-        }
-
-        QUERY {
-            SELECT name FROM Examples;
-        }
-    }
-}
-```
-
-#### Example
-
-```
-METADATA {
-     id: Example
-     name: Example book
-     title: Awesome Example Book
-     author: Author of the Book
-     color: purple
-}
-
-PAGE {
-     Example of the first page. You can write several songs on the page.
-     A newline does not end the paragraph. \ N Forces a newline.
-
-     The double line break starts a new song.
-
-     <ul><li> <b> Supports html tags </b> </li> </ul>
-}
-
-PAGE {
-     EXAMPLE {
-         TABLE {
-             Examples
-             id | name | field
-             1 | Example | From the table
-             2 | Here | Fits
-             3 | Three | Rows
-         }
-
-         QUERY {
-             SELECT name FROM Examples;
-         }
-     }
-}
-```
-
-### 📝 Tasks syntax
-
-In the following chapter, the outline of a task is explained and the according to syntax. In the end, a full example is
-shown.
-
-#### METADATA
-
-Within the `METADATA` one can specify:
-
-- `id` of the task which should follow the naming convention `task-001`
-- `name` of the task
-- `title` of the task
-- `author` of the book
-- `color` of the book a.e green, purple, red
-
-```
-METADATA {
-     id: Book-A
-     name: Example book
-     title: Awesome Example Book
-     author: Author of the Book
-     color: purple
-}
-```
-
-#### DESCRIPTION
-
-The description is used to assign instruction to the task. The content should consist of plain text.
-
-```
-DESCRIPTION {
-    Assignment and instructions for completing the task. Here you can connect the task to the magical world.
-    \ n force line breaks.
-
-    Assignment: Here are more detailed instructions
-}
-```
-
-#### PARSONS (optional)
-
-The `PARSONS` Section is optional and specifies whether a task needs to be solved by using
-the  [Parsons Programming Puzzle](https://github.com/js-parsons/js-parsons) (if set). The outline needs to follow the
-model solution. This means that a concatenation of all entries from index 0-n and filtering out the `#discractor` needs
-to result in the model solution.
-
-```
-PARSONS {   
-  SELECT name, year 
-  FROM Ghosts   
-  SELECT name and yearOfBirth #distractor   
-  SELECT * #distractor  
-  SELECT name #distractor   
-}   
-```
-
-#### ANSWER (optional)
-
-The `ANSWER` section can be set if the teacher wants to allow the display of a model answer after the task is completed
-successfully by the student.
-
-```
-ANSWER {
-    SELECT * FROM Test;
-}
-```
-
-#### STRICT (optional)
-
-The `STRICT` can be used to enable strict validation of the test result (order).
-
-```
-STRICT
-
-TEST {
-    ...    
-}
-```
-
-#### TEST
-
-The section `TEST` is used to validate the task. A teacher can specify multiple `TEST` if needed in order to validate
-the answer. There are two possible approaches, on the one hand, by defining a DB scheme by using the `TABLE` section
-recommended for SELECT operations and on the other hand by using `SQL` section mostly suited for queries containing
-statements like CREATE and INSERT. Consider the pre-implementation tasks for further and more complex examples.
-
-#### Predefined Table Example
-
-```
-TEST {
-    TABLE {
-        Ghosts
-        id|name
-        1|Arthur
-        2|Desiree
-        3|Siegfried
-        4|Sieglinde
-        5|Kaaleppi
-    }
-
-    TABLE {
-        Places
-        id|name
-        1|school
-        2|forest
-        3|mill
-    }
-
-    TABLE {
-        Hauntings
-        ghost_id|place_id
-        1|1
-        2|2
-        2|3
-        3|2
-        4|2
-    }
-
-    RESULT {
-        Desiree
-        Siegfried
-        Sieglinde
-    }
-}
-
-```
-
-#### SQL Example
-
-```
-TEST {
-    SQL {
-        CREATE TABLE Parts (head TEXT, tail TEXT);
-        INSERT INTO Parts (head, tail) VALUES ('🐟','🐍')    
-    }
-
-    RESULT {
-        🐟|🐍
-    }
-}
-```
-
-#### Example
-
-```
-METADATA {
-    id: task-001
-    name: Example task
-    color: purple
-}
-
-DESCRIPTION {
-    Assignment and instructions for completing the task. Here you can connect the task to the magical world.
-    \ n force line breaks.
-
-    Assignment: Here are more detailed instructions
-}
-
-PARSONS {   
-  SELECT name, year 
-  FROM Ghosts   
-  SELECT name and yearOfBirth #distractor   
-  SELECT * #distractor  
-  SELECT name #distractor   
-}   
-
-
-ANSWER {
-    SELECT * FROM Test;
-}
-
-TEST {
-    TABLE {
-        Pets
-        id | animal | feeling
-        1 | 😻 | in love
-        2 | 🦑 | satisfied
-        3 | 🦎 | angry
-    }
-
-    TABLE {
-        Pets_copy
-        id | animal | feeling
-        1 | 😻 | in love
-        2 | 🦑 | satisfied
-        3 | 🦎 | angry
-    }
-
-    SQL {
-        CREATE TABLE Runes (id INTEGER PRIMARY KEY, rune TEXT, name TEXT);
-        INSERT INTO Runes (name, rune) VALUES ('Fe', 'ᚠ'), ('Thurs', 'ᚦ'), ('Kaun', 'ᚲ'), ('Algiz', 'ᛉ'), ( 'Berkanan', 'ᛒ'), ('Yngvi', 'ᛝ');
-    }
-
-    STRICT
-    RESULT {
-        1 | 😻 | in love
-        2 | 🦑 | satisfied
-        3 | 🦎 | angry
-    }
-}
-```
-
-### 🔨 Experimental Editor
-
-Located at `/html/editors.html`, this in-browser editor allows advanced users to edit `.task` and `.book` files.
-Experimental features may crash and require JS troubleshooting.
-
----
-
-## 🌐 Backend: REST API (Node.js + MongoDB)
-
-**[Dockerfile](backend/api/Dockerfile)**
-
-### 💾 Getting Started
-
-```bash
-npm i
-npm run start        # production
-npm run start:dev    # dev with nodemon
-npm run test         # run jest tests
-npm run test:watch   # jest with livereload
-npm run test:coverage
-```
-
-### ⚡ API Overview
-
-**Status Codes**
-
-- `200 OK`
-- `400 Bad Request`
-- `401 Unauthorized`
-- `500 Server Error`
-
-#### /users Endpoints
-
-- `POST /register`: `{username, password}`
-- `POST /authenticate`: `{username, password}`
-- `POST /recover`: `{username}`
-- `POST /reset`: `{token, password}`
-- `GET /self`
-- `PATCH /self/answer_sql`: `{task, correct, query}`
-
-### 📦 Dependencies
-
-- `bcryptjs`, `body-parser`, `cors`, `dotenv`, `express`, `express-jwt`
-- `joi`, `jsonwebtoken`, `mongodb`, `postmark`, `rootpath`, `winston`
-
----
-
-## 🧠 Backend: Python Recommendation Model (FastAPI)
-
-**[Dockerfile](backend/model/Dockerfile)**
-
-### 🧰 Python Dependencies
-
-```
-MarkupSafe==2.1.3
-flasgger==0.9.7.1
-pymongo==4.7.2
-gunicorn==22.0.0
-scikit-learn==1.4.2 
-fastapi==0.114.0
-uvicorn==0.30.6
-numpy==2.1.1
-pandas==2.2.2
-requests==2.26.0
-```
-
-### 🚀 Serving the Model
-
-Start locally with:
-
-```bash
-    uvicorn app:app --host 0.0.0.0 --port 8000
-```
-
-Or using Gunicorn:
-
-```bash
-    gunicorn -w 4 -k uvicorn.workers.UvicornWorker app:app
-```
-
----
-
-## 🔐 Usage of Data
-
-The collected data and their according usage are explained within [PRIVACY.md](PRIVACY.md).
-
+The collected data and their usage are explained within [PRIVACY.md](PRIVACY.md).
 
 ---
 
 ## 🙏 Credits
 
-At this point we want to say thanks to Aurora Lahtela from Helsinki who created the original codebase called
+We would like to say thanks to **Aurora Lahtela** from Helsinki who created the original codebase called
 SQL-Training-Game. This work is a customization of Aurora Lahtela's work, adapted to the needs of the FHNW. One can diff
 the
 changes between the original code base and the one of FHNW-SQL-Training-Game through the created tag
 called `AuroraLS3/SQL-Training-Game-e755cc5` representing the state of the commit `e755cc5`
-.  [Compare the changes](https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game.github.io/compare/AuroraLS3/SQL-Training-Game-e755cc5...main)
-.
 
+- [Compare the changes](https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game.github.io/compare/AuroraLS3/SQL-Training-Game-e755cc5...main)
 - [AuroraLS3/SQL-Training-Game](https://github.com/AuroraLS3/SQL-Training-game)
 
-Sound effects have been obtained from freesound.org under the Creative Commons License.
+**Sound effects from freesound.org (CC License):**
 
-- book_page_turn: sound by SmartWentCody, original title "Book Page Turning.wav",
-  license https://creativecommons.org/licenses/by/3.0/, *edited version*
-- right_answer: sound by rhodesmas, original title "Coins Purchase 4.wav",
-  license https://creativecommons.org/licenses/by/3.0/, *edited version*
-- wrong_answer: sound by Sjonas88, original title "fail-sound.wav",
-  license https://creativecommons.org/publicdomain/zero/1.0/, *edited version* 
-
-
-
+- book_page_turn: SmartWentCody, ["Book Page Turning.wav"](https://creativecommons.org/licenses/by/3.0/) (*edited
+  version*)
+- right_answer: rhodesmas, ["Coins Purchase 4.wav"](https://creativecommons.org/licenses/by/3.0/) (*edited version*)
+- wrong_answer: Sjonas88, ["fail-sound.wav"](https://creativecommons.org/publicdomain/zero/1.0/) (*edited version*)
