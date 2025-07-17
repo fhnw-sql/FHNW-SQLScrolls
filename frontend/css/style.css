@@ -2170,20 +2170,6 @@ body {
     border-color: var(--col-cars-red);
 }
 
-.book.witcher-book {
-    border-color: #170101;
-}
-
-.book.witcher-book::after {
-    background: url("../assets/books/witcher.png");
-    background-size: cover;
-    border-color: #170101;
-}
-
-.book-open.witcher-book {
-    border-color: #2b0e0e;
-}
-
 .book.json-book {
     border-color: #161616;
 }
