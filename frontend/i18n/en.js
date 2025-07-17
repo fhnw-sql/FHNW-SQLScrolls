@@ -36,7 +36,6 @@ for (let entry of Object.entries({
     tables: "Tables",
     "wanted-result": "Expected result",
     "query-results": "Query results",
-    "ai-start": '<i class="fa fa-robot"></i> Recommend me a task!',
     "ai-newtask": '<i class="fa fa-robot"></i> Recommend a task',
     "consult-theory": '<i class="fa fa-graduation-cap"></i> Consult theory',
     "books-text": "Books",
