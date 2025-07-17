@@ -846,6 +846,8 @@ th {
     align-content: center;
 }
 
+#inventory-container:hover #inventory { display: flex; }
+
 #inventory .item {
     -webkit-transform: scale(0.7);
     -ms-transform: scale(0.7);
@@ -1671,8 +1673,8 @@ body {
     z-index: 2; /* Ensure it's above task-view */
     color: #fff;
     height: auto;
-    right: 2rem;
-    top: 20%;
+    left: 1rem;
+    top: 15%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
