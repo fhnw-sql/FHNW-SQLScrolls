@@ -815,8 +815,7 @@ async function loadRecommendedTask() {
         }
     } catch (error) {
         console.error('Error loading recommended task:', error);
-        // Optionally show a toast for unexpected errors:
-        Views.PROFILE.displayToast(i18n.get('recommendation-error'), 'error', 3000);
+        showError('Recommendation model not yet available. Please check back later in a few minutes!');
     } finally {
         // Hide the loading view in all cases
         await hideElementImmediately("loading-view");
