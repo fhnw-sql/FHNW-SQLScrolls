@@ -1,7 +1,7 @@
-const app = require("./server"); // Link to your server file
+const app = require("../server"); // Link to your server file
 const supertest = require("supertest");
 const request = supertest(app);
-const db = require("./utils/db");
+const db = require("../utils/db");
 
 describe("The Server", () => {
   const USERNAME = "test@jest.io";

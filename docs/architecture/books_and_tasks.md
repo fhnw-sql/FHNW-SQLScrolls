@@ -1,43 +1,19 @@
-# 🖼️Frontend: Web Client through NGinx
+# 📚 Books & Tasks
 
-**[Dockerfile](frontend/Dockerfile)**
+## 🔨 Experimental Editor
 
-## ⚙️ Configuration
-
-- **Books & Tasks**  
-  Configurable via `.task` and `.book` files in `/frontend/tasks` and `/frontend/books`.
-
-- **Language Support**  
-  Add translations via:
-    - `/i18n/<lang>.js`
-    - `/books/<lang>/Book-<>.book`
-    - `/tasks/<lang>/Task-<>.task`
-    - Update the `language-selector` in `index.html`
-
-- **Progression Rules**  
-  Found in `/frontend/tasks/progression.js`.
-
-- **General Settings**  
-  Configurable in `/frontend/js/configuration.js`:
-    - `API_URL`
-    - `FALSE_ANSWER_UNTIL_MODEL_ANSWER`
-    - `EDITOR_PASSWORD`
+Located at `/frontend/admin/editors.html`, this in-browser editor allows advanced users to edit `.task` and `.book`
+files.
+Experimental features may crash and require JS troubleshooting.
 
 ---
 
-## 📚 Books & Tasks
-
-### 🔨 Experimental Editor
-
-Located at `/html/editors.html`, this in-browser editor allows advanced users to edit `.task` and `.book` files.
-Experimental features may crash and require JS troubleshooting.
-
-### 📝 Books syntax
+## 📝 Books syntax
 
 In the following chapter, the outline of a book is explained and according to syntax. In the end, a full example is
 shown.
 
-#### METADATA
+### METADATA
 
 Within the `METADATA` one can specify:
 
@@ -45,7 +21,7 @@ Within the `METADATA` one can specify:
 - `name` of the book
 - `title` of the book -> shown on the cover
 - `author` of the book
-- `color` of the book a.e green, purple, red
+- `color` of the book a.e green, purple, red (can also be a name such as color: music2)
 
 ```
 METADATA {
@@ -57,7 +33,7 @@ METADATA {
 }
 ```
 
-#### PAGE
+### PAGE
 
 Representation of a page within the book. Within one can use plain text or HTML syntax to describe the content of the
 page. A page further supports the `EXAMPLE` tag, which can be used to display a theoretical example. Consider the
@@ -82,7 +58,7 @@ PAGE {
 }
 ```
 
-#### Example
+### Example
 
 ```
 METADATA {
@@ -119,12 +95,14 @@ PAGE {
 }
 ```
 
-### 📝 Tasks syntax
+---
+
+## 📝 Tasks syntax
 
 In the following chapter, the outline of a task is explained and the according to syntax. In the end, a full example is
 shown.
 
-#### METADATA
+## METADATA
 
 Within the `METADATA` one can specify:
 
@@ -144,7 +122,7 @@ METADATA {
 }
 ```
 
-#### DESCRIPTION
+### DESCRIPTION
 
 The description is used to assign instruction to the task. The content should consist of plain text.
 
@@ -157,7 +135,7 @@ DESCRIPTION {
 }
 ```
 
-#### PARSONS (optional)
+### PARSONS (optional)
 
 The `PARSONS` Section is optional and specifies whether a task needs to be solved by using
 the  [Parsons Programming Puzzle](https://github.com/js-parsons/js-parsons) (if set). The outline needs to follow the
@@ -174,7 +152,7 @@ PARSONS {
 }   
 ```
 
-#### ANSWER (optional)
+### ANSWER (optional)
 
 The `ANSWER` section can be set if the teacher wants to allow the display of a model answer after the task is completed
 successfully by the student.
@@ -185,7 +163,7 @@ ANSWER {
 }
 ```
 
-#### STRICT (optional)
+### STRICT (optional)
 
 The `STRICT` can be used to enable strict validation of the test result (order).
 
@@ -197,14 +175,14 @@ TEST {
 }
 ```
 
-#### TEST
+### TEST
 
 The section `TEST` is used to validate the task. A teacher can specify multiple `TEST` if needed in order to validate
 the answer. There are two possible approaches, on the one hand, by defining a DB scheme by using the `TABLE` section
 recommended for SELECT operations and on the other hand by using `SQL` section mostly suited for queries containing
 statements like CREATE and INSERT. Consider the pre-implementation tasks for further and more complex examples.
 
-#### Predefined Table Example
+### Predefined Table Example
 
 ```
 TEST {
@@ -245,7 +223,7 @@ TEST {
 
 ```
 
-#### SQL Example
+### SQL Example
 
 ```
 TEST {
@@ -260,7 +238,7 @@ TEST {
 }
 ```
 
-#### Example
+### Example
 
 ```
 METADATA {

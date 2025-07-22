@@ -14,7 +14,7 @@ const {
     answerSqlPATCH,
     recoverPOST,
     resetPOST
-} = require("../schemes/users");
+} = require("../schemas/users");
 const {checkIfFinished, checkIfNew, generateCertificate} = require("../utils/certificate");
 
 const cors = require("cors");
