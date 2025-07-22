@@ -1,6 +1,6 @@
 # 🧠 Backend: Python Recommendation Model (FastAPI)
 
-**[Dockerfile](backend/model/Dockerfile)**
+**[Dockerfile](../../backend/model/Dockerfile)**
 
 ## 🧰 Python Dependencies
 

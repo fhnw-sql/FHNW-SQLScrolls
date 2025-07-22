@@ -1,6 +1,6 @@
 # 🌐 Backend: REST API (Node.js + MongoDB)
 
-**[Dockerfile](backend/api/Dockerfile)**
+**[Dockerfile](../../backend/api/Dockerfile)**
 
 ## ⚙️ Configuration
 

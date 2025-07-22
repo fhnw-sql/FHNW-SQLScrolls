@@ -1,6 +1,6 @@
 # 🖼️Frontend: Web Client through NGinx
 
-**[Dockerfile](frontend/Dockerfile)**
+**[Dockerfile](../../frontend/Dockerfile)**
 
 ## ⚙️ Configuration
 
