@@ -5,7 +5,7 @@ to development, deployment, and ongoing maintenance.
 
 ---
 
-## 📘 Overviews
+## 📘 General
 
 - [README](../README.md) – Project overview, quick-start setup, and architecture.
 - [PRIVACY](../PRIVACY.md) – Privacy policy and data usage information.
@@ -21,11 +21,11 @@ to development, deployment, and ongoing maintenance.
 
 ---
 
-## ⚙️ Technical Documentation
+## ⚙️ Architecture Documentation
 
-- [Frontend Webclient](technical/frontend.md) – Frontend structure and configuration.
-- [Backend API](technical/api.md) – REST API endpoints and backend structure.
-- [Backend Model](technical/model.md) – Python model (AI/ML recommendation system) and integration.
+- [Frontend Webclient](architecture/frontend.md) – Frontend structure and configuration.
+- [Backend API](architecture/api.md) – REST API endpoints and backend structure.
+- [Backend Model](architecture/model.md) – Python model (AI/ML recommendation system) and integration.
 
 ---
 
