@@ -75,6 +75,7 @@ the "Database Technology" course.
       or [Mac install guide](https://docs.docker.com/desktop/install/mac-install/).
     - ⚠️ **Windows users:** Make sure [WSL 2.0](https://docs.microsoft.com/en-us/windows/wsl/install) is enabled and set
       as the backend for Docker Desktop.
+        - Powershell:```wsl --set-default-version 2```
 
 - **Linux:**
     - Install Docker and Docker Compose using your system’s package manager, e.g.:
@@ -99,7 +100,7 @@ API_URL=http://localhost:4001
 # URL for socket.io communications (frontend-backend real-time)
 IO_URL=http://localhost:80
 
-# Email provider API key (set to 'blank' if not using email features)
+# [OPTI0NAL] Email provider API key (set to 'blank' if not using email features)
 POSTMARK_API_KEY=blank
 
 # The sender address for outgoing emails (used for password reset, etc)
@@ -155,6 +156,8 @@ you can skip step 4 (setting environment variables)**.
 #### 💡 JetBrains WebStorm
 
 Includes a preconfigured [Dev_Compose.xml](.idea/runConfigurations/Dev_Compose.xml) to start via UI.
+
+![Webstorm Dev Compose.png](docs/resources/Webstorm%20Dev%20Compose.png)
 
 #### 🧑‍💻 Access
 
@@ -234,13 +237,13 @@ found in the
 
 **Infrastructure**
 
-- Docker (Node.js, Nginx)
+- Docker (Node.js, Nginx, Uvicorn)
 
 **Supported Browsers**
 
 - Chrome
 - Firefox
-- Safari
+- Safari (Needs testing)
 - Microsoft Edge (Chromium)
 
 ---

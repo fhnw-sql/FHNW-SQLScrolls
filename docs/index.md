@@ -24,6 +24,7 @@ to development, deployment, and ongoing maintenance.
 ## ⚙️ Architecture Documentation
 
 - [Frontend Webclient](architecture/frontend.md) – Frontend structure and configuration.
+- [Books & Tasks](architecture/books_and_tasks.md) – Frontend structure and configuration.
 - [Backend API](architecture/api.md) – REST API endpoints and backend structure.
 - [Backend Model](architecture/model.md) – Python model (AI/ML recommendation system) and integration.
 

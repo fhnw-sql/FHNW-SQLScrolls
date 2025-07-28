@@ -1,6 +1,6 @@
 # 🧠 Backend: Python Recommendation Model (Machine Learning)
 
-**[Dockerfile](../../backend/model/Dockerfile)**
+[**Documentation Hub**](docs/index.md) | **[Dockerfile](../../backend/model/Dockerfile)**
 
 ## 📂 Component Folder Structure
 

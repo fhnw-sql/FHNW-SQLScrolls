@@ -76,7 +76,7 @@ fabric.properties
 data/
 
 # environment
-.env
+dump/.env
 .vs/
 .vscode/launch.json
 js/configuration.js
