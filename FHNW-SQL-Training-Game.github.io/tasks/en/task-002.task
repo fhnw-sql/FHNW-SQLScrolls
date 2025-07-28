@@ -62,3 +62,8 @@ TEST {
         Haydee|1604
     }
 }
+
+
+SKELETON {
+    SELECT __ , __ FROM __
+}

@@ -36,3 +36,8 @@ TEST {
         Parade Of The Wooden Soldiers|2
     }
 }
+
+
+SKELETON {
+    SELECT __ , __ FROM __ WHERE __ <= __ ;
+}

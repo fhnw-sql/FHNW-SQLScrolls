@@ -107,3 +107,7 @@ TEST {
 		75
     }
 }
+
+SKELETON {
+    SELECT _.__ / COUNT ( * ) FROM ( SELECT __ , SUM ( __ ) __ FROM __ WHERE __ = '__' GROUP BY __ ) __ INNER JOIN __ __ ON ( _.__ = _.__ ) INNER JOIN __ __ ON ( _.__ = _.__ ) GROUP BY _.__ , _.__ ;
+}

@@ -70,3 +70,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT COUNT ( * ) FROM __ ;
+}

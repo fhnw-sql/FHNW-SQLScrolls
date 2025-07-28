@@ -132,3 +132,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    CREATE TABLE __ ( __ INTEGER NOT NULL , __ INTEGER NOT NULL , __ REAL NOT NULL , PRIMARY KEY ( __ , __ ) , FOREIGN KEY ( __ ) REFERENCES __ ( __ ) , FOREIGN KEY ( __ ) REFERENCES __ ( __ ) , __ ( __ > __ ) ) ;
+}

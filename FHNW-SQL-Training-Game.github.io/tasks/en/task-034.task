@@ -48,3 +48,8 @@ TEST {
         Fabuland
     }
 }
+
+
+SKELETON {
+    SELECT __ FROM __ GROUP BY __ HAVING COUNT ( * ) = __
+}

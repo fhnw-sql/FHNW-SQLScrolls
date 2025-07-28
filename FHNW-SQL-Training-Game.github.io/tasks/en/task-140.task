@@ -86,3 +86,7 @@ TEST {
         Brass
     }
 }
+
+SKELETON {
+    SELECT __ FROM __ __ , __ __ WHERE _.__ = _.__ AND _.__ = '__' ;
+}

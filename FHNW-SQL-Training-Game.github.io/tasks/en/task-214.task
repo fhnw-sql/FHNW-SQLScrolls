@@ -47,3 +47,8 @@ TEST {
         Kate|{"address":"4th Avenue","phone":"784584567","products":["washing machine","tumbler"]}    
     }
 }
+
+
+SKELETON {
+    SELECT __ , json_insert ( __ , '$.__' , json_group_array ( __ ) ) FROM __ GROUP BY __
+}

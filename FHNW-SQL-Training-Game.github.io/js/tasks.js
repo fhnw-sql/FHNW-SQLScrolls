@@ -1,5 +1,15 @@
 /* Some code originally from https://github.com/pllk/sqltrainer */
 
+let currentTaskHintData = null;
+
+const ACTIVE_MODEL = Config.AI || "gemini";
+const SKELETON_SHOW_LEVEL = Config.LEVEL_ABOVE_WHICH_SHOW_SKELETON || 1; // Level above which skeleton is shown
+
+/* selectors for whichever model is active */
+const hintBoxSel = ACTIVE_MODEL === "gemini" ? "#gemini-hint-box" : "#openai-hint-box";
+const minHintBoxSel = ACTIVE_MODEL === "gemini" ? "#gemini-minimized-hint-box" : "#openai-minimized-hint-box";
+const hintButtonSel = ACTIVE_MODEL === "gemini" ? "#gemini-hint-button" : "#openai-hint-button";
+
 const Colors = {
     PURPLE: "col-book-purple",
     BLUE: "col-book-blue",
@@ -47,8 +57,8 @@ class Result {
         if (this.error) {
             return `<div class="row justify-content-md-center">
                 <div class="table-paper"><p class="col-red">${(this.error + "")
-                .split("Error")
-                .join(i18n.get("error"))}</p><p>Please review your query and submit again</p></div>
+                    .split("Error")
+                    .join(i18n.get("error"))}</p><p>Please review your query and submit again</p></div>
             </div>`;
         } else if (!this.table) {
             return `<div class="row justify-content-md-center">
@@ -62,12 +72,12 @@ class Result {
                         <h4 class="col-yellow">${i18n.get("tables")}</h4><hr>
                         <div class="row m-0 p-0">
                             ${sourceTables
-                .map(
-                    (t) => `<div class="table-paper" aria-hidden="true">
+                    .map(
+                        (t) => `<div class="table-paper" aria-hidden="true">
                             ${t.renderAsTable(true)}
                         </div>`
-                )
-                .join("")}
+                    )
+                    .join("")}
                         </div>
                     </div>
                     <div class="tables">
@@ -84,12 +94,12 @@ class Result {
                         <h4 class="col-yellow">${i18n.get("tables")}</h4><hr>
                         <div class="row m-0 p-0">
                             ${sourceTables
-                .map(
-                    (t) => `<div class="table-paper" aria-hidden="true">
+                    .map(
+                        (t) => `<div class="table-paper" aria-hidden="true">
                             ${t.renderAsTable(true)}
                         </div>`
-                )
-                .join("")}
+                    )
+                    .join("")}
                         </div>
                     </div>
                     <div class="tables">
@@ -124,6 +134,7 @@ class Task extends ItemType {
      * parsed.parsons          parsons of the Task
      * parsed.tests           Test objects parsed by TestParser, used to test if the query for the task was correct.
      * parsed.type            Test type used to allow DCL tasks.
+     * parsed.skeleton        Skeleton of the query, used to show the user what they need to fill in.
      *
      * @param options {parsed: {metadata: {id, name, color}, description, tests}}
      */
@@ -149,6 +160,8 @@ class Task extends ItemType {
                     : `col-book-${parsed.metadata.color}`;
             this.description = parsed.description;
             this.answer = parsed.answer;
+            this.skeleton = parsed.skeleton;
+            this.level = parsed.metadata.level;
             this.parsons = parsed.parsons;
             this.tests = parsed.tests;
         }
@@ -173,7 +186,7 @@ class Task extends ItemType {
         if (this.tests) {
             const firstTest = this.tests[0];
             wantedResult = firstTest.result;
-            if (firstTest && firstTest.contextTableNames.length>0) {
+            if (firstTest && firstTest.contextTableNames.length > 0) {
                 taskTables = await queryAllContentsOfTables(firstTest.context, firstTest.contextTableNames);
             }
         }
@@ -196,7 +209,7 @@ class Task extends ItemType {
             const wanted = test.result;
             if (query.length === 0 || query === i18n.get("i18n-query-placeholder")) {
                 console.warn("Empty query!!")
-                results.push(new Result({source: test, correct: false, wanted}));
+                results.push(new Result({ source: test, correct: false, wanted }));
                 continue;
             }
             if (query.split(";").length > 2) {
@@ -228,7 +241,7 @@ class Task extends ItemType {
                     // console.log("table = ", table)
                     // console.log("wanted = ", wanted)
                     const correct = table.isEqual(wanted, test.strict);
-                    results.push(new Result({source: test, correct, table, wanted}));
+                    results.push(new Result({ source: test, correct, table, wanted }));
                 } else {
                     if (resultSets.length == wanted.rows.length) {
                         results.push(
@@ -237,8 +250,8 @@ class Task extends ItemType {
                                 correct: true,
                                 table: Table.fromPlain("", [i18n.get("query-no-rows")], []),
                                 wanted,
-                            })                   
-                        );     
+                            })
+                        );
                     } else {
                         results.push(
                             new Result({
@@ -251,13 +264,13 @@ class Task extends ItemType {
                     }
                 }
             } catch (error) {
-                results.push(new Result({source: test, correct: false, error, wanted}));
+                results.push(new Result({ source: test, correct: false, error, wanted }));
             }
         }
         return results;
     }
 
-    async showHint() {       
+    async showHint() {
         await hideElementImmediately("book-menu");
         await showElement("task-hint-notification");
         $("#close-hint-button")
@@ -271,7 +284,7 @@ class Task extends ItemType {
         await hideElement("task-hint-notification");
         await showElementImmediately("book-menu");
     }
-    
+
     async completeTask() {
         if (this.completed) return;
         const taskGroup = taskGroups.lookupTaskGroupWithTaskId(this.id);
@@ -326,7 +339,7 @@ class Task extends ItemType {
 class LazyTask extends Task {
     constructor(id) {
         super({
-            parsed: {metadata: {id}},
+            parsed: { metadata: { id } },
         });
         this.loaded = false;
         this.loadedTask = null;
@@ -334,7 +347,7 @@ class LazyTask extends Task {
 
     async loadTask() {
         try {
-            const loaded = new Task({parsed: await parseTaskFrom(`tasks/${currentLang}/${this.id}.task`)});
+            const loaded = new Task({ parsed: await parseTaskFrom(`tasks/${currentLang}/${this.id}.task`) });
             loaded.completed = this.completed;
             this.loadedTask = loaded;
             this.loaded = true;
@@ -342,6 +355,8 @@ class LazyTask extends Task {
             this.color = loaded.color;
             this.description = loaded.description;
             this.answer = loaded.answer;
+            this.skeleton = loaded.skeleton;
+            this.level = loaded.level;
             this.parsons = loaded.parsons;
             this.tests = loaded.tests;
         } catch (e) {
@@ -383,7 +398,7 @@ class Table {
      *
      * It is assumed that rows and header have same length.
      */
-    constructor({name, header, rows}) {
+    constructor({ name, header, rows }) {
         this.name = name;
         this.header = header;
         this.rows = rows;
@@ -416,7 +431,7 @@ class Table {
         return new Table({
             name: name,
             header: headers ? headers : [],
-            rows: lines.map((line) => line.split("|").map(function(item) { return item === "null" ? null : item ; })), // convert "null" to null value
+            rows: lines.map((line) => line.split("|").map(function (item) { return item === "null" ? null : item; })), // convert "null" to null value
         });
     }
 
@@ -469,7 +484,7 @@ class Table {
                     columnTypes[i] = "JSON";
                 } catch (e) {
                     columnTypes[i] = "TEXT";
-                }              
+                }
             } else {
                 columnTypes[i] = "NUMBER";
             }
@@ -487,10 +502,10 @@ class Table {
             const valuesWithTypes = [];
             for (let i = 0; i < row.length; i++) {
                 // Adds 'value' if TEXT and escapes ' if necessary, otherwise value (assuming number)
-                valuesWithTypes.push(((columnTypes[i] === "TEXT")||(columnTypes[i] === "JSON"))&& (row[i] != null) ? `'${row[i].split("'").join("\\''")}'` : row[i]);
+                valuesWithTypes.push(((columnTypes[i] === "TEXT") || (columnTypes[i] === "JSON")) && (row[i] != null) ? `'${row[i].split("'").join("\\''")}'` : row[i]);
             }
             // example: INSERT INTO Table (col1, col2) VALUES ("value", 0);
-            queries.push(`INSERT INTO ${this.name} (${this.header.join(",")}) VALUES (${valuesWithTypes.map(v => v == null ? 'null': v).join(",")});`);
+            queries.push(`INSERT INTO ${this.name} (${this.header.join(",")}) VALUES (${valuesWithTypes.map(v => v == null ? 'null' : v).join(",")});`);
         }
         return queries;
     }
@@ -512,7 +527,7 @@ function getNextTaskId(currentTaskId) {
     }
 
     let bookIndex = 0
-    for(const book of taskGroups.asList()) { 
+    for (const book of taskGroups.asList()) {
         if (book.tasks.find(taskId => taskId === currentTaskId)) {
             const indexTask = book.tasks.indexOf(currentTaskId)
             if (indexTask + 1 < book.tasks.length) {
@@ -528,7 +543,7 @@ function getNextTaskId(currentTaskId) {
         bookIndex += 1
 
     }
-    
+
     var getPart = currentTaskId.replace(/[^\d.]/g, ""); // returns 0023
     var num = parseInt(getPart); // returns 23
     var newVal = padWithZeroes(num + 1); // returns 24
@@ -539,7 +554,7 @@ function getNextTaskId(currentTaskId) {
 async function queryAllContentsOfTables(context, tableNames) {
     const queryResults = [];
 
-    if (tableNames.length > 0){
+    if (tableNames.length > 0) {
         const queries = tableNames.map((table) => `SELECT * FROM ${table};`).join("");
         const resultSets = await runSQL(context, queries);
         for (let i = 0; i < resultSets.length; i++) {
@@ -547,6 +562,31 @@ async function queryAllContentsOfTables(context, tableNames) {
         }
     }
     return queryResults;
+}
+
+function syncSkeletonUI() {
+    const showSkeleton = Views.TASK.currentTask.level > SKELETON_SHOW_LEVEL;
+    const html = showSkeleton ? Views.TASK.currentTask.skeleton : "";
+
+    const $fullRow = $(hintBoxSel)
+        .find(".hint-label-skeleton")
+        .closest(".hint-row");
+
+    const $minRow = $(minHintBoxSel)
+        .find(".hint-label-skeleton-min")
+        .closest(".hint-row");
+
+    if (showSkeleton) {
+        $fullRow.removeClass("d-none")
+            .find(".hint-skeleton").html(html);
+        $minRow.removeClass("d-none")
+            .find(".hint-skeleton-min").html(html);
+    } else {
+        $fullRow.addClass("d-none").find(".hint-skeleton").empty();
+        $minRow.addClass("d-none").find(".hint-skeleton-min").empty();
+    }
+
+    console.log("Task level is", Views.TASK.currentTask.level); // Debugging log
 }
 
 /**
@@ -560,6 +600,15 @@ async function queryAllContentsOfTables(context, tableNames) {
  * @return Promise that fulfills when the task is set as completed
  */
 async function runQueryTests(allowCompletionAndStore) {
+    // Reset ChatGPT-hint UI on each new submission
+    currentTaskHintData = null;
+    $(hintBoxSel).find(".hint-main").html("");
+    $(hintBoxSel).find(".hint-explanation").html("");
+    $(hintBoxSel).addClass("d-none");
+    $(minHintBoxSel).addClass("d-none");
+    $(hintButtonSel).addClass("d-none");
+    syncSkeletonUI();
+
     function didAllError() {
         // Logic in charge of displaying no test tabs, and instead showing a single error box
         const firstError = String(results[0].error);
@@ -574,7 +623,7 @@ async function runQueryTests(allowCompletionAndStore) {
         content += `<div id="test-0" data-parent="#query-out-table">`;
         content += await results[0].render();
         content += `</div>`;
-        return {nav: "", content};
+        return { nav: "", content };
     }
 
     // Side effect: allCorrect is set as false sometimes
@@ -592,18 +641,15 @@ async function runQueryTests(allowCompletionAndStore) {
                 ? `<i class="fa fa-check col-green" aria-label="${i18n.get("correct")}"></i>`
                 : `<i class="fa fa-times col-light-red" aria-label="${i18n.get("incorrect")}"></i>`;
 
-            content += `<div id="test-${i + 1}" class="collapse" aria-labelledby="test-nav-${
-                i + 1
-            }" data-parent="#query-out-table">`;
+            content += `<div id="test-${i + 1}" class="collapse" aria-labelledby="test-nav-${i + 1
+                }" data-parent="#query-out-table">`;
             content += await result.render();
             content += `</div>`;
 
             nav += `<li class="nav-item">
-                        <button id="test-nav-${
-                i + 1
-            }" class="nav-link mr-1 collapsed" aria-expanded="false" data-toggle="collapse" data-target="#test-${
-                i + 1
-            }" aria-controls="test-${i + 1}" onclick="preserveTaskBoxHeight()">
+                        <button id="test-nav-${i + 1
+                }" class="nav-link mr-1 collapsed" aria-expanded="false" data-toggle="collapse" data-target="#test-${i + 1
+                }" aria-controls="test-${i + 1}" onclick="preserveTaskBoxHeight()">
                         ${icon} ${i18n.getWith("test", [i + 1])}
                         </button>
                     </li>`;
@@ -617,7 +663,7 @@ async function runQueryTests(allowCompletionAndStore) {
         nav = nav
             .split(`id="test-nav-${displayIndex + 1}" class="nav-link mr-1 collapsed" aria-expanded="false"`, 2)
             .join(`id=test-nav-${displayIndex + 1}" class="nav-link mr-1" aria-expanded="true"`);
-        return {nav, content};
+        return { nav, content };
     }
 
     // Side effect: allCorrect is set as false sometimes
@@ -631,6 +677,13 @@ async function runQueryTests(allowCompletionAndStore) {
     }
 
     const query = document.getElementById("query-input").value.trim();
+
+    /* ─── guard: never store an empty answer ────────────────────────── */
+    if (query === "" || query === i18n.get("i18n-query-placeholder")) {
+        allowCompletionAndStore = false;     // skip the /quizzes POST
+    }
+    /* ───────────────────────────────────────────────────────────────── */
+
     animateQueryResultsClose();
     const results = await Views.TASK.currentTask.runTests(query);
 
@@ -654,7 +707,7 @@ async function runQueryTests(allowCompletionAndStore) {
 
     if (API.loginStatus === LoginStatus.LOGGED_IN && allCorrect) {
         // Display Endgame dialog on last question submission & hide next button
-        if ((taskGroups.getCompletedTaskCount() + 1 >= taskGroups.getTaskCount()) && !DISPLAY_STATE.gameCompleted){
+        if ((taskGroups.getCompletedTaskCount() + 1 >= taskGroups.getTaskCount()) && !DISPLAY_STATE.gameCompleted) {
             if (allowCompletionAndStore) {
                 await Views.TASK.currentTask.completeTask();
                 let certRes = await API.generateCertificate();
@@ -687,14 +740,137 @@ async function runQueryTests(allowCompletionAndStore) {
     if (allCorrect && allowCompletionAndStore && Views.TASK.currentTask) {
         await Views.TASK.currentTask.completeTask();
     } else {
-        if(!allCorrect && allowCompletionAndStore && Views.TASK.currentTask && API.loginStatus === LoginStatus.LOGGED_IN ) {
+        if (!allCorrect && allowCompletionAndStore && Views.TASK.currentTask && API.loginStatus === LoginStatus.LOGGED_IN) {
             animateSubmitButton();
             playSoundById("sound_wrong_answer");
             const profile = await API.self();
-            const showHint = profile.history[Views.TASK.currentTask.id]?.length == Config.FALSE_ANSWER_UNTIL_BOOK_HINT;
-            if(showHint){
-                await Views.TASK.currentTask.showHint();
-            }
+            const attempts = profile.history[Views.TASK.currentTask.id]?.length ?? 0;
+            // const showHint = profile.history[Views.TASK.currentTask.id]?.length == Config.FALSE_ANSWER_UNTIL_BOOK_HINT;
+
+            const showHelp = attempts >= Config.FALSE_ANSWER_UNTIL_AI_HINT;
+            if (showHelp) { $(hintButtonSel).removeClass("d-none"); }
+
+            // const showHint = attempts == Config.FALSE_ANSWER_UNTIL_BOOK_HINT;
+            // if (showHint) {
+            //     await Views.TASK.currentTask.showHint();
+            // }
         }
-    }    
+    }
+
+    // Hook up the hint UI once the DOM is ready
+    $(function registerHintUi() {
+        console.log("Hint UI registration started."); // Debugging log
+
+        $(hintBoxSel).on("click", ".hint-close", () => {
+            $(hintBoxSel).addClass("d-none");
+            console.log("Hint box closed."); // Debugging log
+        });
+
+        $(hintBoxSel).on("click", ".hint-minimize", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $(minHintBoxSel).removeClass("d-none");
+            syncSkeletonUI();
+            $(minHintBoxSel).find(".hint-main-min").html(`${currentTaskHintData.hint}`);
+            if (currentTaskHintData.explanation) {
+                $(minHintBoxSel).find(".hint-explanation-min").html(`${currentTaskHintData.explanation}`);
+            } else {
+                $(minHintBoxSel).find(".hint-explanation-min").html("");
+            }
+            $(hintBoxSel).addClass("d-none");
+            console.log("Hint box minimized."); // Debugging log
+        });
+
+        $(minHintBoxSel).on("click", ".hint-maximize-min", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $(hintBoxSel).removeClass("d-none");
+            $(minHintBoxSel).addClass("d-none");
+            console.log("Minimized hint box clicked, restoring full hint."); // Debugging log
+        });
+
+        // Close button inside the minimized box
+        $(minHintBoxSel).on("click", ".hint-close-min", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $(minHintBoxSel).addClass("d-none");
+            console.log("Close button clicked: hiding hint completely."); // Debugging log
+        });
+
+        $(hintButtonSel)
+            .off("click")
+            .on("click", async () => {
+                if ($(minHintBoxSel).is(":visible")) {
+                    console.log("Minimized hint box active — skipping full hint.");
+                    return;
+                }
+
+                console.log("Hint button clicked!"); // Debugging log
+
+                // If a hint has been fully processed and stored for the current task, display it directly
+                if (currentTaskHintData) {
+                    console.log("Displaying cached hint."); // Debugging log
+                    syncSkeletonUI();
+                    $(minHintBoxSel).find(".hint-main-min").html(`${currentTaskHintData.hint}`);
+                    if (currentTaskHintData.explanation) {
+                        $(minHintBoxSel).find(".hint-explanation-min").html(`${currentTaskHintData.explanation}`);
+                    } else {
+                        $(minHintBoxSel).find(".hint-explanation-min").html("");
+                    }
+                    $(hintBoxSel).removeClass("d-none");
+                    return;
+                }
+
+                // Reset UI for new stream
+                $(hintBoxSel).find(".hint-main").text("Loading hint...");
+                $(hintBoxSel).find(".hint-explanation").text("");
+                $(hintBoxSel).removeClass("d-none");
+
+                const query = $("#query-input").val().trim();
+                console.log("Query input:", query); // Debugging log
+
+                try {
+                    const profile = await API.self();
+                    console.log("API.self() resolved successfully. Profile:", profile); // Debugging log
+                    const attempts = profile.history[Views.TASK.currentTask.id]?.length || 0;
+                    console.log("Attempts:", attempts); // Debugging log
+
+                    // Call the streaming API function
+                    console.log("Attempting to call API.openaiGetHintStream..."); // Debugging log
+                    API.openaiGetHintStream(
+                        Views.TASK.currentTask,
+                        query,
+                        ({ delta }) => {
+                            $(hintBoxSel).find(".hint-main").append(delta);
+                        },
+                        ({ hint, explanation }) => {
+                            $(hintBoxSel).find(".hint-minimize").removeClass("d-none");
+                            currentTaskHintData = { hint, explanation };
+                            syncSkeletonUI();
+                            $(hintBoxSel).find(".hint-main").html(`${currentTaskHintData.hint}`);
+                            if (currentTaskHintData.explanation) {
+                                $(hintBoxSel).find(".hint-explanation").html(`${currentTaskHintData.explanation}`);
+                            } else {
+                                $(hintBoxSel).find(".hint-explanation").html("");
+                            }
+                            console.log("Stream finished. Full hint:", currentTaskHintData); // Debugging log
+                        },
+                        (err) => {
+                            // Handle errors during the stream
+                            showError("Failed to get hint: " + err.message);
+                            $(hintBoxSel).find(".hint-main").html(`<span style="color: red;">Error: ${err.message}</span>`);
+                            $(hintBoxSel).find(".hint-explanation").html("");
+                            $(hintBoxSel).find(".hint-minimize").addClass("d-none");
+                            console.error("Error during hint stream:", err); // Debugging log
+                        }
+                    );
+                } catch (error) {
+                    console.error("Error before calling openaiGetHintStream (e.g., API.self() failed):", error); // Debugging log
+                    showError("Could not initialize hint request: " + error.message);
+                    $(hintBoxSel).find(".hint-main").html(`<span style="color: red;">Failed to get hint: ${error.message}</span>`);
+                    $(hintBoxSel).find(".hint-explanation").html("");
+                    $(hintBoxSel).find(".hint-minimize").addClass("d-none");
+                }
+            });
+    });
 }

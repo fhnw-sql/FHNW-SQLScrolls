@@ -39,3 +39,8 @@ TEST {
         Maggie|Maus
     }
 }
+
+
+SKELETON {
+    SELECT __ , __ FROM __ WHERE __ IS NOT NULL AND __ = '__'
+}

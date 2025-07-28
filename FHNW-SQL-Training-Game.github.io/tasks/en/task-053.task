@@ -42,3 +42,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT DISTINCT __ FROM __ ;
+}

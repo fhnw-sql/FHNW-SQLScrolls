@@ -61,3 +61,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT * FROM __ WHERE __ IS NOT NULL ;
+}

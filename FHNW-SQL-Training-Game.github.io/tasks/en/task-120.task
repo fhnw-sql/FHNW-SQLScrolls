@@ -39,3 +39,8 @@ TEST {
         Brass
     }
 }
+
+
+SKELETON {
+    SELECT __ FROM __
+}

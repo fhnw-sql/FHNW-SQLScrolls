@@ -62,3 +62,7 @@ TEST {
         Sternenstrasse|Entenhausen|3
     }
 }
+
+SKELETON {
+    SELECT __ , __ , COUNT ( * ) FROM __ GROUP BY __ , __ ;
+}

@@ -64,3 +64,8 @@ TEST {
 
 
 
+
+
+SKELETON {
+    SELECT __ FROM __ UNION SELECT __ FROM __ ORDER BY __ ;
+}

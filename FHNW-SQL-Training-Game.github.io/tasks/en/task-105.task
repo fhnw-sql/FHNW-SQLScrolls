@@ -58,3 +58,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    CREATE TABLE __ ( __ INTEGER , __ TEXT , __ REAL )
+}

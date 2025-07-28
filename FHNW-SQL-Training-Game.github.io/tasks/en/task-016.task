@@ -62,3 +62,7 @@ TEST {
        10|Veronika|1723
     }
 }
+
+SKELETON {
+    SELECT * FROM __ WHERE __ BETWEEN __ AND __ AND __ = '__'
+}

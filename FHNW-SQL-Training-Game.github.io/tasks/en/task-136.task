@@ -71,3 +71,7 @@ TEST {
         T|2
     }
 }
+
+SKELETON {
+    SELECT __ ( __ , __ , __ ) __ , COUNT ( * ) COUNT FROM __ GROUP BY __ ORDER BY COUNT ;
+}

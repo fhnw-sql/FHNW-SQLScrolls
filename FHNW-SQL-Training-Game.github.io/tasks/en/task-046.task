@@ -70,3 +70,8 @@ TEST {
         Musilda|Château de Suscinio
     }
 }
+
+
+SKELETON {
+    SELECT _.__ , _.__ FROM __ __ LEFT __ JOIN __ __ ON _.__ = _.__
+}

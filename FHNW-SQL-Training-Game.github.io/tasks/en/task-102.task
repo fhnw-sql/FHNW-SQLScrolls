@@ -70,3 +70,8 @@ TEST {
 		5|Diego
     }
 }
+
+
+SKELETON {
+    SELECT COUNT ( * ) AS __ , _.__ FROM __ __ LEFT JOIN __ __ ON _.__ = _.__ WHERE _.__ IS NOT NULL GROUP BY _.__ ;
+}

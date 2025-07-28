@@ -36,3 +36,8 @@ TEST {
         10
     }
 }
+
+
+SKELETON {
+    SELECT COUNT ( * ) FROM __ ;
+}

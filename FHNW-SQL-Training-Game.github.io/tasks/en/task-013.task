@@ -63,3 +63,8 @@ TEST {
         1604
     }
 }
+
+
+SKELETON {
+    SELECT DISTINCT __ FROM __ ORDER BY __ __ ;
+}

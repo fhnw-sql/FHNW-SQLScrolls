@@ -38,3 +38,8 @@ TEST {
         5|Midnight Surprise|25|1
     }
 }
+
+
+SKELETON {
+    UPDATE __ __ __ = __ WHERE __ = __ ;
+}

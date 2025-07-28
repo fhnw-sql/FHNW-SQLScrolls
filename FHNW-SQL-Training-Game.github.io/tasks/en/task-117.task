@@ -76,3 +76,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    CREATE __ INDEX __ ON __ ( __ ) ;
+}

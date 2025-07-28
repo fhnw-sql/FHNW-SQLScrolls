@@ -75,3 +75,8 @@ TEST {
         mill
     }
 }
+
+
+SKELETON {
+    SELECT _.__ FROM __ __ , __ __ WHERE _.__ = _.__ AND _.__ = __
+}

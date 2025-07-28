@@ -50,3 +50,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT __ , COUNT ( __ ) FROM __ WHERE __ = __ GROUP BY __
+}

@@ -54,3 +54,7 @@ TEST {
         Zaptus
     }
 }
+
+SKELETON {
+    SELECT __ FROM __ WHERE __ < __ ORDER BY __ __
+}

@@ -52,3 +52,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT __ , json_array_length ( __ -> '__' ) FROM __ ;
+}

@@ -81,3 +81,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT __ , __ FROM __ ORDER BY __ __ ;
+}

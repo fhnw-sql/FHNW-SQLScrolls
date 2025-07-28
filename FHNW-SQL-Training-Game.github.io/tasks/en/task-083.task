@@ -69,3 +69,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT __ , __ FROM __ WHERE __ BETWEEN __ AND __ ORDER BY __ __ ;
+}

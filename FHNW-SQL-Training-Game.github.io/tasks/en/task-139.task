@@ -89,3 +89,7 @@ TEST {
         Strings|Contrabass
     }
 }
+
+SKELETON {
+    SELECT __ , __ FROM __ __ , __ __ WHERE _.__ = _.__ AND _.__ = '__' ; OR SELECT __ , __ FROM __ __ INNER JOIN __ __ ON ( _.__ = _.__ ) WHERE _.__ = '__' ;
+}

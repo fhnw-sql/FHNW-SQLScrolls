@@ -163,3 +163,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT _.__ , _.__ , _.__ FROM __ __ INNER JOIN __ __ ON ( _.__ = _.__ ) INNER JOIN __ __ ON ( _.__ = _.__ ) WHERE _.__ = '__' ORDER BY __ , __ ;
+}

@@ -1,29 +1,27 @@
-# API_URL -> http://localhost:3000
-# POSTMARK_API_KEY -> POSTMARK_API_KEY
-# FROM_SENDER -> POSTMARK_API_KEY
+version: "3.9"
 
-
-version: "3"
 services:
   db:
-    container_name: mongo
-    image: mongo
+    container_name: mongo_db
+    image: mongo:6
     restart: on-failure
     volumes:
       - ./data:/data/db
     ports:
       - "27017:27017"
+
   api:
     container_name: stg-api
-    depends_on:
-      - 'db'
+    build:
+      context: ../FHNW-SQL-Training-Game-API   
+      dockerfile: Dockerfile                  
     restart: always
-    # image: janwilhelmfhnw/api
-    build: ../FHNW-SQL-Training-Game-API
+    depends_on:
+      - db
     env_file:
-      - .env
+      - .env                                  
     environment:
-      - MONGODB_URI=mongodb://mongo:27017/stg-api
+      - MONGODB_URI=mongodb://db:27017/stg-api
       - JWT_SECRET=FHNW_2021
       - FROM_SENDER=${FROM_SENDER}
       - POSTMARK_API_KEY=${POSTMARK_API_KEY}
@@ -31,16 +29,17 @@ services:
       - IO_URL=${IO_URL}
     ports:
       - "3001:3001"
+
   frontend:
     container_name: stg-frontend
-    depends_on:
-      - 'api'
-    restart: always
-    # image: janwilhelmfhnw/frontend
     build:
       context: .
+      dockerfile: Dockerfile                  
       args:
         API_URL: ${API_URL}
+    restart: always
+    depends_on:
+      - api
     ports:
-      - "80:80"
-      - "3000:3000"
+      - "80:80"      
+      - "3000:3000"   

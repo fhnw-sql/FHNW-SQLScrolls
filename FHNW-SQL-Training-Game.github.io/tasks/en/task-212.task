@@ -54,3 +54,7 @@ TEST {
         {"address":"Hybe Avenue","phone":"004569871","age":21,"surname":"Jake"}
     }
 }
+
+SKELETON {
+    SELECT json_insert ( __ , '$.__' , __ ) FROM __
+}

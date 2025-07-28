@@ -36,3 +36,8 @@ TEST {
         Jim|{"address":"Star Square","phone":"134313443","credentials":{"email":"jimmy@tech.com","password":"hR56432N5"}}
     }
 }
+
+
+SKELETON {
+    SELECT __ , json_set ( __ , '$.__' , __ ) FROM __
+}

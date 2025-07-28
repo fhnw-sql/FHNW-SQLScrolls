@@ -81,3 +81,7 @@ TEST {
         10|1
     }
 }
+
+SKELETON {
+    SELECT LENGTH ( __ ) LENGTH , COUNT ( * ) FROM __ GROUP BY LENGTH ( __ ) ORDER BY LENGTH ;
+}

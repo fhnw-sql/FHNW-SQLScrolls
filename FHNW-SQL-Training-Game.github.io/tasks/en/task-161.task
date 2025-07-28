@@ -137,3 +137,8 @@ TABLE {
 
 
 
+
+
+SKELETON {
+    SELECT _.__ , _.__ , _.__ , _.__ , _.__ FROM __ __ INNER JOIN __ __ ON ( _.__ = _.__ ) INNER JOIN __ __ ON ( _.__ = _.__ ) WHERE _.__ = '__' __ SELECT _.__ , _.__ , _.__ , _.__ , _.__ FROM __ __ INNER JOIN __ __ ON ( _.__ = _.__ ) INNER JOIN __ __ ON ( _.__ = _.__ ) WHERE _.__ = '__' AND _.__ <= '__' AND _.__ >= '__' ;
+}

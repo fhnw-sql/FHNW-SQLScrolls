@@ -45,3 +45,8 @@ TEST {
         Ursina|2021-04-05
     }
 }
+
+
+SKELETON {
+    SELECT __ , __ FROM __ WHERE __ = ( SELECT MAX ( __ ) FROM __ WHERE __ = '__' ) ;
+}

@@ -145,3 +145,8 @@ TABLE {
 }
 
 
+
+
+SKELETON {
+    SELECT _.__ , _.__ , _.__ , _.__ , __ ( '__' , _.__ ) AS __ , __ ( '__' , _.__ ) AS __ FROM __ __ INNER JOIN __ __ ON _.__ = _.__ INNER JOIN __ __ ON _.__ = _.__ WHERE _.__ = '__' AND _.__ <= __ ( '__' ) AND ( _.__ IS NULL OR _.__ >= __ ( '__' ) ) ORDER BY __ ;
+}

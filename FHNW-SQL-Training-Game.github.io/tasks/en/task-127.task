@@ -56,3 +56,8 @@ TEST {
         Oboe|4
     }
 }
+
+
+SKELETON {
+    SELECT __ , LENGTH ( __ ) FROM __ WHERE LENGTH ( __ ) < __ ORDER BY __ __ , __ ;
+}

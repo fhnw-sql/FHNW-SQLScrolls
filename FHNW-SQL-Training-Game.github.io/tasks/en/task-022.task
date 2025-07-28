@@ -59,3 +59,7 @@ TEST {
        7
     }
 }
+
+SKELETON {
+    SELECT COUNT ( __ ) FROM __ WHERE __ >= __
+}

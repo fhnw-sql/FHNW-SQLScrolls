@@ -92,3 +92,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT __ , __ , __ , __ FROM __ JOIN __ ON _.__ = _.__ ORDER BY __ __ ;
+}

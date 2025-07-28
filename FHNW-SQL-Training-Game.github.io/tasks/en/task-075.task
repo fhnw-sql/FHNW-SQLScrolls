@@ -78,3 +78,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT __ , __ , __ , __ FROM __ WHERE __ IN ( '__' , '__' , '__' ) OR __ IN ( '__' , '__' , '__' ) ;
+}

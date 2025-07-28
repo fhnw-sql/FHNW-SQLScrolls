@@ -1,8 +1,8 @@
 # Pull Image
-FROM nginx:alpine
+FROM nginx:1.29.0-alpine   
 
 # API ARG
-ARG API_URL=http://loalhosthost:3000
+ARG API_URL=http://loalhosthost:3001
 RUN test -n "$API_URL" || (echo "API_URL  not set" && false)
 
 # Set app directory

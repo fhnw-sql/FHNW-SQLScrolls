@@ -123,3 +123,8 @@ TEST {
         Computer Science|10
     }
 }
+
+
+SKELETON {
+    SELECT __ , COUNT ( * ) __ FROM __ GROUP BY __ HAVING COUNT ( * ) > ( SELECT COUNT ( * ) __ FROM __ WHERE __ = '__' ) ;
+}

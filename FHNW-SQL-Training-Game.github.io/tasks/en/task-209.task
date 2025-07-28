@@ -56,3 +56,8 @@ TEST {
         winter|{"sport":"ice hockey","food":"baking cookies","art":"paper snowflake"}
     }
 }
+
+
+SKELETON {
+    SELECT __ , json_object ( '__' , __ , '__' , __ , '__' , __ ) FROM __
+}

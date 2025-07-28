@@ -64,3 +64,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT __ , SUM ( __ ) , AVG ( __ ) FROM __ GROUP BY __ ORDER BY __ ;
+}

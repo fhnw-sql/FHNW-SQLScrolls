@@ -59,3 +59,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT __ , __ FROM __ INNER JOIN __ ON __ = __ WHERE __ = '__'
+}

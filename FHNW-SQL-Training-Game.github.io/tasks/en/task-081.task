@@ -70,3 +70,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT __ , __ FROM __ WHERE __ > ( SELECT AVG ( __ ) FROM __ ) ORDER BY __ __ ;
+}

@@ -77,3 +77,8 @@ TEST {
         mill
     }
 }
+
+
+SKELETON {
+    SELECT _.__ FROM __ __ INNER JOIN __ __ ON _.__ = _.__ WHERE _.__ = __
+}

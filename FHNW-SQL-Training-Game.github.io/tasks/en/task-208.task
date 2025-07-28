@@ -55,3 +55,8 @@ TEST {
         Jake|surfing
     }
 }
+
+
+SKELETON {
+    SELECT __ , json_extract ( __ , '$.__' ) FROM __
+}

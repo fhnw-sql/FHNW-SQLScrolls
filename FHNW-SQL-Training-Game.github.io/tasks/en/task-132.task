@@ -61,3 +61,8 @@ TEST {
         Blumenweg|1
     }
 }
+
+
+SKELETON {
+    SELECT __ , COUNT ( * ) FROM __ WHERE __ = '__' GROUP BY __ ;
+}

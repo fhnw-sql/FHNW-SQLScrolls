@@ -55,3 +55,8 @@ TEST {
         Trick|Duck
     }
 }
+
+
+SKELETON {
+    SELECT * FROM __ WHERE __ = '__' AND __ IS NOT NULL ORDER BY __
+}

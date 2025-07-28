@@ -64,3 +64,7 @@ TEST {
         Trick|Duck|Donald|Duck      
     }
 }
+
+SKELETON {
+    SELECT _.__ __ , _.__ __ , _.__ __ , _.__ __ FROM __ __ INNER JOIN __ __ ON ( _.__ = _.__ ) WHERE _.__ = '__' AND _.__ = '__' ;
+}

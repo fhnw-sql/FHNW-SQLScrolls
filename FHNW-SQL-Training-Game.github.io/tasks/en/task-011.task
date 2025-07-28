@@ -55,3 +55,7 @@ TEST {
        7|Zaptus|1650
     }
 }
+
+SKELETON {
+    SELECT * FROM __ WHERE __ = '__'
+}

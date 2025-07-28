@@ -136,3 +136,8 @@ TEST {
         Violine|Tick|Duck
     }
 }
+
+
+SKELETON {
+    SELECT _.__ , _.__ , _.__ FROM __ __ INNER JOIN __ __ ON ( _.__ = _.__ ) INNER JOIN __ __ ON ( _.__ = _.__ ) WHERE _.__ IN ( '__' , '__' ) ORDER BY _.__ , _.__ ;
+}

@@ -61,3 +61,8 @@ TEST {
         5
     }
 }
+
+
+SKELETON {
+    SELECT COUNT ( * ) FROM __ WHERE __ BETWEEN __ AND __
+}

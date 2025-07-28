@@ -60,3 +60,7 @@ TEST {
         Mickey|Duck|Mickey|Maus        
     }
 }
+
+SKELETON {
+    SELECT _.__ __ , _.__ __ , _.__ __ , _.__ __ FROM __ __ , __ __ WHERE ( _.__ = _.__ AND _.__ < _.__ ) ;
+}

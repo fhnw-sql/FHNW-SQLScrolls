@@ -63,3 +63,8 @@ TEST {
         object|array|text|integer
     }
 }
+
+
+SKELETON {
+    SELECT DISTINCT json_type ( __ ) , json_type ( __ -> '$.__' ) , json_type ( __ - > '$.__' ) , json_type ( __ - > '$.__' ) FROM __
+}

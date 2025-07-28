@@ -61,3 +61,8 @@ TEST {
         4|Jake|singing
     }
 }
+
+
+SKELETON {
+    SELECT __ , __ , __ -> '__' - > > '__' FROM __ ;
+}

@@ -42,3 +42,8 @@ TEST {
         Minni|Maus
     }
 }
+
+
+SKELETON {
+    SELECT __ , __ FROM __ WHERE __ = '__' ORDER BY __ , __ ;
+}

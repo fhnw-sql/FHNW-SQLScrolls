@@ -74,3 +74,8 @@ TEST {
         track and field
     }
 }
+
+
+SKELETON {
+    SELECT DISTINCT __ AS __ FROM __ , json_tree ( _.__ ) WHERE __ = '__' ORDER BY __
+}

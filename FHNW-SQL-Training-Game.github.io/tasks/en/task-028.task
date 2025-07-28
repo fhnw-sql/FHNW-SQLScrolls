@@ -57,3 +57,7 @@ TEST {
         Soulness|14
     }
 }
+
+SKELETON {
+    SELECT __ , SUM ( __ ) FROM __ GROUP BY __
+}

@@ -122,3 +122,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT COUNT ( * ) __ , __ FROM __ WHERE __ = '__' GROUP BY __ HAVING COUNT ( * ) > __ ;
+}

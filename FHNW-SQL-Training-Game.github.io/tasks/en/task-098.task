@@ -105,3 +105,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT _.__ FROM __ __ JOIN __ __ ON _.__ = _.__ WHERE _.__ = '__' ;
+}

@@ -86,3 +86,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT __ , __ , __ , __ FROM __ WHERE __ > __ AND __ > __ ;
+}

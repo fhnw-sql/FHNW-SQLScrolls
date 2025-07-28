@@ -56,3 +56,8 @@ TEST {
         Haydee
     }
 }
+
+
+SKELETON {
+    SELECT __ FROM __ ORDER BY __ __
+}

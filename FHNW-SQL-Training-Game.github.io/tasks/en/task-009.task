@@ -58,3 +58,7 @@ TEST {
        5|Kaaleppi|1833
     }
 }
+
+SKELETON {
+    SELECT * FROM __ ORDER BY __ __ , __ __
+}

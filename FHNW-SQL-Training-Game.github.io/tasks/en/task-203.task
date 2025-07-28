@@ -66,3 +66,7 @@ TEST {
         Jake|1
     }
 }
+
+SKELETON {
+    SELECT __ , __ FROM __ , json_each ( _.__ )
+}

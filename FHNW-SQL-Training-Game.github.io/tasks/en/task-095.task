@@ -57,3 +57,8 @@ TEST {
 
 
 
+
+
+SKELETON {
+    SELECT __ , __ , __ , __ FROM __ WHERE __ IS NULL ;
+}

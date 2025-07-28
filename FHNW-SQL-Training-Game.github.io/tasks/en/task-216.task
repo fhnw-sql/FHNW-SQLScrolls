@@ -56,3 +56,7 @@ TEST {
         ["Photographer","Sam","Smith"]|Thailand
     }
 }
+
+SKELETON {
+    SELECT json_extract ( __ , '$.__' , '$.__' , '$.__' ) AS __ , __ FROM __ ;
+}

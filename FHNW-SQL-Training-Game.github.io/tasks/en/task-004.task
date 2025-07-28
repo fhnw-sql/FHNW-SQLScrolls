@@ -48,3 +48,8 @@ TEST {
         Valentine
     }
 }
+
+
+SKELETON {
+    SELECT __ FROM __ WHERE __ > __
+}

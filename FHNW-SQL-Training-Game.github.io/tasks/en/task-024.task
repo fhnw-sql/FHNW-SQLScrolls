@@ -47,3 +47,8 @@ TEST {
         1604|1885
     }
 }
+
+
+SKELETON {
+    SELECT MIN ( __ ) , MAX ( __ ) FROM __
+}

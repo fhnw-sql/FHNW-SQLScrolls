@@ -87,3 +87,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    CREATE VIEW __ AS SELECT _.__ , _.__ , _.__ FROM __ __ , __ __ WHERE ROUND ( _.__ ) = _.__ ;
+}

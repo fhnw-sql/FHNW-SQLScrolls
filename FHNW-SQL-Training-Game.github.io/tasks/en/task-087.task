@@ -50,3 +50,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT MIN ( __ ) , MAX ( __ ) FROM __
+}

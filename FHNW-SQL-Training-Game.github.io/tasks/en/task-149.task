@@ -132,3 +132,8 @@ TEST {
        Minni|Maus|4
     }
 }
+
+
+SKELETON {
+    SELECT _.__ , _.__ , COUNT ( * ) FROM __ __ INNER JOIN __ __ ON ( _.__ = _.__ ) GROUP BY _.__ , _.__ HAVING COUNT ( * ) > __ ;
+}

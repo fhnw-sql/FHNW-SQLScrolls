@@ -81,3 +81,7 @@ TEST {
         Woodwind|2
     }
 }
+
+SKELETON {
+    SELECT _.__ , COUNT ( * ) FROM __ __ INNER JOIN __ __ ON ( _.__ = _.__ ) GROUP BY _.__ ;
+}

@@ -53,3 +53,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    CREATE TABLE __ ( __ INTEGER PRIMARY KEY , __ TEXT __ ) ;
+}

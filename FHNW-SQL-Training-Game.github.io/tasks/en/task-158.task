@@ -124,3 +124,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT * FROM __ __ WHERE _.__ = '__' AND _.__ = '__' ;
+}

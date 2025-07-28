@@ -41,3 +41,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    UPDATE __ __ __ = '__' WHERE __ = __ ;
+}

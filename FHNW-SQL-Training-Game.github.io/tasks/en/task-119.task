@@ -56,3 +56,8 @@ TEST {
         Dragon Potion|7.2|🐉  
     }
 }
+
+
+SKELETON {
+    SELECT _.__ , SUM ( __ ) , __ ( __ ) FROM __ __ JOIN __ __ __ ( __ ) JOIN __ __ __ ( __ ) GROUP BY __
+}

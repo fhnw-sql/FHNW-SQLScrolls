@@ -79,3 +79,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT _.__ , _.__ , _.__ , _.__ FROM __ __ LEFT JOIN __ __ ON _.__ = _.__ LEFT JOIN __ __ ON _.__ = _.__ WHERE _.__ <= __ ORDER BY _.__
+}

@@ -38,3 +38,8 @@ TEST {
         5|Midnight Surprise|10
     }
 }
+
+
+SKELETON {
+    DELETE FROM __ WHERE __ = __ ;
+}

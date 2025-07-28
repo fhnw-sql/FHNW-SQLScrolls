@@ -47,3 +47,8 @@ TEST {
         2
     }
 }
+
+
+SKELETON {
+    SELECT COUNT ( DISTINCT __ ) FROM __
+}

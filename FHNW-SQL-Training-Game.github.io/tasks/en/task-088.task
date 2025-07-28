@@ -85,3 +85,8 @@ TEST {
 
 
 
+
+
+SKELETON {
+    SELECT _.__ , _.__ , _.__ FROM __ __ JOIN __ __ ON _.__ = = __ JOIN __ __ ON _.__ = = __ ORDER BY _.__ LIMIT __ ;
+}

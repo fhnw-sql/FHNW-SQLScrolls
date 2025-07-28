@@ -106,3 +106,8 @@ TEST {
         Mercedes|mill
     }
 }
+
+
+SKELETON {
+    SELECT _.__ , _.__ FROM __ __ JOIN __ __ ON _.__ = _.__ JOIN __ __ ON _.__ = _.__
+}

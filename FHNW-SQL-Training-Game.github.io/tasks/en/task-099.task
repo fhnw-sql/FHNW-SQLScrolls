@@ -73,3 +73,8 @@ TEST {
 
 
 
+
+
+SKELETON {
+    SELECT COUNT ( __ ) AS __ , __ FROM __ GROUP BY __ ORDER BY __ __ ;
+}

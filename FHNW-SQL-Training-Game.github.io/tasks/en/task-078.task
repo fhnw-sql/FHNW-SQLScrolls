@@ -64,3 +64,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT COUNT ( DISTINCT ( __ ) ) AS __ , COUNT ( DISTINCT ( __ ( __ , __ , __ ) ) ) AS __ FROM __ ;
+}

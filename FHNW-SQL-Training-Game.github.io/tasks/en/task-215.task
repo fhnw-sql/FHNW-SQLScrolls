@@ -87,3 +87,7 @@ TEST {
         spring|{"sport":["tennis"]}     
     }
 }
+
+SKELETON {
+    SELECT __ , json_group_object ( '__' , json ( __ ) ) AS __ FROM ( SELECT __ , json_group_array ( __ ) AS __ FROM __ GROUP BY __ ) GROUP BY __ ORDER BY json_array_length ( __ -> '$.__' )
+}

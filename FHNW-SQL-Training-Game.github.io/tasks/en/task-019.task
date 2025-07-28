@@ -75,3 +75,7 @@ TEST {
        1712
     }
 }
+
+SKELETON {
+    SELECT MIN ( __ ) FROM __ WHERE __ BETWEEN '__' AND '__'
+}

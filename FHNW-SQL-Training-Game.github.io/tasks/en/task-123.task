@@ -49,3 +49,8 @@ TEST {
         Mickey|Maus|Blumenweg|Entenhausen
     }
 }
+
+
+SKELETON {
+    SELECT __ , __ , __ , __ FROM __ WHERE __ = '__'
+}

@@ -69,3 +69,7 @@ TEST {
         2|Jayson|2.5
     }
 }
+
+SKELETON {
+    SELECT _.__ , __ , SUM ( __ ) AS __ FROM __ , json_each ( _.__ ) GROUP BY __ ORDER BY __ __
+}

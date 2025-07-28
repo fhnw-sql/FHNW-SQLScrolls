@@ -55,3 +55,7 @@ TEST {
         4|winter|["ice hockey","baking cookies","paper snowflake"]
     }
 }
+
+SKELETON {
+    SELECT __ , __ , json_array ( __ , __ , __ ) FROM __
+}

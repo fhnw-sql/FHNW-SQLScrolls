@@ -57,3 +57,7 @@ TEST {
        10
     }
 }
+
+SKELETON {
+    SELECT SUM ( __ ) FROM __ WHERE __ = '__'
+}

@@ -43,3 +43,7 @@ TEST {
 		Wham!
     }
 }
+
+SKELETON {
+    SELECT __ FROM __ ORDER BY __ ;
+}

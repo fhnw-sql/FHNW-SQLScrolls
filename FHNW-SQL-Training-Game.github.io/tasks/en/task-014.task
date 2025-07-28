@@ -61,3 +61,7 @@ TEST {
        8|Zaptus|1602
     }
 }
+
+SKELETON {
+    SELECT * FROM __ WHERE __ BETWEEN __ AND __ ORDER BY __ __ , __ __
+}

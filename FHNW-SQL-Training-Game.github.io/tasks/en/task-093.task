@@ -47,3 +47,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT __ , __ FROM __ WHERE __ = ( SELECT MIN ( __ ) FROM __ ) ;
+}

@@ -56,3 +56,7 @@ TEST {
        1699
     }
 }
+
+SKELETON {
+    SELECT MAX ( __ ) FROM __ WHERE __ BETWEEN __ AND __
+}

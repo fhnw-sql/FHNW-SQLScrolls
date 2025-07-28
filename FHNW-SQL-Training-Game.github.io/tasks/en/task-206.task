@@ -70,3 +70,7 @@ TEST {
         winter|["ice hockey","baking cookies"]
     }
 }
+
+SKELETON {
+    SELECT __ , json_group_array ( _.__ ) FROM __ , json_each ( _.__ ) AS __ , json_each ( _.__ ) AS __ GROUP BY __
+}

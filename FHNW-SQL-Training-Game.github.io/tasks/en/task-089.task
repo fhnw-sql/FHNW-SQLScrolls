@@ -69,3 +69,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT __ , COUNT ( * ) AS __ , ROUND ( AVG ( __ ) , __ ) FROM __ __ JOIN __ __ ON _.__ = _.__ GROUP BY __ HAVING __ > __ ;
+}

@@ -43,3 +43,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    SELECT __ , COUNT ( * ) FROM __ GROUP BY __ ;
+}

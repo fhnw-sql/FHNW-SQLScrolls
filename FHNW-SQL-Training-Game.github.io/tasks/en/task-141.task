@@ -59,3 +59,7 @@ TEST {
         Marie|Maus|Mickey|Maus      
     }
 }
+
+SKELETON {
+    SELECT _.__ __ , _.__ __ , _.__ __ , _.__ __ FROM __ __ INNER JOIN __ __ ON ( _.__ = _.__ ) WHERE _.__ = '__' ;
+}

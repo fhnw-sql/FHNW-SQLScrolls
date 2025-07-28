@@ -107,3 +107,8 @@ TEST {
     }
 }
 
+
+
+SKELETON {
+    DELETE FROM __ WHERE __ = '__' AND __ = '__' ;
+}

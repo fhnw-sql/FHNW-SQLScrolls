@@ -49,3 +49,8 @@ TEST {
         2
     }
 }
+
+
+SKELETON {
+    SELECT COUNT ( * ) FROM __ WHERE __ LIKE '__' ;
+}

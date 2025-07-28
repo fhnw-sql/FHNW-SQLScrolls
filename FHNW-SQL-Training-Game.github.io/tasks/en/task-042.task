@@ -69,3 +69,8 @@ TEST {
         Anna
     }
 }
+
+
+SKELETON {
+    SELECT _.__ FROM __ __ , __ __ WHERE _.__ = ( SELECT _.__ FROM __ __ WHERE _.__ = __ ) AND _.__ = _.__
+}

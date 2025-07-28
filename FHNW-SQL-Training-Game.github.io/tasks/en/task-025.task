@@ -46,3 +46,8 @@ TEST {
         Edmond
     }
 }
+
+
+SKELETON {
+    SELECT MIN ( __ ) FROM __ ORDER BY __ __
+}

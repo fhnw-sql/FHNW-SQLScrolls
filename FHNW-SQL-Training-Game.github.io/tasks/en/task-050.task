@@ -32,3 +32,8 @@ TEST {
 	}
 }
 
+
+
+SKELETON {
+    SELECT __ FROM __ ;
+}

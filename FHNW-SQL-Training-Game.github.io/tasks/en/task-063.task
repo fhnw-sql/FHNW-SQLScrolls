@@ -62,3 +62,8 @@ TEST {
 		A Christmas Gift For You From Phil Spector|6|978
     }
 }
+
+
+SKELETON {
+    SELECT _.__ , COUNT ( * ) , SUM ( _.__ ) FROM __ __ INNER JOIN __ __ ON _.__ = _.__ GROUP BY _.__
+}

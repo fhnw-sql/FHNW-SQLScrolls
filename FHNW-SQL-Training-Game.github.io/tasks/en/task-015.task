@@ -62,3 +62,7 @@ TEST {
        Zaptus
     }
 }
+
+SKELETON {
+    SELECT DISTINCT __ FROM __ WHERE __ = __ ORDER BY __ __
+}

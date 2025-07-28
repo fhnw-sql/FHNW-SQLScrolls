@@ -48,3 +48,8 @@ TEST {
         Fernand
     }
 }
+
+
+SKELETON {
+    SELECT __ FROM __ WHERE __ > __ AND __ < __
+}

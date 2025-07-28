@@ -61,3 +61,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT MIN ( __ ) , MAX ( __ ) , SUM ( __ ) , AVG ( __ ) FROM __ ;
+}

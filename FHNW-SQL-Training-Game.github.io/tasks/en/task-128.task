@@ -39,3 +39,8 @@ TEST {
         Trump
     }
 }
+
+
+SKELETON {
+    SELECT DISTINCT ( __ ) FROM __ ;
+}

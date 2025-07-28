@@ -49,3 +49,8 @@ TEST {
 
 
 
+
+
+SKELETON {
+    SELECT __ FROM __ WHERE __ LIKE '__' ;
+}

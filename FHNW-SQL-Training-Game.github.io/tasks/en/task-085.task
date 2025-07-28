@@ -58,3 +58,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT DISTINCT ( __ ( __ , LENGTH ( __ ) - __ , __ ) ) AS __ FROM __ ORDER BY __ ;
+}

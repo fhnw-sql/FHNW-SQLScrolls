@@ -81,3 +81,8 @@ TEST {
         Haydee|forest
     }
 }
+
+
+SKELETON {
+    SELECT _.__ , _.__ FROM __ __ , __ __ WHERE _.__ = = _.__
+}

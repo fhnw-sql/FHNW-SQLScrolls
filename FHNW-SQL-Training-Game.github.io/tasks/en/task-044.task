@@ -76,3 +76,8 @@ TEST {
         Invisible|Pegasus
     }
 }
+
+
+SKELETON {
+    SELECT _.__ , _.__ FROM __ __ __ JOIN __ __ WHERE _.__ = __
+}

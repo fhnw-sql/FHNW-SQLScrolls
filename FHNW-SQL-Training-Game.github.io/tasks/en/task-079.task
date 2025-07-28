@@ -62,3 +62,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT __ , LENGTH ( __ ) FROM __ ORDER BY LENGTH ( __ ) __ LIMIT __ ;
+}

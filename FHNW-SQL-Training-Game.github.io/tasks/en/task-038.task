@@ -104,3 +104,8 @@ TEST {
         Mercedes|mill
     }
 }
+
+
+SKELETON {
+    SELECT _.__ , _.__ FROM __ __ , __ __ , __ __ WHERE _.__ = _.__ AND _.__ = _.__
+}

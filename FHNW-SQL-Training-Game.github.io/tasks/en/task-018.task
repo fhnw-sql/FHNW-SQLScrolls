@@ -60,3 +60,7 @@ TEST {
        4
     }
 }
+
+SKELETON {
+    SELECT COUNT ( DISTINCT __ ) FROM __ WHERE __ BETWEEN '__' AND '__'
+}

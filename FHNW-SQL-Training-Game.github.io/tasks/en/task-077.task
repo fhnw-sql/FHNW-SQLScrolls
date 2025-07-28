@@ -90,3 +90,8 @@ TEST {
 }
 
 
+
+
+SKELETON {
+    SELECT __ , __ ( __ , __ , __ ) FROM __ ;
+}

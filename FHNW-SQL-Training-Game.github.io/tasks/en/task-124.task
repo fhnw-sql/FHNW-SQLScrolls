@@ -42,3 +42,8 @@ TEST {
         Dagobert|Trump
     }
 }
+
+
+SKELETON {
+    SELECT __ , __ FROM __ WHERE __ IS NULL ;
+}
