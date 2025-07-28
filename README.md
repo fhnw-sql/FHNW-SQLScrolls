@@ -75,6 +75,7 @@ the "Database Technology" course.
       or [Mac install guide](https://docs.docker.com/desktop/install/mac-install/).
     - ⚠️ **Windows users:** Make sure [WSL 2.0](https://docs.microsoft.com/en-us/windows/wsl/install) is enabled and set
       as the backend for Docker Desktop.
+        - Powershell:```wsl --set-default-version 2```
 
 - **Linux:**
     - Install Docker and Docker Compose using your system’s package manager, e.g.:
@@ -99,7 +100,7 @@ API_URL=http://localhost:4001
 # URL for socket.io communications (frontend-backend real-time)
 IO_URL=http://localhost:80
 
-# Email provider API key (set to 'blank' if not using email features)
+# [OPTI0NAL] Email provider API key (set to 'blank' if not using email features)
 POSTMARK_API_KEY=blank
 
 # The sender address for outgoing emails (used for password reset, etc)
@@ -156,6 +157,8 @@ you can skip step 4 (setting environment variables)**.
 
 Includes a preconfigured [Dev_Compose.xml](.idea/runConfigurations/Dev_Compose.xml) to start via UI.
 
+![Webstorm Dev Compose.png](docs/resources/Webstorm%20Dev%20Compose.png)
+
 #### 🧑‍💻 Access
 
 Once running, open your browser to [http://localhost](http://localhost) (or the port you configured).
@@ -164,6 +167,14 @@ Once running, open your browser to [http://localhost](http://localhost) (or the 
 
 - Use browser dev tools (`F12`) for live feedback
 - Use container logs for backend issues
+
+---
+
+## ⚠️ Important Deployment Notice
+
+Currently, it is necessary to already have at least one registered user in the database and restarting the stack to
+facilitate the generation of the AI recommendation model. Trying to access the feature without a model file will throw
+an error on the user's UI to check back at a later time.
 
 ---
 
@@ -234,13 +245,13 @@ found in the
 
 **Infrastructure**
 
-- Docker (Node.js, Nginx)
+- Docker (Node.js, Nginx, Uvicorn)
 
 **Supported Browsers**
 
 - Chrome
 - Firefox
-- Safari
+- Safari (Needs testing)
 - Microsoft Edge (Chromium)
 
 ---

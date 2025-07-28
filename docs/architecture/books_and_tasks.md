@@ -1,5 +1,7 @@
 # 📚 Books & Tasks
 
+[**Documentation Hub**](../index.md) | [**Example Book**](../../frontend/books/example.book) | | [**Example Task**](../../frontend/tasks/example.task) 
+
 ## 🔨 Experimental Editor
 
 Located at `/frontend/admin/editors.html`, this in-browser editor allows advanced users to edit `.task` and `.book`
