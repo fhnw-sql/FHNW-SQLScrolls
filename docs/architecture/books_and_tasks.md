@@ -1,6 +1,6 @@
 # 📚 Books & Tasks
 
-[**Documentation Hub**](docs/index.md) | [**Example Book**](../../frontend/books/example.book) | | [**Example Task**](../../frontend/tasks/example.task) 
+[**Documentation Hub**](../index.md) | [**Example Book**](../../frontend/books/example.book) | | [**Example Task**](../../frontend/tasks/example.task) 
 
 ## 🔨 Experimental Editor
 

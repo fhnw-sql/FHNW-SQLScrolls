@@ -1,6 +1,6 @@
 # 🖼️Frontend: Webclient through NGinx
 
-[**Documentation Hub**](docs/index.md) | **[Dockerfile](../../frontend/Dockerfile)**
+[**Documentation Hub**](../index.md) | **[Dockerfile](../../frontend/Dockerfile)**
 
 
 ## 📂 Component Folder Structure
