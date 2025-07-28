@@ -156,6 +156,10 @@ you can skip step 4 (setting environment variables)**.
 
 Includes a preconfigured [Dev_Compose.xml](.idea/runConfigurations/Dev_Compose.xml) to start via UI.
 
+#### 🧑‍💻 Access
+
+Once running, open your browser to [http://localhost](http://localhost) (or the port you configured).
+
 #### 🐞 Debugging
 
 - Use browser dev tools (`F12`) for live feedback
@@ -166,21 +170,55 @@ Includes a preconfigured [Dev_Compose.xml](.idea/runConfigurations/Dev_Compose.x
 ## 📖 Documentation Hub
 
 Comprehensive technical documents, development notes, and further details to frontend and backend components can be
-found inside the
+found in the
 [**Documentation Hub**](docs/index.md).
 
 ---
 
-## 📂 Project Structure
+## 📂 Repository Structure
 
 ```
 /
 ├── backend/
-│ ├── api/              # Backend REST API (Node.js server)
-│ └── model/            # Python AI/ML recommendation service
-├── docs/               # Documentation hub (technical docs, development docs, etc.)
-├── frontend/           # Frontend web client (HTML, CSS, JS, localization, books and tasks)
-└── *                   # Root level files for configuration and documentation
+│ ├── api/                                  # Backend REST API (Node.js server)
+│ └── model/                                # Python AI/ML recommendation service
+├── docs/                                   # Documentation hub (technical docs, development docs, etc.)
+├── frontend/                               # Frontend web client (HTML, CSS, JS, localization, books and tasks)
+└── *                                       # Root level files for configuration and documentation
+```
+
+---
+
+## 🏗 Architecture
+
+### 🧩 Services
+
+```
+├── Frontend                                # Port 80 | 3000
+│   └── Javascript Application    
+├── Backend API                             # Port 4001
+│   └── Express.js + MongoDB
+├── Recommendation ML Service               # Port 5001
+│   └── FastAPI + Python
+└── MongoDB                                 # Port 27017
+```
+
+### 💬 Communication Flow
+
+```
+1. Frontend (80/3000) ───► Backend API (4001)
+   └──► ML Service (5001)
+2. Backend API (4001) ───► ML Service (5001)
+   └──► MongoDB (27017)
+```
+
+### 🐋 Docker Containers
+
+```
+├── stg-frontend                            # Frontend container
+├── stg-api                                 # Main API container
+├── stg-model                               # Recommendation service container
+└── stg-mongo                               # Database container
 ```
 
 ---
