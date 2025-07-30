@@ -2,13 +2,12 @@
 
 [Trailer](https://tube.switch.ch/videos/xOZ13ry9OG) 
 
-
-TEst
-
 SQLScrolls is a game developed by FHNW Nordwestschweiz.
 Currenty, the game consists of 162 SQL tasks (task 1-162) and 17 JSON tasks (task 200-217).
 
 First version of the game was created by Kai Krause: [GitHub](https://github.com/elapustulka/FHNW-SQL-Training-Game.github.io)
+
+**This version of the game includes an AI teaching assistant.**
 
 ## Table of Contents
 
@@ -48,6 +47,11 @@ First version of the game was created by Kai Krause: [GitHub](https://github.com
 5. Open Terminal. You can find it in the Applications/Utilities folder or by using Spotlight search.
 6. Navigate to the SQLScrolls folder in Terminal. Go to the "FHNW-SQL-Training-Game.github.io" folder within the extracted files. Copy the directory path, for example: `/Users/player/downloads/SQL-Scrolls-main/FHNW-SQL-Training-Game.github.io`. Change the Terminal's directory to the copied path using the following command: `cd your-copied-path`.
 7. Run the following Docker command in Terminal: `docker-compose up`.
+
+## Usage of Teaching Assistant
+
+To be able to use the teaching assistant, you have to provide Google or OpenAI API Keys in the ENV file of the backend.
+**Be sure to gitignore your env file, before adding keys and uploading changes to GitHub.**
 
 ## Usage
 [Table of Contents](#table-of-contents)
