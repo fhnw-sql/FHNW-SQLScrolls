@@ -23,6 +23,10 @@ app.use(jwt());
 
 // api routes
 app.use("/users", require("./routes/users.routes"));
+const { router: aiRouter } = require("./routes/ai.routes");
+const { router: geminiRouter } = require("./routes/gemini2.routes");
+app.use("/ai", aiRouter);
+app.use("/gemini2", geminiRouter);
 
 // Defalt health route
 app.get("/", function (req, res) {

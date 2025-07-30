@@ -1,0 +1,5 @@
+answer,input,Task-ID,Level,Book,Type,Details
+"SELECT season, json_object('sport', sport, 'food', food, 'art', art) FROM leisure","SELECT season, json_object('sport', 'food', 'art') FROM leisure",209,5,JSON operators,Mistakes,Column reference missing
+"SELECT north_zone.squaremeter/count(*) FROM (SELECT zone, sum(squaremeter) squaremeter FROM zoo_cage WHERE zone = 'north' GROUP BY zone) north_zone INNER JOIN zoo_cage c ON (north_zone.zone = c.zone) INNER JOIN zoo_animal a ON (c.id = a.cage_id) GROUP BY c.zone, north_zone.squaremeter","SELECT north_zone.squaremeter/count(*) FROM (SELECT zone, sum(squaremeter) squaremeter FROM zoo_cage WHERE zone = 'north' GROUP BY zone) north_zone INNER JOIN zoo_cage c ON (north_zone.zone = c.zone) INNER JOIN zoo_animal a ON ",104,5,Zoo Book,Progression,-
+SELECT name from ghosts where year > 1800,SELECT,4,1,Selection Book,Easy,-
+"SELECT a.title, count(*), sum(s.seconds) FROM song s INNER JOIN album a ON a.album_id = s.album_fk GROUP BY a.title","SELECT a.title, count(*), sum(s.seconds) FROM song s LEFT JOIN album a ON a.album_id = s.album_fk GROUP BY s.title",63,5,Christmas Book,Parsons,Two distractors

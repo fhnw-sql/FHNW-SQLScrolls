@@ -1,4 +1,4 @@
-FROM node:10.19.0
+FROM node:18-alpine
 #FROM node:14
 
 ## Set Port
@@ -17,7 +17,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Production
-RUN npm ci --only=production
+RUN npm install
 
 # Bundle app source
 COPY . .
