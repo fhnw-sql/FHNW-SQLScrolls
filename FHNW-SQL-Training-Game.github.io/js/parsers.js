@@ -327,6 +327,19 @@ class AnswerParser extends Parser {
   }
 }
 
+// Parses SKELETON blocks
+class SkeletonParser extends Parser {
+  parse(context, lines) {
+    let skeletonHTML = ``;
+    while (true) {
+      const line = lines.shift().trim();
+      if (line === "}") break;
+      skeletonHTML += line + " ";
+    }
+    return skeletonHTML;
+  }
+}
+
 // Parses PARSONs blocks
 class ParsonsParser extends Parser {
   parse(context, lines) {
@@ -413,6 +426,7 @@ class TaskParser extends Parser {
       metadata: {},
       description: "",
       answer: "",
+      skeleton: "",
       parsons: "",
       tests: [],
     };
@@ -433,6 +447,9 @@ class TaskParser extends Parser {
       }
       if (line === "ANSWER {") {
         task.answer = PARSERS.ANSWER.parse({}, lines);
+      }
+      if (line === "SKELETON {") {
+        task.skeleton = PARSERS.SKELETON.parse({}, lines);
       }
       if (line === "PARSONS {") {
         task.parsons = PARSERS.PARSONs.parse({}, lines);
@@ -484,6 +501,7 @@ const PARSERS = {
   LEGACY: new LegacyParser(),
   TEST: new TestParser(),
   ANSWER: new AnswerParser(),
+  SKELETON: new SkeletonParser(),
   PARSONs: new ParsonsParser(),
   DESCRIPTION: new DescriptionParser(),
   TASK: new TaskParser(),
