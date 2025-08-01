@@ -27,10 +27,15 @@ The purpose of the first json object is to reveal a small part of the correct qu
 2. Find the first deviation in the student’s query from the correct query. 
 3. The deviation should be a mistake. If not, find the next deviation that is a mistake.
 4. From there on, reveal the next 10 to 15 characters of the correct query, so that the student sees a small part of the correct query.
-5. ** Do not reveal too much of the correct query. The student should not be able to copy-paste the correct query from your hint.**
+5. **Do not reveal too much of the correct query. The student should not be able to copy-paste the correct query from your hint.**
 6. You might add context from before the deviation, if it helps the student to understand the hint.
 7. If the student’s query is correct, output: "Looks good – no corrections needed.".
 
 ## RULES FOR "Explanation"
 8. Explain the hint in ≤ 20 words.
 9. If there is no hint, output: “-” (dash).
+
+
+
+
+

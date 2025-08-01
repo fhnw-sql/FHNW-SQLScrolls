@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require("../utils/db.js");
 const { ObjectID } = require("mongodb");
 const utils = require("../utils/renderPrompt.js");
-const prompt = require("../prompts/prompt2.js");
+const prompt = require("../prompts/prompt.js");
 
 const { GoogleGenAI } = require("@google/genai");
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
