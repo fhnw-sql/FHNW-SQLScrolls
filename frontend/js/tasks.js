@@ -815,7 +815,7 @@ async function loadRecommendedTask() {
         }
     } catch (error) {
         console.error('Error loading recommended task:', error);
-        showError('Recommendation model not yet available. Please check back later in a few minutes!');
+        showError('Recommendation model not yet available. Please restart the server!');
     } finally {
         // Hide the loading view in all cases
         await hideElementImmediately("loading-view");
