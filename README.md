@@ -103,7 +103,7 @@ IO_URL=http://localhost:80
 # [OPTI0NAL] Email provider API key (set to 'blank' if not using email features)
 POSTMARK_API_KEY=blank
 
-# The sender address for outgoing emails (used for password reset, etc)
+# [OPTI0NAL]  The sender address for outgoing emails (used for password reset, etc)
 FROM_SENDER=stg@github.io
 ```
 
@@ -139,6 +139,10 @@ If you prefer a different email provider (SMTP or another service), you’ll nee
     docker-compose up
 ```
 
+![Docker Desktop Containers.png](docs/resources/Docker%20Desktop%20Containers.png)
+
+***Docker Desktop showing the running containers***
+
 ---
 
 ### 💻 Quick Start: Development Ready
@@ -170,11 +174,12 @@ Once running, open your browser to [http://localhost](http://localhost) (or the 
 
 ---
 
-## ⚠️ Important Deployment Notice
+## ⚠️ Important Notice
 
 Currently, it is necessary to already have at least one registered user in the database and restarting the stack to
 facilitate the generation of the AI recommendation model. Trying to access the feature without a model file will throw
-an error on the user's UI to check back at a later time.
+an error on the user's UI to check back at a later time. The current implementation does also not allow for staggered
+book unlocks as the algorithm currently expects all tasks to be available at once.
 
 ---
 
@@ -268,9 +273,8 @@ We would like to say thanks to **Aurora Lahtela** from Helsinki who created the 
 SQL-Training-Game. This work is a customization of Aurora Lahtela's work, adapted to the needs of the FHNW. One can diff
 the
 changes between the original code base and the one of FHNW-SQL-Training-Game through the created tag
-called `AuroraLS3/SQL-Training-Game-e755cc5` representing the state of the commit `e755cc5`
+called `AuroraLS3/SQL-Training-Game-e755cc5`.
 
-- [Compare the changes](https://github.com/FHNW-SQL-Training-Game/FHNW-SQL-Training-Game.github.io/compare/AuroraLS3/SQL-Training-Game-e755cc5...main)
 - [AuroraLS3/SQL-Training-Game](https://github.com/AuroraLS3/SQL-Training-game)
 
 **Sound effects from freesound.org (CC License):**

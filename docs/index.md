@@ -1,7 +1,7 @@
 # FHNW SQL Training Game – Documentation Hub
 
-Welcome to the official documentation for the **FHNW SQL Training Game** project. Here you'll find all resources related
-to development, deployment, and ongoing maintenance.
+Welcome to the official documentation for the **FHNW SQL Scrolls Game** project. 
+Here you'll find all resources related to development, deployment, and ongoing maintenance.
 
 ---
 
@@ -34,14 +34,15 @@ to development, deployment, and ongoing maintenance.
 
 ```
 /docs
-├── index.md
+├── architecture/
+│ ├── api.md
+│ ├── books_and_tasks.md
+│ ├── frontend.md
+│ └── model.md
 ├── development/
 │ ├── changelog.md
 │ ├── known_issues.md
 │ └── future_work.md
-├── technical/
-│ ├── frontend.md
-│ ├── api.md
-│ └── model.md
-└── resources/ # resources, diagrams, etc.
+├── resources/ # resources, diagrams, etc.
+└── index.md
 ```

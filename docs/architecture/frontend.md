@@ -20,8 +20,6 @@ frontend/
 ├── sounds/                                 # Sound assets
 ├── tasks/                                  # Tasks for books (json-format)
 ├── vendor/                                 # Manually managed libraries / dependencies
-├── docs/                                   # Documentation hub (technical docs, development docs, etc.)
-├── frontend/                               # Frontend web client (HTML, CSS, JS, localization, books and tasks)
 ├── Dockerfile                              # Docker configuration
 ├── index.html                              # Main application entry point
 ├── package.json                            # NPM management file

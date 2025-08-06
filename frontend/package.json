@@ -1,6 +1,12 @@
 {
-  "name": "my-frontend",
+  "name": "fhnw-sql-scrolls-frontend",
   "version": "1.0.0",
+  "description": "Frontend for the Game",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fhnw-sql/FHNW-SQLScrolls"
+  },
   "scripts": {
     "prepare": "npm run copy-libs",
     "copy-libs": "npx npm-run-all --parallel copy-*",

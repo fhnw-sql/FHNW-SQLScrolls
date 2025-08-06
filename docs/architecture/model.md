@@ -13,8 +13,8 @@ backend/model/
 ├── RecommendTask.py                    # Task recommendation algorithm and logic
 ├── requirements.txt                    # Python dependencies for the ML service
 ├── student_data_average_generation.py  # Student performance data generation and analysis
-├── task_data_generation.py            # Task-related data generation utilities
-└── TrainModel.py                      # ML model training and configuration
+├── task_data_generation.py             # Task-related data generation utilities
+└── TrainModel.py                       # ML model training and configuration
 ```
 
 --- 
