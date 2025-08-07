@@ -49,7 +49,6 @@ TEST {
         5|Wampus cat hair
         4|Unicorn tail hair
         3|Unicorn tail hair
-
     }
         
     RESULT {
