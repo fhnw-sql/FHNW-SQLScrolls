@@ -1,5 +1,5 @@
 METADATA {
-    id: task-034c
+    id: task-502
     name: Popular Wands
     color: green
     info: natural join grouped on count condition

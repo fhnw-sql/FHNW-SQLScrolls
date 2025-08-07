@@ -1,5 +1,5 @@
 METADATA {
-    id: task-034e
+    id: task-504
     name: Who is the weakest
     color: green
     info: natural join list field grouped on count condition having
